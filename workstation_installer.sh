@@ -4,6 +4,7 @@
 #
 #Site       :http://renantmagalhaes.com
 #Author      :Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
+#                                     <https://github.com/renantmagalhaes>
 #
 # ---------------------------------------------------------------
 #   
@@ -19,8 +20,10 @@
 #
 #   V0.2 2017-12-03 RTM:
 #       - added more packages from debian repo
+#
 #   V0.2.1 2017-12-03 RTM:
 #       - Sintax adjustments
+#       - Add github address in header
 #       
 #
 #   TODO
