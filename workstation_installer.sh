@@ -19,6 +19,8 @@
 #
 #   V0.2 2017-12-03 RTM:
 #       - added more packages from debian repo
+#   V0.2.1 2017-12-03 RTM:
+#       - Sintax adjustments
 #       
 #
 #   TODO
@@ -166,7 +168,7 @@ EOF
 runuser -l $user -c 'cd /home/$user'
 runuser -l $user -c 'git clone https://github.com/gpakosz/.tmux.git'
 runuser -l $user -c 'ln -s -f .tmux/.tmux.conf'
-runuser -l $user -c 'cp .tmux/.tmux.conf.local .''
+runuser -l $user -c 'cp .tmux/.tmux.conf.local .'
 
 echo 'export TERM="xterm-256color"' >> /home/$user/.bashrc
 echo 'export TERM="alias tmux="tmux -2"' >> /home/$user/.bashrc
