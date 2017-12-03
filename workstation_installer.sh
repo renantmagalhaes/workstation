@@ -24,7 +24,8 @@
 #  Install bobthefish
 #  Install advanced tmux config
 #  sed the config to user powerline in tmux tmux_conf_theme_left_separator* tmux_conf_theme_right_separator
-#
+#  Install tmux ressurect
+#  Add more bindn keys to tmux
 #RTM
 
 #Root check
