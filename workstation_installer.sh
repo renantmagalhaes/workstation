@@ -24,6 +24,7 @@
 #   V0.2.1 2017-12-03 RTM:
 #       - Sintax adjustments
 #       - Add github address in header
+#       - Enable blowfish2 vim cryptmethod
 #       
 #
 #   TODO
@@ -118,7 +119,9 @@ if ! has("gui_running")
 endif
 " feel free to choose :set background=light for a different style
 set background=dark
-colors peaksea 
+colors peaksea
+
+set cm=blowfish2
 EOF
 
 cat <<EOF >> /home/$user/.gvimrc
@@ -132,6 +135,8 @@ colors peaksea
 if has('gui_running')
   set guifont=Monospace\ 10
 endif
+
+set cm=blowfish2
 EOF
 
 #Set Oh My Fish
