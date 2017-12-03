@@ -179,7 +179,7 @@ runuser -l $user -c 'ln -s -f .tmux/.tmux.conf'
 runuser -l $user -c 'cp .tmux/.tmux.conf.local .'
 
 echo 'export TERM="xterm-256color"' >> /home/$user/.bashrc
-echo 'export TERM="alias tmux="tmux -2"' >> /home/$user/.bashrc
+echo 'alias tmux="tmux -2"' >> /home/$user/.bashrc
 
 #RTM
 
