@@ -7,10 +7,10 @@
 #                                     <https://github.com/renantmagalhaes>
 #
 # ---------------------------------------------------------------
-#   
+#
 #  When executing the script it will make all the changes in the system and will download / install the most used packages.
 #
-# 
+#
 # --------------------------------------------------------------
 #
 # Changelog
@@ -25,7 +25,10 @@
 #       - Sintax adjustments
 #       - Add github address in header
 #       - Enable blowfish2 vim cryptmethod
-#       
+#
+#   V0.3 2017-12-11
+#       - Added tmux plugin manager
+#
 #
 #   TODO
 #
@@ -35,7 +38,7 @@
 #  Install tmux ressurect
 #  Add more bindn keys to tmux
 #  Add virtualization software
-#  
+#
 #RTM
 
 #Root check
@@ -46,7 +49,7 @@ fi
 
 #User check
 echo "#########################"
-echo "#			#"                           
+echo "#			#"
 echo "#	User Config	#"
 echo "#			#"
 echo "#########################"
@@ -101,7 +104,7 @@ apt-get install sublime-text
 wget -nv https://download.opensuse.org/repositories/shells:fish:release:2/Debian_9.0/Release.key -O Release.key
 apt-key add - < Release.key
 apt-get update
-echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/2/Debian_9.0/ /' > /etc/apt/sources.list.d/fish.list 
+echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/2/Debian_9.0/ /' > /etc/apt/sources.list.d/fish.list
 apt-get update
 apt-get -y install fish
 
@@ -130,7 +133,7 @@ if ! has("gui_running")
 endif
 " feel free to choose :set background=light for a different style
 set background=dark
-colors peaksea 
+colors peaksea
 
 if has('gui_running')
   set guifont=Monospace\ 10
@@ -180,6 +183,28 @@ runuser -l $user -c 'cp .tmux/.tmux.conf.local .'
 
 echo 'export TERM="xterm-256color"' >> /home/$user/.bashrc
 echo 'alias tmux="tmux -2"' >> /home/$user/.bashrc
+
+#Install plugin manager for tmux
+runuser -l $user -c 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'
+cat <<EOF >> /home/$user/.tmux.conf
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @resurrect-capture-pane-contents 'on'
+
+# Other examples:
+# set -g @plugin 'github_username/plugin_name'
+# set -g @plugin 'git@github.com/user/plugin'
+# set -g @plugin 'git@bitbucket.com/user/plugin'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
+
+
+EOF
+
+
 
 #RTM
 
