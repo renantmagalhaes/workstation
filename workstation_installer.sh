@@ -38,6 +38,8 @@
 #  Install tmux ressurect
 #  Add more bindn keys to tmux
 #  Add virtualization software
+#  Auto ctrl b + I to load tmux plugins
+#  Install xmind
 #
 #RTM
 
