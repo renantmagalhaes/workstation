@@ -39,7 +39,8 @@
 #  Add more bindn keys to tmux
 #  Add virtualization software
 #  Auto ctrl b + I to load tmux plugins
-#  Install xmind
+#  Install xmind / freemind
+#  Install Draw.Io
 #
 #RTM
 
