@@ -29,6 +29,8 @@
 #   V0.3 2017-12-11
 #       - Added tmux plugin manager
 #
+#   V0.4 2017-12-29
+#       - Rework Oh my fish! installation
 #
 #   TODO
 #
@@ -146,7 +148,8 @@ set cm=blowfish2
 EOF
 
 #Set Oh My Fish
-runuser -l $user -c 'curl -L https://get.oh-my.fish'
+runuser -l $user -c 'curl -L https://get.oh-my.fish > install'
+runuser -l $user -c 'fish install --path=~/.local/share/omf --config=~/.config/omf'
 runuser -l $user -c 'touch ~/.config/fish/config.fish'
 
 cat <<EOF >> /home/$user/.config/fish/config.fish
