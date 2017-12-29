@@ -149,7 +149,7 @@ EOF
 
 #Set Oh My Fish
 runuser -l $user -c 'curl -L https://get.oh-my.fish > install'
-runuser -l $user -c 'fish install --path=~/.local/share/omf --config=~/.config/omf'
+runuser -l $user -c 'fish install --path=~/.local/share/omf --config=~/.config/omf --noninteractive'
 runuser -l $user -c 'touch ~/.config/fish/config.fish'
 
 cat <<EOF >> /home/$user/.config/fish/config.fish
