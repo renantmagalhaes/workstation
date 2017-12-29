@@ -31,13 +31,12 @@
 #
 #   V0.4 2017-12-29
 #       - Rework Oh my fish! installation
+#       - Auto install bobthefish
 #
 #   TODO
-#
-#  Install bobthefish
+
 #  Install advanced tmux config
 #  sed the config to user powerline in tmux tmux_conf_theme_left_separator* tmux_conf_theme_right_separator
-#  Install tmux ressurect
 #  Add more bindn keys to tmux
 #  Add virtualization software
 #  Auto ctrl b + I to load tmux plugins
@@ -179,6 +178,9 @@ set -g theme_color_scheme dark
 set -g fish_prompt_pwd_dir_length 0
 set -g theme_project_dir_length 1
 EOF
+
+#Install bobthefish
+runuser -l $user -c "/usr/bin/fish -c 'omf install bobthefish'" 
 
 #Set Tmux basic advanced config
 #CREDITS to Gregory <https://github.com/gpakosz>
