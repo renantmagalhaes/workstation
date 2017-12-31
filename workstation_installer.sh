@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# installer_workstation.sh - Script to install my full workstation experience
+# installer_workstation.sh - Script to install my full DEBIAN 9 workstation experience
 #
 #Site       :http://renantmagalhaes.com
 #Author      :Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
