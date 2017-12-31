@@ -147,6 +147,7 @@ set cm=blowfish2
 EOF
 
 #Set Oh My Fish
+#Credits <https://github.com/oh-my-fish/oh-my-fish>
 runuser -l $user -c 'curl -L https://get.oh-my.fish > install'
 runuser -l $user -c 'fish install --path=~/.local/share/omf --config=~/.config/omf --noninteractive'
 runuser -l $user -c 'touch ~/.config/fish/config.fish'
@@ -193,6 +194,7 @@ echo 'export TERM="xterm-256color"' >> /home/$user/.bashrc
 echo 'alias tmux="tmux -2"' >> /home/$user/.bashrc
 
 #Install plugin manager for tmux
+#Credits  <https://github.com/tmux-plugins/tpm>
 runuser -l $user -c 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'
 cat <<EOF >> /home/$user/.tmux.conf
 # List of plugins
