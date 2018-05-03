@@ -74,7 +74,7 @@ sed -e 's/main/main non-free/g' -i /etc/apt/sources.list
 apt-get update && apt-get upgrade
 
 #Install the packages from debian repo
-apt-get -y install clementine deluge dia vim vim-gtk vim-gui-common nmap vlc gimp blender fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient caja-share caja-open-terminal git gnome-icon-theme idle3 mate-sensors-applet guake guake-indicator numix-gtk-theme numix-icon-theme firmware-linux firmware-linux-nonfree firmware-linux-free fonts-hack-ttf apt-transport-https htop python3-pip meld
+apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap vlc gimp blender fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient caja-share caja-open-terminal git gnome-icon-theme idle3 mate-sensors-applet guake guake-indicator numix-gtk-theme numix-icon-theme firmware-linux firmware-linux-nonfree firmware-linux-free fonts-hack-ttf apt-transport-https htop python3-pip meld
 
 #Install Firefox pt-BR 57
 wget https://ftp.mozilla.org/pub/firefox/releases/57.0.1/linux-x86_64/pt-BR/firefox-57.0.1.tar.bz2 -O /tmp/firefox-57.0.1.tar.bz2
