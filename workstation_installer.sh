@@ -36,14 +36,14 @@
 #
 #
 #   V0.5 2018-05-09
-        - Removed Vim config -> Working on my own config
-        - Removed Sublimetext editor -> Using Visual Code
-        - Removed Guake from default installed packages 
-        - Change default browser -> Firefox to Google Chrome
-        - Changed default file manager -> Caja to Thunar 
-        - Updated GTK theme version  
-        - Added Visual Code Studio
-        - Added xfce plugins
+#       - Removed Vim config -> Working on my own config
+#       - Removed Sublimetext editor -> Using Visual Code
+#       - Removed Guake from default installed packages 
+#       - Change default browser -> Firefox to Google Chrome
+#       - Changed default file manager -> Caja to Thunar 
+#       - Updated GTK theme version  
+#       - Added Visual Code Studio
+#       - Added xfce plugins
 #   TODO
 
 #  Install advanced tmux config
