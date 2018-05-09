@@ -1,2 +1,2 @@
 # workstation
-My desktop config
+My desktop config for Debian 9
