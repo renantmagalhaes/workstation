@@ -33,6 +33,17 @@
 #       - Rework Oh my fish! installation
 #       - Auto install bobthefish
 #
+#
+#
+#   V0.5 2018-05-09
+        - Removed Vim config -> Working on my own config
+        - Removed Sublimetext editor -> Using Visual Code
+        - Removed Guake from default installed packages 
+        - Change default browser -> Firefox to Google Chrome
+        - Changed default file manager -> Caja to Thunar 
+        - Updated GTK theme version  
+        - Added Visual Code Studio
+        - Added xfce plugins
 #   TODO
 
 #  Install advanced tmux config
@@ -74,35 +85,50 @@ sed -e 's/main/main non-free/g' -i /etc/apt/sources.list
 apt-get update && apt-get upgrade
 
 #Install the packages from debian repo
-apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap vlc gimp blender fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient caja-share caja-open-terminal git gnome-icon-theme idle3 mate-sensors-applet guake guake-indicator numix-gtk-theme numix-icon-theme firmware-linux firmware-linux-nonfree firmware-linux-free fonts-hack-ttf apt-transport-https htop python3-pip meld
+apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap vlc gimp blender fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient thunar thunar-archive-plugin thunar-data thunar-dbg thunar-media-tags-plugin thunar-volman xfce4-goodies xfce4-*plugin git gnome-icon-theme idle3 mate-sensors-applet numix-gtk-theme numix-icon-theme firmware-linux firmware-linux-nonfree firmware-linux-free fonts-hack-ttf apt-transport-https htop python3-pip meld
 
-#Install Firefox pt-BR 57
-wget https://ftp.mozilla.org/pub/firefox/releases/57.0.1/linux-x86_64/pt-BR/firefox-57.0.1.tar.bz2 -O /tmp/firefox-57.0.1.tar.bz2
-tar -xvjf /tmp/firefox-57.0.1.tar.bz2 -C /usr/local
-ln -s /usr/local/firefox/firefox /usr/bin/firefox-quantum
-cat <<EOF > /usr/share/applications/firefox-quantum.desktop
-[Desktop Entry]
-Name=Firefox Quantum
-Exec=/usr/local/firefox/firefox %u
-Terminal=false
-X-MultipleArgs=false
-Type=Application
-Icon=/usr/local/firefox/browser/icons/mozicon128.png
-Categories=Network;WebBrowser;
-MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/vnd.mozilla.xul+xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;
-StartupWMClass=Firefox-quantum
-StartupNotify=true
-EOF
+
+####### Testing google-chrome for now ######
+###Install Firefox pt-BR Latest
+
+#### NEW WGET METHOD
+#wget -O /tmp/FirefoxSetup.bzip2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=pt-BR"
+
+##wget https://ftp.mozilla.org/pub/firefox/releases/57.0.1/linux-x86_64/pt-BR/firefox-57.0.1.tar.bz2 -O /tmp/firefox-57.0.1.tar.bz2
+##tar -xvjf /tmp/firefox-57.0.1.tar.bz2 -C /usr/local
+##ln -s /usr/local/firefox/firefox /usr/bin/firefox-quantum
+##cat <<EOF > /usr/share/applications/firefox-quantum.desktop
+##[Desktop Entry]
+##Name=Firefox Quantum
+##Exec=/usr/local/firefox/firefox %u
+##Terminal=false
+##X-MultipleArgs=false
+##Type=Application
+##Icon=/usr/local/firefox/browser/icons/mozicon128.png
+##Categories=Network;WebBrowser;
+##MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/vnd.mozilla.xul+xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;
+##StartupWMClass=Firefox-quantum
+##StartupNotify=true
+##EOF
+
+#Install Google Chrome
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/
+dpkg -i /tmp/google-chrome-stable_current_amd64.deb
 
 #Install GTK theme
-wget https://github.com/LinxGem33/OSX-Arc-Darker/releases/download/v1.4.5/osx-arc-collection_1.4.5_amd64.deb -O /tmp/osx-arc-collection_1.4.5_amd64.deb
-dpkg -i /tmp/osx-arc-collection_1.4.5_amd64.deb
+wget https://github.com/LinxGem33/X-Arc-Darker/releases/download/v1.4.7/osx-arc-collection_1.4.7_amd64.deb -O /tmp/osx-arc-collection_1.4.7_amd64.deb
+dpkg -i /tmp/osx-arc-collection_1.4.7_amd64.deb
 
-#Install Sublime Text
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
-echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
-apt-get update
-apt-get install sublime-text
+##Install Sublime Text
+#wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
+#echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
+#apt-get update
+#apt-get install sublime-text
+
+##Install Visual Code - Need further verification (check link)
+wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
+dpkg -i /tmp/visual_code_amd64.deb
+
 
 #Install fish
 wget -nv https://download.opensuse.org/repositories/shells:fish:release:2/Debian_9.0/Release.key -O Release.key
@@ -115,36 +141,38 @@ apt-get -y install fish
 #Include Fish as user default shell
 echo 'fish' >> /home/$user/.bashrc
 
-#Create vim config
-#CREDITS to Amir <https://github.com/amix/vimrc>
-runuser -l $user -c 'git clone https://github.com/amix/vimrc.git ~/.vim_runtime'
-runuser -l $user -c 'bash ~/.vim_runtime/install_awesome_vimrc.sh'
 
-cat <<EOF >> /home/$user/.vimrc
-if ! has("gui_running")
-    set t_Co=256
-endif
-" feel free to choose :set background=light for a different style
-set background=dark
-colors peaksea
-
-set cm=blowfish2
-EOF
-
-cat <<EOF >> /home/$user/.gvimrc
-if ! has("gui_running")
-    set t_Co=256
-endif
-" feel free to choose :set background=light for a different style
-set background=dark
-colors peaksea
-
-if has('gui_running')
-  set guifont=Monospace\ 10
-endif
-
-set cm=blowfish2
-EOF
+#I'm not happy with this config right now ... working on my own personal configuration.
+###Create vim config
+###CREDITS to Amir <https://github.com/amix/vimrc>
+##runuser -l $user -c 'git clone https://github.com/amix/vimrc.git ~/.vim_runtime'
+##runuser -l $user -c 'bash ~/.vim_runtime/install_awesome_vimrc.sh'
+##
+##cat <<EOF >> /home/$user/.vimrc
+##if ! has("gui_running")
+##    set t_Co=256
+##endif
+##" feel free to choose :set background=light for a different style
+##set background=dark
+##colors peaksea
+##
+##set cm=blowfish2
+##EOF
+##
+##cat <<EOF >> /home/$user/.gvimrc
+##if ! has("gui_running")
+##    set t_Co=256
+##endif
+##" feel free to choose :set background=light for a different style
+##set background=dark
+##colors peaksea
+##
+##if has('gui_running')
+##  set guifont=Monospace\ 10
+##endif
+##
+##set cm=blowfish2
+##EOF
 
 #Set Oh My Fish
 #Credits <https://github.com/oh-my-fish/oh-my-fish>
