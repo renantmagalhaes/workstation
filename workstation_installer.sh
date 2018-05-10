@@ -112,7 +112,7 @@ apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap v
 ##EOF
 
 #Install Google Chrome
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
 dpkg -i /tmp/google-chrome-stable_current_amd64.deb
 
 #Install GTK theme
