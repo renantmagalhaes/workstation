@@ -90,26 +90,26 @@ apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap v
 
 ####### Testing google-chrome for now ######
 ###Install Firefox pt-BR Latest
+wget -O /tmp/FirefoxSetup.bzip2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=pt-BR"
+tar -xvjf /tmp/FirefoxSetup.bzip2 -C /usr/local
+ln -s /usr/local/firefox/firefox /usr/bin/firefox-quantum
+cat <<EOF > /usr/share/applications/firefox-quantum.desktop
+[Desktop Entry]
+Name=Firefox Quantum
+Exec=/usr/local/firefox/firefox %u
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=/usr/local/firefox/browser/chrome/icons/default/mozicon128.png
+Categories=Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/vnd.mozilla.xul+xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;
+StartupWMClass=Firefox-quantum
+StartupNotify=true
+EOF
 
-#### NEW WGET METHOD
-#wget -O /tmp/FirefoxSetup.bzip2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=pt-BR"
+##Change folder permission
+chown -R $user:$user /usr/local/firefox/
 
-##wget https://ftp.mozilla.org/pub/firefox/releases/57.0.1/linux-x86_64/pt-BR/firefox-57.0.1.tar.bz2 -O /tmp/firefox-57.0.1.tar.bz2
-##tar -xvjf /tmp/firefox-57.0.1.tar.bz2 -C /usr/local
-##ln -s /usr/local/firefox/firefox /usr/bin/firefox-quantum
-##cat <<EOF > /usr/share/applications/firefox-quantum.desktop
-##[Desktop Entry]
-##Name=Firefox Quantum
-##Exec=/usr/local/firefox/firefox %u
-##Terminal=false
-##X-MultipleArgs=false
-##Type=Application
-##Icon=/usr/local/firefox/browser/icons/mozicon128.png
-##Categories=Network;WebBrowser;
-##MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/vnd.mozilla.xul+xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;
-##StartupWMClass=Firefox-quantum
-##StartupNotify=true
-##EOF
 
 #Install Google Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
