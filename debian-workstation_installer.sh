@@ -45,14 +45,19 @@
 #       - Added Visual Code Studio
 #       - Added xfce plugins
 #       - Added Draw.IO
+#
+#   V0.6 2018-05-28
+#       - Added Gnome3 plugins
+#       - Removed Draw.IO (use web version)
+#       - Minor improvements
+#
 #   TODO
 
 #  Install advanced tmux config
 #  sed the config to user powerline in tmux tmux_conf_theme_left_separator* tmux_conf_theme_right_separator
 #  Add more bindn keys to tmux
 #  Add virtualization software
-#  Auto ctrl b + I to load tmux plugins
-#  Install xmind / freemind
+#  Auto ctrl b + I to load tmux plugins (?)
 #
 #RTM
 
@@ -128,10 +133,6 @@ dpkg -i /tmp/osx-arc-collection_1.4.7_amd64.deb
 ##Install Visual Code - Need further verification (check link)
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
 dpkg -i /tmp/visual_code_amd64.deb
-
-##Install Draw.IO
-wget https://github.com/jgraph/drawio-desktop/releases/download/v8.4.7/draw.io-amd64-8.4.7.deb -O /tmp/
-dpkg -i /tmp/draw.io-amd64-8.4.7.deb 
 
 
 #Install fish
