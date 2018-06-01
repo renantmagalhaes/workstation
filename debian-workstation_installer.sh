@@ -33,8 +33,6 @@
 #       - Rework Oh my fish! installation
 #       - Auto install bobthefish
 #
-#
-#
 #   V0.5 2018-05-09
 #       - Removed Vim config -> Working on my own config
 #       - Removed Sublimetext editor -> Using Visual Code
