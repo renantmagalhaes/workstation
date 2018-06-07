@@ -34,12 +34,12 @@
 #       - Auto install bobthefish
 #
 #   V0.5 2018-05-09
-#       - Removed Vim config -> Working on my own config
+#       - Working on my own config
 #       - Removed Sublimetext editor -> Using Visual Code
-#       - Removed Guake from default installed packages 
+#       - Removed Guake from default installed packages
 #       - Change default browser -> Firefox to Google Chrome
-#       - Changed default file manager -> Caja to Thunar 
-#       - Updated GTK theme version  
+#       - Changed default file manager -> Caja to Thunar
+#       - Updated GTK theme version
 #       - Added Visual Code Studio
 #       - Added xfce plugins
 #       - Added Draw.IO
@@ -49,13 +49,16 @@
 #       - Removed Draw.IO (use web version)
 #       - Minor improvements
 #
+#
 #   TODO
-
-#  Install advanced tmux config
-#  sed the config to user powerline in tmux tmux_conf_theme_left_separator* tmux_conf_theme_right_separator
-#  Add more bindn keys to tmux
-#  Add virtualization software
-#  Auto ctrl b + I to load tmux plugins (?)
+#  * Make fresh install to test all configs
+#  * Install advanced tmux config
+#  * sed the config to user powerline in tmux tmux_conf_theme_left_separator* tmux_conf_theme_right_separator
+#  * Add more bindn keys to tmux
+#  * Add virtualization software
+#  * Auto ctrl b + I to load tmux plugins (?)
+#  * Auto enable plugins (Gnome and xfce)
+#  * Set default wallpaper (lock screen and desktop)
 #
 #RTM
 
@@ -146,36 +149,36 @@ echo 'fish' >> /home/$user/.bashrc
 
 
 #I'm not happy with this config right now ... working on my own personal configuration.
-###Create vim config
-###CREDITS to Amir <https://github.com/amix/vimrc>
-##runuser -l $user -c 'git clone https://github.com/amix/vimrc.git ~/.vim_runtime'
-##runuser -l $user -c 'bash ~/.vim_runtime/install_awesome_vimrc.sh'
-##
-##cat <<EOF >> /home/$user/.vimrc
-##if ! has("gui_running")
-##    set t_Co=256
-##endif
-##" feel free to choose :set background=light for a different style
-##set background=dark
-##colors peaksea
-##
-##set cm=blowfish2
-##EOF
-##
-##cat <<EOF >> /home/$user/.gvimrc
-##if ! has("gui_running")
-##    set t_Co=256
-##endif
-##" feel free to choose :set background=light for a different style
-##set background=dark
-##colors peaksea
-##
-##if has('gui_running')
-##  set guifont=Monospace\ 10
-##endif
-##
-##set cm=blowfish2
-##EOF
+#Create vim config
+#CREDITS to Amir <https://github.com/amix/vimrc>
+runuser -l $user -c 'git clone https://github.com/amix/vimrc.git ~/.vim_runtime'
+runuser -l $user -c 'bash ~/.vim_runtime/install_awesome_vimrc.sh'
+
+cat <<EOF >> /home/$user/.vimrc
+if ! has("gui_running")
+    set t_Co=256
+endif
+" feel free to choose :set background=light for a different style
+set background=dark
+colors peaksea
+
+set cm=blowfish2
+EOF
+
+cat <<EOF >> /home/$user/.gvimrc
+if ! has("gui_running")
+    set t_Co=256
+endif
+" feel free to choose :set background=light for a different style
+set background=dark
+colors peaksea
+
+if has('gui_running')
+  set guifont=Monospace\ 10
+endif
+
+set cm=blowfish2
+EOF
 
 #Set Oh My Fish
 #Credits <https://github.com/oh-my-fish/oh-my-fish>
@@ -212,7 +215,7 @@ set -g theme_project_dir_length 1
 EOF
 
 #Install bobthefish
-runuser -l $user -c "/usr/bin/fish -c 'omf install bobthefish'" 
+runuser -l $user -c "/usr/bin/fish -c 'omf install bobthefish'"
 
 #Set Tmux basic advanced config
 #CREDITS to Gregory <https://github.com/gpakosz>
