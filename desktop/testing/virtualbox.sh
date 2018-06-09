@@ -24,4 +24,4 @@ echo "deb https://download.virtualbox.org/virtualbox/debian stretch contrib" > /
 
 #Install
 apt-get update
-apt-get install virtualbox-5.2
+apt-get -y install virtualbox-5.2
