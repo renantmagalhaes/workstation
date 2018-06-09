@@ -49,13 +49,15 @@
 #       - Removed Draw.IO (use web version)
 #       - Minor improvements
 #
+#   V0.7 2018-06-08
+#       - Minor improvements
+#	- Added VirtualBox
+#
 #
 #   TODO
-#  * Make fresh install to test all configs
 #  * Install advanced tmux config
 #  * sed the config to user powerline in tmux tmux_conf_theme_left_separator* tmux_conf_theme_right_separator
 #  * Add more bindn keys to tmux
-#  * Add virtualization software (virtualbox)
 #  * Auto ctrl b + I to load tmux plugins (?)
 #  * Auto enable plugins (Gnome and xfce)
 #  * Set default wallpaper (lock screen and desktop)
@@ -87,11 +89,20 @@ sed -e '/deb cdrom:/ s/^#*/#/' -i /etc/apt/sources.list
 #Add non-free packages
 sed -e 's/main/main non-free/g' -i /etc/apt/sources.list
 
+
+##Virtualbox
+#Add Key
+wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
+wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
+#Register source.list
+echo "deb https://download.virtualbox.org/virtualbox/debian stretch contrib" > /etc/apt/sources.list.d/virtualbox.list
+
 #Update / upgrade
 apt-get update && apt-get upgrade
 
+
 #Install the packages from debian repo
-apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap vlc gimp blender fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient thunar thunar-archive-plugin thunar-data thunar-dbg thunar-media-tags-plugin thunar-volman xfce4-goodies xfce4-*plugin git gnome-icon-theme idle3 mate-sensors-applet numix-gtk-theme numix-icon-theme firmware-linux firmware-linux-nonfree firmware-linux-free fonts-hack-ttf apt-transport-https htop python3-pip meld gnome-shell-ex* chrome-gnome-shell
+apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap vlc gimp blender fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient thunar thunar-archive-plugin thunar-data thunar-dbg thunar-media-tags-plugin thunar-volman xfce4-goodies xfce4-*plugin git gnome-icon-theme idle3 mate-sensors-applet numix-gtk-theme numix-icon-theme firmware-linux firmware-linux-nonfree firmware-linux-free fonts-hack-ttf apt-transport-https htop python3-pip meld gnome-shell-ex* chrome-gnome-shell virtualbox-5.2
 
 
 ####### Testing google-chrome for now ######
@@ -106,7 +117,7 @@ Exec=/usr/local/firefox/firefox %u
 Terminal=false
 X-MultipleArgs=false
 Type=Application
-Icon=/usr/local/firefox/browser/chrome/icons/default/mozicon128.png
+Icon=/usr/local/firefox/browser/chrome/icons/default/default128.png
 Categories=Network;WebBrowser;
 MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/vnd.mozilla.xul+xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;
 StartupWMClass=Firefox-quantum
@@ -145,7 +156,7 @@ apt-get update
 apt-get -y install fish
 
 #Include Fish as user default shell
-echo 'fish' >> /home/$user/.bashrc
+usermod -s /usr/bin/fish $user
 
 
 #I'm not happy with this config right now ... working on my own personal configuration.
@@ -163,6 +174,7 @@ set background=dark
 colors peaksea
 
 set cm=blowfish2
+"
 EOF
 
 cat <<EOF >> /home/$user/.gvimrc
@@ -173,17 +185,19 @@ endif
 set background=dark
 colors peaksea
 
-if has('gui_running')
-  set guifont=Monospace\ 10
-endif
-
 set cm=blowfish2
+"
 EOF
+
+
+#Set permit vim
+chown $user:$user /home/$user/.vimrc
+chown $user:$user /home/$user/.gvimrc
 
 #Set Oh My Fish
 #Credits <https://github.com/oh-my-fish/oh-my-fish>
 runuser -l $user -c 'curl -L https://get.oh-my.fish > install'
-runuser -l $user -c 'fish install --path=~/.local/share/omf --config=~/.config/omf --noninteractive'
+runuser -l $usdr -c 'fish install --path=~/.local/share/omf --config=~/.config/omf --noninteractive'
 runuser -l $user -c 'touch ~/.config/fish/config.fish'
 
 cat <<EOF >> /home/$user/.config/fish/config.fish
@@ -249,5 +263,9 @@ EOF
 
 
 #RTM
-
-echo "www.renantmagalhaes.com"
+clear
+echo "#################################"
+echo "#			        #"
+echo "#	www.renantmagalhaes.com	#"
+echo "#			        #"
+echo "#################################"
