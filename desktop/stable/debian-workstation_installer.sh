@@ -34,7 +34,7 @@
 #       - Auto install bobthefish
 #
 #   V0.5 2018-05-09
-#       - Working on my own config
+#       - Working on my own VIM config
 #       - Removed Sublimetext editor -> Using Visual Code
 #       - Removed Guake from default installed packages
 #       - Change default browser -> Firefox to Google Chrome
@@ -51,7 +51,7 @@
 #
 #   V0.7 2018-06-08
 #       - Minor improvements
-#	- Added VirtualBox
+#	    - Added VirtualBox
 #
 #
 #   TODO
