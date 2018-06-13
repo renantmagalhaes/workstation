@@ -132,9 +132,9 @@ chown -R $user:$user /usr/local/firefox/
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
 dpkg -i /tmp/google-chrome-stable_current_amd64.deb
 
-#Install GTK theme
-wget https://github.com/LinxGem33/X-Arc-Darker/releases/download/v1.4.7/osx-arc-collection_1.4.7_amd64.deb -O /tmp/osx-arc-collection_1.4.7_amd64.deb
-dpkg -i /tmp/osx-arc-collection_1.4.7_amd64.deb
+#Install GTK theme - Repo dont exist anymore
+#wget https://github.com/LinxGem33/X-Arc-Darker/releases/download/v1.4.7/osx-arc-collection_1.4.7_amd64.deb -O /tmp/osx-arc-collection_1.4.7_amd64.deb
+#dpkg -i /tmp/osx-arc-collection_1.4.7_amd64.deb
 
 ##Install Sublime Text
 #wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
@@ -231,7 +231,7 @@ EOF
 #Install bobthefish
 runuser -l $user -c "/usr/bin/fish -c 'omf install bobthefish'"
 
-#Set Tmux basic advanced config
+#Set Tmux basic config
 #CREDITS to Gregory <https://github.com/gpakosz>
 runuser -l $user -c 'cd /home/$user'
 runuser -l $user -c 'git clone https://github.com/gpakosz/.tmux.git'
