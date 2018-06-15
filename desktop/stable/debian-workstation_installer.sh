@@ -266,6 +266,7 @@ EOF
 clear
 echo "#################################"
 echo "#			        #"
-echo "#	www.renantmagalhaes.com	#"
+echo "#	www.renantmagalhaes.net	#"
+echo "# Please reboot your pc   #
 echo "#			        #"
 echo "#################################"
