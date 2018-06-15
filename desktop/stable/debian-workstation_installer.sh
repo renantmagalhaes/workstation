@@ -133,8 +133,8 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -
 dpkg -i /tmp/google-chrome-stable_current_amd64.deb
 
 #Install GTK theme - Repo dont exist anymore
-#wget https://github.com/LinxGem33/X-Arc-Darker/releases/download/v1.4.7/osx-arc-collection_1.4.7_amd64.deb -O /tmp/osx-arc-collection_1.4.7_amd64.deb
-#dpkg -i /tmp/osx-arc-collection_1.4.7_amd64.deb
+wget https://gitlab.com/LinxGem33/X-Arc-White/uploads/26bccc81678392584149afa3167f8e78/osx-arc-collection_1.4.7_amd64.deb -O /tmp/osx-arc-collection_1.4.7_amd64.deb
+dpkg -i /tmp/osx-arc-collection_1.4.7_amd64.deb
 
 ##Install Sublime Text
 #wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
