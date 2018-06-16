@@ -202,7 +202,7 @@ chown $user:$user /home/$user/.gvimrc
 #Set Oh My Fish
 #Credits <https://github.com/oh-my-fish/oh-my-fish>
 runuser -l $user -c 'curl -L https://get.oh-my.fish > install'
-runuser -l $usdr -c 'fish install --path=~/.local/share/omf --config=~/.config/omf --noninteractive'
+runuser -l $user -c 'fish install --path=~/.local/share/omf --config=~/.config/omf --noninteractive'
 runuser -l $user -c 'touch ~/.config/fish/config.fish'
 
 cat <<EOF >> /home/$user/.config/fish/config.fish
