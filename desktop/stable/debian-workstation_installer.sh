@@ -51,7 +51,12 @@
 #
 #   V0.7 2018-06-08
 #       - Minor improvements
-#	    - Added VirtualBox
+#       - Added VirtualBox
+#
+#   V0.7 2018-06-08
+#       - Minor improvements
+#       - Fix virtualbox install
+#       - Fix var in ohmyfish install 
 #
 #
 #   TODO
@@ -270,8 +275,8 @@ EOF
 #RTM
 clear
 echo "#################################"
-echo "#			        #"
+echo "#                         #"
 echo "#	www.renantmagalhaes.net	#"
 echo "# Please reboot your pc   #"
-echo "#			        #"
+echo "#                         #"
 echo "#################################"
