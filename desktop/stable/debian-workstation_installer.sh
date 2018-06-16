@@ -267,6 +267,6 @@ clear
 echo "#################################"
 echo "#			        #"
 echo "#	www.renantmagalhaes.net	#"
-echo "# Please reboot your pc   #
+echo "# Please reboot your pc   #"
 echo "#			        #"
 echo "#################################"
