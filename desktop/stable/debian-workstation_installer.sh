@@ -53,7 +53,7 @@
 #       - Minor improvements
 #       - Added VirtualBox
 #
-#   V0.7 2018-06-08
+#   V0.7 2018-06-16
 #       - Minor improvements
 #       - Fix virtualbox install
 #       - Fix var in ohmyfish install 
