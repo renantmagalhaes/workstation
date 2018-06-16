@@ -34,7 +34,7 @@
 #       - Auto install bobthefish
 #
 #   V0.5 2018-05-09
-#       - Working on my own config
+#       - Working on my own VIM config
 #       - Removed Sublimetext editor -> Using Visual Code
 #       - Removed Guake from default installed packages
 #       - Change default browser -> Firefox to Google Chrome
@@ -51,7 +51,12 @@
 #
 #   V0.7 2018-06-08
 #       - Minor improvements
-#	- Added VirtualBox
+#       - Added VirtualBox
+#
+#   V0.7 2018-06-16
+#       - Minor improvements
+#       - Fix virtualbox install
+#       - Fix var in ohmyfish install 
 #
 #
 #   TODO
@@ -90,7 +95,7 @@ sed -e '/deb cdrom:/ s/^#*/#/' -i /etc/apt/sources.list
 sed -e 's/main/main non-free/g' -i /etc/apt/sources.list
 
 
-##Virtualbox
+##Virtualbox part1
 #Add Key
 wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
 wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
@@ -102,8 +107,13 @@ apt-get update && apt-get upgrade
 
 
 #Install the packages from debian repo
-apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap vlc gimp blender fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient thunar thunar-archive-plugin thunar-data thunar-dbg thunar-media-tags-plugin thunar-volman xfce4-goodies xfce4-*plugin git gnome-icon-theme idle3 mate-sensors-applet numix-gtk-theme numix-icon-theme firmware-linux firmware-linux-nonfree firmware-linux-free fonts-hack-ttf apt-transport-https htop python3-pip meld gnome-shell-ex* chrome-gnome-shell virtualbox-5.2
+apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap vlc gimp blender fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient thunar thunar-archive-plugin thunar-data thunar-dbg thunar-media-tags-plugin thunar-volman xfce4-goodies xfce4-*plugin git gnome-icon-theme idle3 mate-sensors-applet numix-gtk-theme numix-icon-theme firmware-linux firmware-linux-nonfree firmware-linux-free fonts-hack-ttf apt-transport-https htop python3-pip meld gnome-shell-ex* chrome-gnome-shell
 
+#Update / upgrade
+apt-get update && apt-get upgrade
+
+##Virtualbox part2 (need apt-transport-https before install)
+apt-get -y virtualbox-5.2 
 
 ####### Testing google-chrome for now ######
 ###Install Firefox pt-BR Latest
@@ -132,8 +142,8 @@ chown -R $user:$user /usr/local/firefox/
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
 dpkg -i /tmp/google-chrome-stable_current_amd64.deb
 
-#Install GTK theme
-wget https://github.com/LinxGem33/X-Arc-Darker/releases/download/v1.4.7/osx-arc-collection_1.4.7_amd64.deb -O /tmp/osx-arc-collection_1.4.7_amd64.deb
+#Install GTK theme - Repo dont exist anymore
+wget https://gitlab.com/LinxGem33/X-Arc-White/uploads/26bccc81678392584149afa3167f8e78/osx-arc-collection_1.4.7_amd64.deb -O /tmp/osx-arc-collection_1.4.7_amd64.deb
 dpkg -i /tmp/osx-arc-collection_1.4.7_amd64.deb
 
 ##Install Sublime Text
@@ -197,7 +207,7 @@ chown $user:$user /home/$user/.gvimrc
 #Set Oh My Fish
 #Credits <https://github.com/oh-my-fish/oh-my-fish>
 runuser -l $user -c 'curl -L https://get.oh-my.fish > install'
-runuser -l $usdr -c 'fish install --path=~/.local/share/omf --config=~/.config/omf --noninteractive'
+runuser -l $user -c 'fish install --path=~/.local/share/omf --config=~/.config/omf --noninteractive'
 runuser -l $user -c 'touch ~/.config/fish/config.fish'
 
 cat <<EOF >> /home/$user/.config/fish/config.fish
@@ -231,7 +241,7 @@ EOF
 #Install bobthefish
 runuser -l $user -c "/usr/bin/fish -c 'omf install bobthefish'"
 
-#Set Tmux basic advanced config
+#Set Tmux basic config
 #CREDITS to Gregory <https://github.com/gpakosz>
 runuser -l $user -c 'cd /home/$user'
 runuser -l $user -c 'git clone https://github.com/gpakosz/.tmux.git'
@@ -265,7 +275,8 @@ EOF
 #RTM
 clear
 echo "#################################"
-echo "#			        #"
-echo "#	www.renantmagalhaes.com	#"
-echo "#			        #"
+echo "#                         #"
+echo "#	www.renantmagalhaes.net	#"
+echo "# Please reboot your pc   #"
+echo "#                         #"
 echo "#################################"
