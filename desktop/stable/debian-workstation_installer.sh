@@ -90,7 +90,7 @@ sed -e '/deb cdrom:/ s/^#*/#/' -i /etc/apt/sources.list
 sed -e 's/main/main non-free/g' -i /etc/apt/sources.list
 
 
-##Virtualbox
+##Virtualbox part1
 #Add Key
 wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
 wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
@@ -102,8 +102,13 @@ apt-get update && apt-get upgrade
 
 
 #Install the packages from debian repo
-apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap vlc gimp blender fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient thunar thunar-archive-plugin thunar-data thunar-dbg thunar-media-tags-plugin thunar-volman xfce4-goodies xfce4-*plugin git gnome-icon-theme idle3 mate-sensors-applet numix-gtk-theme numix-icon-theme firmware-linux firmware-linux-nonfree firmware-linux-free fonts-hack-ttf apt-transport-https htop python3-pip meld gnome-shell-ex* chrome-gnome-shell virtualbox-5.2
+apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap vlc gimp blender fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient thunar thunar-archive-plugin thunar-data thunar-dbg thunar-media-tags-plugin thunar-volman xfce4-goodies xfce4-*plugin git gnome-icon-theme idle3 mate-sensors-applet numix-gtk-theme numix-icon-theme firmware-linux firmware-linux-nonfree firmware-linux-free fonts-hack-ttf apt-transport-https htop python3-pip meld gnome-shell-ex* chrome-gnome-shell
 
+#Update / upgrade
+apt-get update && apt-get upgrade
+
+##Virtualbox part2 (need apt-transport-https before install)
+apt-get -y virtualbox-5.2 
 
 ####### Testing google-chrome for now ######
 ###Install Firefox pt-BR Latest
