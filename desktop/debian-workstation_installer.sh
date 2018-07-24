@@ -56,7 +56,7 @@
 #   V0.7 2018-06-16
 #       - Minor improvements
 #       - Fix virtualbox install
-#       - Fix var in ohmyfish install 
+#       - Fix var in ohmyfish install
 #
 #
 #   TODO
@@ -113,7 +113,7 @@ apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap v
 apt-get update && apt-get upgrade
 
 ##Virtualbox part2 (need apt-transport-https before install)
-apt-get -y virtualbox-5.2 
+apt-get -y virtualbox-5.2
 
 ####### Testing google-chrome for now ######
 ###Install Firefox pt-BR Latest
@@ -211,8 +211,8 @@ runuser -l $user -c 'fish install --path=~/.local/share/omf --config=~/.config/o
 runuser -l $user -c 'touch ~/.config/fish/config.fish'
 
 cat <<EOF >> /home/$user/.config/fish/config.fish
-set -g theme_display_git no
-set -g theme_display_git_untracked no
+set -g theme_display_git yes
+set -g theme_display_git_untracked yes
 set -g theme_display_git_ahead_verbose yes
 set -g theme_git_worktree_support yes
 set -g theme_display_vagrant yes
