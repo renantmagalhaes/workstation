@@ -58,8 +58,17 @@
 #       - Fix virtualbox install
 #       - Fix var in ohmyfish install
 #
+#   V0.7 2018-07-26
+#       - Minor improvements
+#       - Remove some gnome3 packages
+#       - Add gnome-terminal package
+#       - Add Gogh -Color Scheme for Gnome Terminal and Pantheon Terminal (https://github.com/Mayccoll/Gogh)
+#
+#
+#
 #
 #   TODO
+#  * Verify OMF(oh my fish) vs fisherman (https://github.com/fisherman/fisherman)
 #  * Install advanced tmux config
 #  * sed the config to user powerline in tmux tmux_conf_theme_left_separator* tmux_conf_theme_right_separator
 #  * Add more bindn keys to tmux
@@ -107,7 +116,7 @@ apt-get update && apt-get upgrade
 
 
 #Install the packages from debian repo
-apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap vlc gimp blender gconf-editor fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient thunar thunar-archive-plugin thunar-data thunar-dbg thunar-media-tags-plugin thunar-volman xfce4-goodies xfce4-*plugin git gnome-icon-theme idle3 mate-sensors-applet numix-gtk-theme numix-icon-theme firmware-linux firmware-linux-nonfree firmware-linux-free fonts-hack-ttf apt-transport-https htop python3-pip meld gnome-shell-ex* chrome-gnome-shell
+apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap vlc gimp blender gconf-editor fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient thunar thunar-archive-plugin thunar-data thunar-dbg thunar-media-tags-plugin thunar-volman xfce4-goodies xfce4-*plugin git gnome-icon-theme idle3 mate-sensors-applet numix-gtk-theme numix-icon-theme firmware-linux firmware-linux-nonfree firmware-linux-free fonts-hack-ttf apt-transport-https htop python3-pip meld dconf-cli
 
 #Update / upgrade
 apt-get update && apt-get upgrade
@@ -155,6 +164,13 @@ dpkg -i /tmp/osx-arc-collection_1.4.7_amd64.deb
 ##Install Visual Code - Need further verification (check link)
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
 dpkg -i /tmp/visual_code_amd64.deb
+
+#Add Gogh
+## Grubvbox dark
+wget -O xt https://git.io/v7eBS && chmod +x xt && ./xt && rm xt
+##Elementary
+wget -O xt  http://git.io/v3D8R && chmod +x xt && ./xt && rm xt
+
 
 
 #Install fish
