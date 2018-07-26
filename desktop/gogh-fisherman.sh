@@ -17,24 +17,28 @@ echo "Enter your default user name:"
 read user
 
 #Install the packages from debian repo
-apt-get install dconf-cli fonts-powerline
+#apt-get install dconf-cli fonts-powerline curl
 
-#Add Gogh
-##Elementary
-wget -O xt  http://git.io/v3D8R && chmod +x xt && ./xt && rm xt
-## Grubvbox dark
-wget -O xt https://git.io/v7eBS && chmod +x xt && ./xt && rm xt
+apt-get install curl
 
-#Install fish
-wget -nv https://download.opensuse.org/repositories/shells:fish:release:2/Debian_9.0/Release.key -O Release.key
-apt-key add - < Release.key
-apt-get update
-echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/2/Debian_9.0/ /' > /etc/apt/sources.list.d/fish.list
-apt-get update
-apt-get -y install fish
+##Add Gogh
+###Elementary
+#wget -O xt  http://git.io/v3D8R && chmod +x xt && ./xt && rm xt
+### Grubvbox dark
+#wget -O xt https://git.io/v7eBS && chmod +x xt && ./xt && rm xt
+#
+##Install fish
+#wget -nv https://download.opensuse.org/repositories/shells:fish:release:2/Debian_9.0/Release.key -O Release.key
+#apt-key add - < Release.key
+#apt-get update
+#echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/2/Debian_9.0/ /' > /etc/apt/sources.list.d/fish.list
+#apt-get update
+#apt-get -y install fish
+#
+##Include Fish as user default shell
+#usermod -s /usr/bin/fish $user
 
-#Include Fish as user default shell
-usermod -s /usr/bin/fish $user
+runuser -l $user -c 'touch ~/.config/fish/config.fish'
 
 cat <<EOF >> /home/$user/.config/fish/config.fish
 set -g theme_display_git yes
