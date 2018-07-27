@@ -70,7 +70,6 @@
 #
 #
 #   TODO
-#  * Verify OMF(oh my fish) vs fisherman (https://github.com/fisherman/fisherman)
 #  * Install advanced tmux config
 #  * sed the config to user powerline in tmux tmux_conf_theme_left_separator* tmux_conf_theme_right_separator
 #  * Add more bindn keys to tmux
