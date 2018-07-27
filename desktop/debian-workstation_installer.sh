@@ -220,10 +220,10 @@ EOF
 chown $user:$user /home/$user/.vimrc
 chown $user:$user /home/$user/.gvimrc
 
-##Set Oh My Fish
-##Credits <https://github.com/oh-my-fish/oh-my-fish>
-#runuser -l $user -c 'curl -L https://get.oh-my.fish > install'
-#runuser -l $user -c 'fish install --path=~/.local/share/omf --config=~/.config/omf --noninteractive'
+#Set Oh My Fish
+#Credits <https://github.com/oh-my-fish/oh-my-fish>
+runuser -l $user -c 'curl -L https://get.oh-my.fish > install'
+runuser -l $user -c 'fish install --path=~/.local/share/omf --config=~/.config/omf --noninteractive'
 
 
 #Set Fisherman(https://github.com/fisherman/fisherman)
@@ -233,7 +233,7 @@ runuser -l $user -c 'curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs
 runuser -l $user -c 'fisher install edc/bass'
 runuser -l $user -c 'fisher install laughedelic/pisces'
 runuser -l $user -c 'fisher install z'
-runuser -l $user -c 'fisher install omf/theme-bobthefish'
+#runuser -l $user -c 'fisher install omf/theme-bobthefish'
 
 #Add fish config
 runuser -l $user -c 'touch ~/.config/fish/config.fish'
