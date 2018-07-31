@@ -70,6 +70,7 @@
 #
 #
 #   TODO
+#  * Verify Caja.desktop to display in xfce /usr/share/applications/caja*.desktop
 #  * Install advanced tmux config
 #  * sed the config to user powerline in tmux tmux_conf_theme_left_separator* tmux_conf_theme_right_separator
 #  * Add more bindn keys to tmux
