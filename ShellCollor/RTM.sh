@@ -3,7 +3,7 @@
 # ====================CONFIG THIS =============================== #
 COLOR_01="#303030"           # HOST
 COLOR_02="#e1321a"           # SYNTAX_STRING
-COLOR_03="#6ab017"           # COMMAND
+COLOR_03="#8FFF57"           # COMMAND
 COLOR_04="#ffc005"           # COMMAND_COLOR2
 COLOR_05="#004f9e"           # PATH
 COLOR_06="#ec0048"           # SYNTAX_VAR
@@ -14,10 +14,10 @@ COLOR_09="#5d5d5d"           #
 COLOR_10="#ff361e"           # COMMAND_ERROR
 COLOR_11="#50FA7B"           # EXEC
 COLOR_12="#ffd00a"           #
-COLOR_13="#0071ff"           # FOLDER
-COLOR_14="#ff1d62"           #
+COLOR_13="#3C6FAE"           # FOLDER
+COLOR_14="#db3b4b"           #
 COLOR_15="#4bb8fd"           #
-COLOR_16="#a020f0"           #
+COLOR_16="#ffffff"           #
 
 BACKGROUND_COLOR="#101010"   # Background Color
 FOREGROUND_COLOR="#f2f2f2"   # Text
