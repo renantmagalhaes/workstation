@@ -167,6 +167,13 @@ dpkg -i /tmp/osx-arc-collection_1.4.7_amd64.deb
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
 dpkg -i /tmp/visual_code_amd64.deb
 
+#Install FireCode Fonts
+##Select FuraCode Nerd Font Regular size 10
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/FiraCode.zip
+unzip FiraCode.zip -d /usr/local/share/fonts/
+fc-cache -fv
+
+
 #Add Gogh
 ##Elementary
 runuser -l $user -c 'wget -O xt  http://git.io/v3D8R && chmod +x xt && ./xt && rm xt'
