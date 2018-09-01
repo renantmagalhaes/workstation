@@ -67,7 +67,9 @@
 #       - Changed OMF for Fisherman
 #
 #
-#
+#   V0.8 2018-08-31
+#       - Change default vim install to spacevim
+# 
 #
 #   TODO
 #  * Verify Caja.desktop to display in xfce /usr/share/applications/caja*.desktop
@@ -195,37 +197,40 @@ usermod -s /usr/bin/fish $user
 #I'm not happy with this config right now ... working on my own personal configuration.
 #Create vim config
 #CREDITS to Amir <https://github.com/amix/vimrc>
-runuser -l $user -c 'git clone https://github.com/amix/vimrc.git ~/.vim_runtime'
-runuser -l $user -c 'bash ~/.vim_runtime/install_awesome_vimrc.sh'
+#runuser -l $user -c 'git clone https://github.com/amix/vimrc.git ~/.vim_runtime'
+#runuser -l $user -c 'bash ~/.vim_runtime/install_awesome_vimrc.sh'
+#
+#cat <<EOF >> /home/$user/.vimrc
+#if ! has("gui_running")
+#    set t_Co=256
+#endif
+#" feel free to choose :set background=light for a different style
+#set background=dark
+#colors peaksea
+#
+#set cm=blowfish2
+#"
+#EOF
+#
+#cat <<EOF >> /home/$user/.gvimrc
+#if ! has("gui_running")
+#    set t_Co=256
+#endif
+#" feel free to choose :set background=light for a different style
+#set background=dark
+#colors peaksea
+#
+#set cm=blowfish2
+#"
+#EOF
 
-cat <<EOF >> /home/$user/.vimrc
-if ! has("gui_running")
-    set t_Co=256
-endif
-" feel free to choose :set background=light for a different style
-set background=dark
-colors peaksea
-
-set cm=blowfish2
-"
-EOF
-
-cat <<EOF >> /home/$user/.gvimrc
-if ! has("gui_running")
-    set t_Co=256
-endif
-" feel free to choose :set background=light for a different style
-set background=dark
-colors peaksea
-
-set cm=blowfish2
-"
-EOF
+#New VIM
+runuser -l $user -c 'curl -sLf https://spacevim.org/install.sh | bash'
 
 
-#Set permit vim
-chown $user:$user /home/$user/.vimrc
-chown $user:$user /home/$user/.gvimrc
+##Set permit vim
+#achown $user:$user /home/$user/.vimrc
+#chown $user:$user /home/$user/.gvimrc
 
 #Set Oh My Fish
 #Credits <https://github.com/oh-my-fish/oh-my-fish>
