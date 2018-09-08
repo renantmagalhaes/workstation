@@ -209,7 +209,9 @@ apt-key add - < Release.key
 apt-get update
 echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/2/Debian_9.0/ /' > /etc/apt/sources.list.d/fish.list
 apt-get update
+apt-get -y -f install
 apt-get -y install fish
+apt-get -y -f install
 
 #Include Fish as user default shell
 usermod -s /usr/bin/fish $user
