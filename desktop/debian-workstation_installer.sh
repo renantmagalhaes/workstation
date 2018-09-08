@@ -56,7 +56,7 @@
 #   V0.7 2018-06-16
 #       - Minor improvements
 #       - Fix virtualbox install
-#       - Fix var in ohmyfish install
+#       - Fix var in oh-my-fish install
 #
 #   V0.7 2018-07-26
 #       - Minor improvements
@@ -69,7 +69,11 @@
 #
 #   V0.8 2018-08-31
 #       - Change default vim install to spacevim
-# 
+#
+#   V0.9 2018-09-08
+#       - Add snap package manager
+#       - Add mailspring email client
+#       - Add numix-circle icons
 #
 #   TODO
 #  * Verify Caja.desktop to display in xfce /usr/share/applications/caja*.desktop
@@ -120,7 +124,7 @@ apt-get update && apt-get upgrade
 
 
 #Install the packages from debian repo
-apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap vlc gimp blender gconf-editor fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient caja caja-* xfce4-goodies xfce4-*plugin git gnome-icon-theme idle3 mate-sensors-applet numix-gtk-theme numix-icon-theme firmware-linux firmware-linux-nonfree firmware-linux-free fonts-hack-ttf apt-transport-https htop python3-pip meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome
+apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap vlc gimp blender gconf-editor fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient caja caja-* xfce4-goodies xfce4-*plugin git gnome-icon-theme idle3 mate-sensors-applet numix-gtk-theme numix-icon-theme firmware-linux firmware-linux-nonfree firmware-linux-free fonts-hack-ttf apt-transport-https htop python3-pip meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd
 
 #Update / upgrade
 apt-get update && apt-get upgrade
@@ -310,6 +314,14 @@ set -g @resurrect-capture-pane-contents 'on'
 run '~/.tmux/plugins/tpm/tpm'
 EOF
 
+# Install mailspring
+snap install mailspring
+
+#Install numix-circle-icons
+runuser -l $user -c 'mkdir -p ~/.icons'
+runuser -l $user -c 'git clone https://github.com/numixproject/numix-icon-theme-circle.git ~/.icons'
+runuser -l $user -c 'gtk-update-icon-cache ~/.icons/Numix-Circle'
+runuser -l $user -c 'gtk-update-icon-cache ~/.icons/Numix-Circle-Light'
 
 
 #RTM
