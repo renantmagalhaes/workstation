@@ -128,7 +128,7 @@ wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
 echo "deb https://download.virtualbox.org/virtualbox/debian stretch contrib" > /etc/apt/sources.list.d/virtualbox.list
 
 #Update / upgrade
-apt-get update && apt-get upgrade
+apt-get update && apt-get -y upgrade
 
 
 #Install the packages from debian repo
@@ -144,7 +144,7 @@ snap install slack --classic
 
 
 #Update / upgrade
-apt-get update && apt-get upgrade
+apt-get update && apt-get -y upgrade
 
 ##Virtualbox part2 (need apt-transport-https before install)
 apt-get -y virtualbox-5.2
