@@ -90,6 +90,7 @@
 #  * Auto ctrl b + I to load tmux plugins (?)
 #  * Auto enable plugins (Gnome and xfce)
 #  * Set default wallpaper (lock screen and desktop)
+#  * Add %user to wireshark group
 #
 #RTM
 
