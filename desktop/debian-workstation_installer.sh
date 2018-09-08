@@ -2,7 +2,7 @@
 #
 # installer_workstation.sh - Script to install my full DEBIAN 9 workstation experience
 #
-#Site       :http://renantmagalhaes.com
+#Site        :https://renantmagalhaes.net
 #Author      :Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
 #                                     <https://github.com/renantmagalhaes>
 #
@@ -71,9 +71,11 @@
 #       - Change default vim install to spacevim
 #
 #   V0.9 2018-09-08
-#       - Add snap package manager
-#       - Add mailspring email client
 #       - Add numix-circle icons
+#       - Add snap package manager
+#       - Add mailspring email client(snap)
+#       - Add Slack (snap)
+#       - Add Telegram-desktop (snap)
 #
 #   TODO
 #  * Verify Caja.desktop to display in xfce /usr/share/applications/caja*.desktop
@@ -125,6 +127,15 @@ apt-get update && apt-get upgrade
 
 #Install the packages from debian repo
 apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap vlc gimp blender gconf-editor fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient caja caja-* xfce4-goodies xfce4-*plugin git gnome-icon-theme idle3 mate-sensors-applet numix-gtk-theme numix-icon-theme firmware-linux firmware-linux-nonfree firmware-linux-free fonts-hack-ttf apt-transport-https htop python3-pip meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd
+
+#Install the packages from snap repo
+## mailspring
+snap install mailspring
+## telegram
+snap install telegram-desktop
+## slack
+snap install slack --classic
+
 
 #Update / upgrade
 apt-get update && apt-get upgrade
@@ -313,9 +324,6 @@ set -g @resurrect-capture-pane-contents 'on'
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
 EOF
-
-# Install mailspring
-snap install mailspring
 
 #Install numix-circle-icons
 runuser -l $user -c 'mkdir -p ~/.icons'
