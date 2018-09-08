@@ -8,7 +8,7 @@
 #
 # ---------------------------------------------------------------
 #
-#  When executing the script it will make all the changes in the system and will download / install the most used packages.
+# This script  will make all the changes in the system and will download / install my most used packages.
 #
 #
 # --------------------------------------------------------------
@@ -22,9 +22,9 @@
 #       - added more packages from debian repo
 #
 #   V0.2.1 2017-12-03 RTM:
-#       - Sintax adjustments
+#       - Syntax adjustments
 #       - Add github address in header
-#       - Enable blowfish2 vim cryptmethod
+#       - Enable blowfish2 vim crypt method
 #
 #   V0.3 2017-12-11
 #       - Added tmux plugin manager
@@ -77,11 +77,16 @@
 #       - Add Slack (snap)
 #       - Add Telegram-desktop (snap)
 #
+#   V0.9.1 2018-09-08
+#       - Minor spell check adjustment
+#       - Change site to .net domain
+#       - Change description
+#
 #   TODO
 #  * Verify Caja.desktop to display in xfce /usr/share/applications/caja*.desktop
 #  * Install advanced tmux config
 #  * sed the config to user powerline in tmux tmux_conf_theme_left_separator* tmux_conf_theme_right_separator
-#  * Add more bindn keys to tmux
+#  * Add more bind keys to tmux
 #  * Auto ctrl b + I to load tmux plugins (?)
 #  * Auto enable plugins (Gnome and xfce)
 #  * Set default wallpaper (lock screen and desktop)
@@ -180,7 +185,7 @@ dpkg -i /tmp/osx-arc-collection_1.4.7_amd64.deb
 #apt-get update
 #apt-get install sublime-text
 
-##Install Visual Code - Need further verification (check link)
+##Install Visual Code
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
 dpkg -i /tmp/visual_code_amd64.deb
 
