@@ -91,7 +91,7 @@
 #  * Auto enable plugins (Gnome and xfce)
 #  * Set default wallpaper (lock screen and desktop)
 #  * Add %user to wireshark group
-#
+#  * Add XDM downloader (http://xdman.sourceforge.net/#downloads)
 #RTM
 
 #Root check
