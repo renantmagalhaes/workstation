@@ -83,15 +83,19 @@
 #       - Change description
 #
 #   TODO
-#  * Verify Caja.desktop to display in xfce /usr/share/applications/caja*.desktop
-#  * Install advanced tmux config
-#  * sed the config to user powerline in tmux tmux_conf_theme_left_separator* tmux_conf_theme_right_separator
-#  * Add more bind keys to tmux
-#  * Auto ctrl b + I to load tmux plugins (?)
-#  * Auto enable plugins (Gnome and xfce)
-#  * Set default wallpaper (lock screen and desktop)
-#  * Add %user to wireshark group
-#  * Add XDM downloader (http://xdman.sourceforge.net/#downloads)
+#   * Verify Caja.desktop to display in xfce /usr/share/applications/caja*.desktop
+#   * Install advanced tmux config
+#   * sed the config to user powerline in tmux tmux_conf_theme_left_separator* tmux_conf_theme_right_separator
+#   * Add more bind keys to tmux
+#   * Auto ctrl b + I to load tmux plugins (?)
+#   * Auto enable plugins (Gnome and xfce)
+#   * Set default wallpaper (lock screen and desktop)
+#   * Add %user to wireshark group
+#   * Add XDM downloader (http://xdman.sourceforge.net/#downloads)
+#   * Add tmux config
+#            bind -n S-Left  previous-window
+#            bind -n S-Right next-window
+
 #RTM
 
 #Root check
