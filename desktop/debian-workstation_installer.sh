@@ -147,7 +147,7 @@ snap install slack --classic
 apt-get update && apt-get -y upgrade
 
 ##Virtualbox part2 (need apt-transport-https before install)
-apt-get -y virtualbox-5.2
+apt-get -y install virtualbox-5.2
 
 ####### Testing google-chrome for now ######
 ###Install Firefox pt-BR Latest
