@@ -1,0 +1,7 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Terminal=false
+Type=Application
+Name=Thunar
+Exec=/usr/bin/thunar
+Icon=/home/rtm/.icons/Numix-Circle/48/apps/thunar.svg

@@ -83,18 +83,17 @@
 #       - Change description
 #
 #   TODO
-#   * Verify Caja.desktop to display in xfce /usr/share/applications/caja*.desktop
 #   * Install advanced tmux config
 #   * sed the config to user powerline in tmux tmux_conf_theme_left_separator* tmux_conf_theme_right_separator
 #   * Add more bind keys to tmux
 #   * Auto ctrl b + I to load tmux plugins (?)
-#   * Auto enable plugins (Gnome and xfce)
-#   * Set default wallpaper (lock screen and desktop)
 #   * Add %user to wireshark group
 #   * Add XDM downloader (http://xdman.sourceforge.net/#downloads)
 #   * Add tmux config
-#            bind -n S-Left  previous-window
-#            bind -n S-Right next-window
+#            bind -n M-Left  previous-window
+#            bind -n M-Right next-window
+#   * Icons Fix
+#
 
 #RTM
 
@@ -136,7 +135,7 @@ apt-get update && apt-get -y upgrade
 
 
 #Install the packages from debian repo
-apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap vlc gimp blender gconf-editor fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient caja caja-* xfce4-goodies xfce4-*plugin git gnome-icon-theme idle3 mate-sensors-applet numix-gtk-theme numix-icon-theme firmware-linux firmware-linux-nonfree firmware-linux-free fonts-hack-ttf apt-transport-https htop python3-pip meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal
+apt-get -y install docky clementine deluge dia vim vim-gtk vim-gui-common nmap vlc gimp blender gconf-editor fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient xfce4-goodies xfce4-*plugin git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme firmware-linux firmware-linux-nonfree firmware-linux-free fonts-hack-ttf apt-transport-https htop python3-pip meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal
 
 #Install the packages from snap repo
 ## mailspring
@@ -184,11 +183,6 @@ dpkg -i /tmp/google-chrome-stable_current_amd64.deb
 wget https://gitlab.com/LinxGem33/X-Arc-White/uploads/26bccc81678392584149afa3167f8e78/osx-arc-collection_1.4.7_amd64.deb -O /tmp/osx-arc-collection_1.4.7_amd64.deb
 dpkg -i /tmp/osx-arc-collection_1.4.7_amd64.deb
 
-##Install Sublime Text
-#wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
-#echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
-#apt-get update
-#apt-get install sublime-text
 
 ##Install Visual Code
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
@@ -251,13 +245,12 @@ usermod -s /usr/bin/fish $user
 #"
 #EOF
 
-#New VIM
-runuser -l $user -c 'curl -sLf https://spacevim.org/install.sh | bash'
-
-
 ##Set permit vim
 #achown $user:$user /home/$user/.vimrc
 #chown $user:$user /home/$user/.gvimrc
+
+#New VIM
+runuser -l $user -c 'curl -sLf https://spacevim.org/install.sh | bash
 
 #Set Oh My Fish
 #Credits <https://github.com/oh-my-fish/oh-my-fish>
@@ -305,9 +298,6 @@ set -g theme_color_scheme zenburn
 set -g fish_prompt_pwd_dir_length 0
 set -g theme_project_dir_length 1
 EOF
-
-#Install bobthefish
-runuser -l $user -c "/usr/bin/fish -c 'omf install bobthefish'"
 
 #Set Tmux basic config
 #CREDITS to Gregory <https://github.com/gpakosz>

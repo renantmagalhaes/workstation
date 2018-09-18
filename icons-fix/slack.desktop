@@ -1,0 +1,7 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Terminal=false
+Type=Application
+Name=Slack-rtm
+Exec=/snap/slack/8/usr/lib/slack/slack
+Icon=/home/rtm/.icons/Numix-Circle/48/apps/slack.svg
