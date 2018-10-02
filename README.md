@@ -1,2 +1,0 @@
-# workstation
-My full enviroment
