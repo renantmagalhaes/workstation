@@ -1,0 +1,228 @@
+# Purpose:       config file for zsh)
+#
+#Site        :https://renantmagalhaes.net
+#Author      :Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
+#                                     <https://github.com/renantmagalhaes>
+#
+# ---------------------------------------------------------------
+#
+# Changelog
+#
+#   V0.1 2019-01-30 RTM:
+#       - Initial release
+#
+#   TODO
+#   * 
+
+
+#RTM
+
+# Path to your oh-my-zsh installation.
+export ZSH="/home/$USER/.oh-my-zsh"
+
+# Set theme
+POWERLEVEL9K_MODE='nerdfont-complete'
+ZSH_THEME="powerlevel9k/powerlevel9k"
+
+
+#Plugins
+
+plugins=(
+  git
+  kubectl
+  kube-ps1
+  zsh-completions
+  zsh-autosuggestions
+  colored-man-pages
+  colorize
+  command-not-found
+  docker
+  docker-compose
+  tmux
+  virtualenv
+)
+
+
+# Configure env kubectl
+source "$ZSH/plugins/kube-ps1/kube-ps1.plugin.zsh"
+prompt_kube_ps1(){
+   echo -n `kube_ps1`
+}
+KUBE_PS1_NS_ENABLE="false"
+KUBE_PS1_DIVIDER=""
+KUBE_PS1_SYMBOL_USE_IMG="\u2638"
+
+# Display
+
+#POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_user virtualenv dir_writable dir vcs)
+##POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=( status background_jobs command_execution_time kubecontext )
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=( status background_jobs command_execution_time custom_command)
+#
+#
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=3
+#
+## User with skull
+user_with_skull() {
+    echo -n "\uf1d0 $(whoami)@$(hostname)"
+}
+POWERLEVEL9K_CUSTOM_USER="user_with_skull"
+
+#Kubecontext
+#read_kube_config_context() {
+#	    cat ~/.kube/config |grep name |tail -n2 |awk {'print $3'}
+#    }
+#
+read_kube_config_context() {
+	    kubectl config current-context
+    }
+POWERLEVEL9K_CUSTOM_COMMAND="read_kube_config_context"
+
+#
+##Colors
+#
+### DIRS
+#POWERLEVEL9K_DIR_HOME_BACKGROUND='black'
+#POWERLEVEL9K_DIR_HOME_FOREGROUND='white'
+#POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND='black'
+#POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND='white'
+#POWERLEVEL9K_DIR_DEFAULT_BACKGROUND='yellow'
+#POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='black'
+#
+### VCS icons
+#POWERLEVEL9K_VCS_GIT_ICON=$'\uf1d2 '
+#POWERLEVEL9K_VCS_GIT_BITBUCKET_ICON=$'\uf171 '
+#POWERLEVEL9K_VCS_GIT_GITHUB_ICON=$'\uf113 '
+#POWERLEVEL9K_VCS_GIT_GITLAB_ICON=$'\uf296 '
+#POWERLEVEL9K_VCS_BRANCH_ICON=$''
+#POWERLEVEL9K_VCS_STAGED_ICON=$'\uf055'
+#POWERLEVEL9K_VCS_UNSTAGED_ICON=$'\uf421'
+#POWERLEVEL9K_VCS_UNTRACKED_ICON=$'\uf00d'
+#POWERLEVEL9K_VCS_INCOMING_CHANGES_ICON=$'\uf0ab '
+#POWERLEVEL9K_VCS_OUTGOING_CHANGES_ICON=$'\uf0aa '
+
+#
+### VCS colours
+#POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='yellow'
+#POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='black'
+#POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='green'
+#POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='black'
+#POWERLEVEL9K_VCS_CLEAN_BACKGROUND='green'
+#POWERLEVEL9K_VCS_CLEAN_FOREGROUND='black'
+#
+### command_execution_time
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='clear'
+#
+### kunnecontext
+#POWERLEVEL9K_KUBECONTEXT_BACKGROUND='clear'
+#POWERLEVEL9K_KUBECONTEXT_FOREGROUND='231'
+
+#Virtualenv
+POWERLEVEL9K_VIRTUALENV_BACKGROUND='clear'
+POWERLEVEL9K_VIRTUALENV_FOREGROUND='green'
+
+#Custom collors
+POWERLEVEL9K_CUSTOM_USER_BACKGROUND='clear'
+POWERLEVEL9K_CUSTOM_USER_FOREGROUND='blue'
+
+POWERLEVEL9K_CUSTOM_COMMAND_BACKGROUND='clear'
+POWERLEVEL9K_CUSTOM_COMMAND_FOREGROUND='231'
+
+
+######################## NEW COLOR THEME ########################
+
+function sp {
+  git branch > /dev/null 2>&1 || return 1
+  git config user.initials
+}
+
+POWERLEVEL9K_DIR_BACKGROUND='237'
+POWERLEVEL9K_CUSTOM_GIT_PAIR="echo \$(sp)"
+POWERLEVEL9K_CUSTOM_GIT_PAIR_BACKGROUND="clear"
+POWERLEVEL9K_CUSTOM_GIT_PAIR_FOREGROUND="blue"
+POWERLEVEL9K_CUSTOM_GIT_PAIR_ICON="\uf7af"
+POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="clear"
+POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="012"
+POWERLEVEL9K_DIR_FOREGROUND='010'
+POWERLEVEL9K_DIR_HOME_BACKGROUND="clear"
+POWERLEVEL9K_DIR_HOME_FOREGROUND="white"
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="clear"
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="012"
+POWERLEVEL9K_DIR_PATH_SEPARATOR="%F{008}/%F{cyan}"
+
+POWERLEVEL9K_DIR_ETC_BACKGROUND="clear"
+POWERLEVEL9K_ETC_ICON='%F{blue}\uf423'
+POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="red"
+POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND="clear"
+
+POWERLEVEL9K_GO_ICON="\uf7b7"
+POWERLEVEL9K_GO_VERSION_BACKGROUND='clear'
+POWERLEVEL9K_GO_VERSION_FOREGROUND='081'
+
+POWERLEVEL9K_HOME_ICON="\uf1d0"
+
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator virtualenv dir dir_writable_joined custom_git_pair vcs_joined)
+POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='%F{008}\uf460%F{008}'
+
+POWERLEVEL9K_LINUX_MANJARO_ICON="\uf312 "
+POWERLEVEL9K_LINUX_UBUNTU_ICON="\uf31b "
+
+POWERLEVEL9K_MODE='nerdfont-complete'
+
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX=" \uf101 "
+
+POWERLEVEL9K_NVM_BACKGROUND='clear'
+POWERLEVEL9K_NVM_FOREGROUND='green'
+
+POWERLEVEL9K_OS_ICON_BACKGROUND='clear'
+POWERLEVEL9K_OS_ICON_FOREGROUND='cyan'
+
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time go_version nvm os_icon custom_command)
+POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
+POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%F{008}\uf104%F{008}'
+
+POWERLEVEL9K_SHORTEN_DELIMITER='%F{008} …%F{008}'
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=50
+POWERLEVEL9K_SHORTEN_STRATEGY="none"
+
+POWERLEVEL9K_STATUS_ERROR_BACKGROUND="clear"
+POWERLEVEL9K_STATUS_ERROR_FOREGROUND="001"
+POWERLEVEL9K_STATUS_OK_BACKGROUND="clear"
+POWERLEVEL9K_STATUS_BACKGROUND="clear"
+POWERLEVEL9K_CARRIAGE_RETURN_ICON="\uf071"
+
+POWERLEVEL9K_TIME_FORMAT="%D{%H:%M \uE868  %d.%m}"
+
+POWERLEVEL9K_VCS_CLEAN_BACKGROUND='clear'
+POWERLEVEL9K_VCS_CLEAN_FOREGROUND='green'
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='clear'
+POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='yellow'
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='clear'
+POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='green'
+
+
+######################## NEW THEME ########################
+
+#characters backspace 
+#WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
+#Aliases
+alias folder="nautilus"
+
+#Custom plugins
+source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+#Python virtualenv and Virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.7
+source /usr/local/bin/virtualenvwrapper.sh
+
+#source
+source $ZSH/oh-my-zsh.sh

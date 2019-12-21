@@ -1,0 +1,21 @@
+=> Dev Tools
+    -> Beautify (ext install HookyQR.beautify)
+    -> Docker (ext install ms-azuretools.vscode-docker)
+    -> Kubernetes (ext install ms-kubernetes-tools.vscode-kubernetes-tools)
+    -> Python (ext install ms-python.python)
+        -> Select interpreter
+        -> Verify pylint
+    -> Python Extension Pack (ext install donjayamanne.python-extension-pack)
+    -> Yaml (ext install redhat.vscode-yaml)
+    -> Json (ext install ZainChen.json)
+    -> GitLens (ext install eamodio.gitlens)
+    -> shell-format (ext install foxundermoon.shell-format)
+    -> AutoComplate shell (ext install truman.autocomplate-shell)
+    ->  Markdown lint (ext install markdownlint)
+    
+
+=> Themes
+    -> Linux themes - MAIN- (ext install SolarLiner.linux-themes)
+    -> Material Theme (ext install Equinusocio.vsc-material-theme)
+    -> Material Icon Theme (ext install PKief.material-icon-theme)
+    -> Darcula (ext install rokoroku.vscode-theme-darcula)

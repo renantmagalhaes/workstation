@@ -1,0 +1,7 @@
+### Windows Programs ###
+
+Utils: https://ninite.com
+
+Screenshot: lightshot
+
+Screen recorder: OBS Studio
