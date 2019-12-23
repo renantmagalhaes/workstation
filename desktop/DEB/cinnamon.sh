@@ -124,9 +124,10 @@
 #    V1.0.5 2019-12-22
 #        - Major fixes and rework
 # 
+#    V1.1.0 2019-12-23
+#        - Fully automated again
 # 
 #    TODO
-#    * Script is not fully automated anymore, fix that !
 #    * https://github.com/vinceliuice/grub2-themes
 #    * Install albert
 #    * 
