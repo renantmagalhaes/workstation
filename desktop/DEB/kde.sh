@@ -26,109 +26,10 @@
 # 
 #  Changelog
 # 
-#    V0.1 2017-12-02 RTM:
-#        - Initial release
-# 
-#    V0.2 2017-12-03 RTM:
-#        - added more packages from debian repo
-# 
-#    V0.2.1 2017-12-03 RTM:
-#        - Syntax adjustments
-#        - Add github address in header
-#        - Enable blowfish2 vim crypt method
-# 
-#    V0.3 2017-12-11
-#        - Added tmux plugin manager
-# 
-#    V0.4 2017-12-29
-#        - Rework Oh my fish! installation
-#        - Auto install bobthefish
-# 
-#    V0.5 2018-05-09
-#        - Working on my own VIM config
-#        - Removed Sublimetext editor -> Using Visual Code
-#        - Change default browser -> Firefox to Google Chrome
-#        - Changed default file manager -> Caja to Thunar
-#        - Updated GTK theme version
-#        - Added Visual Code Studio
-#        - Added xfce plugins
-#        - Added Draw.IO
-# 
-#    V0.6 2018-05-28
-#        - Added Gnome3 plugins
-#        - Removed Draw.IO (use web version)
-#        - Minor improvements
-# 
-#    V0.7 2018-06-08
-#        - Minor improvements
-#        - Added VirtualBox
-# 
-#    V0.7 2018-06-16
-#        - Minor improvements
-#        - Fix virtualbox install
-#        - Fix var in oh-my-fish install
-# 
-#    V0.7 2018-07-26
-#        - Minor improvements
-#        - Remove some gnome3 packages
-#        - Add gnome-terminal package
-#        - Add Gogh -Color Scheme for Gnome Terminal and Pantheon Terminal (https://github.com/Mayccoll/Gogh)
-#        - Changed Thunar > Caja
-#        - Changed OMF for Fisherman
-# 
-# 
-#    V0.8 2018-08-31
-#        - Change default vim install to spacevim
-# 
-#    V0.9 2018-09-08
-#        - Add numix-circle icons
-#        - Add snap package manager
-#        - Add mailspring email client(snap)
-#        - Add Slack (snap)
-#        - Add Telegram-desktop (snap)
-# 
-#    V0.9.1 2018-09-08
-#        - Minor spell check adjustment
-#        - Change site to .net domain
-#        - Change description
-# 
-#    V1.0 2018-09-29
-#        - All major "TODO" fix
-#        - Change docky for plank
-#        - Add themes for plank
-# 
-#    V1.0.1 2018-10-01
-#        - Plank autostart
-# 
-#    V1.0.2 2019-02-28
-#        - Vimix Theme
-#        - New icons
-#        - New fonts
-#        - New Cursor
-# 
-#    V1.0.2 2019-08-14
-#        - Using Cinnamon now
-#        - New theme
-#        - New icons
-#        - New packages
-# 
-#    V1.0.3 2019-08-14
-#        - Create git folder
-#        - Change default path for theme repos
-
-#    V1.0.4 2019-10-01
-#        - Install obs studio
-#        - Install openshot(video editing)
-#        - Install krita(image editing)
-#
-#    V1.0.5 2019-12-22
-#        - Major fixes and rework
-# 
-#    V1.1.0 2019-12-23
-#        - Fully automated again
-#
-#    V1.1.0 2019-12-23
+#    V0.1 2019-12-31 RTM:
+#        - Initial release (fork from cinnamon release)
 #        - KDE variant added
+#
 #   
 # 
 #    TODO
@@ -162,7 +63,7 @@ sudo apt-get update && apt-get -y upgrade
 
 
 # Install the packages from repo
-sudo apt-get -y install zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc gimp blender fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2  vpnc x2goclient git  idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn snapd guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg
+sudo apt-get -y install zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc gimp blender fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2  vpnc x2goclient git  idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn snapd guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nautilus
 
 ##  slack
 sudo wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.0.2-amd64.deb -O /tmp/slack-desktop-4.0.2-amd64.deb
