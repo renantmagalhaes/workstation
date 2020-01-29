@@ -8,7 +8,7 @@ sudo snap install redis-desktop-manager
 sudo snap install robo3t-snap
 
 #Mysql Workbench
-sudo apt install mysql-workbench
+sudo apt install -y mysql-workbench
 
 #Mindmap
 ## Freemind
