@@ -158,7 +158,7 @@ sudo apt-get update && apt-get -y upgrade
 
 
 # Install the packages from repo
-sudo apt-get -y install zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc gimp blender gconf-editor fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-compare nautilus-data nautilus-emblems nautilus-extension-gnome-terminal nautilus-share krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg
+sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc gimp blender gconf-editor fonts-powerline inkscape brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-compare nautilus-data nautilus-emblems nautilus-extension-gnome-terminal nautilus-share krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg
 
 ##  slack
 sudo wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.0.2-amd64.deb -O /tmp/slack-desktop-4.0.2-amd64.deb
@@ -213,7 +213,7 @@ fc-cache -vf ~/.local/share/fonts/
 # New VIM
 sudo apt-get install -y build-essential
 curl -sLf https://spacevim.org/install.sh | bash
-echo "set ignorecase" >> cat ~/.vim/vimrc
+echo "set ignorecase" >> ~/.vim/vimrc
 
 # Install numix-circle-icons
 mkdir -p ~/.icons
@@ -246,6 +246,8 @@ sudo apt-get install -y virtualbox-6.1
 
 #Permission
 chown -R $script_user:$script_user ~/GIT-REPOS
+chown -R $script_user:$script_user chown -R rtm:rtm ~/.SpaceVim*
+chown -R $script_user:$script_user chown -R rtm:rtm ~/.cache/vimfiles*
 
 # RTM
 clear
