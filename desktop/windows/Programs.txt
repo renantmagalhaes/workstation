@@ -7,5 +7,5 @@ Screenshot: lightshot
 Screen recorder: OBS Studio
 
 Terminal:
-   Cmder
+  * Cmder
   * Cygwin
