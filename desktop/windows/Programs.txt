@@ -5,3 +5,7 @@ Utils: https://ninite.com
 Screenshot: lightshot
 
 Screen recorder: OBS Studio
+
+Terminal:
+   Cmder
+  * Cygwin
