@@ -62,7 +62,7 @@ sudo apt-get update && apt-get -y upgrade
 
 
 # Install the packages from repo
-sudo apt-get -y install zsh clementine dia vim nmap vlc blender fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 x2goclient git idle3 fonts-hack-ttf apt-transport-https htop meld openvpn network-manager-openvpn snapd guake guake-indicator krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg
+sudo apt-get -y install latte-dock zsh clementine dia vim nmap vlc blender fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 x2goclient git idle3 fonts-hack-ttf apt-transport-https htop meld openvpn network-manager-openvpn snapd guake guake-indicator krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg
 
 ##  slack
 sudo wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.0.2-amd64.deb -O /tmp/slack-desktop-4.0.2-amd64.deb
