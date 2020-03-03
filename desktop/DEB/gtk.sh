@@ -237,6 +237,11 @@ cd ~/GIT-REPOS/CORE/Tela-icon-theme
 sh -c "./install.sh -a"
 cd
 
+# Nordic theme
+git clone https://github.com/EliverLara/Nordic.git ~/GIT-REPOS/CORE/Nordic
+sudo mv ~/GIT-REPOS/CORE/Nordic /usr/share/themes/
+cd
+
 # Install obs-studio
 sudo apt-get install -y obs-studio
 
