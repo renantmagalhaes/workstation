@@ -12,7 +12,7 @@
     -> shell-format (ext install foxundermoon.shell-format)
     -> AutoComplate shell (ext install truman.autocomplate-shell)
     ->  Markdown lint (ext install markdownlint)
-    
+    -> compareit (ext install in4margaret.compareit)
 
 => Themes
     -> Linux themes - MAIN- (ext install SolarLiner.linux-themes)
