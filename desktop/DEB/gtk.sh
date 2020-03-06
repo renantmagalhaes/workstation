@@ -242,6 +242,12 @@ git clone https://github.com/EliverLara/Nordic.git ~/GIT-REPOS/CORE/Nordic
 sudo mv ~/GIT-REPOS/CORE/Nordic /usr/share/themes/
 cd
 
+# Nordic theme
+git clone https://github.com/vinceliuice/Qogir-theme.git ~/GIT-REPOS/CORE/Qogir-theme
+cd ~/GIT-REPOS/CORE/Qogir-theme
+sh -c "./install.sh"
+cd
+
 # Install obs-studio
 sudo apt-get install -y obs-studio
 
