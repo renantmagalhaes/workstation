@@ -234,7 +234,15 @@ sh -c "./install.sh"
 # Tela-icons theme
 git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/GIT-REPOS/CORE/Tela-icon-theme
 cd ~/GIT-REPOS/CORE/Tela-icon-theme
-sh -c "./install.sh -a"
+#sh -c "./install.sh -a"
+sh -c "./install.sh"
+cd
+
+# Tela-circle-icon-theme
+git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
+cd ~/GIT-REPOS/CORE/Tela-circle-icon-theme
+#sh -c "./install.sh -a"
+sh -c "./install.sh"
 cd
 
 # Nordic theme
