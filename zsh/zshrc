@@ -223,7 +223,7 @@ source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 #Python virtualenv and Virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.7
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.8
 source /usr/local/bin/virtualenvwrapper.sh
 
 #source

@@ -152,13 +152,14 @@ read script_user
 # Add keys and ppas
 sudo add-apt-repository ppa:obsproject/obs-studio
 wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+sudo add-apt-repository ppa:daniruiz/flat-remix
 
 # Update / upgrade
 sudo apt-get update && apt-get -y upgrade
 
 
 # Install the packages from repo
-sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-compare nautilus-data nautilus-emblems nautilus-extension-gnome-terminal nautilus-share krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload
+sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme
 
 ##  slack
 sudo wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.0.2-amd64.deb -O /tmp/slack-desktop-4.0.2-amd64.deb
@@ -255,6 +256,10 @@ git clone https://github.com/vinceliuice/Qogir-theme.git ~/GIT-REPOS/CORE/Qogir-
 cd ~/GIT-REPOS/CORE/Qogir-theme
 sh -c "./install.sh"
 cd
+
+
+# Install flat-remix theme
+sudo apt install flat-remix-gtk
 
 # Install obs-studio
 sudo apt-get install -y obs-studio
