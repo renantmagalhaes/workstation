@@ -30,7 +30,7 @@ make
 sudo make install
 cp examples/bspwmrc ~/.config/bspwm/bspwmrc
 chmod +x ~/.config/bspwm/bspwmrc
-ln -s -f $PWD/examples/sxhkdrc ~/.config/sxhkd/sxhkdrc
+ln -s -f ~/GIT-REPOS/workstation/desktop/DEB/bspwm/sxhkdrc ~/.config/sxhkd/sxhkdrc
 chmod +x ~/.config/sxhkd/sxhkdrc
 
 
