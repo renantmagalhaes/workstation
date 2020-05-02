@@ -28,9 +28,9 @@ sudo make install
 cd ~/GIT-REPOS/CORE/bspwm
 make
 sudo make install
-cp examples/bspwmrc ~/.config/bspwm/bspwmrc
+ln -s -f ~/GIT-REPOS/workstation/desktop/DEB/bspwm/config/bspwmrc ~/.config/bspwm/bspwmrc
 chmod +x ~/.config/bspwm/bspwmrc
-ln -s -f ~/GIT-REPOS/workstation/desktop/DEB/bspwm/sxhkdrc ~/.config/sxhkd/sxhkdrc
+ln -s -f ~/GIT-REPOS/workstation/desktop/DEB/bspwm/config/sxhkdrc ~/.config/sxhkd/sxhkdrc
 chmod +x ~/.config/sxhkd/sxhkdrc
 
 
@@ -38,6 +38,18 @@ chmod +x ~/.config/sxhkd/sxhkdrc
 sudo cp contrib/freedesktop/bspwm.desktop /usr/share/xsessions/
 
 # Install polybar
+sudo apt-get install -y build-essential git xpp libjsoncpp1 libjsoncpp-dev cmake cmake-data pkg-config libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev cmake cmake-data libcairo2-dev libxcb1-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-randr0-dev libxcb-util0-dev libxcb-xkb-dev pkg-config python-xcbgen xcb-proto libxcb-xrm-dev i3-wm libasound2-dev libmpdclient-dev libiw-dev libcurl4-openssl-dev libpulse-dev
+cd ~/GIT-REPOS/CORE
+git clone https://github.com/jaagr/polybar.git
+cd polybar
+mkdir build
+cd build
+cmake ..
+make -j$(nproc)
+sudo make install
+
+
+
 
 # Install compton
 
