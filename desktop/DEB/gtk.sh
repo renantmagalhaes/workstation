@@ -299,6 +299,18 @@ echo "# Set startup applications \n \
 * Skype \n \
 * Skype \n \n"
 
+echo "# Gnome extensions \n \
+* Dash to dock \n \
+* Hide activities button \n \
+* Openweather \n \
+* Pixel Saver \n \
+* Sound input & output device chooser \n \
+* KStatusNotifierItem/AppIndicator Support \n \
+* User themes \n \
+* Vitals \n \
+* Windowoverlay icons \n \
+* Workspace indicator \n \
+* Workspace scroll \n
 echo " ### Install the other tools in this repo! ###"
 echo "* ZSH"
 echo "* TMUX"
