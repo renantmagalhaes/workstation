@@ -55,7 +55,7 @@ tmux_conf_theme_highlight_focused_pane=false
 
 # focused pane colours:
 tmux_conf_theme_focused_pane_fg='default'
-tmux_conf_theme_focused_pane_bg='#0087d7'               # light blue
+tmux_conf_theme_focused_pane_bg='#0087d7'               # light green
 
 # pane border style, possible values are:
 #   - thin (default)
@@ -64,11 +64,11 @@ tmux_conf_theme_pane_border_style=thin
 
 # pane borders colours:
 tmux_conf_theme_pane_border='#444444'                   # gray
-tmux_conf_theme_pane_active_border='#0eb350'            # light blue
+tmux_conf_theme_pane_active_border='#0eb350'            # light green
 
 # pane indicator colours
-tmux_conf_theme_pane_indicator='#0eb350'                # light blue
-tmux_conf_theme_pane_active_indicator='#0eb350'         # light blue
+tmux_conf_theme_pane_indicator='#0eb350'                # light green
+tmux_conf_theme_pane_active_indicator='#0eb350'         # light green
 
 # status line style
 tmux_conf_theme_message_fg='#000000'                    # black
@@ -124,7 +124,7 @@ tmux_conf_theme_window_status_format='#I #W'
 #     - #{username}
 #     - #{username_ssh}
 tmux_conf_theme_window_status_current_fg='#000000'      # black
-tmux_conf_theme_window_status_current_bg='#0eb350'      # light blue
+tmux_conf_theme_window_status_current_bg='#0eb350'      # light green
 tmux_conf_theme_window_status_current_attr='bold'
 tmux_conf_theme_window_status_current_format='#I #W'
 #tmux_conf_theme_window_status_current_format='#{circled_window_index} #W'
@@ -141,7 +141,7 @@ tmux_conf_theme_window_status_bell_bg='default'
 tmux_conf_theme_window_status_bell_attr='blink,bold'
 
 # window last status style
-tmux_conf_theme_window_status_last_fg='#0eb350'         # light blue
+tmux_conf_theme_window_status_last_fg='#0eb350'         # light green
 tmux_conf_theme_window_status_last_bg='default'
 tmux_conf_theme_window_status_last_attr='none'
 
@@ -263,7 +263,7 @@ tmux_conf_battery_status_discharging='↓'    # U+2193
 
 # clock style (when you hit <prefix> + t)
 # you may want to use %I:%M %p in place of %R in tmux_conf_theme_status_right
-tmux_conf_theme_clock_colour='#0eb350'  # light blue
+tmux_conf_theme_clock_colour='#0eb350'  # light green
 tmux_conf_theme_clock_style='24'
 
 
