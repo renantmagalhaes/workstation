@@ -16,6 +16,7 @@
 
 => Themes
     -> Linux themes - MAIN- (ext install SolarLiner.linux-themes)
+    Set accent collor > Lime
     -> Material Theme (ext install Equinusocio.vsc-material-theme)
     -> Material Icon Theme (ext install PKief.material-icon-theme)
     -> Darcula (ext install rokoroku.vscode-theme-darcula)
