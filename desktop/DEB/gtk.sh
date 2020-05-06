@@ -155,7 +155,7 @@ wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-
 sudo add-apt-repository ppa:daniruiz/flat-remix
 
 # Update / upgrade
-sudo apt-get update && apt-get -y upgrade
+sudo apt-get update && sudo apt-get -y upgrade
 
 
 # Install the packages from repo
@@ -190,8 +190,8 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -
 sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
 
 # Install GTK theme Vimix
-git clone https://github.com/vinceliuice/vimix-gtk-themes.git ~/GIT-REPOS/CORE/vimix
-sh -c "~/GIT-REPOS/CORE/vimix/Install"
+git clone https://github.com/vinceliuice/vimix-gtk-themes.git ~/GIT-REPOS/CORE/vimix-gtk-themes
+sh -c "~/GIT-REPOS/CORE/vimix-gtk-themes/install.sh"
 
 ## Install Visual Code
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
@@ -235,15 +235,15 @@ sh -c "./install.sh"
 # Tela-icons theme
 git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/GIT-REPOS/CORE/Tela-icon-theme
 cd ~/GIT-REPOS/CORE/Tela-icon-theme
-#sh -c "./install.sh -a"
-sh -c "./install.sh"
+sh -c "./install.sh -a"
+#sh -c "./install.sh"
 cd
 
 # Tela-circle-icon-theme
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
 cd ~/GIT-REPOS/CORE/Tela-circle-icon-theme
-#sh -c "./install.sh -a"
-sh -c "./install.sh"
+sh -c "./install.sh -a"
+#sh -c "./install.sh"
 cd
 
 # Nordic theme
