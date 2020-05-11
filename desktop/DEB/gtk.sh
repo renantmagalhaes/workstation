@@ -127,6 +127,12 @@
 #    V1.1.0 2019-12-23
 #        - Fully automated again
 #
+#    V1.1.1 2020-05-08
+#        - Using Ubuntu 20.04 for now
+#        - Minor fixes
+#        - Tweaks in themes
+#
+#
 #    TODO
 #    * https://github.com/vinceliuice/grub2-themes
 #    * Install albert
@@ -135,7 +141,7 @@
 
 Root check
 if [ “$(id -u)” != “0” ]; then
-echo “This script must be run as root 'sudo ./ubuntu_packages.sh'” 2>&1
+echo “This script must be run as root 'sudo ./gtk.sh'” 2>&1
 exit 1
 fi
 
@@ -151,7 +157,7 @@ read script_user
 
 # Add keys and ppas
 sudo add-apt-repository ppa:obsproject/obs-studio
-wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+#wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
 sudo add-apt-repository ppa:daniruiz/flat-remix
 
 # Update / upgrade
@@ -159,11 +165,11 @@ sudo apt-get update && sudo apt-get -y upgrade
 
 
 # Install the packages from repo
-sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme
+sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme chrome-gnome-shell virtualbox
 
 ##  slack
-sudo wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.0.2-amd64.deb -O /tmp/slack-desktop-4.0.2-amd64.deb
-sudo dpkg -i /tmp/slack-desktop-4.0.2-amd64.deb
+sudo wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.4.2-amd64.deb -O /tmp/slack-desktop-4.4.2-amd64.deb
+sudo dpkg -i /tmp/slack-desktop-4.4.2-amd64.deb
 
 ##  telegram
 sudo snap install telegram-desktop
@@ -188,10 +194,6 @@ mkdir -p ~/GIT-REPOS/CORE
 # Install Google Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
 sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
-
-# Install GTK theme Vimix
-git clone https://github.com/vinceliuice/vimix-gtk-themes.git ~/GIT-REPOS/CORE/vimix-gtk-themes
-sh -c "~/GIT-REPOS/CORE/vimix-gtk-themes/install.sh"
 
 ## Install Visual Code
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
@@ -222,15 +224,23 @@ git clone https://github.com/numixproject/numix-icon-theme-circle.git ~/.icons
 gtk-update-icon-cache ~/.icons/Numix-Circle
 gtk-update-icon-cache ~/.icons/Numix-Circle-Light
 
+# Install GTK theme Vimix
+git clone https://github.com/vinceliuice/vimix-gtk-themes.git ~/GIT-REPOS/CORE/vimix-gtk-themes
+cd ~/GIT-REPOS/CORE/vimix-gtk-themes
+sh -c "./install.sh"
+cd
+
 # Install Vimix Icons
 git clone https://github.com/vinceliuice/vimix-icon-theme.git ~/GIT-REPOS/CORE/vimix-icons
 cd ~/GIT-REPOS/CORE/vimix-icons
 sh -c "./install.sh"
+cd
 
 # Layan theme
 git clone https://github.com/vinceliuice/Layan-gtk-theme.git ~/GIT-REPOS/CORE/Layan-gtk-theme
 cd ~/GIT-REPOS/CORE/Layan-gtk-theme
 sh -c "./install.sh"
+cd
 
 # Tela-icons theme
 git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/GIT-REPOS/CORE/Tela-icon-theme
@@ -264,9 +274,9 @@ sudo apt install flat-remix-gtk
 # Install obs-studio
 sudo apt-get install -y obs-studio
 
-# VirtualBox
-echo "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian bionic contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
-sudo apt-get install -y virtualbox-6.1
+## VirtualBox
+#echo "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian bionic contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
+#sudo apt-get install -y virtualbox-6.1
 
 #Permission
 chown -R $script_user:$script_user ~/GIT-REPOS
