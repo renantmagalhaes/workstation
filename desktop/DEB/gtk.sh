@@ -165,7 +165,7 @@ sudo apt-get update && sudo apt-get -y upgrade
 
 
 # Install the packages from repo
-sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme chrome-gnome-shell virtualbox
+sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0
 
 ##  slack
 sudo wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.4.2-amd64.deb -O /tmp/slack-desktop-4.4.2-amd64.deb
@@ -287,7 +287,7 @@ chown -R $script_user:$script_user chown -R rtm:rtm ~/.cache/vimfiles*
 clear
 echo "*** AFTER INSTALL *** \n "
 
-
+echo "*** MINT *** "
 echo "# Setup panel layout and behavior \n \
 * Preferred applications \n \
 * Cycle window \n \
@@ -301,13 +301,16 @@ echo "# Setup Theme  \n \
 * Desktop: vimix \n \
 * Menu Icon: Atom or start-here-symbolic \n \n"
 
-echo "# Set startup applications \n \
-* Guake \n \
-* Albert \n \
-* Slack \n \
-* Telegram \n \
-* Skype \n \
-* Skype \n \n"
+echo "*** MINT *** "
+echo ""
+echo "*** UBUNTU *** "
+echo "# Setup Theme  \n \
+* Applications: Flat-Remix-GTK-Blue-Dark \n \
+* Cursor: Breeze_Snow \n \
+* Icons: Tela-circle-black \n \
+* Shell: Layan-solid \n"
+
+echo ""
 
 echo "# Gnome extensions \n \
 * Dash to dock \n \
@@ -320,7 +323,21 @@ echo "# Gnome extensions \n \
 * Vitals \n \
 * Windowoverlay icons \n \
 * Workspace indicator \n \
-* Workspace scroll \n
+* Workspace scroll \n \
+* Arc menu (Raven Layout)"
+
+echo "*** UBUNTU *** "
+echo ""
+echo "# Set startup applications \n \
+* Guake \n \
+* Albert \n \
+* Slack \n \
+* Telegram \n \
+* Skype \n \
+* Skype \n \n"
+
+
+
 echo " ### Install the other tools in this repo! ###"
 echo "* ZSH"
 echo "* TMUX"
