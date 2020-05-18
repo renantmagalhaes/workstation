@@ -8,15 +8,15 @@
     -> Python Extension Pack (ext install donjayamanne.python-extension-pack)
     -> Yaml (ext install redhat.vscode-yaml)
     -> Json (ext install ZainChen.json)
-    -> GitLens (ext install eamodio.gitlens)
     -> shell-format (ext install foxundermoon.shell-format)
     -> AutoComplate shell (ext install truman.autocomplate-shell)
     ->  Markdown lint (ext install markdownlint)
+    -> GitLens (ext install eamodio.gitlens)
     -> compareit (ext install in4margaret.compareit)
 
 => Themes
     -> Linux themes - MAIN- (ext install SolarLiner.linux-themes)
-    Set accent collor > Lime
     -> Material Theme (ext install Equinusocio.vsc-material-theme)
     -> Material Icon Theme (ext install PKief.material-icon-theme)
+    Set accent collor > Lime
     -> Darcula (ext install rokoroku.vscode-theme-darcula)
