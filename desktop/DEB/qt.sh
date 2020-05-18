@@ -55,18 +55,17 @@ read script_user
 
 # Add keys and ppas
 sudo add-apt-repository ppa:obsproject/obs-studio
-wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
 
 # Update / upgrade
-sudo apt-get update && apt-get -y upgrade
+sudo apt-get update && sudo apt-get -y upgrade
 
 
 # Install the packages from repo
-sudo apt-get -y install latte-dock zsh clementine dia vim nmap vlc blender fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 x2goclient git idle3 fonts-hack-ttf apt-transport-https htop meld openvpn network-manager-openvpn snapd guake guake-indicator krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg
+sudo apt-get -y install latte-dock zsh clementine dia vim nmap vlc blender fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 x2goclient git idle3 fonts-hack-ttf apt-transport-https htop meld openvpn network-manager-openvpn snapd guake guake-indicator krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg virtualbox
 
 ##  slack
-sudo wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.0.2-amd64.deb -O /tmp/slack-desktop-4.0.2-amd64.deb
-sudo dpkg -i /tmp/slack-desktop-4.0.2-amd64.deb
+sudo wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.4.2-amd64.deb -O /tmp/slack-desktop-4.4.2-amd64.deb
+sudo dpkg -i /tmp/slack-desktop-4.4.2-amd64.deb
 
 ##  telegram
 sudo snap install telegram-desktop
@@ -120,9 +119,10 @@ echo "set ignorecase" >> ~/.vim/vimrc
 git clone https://github.com/vinceliuice/vimix-icon-theme.git ~/GIT-REPOS/CORE/vimix-icons
 cd ~/GIT-REPOS/CORE/vimix-icons
 sh -c "./install.sh"
+cd
 
 # Layan theme
-git clonehttps://github.com/vinceliuice/Layan-kde.git ~/GIT-REPOS/CORE/Layan-kde-theme
+git clone https://github.com/vinceliuice/Layan-kde.git ~/GIT-REPOS/CORE/Layan-kde-theme
 cd ~/GIT-REPOS/CORE/Layan-kde-theme
 sh -c "./install.sh"
 
@@ -132,12 +132,16 @@ cd ~/GIT-REPOS/CORE/Tela-icon-theme
 sh -c "./install.sh -a"
 cd
 
+# Tela-icons theme
+git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/GIT-REPOS/CORE/Tela-icon-theme
+cd ~/GIT-REPOS/CORE/Tela-icon-theme
+sh -c "./install.sh -a"
+#sh -c "./install.sh"
+cd
+
+
 # Install obs-studio
 sudo apt-get install -y obs-studio
-
-# VirtualBox
-echo "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian bionic contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
-sudo apt-get install -y virtualbox-6.1
 
 #Permission
 chown -R $script_user:$script_user ~/GIT-REPOS
