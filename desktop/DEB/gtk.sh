@@ -324,6 +324,7 @@ echo "# Gnome extensions \n \
 * Windowoverlay icons \n \
 * Workspace indicator \n \
 * Workspace scroll \n \
+* Transparent Top Panel \
 * Arc menu (Raven Layout)"
 
 echo "*** UBUNTU *** "
