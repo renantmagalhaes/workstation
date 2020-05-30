@@ -13,6 +13,7 @@
     ->  Markdown lint (ext install markdownlint)
     -> GitLens (ext install eamodio.gitlens)
     -> compareit (ext install in4margaret.compareit)
+    -> live server (ext install ritwickdey.LiveServer)
 
 => Themes
     -> Linux themes - MAIN- (ext install SolarLiner.linux-themes)
