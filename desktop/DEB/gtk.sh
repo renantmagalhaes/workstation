@@ -325,6 +325,7 @@ echo "# Gnome extensions \n \
 * Workspace indicator \n \
 * Workspace scroll \n \
 * Transparent Top Panel \
+* https://github.com/CorvetteCole/transparent-window-moving (128,20,010)
 * Arc menu (Raven Layout)"
 
 echo "*** UBUNTU *** "
