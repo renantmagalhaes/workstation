@@ -305,7 +305,7 @@ echo "*** MINT *** "
 echo ""
 echo "*** UBUNTU *** "
 echo "# Setup Theme  \n \
-* Applications: Flat-Remix-GTK-Blue-Dark \n \
+* Applications: Qogir-light \n \
 * Cursor: Breeze_Snow \n \
 * Icons: Tela-circle-black \n \
 * Shell: Layan-solid \n"
