@@ -353,7 +353,7 @@ echo "*** FONTS *** "
 echo "*** Guake Terminal Color - Gogh *** "
 echo '
 1 - Select default Shell -> /usr/bin/zsh \n 
-2 - Run -> bash -c "$(curl -sLo- https://git.io/JvvDs)" # Flat- Remix Color Scheme \n 
+2 - Run -> bash -c "$(curl -sLo- https://raw.githubusercontent.com/renantmagalhaes/workstation/master/ShellCollor/rtm-color-scheme.sh)" # RTM Color Scheme \n 
 3 - Select default Shell -> /usr/bin/tmux \n'
 echo "*** FONTS ***" 
 
