@@ -211,6 +211,15 @@ wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbol
 git clone https://github.com/gabrielelana/awesome-terminal-fonts.git ~/GIT-REPOS/CORE/awesome-terminal-fonts
 sh -c "~/GIT-REPOS/CORE/awesome-terminal-fonts/install.sh"
 
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip -O ~/.local/share/fonts/FiraCode.zip
+unzip ~/.local/share/fonts/FiraCode.zip -d ~/.local/share/fonts/
+
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/3270.zip -O ~/.local/share/fonts/3270.zip
+unzip ~/.local/share/fonts/3270.zip -d ~/.local/share/fonts/
+
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Agave.zip -O ~/.local/share/fonts/Agave.zip
+unzip ~/.local/share/fonts/Agave.zip -d ~/.local/share/fonts/
+
 fc-cache -vf ~/.local/share/fonts/
 
 # New VIM
@@ -324,8 +333,8 @@ echo "# Gnome extensions \n \
 * Windowoverlay icons \n \
 * Workspace indicator \n \
 * Workspace scroll \n \
-* Transparent Top Panel \
-* https://github.com/CorvetteCole/transparent-window-moving (128,20,010)
+* Transparent Top Panel \n\
+* https://github.com/CorvetteCole/transparent-window-moving (128,20,010) \n \
 * Arc menu (Raven Layout)"
 
 echo "*** UBUNTU *** "
@@ -335,9 +344,18 @@ echo "# Set startup applications \n \
 * Albert \n \
 * Slack \n \
 * Telegram \n \
-* Skype \n \
-* Skype \n \n"
+* Skype \n"
 
+echo "*** FONTS *** "
+echo "FiraCode Nerd Font"
+echo "*** FONTS *** "
+
+echo "*** Guake Terminal Color - Gogh *** "
+echo '
+1 - Select default Shell -> /usr/bin/zsh \n 
+2 - Run -> bash -c "$(curl -sLo- https://git.io/JvvDs)" # Flat- Remix Color Scheme \n 
+3 - Select default Shell -> /usr/bin/tmux \n'
+echo "*** FONTS ***" 
 
 
 echo " ### Install the other tools in this repo! ###"
