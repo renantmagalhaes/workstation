@@ -61,7 +61,7 @@ sudo apt-get update && sudo apt-get -y upgrade
 
 
 # Install the packages from repo
-sudo apt-get -y install latte-dock zsh clementine dia vim nmap vlc blender fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 x2goclient git idle3 fonts-hack-ttf apt-transport-https htop meld openvpn network-manager-openvpn snapd guake guake-indicator krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg virtualbox
+sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc x2goclient git idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn snapd guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme virtualbox latte-dock
 
 ##  slack
 sudo wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.4.2-amd64.deb -O /tmp/slack-desktop-4.4.2-amd64.deb
@@ -106,6 +106,15 @@ wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbol
 
 git clone https://github.com/gabrielelana/awesome-terminal-fonts.git ~/GIT-REPOS/CORE/awesome-terminal-fonts
 sh -c "~/GIT-REPOS/CORE/awesome-terminal-fonts/install.sh"
+
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip -O ~/.local/share/fonts/FiraCode.zip
+unzip ~/.local/share/fonts/FiraCode.zip -d ~/.local/share/fonts/
+
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/3270.zip -O ~/.local/share/fonts/3270.zip
+unzip ~/.local/share/fonts/3270.zip -d ~/.local/share/fonts/
+
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Agave.zip -O ~/.local/share/fonts/Agave.zip
+unzip ~/.local/share/fonts/Agave.zip -d ~/.local/share/fonts/
 
 fc-cache -vf ~/.local/share/fonts/
 
