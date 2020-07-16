@@ -276,6 +276,12 @@ cd ~/GIT-REPOS/CORE/Qogir-theme
 sh -c "./install.sh"
 cd
 
+# WhiteSur-gtk-theme
+sudo apt install -y gtk2-engines-murrine gtk2-engines-pixbuf sassc optipng inkscape libcanberra-gtk-module libglib2.0-dev libxml2-utils
+git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/GIT-REPOS/CORE/WhiteSur-gtk-theme
+cd ~/GIT-REPOS/CORE/Qogir-theme
+sh -c "./install.sh"
+cd
 
 # Install flat-remix theme
 sudo apt install flat-remix-gtk
@@ -317,7 +323,7 @@ echo "# Setup Theme  \n \
 * Applications: Qogir-light \n \
 * Cursor: Breeze_Snow \n \
 * Icons: Tela-circle-black \n \
-* Shell: Layan-solid \n"
+* Shell: Layan or WhiteSur-Light \n"
 
 echo ""
 
