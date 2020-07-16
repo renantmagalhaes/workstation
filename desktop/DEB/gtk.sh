@@ -284,7 +284,7 @@ sh -c "./install.sh"
 cd
 
 # Install flat-remix theme
-sudo apt install flat-remix-gtk
+sudo apt install flat-remix-gnome
 
 # Install obs-studio
 sudo apt-get install -y obs-studio
@@ -323,7 +323,7 @@ echo "# Setup Theme  \n \
 * Applications: Qogir-light \n \
 * Cursor: Breeze_Snow \n \
 * Icons: Tela-circle-black \n \
-* Shell: Layan / WhiteSur-Light / Vimix Laptop \n"
+* Shell: Flat-Remix-Blue-Darkest-fullPanel or Layan  \n"
 
 echo ""
 
