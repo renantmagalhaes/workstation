@@ -323,7 +323,7 @@ echo "# Setup Theme  \n \
 * Applications: Qogir-light \n \
 * Cursor: Breeze_Snow \n \
 * Icons: Tela-circle-black \n \
-* Shell: Flat-Remix-Blue-Darkest-fullPanel or Layan  \n"
+* Shell: Flat-Remix-Blue-Darkest-fullPanel / Layan / Vimix-laptop \n"
 
 echo ""
 
