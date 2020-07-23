@@ -14,10 +14,12 @@
     -> GitLens (ext install eamodio.gitlens)
     -> compareit (ext install in4margaret.compareit)
     -> live server (ext install ritwickdey.LiveServer)
+    -> Bracket Pair Colorizer 2 (ext install CoenraadS.bracket-pair-colorizer-2)    
 
 => Themes
-    -> Linux themes - MAIN- (ext install SolarLiner.linux-themes)
     -> Material Theme (ext install Equinusocio.vsc-material-theme)
+    Set theme to Darker High Contrast
     -> Material Icon Theme (ext install PKief.material-icon-theme)
-    Set accent collor > Lime
-    -> Darcula (ext install rokoroku.vscode-theme-darcula)
+    Set accent collor > Acid Lime
+
+    
