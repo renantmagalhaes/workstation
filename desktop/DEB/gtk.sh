@@ -295,6 +295,9 @@ sudo apt-get install -y obs-studio
 #echo "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian bionic contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 #sudo apt-get install -y virtualbox-6.1
 
+# Install Handbrake - Video Converter
+flatpak install flathub fr.handbrake.ghb
+
 #Permission
 chown -R $script_user:$script_user ~/GIT-REPOS
 chown -R $script_user:$script_user chown -R rtm:rtm ~/.SpaceVim*
