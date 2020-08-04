@@ -296,7 +296,7 @@ sudo apt-get install -y obs-studio
 #sudo apt-get install -y virtualbox-6.1
 
 # Install Handbrake - Video Converter
-flatpak install flathub fr.handbrake.ghb
+flatpak install -y flathub fr.handbrake.ghb
 
 #Permission
 chown -R $script_user:$script_user ~/GIT-REPOS
