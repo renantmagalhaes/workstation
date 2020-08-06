@@ -18,9 +18,8 @@ flatpak install -y flathub com.github.muriloventuroso.easyssh
 ## XMind Zen
 flatpak install -y flathub net.xmind.ZEN
 
-## MindMaster
-wget https://download.edrawsoft.com/archives/mindmaster_8.0_x86_64.deb -O /tmp/mindmaster_8.0_x86_64.deb
-sudo dpkg -i /tmp/mindmaster_8.0_x86_64.deb
+## Xmind8
+flatpak install -y flathub net.xmind.XMind8
 
 # DBeaver
 wget -O - https://dbeaver.io/debs/dbeaver.gpg.key | sudo apt-key add -
