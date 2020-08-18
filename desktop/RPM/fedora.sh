@@ -50,23 +50,20 @@ echo "Enter your default user name:"
 read user
 
 #Update / upgrade
-apt-get update && apt-get -y upgrade
+sudo dnf update -y
 
 #Install rpm fusion
 sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 #Install the packages from debian repo
-sudo dnf install -y rofi obs-studio xorg-x11-drv-nvidia-cuda zsh vlc python-vlc  plank clementine breeze-cursor-theme dia vim nmap gimp blender gconf-editor inkscape brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python-pip gnome-tweaks
-
-#Install the packages from snap repo
+sudo dnf install -y rofi obs-studio zsh vlc python-vlc clementine breeze-cursor-theme dia vim nmap gimp blender gconf-editor inkscape brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python-pip gnome-tweaks snapd gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 gnome-weather 
 
 ## slack
 snap install slack --classic
 
 #Update / upgrade
-sudo apt-get update && sudo apt-get -y upgrade
-
+sudo dnf update -y
 
 ####### Testing google-chrome for now ######
 ###Install Firefox Latest
@@ -83,9 +80,7 @@ mkdir -p ~/GIT-REPOS
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -O /tmp/google-chrome-stable_current_x86_64.rpm
 sudo dnf install /tmp/google-chrome-stable_current_amd64.deb
 
-#Install GTK theme Vimix
-git clone https://github.com/vinceliuice/vimix-gtk-themes.git ~/GIT-REPOS/vimix
-sh -c "~/GIT-REPOS/vimix/Install"
+
 
 ##Install Visual Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -94,16 +89,25 @@ sudo dnf check-update
 sudo dnf install code
 
 #Install Fonts
-git clone https://github.com/powerline/fonts.git ~/GIT-REPOS/fonts/
-bash ~/GIT-REPOS/fonts/install.sh
+git clone https://github.com/powerline/fonts.git ~/GIT-REPOS/CORE/fonts/
+bash ~/GIT-REPOS/CORE/fonts/install.sh
 
 wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf -O ~/.local/share/fonts/PowerlineSymbols.otf
 
 mkdir -p ~/.config/fontconfig/conf.d/
 wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf -O ~/.config/fontconfig/conf.d/10-powerline-symbols.conf
 
-git clone https://github.com/gabrielelana/awesome-terminal-fonts.git ~/GIT-REPOS/awesome-terminal-fonts
-sh -c "~/GIT-REPOS/awesome-terminal-fonts/install.sh"
+git clone https://github.com/gabrielelana/awesome-terminal-fonts.git ~/GIT-REPOS/CORE/awesome-terminal-fonts
+sh -c "~/GIT-REPOS/CORE/awesome-terminal-fonts/install.sh"
+
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip -O ~/.local/share/fonts/FiraCode.zip
+unzip ~/.local/share/fonts/FiraCode.zip -d ~/.local/share/fonts/
+
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/3270.zip -O ~/.local/share/fonts/3270.zip
+unzip ~/.local/share/fonts/3270.zip -d ~/.local/share/fonts/
+
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Agave.zip -O ~/.local/share/fonts/Agave.zip
+unzip ~/.local/share/fonts/Agave.zip -d ~/.local/share/fonts/
 
 fc-cache -vf ~/.local/share/fonts/
 
@@ -117,24 +121,25 @@ fc-cache -vf ~/.local/share/fonts/
 #New VIM
 curl -sLf https://spacevim.org/install.sh | bash
 
-#Install numix-circle-icons
-mkdir -p ~/.icons
-git clone https://github.com/numixproject/numix-icon-theme-circle.git ~/.icons
-gtk-update-icon-cache ~/.icons/Numix-Circle
-gtk-update-icon-cache ~/.icons/Numix-Circle-Light
+#Flat-remix Theme
+sudo dnf copr enable daniruiz/flat-remix
+sudo dnf install flat-remix-gnome
+
+#Install GTK theme Vimix
+git clone https://github.com/vinceliuice/vimix-gtk-themes.git ~/GIT-REPOS/vimix
+sh -c "~/GIT-REPOS/vimix/Install"
+
+# Tela-circle-icon-theme
+git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
+cd ~/GIT-REPOS/CORE/Tela-circle-icon-theme
+sh -c "./install.sh -a"
+#sh -c "./install.sh"
+cd
 
 #Install Vimix Icons
 git clone https://github.com/vinceliuice/vimix-icon-theme.git ~/GIT-REPOS/vimix-icons
 sh -c "~/GIT-REPOS/vimix-icons/install.sh"
 
-#Install Oranchelo Icons
-#mkdir -p /home/rtm/.local/share/icons/
-#git clone https://github.com/OrancheloTeam/oranchelo-icon-theme.git /tmp/oranchelo-icons
-#sh -c "/tmp/oranchelo-icons/oranchelo-installer.sh"
-
-#Install plank themes
-#mkdir -p ~/.local/share/plank/themes
-#git clone https://github.com/erikdubois/plankthemes.git ~/.local/share/plank/themes
 
 #Layan theme
 git clone https://github.com/vinceliuice/Layan-gtk-theme.git ~/GIT-REPOS/Layan-gtk-theme
@@ -145,8 +150,16 @@ git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/GIT-REPOS/Tela-ic
 cd ~/GIT-REPOS/Tela-icon-theme/
 ./install.sh
 
-#Set plank autostart
-#curl -o ~/.config/autostart/plank.desktop https://raw.githubusercontent.com/renantmagalhaes/workstation/static-files/plank-fix/plank.desktop
+# Nordic theme
+git clone https://github.com/EliverLara/Nordic.git ~/GIT-REPOS/CORE/Nordic
+sudo mv ~/GIT-REPOS/CORE/Nordic /usr/share/themes/
+cd
+
+# Qogir theme
+git clone https://github.com/vinceliuice/Qogir-theme.git ~/GIT-REPOS/CORE/Qogir-theme
+cd ~/GIT-REPOS/CORE/Qogir-theme
+sh -c "./install.sh"
+cd
 
 
 #RTM
