@@ -303,6 +303,10 @@ chown -R $script_user:$script_user ~/GIT-REPOS
 chown -R $script_user:$script_user chown -R rtm:rtm ~/.SpaceVim*
 chown -R $script_user:$script_user chown -R rtm:rtm ~/.cache/vimfiles*
 
+#Utils
+#Isolate Alt-Tab workspaces
+gsettings set org.gnome.shell.app-switcher current-workspace-only true
+
 # RTM
 clear
 echo "*** AFTER INSTALL *** \n "
