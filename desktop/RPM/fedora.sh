@@ -209,7 +209,7 @@ echo "# Gnome extensions \n \
 * Windowoverlay icons \n \
 * Workspace indicator \n \
 * Workspace scroll \n \
-* Transparent Top Panel \n\
+* Transparent Top Panel *Depends on Theme* \n\
 * https://github.com/CorvetteCole/transparent-window-moving (128,20,010) \n \
 * Arc menu (Raven Layout)"
 
