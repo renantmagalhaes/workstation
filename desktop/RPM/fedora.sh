@@ -59,6 +59,9 @@ sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfre
 #Install the packages from debian repo
 sudo dnf install -y rofi obs-studio zsh vlc python-vlc clementine breeze-cursor-theme dia vim nmap gimp blender gconf-editor inkscape brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita kdenlive frei0r-plugins audacity filezilla tree remmina ffmpeg nload arc-theme chrome-gnome-shell gnome-menus gnome-weather 
 
+# Flatpack repo
+    sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
 ## slack
 sudo wget https://downloads.slack-edge.com/linux_releases/slack-4.8.0-0.1.fc21.x86_64.rpm -O /tmp/slack-4.8.0-0.1.fc21.x86_64.rpm
 sudo dnf install -y /tmp/slack-4.8.0-0.1.fc21.x86_64.rpm
@@ -80,8 +83,6 @@ mkdir -p ~/GIT-REPOS
 #Install Google Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -O /tmp/google-chrome-stable_current_x86_64.rpm
 sudo dnf install -y /tmp/google-chrome-stable_current_x86_64.rpm
-
-
 
 ##Install Visual Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
