@@ -60,7 +60,8 @@ sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfre
 sudo dnf install -y rofi obs-studio zsh vlc python-vlc clementine breeze-cursor-theme dia vim nmap gimp blender gconf-editor inkscape brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita kdenlive frei0r-plugins audacity filezilla tree remmina ffmpeg nload arc-theme chrome-gnome-shell gnome-menus gnome-weather 
 
 ## slack
-snap install slack --classic
+sudo wget https://downloads.slack-edge.com/linux_releases/slack-4.8.0-0.1.fc21.x86_64.rpm -O /tmp/slack-4.8.0-0.1.fc21.x86_64.rpm
+sudo dnf install -y /tmp/slack-4.8.0-0.1.fc21.x86_64.rpm
 
 #Update / upgrade
 sudo dnf update -y
@@ -78,7 +79,7 @@ mkdir -p ~/GIT-REPOS
 
 #Install Google Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -O /tmp/google-chrome-stable_current_x86_64.rpm
-sudo dnf install /tmp/google-chrome-stable_current_amd64.deb
+sudo dnf install -y /tmp/google-chrome-stable_current_x86_64.rpm
 
 
 
@@ -86,7 +87,7 @@ sudo dnf install /tmp/google-chrome-stable_current_amd64.deb
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 sudo dnf check-update
-sudo dnf install code
+sudo dnf install -y code
 
 #Install Fonts
 git clone https://github.com/powerline/fonts.git ~/GIT-REPOS/CORE/fonts/
@@ -125,9 +126,24 @@ curl -sLf https://spacevim.org/install.sh | bash
 sudo dnf copr enable daniruiz/flat-remix
 sudo dnf install flat-remix-gnome
 
-#Install GTK theme Vimix
-git clone https://github.com/vinceliuice/vimix-gtk-themes.git ~/GIT-REPOS/vimix
-sh -c "~/GIT-REPOS/vimix/Install"
+# Install GTK theme Vimix
+git clone https://github.com/vinceliuice/vimix-gtk-themes.git ~/GIT-REPOS/CORE/vimix-gtk-themes
+cd ~/GIT-REPOS/CORE/vimix-gtk-themes
+sh -c "./install.sh"
+cd
+
+# Install Vimix Icons
+git clone https://github.com/vinceliuice/vimix-icon-theme.git ~/GIT-REPOS/CORE/vimix-icons
+cd ~/GIT-REPOS/CORE/vimix-icons
+sh -c "./install.sh"
+cd
+
+# Layan theme
+git clone https://github.com/vinceliuice/Layan-gtk-theme.git ~/GIT-REPOS/CORE/Layan-gtk-theme
+cd ~/GIT-REPOS/CORE/Layan-gtk-theme
+sh -c "./install.sh"
+cd
+
 
 # Tela-circle-icon-theme
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
@@ -136,20 +152,6 @@ sh -c "./install.sh -a"
 #sh -c "./install.sh"
 cd
 
-#Install Vimix Icons
-git clone https://github.com/vinceliuice/vimix-icon-theme.git ~/GIT-REPOS/vimix-icons
-sh -c "~/GIT-REPOS/vimix-icons/install.sh"
-
-
-#Layan theme
-git clone https://github.com/vinceliuice/Layan-gtk-theme.git ~/GIT-REPOS/Layan-gtk-theme
-sh -c "~/GIT-REPOS/Layan-gtk-theme/install.sh"
-
-#Tela-blue icons
-git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/GIT-REPOS/Tela-icon-theme
-cd ~/GIT-REPOS/Tela-icon-theme/
-./install.sh
-
 # Nordic theme
 git clone https://github.com/EliverLara/Nordic.git ~/GIT-REPOS/CORE/Nordic
 sudo mv ~/GIT-REPOS/CORE/Nordic /usr/share/themes/
@@ -157,6 +159,13 @@ cd
 
 # Qogir theme
 git clone https://github.com/vinceliuice/Qogir-theme.git ~/GIT-REPOS/CORE/Qogir-theme
+cd ~/GIT-REPOS/CORE/Qogir-theme
+sh -c "./install.sh"
+cd
+
+# WhiteSur-gtk-theme
+sudo dnft install -y sassc optipng inkscape glib2-devel
+git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/GIT-REPOS/CORE/WhiteSur-gtk-theme
 cd ~/GIT-REPOS/CORE/Qogir-theme
 sh -c "./install.sh"
 cd
