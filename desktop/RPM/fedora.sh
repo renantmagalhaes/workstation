@@ -57,7 +57,7 @@ sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-rele
 sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 #Install the packages from debian repo
-sudo dnf install -y rofi obs-studio zsh vlc python-vlc clementine breeze-cursor-theme dia vim nmap gimp blender gconf-editor inkscape brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python-pip gnome-tweaks snapd gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita kdenlive frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 gnome-weather 
+sudo dnf install -y rofi obs-studio zsh vlc python-vlc clementine breeze-cursor-theme dia vim nmap gimp blender gconf-editor inkscape brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita kdenlive frei0r-plugins audacity filezilla tree remmina ffmpeg nload arc-theme chrome-gnome-shell gnome-menus gnome-weather 
 
 ## slack
 snap install slack --classic
