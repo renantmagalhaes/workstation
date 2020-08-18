@@ -170,3 +170,65 @@ echo "#	www.renantmagalhaes.net	#"
 echo "# Please reboot your pc   #"
 echo "#                         #"
 echo "#################################"
+
+clear
+echo "*** AFTER INSTALL *** \n "
+
+echo ""
+echo "*** Fedora Gnome *** "
+echo "# Setup Theme  \n \
+* Applications: Qogir-light \n \
+* Cursor: Breeze_Snow \n \
+* Icons: Tela-circle-black \n \
+* Shell: Flat-Remix-Blue-Darkest-fullPanel / Layan / Vimix-laptop \n"
+
+echo ""
+
+echo "# Gnome extensions \n \
+* Dash to dock \n \
+* Hide activities button \n \
+* Openweather \n \
+* Pixel Saver \n \
+* Sound input & output device chooser \n \
+* KStatusNotifierItem/AppIndicator Support \n \
+* User themes \n \
+* Vitals \n \
+* Windowoverlay icons \n \
+* Workspace indicator \n \
+* Workspace scroll \n \
+* Transparent Top Panel \n\
+* https://github.com/CorvetteCole/transparent-window-moving (128,20,010) \n \
+* Arc menu (Raven Layout)"
+
+echo "*** UBUNTU *** "
+echo ""
+echo "# Set startup applications \n \
+* Guake \n \
+* Albert \n \
+* Slack \n \
+* Telegram \n \
+* Skype \n"
+
+echo "*** FONTS *** "
+echo "FiraCode Nerd Font"
+echo "*** FONTS *** "
+
+echo "*** Guake Terminal Color - Gogh *** "
+echo '
+1 - Select default Shell -> /usr/bin/zsh \n 
+2 - Run -> bash -c "$(curl -sLo- https://raw.githubusercontent.com/renantmagalhaes/workstation/master/ShellCollor/rtm-color-scheme.sh)" # RTM Color Scheme \n 
+3 - Select default Shell -> /usr/bin/tmux \n'
+echo "*** FONTS ***" 
+
+
+echo " ### Install the other tools in this repo! ###"
+echo "* ZSH"
+echo "* TMUX"
+echo "* DEV-TOOLS \n \n"
+
+echo "#################################"
+echo "#                               #"
+echo "#    www.renantmagalhaes.net    #"
+echo "#     Please reboot your pc     #"
+echo "#                               #"
+echo "#################################"
