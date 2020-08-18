@@ -170,6 +170,10 @@ cd ~/GIT-REPOS/CORE/Qogir-theme
 sh -c "./install.sh"
 cd
 
+#Utils
+#Isolate Alt-Tab workspaces
+gsettings set org.gnome.shell.app-switcher current-workspace-only true
+
 
 #RTM
 clear
