@@ -189,6 +189,16 @@ sudo flatpak install -y flathub com.microsoft.Teams
 ##GBA emulator
 sudo flatpak install flathub io.mgba.mGBA
 
+# VirtualBox
+sudo dnf -y install wget
+wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
+sudo mv virtualbox.repo /etc/yum.repos.d/virtualbox.repo
+sudo dnf install -y gcc binutils make glibc-devel patch libgomp glibc-headers  kernel-headers kernel-devel-`uname -r` dkms
+sudo dnf install -y VirtualBox-6.1
+sudo usermod -a -G vboxusers ${USER}
+sudo /usr/lib/virtualbox/vboxdrv.sh setup
+cd ~/
+wget https://download.virtualbox.org/virtualbox/6.1.2/Oracle_VM_VirtualBox_Extension_Pack-6.1.2.vbox-extpack
 
 #RTM
 clear
