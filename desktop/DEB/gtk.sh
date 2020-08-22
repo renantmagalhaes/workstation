@@ -344,6 +344,7 @@ echo "# Gnome extensions \n \
 * Sound input & output device chooser \n \
 * KStatusNotifierItem/AppIndicator Support \n \
 * User themes \n \
+* AlternateTab \n \
 * Vitals \n \
 * Windowoverlay icons \n \
 * Workspace indicator \n \
