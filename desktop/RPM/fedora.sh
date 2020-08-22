@@ -207,6 +207,7 @@ echo "# Gnome extensions \n \
 * KStatusNotifierItem/AppIndicator Support \n \
 * User themes \n \
 * Vitals \n \
+* AlternateTab \n \
 * Windowoverlay icons \n \
 * Workspace indicator \n \
 * Workspace scroll \n \
