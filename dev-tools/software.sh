@@ -1,5 +1,6 @@
-# Postman
-sudo flatpak install -y flathub com.getpostman.Postman
+#Mindmap
+## XMind
+https://www.xmind.net/download/
 
 # Redis
 sudo snap install redis-desktop-manager
@@ -10,21 +11,20 @@ sudo snap install robo3t-snap
 # Mysql Workbench
 sudo snap install mysql-workbench-community --candidate
 
-# EasySSH
-flatpak install -y flathub com.github.muriloventuroso.easyssh
-
-#Mindmap
-
-## XMind Zen
-flatpak install -y flathub net.xmind.ZEN
-
-## Xmind8
-flatpak install -y flathub net.xmind.XMind8
+# Postman
+sudo flatpak install -y flathub com.getpostman.Postman
 
 # DBeaver
-wget -O - https://dbeaver.io/debs/dbeaver.gpg.key | sudo apt-key add -
-echo "deb https://dbeaver.io/debs/dbeaver-ce /" | sudo tee /etc/apt/sources.list.d/dbeaver.list
-sudo apt-get update && sudo apt-get install -y dbeaver-ce
+sudo flatpak install -y flathub io.dbeaver.DBeaverCommunity
+
+# Regex tester
+sudo flatpak install -y flathub com.github.artemanufrij.regextester
+
+# PyCharm
+sudo flatpak install -y flathub com.jetbrains.PyCharm-Community
+
+# jPdfTweak
+sudo flatpak install -y flathub net.sourceforge.jpdftweak.jPdfTweak
 
 # Install Docker
 ## Install latest docker
@@ -37,7 +37,6 @@ sudo usermod -aG docker `whoami`
 
 ## Install Docker Repo Version - Fedora 32
 sudo dnf -y install dnf-plugins-core
-
 sudo tee /etc/yum.repos.d/docker-ce.repo<<EOF
 [docker-ce-stable]
 name=Docker CE Stable - \$basearch
