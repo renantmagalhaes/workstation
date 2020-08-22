@@ -51,8 +51,7 @@ sudo dnf install docker-ce docker-ce-cli containerd.io
 sudo systemctl enable --now docker
 sudo usermod -aG docker $(whoami)
 newgrp docker
-sudo mkdir /sys/fs/cgroup/systemd
-sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
+sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
 
 #Install docker-compose
 sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
