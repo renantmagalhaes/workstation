@@ -307,6 +307,19 @@ chown -R $script_user:$script_user chown -R rtm:rtm ~/.cache/vimfiles*
 #Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
+## Skype 
+sudo flatpak install -y flathub com.skype.Client
+
+## Zoom
+sudo flatpak install -y flathub us.zoom.Zoom
+
+## Microsoft Teams
+sudo flatpak install -y flathub com.microsoft.Teams
+
+#Games
+##GBA emulator
+sudo flatpak install flathub io.mgba.mGBA
+
 # RTM
 clear
 echo "*** AFTER INSTALL *** \n "

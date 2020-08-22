@@ -14,12 +14,12 @@
     -> GitLens (ext install eamodio.gitlens)
     -> compareit (ext install in4margaret.compareit)
     -> live server (ext install ritwickdey.LiveServer)
-    -> Bracket Pair Colorizer 2 (ext install CoenraadS.bracket-pair-colorizer-2)    
+    -> Bracket Pair Colorizer 2 (ext install CoenraadS.bracket-pair-colorizer-2)
+    -> SQLTools (ext install mtxr.sqltools)
+
 
 => Themes
     -> Material Theme (ext install Equinusocio.vsc-material-theme)
     Set theme to Darker High Contrast
     -> Material Icon Theme (ext install PKief.material-icon-theme)
     Set accent collor > Acid Lime
-
-    
