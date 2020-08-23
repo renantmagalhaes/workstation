@@ -223,6 +223,11 @@ echo "# Setup Theme  \n \
 echo ""
 
 echo "# Gnome extensions \n \
+* Extensions Sync "
+
+echo "or"
+
+echo "# Gnome extensions \n \
 * Dash to dock \n \
 * Hide activities button \n \
 * Openweather \n \
