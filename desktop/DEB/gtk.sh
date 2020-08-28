@@ -381,7 +381,8 @@ echo "# Set startup applications \n \
 * Skype \n"
 
 echo "*** FONTS *** "
-echo "FiraCode Nerd Font"
+echo "*** Terminal *** "
+echo "FiraCode Nerd Font Medium 10"
 echo "*** FONTS *** "
 
 echo "*** Guake Terminal Color - Gogh *** "
