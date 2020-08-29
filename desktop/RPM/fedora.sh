@@ -171,6 +171,19 @@ cd ~/GIT-REPOS/CORE/Qogir-theme
 sh -c "./install.sh"
 cd
 
+# Orchis theme
+git clone https://github.com/vinceliuice/Orchis-theme.git ~/GIT-REPOS/CORE/Orchis-theme
+cd ~/GIT-REPOS/CORE/Orchis-theme
+sh -c "./install.sh"
+cd
+
+# ChromeOS theme
+git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/ChromeOS-theme
+cd ~/GIT-REPOS/CORE/ChromeOS-theme
+sh -c "./install.sh"
+cd
+
+
 #Utils
 ##Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
