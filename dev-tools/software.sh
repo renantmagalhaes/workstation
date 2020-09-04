@@ -26,6 +26,18 @@ sudo flatpak install -y flathub com.jetbrains.PyCharm-Community
 # jPdfTweak
 sudo flatpak install -y flathub net.sourceforge.jpdftweak.jPdfTweak
 
+
+#Yarn and NodeJs
+## Fedora
+sudo yum update -y
+sudo yum install -y curl gnupg2
+sudo curl -sL https://rpm.nodesource.com/setup_12.x | bash -
+sudo curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
+sudo yum clean all && yum makecache
+sudo yum install -y gcc-c++ make
+sudo yum install -y yarn nodejs
+
+
 # Install Docker
 ## Install latest docker
 curl -sSL https://get.docker.com/ | sh
