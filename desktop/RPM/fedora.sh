@@ -215,6 +215,9 @@ sudo /usr/lib/virtualbox/vboxdrv.sh setup
 cd ~/
 wget https://download.virtualbox.org/virtualbox/6.1.2/Oracle_VM_VirtualBox_Extension_Pack-6.1.2.vbox-extpack
 
+## If kernel update problem
+## https://www.virtualbox.org/wiki/Testbuilds > Linux 64-bit > Run .run file
+
 #RTM
 clear
 echo "#################################"
