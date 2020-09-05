@@ -167,7 +167,7 @@ cd
 # WhiteSur-gtk-theme
 sudo dnf install -y sassc optipng inkscape glib2-devel
 git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/GIT-REPOS/CORE/WhiteSur-gtk-theme
-cd ~/GIT-REPOS/CORE/Qogir-theme
+cd ~/GIT-REPOS/CORE/WhiteSur-gtk-theme
 sh -c "./install.sh"
 cd
 
