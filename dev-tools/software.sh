@@ -26,6 +26,9 @@ sudo flatpak install -y flathub com.jetbrains.PyCharm-Community
 # jPdfTweak
 sudo flatpak install -y flathub net.sourceforge.jpdftweak.jPdfTweak
 
+# K8S IDE - Lens
+sudo snap install kontena-lens --classic
+
 
 #Yarn and NodeJs
 ## Fedora
