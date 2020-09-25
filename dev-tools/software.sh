@@ -3,10 +3,16 @@
 https://www.xmind.net/download/
 
 # Redis
-sudo snap install redis-desktop-manager
+#sudo snap install redis-desktop-manager
+mkdir -p ~/Apps
+wget https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v1.3.8/Another-Redis-Desktop-Manager.1.3.8.AppImage -O ~/Apps/Another-Redis-Desktop-Manager.1.3.8.AppImage
+chmod +x ~/Apps/Another-Redis-Desktop-Manager.1.3.8.AppImage
 
 # Robo3t
 sudo snap install robo3t-snap
+
+# DBeaver
+sudo flatpak install -y flathub io.dbeaver.DBeaverCommunity
 
 # Mysql Workbench
 sudo snap install mysql-workbench-community --candidate
@@ -14,21 +20,14 @@ sudo snap install mysql-workbench-community --candidate
 # Postman
 sudo flatpak install -y flathub com.getpostman.Postman
 
-# DBeaver
-sudo flatpak install -y flathub io.dbeaver.DBeaverCommunity
-
 # Regex tester
 sudo flatpak install -y flathub com.github.artemanufrij.regextester
-
-# PyCharm
-sudo flatpak install -y flathub com.jetbrains.PyCharm-Community
 
 # jPdfTweak
 sudo flatpak install -y flathub net.sourceforge.jpdftweak.jPdfTweak
 
 # K8S IDE - Lens
 sudo snap install kontena-lens --classic
-
 
 #Yarn and NodeJs
 ## Fedora

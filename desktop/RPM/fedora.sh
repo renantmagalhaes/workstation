@@ -1,6 +1,5 @@
 #!/bin/sh
 #
-# installer_workstation.sh - Script to install my full DEBIAN 9 workstation experience
 #
 #Site        :https://renantmagalhaes.net
 #Author      :Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
@@ -12,7 +11,7 @@
 #
 #
 #   => Preferred applications
-#       -> Web: Google Chrome
+#       -> Web: Google Chrome / Vivaldi
 #       -> Mail: Thunderbird
 #       -> Editor: Visual Studio Code
 #       -> Music: Clementine / Spotify(web)
@@ -28,6 +27,9 @@
 #
 #   V0.1 2019-09-21 RTM:
 #       - Initial release for fedora linux
+#
+#   V0.2 2020-10-25 RTM:
+#       - Several updates and fix.
 #
 
 
@@ -57,28 +59,16 @@ sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-rele
 sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 #Install the packages from debian repo
-sudo dnf install -y rofi obs-studio zsh vlc python-vlc clementine breeze-cursor-theme dia vim nmap gimp blender gconf-editor inkscape brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina ffmpeg nload arc-theme chrome-gnome-shell gnome-menus gnome-weather 
+sudo dnf install -y obs-studio zsh vlc python-vlc clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina ffmpeg nload arc-theme chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat 
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-## slack
-sudo wget https://downloads.slack-edge.com/linux_releases/slack-4.8.0-0.1.fc21.x86_64.rpm -O /tmp/slack-4.8.0-0.1.fc21.x86_64.rpm
-sudo dnf install -y /tmp/slack-4.8.0-0.1.fc21.x86_64.rpm
 
 #Update / upgrade
 sudo dnf update -y
 
 # Snap syslink
 ln -s /var/lib/snapd/snap /snap
-
-####### Testing google-chrome for now ######
-###Install Firefox Latest
-#wget -O ~/FirefoxSetup.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64"
-#sudo tar xjf ~/FirefoxSetup.tar.bz2 -C /opt/
-#sudo mv /usr/lib/firefox/firefox /usr/lib/firefox/firefox_backup
-#sudo ln -s /opt/firefox/firefox /usr/lib/firefox/firefox
-#rm -rf ~/FirefoxSetup.tar.bz2 
 
 #Create git-folder
 mkdir -p ~/GIT-REPOS
@@ -115,13 +105,6 @@ wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Agave.zip 
 unzip ~/.local/share/fonts/Agave.zip -d ~/.local/share/fonts/
 
 fc-cache -vf ~/.local/share/fonts/
-
-##Add Gogh
-###Elementary
-#runuser -l $user -c 'wget -O xt  http://git.io/v3D8R && chmod +x xt && ./xt && rm xt'
-### Grubvbox dark
-#runuser -l $user -c 'wget -O xt https://git.io/v7eBS && chmod +x xt && ./xt && rm xt'
-
 
 #New VIM
 curl -sLf https://spacevim.org/install.sh | bash
@@ -190,6 +173,9 @@ cd
 #Utils
 ##Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
+
+## Slack
+sudo flatpak install flathub com.slack.Slack
 
 ## Skype 
 sudo flatpak install -y flathub com.skype.Client
@@ -261,21 +247,17 @@ echo "# Gnome extensions \n \
 * https://github.com/CorvetteCole/transparent-window-moving (128,20,010) \n \
 * Arc menu (Raven Layout)"
 
-echo "*** UBUNTU *** "
+
 echo ""
-echo "# Set startup applications \n \
-* Guake \n \
-* Albert \n \
-* Slack \n \
-* Telegram \n \
-* Skype \n"
+echo "Set startup applications \n \
+* Guake"
 
 echo "*** FONTS *** "
 echo "*** Terminal *** "
 echo "FiraCode Nerd Font Medium 10"
 echo "*** FONTS *** "
 
-echo "*** Guake Terminal Color - Gogh *** "
+echo "*** Guake Terminal Color - Gogh / RTM VERSION *** "
 echo '
 1 - Select default Shell -> /usr/bin/zsh \n 
 2 - Run -> bash -c "$(curl -sLo- https://raw.githubusercontent.com/renantmagalhaes/workstation/master/ShellCollor/rtm-color-scheme.sh)" # RTM Color Scheme \n 
