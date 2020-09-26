@@ -7,6 +7,7 @@ https://www.xmind.net/download/
 mkdir -p ~/Apps
 wget https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v1.3.8/Another-Redis-Desktop-Manager.1.3.8.AppImage -O ~/Apps/Another-Redis-Desktop-Manager.1.3.8.AppImage
 chmod +x ~/Apps/Another-Redis-Desktop-Manager.1.3.8.AppImage
+#! Add this program in menu using Alacarte package
 
 # Robo3t
 sudo snap install robo3t-snap
