@@ -112,6 +112,8 @@ curl -sLf https://spacevim.org/install.sh | bash
 #Flat-remix Theme
 sudo dnf copr enable daniruiz/flat-remix
 sudo dnf install flat-remix-gnome
+sudo dnf install flat-remix-gtk2-theme flat-remix-gtk3-theme
+sudo dnf install flat-remix-icon-theme
 
 # Install GTK theme Vimix
 git clone https://github.com/vinceliuice/vimix-gtk-themes.git ~/GIT-REPOS/CORE/vimix-gtk-themes
