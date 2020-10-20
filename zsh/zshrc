@@ -76,13 +76,18 @@ read_kube_config_context() {
     }
 POWERLEVEL9K_CUSTOM_COMMAND="read_kube_config_context"
 
+custom_symbol(){
+  echo -e '\u2638'
+}
+POWERLEVEL9K_CUSTOM_SYMBOL="custom_symbol"
+
 
 # Default Prompt Elements
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator virtualenv dir dir_writable_joined custom_git_pair vcs_joined)
 POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='%F{008}\uf460%F{008}'
 
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time go_version nvm os_icon custom_command)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time go_version nvm os_icon custom_symbol custom_command)
 POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
 POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%F{008}\uf104%F{008}'
 
@@ -107,6 +112,8 @@ POWERLEVEL9K_CUSTOM_USER_FOREGROUND='blue'
 POWERLEVEL9K_CUSTOM_COMMAND_BACKGROUND='clear'
 POWERLEVEL9K_CUSTOM_COMMAND_FOREGROUND='231'
 
+POWERLEVEL9K_CUSTOM_SYMBOL_BACKGROUND='clear'
+POWERLEVEL9K_CUSTOM_SYMBOL_FOREGROUND='blue'
 
 #
 function sp {
