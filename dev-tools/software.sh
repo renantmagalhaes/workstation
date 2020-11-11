@@ -50,16 +50,14 @@ sudo usermod -aG docker $USER
 sudo apt install docker docker.io
 sudo usermod -aG docker `whoami`
 
-## Install Docker Repo Version - Fedora 32
+## Install Docker Repo Version - Fedora 33
+# look into moby-engine
 sudo dnf -y install dnf-plugins-core
-sudo tee /etc/yum.repos.d/docker-ce.repo<<EOF
-[docker-ce-stable]
-name=Docker CE Stable - \$basearch
-baseurl=https://download.docker.com/linux/fedora/31/\$basearch/stable
-enabled=1
-gpgcheck=1
-gpgkey=https://download.docker.com/linux/fedora/gpg
-EOF
+
+sudo dnf config-manager --add-repo \
+    https://download.docker.com/linux/fedora/docker-ce.repo
+perl -p -i -e 's/\$releasever/32/g' /etc/yum.repos.d/docker-ce.repo
+
 sudo dnf makecache
 sudo dnf install docker-ce docker-ce-cli containerd.io
 sudo systemctl enable --now docker
