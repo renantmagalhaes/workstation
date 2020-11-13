@@ -66,11 +66,6 @@ sudo dnf install -y obs-studio zsh vlc python-vlc clementine breeze-cursor-theme
 sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 sudo dnf groupupdate -y sound-and-video
 
-## Better fonts
-sudo dnf copr enable dawid/better_fonts -y
-sudo dnf install fontconfig-font-replacements -y
-sudo dnf install fontconfig-enhanced-defaults -y
-
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
