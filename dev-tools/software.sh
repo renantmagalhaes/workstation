@@ -1,10 +1,12 @@
+# Default folder
+mkdir -p ~/Apps
+
 #Mindmap
 ## XMind
 https://www.xmind.net/download/
 
 # Redis
 #sudo snap install redis-desktop-manager
-mkdir -p ~/Apps
 wget https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v1.3.8/Another-Redis-Desktop-Manager.1.3.8.AppImage -O ~/Apps/Another-Redis-Desktop-Manager.1.3.8.AppImage
 chmod +x ~/Apps/Another-Redis-Desktop-Manager.1.3.8.AppImage
 #! Add this program in menu using Alacarte package
@@ -40,7 +42,6 @@ sudo yum clean all && yum makecache
 sudo yum install -y gcc-c++ make
 sudo yum install -y yarn nodejs
 
-
 # Install Docker
 ## Install latest docker
 curl -sSL https://get.docker.com/ | sh
@@ -68,7 +69,6 @@ sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
 sudo firewall-cmd --zone=FedoraWorkstation --add-masquerade --permanent
 sudo firewall-cmd --reload
 sudo systemctl restart docker
-
 
 #Install docker-compose
 sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose

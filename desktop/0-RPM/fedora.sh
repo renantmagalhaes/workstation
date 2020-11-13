@@ -59,13 +59,12 @@ sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-rele
 sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 #Install the packages from debian repo
-sudo dnf install -y obs-studio zsh vlc python-vlc clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina ffmpeg nload arc-theme chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte gnome-extensions-app alacritty
+sudo dnf install -y obs-studio zsh vlc python-vlc clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina ffmpeg nload arc-theme chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte gnome-extensions-app alacritty
 
 # Aditional fedora packages
 ## multimedia codecs
 sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 sudo dnf groupupdate -y sound-and-video
-
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -82,6 +81,10 @@ mkdir -p ~/GIT-REPOS
 #Install Google Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -O /tmp/google-chrome-stable_current_x86_64.rpm
 sudo dnf install -y /tmp/google-chrome-stable_current_x86_64.rpm
+
+#Install Vivaldi
+wget https://downloads.vivaldi.com/stable/vivaldi-stable-3.4.2066.106-1.x86_64.rpm -O /tmp/vivaldi-stable-3.4.2066.106-1.x86_64.rpm
+sudo dnf install -y vivaldi-stable-3.4.2066.106-1.x86_64.rpm
 
 ##Install Visual Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -139,7 +142,6 @@ cd ~/GIT-REPOS/CORE/Layan-gtk-theme
 sh -c "./install.sh"
 cd
 
-
 # Tela-circle-icon-theme
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
 cd ~/GIT-REPOS/CORE/Tela-circle-icon-theme
@@ -177,7 +179,6 @@ cd ~/GIT-REPOS/CORE/ChromeOS-theme
 sh -c "./install.sh"
 cd
 
-
 #Utils
 ##Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
@@ -198,15 +199,16 @@ sudo flatpak install -y flathub com.microsoft.Teams
 flatpak install -y flathub org.kde.kdenlive
 
 # VirtualBox
-sudo dnf -y install wget
-wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
-sudo mv virtualbox.repo /etc/yum.repos.d/virtualbox.repo
-sudo dnf install -y gcc binutils make glibc-devel patch libgomp glibc-headers  kernel-headers kernel-devel-`uname -r` dkms
-sudo dnf install -y VirtualBox-6.1
-sudo usermod -a -G vboxusers ${USER}
-sudo /usr/lib/virtualbox/vboxdrv.sh setup
-cd ~/
-wget https://download.virtualbox.org/virtualbox/6.1.2/Oracle_VM_VirtualBox_Extension_Pack-6.1.2.vbox-extpack
+sudo dnf install VirtualBox.x86_64
+#sudo dnf -y install wget
+#wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
+#sudo mv virtualbox.repo /etc/yum.repos.d/virtualbox.repo
+#sudo dnf install -y gcc binutils make glibc-devel patch libgomp glibc-headers  kernel-headers kernel-devel-`uname -r` dkms
+#sudo dnf install -y VirtualBox-6.1
+#sudo usermod -a -G vboxusers ${USER}
+#sudo /usr/lib/virtualbox/vboxdrv.sh setup
+#cd ~/
+#wget https://download.virtualbox.org/virtualbox/6.1.2/Oracle_VM_VirtualBox_Extension_Pack-6.1.2.vbox-extpack
 
 ## If kernel update problem
 ## https://www.virtualbox.org/wiki/Testbuilds > Linux 64-bit > Run .run file
