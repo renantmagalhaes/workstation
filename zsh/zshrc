@@ -201,3 +201,8 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 #source
 source $ZSH/oh-my-zsh.sh
+
+# enhancd
+source $ZSH/custom/plugins/enhancd/init.sh
+ENHANCD_FILTER=fzf
+export ENHANCD_FILTER
