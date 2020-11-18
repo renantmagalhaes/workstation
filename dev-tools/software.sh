@@ -7,8 +7,8 @@ https://www.xmind.net/download/
 
 # Redis
 #sudo snap install redis-desktop-manager
-wget https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v1.3.8/Another-Redis-Desktop-Manager.1.3.8.AppImage -O ~/Apps/Another-Redis-Desktop-Manager.1.3.8.AppImage
-chmod +x ~/Apps/Another-Redis-Desktop-Manager.1.3.8.AppImage
+wget https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v1.3.9/Another-Redis-Desktop-Manager.1.3.9.AppImage -O ~/Apps/Another-Redis-Desktop-Manager.1.3.9.AppImage
+chmod +x ~/Apps/Another-Redis-Desktop-Manager.1.3.9.AppImage
 #! Add this program in menu using Alacarte package
 
 # Robo3t
@@ -42,34 +42,13 @@ sudo yum clean all && yum makecache
 sudo yum install -y gcc-c++ make
 sudo yum install -y yarn nodejs
 
-# Install Docker
-## Install latest docker
-curl -sSL https://get.docker.com/ | sh
-sudo usermod -aG docker $USER
-
-## Install Docker Repo Version - Ubuntu
-sudo apt install docker docker.io
-sudo usermod -aG docker `whoami`
-
-## Install Docker Repo Version - Fedora 33
-# look into moby-engine
-sudo dnf -y install dnf-plugins-core
-
-sudo dnf config-manager --add-repo \
-    https://download.docker.com/linux/fedora/docker-ce.repo
-perl -p -i -e 's/\$releasever/32/g' /etc/yum.repos.d/docker-ce.repo
-
-sudo dnf makecache
-sudo dnf install docker-ce docker-ce-cli containerd.io
-sudo systemctl enable --now docker
-sudo usermod -aG docker $(whoami)
-newgrp docker
+# Install Docker Repo Version - Fedora 33
 sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
-
-sudo firewall-cmd --zone=FedoraWorkstation --add-masquerade --permanent
+sudo firewall-cmd --permanent --zone=trusted --add-interface=docker0
+sudo firewall-cmd --permanent --zone=FedoraWorkstation --add-masquerade
 sudo firewall-cmd --reload
+sudo dnf install -y moby-engine docker-compose
+sudo systemctl enable docker
+sudo groupadd docker
+sudo usermod -aG docker $USER
 sudo systemctl restart docker
-
-#Install docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose

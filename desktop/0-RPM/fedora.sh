@@ -59,9 +59,12 @@ sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-rele
 sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 #Install the packages from debian repo
-sudo dnf install -y obs-studio zsh vlc python-vlc clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina ffmpeg nload arc-theme chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte gnome-extensions-app alacritty fzf
+sudo dnf install -y zsh clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina nload arc-theme chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte gnome-extensions-app alacritty fzf ffmpeg
 
 # Aditional fedora packages
+## Plugins Core
+sudo dnf -y install dnf-plugins-core
+
 ## multimedia codecs
 sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 sudo dnf groupupdate -y sound-and-video
@@ -69,11 +72,32 @@ sudo dnf groupupdate -y sound-and-video
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-#Update / upgrade
-sudo dnf update -y
+#Utils
+##Isolate Alt-Tab workspaces
+gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
-# Snap syslink
-ln -s /var/lib/snapd/snap /snap
+
+# Flathub Packages
+## Slack
+sudo flatpak install flathub com.slack.Slack
+
+## Skype 
+sudo flatpak install -y flathub com.skype.Client
+
+## Zoom
+sudo flatpak install -y flathub us.zoom.Zoom
+
+## Microsoft Teams
+sudo flatpak install -y flathub com.microsoft.Teams
+
+## Kdenlive
+sudo flatpak install -y flathub org.kde.kdenlive
+
+## OBS Studio
+sudo flatpak install -y flathub com.obsproject.Studio
+
+## VLC
+sudo flatpak install -y flathub org.videolan.VLC
 
 #Create git-folder
 mkdir -p ~/GIT-REPOS
@@ -117,6 +141,9 @@ fc-cache -vf ~/.local/share/fonts/
 
 #New VIM
 curl -sLf https://spacevim.org/install.sh | bash
+echo "set ignorecase" >> ~/.vim/vimrc
+echo "set paste" >> ~/.vim/vimrc
+
 
 #Flat-remix Theme
 sudo dnf copr enable daniruiz/flat-remix
@@ -179,27 +206,9 @@ cd ~/GIT-REPOS/CORE/ChromeOS-theme
 sh -c "./install.sh"
 cd
 
-#Utils
-##Isolate Alt-Tab workspaces
-gsettings set org.gnome.shell.app-switcher current-workspace-only true
-
-## Slack
-sudo flatpak install flathub com.slack.Slack
-
-## Skype 
-sudo flatpak install -y flathub com.skype.Client
-
-## Zoom
-sudo flatpak install -y flathub us.zoom.Zoom
-
-## Microsoft Teams
-sudo flatpak install -y flathub com.microsoft.Teams
-
-## Kdenlive
-flatpak install -y flathub org.kde.kdenlive
-
+######################### Using gnome-boxes now #########################
 # VirtualBox
-sudo dnf install VirtualBox.x86_64
+#sudo dnf install VirtualBox.x86_64
 #sudo dnf -y install wget
 #wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
 #sudo mv virtualbox.repo /etc/yum.repos.d/virtualbox.repo
@@ -212,6 +221,8 @@ sudo dnf install VirtualBox.x86_64
 
 ## If kernel update problem
 ## https://www.virtualbox.org/wiki/Testbuilds > Linux 64-bit > Run .run file
+######################### Using gnome-boxes now #########################
+
 
 #RTM
 clear
@@ -255,7 +266,7 @@ echo "# Gnome extensions \n \
 * Workspace scroll \n \
 * Transparent Top Panel *Depends on Theme* \n\
 * https://github.com/CorvetteCole/transparent-window-moving (128,20,010) \n \
-* Arc menu (Raven Layout)"
+* Arc menu (Gnome-dash-menu Style)"
 
 
 echo ""
