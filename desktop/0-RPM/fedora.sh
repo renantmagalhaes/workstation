@@ -55,11 +55,11 @@ read user
 sudo dnf update -y
 
 #Install rpm fusion
-sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 #Install the packages from debian repo
-sudo dnf install -y zsh clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina nload arc-theme chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte gnome-extensions-app alacritty fzf ffmpeg
+sudo dnf install -y zsh clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina nload arc-theme chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte gnome-extensions-app alacritty fzf ffmpeg neofetch
 
 # Aditional fedora packages
 ## Plugins Core
@@ -108,7 +108,7 @@ sudo dnf install -y /tmp/google-chrome-stable_current_x86_64.rpm
 
 #Install Vivaldi
 wget https://downloads.vivaldi.com/stable/vivaldi-stable-3.4.2066.106-1.x86_64.rpm -O /tmp/vivaldi-stable-3.4.2066.106-1.x86_64.rpm
-sudo dnf install -y vivaldi-stable-3.4.2066.106-1.x86_64.rpm
+sudo dnf install -y /tmp/vivaldi-stable-3.4.2066.106-1.x86_64.rpm
 
 ##Install Visual Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -146,10 +146,8 @@ echo "set paste" >> ~/.vim/vimrc
 
 
 #Flat-remix Theme
-sudo dnf copr enable daniruiz/flat-remix
-sudo dnf install flat-remix-gnome
-sudo dnf install flat-remix-gtk2-theme flat-remix-gtk3-theme
-sudo dnf install flat-remix-icon-theme
+sudo dnf copr enable -y daniruiz/flat-remix
+sudo dnf install -y flat-remix-gnome  flat-remix-gtk2-theme flat-remix-gtk3-theme flat-remix-icon-theme
 
 # Install GTK theme Vimix
 git clone https://github.com/vinceliuice/vimix-gtk-themes.git ~/GIT-REPOS/CORE/vimix-gtk-themes
