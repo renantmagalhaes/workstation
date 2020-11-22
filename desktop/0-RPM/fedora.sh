@@ -245,7 +245,7 @@ rm teamviewer.x86_64.rpm
 clear
 echo "#################################"
 echo "#                         #"
-echo "#	www.renantmagalhaes.net	#"
+echo "#	    rtm.codes       	#"
 echo "# Please reboot your pc   #"
 echo "#                         #"
 echo "#################################"
@@ -256,10 +256,10 @@ echo "*** AFTER INSTALL *** \n "
 echo ""
 echo "*** Fedora Gnome *** "
 echo "# Setup Theme  \n \
-* Applications: Qogir-light \n \
+* Applications: Flat-Remix-Blue-Dark \n \
 * Cursor: Breeze_Snow \n \
-* Icons: Tela-circle-black \n \
-* Shell: Flat-Remix-Blue-Darkest-fullPanel / Layan / Vimix-laptop \n"
+* Icons: Tela-circle-blue-dark \n \
+* Shell: Flat-Remix-Blue-Darkest-fullPanel / Layan"
 
 echo ""
 
