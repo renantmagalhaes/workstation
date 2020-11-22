@@ -3,7 +3,8 @@ mkdir -p ~/Apps
 
 #Mindmap
 ## XMind
-https://www.xmind.net/download/
+#sudo flatpak install -y flathub net.xmind.XMind8
+sudo flatpak install -y flathub net.xmind.ZEN
 
 # Redis
 #sudo snap install redis-desktop-manager
@@ -16,9 +17,6 @@ sudo snap install robo3t-snap
 
 # DBeaver
 sudo flatpak install -y flathub io.dbeaver.DBeaverCommunity
-
-# Mysql Workbench
-sudo snap install mysql-workbench-community --candidate
 
 # Postman
 sudo flatpak install -y flathub com.getpostman.Postman
@@ -34,13 +32,11 @@ sudo snap install kontena-lens --classic
 
 #Yarn and NodeJs
 ## Fedora
-sudo yum update -y
-sudo yum install -y curl gnupg2
-sudo curl -sL https://rpm.nodesource.com/setup_12.x | bash -
+sudo dnf install -y curl gnupg2 gcc-c++ make
+sudo curl -sL https://rpm.nodesource.com/setup_12.x | sudo bash -
 sudo curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
-sudo yum clean all && yum makecache
-sudo yum install -y gcc-c++ make
-sudo yum install -y yarn nodejs
+sudo dnf update -y
+sudo dnf install -y yarn nodejs
 
 # Install Docker Repo Version - Fedora 33
 sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"

@@ -10,16 +10,15 @@
 # This script  will make all the changes in the system and will download / install my most used packages.
 #
 #
-#   => Preferred applications
-#       -> Web: Google Chrome / Vivaldi
-#       -> Mail: Thunderbird
-#       -> Editor: Visual Studio Code
-#       -> Music: Clementine / Spotify(web)
-#       -> Video: VLC 
-#       -> Terminal: Guake 
-#       -> File Manager: Nautilus
-#       -> Record Desktop: OBS Studio
-#
+#*  -> Preferred applications
+#*      - Web: Vivaldi / Google Chrome
+#*      - Editor: Visual Studio Code
+#*      - Music: Clementine / Spotify(web)
+#*      - Video: VLC 
+#*      - Terminal: Guake 
+#*      - File Manager: Nautilus
+#*      - Record Desktop: OBS Studio
+#//     - Mail: Thunderbird
 #
 # --------------------------------------------------------------
 #
@@ -31,8 +30,15 @@
 #   V0.2 2020-10-25 RTM:
 #       - Several updates and fix.
 #
-
-
+#   V0.3 2020-11-22 RTM:
+#       - Update and fix.
+#       - Add Vivaldi to installation
+#       - Remove virtualbox (using Gnome Boxes)
+#       - Moby-engine
+#
+# TODO:
+#   - Test automated deploy
+#   - Link with Tmux / ZSH / Software / Shell Color folders
 #RTM
 
 #Root check
@@ -73,9 +79,17 @@ sudo dnf groupupdate -y sound-and-video
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 #Utils
+## Fix snapd
+sudo ln -s /var/lib/snapd/snap /snap
+
 ##Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
+## G910 color profile
+sudo dnf copr enable lkiesow/g810-led # Enable Copr repository
+sudo dnf install g810-led
+sudo g810-led -p /etc/g810-led/samples/colors
+#sudo g810-led -p /etc/g810-led/samples/group_keys
 
 # Flathub Packages
 ## Slack
@@ -203,6 +217,11 @@ git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/Chr
 cd ~/GIT-REPOS/CORE/ChromeOS-theme
 sh -c "./install.sh"
 cd
+
+# Install Teamviewer
+wget https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
+sudo dnf -y install teamviewer.x86_64.rpm
+rm teamviewer.x86_64.rpm
 
 ######################### Using gnome-boxes now #########################
 # VirtualBox
