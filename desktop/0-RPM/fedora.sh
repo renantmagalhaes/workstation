@@ -42,20 +42,20 @@
 #RTM
 
 #Root check
-#if [ “$(id -u)” != “0” ]; then
-#echo “This script must be run as root” 2>&1
-#exit 1
-#fi
+if [ “$(id -u)” = “0” ]; then
+echo “Dont run this script as root” 2>&1
+exit 1
+fi
 
 #User check
-echo "#########################"
-echo "#			#"
-echo "#	User Config	#"
-echo "#			#"
-echo "#########################"
+#echo "#########################"
+#echo "#			#"
+#echo "#	User Config	#"
+#echo "#			#"
+#echo "#########################"
 
-echo "Enter your default user name:"
-read user
+#echo "Enter your default user name:"
+#read user
 
 #Update / upgrade
 sudo dnf update -y
@@ -121,9 +121,7 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm 
 sudo dnf install -y /tmp/google-chrome-stable_current_x86_64.rpm
 
 #Install Vivaldi
-wget https://downloads.vivaldi.com/stable/vivaldi-stable-3.4.2066.106-1.x86_64.rpm -O /tmp/vivaldi-stable-3.4.2066.106-1.x86_64.rpm
-sudo dnf install -y /tmp/vivaldi-stable-3.4.2066.106-1.x86_64.rpm
-
+wget https:”
 ##Install Visual Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
@@ -186,13 +184,7 @@ git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/
 cd ~/GIT-REPOS/CORE/Tela-circle-icon-theme
 sh -c "./install.sh -a"
 #sh -c "./install.sh"
-cd
-
-# Nordic theme
-git clone https://github.com/EliverLara/Nordic.git ~/GIT-REPOS/CORE/Nordic
-sudo mv ~/GIT-REPOS/CORE/Nordic /usr/share/themes/
-cd
-
+cd”
 # Qogir theme
 git clone https://github.com/vinceliuice/Qogir-theme.git ~/GIT-REPOS/CORE/Qogir-theme
 cd ~/GIT-REPOS/CORE/Qogir-theme
@@ -251,43 +243,24 @@ echo "#                         #"
 echo "#################################"
 
 clear
-echo "*** AFTER INSTALL *** \n "
+echo "*** AFTER INSTALL *** "
 
 echo ""
 echo "*** Fedora Gnome *** "
-echo "# Setup Theme  \n \
-* Applications: Flat-Remix-Blue-Dark \n \
-* Cursor: Breeze_Snow \n \
-* Icons: Tela-circle-blue-dark \n \
+echo "# Setup Theme
+* Applications: Flat-Remix-Blue-Dark 
+* Cursor: Breeze_Snow
+* Icons: Tela-circle-blue-dark
 * Shell: Flat-Remix-Blue-Darkest-fullPanel / Layan"
 
 echo ""
 
-echo "# Gnome extensions \n \
+echo "# Gnome extensions
 * Extensions Sync "
 
-echo "or"
-
-echo "# Gnome extensions \n \
-* Dash to dock \n \
-* Hide activities button \n \
-* Openweather \n \
-* Pixel Saver \n \
-* Sound input & output device chooser \n \
-* KStatusNotifierItem/AppIndicator Support \n \
-* User themes \n \
-* Vitals \n \
-* AlternateTab \n \
-* Windowoverlay icons \n \
-* Workspace indicator \n \
-* Workspace scroll \n \
-* Transparent Top Panel *Depends on Theme* \n\
-* https://github.com/CorvetteCole/transparent-window-moving (128,20,010) \n \
-* Arc menu (Gnome-dash-menu Style)"
-
-
 echo ""
-echo "Set startup applications \n \
+
+echo "Set startup applications
 * Guake"
 
 echo "*** FONTS *** "
@@ -296,21 +269,19 @@ echo "FiraCode Nerd Font Medium 10"
 echo "*** FONTS *** "
 
 echo "*** Guake Terminal Color - Gogh / RTM VERSION *** "
-echo '
-1 - Select default Shell -> /usr/bin/zsh \n 
-2 - Run -> bash -c "$(curl -sLo- https://raw.githubusercontent.com/renantmagalhaes/workstation/master/ShellCollor/rtm-color-scheme.sh)" # RTM Color Scheme \n 
-3 - Select default Shell -> /usr/bin/tmux \n'
-echo "*** FONTS ***" 
 
+echo ""
 
 echo " ### Install the other tools in this repo! ###"
 echo "* ZSH"
 echo "* TMUX"
 echo "* DEV-TOOLS \n \n"
 
+echo ""
+
 echo "#################################"
 echo "#                               #"
-echo "#    www.renantmagalhaes.net    #"
+echo "#         rtm.codes             #"
 echo "#     Please reboot your pc     #"
 echo "#                               #"
 echo "#################################"
