@@ -2,7 +2,6 @@
 mkdir -p ~/Apps
 
 #Mindmap
-## XMind
 #sudo flatpak install -y flathub net.xmind.XMind8
 sudo flatpak install -y flathub net.xmind.ZEN
 
@@ -11,6 +10,9 @@ sudo flatpak install -y flathub net.xmind.ZEN
 wget https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v1.3.9/Another-Redis-Desktop-Manager.1.3.9.AppImage -O ~/Apps/Another-Redis-Desktop-Manager.1.3.9.AppImage
 chmod +x ~/Apps/Another-Redis-Desktop-Manager.1.3.9.AppImage
 #! Add this program in menu using Alacarte package
+
+# Restart snapd service
+sudo systemctl restart snapd.seeded.service
 
 # Robo3t
 sudo snap install robo3t-snap
