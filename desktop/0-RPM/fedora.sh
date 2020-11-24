@@ -1,9 +1,9 @@
 #!/bin/sh
 #
 #
-#Site        :https://renantmagalhaes.net
-#Author      :Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
-#                                     <https://github.com/renantmagalhaes>
+#?Site        :https://rtm.codes
+#?Author      :Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
+#?                                     <https://github.com/renantmagalhaes>
 #
 # ---------------------------------------------------------------
 #
@@ -36,7 +36,15 @@
 #       - Remove virtualbox (using Gnome Boxes)
 #       - Moby-engine
 #
+#   V0.4 2020-11-22 RTM:
+#       - Minor typo fixes
+#
+#
 # TODO:
+#   - Check if is the system is a Fedora Workstation installation 
+#   - Vivaldi installation
+#   - Install Aws K8S toolkit (cli and auth)
+#   - ZSH function to not show context-not-set with k8s installed
 #   - Test automated deploy
 #   - Link with Tmux / ZSH / Software / Shell Color folders
 #RTM
@@ -65,7 +73,7 @@ sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-r
 sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 #Install the packages from debian repo
-sudo dnf install -y zsh clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina nload arc-theme chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte gnome-extensions-app alacritty fzf ffmpeg neofetch
+sudo dnf install -y zsh clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina nload arc-theme chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte gnome-extensions-app alacritty fzf ffmpeg neofetch util-linux-user
 
 # Aditional fedora packages
 ## Plugins Core
@@ -86,14 +94,14 @@ sudo ln -s /var/lib/snapd/snap /snap
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 ## G910 color profile
-sudo dnf copr enable lkiesow/g810-led # Enable Copr repository
-sudo dnf install g810-led
+sudo dnf copr enable -y lkiesow/g810-led # Enable Copr repository
+sudo dnf install -y g810-led
 sudo g810-led -p /etc/g810-led/samples/colors
 #sudo g810-led -p /etc/g810-led/samples/group_keys
 
 # Flathub Packages
 ## Slack
-sudo flatpak install flathub com.slack.Slack
+sudo flatpak install -y flathub com.slack.Slack
 
 ## Skype 
 sudo flatpak install -y flathub com.skype.Client
