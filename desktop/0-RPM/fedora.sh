@@ -39,6 +39,9 @@
 #   V0.4 2020-11-22 RTM:
 #       - Minor typo fixes
 #
+#   V0.5 2020-11-27 RTM:
+#       - Remember grub2 last choice
+#       - Increse DNF speed
 #
 # TODO:
 #   - Check if is the system is a Fedora Workstation installation 
@@ -65,17 +68,24 @@ fi
 #echo "Enter your default user name:"
 #read user
 
-#Increase fedora package manager speed
+
+# Grub2 config - Save last option
+sudo runuser -l  root -c 'echo "GRUB_DEFAULT=saved" >> /etc/default/grub'
+sudo runuser -l  root -c 'echo "GRUB_SAVEDEFAULT=true" >> /etc/default/grub'
+sudo grub2-editenv create
+sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
+
+# Increase fedora package manager speed
 sudo runuser -l  root -c 'echo "max_parallel_downloads=10" >> /etc/dnf/dnf.conf'
 
-#Update / upgrade
+# Update / upgrade
 sudo dnf update -y
 
-#Install rpm fusion
+# Install rpm fusion
 sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
-#Install the packages from debian repo
+# Install the packages from debian repo
 sudo dnf install -y zsh clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina nload arc-theme chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte gnome-extensions-app alacritty fzf ffmpeg neofetch util-linux-user grub-customizer
 
 # Aditional fedora packages
@@ -131,15 +141,15 @@ mkdir -p ~/GIT-REPOS
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -O /tmp/google-chrome-stable_current_x86_64.rpm
 sudo dnf install -y /tmp/google-chrome-stable_current_x86_64.rpm
 
-#Install Vivaldi
+# Install Vivaldi
 wget https:”
-##Install Visual Code
+## Install Visual Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
 sudo dnf check-update
 sudo dnf install -y code
 
-#Install Fonts
+# Install Fonts
 git clone https://github.com/powerline/fonts.git ~/GIT-REPOS/CORE/fonts/
 bash ~/GIT-REPOS/CORE/fonts/install.sh
 
@@ -162,13 +172,13 @@ unzip ~/.local/share/fonts/Agave.zip -d ~/.local/share/fonts/
 
 fc-cache -vf ~/.local/share/fonts/
 
-#New VIM
+# New VIM
 curl -sLf https://spacevim.org/install.sh | bash
 echo "set ignorecase" >> ~/.vim/vimrc
 echo "set paste" >> ~/.vim/vimrc
 
 
-#Flat-remix Theme
+# Flat-remix Theme
 sudo dnf copr enable -y daniruiz/flat-remix
 sudo dnf install -y flat-remix-gnome  flat-remix-gtk2-theme flat-remix-gtk3-theme flat-remix-icon-theme
 
@@ -194,7 +204,7 @@ cd
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
 cd ~/GIT-REPOS/CORE/Tela-circle-icon-theme
 sh -c "./install.sh -a"
-#sh -c "./install.sh"
+# sh -c "./install.sh"
 cd”
 # Qogir theme
 git clone https://github.com/vinceliuice/Qogir-theme.git ~/GIT-REPOS/CORE/Qogir-theme
@@ -244,7 +254,7 @@ rm teamviewer.x86_64.rpm
 ######################### Using gnome-boxes now #########################
 
 
-#RTM
+# RTM
 clear
 echo "#################################"
 echo "#                         #"
