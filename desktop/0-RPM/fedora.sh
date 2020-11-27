@@ -42,6 +42,7 @@
 #   V0.5 2020-11-27 RTM:
 #       - Remember grub2 last choice
 #       - Increse DNF speed
+#       - g810-led cron setup
 #
 # TODO:
 #   - Check if is the system is a Fedora Workstation installation 
@@ -111,6 +112,8 @@ sudo dnf copr enable -y lkiesow/g810-led # Enable Copr repository
 sudo dnf install -y g810-led
 sudo g810-led -p /etc/g810-led/samples/colors
 #sudo g810-led -p /etc/g810-led/samples/group_keys
+## Set color scheme on boot
+(crontab -l 2>/dev/null; echo "@reboot g810-led -p /etc/g810-led/samples/colors") | crontab -
 
 # Flathub Packages
 ## Slack
