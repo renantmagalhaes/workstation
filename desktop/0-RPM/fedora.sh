@@ -28,10 +28,10 @@
 #       - Initial release for fedora linux
 #
 #   V0.2 2020-10-25 RTM:
-#       - Several updates and fix.
+#       - Packages added
 #
 #   V0.3 2020-11-22 RTM:
-#       - Update and fix.
+#       - Packages added
 #       - Add Vivaldi to installation
 #       - Remove virtualbox (using Gnome Boxes)
 #       - Moby-engine
@@ -43,6 +43,7 @@
 #       - Remember grub2 last choice
 #       - Increse DNF speed
 #       - g810-led cron setup
+#       - rpm fusion - groupupdate core
 #
 # TODO:
 #   - Check if is the system is a Fedora Workstation installation 
@@ -85,6 +86,7 @@ sudo dnf update -y
 # Install rpm fusion
 sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf groupupdate -y core
 
 # Install the packages from debian repo
 sudo dnf install -y zsh clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina nload arc-theme chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte gnome-extensions-app alacritty fzf ffmpeg neofetch util-linux-user grub-customizer
