@@ -22,7 +22,7 @@ export ZSH="/home/$USER/.oh-my-zsh"
 
 # Set theme
 POWERLEVEL9K_MODE='nerdfont-complete'
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 
 #Plugins
