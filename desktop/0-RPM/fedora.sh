@@ -18,6 +18,7 @@
 #*      - Terminal: Guake 
 #*      - File Manager: Nautilus
 #*      - Record Desktop: OBS Studio
+#*      - Screenshot tool: Default Gnome / Flameshot
 #//     - Mail: Thunderbird
 #
 # --------------------------------------------------------------
@@ -89,7 +90,7 @@ sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-non
 sudo dnf groupupdate -y core
 
 # Install the packages from debian repo
-sudo dnf install -y zsh clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina nload arc-theme chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte gnome-extensions-app alacritty fzf ffmpeg neofetch util-linux-user grub-customizer xclip
+sudo dnf install -y zsh clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina nload arc-theme chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte gnome-extensions-app alacritty fzf ffmpeg neofetch util-linux-user grub-customizer xclip flameshot
 
 # Aditional fedora packages
 ## Plugins Core
