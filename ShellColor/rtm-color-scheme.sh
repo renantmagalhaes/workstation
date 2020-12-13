@@ -4,7 +4,7 @@
 # ====================CONFIG THIS =============================== #
 export COLOR_01="#1F2229"           # Black
 export COLOR_02="#D41919"           # Red
-export COLOR_03="#5EBDAB"           # Green
+export COLOR_03="#ADEF7F"           # Green
 export COLOR_04="#FEA44C"           # Yellow
 export COLOR_05="#367bf0"           # Blue
 export COLOR_06="#BF2E5D"           # Magenta
