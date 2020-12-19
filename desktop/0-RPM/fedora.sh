@@ -45,6 +45,7 @@
 #       - Increse DNF speed
 #       - g810-led cron setup
 #       - rpm fusion - groupupdate core
+#				- zsh color change
 #
 # TODO:
 #   - Check if is the system is a Fedora Workstation installation 
