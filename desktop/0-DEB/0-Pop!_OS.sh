@@ -1,26 +1,25 @@
-# !/bin/sh
-#
-#  installer_workstation.sh - Script to install my full workstation experience
-#
-# Site        :https://renantmagalhaes.net
-# Author      :Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
-#                                      <https://github.com/renantmagalhaes>
-#
-#  ---------------------------------------------------------------
-#
-#  This script  will make all the changes in the system and will download / install my most used packages.
+#!/bin/sh
 #
 #
-#    => Preferred applications
-#        -> Web: Google Chrome
-#        -> Mail: Thunderbird
-#        -> Editor: Visual Studio Code
-#        -> Music: Clementine / Spotify(web)
-#        -> Video: VLC
-#        -> Terminal: Guake
-#        -> File Manager: Nautilus
-#        -> Record Desktop: OBS Studio
+#?Site        :https://rtm.codes
+#?Author      :Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
+#?                                     <https://github.com/renantmagalhaes>
 #
+# ---------------------------------------------------------------
+#
+# This script  will make all the changes in the system and will download / install my most used packages.
+#
+#
+#*  -> Preferred applications
+#*      - Web: Vivaldi / Google Chrome
+#*      - Editor: Visual Studio Code
+#*      - Music: Clementine / Spotify(web)
+#*      - Video: VLC 
+#*      - Terminal: Guake 
+#*      - File Manager: Nautilus
+#*      - Record Desktop: OBS Studio
+#*      - Screenshot tool: Default Gnome / Flameshot
+#//     - Mail: Thunderbird
 #
 #  --------------------------------------------------------------
 #
@@ -132,6 +131,11 @@
 #        - Minor fixes
 #        - Tweaks in themes
 #
+#    V1.1.2 2020-12-21
+#        - Using Pop!_OS 20.04 for now
+#        - Minor tweaks to make up to date to fedora script
+#
+#
 #
 #    TODO
 #    * https://github.com/vinceliuice/grub2-themes
@@ -182,8 +186,6 @@ sudo flatpak install -y flathub org.videolan.VLC
 
 # Install Handbrake - Video Converter
 flatpak install -y flathub fr.handbrake.ghb
-
-
 
 #Utils
 ## Fix snapd
@@ -314,14 +316,7 @@ cd
 
 
 # Install flat-remix theme
-sudo apt install flat-remix-gnome
-
-## VirtualBox
-#echo "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian bionic contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
-#sudo apt-get install -y virtualbox-6.1
-
-
-
+sudo apt install flat-remix-gnome flat-remix flat-remix-gtk 
 
 
 # RTM
