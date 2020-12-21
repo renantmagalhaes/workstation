@@ -139,24 +139,13 @@
 #    *
 # RTM
 
-Root check
-if [ “$(id -u)” != “0” ]; then
-echo “This script must be run as root 'sudo ./gtk.sh'” 2>&1
+#Root check
+if [ “$(id -u)” = “0” ]; then
+echo “Dont run this script as root” 2>&1
 exit 1
 fi
 
-# User check
-echo "#####################"
-echo "#                   #"
-echo "#    User Config    # "
-echo "#                   # "
-echo "#####################"
-
-echo "\nEnter your default user name and press ENTER: "
-read script_user
-
 # Add keys and ppas
-sudo add-apt-repository ppa:obsproject/obs-studio
 #wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
 sudo add-apt-repository ppa:daniruiz/flat-remix
 
@@ -164,31 +153,47 @@ sudo add-apt-repository ppa:daniruiz/flat-remix
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 gnome-weather flatpak gnome-software-plugin-flatpak
+sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 gnome-weather flatpak  chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte gnome-extensions-app alacritty fzf ffmpeg neofetch xclip flameshot unrar 
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-##  slack
-sudo wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.4.2-amd64.deb -O /tmp/slack-desktop-4.4.2-amd64.deb
-sudo dpkg -i /tmp/slack-desktop-4.4.2-amd64.deb
+# Flathub Packages
+## Slack
+sudo flatpak install -y flathub com.slack.Slack
+
+## Skype 
+sudo flatpak install -y flathub com.skype.Client
+
+## Zoom
+sudo flatpak install -y flathub us.zoom.Zoom
+
+## Microsoft Teams
+sudo flatpak install -y flathub com.microsoft.Teams
+
+## Kdenlive
+sudo flatpak install -y flathub org.kde.kdenlive
+
+## OBS Studio
+sudo flatpak install -y flathub com.obsproject.Studio
+
+## VLC
+sudo flatpak install -y flathub org.videolan.VLC
+
+# Install Handbrake - Video Converter
+flatpak install -y flathub fr.handbrake.ghb
+
+
+
+#Utils
+## Fix snapd
+sudo ln -s /var/lib/snapd/snap /snap
 
 ##  telegram
 sudo snap install telegram-desktop
 
-#######  Testing google-chrome for now ######
-## Remove firefox
-# sudo dpkg -r firefox
-# sudo rm /usr/bin/firefox
-# sudo rm /usr/share/applications/firefox.desktop
-#
-#
-## # Install Firefox Latest
-# wget -O ~/FirefoxSetup.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64"
-# sudo tar xjf ~/FirefoxSetup.tar.bz2 -C /opt/
-# sudo ln -s /opt/firefox/firefox /usr/bin/firefox
-# sudo wget https://raw.githubusercontent.com/renantmagalhaes/workstation/static-files/firefox/firefox.desktop -O /usr/share/applications/firefox.desktop
-# rm -rf ~/FirefoxSetup.tar.bz2
+#Isolate Alt-Tab workspaces
+gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
@@ -200,6 +205,15 @@ sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
 ## Install Visual Code
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
 sudo dpkg -i /tmp/visual_code_amd64.deb
+
+## G910 color profile
+sudo dnf copr enable -y lkiesow/g810-led # Enable Copr repository
+sudo dnf install -y g810-led
+sudo g810-led -p /etc/g810-led/samples/colors
+#sudo g810-led -p /etc/g810-led/samples/group_keys
+## Set color scheme on boot
+(crontab -l 2>/dev/null; echo "@reboot g810-led -p /etc/g810-led/samples/colors") | crontab -
+
 
 # Install Fonts
 git clone https://github.com/powerline/fonts.git ~/GIT-REPOS/CORE/fonts/
@@ -302,40 +316,13 @@ cd
 # Install flat-remix theme
 sudo apt install flat-remix-gnome
 
-# Install obs-studio
-sudo apt-get install -y obs-studio
-
 ## VirtualBox
 #echo "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian bionic contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 #sudo apt-get install -y virtualbox-6.1
 
-# Install Handbrake - Video Converter
-flatpak install -y flathub fr.handbrake.ghb
 
-#Permission
-chown -R $script_user:$script_user ~/GIT-REPOS
-chown -R $script_user:$script_user chown -R rtm:rtm ~/.SpaceVim*
-chown -R $script_user:$script_user chown -R rtm:rtm ~/.cache/vimfiles*
 
-#Utils
-#Isolate Alt-Tab workspaces
-gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
-## Skype 
-sudo flatpak install -y flathub com.skype.Client
-
-## Zoom
-sudo flatpak install -y flathub us.zoom.Zoom
-
-## Microsoft Teams
-sudo flatpak install -y flathub com.microsoft.Teams
-
-## Kdenlive
-flatpak install -y flathub org.kde.kdenlive
-
-#Games
-##GBA emulator
-sudo flatpak install flathub io.mgba.mGBA
 
 # RTM
 clear
