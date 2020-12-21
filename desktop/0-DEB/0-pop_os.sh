@@ -153,7 +153,7 @@ sudo add-apt-repository ppa:daniruiz/flat-remix
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 gnome-weather flatpak  chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte gnome-extensions-app alacritty fzf ffmpeg neofetch xclip flameshot unrar 
+sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 gnome-weather flatpak  chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte alacritty fzf ffmpeg neofetch xclip flameshot unrar 
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -208,7 +208,7 @@ sudo dpkg -i /tmp/visual_code_amd64.deb
 
 ## G910 color profile
 sudo dnf copr enable -y lkiesow/g810-led # Enable Copr repository
-sudo dnf install -y g810-led
+sudo apt install -y g810-led
 sudo g810-led -p /etc/g810-led/samples/colors
 #sudo g810-led -p /etc/g810-led/samples/group_keys
 ## Set color scheme on boot
@@ -325,86 +325,55 @@ sudo apt install flat-remix-gnome
 
 
 # RTM
+# RTM
 clear
-echo "*** AFTER INSTALL *** \n "
+echo "#################################"
+echo "#                         #"
+echo "#	    rtm.codes       	#"
+echo "# Please reboot your pc   #"
+echo "#                         #"
+echo "#################################"
 
-echo "*** MINT *** "
-echo "# Setup panel layout and behavior \n \
-* Preferred applications \n \
-* Cycle window \n \
-* Transparent panel \n \n "
+clear
+echo "*** AFTER INSTALL *** "
 
-echo "# Setup Theme  \n \
-* Windows borders: vimix \n \
-* Icons: Tela-dark \n \
-* Controls: Layan-dark \n \
-* Mouse Pointer: Breeze_Snow \n \
-* Desktop: vimix \n \
-* Menu Icon: Atom or start-here-symbolic \n \n"
-
-echo "*** MINT *** "
 echo ""
-echo "*** UBUNTU *** "
-echo "# Setup Theme  \n \
-* Applications: Qogir-light \n \
-* Cursor: Breeze_Snow \n \
-* Icons: Tela-circle-black \n \
-* Shell: Flat-Remix-Blue-Darkest-fullPanel / Layan / Vimix-laptop \n"
+echo "*** Fedora Gnome *** "
+echo "# Setup Theme
+* Applications: Flat-Remix-Blue-Dark 
+* Cursor: Breeze_Snow
+* Icons: Tela-circle-blue-dark
+* Shell: Flat-Remix-Blue-Darkest-fullPanel / Layan"
 
 echo ""
 
-echo "# Gnome extensions \n \
+echo "# Gnome extensions
 * Extensions Sync "
 
-echo "or"
-
-echo "# Gnome extensions \n \
-* Dash to dock \n \
-* Hide activities button \n \
-* Openweather \n \
-* Pixel Saver \n \
-* Sound input & output device chooser \n \
-* KStatusNotifierItem/AppIndicator Support \n \
-* User themes \n \
-* AlternateTab \n \
-* Vitals \n \
-* Windowoverlay icons \n \
-* Workspace indicator \n \
-* Workspace scroll \n \
-* Transparent Top Panel \n\
-* https://github.com/CorvetteCole/transparent-window-moving (128,20,010) \n \
-* Arc menu (Raven Layout)"
-
-echo "*** UBUNTU *** "
 echo ""
-echo "# Set startup applications \n \
-* Guake \n \
-* Albert \n \
-* Slack \n \
-* Telegram \n \
-* Skype \n"
+
+echo "Set startup applications
+* Guake"
 
 echo "*** FONTS *** "
 echo "*** Terminal *** "
 echo "FiraCode Nerd Font Medium 10"
 echo "*** FONTS *** "
 
-echo "*** Guake Terminal Color - Gogh *** "
-echo '
-1 - Select default Shell -> /usr/bin/zsh \n 
-2 - Run -> bash -c "$(curl -sLo- https://raw.githubusercontent.com/renantmagalhaes/workstation/master/ShellCollor/rtm-color-scheme.sh)" # RTM Color Scheme \n 
-3 - Select default Shell -> /usr/bin/tmux \n'
-echo "*** FONTS ***" 
+echo "*** Guake Terminal Color - Gogh / RTM VERSION *** "
 
+echo ""
 
 echo " ### Install the other tools in this repo! ###"
 echo "* ZSH"
 echo "* TMUX"
 echo "* DEV-TOOLS \n \n"
 
+echo ""
+
 echo "#################################"
 echo "#                               #"
-echo "#    www.renantmagalhaes.net    #"
+echo "#         rtm.codes             #"
 echo "#     Please reboot your pc     #"
 echo "#                               #"
 echo "#################################"
