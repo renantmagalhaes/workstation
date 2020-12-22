@@ -29,14 +29,7 @@
 #        - Initial release
 #
 #    V0.2 2017-12-03 RTM:
-#        - added more packages from debian repo
-#
-#    V0.2.1 2017-12-03 RTM:
-#        - Syntax adjustments
-#        - Add github address in header
-#        - Enable blowfish2 vim crypt method
-#
-#    V0.3 2017-12-11
+#        - added more packages from debian repo 
 #        - Added tmux plugin manager
 #
 #    V0.4 2017-12-29
@@ -73,10 +66,7 @@
 #        - Add gnome-terminal package
 #        - Add Gogh -Color Scheme for Gnome Terminal and Pantheon Terminal (https://github.com/Mayccoll/Gogh)
 #        - Changed Thunar > Caja
-#        - Changed OMF for Fisherman
-#
-#
-#    V0.8 2018-08-31
+#        - Changed OMF for Fisherman 
 #        - Change default vim install to spacevim
 #
 #    V0.9 2018-09-08
@@ -110,14 +100,7 @@
 #        - New theme
 #        - New icons
 #        - New packages
-#
-#    V1.0.3 2019-08-14
-#        - Create git folder
-#        - Change default path for theme repos
-
-#    V1.0.4 2019-10-01
-#        - Install obs studio
-#        - Install openshot(video editing)
+# 
 #        - Install krita(image editing)
 #
 #    V1.0.5 2019-12-22
@@ -162,11 +145,7 @@ sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-t
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-# Flathub Packages
-## Slack
-sudo flatpak install -y flathub com.slack.Slack
-
-## Skype 
+# Flathub Packages 
 sudo flatpak install -y flathub com.skype.Client
 
 ## Zoom
@@ -316,7 +295,7 @@ cd
 
 
 # Install flat-remix theme
-sudo apt install flat-remix-gnome flat-remix flat-remix-gtk 
+sudo apt install -y flat-remix-gnome flat-remix flat-remix-gtk 
 
 
 # RTM
