@@ -193,7 +193,7 @@ sudo apt install -y g810-led
 sudo g810-led -p /etc/g810-led/samples/colors
 #sudo g810-led -p /etc/g810-led/samples/group_keys
 ## Set color scheme on boot
-(crontab -l 2>/dev/null; echo "@reboot g810-led -p /etc/g810-led/samples/colors") | crontab -
+(crontab -l 2>/dev/null; echo "@reboot g810-led -p /usr/share/doc/g810-led/examples/sample_profiles/colors") | crontab -
 
 
 # Install Fonts
