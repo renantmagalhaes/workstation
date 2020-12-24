@@ -238,6 +238,8 @@ POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='green'
 #Aliases
 alias folder="nautilus"
 alias killtmux="pidof tmux |xargs kill -9"
+alias python="python3"
+
 
 #Custom plugins
 source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -255,6 +257,10 @@ source $ZSH/oh-my-zsh.sh
 source $ZSH/custom/plugins/enhancd/init.sh
 ENHANCD_FILTER=fzf
 export ENHANCD_FILTER
+
+# crontab editor
+export VISUAL=vim
+
 
 # Kubecontext
 #############[ kubecontext: current kubernetes context (https://kubernetes.io/) ]#############
