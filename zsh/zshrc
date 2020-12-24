@@ -232,37 +232,8 @@ POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='green'
 
 ######################### COLOR THEME ########################
 
-#characters backspace 
-#WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
-#Aliases
-alias folder="nautilus"
-alias killtmux="pidof tmux |xargs kill -9"
-alias python="python3"
-
-
-#Custom plugins
-source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-#Python virtualenv and Virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
-
-#source
-source $ZSH/oh-my-zsh.sh
-
-# enhancd
-source $ZSH/custom/plugins/enhancd/init.sh
-ENHANCD_FILTER=fzf
-export ENHANCD_FILTER
-
-# crontab editor
-export VISUAL=vim
-
-
-# Kubecontext
+######################### KubeContext ########################
 #############[ kubecontext: current kubernetes context (https://kubernetes.io/) ]#############
   # Show kubecontext only when the the command you are typing invokes one of these tools.
   # Tip: Remove the next line to always show kubecontext.
@@ -349,5 +320,42 @@ export VISUAL=vim
   POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${P9K_KUBECONTEXT_CLOUD_CLUSTER:-${P9K_KUBECONTEXT_NAME}}'
   # Append the current context's namespace if it's not "default".
   POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${${:-/$P9K_KUBECONTEXT_NAMESPACE}:#/default}'
+######################### KubeContext ########################
+
+######################### General Setup ########################
+
+
+
+#characters backspace 
+#WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
+#Aliases
+alias folder="nautilus"
+alias killtmux="pidof tmux |xargs kill -9"
+alias python="python3"
+
+
+#Custom plugins
+source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+#Python virtualenv and Virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
+
+#source
+source $ZSH/oh-my-zsh.sh
+
+# enhancd
+source $ZSH/custom/plugins/enhancd/init.sh
+ENHANCD_FILTER=fzf
+export ENHANCD_FILTER
+
+# crontab editor
+export VISUAL=vim
+
+######################### General Setup ########################
+
 
 
