@@ -121,8 +121,9 @@
 #
 #
 #    TODO
-#       * https://github.com/vinceliuice/grub2-themes
-#       * Interactive Menu
+#    * https://github.com/vinceliuice/grub2-themes
+#    * Install albert
+#    *
 # RTM
 
 #Root check
@@ -131,9 +132,6 @@ echo “Dont run this script as root” 2>&1
 exit 1
 fi
 
-# Add keys and ppas
-#wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-sudo add-apt-repository ppa:daniruiz/flat-remix
 
 # Update / upgrade
 sudo apt-get update && sudo apt-get -y upgrade
@@ -151,26 +149,18 @@ sudo flatpak install -y flathub com.skype.Client
 sudo flatpak install -y flathub us.zoom.Zoom
 
 ## Microsoft Teams
-sudo flatpak install -y flathub com.microsoft.Teams
-
-## Kdenlive
-sudo flatpak install -y flathub org.kde.kdenlive
-
-## OBS Studio
-sudo flatpak install -y flathub com.obsproject.Studio
+sudo flatpak install -y flathub com.microsoft.Fedoraject.Studio
 
 ## VLC
 sudo flatpak install -y flathub org.videolan.VLC
 
 # Install Handbrake - Video Converter
-flatpak install -y flathub fr.handbrake.ghbE
+flatpak install -y flathub fr.handbrake.ghb
 
 #Utils
 ## Fix snapd
 sudo ln -s /var/lib/snapd/snap /snap
 
-#Isolate Alt-Tab workspaces
-gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
@@ -183,21 +173,11 @@ sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
 sudo dpkg -i /tmp/visual_code_amd64.deb
 
-## G810 color profile
+## G910 color profile
 sudo apt install -y g810-led
 sudo g810-led -p /etc/g810-led/samples/colors
 #sudo g810-led -p /etc/g810-led/samples/group_keys
-## Set color scheme on boot
-(crontab -l 2>/dev/null; echo "@reboot g810-led -p /usr/share/doc/g810-led/examples/sample_profiles/colors") | crontab -
-
-
-# Install Fonts
-git clone https://github.com/powerline/fonts.git ~/GIT-REPOS/CORE/fonts/
-bash ~/GIT-REPOS/CORE/fonts/install.sh
-
-wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf -O ~/.local/share/fonts/PowerlineSymbols.otf
-
-mkdir -p ~/.config/fontconfig/conf.d/
+## Set color scheme on bootFedora
 wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf -O ~/.config/fontconfig/conf.d/10-powerline-symbols.conf
 
 git clone https://github.com/gabrielelana/awesome-terminal-fonts.git ~/GIT-REPOS/CORE/awesome-terminal-fonts
@@ -214,38 +194,30 @@ unzip ~/.local/share/fonts/Agave.zip -d ~/.local/share/fonts/
 
 fc-cache -vf ~/.local/share/fonts/
 
+# Kvantum
+sudo add-apt-repository ppa:papirus/papirus
+sudo apt-get update
+sudo apt install qt5-style-kvantum 
+
+
+# Themes and icons
+# Qogir theme
+git clone https://github.com/vinceliuice/Qogir-theme.git ~/GIT-REPOS/CORE/Qogir-theme
+cd ~/GIT-REPOS/CORE/Qogir-theme
+sh -c "./install.sh"
+cd
+
+git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
+cd ~/GIT-REPOS/CORE/Tela-circle-icon-theme
+sh -c "./install.sh -a"
+#sh -c "./install.sh"
+cd
+
+
 # New VIM
 sudo apt-get install -y build-essential
 curl -sLf https://spacevim.org/install.sh | bash
 echo "set ignorecase" >> ~/.vim/vimrc
-
-
-# Layan theme
-git clone https://github.com/vinceliuice/Layan-gtk-theme.git ~/GIT-REPOS/CORE/Layan-gtk-theme
-sh -c "~/GIT-REPOS/CORE/Layan-gtk-theme/install.sh"
-
-# Tela-circle-icon-theme
-git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
-sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh -a"
-# Nordic theme
-git clone https://github.com/EliverLara/Nordic.git ~/GIT-REPOS/CORE/Nordic
-sudo mv ~/GIT-REPOS/CORE/Nordic /usr/share/themes/
-
-# Qogir theme
-git clone https://github.com/vinceliuice/Qogir-theme.git ~/GIT-REPOS/CORE/Qogir-theme
-sh -c "~/GIT-REPOS/CORE/Qogir-theme/install.sh"
-
-# Orchis theme
-git clone https://github.com/vinceliuice/Orchis-theme.git ~/GIT-REPOS/CORE/Orchis-theme
-sh -c "~/GIT-REPOS/CORE/Orchis-theme/install.sh"
-
-# ChromeOS theme
-git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/ChromeOS-theme
-sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
-
-# Install flat-remix theme
-sudo apt install -y flat-remix-gnome flat-remix flat-remix-gtk 
-
 
 # RTM
 # RTM
@@ -260,18 +232,6 @@ echo "#################################"
 clear
 echo "*** AFTER INSTALL *** "
 
-echo ""
-echo "*** Gnome *** "
-echo "# Setup Theme
-* Applications: Flat-Remix-Blue-Dark 
-* Cursor: Breeze_Snow
-* Icons: Tela-circle-blue-dark
-* Shell: Flat-Remix-Blue-Darkest-fullPanel / Layan"
-
-echo ""
-
-echo "# Gnome extensions
-* Extensions Sync "
 
 echo ""
 
