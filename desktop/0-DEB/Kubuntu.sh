@@ -203,15 +203,15 @@ sudo apt install qt5-style-kvantum
 # Themes and icons
 # Qogir theme
 git clone https://github.com/vinceliuice/Qogir-theme.git ~/GIT-REPOS/CORE/Qogir-theme
-cd ~/GIT-REPOS/CORE/Qogir-theme
-sh -c "./install.sh"
-cd
+sh -c "~/GIT-REPOS/CORE/Qogir-theme/install.sh"
 
+# Tela-circle-icon-theme
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
-cd ~/GIT-REPOS/CORE/Tela-circle-icon-theme
-sh -c "./install.sh -a"
-#sh -c "./install.sh"
-cd
+sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh -a"
+
+# Layan
+git clone https://github.com/vinceliuice/Layan-kde.git ~/GIT-REPOS/CORE/Layan-kde
+sh -c "~/GIT-REPOS/CORE/Layan-kde/install.sh"
 
 
 # New VIM
