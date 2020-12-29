@@ -51,7 +51,7 @@
 #   - Check if is the system is a Fedora Workstation installation 
 #   - Vivaldi installation
 #   - Install Aws K8S toolkit (cli and auth)
-#   - ZSH function to not show context-not-set with k8s installed
+#   //ZSH function to not show context-not-set with k8s installed
 #   - Test automated deploy
 #   - Link with Tmux / ZSH / Software / Shell Color folders
 #RTM

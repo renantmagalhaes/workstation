@@ -115,14 +115,22 @@
 #        - Tweaks in themes
 #
 #    V1.1.2 2020-12-21
+#        - Synced with Fedora installation
 #        - Using Pop!_OS 20.04 for now
 #        - Minor tweaks to make up to date to fedora script
+#
+#    V1.1.3 2020-12-29
+#        - Python path fix
+#        - VsCode architecture fix
 #
 #
 #
 #    TODO
-#       * https://github.com/vinceliuice/grub2-themes
-#       * Interactive Menu
+#   - Check if is the system is a Pop!_OS installation 
+#   - Vivaldi installation
+#   - Install Aws K8S toolkit (cli and auth)
+#   - Test automated deploy
+#   - Link with Tmux / ZSH / Software / Shell Color folders
 # RTM
 
 #Root check
@@ -168,6 +176,9 @@ flatpak install -y flathub fr.handbrake.ghbE
 #Utils
 ## Fix snapd
 sudo ln -s /var/lib/snapd/snap /snap
+
+## Fix python default path
+sudo ln -s /usr/bin/python3 /usr/bin/python
 
 #Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true

@@ -25,105 +25,11 @@
 #
 #  Changelog
 #
-#    V0.1 2017-12-02 RTM:
+#    V0.1 2020-12-29 RTM:
 #        - Initial release
-#
-#    V0.2 2017-12-03 RTM:
-#        - added more packages from debian repo 
-#        - Added tmux plugin manager
-#
-#    V0.4 2017-12-29
-#        - Rework Oh my fish! installation
-#        - Auto install bobthefish
-#
-#    V0.5 2018-05-09
-#        - Working on my own VIM config
-#        - Removed Sublimetext editor -> Using Visual Code
-#        - Change default browser -> Firefox to Google Chrome
-#        - Changed default file manager -> Caja to Thunar
-#        - Updated GTK theme version
-#        - Added Visual Code Studio
-#        - Added xfce plugins
-#        - Added Draw.IO
-#
-#    V0.6 2018-05-28
-#        - Added Gnome3 plugins
-#        - Removed Draw.IO (use web version)
-#        - Minor improvements
-#
-#    V0.7 2018-06-08
-#        - Minor improvements
-#        - Added VirtualBox
-#
-#    V0.7 2018-06-16
-#        - Minor improvements
-#        - Fix virtualbox install
-#        - Fix var in oh-my-fish install
-#
-#    V0.7 2018-07-26
-#        - Minor improvements
-#        - Remove some gnome3 packages
-#        - Add gnome-terminal package
-#        - Add Gogh -Color Scheme for Gnome Terminal and Pantheon Terminal (https://github.com/Mayccoll/Gogh)
-#        - Changed Thunar > Caja
-#        - Changed OMF for Fisherman 
-#        - Change default vim install to spacevim
-#
-#    V0.9 2018-09-08
-#        - Add numix-circle icons
-#        - Add snap package manager
-#        - Add mailspring email client(snap)
-#        - Add Slack (snap)
-#        - Add Telegram-desktop (snap)
-#
-#    V0.9.1 2018-09-08
-#        - Minor spell check adjustment
-#        - Change site to .net domain
-#        - Change description
-#
-#    V1.0 2018-09-29
-#        - All major "TODO" fix
-#        - Change docky for plank
-#        - Add themes for plank
-#
-#    V1.0.1 2018-10-01
-#        - Plank autostart
-#
-#    V1.0.2 2019-02-28
-#        - Vimix Theme
-#        - New icons
-#        - New fonts
-#        - New Cursor
-#
-#    V1.0.2 2019-08-14
-#        - Using Cinnamon now
-#        - New theme
-#        - New icons
-#        - New packages
-# 
-#        - Install krita(image editing)
-#
-#    V1.0.5 2019-12-22
-#        - Major fixes and rework
-#
-#    V1.1.0 2019-12-23
-#        - Fully automated again
-#
-#    V1.1.1 2020-05-08
-#        - Using Ubuntu 20.04 for now
-#        - Minor fixes
-#        - Tweaks in themes
-#
-#    V1.1.2 2020-12-21
-#        - Using Pop!_OS 20.04 for now
-#        - Minor tweaks to make up to date to fedora script
-#
 #
 #
 #    TODO
-#    * https://github.com/vinceliuice/grub2-themes
-#    * Install albert
-#    *
 # RTM
 
 #Root check
