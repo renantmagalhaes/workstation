@@ -182,6 +182,7 @@ sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
 ## Install Visual Code
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
 sudo dpkg -i /tmp/visual_code_amd64.deb
+sudo sed -i 's/\,arm64\,armhf//g' /etc/apt/sources.list.d/vscode.list
 
 ## G810 color profile
 sudo apt install -y g810-led
