@@ -1,3 +1,6 @@
+# TODO - Check if Deb or RPM distribution
+
+
 # Default folder
 mkdir -p ~/Apps
 
