@@ -123,11 +123,12 @@
 #        - Python path fix
 #        - VsCode architecture fix
 #
-#
+#    V1.1.4 2021-01-02
+#        - Vivaldi installation
+#      
 #
 #    TODO
 #   - Check if is the system is a Pop!_OS installation 
-#   - Vivaldi installation
 #   - Install Aws K8S toolkit (cli and auth)
 #   - Test automated deploy
 #   - Link with Tmux / ZSH / Software / Shell Color folders
@@ -140,8 +141,13 @@ exit 1
 fi
 
 # Add keys and ppas
+## VirtualBox
 #wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+## Flat-Remix Theme
 sudo add-apt-repository ppa:daniruiz/flat-remix
+## Vivaldi Browser
+wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo apt-key add -
+sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
 
 # Update / upgrade
 sudo apt-get update && sudo apt-get -y upgrade
@@ -180,6 +186,7 @@ sudo ln -s /var/lib/snapd/snap /snap
 ## Fix python default path
 sudo ln -s /usr/bin/python3 /usr/bin/python
 sudo ln -s /usr/bin/pip3 /usr/bin/pip
+
 ## Teamviewer
 wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp/teamviewer_amd64.deb
 sudo dpkg -i /tmp/teamviewer_amd64.deb
@@ -197,6 +204,9 @@ mkdir -p ~/GIT-REPOS/CORE
 # Install Google Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
 sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
+
+# Install Vivaldi Browser
+sudo apt install -y vivaldi-stable
 
 ## Install Visual Code
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
