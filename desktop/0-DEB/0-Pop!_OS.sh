@@ -125,6 +125,7 @@
 #
 #    V1.1.4 2021-01-02
 #        - Vivaldi installation
+#        - Guake Settings
 #      
 #
 #    TODO
@@ -191,6 +192,9 @@ sudo ln -s /usr/bin/pip3 /usr/bin/pip
 wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp/teamviewer_amd64.deb
 sudo dpkg -i /tmp/teamviewer_amd64.deb
 sudo apt install -f -y
+
+## Guake Configs
+guake --restore-preferences ../../guake/rtm-guake-settings 
 
 # Install pip packages
 sudo pip3 install virtualenv virtualenvwrapper
