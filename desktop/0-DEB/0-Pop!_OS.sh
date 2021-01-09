@@ -133,6 +133,7 @@
 #   - Install Aws K8S toolkit (cli and auth)
 #   - Test automated deploy
 #   - Link with Tmux / ZSH / Software / Shell Color folders
+#   - System stats inside ZSH (remove Vitals from gnome-extensions)
 # RTM
 
 #Root check
@@ -278,8 +279,16 @@ sh -c "~/GIT-REPOS/CORE/Orchis-theme/install.sh"
 git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/ChromeOS-theme
 sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
 
+# WhiteSur-gtk-theme
+sudo apt install -y gtk2-engines-murrine gtk2-engines-pixbuf sassc optipng inkscape libcanberra-gtk-module libglib2.0-dev libxml2-utils libnotify-bin
+git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/GIT-REPOS/CORE/WhiteSur-gtk-theme
+sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/install.sh -g
+sh -c "~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/other/dash-to-dock/install.sh -d"
+
+
 # Install flat-remix theme
 sudo apt install -y flat-remix-gnome flat-remix flat-remix-gtk 
+
 
 
 # RTM
