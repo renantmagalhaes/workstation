@@ -61,8 +61,6 @@ KUBE_PS1_DIVIDER=""
 KUBE_PS1_SYMBOL_USE_IMG="\u2638"
 
 # Display
-
-
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=1
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=2
 #
@@ -94,7 +92,7 @@ POWERLEVEL9K_CUSTOM_SYMBOL="custom_symbol"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator virtualenv dir dir_writable_joined custom_git_pair vcs_joined)
 #POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='%F{008}\uf460%F{008}'
 
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time go_version nvm kubecontext)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time go_version nvm load ram disk_usage background_jobs kubecontext)
 #POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
 #POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%F{008}\uf104%F{008}'
 POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='\uE0B1'
@@ -143,7 +141,45 @@ POWERLEVEL9K_CUSTOM_COMMAND_FOREGROUND='231'
 POWERLEVEL9K_CUSTOM_SYMBOL_BACKGROUND='clear'
 POWERLEVEL9K_CUSTOM_SYMBOL_FOREGROUND='blue'
 
-#
+##################################[ load: load usage ]################################## 
+# Show average CPU load over this many last minutes. Valid values are 1, 5 and 15.
+  typeset -g POWERLEVEL9K_LOAD_WHICH=5
+  # Load color when load is under 50%.
+  # typeset -g POWERLEVEL9K_LOAD_NORMAL_FOREGROUND=0
+  # typeset -g POWERLEVEL9K_LOAD_NORMAL_BACKGROUND=2
+  # Load color when load is between 50% and 70%.
+  # typeset -g POWERLEVEL9K_LOAD_WARNING_FOREGROUND=0
+  # typeset -g POWERLEVEL9K_LOAD_WARNING_BACKGROUND=3
+  # Load color when load is over 70%.
+  # typeset -g POWERLEVEL9K_LOAD_CRITICAL_FOREGROUND=0
+  # typeset -g POWERLEVEL9K_LOAD_CRITICAL_BACKGROUND=1
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_LOAD_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+##################################[ ram: ram usage ]################################## 
+
+  # RAM color.
+   typeset -g POWERLEVEL9K_RAM_FOREGROUND=0
+   typeset -g POWERLEVEL9K_RAM_BACKGROUND=3
+  # Custom icon.
+  #typeset -g POWERLEVEL9K_RAM_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+##################################[ disk_usage: disk usage ]##################################
+  # Colors for different levels of disk usage.
+  # typeset -g POWERLEVEL9K_DISK_USAGE_NORMAL_FOREGROUND=3
+  # typeset -g POWERLEVEL9K_DISK_USAGE_NORMAL_BACKGROUND=0
+  # typeset -g POWERLEVEL9K_DISK_USAGE_WARNING_FOREGROUND=0
+  # typeset -g POWERLEVEL9K_DISK_USAGE_WARNING_BACKGROUND=3
+  # typeset -g POWERLEVEL9K_DISK_USAGE_CRITICAL_FOREGROUND=7
+  # typeset -g POWERLEVEL9K_DISK_USAGE_CRITICAL_BACKGROUND=1
+  # Thresholds for different levels of disk usage (percentage points).
+  typeset -g POWERLEVEL9K_DISK_USAGE_WARNING_LEVEL=90
+  typeset -g POWERLEVEL9K_DISK_USAGE_CRITICAL_LEVEL=95
+  # If set to true, hide disk usage when below $POWERLEVEL9K_DISK_USAGE_WARNING_LEVEL percent.
+  typeset -g POWERLEVEL9K_DISK_USAGE_ONLY_WARNING=false
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_DISK_USAGE_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
 function sp {
   git branch > /dev/null 2>&1 || return 1
   git config user.initials
@@ -323,17 +359,8 @@ POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='green'
 ######################### KubeContext ########################
 
 ######################### General Setup ########################
-
-
-
 #characters backspace 
 #WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
-
-#Aliases
-alias folder="nautilus"
-alias killtmux="pidof tmux |xargs kill -9"
-alias python="python3"
-
 
 #Custom plugins
 source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -354,6 +381,70 @@ export ENHANCD_FILTER
 
 # crontab editor
 export VISUAL=vim
+
+#Aliases
+alias folder="nautilus"
+alias killtmux="pidof tmux |xargs kill -9"
+alias python="python3"
+
+alias cp='cp -iv'
+alias rm='rm -ir'
+alias mv='mv -iv'
+alias ln='ln -sriv'
+alias xclip='xclip -selection c'
+command -v vim > /dev/null && alias vi='vim'
+
+### Colorize commands
+#alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias diff='diff --color=auto'
+alias ip='ip --color=auto'
+
+### LS & TREE
+alias ll='ls -la'
+alias la='ls -A'
+alias l='ls -F'
+
+
+command -v lsd > /dev/null && alias ls='lsd --group-dirs first' && \
+	alias tree='lsd --tree'
+#command -v colorls > /dev/null && alias ls='colorls --sd --gs' && \
+#	alias tree='colorls --tree'
+
+### CAT & LESS
+#command -v batcat > /dev/null && \
+#	alias batcat='batcat --theme=ansi-$([ "$COLOR_SCHEME" = "light" ] && echo "light" || echo "dark")' && \
+#	alias cat='batcat --pager=never' && \
+#	alias less='batcat'
+
+# colorize ls
+[ -x /usr/bin/dircolors ] && eval "$(dircolors -b)"
+
+### TOP
+command -v htop > /dev/null && alias top='htop'
+command -v bpytop > /dev/null && alias top='bpytop'
+
+# Completion.
+autoload -Uz compinit
+compinit
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
+zstyle ':completion:*' rehash true                              # automatically find new executables in path 
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' menu select=2
+zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+zstyle ':completion:*:descriptions' format '%U%F{cyan}%d%f%u'
+
+
+# Speed up completions
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.cache/zcache
+
+# automatically load bash completion functions
+autoload -U +X bashcompinit && bashcompinit
 
 ######################### General Setup ########################
 

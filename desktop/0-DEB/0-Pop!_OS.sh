@@ -126,14 +126,21 @@
 #    V1.1.4 2021-01-02
 #        - Vivaldi installation
 #        - Guake Settings
-#      
+#
+#    V1.1.5 2021-01-10
+#        - Guake Settings updated / Guake autostart
+#        - Big ZSH changes (lsd and configs)
+#        - New utilities packages installed.
+#        - Colorls
 #
 #    TODO
 #   - Check if is the system is a Pop!_OS installation 
 #   - Install Aws K8S toolkit (cli and auth)
 #   - Test automated deploy
 #   - Link with Tmux / ZSH / Software / Shell Color folders
-#   - System stats inside ZSH (remove Vitals from gnome-extensions)
+#//   - System stats inside ZSH (remove Vitals from gnome-extensions)
+#   - Send system stats to tmux panel
+#   - Test exa(https://github.com/ogham/exa) over lsd, when available on stable repo
 # RTM
 
 #Root check
@@ -155,7 +162,7 @@ sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 gnome-weather flatpak chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte alacritty fzf ffmpeg neofetch xclip flameshot unrar python3-pip
+sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 gnome-weather flatpak chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte alacritty fzf ffmpeg neofetch xclip flameshot unrar python3-pip batcat
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -182,6 +189,11 @@ sudo flatpak install -y flathub org.videolan.VLC
 sudo flatpak install -y flathub fr.handbrake.ghbE
 
 #Utils
+
+## LSD
+wget https://github.com/Peltoche/lsd/releases/download/0.19.0/lsd_0.19.0_amd64.deb -O /tmp/lsd_amd64.deb
+sudo dpkg -i /tmp/lsd_amd64.deb
+
 ## Fix snapd
 sudo ln -s /var/lib/snapd/snap /snap
 
@@ -297,6 +309,9 @@ git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/GIT-REPOS/CORE
 sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/install.sh -g
 sh -c "~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/other/dash-to-dock/install.sh -d"
 
+# Colorls
+sudo apt install ruby-dev
+sudo gem install colorls
 
 # Install flat-remix theme
 sudo apt install -y flat-remix-gnome flat-remix flat-remix-gtk 
