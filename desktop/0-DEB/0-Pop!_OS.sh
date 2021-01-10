@@ -196,6 +196,18 @@ sudo apt install -f -y
 
 ## Guake Configs
 guake --restore-preferences ../../guake/rtm-guake-settings 
+cat <<EOF >> ~/.config/autostart/guake.desktop
+[Desktop Entry]
+Name=Guake Terminal
+Comment=Use the command line in a Quake-like terminal
+TryExec=guake
+Exec=guake
+Icon=guake
+Type=Application
+Categories=GNOME;GTK;System;Utility;TerminalEmulator;
+StartupNotify=true
+X-Desktop-File-Install-Version=0.22
+EOF
 
 # Install pip packages
 sudo pip3 install virtualenv virtualenvwrapper
