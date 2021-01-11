@@ -189,17 +189,9 @@ tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see
 #     - #{username}
 #     - #{username_ssh}
 
-#default
-#tmux_conf_theme_status_left=' ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} '
-#tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} '
-
 # Custom
 tmux_conf_theme_status_left=' , #{circled_session_name} ,'
-tmux_conf_theme_status_right='#{prefix_highlight} #{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , VPN:#{nordvpn_status_color}#{nordvpn_status}(#{nordvpn_country}) , Online:#{online_status} , #{network_bandwidth} , ⌬ %Y-%m-%d #{weather} | #{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,}| #{username}#{root}@#{hostname} '
-
-# Custom with sys info (missing HD information df -h |grep -w / |awk '{ print $5 }')
-#tmux_conf_theme_status_left=' , #{circled_session_name} ,'
-#tmux_conf_theme_status_right='#{prefix_highlight} #{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , VPN:#{nordvpn_status_color}#{nordvpn_status}(#{nordvpn_country}) , Online:#{online_status} , #{load_short}   , #{sysstat_mem}   , ⌬ %Y-%m-%d | #{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} | #{username}#{root}@#{hostname} '
+tmux_conf_theme_status_right='#{prefix_highlight} #{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , VPN:#{nordvpn_status_color}#{nordvpn_status}(#{nordvpn_country}) , Online:#{online_status} , #{network_bandwidth} , ⌬ %Y-%m-%d #{weather} , #{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} | #{username}#{root} | #{hostname}  '
 
 # status left style
 tmux_conf_theme_status_left_fg='#000000,#e4e4e4,#e4e4e4'  # black, white , white
