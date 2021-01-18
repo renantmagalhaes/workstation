@@ -7,8 +7,12 @@ type curl >/dev/null 2>&1 || { echo >&2 "Install zsh before run this script "; e
 #install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-#syslink 
+#zsh config 
 ln -s -f $PWD/zshrc ~/.zshrc
+
+#lsd config
+mkdir -p  ~/.config/lsd/
+ln -s -f $PWD/lsd-config.yaml ~/.config/lsd/config.yaml
 
 #install plugins
 ##zsh-syntax-highlighting.zsh
