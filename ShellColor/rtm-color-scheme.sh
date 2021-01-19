@@ -20,7 +20,7 @@ export COLOR_14="#D71655"           # Light Magenta
 export COLOR_15="#05A1F7"           # Light Cyan
 export COLOR_16="#FFFFFF"           # White
 
-export BACKGROUND_COLOR="#0C0C0C"   # Background Color
+export BACKGROUND_COLOR="#23242D"   # Background Color
 export FOREGROUND_COLOR="#FFFFFF"   # Foreground Color (text)
 export CURSOR_COLOR="$FOREGROUND_COLOR" # Cursor color
 export PROFILE_NAME="RTM"
