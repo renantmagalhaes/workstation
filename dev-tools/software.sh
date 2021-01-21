@@ -36,12 +36,12 @@ sudo flatpak install -y flathub net.sourceforge.jpdftweak.jPdfTweak
 sudo snap install kontena-lens --classic
 
 #Yarn and NodeJs
-## Fedora
-sudo dnf install -y curl gnupg2 gcc-c++ make
-sudo curl -sL https://rpm.nodesource.com/setup_12.x | sudo bash -
-sudo curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
-sudo dnf update -y
-sudo dnf install -y yarn nodejs
+### Fedora
+#sudo dnf install -y curl gnupg2 gcc-c++ make
+#sudo curl -sL https://rpm.nodesource.com/setup_12.x | sudo bash -
+#sudo curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
+#sudo dnf update -y
+#sudo dnf install -y yarn nodejs
 
 ## DEB based
 sudo apt install -y curl gnupg2 gcc-c++ make
@@ -53,20 +53,20 @@ sudo apt install -y yarn nodejs
 
 # Docker
 
-## Fedora
-###Install Docker Repo Version - Fedora 33 (Maybe not needed anymore after cgroups update)
-sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
-sudo firewall-cmd --permanent --zone=trusted --add-interface=docker0
-sudo firewall-cmd --permanent --zone=FedoraWorkstation --add-masquerade
-sudo firewall-cmd --reload
-sudo dnf install -y moby-engine docker-compose
-sudo systemctl enable docker
-sudo groupadd docker
-sudo usermod -aG docker $USER
-sudo systemctl restart docker
-
+### Fedora
+####Install Docker Repo Version - Fedora 33 (Maybe not needed anymore after cgroups update)
+#sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
+#sudo firewall-cmd --permanent --zone=trusted --add-interface=docker0
+#sudo firewall-cmd --permanent --zone=FedoraWorkstation --add-masquerade
+#sudo firewall-cmd --reload
+#sudo dnf install -y moby-engine docker-compose
+#sudo systemctl enable docker
+#sudo groupadd docker
+#sudo usermod -aG docker $USER
+#sudo systemctl restart docker
+#
 ## DEB Based 20.04
-sudo apt install apt-transport-https ca-certificates curl software-properties-common
+sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
 apt-cache policy docker-ce
