@@ -38,12 +38,18 @@ echo “Dont run this script as root” 2>&1
 exit 1
 fi
 
+# Add keys and ppas
+## VirtualBox
+#wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+## Vivaldi Browser
+wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo apt-key add -
+sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
 
 # Update / upgrade
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install latte-dock zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 gnome-weather flatpak  chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte alacritty fzf ffmpeg neofetch xclip flameshot unrar 
+sudo apt-get -y install latte-dock plank zsh clementine breeze-cursor-theme vim vim-gtk vim-gui-common nmap vlc blender fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 x2goclient git idle3 fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn snapd guake guake-indicator krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload virtualbox flatpak pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -55,18 +61,40 @@ sudo flatpak install -y flathub com.skype.Client
 sudo flatpak install -y flathub us.zoom.Zoom
 
 ## Microsoft Teams
-sudo flatpak install -y flathub com.microsoft.Fedoraject.Studio
+sudo flatpak install -y flathub com.microsoft.Teams
+
+## Kdenlive
+sudo flatpak install -y flathub org.kde.kdenlive
+
+## OBS Studio
+sudo flatpak install -y flathub com.obsproject.Studio
 
 ## VLC
 sudo flatpak install -y flathub org.videolan.VLC
 
 # Install Handbrake - Video Converter
-flatpak install -y flathub fr.handbrake.ghb
+sudo flatpak install -y flathub fr.handbrake.ghbE
 
 #Utils
+## LSD
+wget https://github.com/Peltoche/lsd/releases/download/0.19.0/lsd_0.19.0_amd64.deb -O /tmp/lsd_amd64.deb
+sudo dpkg -i /tmp/lsd_amd64.deb
+
 ## Fix snapd
 sudo ln -s /var/lib/snapd/snap /snap
 
+## Fix python default path
+sudo ln -s /usr/bin/python3 /usr/bin/python
+sudo ln -s /usr/bin/pip3 /usr/bin/pip
+
+## Teamviewer
+wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp/teamviewer_amd64.deb
+sudo dpkg -i /tmp/teamviewer_amd64.deb
+sudo apt install -f -y
+
+# Install pip packages
+sudo pip3 install virtualenv virtualenvwrapper
+sudo pip3 install bpytop --upgrade
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
@@ -75,15 +103,28 @@ mkdir -p ~/GIT-REPOS/CORE
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
 sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
 
+# Install Vivaldi Browser
+sudo apt install -y vivaldi-stable
+
 ## Install Visual Code
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
 sudo dpkg -i /tmp/visual_code_amd64.deb
+sudo sed -i 's/\,arm64\,armhf//g' /etc/apt/sources.list.d/vscode.list
 
-## G910 color profile
+## G810 color profile
 sudo apt install -y g810-led
 sudo g810-led -p /etc/g810-led/samples/colors
 #sudo g810-led -p /etc/g810-led/samples/group_keys
-## Set color scheme on bootFedora
+## Set color scheme on boot
+(crontab -l 2>/dev/null; echo "@reboot g810-led -p /usr/share/doc/g810-led/examples/sample_profiles/colors") | crontab -
+
+# Install Fonts
+git clone https://github.com/powerline/fonts.git ~/GIT-REPOS/CORE/fonts/
+bash ~/GIT-REPOS/CORE/fonts/install.sh
+
+wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf -O ~/.local/share/fonts/PowerlineSymbols.otf
+
+mkdir -p ~/.config/fontconfig/conf.d/
 wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf -O ~/.config/fontconfig/conf.d/10-powerline-symbols.conf
 
 git clone https://github.com/gabrielelana/awesome-terminal-fonts.git ~/GIT-REPOS/CORE/awesome-terminal-fonts
@@ -105,6 +146,10 @@ sudo add-apt-repository ppa:papirus/papirus
 sudo apt-get update
 sudo apt install qt5-style-kvantum 
 
+# New VIM
+sudo apt-get install -y build-essential
+curl -sLf https://spacevim.org/install.sh | bash
+echo "set ignorecase" >> ~/.vim/vimrc
 
 # Themes and icons
 # Qogir theme
@@ -119,17 +164,15 @@ sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh -a"
 git clone https://github.com/vinceliuice/Layan-kde.git ~/GIT-REPOS/CORE/Layan-kde
 sh -c "~/GIT-REPOS/CORE/Layan-kde/install.sh"
 
+# Colorls
+sudo apt install -y ruby-dev
+sudo gem install colorls
 
 #Widgets 
 git clone https://github.com/wsdfhjxc/virtual-desktop-bar.git ~/GIT-REPOS/CORE/virtual-desktop-bar
 sh -c "~~/GIT-REPOS/CORE/virtual-desktop-bar/scripts/install-dependencies-ubuntu.sh"
 sh -c "~~/GIT-REPOS/CORE/virtual-desktop-bar/scripts/install-applet.sh"
 
-
-# New VIM
-sudo apt-get install -y build-essential
-curl -sLf https://spacevim.org/install.sh | bash
-echo "set ignorecase" >> ~/.vim/vimrc
 
 # RTM
 # RTM
