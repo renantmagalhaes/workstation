@@ -92,6 +92,23 @@ wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp
 sudo dpkg -i /tmp/teamviewer_amd64.deb
 sudo apt install -f -y
 
+## Guake Configs
+mkdir -p ~/.config/autostart/
+guake --restore-preferences ../../guake/rtm-guake-settings 
+cat <<EOF >> ~/.config/autostart/guake.desktop
+[Desktop Entry]
+Name=Guake Terminal
+Comment=Use the command line in a Quake-like terminal
+TryExec=guake
+Exec=guake
+Icon=guake
+Type=Application
+Categories=GNOME;GTK;System;Utility;TerminalEmulator;
+StartupNotify=true
+X-Desktop-File-Install-Version=0.22
+EOF
+
+
 # Install pip packages
 sudo pip3 install virtualenv virtualenvwrapper
 sudo pip3 install bpytop --upgrade
@@ -144,25 +161,39 @@ fc-cache -vf ~/.local/share/fonts/
 # Kvantum
 sudo add-apt-repository ppa:papirus/papirus
 sudo apt-get update
-sudo apt install qt5-style-kvantum 
+sudo apt install -y qt5-style-kvantum 
 
 # New VIM
 sudo apt-get install -y build-essential
 curl -sLf https://spacevim.org/install.sh | bash
 echo "set ignorecase" >> ~/.vim/vimrc
 
-# Themes and icons
-# Qogir theme
-git clone https://github.com/vinceliuice/Qogir-theme.git ~/GIT-REPOS/CORE/Qogir-theme
-sh -c "~/GIT-REPOS/CORE/Qogir-theme/install.sh"
-
-# Tela-circle-icon-theme
-git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
-sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh -a"
+# Themes
+# Qogir
+git clone https://github.com/vinceliuice/Qogir-kde.git ~/GIT-REPOS/CORE/Qogir-kde
+sh -c "~/GIT-REPOS/CORE/Qogir-kde/install.sh"
 
 # Layan
 git clone https://github.com/vinceliuice/Layan-kde.git ~/GIT-REPOS/CORE/Layan-kde
 sh -c "~/GIT-REPOS/CORE/Layan-kde/install.sh"
+
+# Orchis
+git clone https://github.com/vinceliuice/Orchis-kde.git ~/GIT-REPOS/CORE/Orchis-kde
+sh -c "~/GIT-REPOS/CORE/Orchis-kde/install.sh"
+
+# ChromeOS
+git clone https://github.com/vinceliuice/ChromeOS-kde.git ~/GIT-REPOS/CORE/ChromeOS-kde
+sh -c "~/GIT-REPOS/CORE/ChromeOS-kde/install.sh"
+
+# WhiteSur
+git clone https://github.com/vinceliuice/WhiteSur-kde.git ~/GIT-REPOS/CORE/WhiteSur-kde
+sh -c "~/GIT-REPOS/CORE/WhiteSur-kde/install.sh"
+
+
+# Icons
+# Tela-circle-icon-theme
+git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
+sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh -a"
 
 # Colorls
 sudo apt install -y ruby-dev
