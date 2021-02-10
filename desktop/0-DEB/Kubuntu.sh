@@ -49,7 +49,7 @@ sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install latte-dock plank zsh clementine breeze-cursor-theme vim vim-gtk vim-gui-common nmap vlc blender fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 x2goclient git idle3 fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn snapd guake guake-indicator krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload virtualbox flatpak pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors
+sudo apt-get -y install latte-dock plank zsh clementine breeze-cursor-theme vim vim-gtk vim-gui-common nmap vlc blender fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 x2goclient git idle3 fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn snapd guake guake-indicator krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload virtualbox flatpak pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors obs-studio kdenlive
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -60,20 +60,16 @@ sudo flatpak install -y flathub com.skype.Client
 ## Zoom
 sudo flatpak install -y flathub us.zoom.Zoom
 
-## Microsoft Teams
-sudo flatpak install -y flathub com.microsoft.Teams
-
-## Kdenlive
-sudo flatpak install -y flathub org.kde.kdenlive
-
-## OBS Studio
-sudo flatpak install -y flathub com.obsproject.Studio
-
-## VLC
-sudo flatpak install -y flathub org.videolan.VLC
-
 # Install Handbrake - Video Converter
 sudo flatpak install -y flathub fr.handbrake.ghbE
+
+# Slack
+wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.12.2-amd64.deb -O /tmp/slack-desktop.deb
+sudo dpkg -i /tmp/slack-desktop.deb
+
+# Microsoft teams
+wget https://go.microsoft.com/fwlink/p/?LinkID=2112886&clcid=0x409&culture=en-us&country=US -O /tmp/microsoft-teams.deb
+sudo dpkg -i /tmp/microsoft-teams.deb
 
 #Utils
 ## LSD
@@ -201,8 +197,8 @@ sudo gem install colorls
 
 #Widgets 
 git clone https://github.com/wsdfhjxc/virtual-desktop-bar.git ~/GIT-REPOS/CORE/virtual-desktop-bar
-sh -c "~~/GIT-REPOS/CORE/virtual-desktop-bar/scripts/install-dependencies-ubuntu.sh"
-sh -c "~~/GIT-REPOS/CORE/virtual-desktop-bar/scripts/install-applet.sh"
+sh -c "~/GIT-REPOS/CORE/virtual-desktop-bar/scripts/install-dependencies-ubuntu.sh"
+sh -c "~/GIT-REPOS/CORE/virtual-desktop-bar/scripts/install-applet.sh"
 
 
 # RTM

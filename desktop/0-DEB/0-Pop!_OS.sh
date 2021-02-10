@@ -162,7 +162,7 @@ sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 gnome-weather flatpak chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte alacritty fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors
+sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 gnome-weather flatpak chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte alacritty fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors obs-studio kdenlive
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -173,23 +173,18 @@ sudo flatpak install -y flathub com.skype.Client
 ## Zoom
 sudo flatpak install -y flathub us.zoom.Zoom
 
-## Microsoft Teams
-sudo flatpak install -y flathub com.microsoft.Teams
-
-## Kdenlive
-sudo flatpak install -y flathub org.kde.kdenlive
-
-## OBS Studio
-sudo flatpak install -y flathub com.obsproject.Studio
-
-## VLC
-sudo flatpak install -y flathub org.videolan.VLC
-
 # Install Handbrake - Video Converter
 sudo flatpak install -y flathub fr.handbrake.ghbE
 
-#Utils
+# Slack
+wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.12.2-amd64.deb -O /tmp/slack-desktop.deb
+sudo dpkg -i /tmp/slack-desktop.deb
 
+# Microsoft teams
+wget https://go.microsoft.com/fwlink/p/?LinkID=2112886&clcid=0x409&culture=en-us&country=US -O /tmp/microsoft-teams.deb
+sudo dpkg -i /tmp/microsoft-teams.deb
+
+#Utils
 ## LSD
 wget https://github.com/Peltoche/lsd/releases/download/0.19.0/lsd_0.19.0_amd64.deb -O /tmp/lsd_amd64.deb
 sudo dpkg -i /tmp/lsd_amd64.deb
@@ -204,7 +199,6 @@ sudo ln -s /usr/bin/pip3 /usr/bin/pip
 ## Teamviewer
 wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp/teamviewer_amd64.deb
 sudo dpkg -i /tmp/teamviewer_amd64.deb
-sudo apt install -f -y
 
 ## Guake Configs
 mkdir -p ~/.config/autostart/
@@ -280,7 +274,6 @@ sudo apt-get install -y build-essential
 curl -sLf https://spacevim.org/install.sh | bash
 echo "set ignorecase" >> ~/.vim/vimrc
 
-
 # Layan theme
 git clone https://github.com/vinceliuice/Layan-gtk-theme.git ~/GIT-REPOS/CORE/Layan-gtk-theme
 sh -c "~/GIT-REPOS/CORE/Layan-gtk-theme/install.sh"
@@ -288,6 +281,7 @@ sh -c "~/GIT-REPOS/CORE/Layan-gtk-theme/install.sh"
 # Tela-circle-icon-theme
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
 sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh -a"
+
 # Nordic theme
 git clone https://github.com/EliverLara/Nordic.git ~/GIT-REPOS/CORE/Nordic
 sudo mv ~/GIT-REPOS/CORE/Nordic /usr/share/themes/
@@ -317,7 +311,8 @@ sudo gem install colorls
 # Install flat-remix theme
 sudo apt install -y flat-remix-gnome flat-remix flat-remix-gtk 
 
-
+# Make sure all package are installed
+sudo apt-get -f install -y
 
 # RTM
 # RTM
