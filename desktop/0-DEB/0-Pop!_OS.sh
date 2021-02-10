@@ -181,8 +181,7 @@ wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.12.2-amd64.
 sudo dpkg -i /tmp/slack-desktop.deb
 
 # Microsoft teams
-wget https://go.microsoft.com/fwlink/p/?LinkID=2112886&clcid=0x409&culture=en-us&country=US -O /tmp/microsoft-teams.deb
-sudo dpkg -i /tmp/microsoft-teams.deb
+sudo flatpak install flathub com.microsoft.Teams
 
 #Utils
 ## LSD
@@ -316,7 +315,7 @@ sudo apt-get -f install -y
 
 # RTM
 # RTM
-clear
+#clear
 echo "#################################"
 echo "#                         #"
 echo "#	    rtm.codes       	#"
@@ -324,7 +323,7 @@ echo "# Please reboot your pc   #"
 echo "#                         #"
 echo "#################################"
 
-clear
+#clear
 echo "*** AFTER INSTALL *** "
 
 echo ""
