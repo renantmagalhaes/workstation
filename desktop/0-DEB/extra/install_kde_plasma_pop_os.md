@@ -8,7 +8,6 @@ sudo apt full-upgrade
 
 # Backup with Timeshift (Optional)
 [Tutorial here](https://youtu.be/QE0lyWodWdU​)
-
 # Install KDE Plasma
 ```
 sudo apt install kde-standard
