@@ -133,20 +133,39 @@
 #        - New utilities packages installed.
 #        - Colorls
 #
-#    TODO
-#   - Check if is the system is a Pop!_OS installation 
-#   - Install Aws K8S toolkit (cli and auth)
-#   - Test automated deploy
-#   - Link with Tmux / ZSH / Software / Shell Color folders
+#    V1.1.6 2021-02-14
+#        - Check if is the system is a Pop!_OS installation
+#        - GTK WhiteSur script fix
+#        - Order of events in script changed to better fit the flow
+#
+#    TODO V2
+#//   - Check if is the system is a Pop!_OS installation 
+#//   - Install Aws K8S toolkit (cli and auth) - will not do
 #//   - System stats inside ZSH (remove Vitals from gnome-extensions)
-#   - Send system stats to tmux panel
+#//   - Send system stats to tmux panel
+#   - Change Show application icon (GDM WhiteSur theme)
+#   - Test automated deploy
+
+#
+#    TODO V3
 #   - Test exa(https://github.com/ogham/exa) over lsd, when available on stable repo
+#   - Link with Tmux / ZSH / Software / Shell Color folders
+
 # RTM
 
-#Root check
+# Verifications 
 if [ “$(id -u)” = “0” ]; then
 echo “Dont run this script as root” 2>&1
 exit 1
+fi
+
+## Is Pop!_OS ?
+grep -o "ID=pop" /etc/os-release
+RESULT=$?
+if [ $RESULT -eq 0 ]; then
+  echo "Pop!_OS detected"
+else
+  read -rsn1 -p "You are NOT running Pop!_OS. Are you sure to continue? (Press ANY key to confirm)"
 fi
 
 # Add keys and ppas
@@ -162,12 +181,14 @@ sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gtk2-engines-murrine gtk2-engines-pixbuf gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 gnome-weather flatpak chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte alacritty fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors obs-studio kdenlive
+sudo apt-get -y install plank zsh clementine breeze-cursor-theme oxygen-cursor-theme oxygen-cursor-theme-extra dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 gnome-weather flatpak chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte alacritty fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors obs-studio kdenlive
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-# Flathub Packages 
+#Utils
+
+## Skype
 sudo flatpak install -y flathub com.skype.Client
 
 ## Zoom
@@ -176,14 +197,13 @@ sudo flatpak install -y flathub us.zoom.Zoom
 # Install Handbrake - Video Converter
 sudo flatpak install -y flathub fr.handbrake.ghbE
 
+# Microsoft teams
+sudo flatpak install -y flathub com.microsoft.Teams
+
 # Slack
 wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.12.2-amd64.deb -O /tmp/slack-desktop.deb
 sudo dpkg -i /tmp/slack-desktop.deb
 
-# Microsoft teams
-sudo flatpak install flathub com.microsoft.Teams
-
-#Utils
 ## LSD
 wget https://github.com/Peltoche/lsd/releases/download/0.19.0/lsd_0.19.0_amd64.deb -O /tmp/lsd_amd64.deb
 sudo dpkg -i /tmp/lsd_amd64.deb
@@ -198,6 +218,18 @@ sudo ln -s /usr/bin/pip3 /usr/bin/pip
 ## Teamviewer
 wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp/teamviewer_amd64.deb
 sudo dpkg -i /tmp/teamviewer_amd64.deb
+
+# Install Google Chrome
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
+sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
+
+# Install Vivaldi Browser
+sudo apt install -y vivaldi-stable
+
+## Install Visual Code
+wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
+sudo dpkg -i /tmp/visual_code_amd64.deb
+sudo sed -i 's/\,arm64\,armhf//g' /etc/apt/sources.list.d/vscode.list
 
 ## Guake Configs
 mkdir -p ~/.config/autostart/
@@ -222,21 +254,6 @@ sudo pip3 install bpytop --upgrade
 #Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
-# Create git-folder
-mkdir -p ~/GIT-REPOS/CORE
-
-# Install Google Chrome
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
-sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
-
-# Install Vivaldi Browser
-sudo apt install -y vivaldi-stable
-
-## Install Visual Code
-wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
-sudo dpkg -i /tmp/visual_code_amd64.deb
-sudo sed -i 's/\,arm64\,armhf//g' /etc/apt/sources.list.d/vscode.list
-
 ## G810 color profile
 sudo apt install -y g810-led
 sudo g810-led -p /etc/g810-led/samples/colors
@@ -244,6 +261,13 @@ sudo g810-led -p /etc/g810-led/samples/colors
 ## Set color scheme on boot
 (crontab -l 2>/dev/null; echo "@reboot g810-led -p /usr/share/doc/g810-led/examples/sample_profiles/colors") | crontab -
 
+# New VIM
+sudo apt-get install -y build-essential
+curl -sLf https://spacevim.org/install.sh | bash
+echo "set ignorecase" >> ~/.vim/vimrc
+
+# Create git-folder
+mkdir -p ~/GIT-REPOS/CORE
 
 # Install Fonts
 git clone https://github.com/powerline/fonts.git ~/GIT-REPOS/CORE/fonts/
@@ -267,11 +291,6 @@ wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Agave.zip 
 unzip ~/.local/share/fonts/Agave.zip -d ~/.local/share/fonts/
 
 fc-cache -vf ~/.local/share/fonts/
-
-# New VIM
-sudo apt-get install -y build-essential
-curl -sLf https://spacevim.org/install.sh | bash
-echo "set ignorecase" >> ~/.vim/vimrc
 
 # Layan theme
 git clone https://github.com/vinceliuice/Layan-gtk-theme.git ~/GIT-REPOS/CORE/Layan-gtk-theme
@@ -298,10 +317,10 @@ git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/Chr
 sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
 
 # WhiteSur-gtk-theme
-sudo apt install -y gtk2-engines-murrine gtk2-engines-pixbuf sassc optipng inkscape libcanberra-gtk-module libglib2.0-dev libxml2-utils libnotify-bin
+sudo apt install -y gtk2-engines-murrine gtk2-engines-pixbuf sassc optipng inkscape libcanberra-gtk-module libglib2.0-dev libxml2-utils libnotify-bin libglib2.0-dev-bin
 git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/GIT-REPOS/CORE/WhiteSur-gtk-theme
 sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/install.sh -g
-sh -c "~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/other/dash-to-dock/install.sh -d"
+~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/other/dash-to-dock/install.sh -d
 
 # Colorls
 sudo apt install -y ruby-dev
@@ -329,10 +348,10 @@ echo "*** AFTER INSTALL *** "
 echo ""
 echo "*** Gnome *** "
 echo "# Setup Theme
-* Applications: Flat-Remix-Blue-Dark 
+* Applications: ChromeOS-dark-compact 
 * Cursor: Breeze_Snow
 * Icons: Tela-circle-blue-dark
-* Shell: Flat-Remix-Blue-Darkest-fullPanel / Layan"
+* Shell: WhiteSur-dark"
 
 echo ""
 
