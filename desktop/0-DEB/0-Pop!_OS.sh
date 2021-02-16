@@ -316,18 +316,16 @@ sh -c "~/GIT-REPOS/CORE/Orchis-theme/install.sh"
 git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/ChromeOS-theme
 sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
 
-# Flatery Icon Theme
-git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
-ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
-ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-Indigo-Dark
-
-
-
 # WhiteSur-gtk-theme
 sudo apt install -y gtk2-engines-murrine gtk2-engines-pixbuf sassc optipng inkscape libcanberra-gtk-module libglib2.0-dev libxml2-utils libnotify-bin libglib2.0-dev-bin
 git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/GIT-REPOS/CORE/WhiteSur-gtk-theme
 sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/install.sh -i void -o standard -t blue -g
 ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/other/dash-to-dock/install.sh -d
+
+# Flatery Icon Theme
+git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
+ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
+ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-Indigo-Dark
 
 # Colorls
 sudo apt install -y ruby-dev
