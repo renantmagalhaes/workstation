@@ -86,6 +86,10 @@ custom_symbol(){
 }
 POWERLEVEL9K_CUSTOM_SYMBOL="custom_symbol"
 
+#Home folder icon
+#POWERLEVEL9K_HOME_ICON='\uf114'
+POWERLEVEL9K_HOME_SUB_ICON='\uf07b '
+#POWERLEVEL9K_FOLDER_ICON='\uf114'
 
 # Default Prompt Elements
 
