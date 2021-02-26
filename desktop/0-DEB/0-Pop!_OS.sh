@@ -324,6 +324,10 @@ cp ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/assets/gnome-shell/common-assets/nois
 sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/install.sh -i void -o standard -t blue -g
 ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/other/dash-to-dock/install.sh -d
 
+# Fluent Theme
+git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
+sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh"
+
 # Flatery Icon Theme
 git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
