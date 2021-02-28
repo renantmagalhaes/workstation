@@ -191,7 +191,8 @@ tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see
 
 # Custom
 tmux_conf_theme_status_left='   #{circled_session_name}  '
-tmux_conf_theme_status_right='#{prefix_highlight} #{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , VPN:#{nordvpn_status_color}#{nordvpn_status}(#{nordvpn_country}) , Online:#{online_status} , ⌬ %Y-%m-%d , #{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} | #{username}#{root}#{username_ssh} | #{hostname}#{hostname_ssh} '
+tmux_conf_theme_status_right='#{prefix_highlight} #{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , #[fg=blue]VPN:#{nordvpn_status_color}#{nordvpn_status} #[fg=cyan][#{nordvpn_country}#{nordvpn_ip}] , Online:#{online_status} , ⌬ %Y-%m-%d , #{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} | #{username}#{root}#{username_ssh} | #{hostname}#{hostname_ssh} '
+
 
 
 # Custom with network and weather options
