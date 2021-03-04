@@ -236,6 +236,7 @@ sudo sed -i 's/\,arm64\,armhf//g' /etc/apt/sources.list.d/vscode.list
 
 ## Guake Configs
 mkdir -p ~/.config/autostart/
+#guake --save-preferences ../../guake/rtm-guake-settings
 guake --restore-preferences ../../guake/rtm-guake-settings 
 cat <<EOF >> ~/.config/autostart/guake.desktop
 [Desktop Entry]
