@@ -3,7 +3,7 @@ abbreviate-tab-names=false
 compat-delete='delete-sequence'
 default-shell='/usr/bin/tmux'
 display-n=0
-gtk-theme-name='Flat-Remix-GTK-Blue-Dark'
+gtk-theme-name='Orchis-dark-compact'
 history-size=100000
 max-tab-name-length=100
 mouse-display=true
@@ -20,7 +20,7 @@ use-popup=true
 use-scrollbar=true
 use-trayicon=false
 window-halignment=0
-window-height=74
+window-height=88
 window-losefocus=false
 window-refocus=false
 window-tabbar=false
@@ -30,10 +30,10 @@ window-width=100
 show-hide='<Primary>Return'
 
 [style/background]
-transparency=98
+transparency=96
 
 [style/font]
 allow-bold=true
-palette='#1F2229:#D41919:#ADEF7F:#FEA44C:#367bf0:#BF2E5D:#49AEE6:#E6E6E6:#8C42AB:#EC0101:#47D4B9:#FF8A18:#277FFF:#D71655:#05A1F7:#FFFFFF:#FFFFFF:#0C0C0C'
-palette-name='RTM'
+palette='#1f1f22222929:#d4d419191919:#adadefef7f7f:#fefea4a44c4c:#36367b7bf0f0:#bfbf2e2e5d5d:#4949aeaee6e6:#e6e6e6e6e6e6:#8c8c4242abab:#ecec01010101:#4747d4d4b9b9:#ffff8a8a1818:#27277f7fffff:#d7d716165555:#0505a1a1f7f7:#ffffffffffff:#ffffffffffff:#0c0c0c0c0c0c'
+palette-name='Custom'
 style='FiraCode Nerd Font 10'
