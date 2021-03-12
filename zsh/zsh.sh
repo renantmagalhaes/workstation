@@ -8,7 +8,7 @@ type curl >/dev/null 2>&1 || { echo >&2 "Install zsh before run this script "; e
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 #zsh config 
-ln -s -f $PWD/zshrc ~/.zshrc
+ln -s -f $PWD/zsh/zshrc ~/.zshrc
 
 #lsd config
 mkdir -p  ~/.config/lsd/
