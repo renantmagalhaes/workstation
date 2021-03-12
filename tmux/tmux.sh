@@ -8,8 +8,8 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 
 #Create syslinks 
-ln -s -f $PWD/tmux.conf ~/.tmux.conf
-ln -s -f $PWD/tmux.conf.local ~/.tmux.conf.local
+ln -s -f $PWD/tmux/tmux.conf ~/.tmux.conf
+ln -s -f $PWD/tmux/tmux.conf.local ~/.tmux.conf.local
 
 # Install plugins
 echo " Install Plugins - run: "
