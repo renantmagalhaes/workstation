@@ -5,7 +5,7 @@ type zsh >/dev/null 2>&1 || { echo >&2 "Install zsh before run this script "; ex
 type curl >/dev/null 2>&1 || { echo >&2 "Install zsh before run this script "; exit 1; }
 
 #install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 #zsh config 
 ln -s -f $PWD/zshrc ~/.zshrc
