@@ -184,7 +184,7 @@ sudo dpkg -i /tmp/nordvpn-release_1.0.0_all.deb
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install plank zsh clementine breeze-cursor-theme dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload arc-theme chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 gnome-weather flatpak chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte alacritty fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors obs-studio kdenlive nordvpn cheese
+sudo apt-get -y install plank zsh clementine breeze-cursor-theme dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 flatpak chrome-gnome-shell gnome-menus pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors obs-studio kdenlive nordvpn cheese
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -269,6 +269,8 @@ sudo g810-led -p /etc/g810-led/samples/colors
 sudo apt-get install -y build-essential
 curl -sLf https://spacevim.org/install.sh | bash
 echo "set ignorecase" >> ~/.vim/vimrc
+echo "set cryptmethod=blowfish2" >> ~/.vim/vimrc
+echo "set viminfo=" >> ~/.vim/vimrc
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
@@ -295,14 +297,6 @@ wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Agave.zip 
 unzip ~/.local/share/fonts/Agave.zip -d ~/.local/share/fonts/
 
 fc-cache -vf ~/.local/share/fonts/
-
-# Layan theme
-git clone https://github.com/vinceliuice/Layan-gtk-theme.git ~/GIT-REPOS/CORE/Layan-gtk-theme
-sh -c "~/GIT-REPOS/CORE/Layan-gtk-theme/install.sh"
-
-# Tela-circle-icon-theme
-git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
-sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh -a"
 
 # Nordic theme
 git clone https://github.com/EliverLara/Nordic.git ~/GIT-REPOS/CORE/Nordic
@@ -331,6 +325,10 @@ sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
 # Fluent Theme
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
 sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh"
+
+# Tela-circle-icon-theme
+git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
+sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh -a"
 
 # Flatery Icon Theme
 git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
