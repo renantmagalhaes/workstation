@@ -367,8 +367,8 @@ echo "*** Gnome *** "
 echo "# Setup Theme
 * Applications: ChromeOS-dark-compact 
 * Cursor: Breeze_Snow
-* Icons: Tela-circle-blue-dark
-* Shell: WhiteSur-dark"
+* Icons: Flatery-Indigo-Dark
+* Shell: Orchis-dark-compact"
 
 echo ""
 
