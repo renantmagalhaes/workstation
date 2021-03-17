@@ -14,6 +14,7 @@ echo " 3) Install Oh my ZSH"
 echo " 4) Install ZSH additional packages"
 echo " 5) Guake Settings"
 echo " 6) Install DEV Tools"
+echo " 7) Cron Jobs"
 echo " 9)Exit"
 
 read n
@@ -24,6 +25,7 @@ case $n in
     4) bash zsh/zsh.sh ;;
     5) guake --restore-preferences guake/rtm-guake-settings ;;    
     6) bash dev-tools/software.sh ;;
+    7) bash cron/cron-scripts.sh ;;
     9)  echo "Bye" || exit ;;
   *) echo "Invalid option";;
 esac
