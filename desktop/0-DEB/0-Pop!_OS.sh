@@ -313,12 +313,12 @@ git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/Chr
 sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
 
 ## WhiteSur-gtk-theme
-#sudo apt install -y gtk2-engines-murrine gtk2-engines-pixbuf sassc optipng inkscape libcanberra-gtk-module libglib2.0-dev libxml2-utils libnotify-bin libglib2.0-dev-bin
+sudo apt install -y gtk2-engines-murrine gtk2-engines-pixbuf sassc optipng inkscape libcanberra-gtk-module libglib2.0-dev libxml2-utils libnotify-bin libglib2.0-dev-bin
 #git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/GIT-REPOS/CORE/WhiteSur-gtk-theme
 #mv ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/assets/gnome-shell/common-assets/view-app-grid.svg ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/assets/gnome-shell/common-assets/view-app-grid-backup.svg
 #cp ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/assets/gnome-shell/common-assets/noise-texture.svg ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/assets/gnome-shell/common-assets/view-app-grid.svg
 #sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/install.sh -i void -o standard -t blue -g
-#~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/other/dash-to-dock/install.sh -d
+~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/other/dash-to-dock/install.sh -d
 
 # Fluent Theme
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
