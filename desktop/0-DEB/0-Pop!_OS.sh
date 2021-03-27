@@ -143,13 +143,14 @@
 #//   - Install Aws K8S toolkit (cli and auth) - will not do
 #//   - System stats inside ZSH (remove Vitals from gnome-extensions)
 #//   - Send system stats to tmux panel
-#   - Change Show application icon (GDM WhiteSur theme)
-#   - Test automated deploy
+#//   - Change Show application icon (GDM WhiteSur theme)
+#//   - Test automated deploy
 
 #
 #    TODO V2
 #   - Test exa(https://github.com/ogham/exa) over lsd, when available on stable repo
-#   - Link with Tmux / ZSH / Software / Shell Color folders
+#//   - Link with Tmux / ZSH / Software / Shell Color folders
+#   - Regex to modify orchis top bar size   
 
 # RTM
 
