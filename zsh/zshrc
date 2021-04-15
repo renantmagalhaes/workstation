@@ -398,6 +398,7 @@ export VISUAL=vim
 alias folder="nautilus"
 alias killtmux="pidof tmux |xargs kill -9"
 alias python="python3"
+alias killvivaldi="pidof vivaldi-bin |xargs kill -9"
 
 alias cp='cp -iv'
 alias rm='rm -ir'
