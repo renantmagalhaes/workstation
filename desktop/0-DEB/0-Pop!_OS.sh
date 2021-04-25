@@ -207,6 +207,9 @@ sudo flatpak install -y flathub fr.handbrake.ghbE
 # Microsoft teams
 sudo flatpak install -y flathub com.microsoft.Teams
 
+# FFaudioConverter
+sudo flatpak install flathub com.github.Bleuzen.FFaudioConverter
+
 # Slack
 wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.12.2-amd64.deb -O /tmp/slack-desktop.deb
 sudo dpkg -i /tmp/slack-desktop.deb
