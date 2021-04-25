@@ -9,3 +9,11 @@ Use the script ``install.sh`` and run all modules, running the scripts directly 
 ![2-terminal_and_file-manager.png](https://raw.githubusercontent.com/renantmagalhaes/workstation/master/images/2-terminal_and_file-manager.png)
 
 ![3-Tiling_window.png](https://raw.githubusercontent.com/renantmagalhaes/workstation/master/images/3-Tiling_window.png)
+
+## Utils
+
+### Piper DPI
+
+1. 1000
+2. 2100
+3. 3000 (default)
