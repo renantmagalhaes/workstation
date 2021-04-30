@@ -195,31 +195,34 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 
 #Utils
 
+## Fix snapd
+sudo ln -s /var/lib/snapd/snap /snap
+
 ## Skype
 sudo flatpak install -y flathub com.skype.Client
 
 ## Zoom
 sudo flatpak install -y flathub us.zoom.Zoom
 
-# Install Handbrake - Video Converter
+## Install Handbrake - Video Converter
 sudo flatpak install -y flathub fr.handbrake.ghbE
 
-# Microsoft teams
+## Microsoft teams
 sudo flatpak install -y flathub com.microsoft.Teams
 
-# FFaudioConverter
+## FFaudioConverter
 sudo flatpak install flathub com.github.Bleuzen.FFaudioConverter
 
-# Slack
+## MkCron
+sudo snap install mkcron
+
+## Slack
 wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.12.2-amd64.deb -O /tmp/slack-desktop.deb
 sudo dpkg -i /tmp/slack-desktop.deb
 
 ## LSD
 wget https://github.com/Peltoche/lsd/releases/download/0.19.0/lsd_0.19.0_amd64.deb -O /tmp/lsd_amd64.deb
 sudo dpkg -i /tmp/lsd_amd64.deb
-
-## Fix snapd
-sudo ln -s /var/lib/snapd/snap /snap
 
 ## Fix python default path
 sudo ln -s /usr/bin/python3 /usr/bin/python
@@ -229,11 +232,11 @@ sudo ln -s /usr/bin/pip3 /usr/bin/pip
 wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp/teamviewer_amd64.deb
 sudo dpkg -i /tmp/teamviewer_amd64.deb
 
-# Install Google Chrome
+## Install Google Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
 sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
 
-# Install Vivaldi Browser
+## Install Vivaldi Browser
 sudo apt install -y vivaldi-stable
 
 ## Install Visual Code
