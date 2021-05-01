@@ -23,9 +23,9 @@ case $n in
     2) bash tmux/tmux.sh ;;
     3) bash zsh/zsh.sh ;;
     4) bash zsh/zsh.sh ;;
-    5) guake --restore-preferences guake/rtm-guake-settings ;;    
+    5) guake --restore-preferences guake/rtm-guake-settings && echo "Done" ;;
     6) bash dev-tools/software.sh ;;
-    7) bash cron/cron-scripts.sh ;;
+    7) bash cron/cron-scripts.sh && echo "Done" ;;
     9)  echo "Bye" || exit ;;
   *) echo "Invalid option";;
 esac

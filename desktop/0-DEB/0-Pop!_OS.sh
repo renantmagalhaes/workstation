@@ -211,7 +211,7 @@ sudo flatpak install -y flathub fr.handbrake.ghbE
 sudo flatpak install -y flathub com.microsoft.Teams
 
 ## FFaudioConverter
-sudo flatpak install flathub com.github.Bleuzen.FFaudioConverter
+sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
 
 ## MkCron
 sudo snap install mkcron
@@ -365,10 +365,10 @@ sudo dpkg -i /tmp/veracrypt-1.24-Update7-Ubuntu-20.04-amd64.deb
 # RTM
 #clear
 echo "#################################"
-echo "#                         #"
-echo "#	    rtm.codes       	#"
-echo "# Please reboot your pc   #"
-echo "#                         #"
+echo "#                               #"
+echo "#         rtm.codes             #"
+echo "#     Please reboot your pc     #"
+echo "#                               #"
 echo "#################################"
 
 #clear

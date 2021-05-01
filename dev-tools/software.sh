@@ -43,7 +43,7 @@ sudo snap install kontena-lens --classic
 #sudo dnf install -y yarn nodejs
 
 ## DEB based
-sudo apt install -y curl gnupg2 gcc-c++ make
+sudo apt install -y curl gnupg2 make
 sudo curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
 sudo curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 sudo echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
@@ -74,3 +74,10 @@ sudo systemctl enable docker
 sudo systemctl restart docker
 sudo usermod -aG docker $USER
 
+#clear
+echo "###########################"
+echo "#                         #"
+echo "#      rtm.codes          #"
+echo "#       DONE              #"
+echo "#                         #"
+echo "###########################"
