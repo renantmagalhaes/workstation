@@ -357,6 +357,10 @@ sudo apt install -y flat-remix-gnome flat-remix flat-remix-gtk
 # Make sure all package are installed
 sudo apt-get -f install -y
 
+# Install Veracrypy
+wget https://launchpad.net/veracrypt/trunk/1.24-update7/+download/veracrypt-1.24-Update7-Ubuntu-20.04-amd64.deb -O /tmp/veracrypt-1.24-Update7-Ubuntu-20.04-amd64.deb
+sudo dpkg -i /tmp/veracrypt-1.24-Update7-Ubuntu-20.04-amd64.deb
+
 # RTM
 # RTM
 #clear
