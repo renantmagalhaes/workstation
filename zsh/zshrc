@@ -395,6 +395,7 @@ export ENHANCD_FILTER
 export VISUAL=vim
 
 #Aliases
+alias update-all="sudo apt update && sudo apt upgrade && sudo flatpak update && sudo snap refresh"
 alias folder="nautilus"
 alias killtmux="pidof tmux |xargs kill -9"
 alias python="python3"
