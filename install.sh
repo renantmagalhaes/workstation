@@ -17,6 +17,7 @@ echo " 6) Install DEV Tools"
 echo " 7) Cron Jobs"
 echo " ==== UTILS ===="
 echo " 11) VirtualBox Extension Pack"
+echo " 12) Deckboard"
 echo " ==============="
 echo " 0)Exit"
 
@@ -31,6 +32,7 @@ case $n in
     7) bash cron/cron-scripts.sh && echo "Done" ;;
 # ===================================================================================
     11) bash utils/virtualbox/virtualbox-ext-pack.sh ;;
+    12) bash utils/deckboard/deckboard.sh ;;
 # ===================================================================================
     0)  echo "Bye" || exit ;;
 # ===================================================================================
