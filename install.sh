@@ -15,7 +15,10 @@ echo " 4) Install ZSH additional packages"
 echo " 5) Guake Settings"
 echo " 6) Install DEV Tools"
 echo " 7) Cron Jobs"
-echo " 9)Exit"
+echo " ==== UTILS ===="
+echo " 11) VirtualBox Extension Pack"
+echo " ==============="
+echo " 0)Exit"
 
 read n
 case $n in
@@ -26,6 +29,10 @@ case $n in
     5) guake --restore-preferences guake/rtm-guake-settings && echo "Done" ;;
     6) bash dev-tools/software.sh ;;
     7) bash cron/cron-scripts.sh && echo "Done" ;;
-    9)  echo "Bye" || exit ;;
+# ===================================================================================
+    11) bash utils/virtualbox/virtualbox-ext-pack.sh ;;
+# ===================================================================================
+    0)  echo "Bye" || exit ;;
+# ===================================================================================
   *) echo "Invalid option";;
 esac
