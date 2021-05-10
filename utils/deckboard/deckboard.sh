@@ -7,4 +7,4 @@ wget https://github.com/rivafarabi/deckboard/releases/download/v1.9.93/deckboard
 sudo dpkg -i /tmp/deckboard_1.9.93_amd64.deb
 
 # Install dependencies
-sudo apt-get install -f
+sudo apt-get install -f -y
