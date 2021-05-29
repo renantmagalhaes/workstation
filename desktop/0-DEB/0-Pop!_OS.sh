@@ -187,6 +187,8 @@ sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
 sudo apt-get -y install plank zsh clementine breeze-cursor-theme dia vim vim-gtk vim-gui-common nmap vlc blender gconf-editor fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome x2goclient git gnome-icon-theme idle3 fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 flatpak chrome-gnome-shell gnome-menus pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors obs-studio nordvpn cheese ncdu whois pdfshuffler piper
+sudo apt-get -f install -y
+
 
 # vboxuser
 sudo usermod -aG vboxusers $USER
@@ -236,10 +238,12 @@ sudo ln -s /usr/bin/pip3 /usr/bin/pip
 ## Teamviewer
 wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp/teamviewer_amd64.deb
 sudo dpkg -i /tmp/teamviewer_amd64.deb
+sudo apt-get -f install -y
 
 ## Install Google Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
 sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
+sudo apt-get -f install -y
 
 ## Install Vivaldi Browser
 sudo apt install -y vivaldi-stable
@@ -248,6 +252,8 @@ sudo apt install -y vivaldi-stable
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
 sudo dpkg -i /tmp/visual_code_amd64.deb
 sudo sed -i 's/\,arm64\,armhf//g' /etc/apt/sources.list.d/vscode.list
+sudo apt-get -f install -y
+
 
 ## Guake Configs
 mkdir -p ~/.config/autostart/
@@ -269,6 +275,7 @@ EOF
 # Install pip packages
 sudo pip3 install virtualenv virtualenvwrapper
 sudo pip3 install bpytop --upgrade
+sudo apt-get -f install -y
 
 #Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
@@ -284,6 +291,7 @@ curl -sLf https://spacevim.org/install.sh | bash
 echo "set ignorecase" >> ~/.vim/vimrc
 echo "set cryptmethod=blowfish2" >> ~/.vim/vimrc
 echo "set viminfo=" >> ~/.vim/vimrc
+sudo apt-get -f install -y
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
@@ -334,6 +342,8 @@ sudo apt install -y gtk2-engines-murrine gtk2-engines-pixbuf sassc optipng inksc
 #cp ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/assets/gnome-shell/common-assets/noise-texture.svg ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/assets/gnome-shell/common-assets/view-app-grid.svg
 #sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/install.sh -i void -o standard -t blue -g
 ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/other/dash-to-dock/install.sh -d
+sudo apt-get -f install -y
+
 
 # Fluent Theme
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
@@ -355,18 +365,22 @@ ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-
 # Colorls
 sudo apt install -y ruby-dev
 sudo gem install colorls
+sudo apt-get -f install -y
 
 # Install flat-remix theme
-sudo apt install -y flat-remix-gnome flat-remix flat-remix-gtk 
+sudo apt install -y flat-remix-gnome flat-remix flat-remix-gtk
+sudo apt-get -f install -y
+
 
 # Install Veracrypy
 wget https://launchpad.net/veracrypt/trunk/1.24-update7/+download/veracrypt-1.24-Update7-Ubuntu-20.04-amd64.deb -O /tmp/veracrypt-1.24-Update7-Ubuntu-20.04-amd64.deb
 sudo dpkg -i /tmp/veracrypt-1.24-Update7-Ubuntu-20.04-amd64.deb
+sudo apt-get -f install -y
 
 # Install ClamAV
-sudo apt install clamav clamtk
+sudo apt install -y clamav clamtk
 sudo apt-get -f install -y
-sudo apt-get install clamav-daemon
+sudo apt-get install -y clamav-daemon
 
 # Make sure all package are installed
 sudo apt-get -f install -y
