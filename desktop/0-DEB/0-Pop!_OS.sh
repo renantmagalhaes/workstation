@@ -341,7 +341,7 @@ sudo apt install -y gtk2-engines-murrine gtk2-engines-pixbuf sassc optipng inksc
 #mv ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/assets/gnome-shell/common-assets/view-app-grid.svg ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/assets/gnome-shell/common-assets/view-app-grid-backup.svg
 #cp ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/assets/gnome-shell/common-assets/noise-texture.svg ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/assets/gnome-shell/common-assets/view-app-grid.svg
 #sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/install.sh -i void -o standard -t blue -g
-~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/other/dash-to-dock/install.sh -d
+#~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/other/dash-to-dock/install.sh -d
 sudo apt-get -f install -y
 
 
