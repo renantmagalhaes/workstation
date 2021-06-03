@@ -273,7 +273,7 @@ X-Desktop-File-Install-Version=0.22
 EOF
 
 # Install pip packages
-sudo pip3 install virtualenv virtualenvwrapper
+sudo pip3 install virtualenv virtualenvwrapper pylint
 sudo pip3 install bpytop --upgrade
 sudo apt-get -f install -y
 
