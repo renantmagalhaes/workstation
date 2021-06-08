@@ -5,7 +5,7 @@
 mkdir -p ~/Apps
 
 #Mindmap
-#sudo flatpak install -y flathub net.xmind.XMind8
+sudo flatpak install -y flathub net.xmind.XMind8
 sudo flatpak install -y flathub net.xmind.ZEN
 
 # Redis
