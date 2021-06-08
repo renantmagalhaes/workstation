@@ -219,7 +219,6 @@ sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
 ## Kdenlive
 sudo flatpak install flathub -y org.kde.kdenlive
 
-
 ## MkCron
 sudo snap install mkcron
 
@@ -271,6 +270,9 @@ Categories=GNOME;GTK;System;Utility;TerminalEmulator;
 StartupNotify=true
 X-Desktop-File-Install-Version=0.22
 EOF
+
+# Enable BT FastConnectable
+sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
 
 # Install pip packages
 sudo pip3 install virtualenv virtualenvwrapper pylint
