@@ -66,6 +66,7 @@ sudo apt install -y feh
 # git submodule update --init --recursive
 # meson --buildtype=release . build
 # ninja -C build
+ #sudo ninja -C build install
 
 # Theme
 # mkdir -p ~/.config/picom
