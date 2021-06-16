@@ -1,14 +1,13 @@
 #!/bin/bash
 
-
 # Install dependencies
-sudo apt update
-sudo apt install -y git gcc make xcb libxcb-util0-dev libxcb-ewmh-dev libxcb-randr0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-xinerama0-dev libasound2-dev libxcb-xtest0-dev libxcb-shape0-dev
+sudo apt update &&  sudo apt upgrade -y
+sudo apt install build-essential git vim xcb libxcb-util0-dev libxcb-ewmh-dev libxcb-randr0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-xinerama0-dev libasound2-dev libxcb-xtest0-dev libxcb-shape0-dev rofi 
 
 # Set default folders
 mkdir -p ~/GIT-REPOS/CORE
-mkdir -p ~/.config/bspwm/bspwmrc
-mkdir -p ~/.config/sxhkd
+mkdir -p ~/.config/bspwm/
+mkdir -p ~/.config/sxhkd/
 
 
 # Clone repos
@@ -20,8 +19,6 @@ git clone https://github.com/baskerville/sxhkd.git
 cd ~/GIT-REPOS/CORE/sxhkd
 make
 sudo make install
-
-
 
 # Install Project
 ## BSPWM
@@ -35,12 +32,12 @@ chmod +x ~/.config/sxhkd/sxhkdrc
 
 
 # Set display window
-sudo cp contrib/freedesktop/bspwm.desktop /usr/share/xsessions/
+# sudo cp contrib/freedesktop/bspwm.desktop /usr/share/xsessions/
 
 # Install polybar
-sudo apt-get install -y build-essential git xpp libjsoncpp1 libjsoncpp-dev cmake cmake-data pkg-config libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev cmake cmake-data libcairo2-dev libxcb1-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-randr0-dev libxcb-util0-dev libxcb-xkb-dev pkg-config python-xcbgen xcb-proto libxcb-xrm-dev i3-wm libasound2-dev libmpdclient-dev libiw-dev libcurl4-openssl-dev libpulse-dev
+sudo apt install cmake cmake-data pkg-config python3-sphinx libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python3-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-xkb-dev libxcb-xrm-dev libxcb-cursor-dev libasound2-dev libpulse-dev libjsoncpp-dev libmpdclient-dev libcurl4-openssl-dev libnl-genl-3-dev
 cd ~/GIT-REPOS/CORE
-git clone https://github.com/jaagr/polybar.git
+git clone --recursive https://github.com/polybar/polybar
 cd polybar
 mkdir build
 cd build
@@ -49,8 +46,11 @@ make -j$(nproc)
 sudo make install
 
 
-
-
-# Install compton
-
-# Install rofi
+# Install Picom
+sudo apt install meson libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev  libpcre2-dev  libevdev-dev uthash-dev libev-dev libx11-xcb-dev libxcb-glx0-dev
+cd ~/GIT-REPOS/CORE
+git clone https://github.com/ibhagwan/picom.git
+cd picom
+git submodule update --init --recursive
+meson --buildtype=release . build
+ninja -C build
