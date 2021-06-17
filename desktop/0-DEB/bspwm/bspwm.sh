@@ -48,15 +48,15 @@ sudo make install
 
 # Desktop wallpaper
 sudo apt install -y feh
- echo 'feh --bg-fill $HOME/Downloads/blue-sky/wallpapers/blue3.png' >> ~/.config/bspwm/bspwmrc
+#echo 'feh --bg-fill $HOME/Downloads/blue-sky/wallpapers/blue3.png' >> ~/.config/bspwm/bspwmrc
 
 # Polybar
- mkdir ~/.config/polybar
- cd ~/GIT-REPOS/CORE/blue-sky/polybar
- cp * -r ~/.config/polybar
- echo '~/.config/polybar/./launch.sh' >> ~/.config/bspwm/bspwmrc
- cd fonts
- sudo cp * /usr/share/fonts/truetype/
+mkdir ~/.config/polybar
+#cd ~/GIT-REPOS/CORE/blue-sky/polybar
+#cp * -r ~/.config/polybar
+#echo '~/.config/polybar/./launch.sh' >> ~/.config/bspwm/bspwmrc
+#cd fonts
+#sudo cp * /usr/share/fonts/truetype/
 
 #  # Install Picom
 # sudo apt install -y meson libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev  libpcre2-dev  libevdev-dev uthash-dev libev-dev libx11-xcb-dev libxcb-glx0-dev
@@ -74,24 +74,28 @@ sudo apt install -y feh
 
 
 
-# VIM
-mkdir -p ~/.vim/colors
-cd ~/GIT-REPOS/CORE/
-cp blue-sky/nord.vim ~/.vim/colors
-git clone https://github.com/vim-airline/vim-airline.git
-cd vim-airline
-cp * -r ~/.vim
-cd ~/GIT-REPOS/CORE/
-git clone https://github.com/vim-airline/vim-airline-themes.git
-cd vim-airline-themes
-cp * -r ~/.vim
-echo 'colorscheme nord' >> ~/.vimrc
-echo 'let g:airline_theme='base16' >> ~/.vimrc'
+# # VIM
+# mkdir -p ~/.vim/colors
+# cd ~/GIT-REPOS/CORE/
+# cp blue-sky/nord.vim ~/.vim/colors
+# git clone https://github.com/vim-airline/vim-airline.git
+# cd vim-airline
+# cp * -r ~/.vim
+# cd ~/GIT-REPOS/CORE/
+# git clone https://github.com/vim-airline/vim-airline-themes.git
+# cd vim-airline-themes
+# cp * -r ~/.vim
+# echo 'colorscheme nord' >> ~/.vimrc
+# echo 'let g:airline_theme='base16' >> ~/.vimrc'
 
 
 # Rofi theme
 mkdir -p ~/.config/rofi/themes
-cp ~/GIT-REPOS/CORE/blue-sky/nord.rasi ~/.config/rofi/themes
+cd ~/GIT-REPOS/CORE/
+git clone --depth=1 https://github.com/adi1090x/rofi.git
+cd rofi
+chmod +x setup.sh
+bash setup.sh
 rofi-theme-selector #preview the "nord theme" with Enter and apply it with Alt+a
 
 # # slim and slimlock
