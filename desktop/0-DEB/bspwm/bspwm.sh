@@ -25,9 +25,9 @@ sudo make install
 cd ~/GIT-REPOS/CORE/bspwm
 make
 sudo make install
-ln -s -f ~/GIT-REPOS/workstation/desktop/DEB/bspwm/config/bspwmrc ~/.config/bspwm/bspwmrc
+ln -s -f $PWD/config/bspwmrc ~/.config/bspwm/bspwmrc
 chmod +x ~/.config/bspwm/bspwmrc
-ln -s -f ~/GIT-REPOS/workstation/desktop/DEB/bspwm/config/sxhkdrc ~/.config/sxhkd/sxhkdrc
+ln -s -f $PWD/config/sxhkdrc ~/.config/sxhkd/sxhkdrc
 chmod +x ~/.config/sxhkd/sxhkdrc
 
 
