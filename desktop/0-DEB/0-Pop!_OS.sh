@@ -319,6 +319,11 @@ unzip ~/.local/share/fonts/3270.zip -d ~/.local/share/fonts/
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Agave.zip -O ~/.local/share/fonts/Agave.zip
 unzip ~/.local/share/fonts/Agave.zip -d ~/.local/share/fonts/
 
+## cascadia font for vscode
+wget https://github.com/microsoft/cascadia-code/releases/download/v2105.24/CascadiaCode-2105.24.zip -O /tmp/CascadiaCode-2105.24.zip
+unzip /tmp/CascadiaCode-2105.24.zip -d /tmp/
+cp /tmp/ttf/CascadiaCodePL.ttf  ~/.local/share/fonts/
+
 fc-cache -vf ~/.local/share/fonts/
 
 # Nordic theme
