@@ -1,0 +1,103 @@
+{
+    "git.enableSmartCommit": true,
+    "git.autofetch": true,
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorCustomizations": {
+        "activityBarBadge.background": "#388E3C",
+        "activityBar.activeBorder": "#388E3C",
+        "list.activeSelectionForeground": "#388E3C",
+        "list.inactiveSelectionForeground": "#388E3C",
+        "list.highlightForeground": "#388E3C",
+        "scrollbarSlider.activeBackground": "#388E3C50",
+        "editorSuggestWidget.highlightForeground": "#388E3C",
+        "textLink.foreground": "#388E3C",
+        "progressBar.background": "#388E3C",
+        "pickerGroup.foreground": "#388E3C",
+        "tab.activeBorder": "#388E3C",
+        "notificationLink.foreground": "#388E3C",
+        "editorWidget.resizeBorder": "#388E3C",
+        "editorWidget.border": "#388E3C",
+        "settings.modifiedItemIndicator": "#388E3C",
+        "settings.headerForeground": "#388E3C",
+        "panelTitle.activeBorder": "#388E3C",
+        "breadcrumb.activeSelectionForeground": "#388E3C",
+        "menu.selectionForeground": "#388E3C",
+        "menubar.selectionForeground": "#388E3C",
+        "editor.findMatchBorder": "#388E3C",
+        "selection.background": "#388E3C40",
+        "statusBarItem.remoteBackground": "#388E3C",
+        "[Material Theme Darker High Contrast]": {
+            "activityBarBadge.background": "#616161",
+            "activityBar.activeBorder": "#616161",
+            "list.activeSelectionForeground": "#616161",
+            "list.inactiveSelectionForeground": "#616161",
+            "list.highlightForeground": "#616161",
+            "scrollbarSlider.activeBackground": "#61616150",
+            "editorSuggestWidget.highlightForeground": "#616161",
+            "textLink.foreground": "#616161",
+            "progressBar.background": "#616161",
+            "pickerGroup.foreground": "#616161",
+            "tab.activeBorder": "#616161",
+            "notificationLink.foreground": "#616161",
+            "editorWidget.resizeBorder": "#616161",
+            "editorWidget.border": "#616161",
+            "settings.modifiedItemIndicator": "#616161",
+            "settings.headerForeground": "#616161",
+            "panelTitle.activeBorder": "#616161",
+            "breadcrumb.activeSelectionForeground": "#616161",
+            "menu.selectionForeground": "#616161",
+            "menubar.selectionForeground": "#616161",
+            "editor.findMatchBorder": "#616161",
+            "selection.background": "#61616140",
+            "statusBarItem.remoteBackground": "#616161"
+        }
+    },
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "cSpell.enabled": true,
+    "cSpell.enableFiletypes": [
+        "xml"
+    ],
+    "explorer.confirmDelete": false,
+    "python.languageServer": "Pylance",
+    "workbench.startupEditor": "welcomePage",
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb"
+    },
+    "python.pythonPath": "/usr/bin/python3",
+    "git.confirmSync": false,
+    "code-runner.runInTerminal": true,
+    "aws.profile": "profile:default",
+    "explorer.confirmDragAndDrop": false,
+    "spellright.language": [],
+    "spellright.documentTypes": [
+        "latex",
+        "plaintext"
+    ],
+    "material-icon-theme.saturation": null,
+    "material-icon-theme.hidesExplorerArrows": false,
+    "material-icon-theme.folders.theme": "specific",
+    "material-icon-theme.folders.color": "#90a4ae",
+    "mssql.connections": [
+        {
+            "server": "{{put-server-name-here}}",
+            "database": "{{put-database-name-here}}",
+            "user": "{{put-username-here}}",
+            "password": "{{put-password-here}}"
+        }
+    ],
+    "materialTheme.accent": "Remove accents",
+    "todohighlight.isEnable": true,
+    "cSpell.userWords": [
+        "ainda"
+    ],
+    "vsicons.dontShowNewVersionMessage": true,
+    "window.zoomLevel": 1,
+    "workbench.colorTheme": "Monokai Pro (Filter Spectrum)",
+    "terminal.integrated.fontFamily": "monospace",
+    "editor.fontLigatures": true,
+    "editor.cursorBlinking": "expand",
+    "workbench.productIconTheme": "material-product-icons",
+    "editor.fontFamily": "'cascadia code','fira code'",
+    "editor.fontSize": 14
+}
