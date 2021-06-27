@@ -150,7 +150,7 @@
 #    TODO: V2
 #   - Test exa(https://github.com/ogham/exa) over lsd, when available on stable repo
 #//   - Link with Tmux / ZSH / Software / Shell Color folders
-#   - Regex to modify orchis top bar size   
+# //  - Regex to modify orchis top bar size   
 
 # RTM
 
@@ -353,6 +353,11 @@ sudo apt-get -f install -y
 # Fluent Theme
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
 sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh"
+
+# Dracula theme
+wget https://github.com/dracula/gtk/archive/master.zip -O ~/.themes/Dracula.zip
+unzip ~/.themes/Dracula.zip -d ~/.themes/Dracula
+mv ~/.themes/Dracula/gtk-master/* ~/.themes/Dracula
 
 # Tela-circle-icon-theme
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
