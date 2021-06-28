@@ -323,6 +323,7 @@ unzip ~/.local/share/fonts/Agave.zip -d ~/.local/share/fonts/
 wget https://github.com/microsoft/cascadia-code/releases/download/v2105.24/CascadiaCode-2105.24.zip -O /tmp/CascadiaCode-2105.24.zip
 unzip /tmp/CascadiaCode-2105.24.zip -d /tmp/
 cp /tmp/ttf/CascadiaCodePL.ttf  ~/.local/share/fonts/
+cp /tmp/ttf/CascadiaCode.ttf  ~/.local/share/fonts/
 
 fc-cache -vf ~/.local/share/fonts/
 
