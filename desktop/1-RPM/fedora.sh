@@ -48,12 +48,19 @@
 #				- zsh color change
 #
 # TODO:
-#   - Check if is the system is a Fedora Workstation installation 
-#   - Vivaldi installation
-#   - Install Aws K8S toolkit (cli and auth)
-#   //ZSH function to not show context-not-set with k8s installed
+#//   - Check if is the system is a Fedora Workstation installation 
+#//  - Vivaldi installation
+#//  - Install Aws K8S toolkit (cli and auth)
+#//   - ZSH function to not show context-not-set with k8s installed
 #   - Test automated deploy
-#   - Link with Tmux / ZSH / Software / Shell Color folders
+#//   - Link with Tmux / ZSH / Software / Shell Color folders
+# Things to install
+# nordvpn
+# libratbag-tools
+# gir1.2-gtop-2.0
+# vivaldi
+# Teamviewer bug
+
 #RTM
 
 #Root check
@@ -74,10 +81,10 @@ fi
 
 
 # Grub2 config - Save last option
-sudo runuser -l  root -c 'echo "GRUB_DEFAULT=saved" >> /etc/default/grub'
-sudo runuser -l  root -c 'echo "GRUB_SAVEDEFAULT=true" >> /etc/default/grub'
-sudo grub2-editenv create
-sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
+# sudo runuser -l  root -c 'echo "GRUB_DEFAULT=saved" >> /etc/default/grub'
+# sudo runuser -l  root -c 'echo "GRUB_SAVEDEFAULT=true" >> /etc/default/grub'
+# sudo grub2-editenv create
+# sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
 
 # Increase fedora package manager speed
 sudo runuser -l  root -c 'echo "max_parallel_downloads=10" >> /etc/dnf/dnf.conf'
@@ -90,8 +97,8 @@ sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-r
 sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf groupupdate -y core
 
-# Install the packages from debian repo
-sudo dnf install -y zsh clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl net-tools vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina nload arc-theme chrome-gnome-shell gnome-menus gnome-weather pwgen sysstat alacarte gnome-extensions-app alacritty fzf ffmpeg neofetch util-linux-user grub-customizer xclip flameshot unrar
+# Install the packages from fedora repo
+sudo dnf install -y zsh vlc clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina nload arc-theme chrome-gnome-shell gnome-menus pwgen sysstat alacarte gnome-extensions-app alacritty fzf ffmpeg neofetch util-linux-user grub-customizer xclip flameshot unrar bat gawk net-tools coreutils ncdu whois pdfshuffler piper lsd
 
 # Aditional fedora packages
 ## Plugins Core
@@ -111,13 +118,13 @@ sudo ln -s /var/lib/snapd/snap /snap
 ##Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
-## G910 color profile
-sudo dnf copr enable -y lkiesow/g810-led # Enable Copr repository
-sudo dnf install -y g810-led
-sudo g810-led -p /etc/g810-led/samples/colors
-#sudo g810-led -p /etc/g810-led/samples/group_keys
-## Set color scheme on boot
-(crontab -l 2>/dev/null; echo "@reboot g810-led -p /etc/g810-led/samples/colors") | crontab -
+# ## G910 color profile
+# sudo dnf copr enable -y lkiesow/g810-led # Enable Copr repository
+# sudo dnf install -y g810-led
+# sudo g810-led -p /etc/g810-led/samples/colors
+# #sudo g810-led -p /etc/g810-led/samples/group_keys
+# ## Set color scheme on boot
+# (crontab -l 2>/dev/null; echo "@reboot g810-led -p /etc/g810-led/samples/colors") | crontab -
 
 # Flathub Packages
 ## Slack
@@ -138,18 +145,24 @@ sudo flatpak install -y flathub org.kde.kdenlive
 ## OBS Studio
 sudo flatpak install -y flathub com.obsproject.Studio
 
-## VLC
-sudo flatpak install -y flathub org.videolan.VLC
+## FFaudioConverter
+sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
 
-#Create git-folder
-mkdir -p ~/GIT-REPOS
+## MkCron
+sudo snap install mkcron
+
+## Install Teamviewer
+wget https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
+sudo dnf -y install teamviewer.x86_64.rpm
+rm teamviewer.x86_64.rpm
 
 #Install Google Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -O /tmp/google-chrome-stable_current_x86_64.rpm
 sudo dnf install -y /tmp/google-chrome-stable_current_x86_64.rpm
 
 # Install Vivaldi
-wget https:”
+# wget https:”
+
 ## Install Visual Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
@@ -177,6 +190,12 @@ unzip ~/.local/share/fonts/3270.zip -d ~/.local/share/fonts/
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Agave.zip -O ~/.local/share/fonts/Agave.zip
 unzip ~/.local/share/fonts/Agave.zip -d ~/.local/share/fonts/
 
+## cascadia font for vscode
+wget https://github.com/microsoft/cascadia-code/releases/download/v2105.24/CascadiaCode-2105.24.zip -O /tmp/CascadiaCode-2105.24.zip
+unzip /tmp/CascadiaCode-2105.24.zip -d /tmp/
+cp /tmp/ttf/CascadiaCodePL.ttf  ~/.local/share/fonts/
+cp /tmp/ttf/CascadiaCode.ttf  ~/.local/share/fonts/
+
 fc-cache -vf ~/.local/share/fonts/
 
 # New VIM
@@ -184,10 +203,12 @@ curl -sLf https://spacevim.org/install.sh | bash
 echo "set ignorecase" >> ~/.vim/vimrc
 echo "set paste" >> ~/.vim/vimrc
 
+#Create git-folder
+mkdir -p ~/GIT-REPOS
 
 # Flat-remix Theme
-sudo dnf copr enable -y daniruiz/flat-remix
-sudo dnf install -y flat-remix-gnome  flat-remix-gtk2-theme flat-remix-gtk3-theme flat-remix-icon-theme
+# sudo dnf copr enable -y daniruiz/flat-remix
+# sudo dnf install -y flat-remix-gnome  flat-remix-gtk2-theme flat-remix-gtk3-theme flat-remix-icon-theme
 
 # Install GTK theme Vimix
 git clone https://github.com/vinceliuice/vimix-gtk-themes.git ~/GIT-REPOS/CORE/vimix-gtk-themes
@@ -201,47 +222,51 @@ cd ~/GIT-REPOS/CORE/vimix-icons
 sh -c "./install.sh"
 cd
 
-# Layan theme
-git clone https://github.com/vinceliuice/Layan-gtk-theme.git ~/GIT-REPOS/CORE/Layan-gtk-theme
-cd ~/GIT-REPOS/CORE/Layan-gtk-theme
-sh -c "./install.sh"
-cd
+# Nordic theme
+git clone https://github.com/EliverLara/Nordic.git ~/GIT-REPOS/CORE/Nordic
+sudo mv ~/GIT-REPOS/CORE/Nordic /usr/share/themes/
 
-# Tela-circle-icon-theme
-git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
-cd ~/GIT-REPOS/CORE/Tela-circle-icon-theme
-sh -c "./install.sh -a"
-# sh -c "./install.sh"
-cd”
 # Qogir theme
 git clone https://github.com/vinceliuice/Qogir-theme.git ~/GIT-REPOS/CORE/Qogir-theme
-cd ~/GIT-REPOS/CORE/Qogir-theme
-sh -c "./install.sh"
-cd
-
-# WhiteSur-gtk-theme
-sudo dnf install -y sassc optipng inkscape glib2-devel
-git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/GIT-REPOS/CORE/WhiteSur-gtk-theme
-cd ~/GIT-REPOS/CORE/WhiteSur-gtk-theme
-sh -c "./install.sh"
-cd
+sh -c "~/GIT-REPOS/CORE/Qogir-theme/install.sh"
 
 # Orchis theme
 git clone https://github.com/vinceliuice/Orchis-theme.git ~/GIT-REPOS/CORE/Orchis-theme
-cd ~/GIT-REPOS/CORE/Orchis-theme
-sh -c "./install.sh"
-cd
+sh -c "~/GIT-REPOS/CORE/Orchis-theme/install.sh"
 
 # ChromeOS theme
 git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/ChromeOS-theme
-cd ~/GIT-REPOS/CORE/ChromeOS-theme
-sh -c "./install.sh"
-cd
+sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
 
-# Install Teamviewer
-wget https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
-sudo dnf -y install teamviewer.x86_64.rpm
-rm teamviewer.x86_64.rpm
+## WhiteSur-gtk-theme
+sudo dnf install -y sassc optipng inkscape glib2-devel
+git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/GIT-REPOS/CORE/WhiteSur-gtk-theme
+sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/install.sh -i void -N mojave -c dark -c light -t all 
+sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/tweaks.sh -g 
+
+
+# Fluent Theme
+git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
+sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh"
+
+# Dracula theme
+wget https://github.com/dracula/gtk/archive/master.zip -O ~/.themes/Dracula.zip
+unzip ~/.themes/Dracula.zip -d ~/.themes/Dracula
+mv ~/.themes/Dracula/gtk-master/* ~/.themes/Dracula
+
+# Tela-circle-icon-theme
+git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
+sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh -a"
+
+# Flatery Icon Theme
+git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
+ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
+ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-Indigo-Dark
+
+## Dock icon 
+#mv ~/.local/share/icons/Flatery-Indigo-Dark/actions/16/view-grid.svg ~/.local/share/icons/Flatery-Indigo-Dark/actions/16/view-grid-backup.svg
+#cp  ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/assets/gnome-shell/activities-black/activities-void.svg ~/.local/share/icons/Flatery-Indigo-Dark/actions/16/view-grid.svg
+
 
 ######################### Using gnome-boxes now #########################
 # VirtualBox
@@ -260,26 +285,33 @@ rm teamviewer.x86_64.rpm
 ## https://www.virtualbox.org/wiki/Testbuilds > Linux 64-bit > Run .run file
 ######################### Using gnome-boxes now #########################
 
+# Colorls
+sudo dnf install -y ruby ruby-devel
+sudo gem install colorls
+
+# Install ClamAV
+sudo dnf install -y clamav clamtk
+# sudo dnf install -y clamav-daemon
 
 # RTM
-clear
+#clear
 echo "#################################"
-echo "#                         #"
-echo "#	    rtm.codes       	#"
-echo "# Please reboot your pc   #"
-echo "#                         #"
+echo "#                               #"
+echo "#         rtm.codes             #"
+echo "#     Please reboot your pc     #"
+echo "#                               #"
 echo "#################################"
 
-clear
+#clear
 echo "*** AFTER INSTALL *** "
 
 echo ""
-echo "*** Fedora Gnome *** "
+echo "*** Gnome *** "
 echo "# Setup Theme
-* Applications: Flat-Remix-Blue-Dark 
+* Applications: ChromeOS-dark-compact 
 * Cursor: Breeze_Snow
-* Icons: Tela-circle-blue-dark
-* Shell: Flat-Remix-Blue-Darkest-fullPanel / Layan"
+* Icons: Flatery-Indigo-Dark
+* Shell: Orchis-dark-compact"
 
 echo ""
 
