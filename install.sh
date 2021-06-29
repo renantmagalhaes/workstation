@@ -27,7 +27,7 @@ case $n in
     2) bash tmux/tmux.sh ;;
     3) bash zsh/zsh.sh ;;
     4) bash zsh/zsh.sh ;;
-    5) guake --restore-preferences guake/rtm-guake-settings && echo "Done" ;;
+    5) guake --restore-preferences utils/guake/rtm-guake-settings && echo "Done" ;;
     6) bash dev-tools/software.sh ;;
     7) bash cron/cron-scripts.sh && echo "Done" ;;
 # ===================================================================================
