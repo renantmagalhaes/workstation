@@ -282,11 +282,6 @@ sudo apt-get -f install -y
 #Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
-# ## G810 color profile
-# sudo apt install -y g810-led
-# sudo g810-led -p /etc/g810-led/samples/colors
-# #sudo g810-led -p /etc/g810-led/samples/group_keys
-
 # New VIM
 sudo apt-get install -y build-essential
 curl -sLf https://spacevim.org/install.sh | bash
@@ -343,11 +338,11 @@ sh -c "~/GIT-REPOS/CORE/Orchis-theme/install.sh"
 git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/ChromeOS-theme
 sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
 
-## WhiteSur-gtk-theme
+# WhiteSur-gtk-theme
 sudo apt install -y gtk2-engines-murrine gtk2-engines-pixbuf sassc optipng inkscape libcanberra-gtk-module libglib2.0-dev libxml2-utils libnotify-bin libglib2.0-dev-bin
 git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/GIT-REPOS/CORE/WhiteSur-gtk-theme
 sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/install.sh -i void -N mojave -c dark -c light -t all 
-sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/tweaks.sh -g 
+# sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/tweaks.sh -g 
 sudo apt-get -f install -y
 
 
@@ -382,11 +377,6 @@ sudo apt-get -f install -y
 # sudo apt install -y flat-remix-gnome flat-remix flat-remix-gtk
 # sudo apt-get -f install -y
 
-
-# Install Veracrypy
-wget https://launchpad.net/veracrypt/trunk/1.24-update7/+download/veracrypt-1.24-Update7-Ubuntu-20.04-amd64.deb -O /tmp/veracrypt-1.24-Update7-Ubuntu-20.04-amd64.deb
-sudo dpkg -i /tmp/veracrypt-1.24-Update7-Ubuntu-20.04-amd64.deb
-sudo apt-get -f install -y
 
 # Install ClamAV
 sudo apt install -y clamav clamtk
