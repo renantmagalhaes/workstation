@@ -118,13 +118,12 @@ sudo ln -s /var/lib/snapd/snap /snap
 ##Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
-# ## G910 color profile
-# sudo dnf copr enable -y lkiesow/g810-led # Enable Copr repository
-# sudo dnf install -y g810-led
-# sudo g810-led -p /etc/g810-led/samples/colors
-# #sudo g810-led -p /etc/g810-led/samples/group_keys
-# ## Set color scheme on boot
-# (crontab -l 2>/dev/null; echo "@reboot g810-led -p /etc/g810-led/samples/colors") | crontab -
+# Enable BT FastConnectable
+sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
+
+# Install pip packages
+sudo pip3 install virtualenv virtualenvwrapper pylint
+sudo pip3 install bpytop --upgrade
 
 # Flathub Packages
 ## Slack
@@ -169,6 +168,9 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
 sudo dnf check-update
 sudo dnf install -y code
 
+# Create git-folder
+mkdir -p ~/GIT-REPOS/CORE
+
 # Install Fonts
 git clone https://github.com/powerline/fonts.git ~/GIT-REPOS/CORE/fonts/
 bash ~/GIT-REPOS/CORE/fonts/install.sh
@@ -202,9 +204,6 @@ fc-cache -vf ~/.local/share/fonts/
 curl -sLf https://spacevim.org/install.sh | bash
 echo "set ignorecase" >> ~/.vim/vimrc
 echo "set paste" >> ~/.vim/vimrc
-
-#Create git-folder
-mkdir -p ~/GIT-REPOS
 
 # Flat-remix Theme
 # sudo dnf copr enable -y daniruiz/flat-remix
