@@ -23,7 +23,7 @@ echo " 0)Exit"
 
 read n
 case $n in
-    1) bash desktop/0-DEB/0-Pop\!_OS.sh ;;
+    1) bash desktop/0-DEB/0-system.sh ;;
     2) bash tmux/tmux.sh ;;
     3) bash zsh/zsh.sh ;;
     4) bash zsh/zsh.sh ;;
