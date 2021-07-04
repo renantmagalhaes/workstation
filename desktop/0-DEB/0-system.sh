@@ -160,14 +160,14 @@ echo “Dont run this script as root” 2>&1
 exit 1
 fi
 
-## Is Pop!_OS ?
-grep -o "ID=pop" /etc/os-release
-RESULT=$?
-if [ $RESULT -eq 0 ]; then
-  echo "Pop!_OS detected"
-else
-  read -rsn1 -p "You are NOT running Pop!_OS. Are you sure to continue? (Press ANY key to confirm)"
-fi
+# ## Is Pop!_OS ?
+# grep -o "ID=pop" /etc/os-release
+# RESULT=$?
+# if [ $RESULT -eq 0 ]; then
+#   echo "Pop!_OS detected"
+# else
+#   read -rsn1 -p "You are NOT running Pop!_OS. Are you sure to continue? (Press ANY key to confirm)"
+# fi
 
 # Add keys, ppa and repos
 ## VirtualBox
