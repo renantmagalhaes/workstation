@@ -13,7 +13,7 @@
 #*  -> Preferred applications
 #*      - Web: Vivaldi / Google Chrome
 #*      - Editor: Visual Studio Code
-#*      - Music: Clementine / Spotify(web)
+#*      - Music: Clementine
 #*      - Video: VLC 
 #*      - Terminal: Guake 
 #*      - File Manager: Nautilus
@@ -47,19 +47,17 @@
 #       - rpm fusion - groupupdate core
 #				- zsh color change
 #
+#   V1.0 2021-07-09 RTM:
+#       - Upgrade for Gnome 40
+#       - Upgrade for Fedora 34
+#       - Fix vivaldi
+#       - Fix tamviewer package
+#       - Fix nordvpn
+#       - Tested full automated deploy with success
+#       - NordVPN outside default script
+#
 # TODO:
-#//   - Check if is the system is a Fedora Workstation installation 
-#//  - Vivaldi installation
-#//  - Install Aws K8S toolkit (cli and auth)
-#//   - ZSH function to not show context-not-set with k8s installed
-#   - Test automated deploy
-#//   - Link with Tmux / ZSH / Software / Shell Color folders
-# Things to install
-# nordvpn
-# libratbag-tools
-# gir1.2-gtop-2.0
-# vivaldi
-# Teamviewer bug
+
 
 #RTM
 
@@ -154,13 +152,15 @@ sudo snap install mkcron
 wget https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
 sudo dnf -y install teamviewer.x86_64.rpm
 rm teamviewer.x86_64.rpm
+sudo sed -i 's/failovermethod\=priority//' /etc/yum.repos.d/teamviewer.repo
 
 #Install Google Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -O /tmp/google-chrome-stable_current_x86_64.rpm
 sudo dnf install -y /tmp/google-chrome-stable_current_x86_64.rpm
 
 # Install Vivaldi
-# wget https:”
+sudo dnf config-manager --add-repo https://repo.vivaldi.com/archive/vivaldi-fedora.repo
+sudo dnf install -y vivaldi-stable
 
 ## Install Visual Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -241,8 +241,7 @@ sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
 sudo dnf install -y sassc optipng inkscape glib2-devel
 git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/GIT-REPOS/CORE/WhiteSur-gtk-theme
 sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/install.sh -i void -N mojave -c dark -c light -t all 
-sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/tweaks.sh -g 
-
+# sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/tweaks.sh -g 
 
 # Fluent Theme
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
