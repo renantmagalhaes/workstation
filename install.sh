@@ -34,7 +34,7 @@ case $n in
 # ===================================================================================
     11) bash utils/virtualbox/virtualbox-ext-pack.sh ;;
     12) bash utils/deckboard/deckboard.sh ;;
-    12) sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh) ;;
+    13) sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh) ;;
 # ===================================================================================
     0)  echo "Bye" || exit ;;
 # ===================================================================================
