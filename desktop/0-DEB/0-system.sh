@@ -177,10 +177,6 @@ fi
 ## Vivaldi Browser
 wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo apt-key add -
 sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
-## Nordvpn
-wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb -O /tmp/nordvpn-release_1.0.0_all.deb
-sudo dpkg -i /tmp/nordvpn-release_1.0.0_all.deb
-
 
 # Update / upgrade
 sudo apt-get update && sudo apt-get -y upgrade

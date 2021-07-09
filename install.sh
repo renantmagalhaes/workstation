@@ -18,6 +18,7 @@ echo " 7) Cron Jobs"
 echo " ==== UTILS ===="
 echo " 11) VirtualBox Extension Pack"
 echo " 12) Deckboard"
+echo " 13) NordVPN"
 echo " ==============="
 echo " 0)Exit"
 
@@ -33,6 +34,7 @@ case $n in
 # ===================================================================================
     11) bash utils/virtualbox/virtualbox-ext-pack.sh ;;
     12) bash utils/deckboard/deckboard.sh ;;
+    12) sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh) ;;
 # ===================================================================================
     0)  echo "Bye" || exit ;;
 # ===================================================================================
