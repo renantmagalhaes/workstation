@@ -1,5 +1,5 @@
 # TODO:
-#  - Check if Deb or RPM distribution
+#//  - Check if Deb or RPM distribution
 
 # Default folder
 mkdir -p ~/Apps
@@ -41,45 +41,53 @@ sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_
 sudo apt install -y pgadmin4-desktop
 
 
-#Yarn and NodeJs
-### Fedora
-#sudo dnf install -y curl gnupg2 gcc-c++ make
-#sudo curl -sL https://rpm.nodesource.com/setup_12.x | sudo bash -
-#sudo curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
-#sudo dnf update -y
-#sudo dnf install -y yarn nodejs
+# RPM OR DEB env
 
-## DEB based
-sudo apt install -y curl gnupg2 make
-sudo curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
-sudo curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-sudo echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt update -y
-sudo apt install -y yarn nodejs
+# check cmd function
+check_cmd() {
+    command -v "$1" 2> /dev/null
+}
 
-# Docker
+# Add the repository key with either wget or curl
+if check_cmd apt-get; then # FOR DEB SYSTEMS
+    ## docker
+    sudo apt install -y apt-transport-https ca-certificates curl software-properties-common 
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+    apt-cache policy docker-ce
+    sudo apt install -y docker-ce docker-compose
+    sudo systemctl enable docker
+    sudo systemctl restart docker
+    sudo usermod -aG docker $USER
 
-### Fedora
-####Install Docker Repo Version - Fedora 33 (Maybe not needed anymore after cgroups update)
-#sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
-#sudo firewall-cmd --permanent --zone=trusted --add-interface=docker0
-#sudo firewall-cmd --permanent --zone=FedoraWorkstation --add-masquerade
-#sudo firewall-cmd --reload
-#sudo dnf install -y moby-engine docker-compose
-#sudo systemctl enable docker
-#sudo groupadd docker
-#sudo usermod -aG docker $USER
-#sudo systemctl restart docker
-#
-## DEB Based 20.04
-sudo apt install -y apt-transport-https ca-certificates curl software-properties-common 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-apt-cache policy docker-ce
-sudo apt install -y docker-ce docker-compose
-sudo systemctl enable docker
-sudo systemctl restart docker
-sudo usermod -aG docker $USER
+    ## yarn / Nodejs
+    sudo apt install -y curl gnupg2 make
+    sudo curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
+    sudo curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    sudo echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+    sudo apt update -y
+    sudo apt install -y yarn nodejs
+    
+elif check_cmd dnf; then  # FOR RPM SYSTEMS
+    ## docker
+    sudo dnf -y install dnf-plugins-core
+    sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+    sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-compose
+    sudo systemctl enable docker
+    sudo groupadd docker
+    sudo usermod -aG docker $USER
+    sudo systemctl restart docker
+
+    ## yarn / nodejs
+    sudo dnf install -y curl gnupg2 gcc-c++ make
+    sudo curl -sL https://rpm.nodesource.com/setup_12.x | sudo bash -
+    sudo curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
+    sudo sed -i 's/failovermethod\=priority//' /etc/yum.repos.d/*
+    sudo dnf update -y
+    sudo dnf install -y yarn nodejs
+else
+    echo "Not able to identify the system"
+fi
 
 #clear
 echo "###########################"
