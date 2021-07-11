@@ -30,10 +30,11 @@ window-width=100
 show-hide='<Primary>Return'
 
 [style/background]
-transparency=96
+transparency=98
 
 [style/font]
 allow-bold=true
-palette='#1f1f22222929:#d4d419191919:#adadefef7f7f:#fefea4a44c4c:#36367b7bf0f0:#bfbf2e2e5d5d:#4949aeaee6e6:#e6e6e6e6e6e6:#8c8c4242abab:#ecec01010101:#4747d4d4b9b9:#ffff8a8a1818:#27277f7fffff:#d7d716165555:#0505a1a1f7f7:#ffffffffffff:#ffffffffffff:#0c0c0c0c0c0c'
+bold-is-bright=false
+palette='#1f1f22222929:#d4d419191919:#adadefef7f7f:#fefea4a44c4c:#8181a1a1c1c1:#bfbf2e2e5d5d:#4949aeaee6e6:#e6e6e6e6e6e6:#8c8c4242abab:#ecec01010101:#4747d4d4b9b9:#ffff8a8a1818:#8181a1a1c1c1:#d7d716165555:#0505a1a1f7f7:#ffffffffffff:#ffffffffffff:#212121212121'
 palette-name='Custom'
 style='FiraCode Nerd Font 10'
