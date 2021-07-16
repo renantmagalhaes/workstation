@@ -18,3 +18,9 @@ View split on right -> Super+Right
 Maximize Window -> Super+Up
 Restore Window -> Super+Down
 ```
+
+## switch windows
+
+```
+switch windows -> Alt+Tab
+```
