@@ -35,8 +35,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(
   git
-  kubectl
-  kube-ps1
+  #kubectl
+  #kube-ps1
   zsh-completions
   zsh-autosuggestions
   colored-man-pages
@@ -50,14 +50,14 @@ plugins=(
 )
 
 
-# Configure env kubectl
-source "$ZSH/plugins/kube-ps1/kube-ps1.plugin.zsh"
-prompt_kube_ps1(){
-   echo -n `kube_ps1`
-}
-KUBE_PS1_NS_ENABLE="false"
-KUBE_PS1_DIVIDER=""
-KUBE_PS1_SYMBOL_USE_IMG="\u2638"
+# # Configure env kubectl
+# source "$ZSH/plugins/kube-ps1/kube-ps1.plugin.zsh"
+# prompt_kube_ps1(){
+#    echo -n `kube_ps1`
+# }
+# KUBE_PS1_NS_ENABLE="false"
+# KUBE_PS1_DIVIDER=""
+# KUBE_PS1_SYMBOL_USE_IMG="\u2638"
 
 # Display
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=1
@@ -280,94 +280,94 @@ POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='green'
 ######################### COLOR THEME ########################
 
 
-######################### KubeContext ########################
-#############[ kubecontext: current kubernetes context (https://kubernetes.io/) ]#############
-  # Show kubecontext only when the the command you are typing invokes one of these tools.
-  # Tip: Remove the next line to always show kubecontext.
-#POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
+# ######################### KubeContext ########################
+# #############[ kubecontext: current kubernetes context (https://kubernetes.io/) ]#############
+#   # Show kubecontext only when the the command you are typing invokes one of these tools.
+#   # Tip: Remove the next line to always show kubecontext.
+# #POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
 
-  # Kubernetes context classes for the purpose of using different colors, icons and expansions with
-  # different contexts.
-  #
-  # POWERLEVEL9K_KUBECONTEXT_CLASSES is an array with even number of elements. The first element
-  # in each pair defines a pattern against which the current kubernetes context gets matched.
-  # More specifically, it's P9K_CONTENT prior to the application of context expansion (see below)
-  # that gets matched. If you unset all POWERLEVEL9K_KUBECONTEXT_*CONTENT_EXPANSION parameters,
-  # you'll see this value in your prompt. The second element of each pair in
-  # POWERLEVEL9K_KUBECONTEXT_CLASSES defines the context class. Patterns are tried in order. The
-  # first match wins.
-  #
-  # For example, given these settings:
-  #
-  #   POWERLEVEL9K_KUBECONTEXT_CLASSES=(
-  #     '*prod*'  PROD
-  #     '*test*'  TEST
-  #     '*'       DEFAULT)
-  #
-  # If your current kubernetes context is "deathray-testing/default", its class is TEST
-  # because "deathray-testing/default" doesn't match the pattern '*prod*' but does match '*test*'.
-  #
-  # You can define different colors, icons and content expansions for different classes:
-  #
-  #   POWERLEVEL9K_KUBECONTEXT_TEST_FOREGROUND=0
-  #   POWERLEVEL9K_KUBECONTEXT_TEST_BACKGROUND=2
-  #   POWERLEVEL9K_KUBECONTEXT_TEST_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  #   POWERLEVEL9K_KUBECONTEXT_TEST_CONTENT_EXPANSION='> ${P9K_CONTENT} <'
-  POWERLEVEL9K_KUBECONTEXT_CLASSES=(
-      # '*prod*'  PROD    # These values are examples that are unlikely
-      # '*test*'  TEST    # to match your needs. Customize them as needed.
-      '*'       DEFAULT)
-  POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=white
-  POWERLEVEL9K_KUBECONTEXT_DEFAULT_BACKGROUND=blue
+#   # Kubernetes context classes for the purpose of using different colors, icons and expansions with
+#   # different contexts.
+#   #
+#   # POWERLEVEL9K_KUBECONTEXT_CLASSES is an array with even number of elements. The first element
+#   # in each pair defines a pattern against which the current kubernetes context gets matched.
+#   # More specifically, it's P9K_CONTENT prior to the application of context expansion (see below)
+#   # that gets matched. If you unset all POWERLEVEL9K_KUBECONTEXT_*CONTENT_EXPANSION parameters,
+#   # you'll see this value in your prompt. The second element of each pair in
+#   # POWERLEVEL9K_KUBECONTEXT_CLASSES defines the context class. Patterns are tried in order. The
+#   # first match wins.
+#   #
+#   # For example, given these settings:
+#   #
+#   #   POWERLEVEL9K_KUBECONTEXT_CLASSES=(
+#   #     '*prod*'  PROD
+#   #     '*test*'  TEST
+#   #     '*'       DEFAULT)
+#   #
+#   # If your current kubernetes context is "deathray-testing/default", its class is TEST
+#   # because "deathray-testing/default" doesn't match the pattern '*prod*' but does match '*test*'.
+#   #
+#   # You can define different colors, icons and content expansions for different classes:
+#   #
+#   #   POWERLEVEL9K_KUBECONTEXT_TEST_FOREGROUND=0
+#   #   POWERLEVEL9K_KUBECONTEXT_TEST_BACKGROUND=2
+#   #   POWERLEVEL9K_KUBECONTEXT_TEST_VISUAL_IDENTIFIER_EXPANSION='⭐'
+#   #   POWERLEVEL9K_KUBECONTEXT_TEST_CONTENT_EXPANSION='> ${P9K_CONTENT} <'
+#   POWERLEVEL9K_KUBECONTEXT_CLASSES=(
+#       # '*prod*'  PROD    # These values are examples that are unlikely
+#       # '*test*'  TEST    # to match your needs. Customize them as needed.
+#       '*'       DEFAULT)
+#   POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=white
+#   POWERLEVEL9K_KUBECONTEXT_DEFAULT_BACKGROUND=blue
   
-  # POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='⭐'
+#   # POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
-  # Use POWERLEVEL9K_KUBECONTEXT_CONTENT_EXPANSION to specify the content displayed by kubecontext
-  # segment. Parameter expansions are very flexible and fast, too. See reference:
-  # http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion.
-  #
-  # Within the expansion the following parameters are always available:
-  #
-  # - P9K_CONTENT                The content that would've been displayed if there was no content
-  #                              expansion defined.
-  # - P9K_KUBECONTEXT_NAME       The current context's name. Corresponds to column NAME in the
-  #                              output of `kubectl config get-contexts`.
-  # - P9K_KUBECONTEXT_CLUSTER    The current context's cluster. Corresponds to column CLUSTER in the
-  #                              output of `kubectl config get-contexts`.
-  # - P9K_KUBECONTEXT_NAMESPACE  The current context's namespace. Corresponds to column NAMESPACE
-  #                              in the output of `kubectl config get-contexts`. If there is no
-  #                              namespace, the parameter is set to "default".
-  # - P9K_KUBECONTEXT_USER       The current context's user. Corresponds to column AUTHINFO in the
-  #                              output of `kubectl config get-contexts`.
-  #
-  # If the context points to Google Kubernetes Engine (GKE) or Elastic Kubernetes Service (EKS),
-  # the following extra parameters are available:
-  #
-  # - P9K_KUBECONTEXT_CLOUD_NAME     Either "gke" or "eks".
-  # - P9K_KUBECONTEXT_CLOUD_ACCOUNT  Account/project ID.
-  # - P9K_KUBECONTEXT_CLOUD_ZONE     Availability zone.
-  # - P9K_KUBECONTEXT_CLOUD_CLUSTER  Cluster.
-  #
-  # P9K_KUBECONTEXT_CLOUD_* parameters are derived from P9K_KUBECONTEXT_CLUSTER. For example,
-  # if P9K_KUBECONTEXT_CLUSTER is "gke_my-account_us-east1-a_my-cluster-01":
-  #
-  #   - P9K_KUBECONTEXT_CLOUD_NAME=gke
-  #   - P9K_KUBECONTEXT_CLOUD_ACCOUNT=my-account
-  #   - P9K_KUBECONTEXT_CLOUD_ZONE=us-east1-a
-  #   - P9K_KUBECONTEXT_CLOUD_CLUSTER=my-cluster-01
-  #
-  # If P9K_KUBECONTEXT_CLUSTER is "arn:aws:eks:us-east-1:123456789012:cluster/my-cluster-01":
-  #
-  #   - P9K_KUBECONTEXT_CLOUD_NAME=eks
-  #   - P9K_KUBECONTEXT_CLOUD_ACCOUNT=123456789012
-  #   - P9K_KUBECONTEXT_CLOUD_ZONE=us-east-1
-  #   - P9K_KUBECONTEXT_CLOUD_CLUSTER=my-cluster-01
-  POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION=
-  # Show P9K_KUBECONTEXT_CLOUD_CLUSTER if it's not empty and fall back to P9K_KUBECONTEXT_NAME.
-  POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${P9K_KUBECONTEXT_CLOUD_CLUSTER:-${P9K_KUBECONTEXT_NAME}}'
-  # Append the current context's namespace if it's not "default".
-  POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${${:-/$P9K_KUBECONTEXT_NAMESPACE}:#/default}'
-######################### KubeContext ########################
+#   # Use POWERLEVEL9K_KUBECONTEXT_CONTENT_EXPANSION to specify the content displayed by kubecontext
+#   # segment. Parameter expansions are very flexible and fast, too. See reference:
+#   # http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion.
+#   #
+#   # Within the expansion the following parameters are always available:
+#   #
+#   # - P9K_CONTENT                The content that would've been displayed if there was no content
+#   #                              expansion defined.
+#   # - P9K_KUBECONTEXT_NAME       The current context's name. Corresponds to column NAME in the
+#   #                              output of `kubectl config get-contexts`.
+#   # - P9K_KUBECONTEXT_CLUSTER    The current context's cluster. Corresponds to column CLUSTER in the
+#   #                              output of `kubectl config get-contexts`.
+#   # - P9K_KUBECONTEXT_NAMESPACE  The current context's namespace. Corresponds to column NAMESPACE
+#   #                              in the output of `kubectl config get-contexts`. If there is no
+#   #                              namespace, the parameter is set to "default".
+#   # - P9K_KUBECONTEXT_USER       The current context's user. Corresponds to column AUTHINFO in the
+#   #                              output of `kubectl config get-contexts`.
+#   #
+#   # If the context points to Google Kubernetes Engine (GKE) or Elastic Kubernetes Service (EKS),
+#   # the following extra parameters are available:
+#   #
+#   # - P9K_KUBECONTEXT_CLOUD_NAME     Either "gke" or "eks".
+#   # - P9K_KUBECONTEXT_CLOUD_ACCOUNT  Account/project ID.
+#   # - P9K_KUBECONTEXT_CLOUD_ZONE     Availability zone.
+#   # - P9K_KUBECONTEXT_CLOUD_CLUSTER  Cluster.
+#   #
+#   # P9K_KUBECONTEXT_CLOUD_* parameters are derived from P9K_KUBECONTEXT_CLUSTER. For example,
+#   # if P9K_KUBECONTEXT_CLUSTER is "gke_my-account_us-east1-a_my-cluster-01":
+#   #
+#   #   - P9K_KUBECONTEXT_CLOUD_NAME=gke
+#   #   - P9K_KUBECONTEXT_CLOUD_ACCOUNT=my-account
+#   #   - P9K_KUBECONTEXT_CLOUD_ZONE=us-east1-a
+#   #   - P9K_KUBECONTEXT_CLOUD_CLUSTER=my-cluster-01
+#   #
+#   # If P9K_KUBECONTEXT_CLUSTER is "arn:aws:eks:us-east-1:123456789012:cluster/my-cluster-01":
+#   #
+#   #   - P9K_KUBECONTEXT_CLOUD_NAME=eks
+#   #   - P9K_KUBECONTEXT_CLOUD_ACCOUNT=123456789012
+#   #   - P9K_KUBECONTEXT_CLOUD_ZONE=us-east-1
+#   #   - P9K_KUBECONTEXT_CLOUD_CLUSTER=my-cluster-01
+#   POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION=
+#   # Show P9K_KUBECONTEXT_CLOUD_CLUSTER if it's not empty and fall back to P9K_KUBECONTEXT_NAME.
+#   POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${P9K_KUBECONTEXT_CLOUD_CLUSTER:-${P9K_KUBECONTEXT_NAME}}'
+#   # Append the current context's namespace if it's not "default".
+#   POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${${:-/$P9K_KUBECONTEXT_NAMESPACE}:#/default}'
+# ######################### KubeContext ########################
 
 ######################### General Setup ########################
 #characters backspace 
@@ -393,8 +393,25 @@ export ENHANCD_FILTER
 # crontab editor
 export VISUAL=vim
 
+# Quiet output
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+# check cmd function
+check_cmd() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+
+
 #Aliases
-alias update-all="sudo apt update && sudo apt upgrade -y && sudo flatpak update -y && sudo snap refresh"
+if check_cmd apt-get; then # FOR DEB SYSTEMS
+    alias update-all="sudo apt update && sudo apt upgrade -y && sudo flatpak update -y && sudo snap refresh"
+elif check_cmd dnf; then  # FOR RPM SYSTEMS
+    alias update-all="sudo dnf update -y && sudo flatpak update -y && sudo snap refresh"
+else
+    echo "Not able to identify the system"
+fi
+
 alias folder="nautilus"
 alias killtmux="pidof tmux |xargs kill -9"
 alias python="python3"
@@ -422,7 +439,7 @@ alias l='ls -F'
 
 
 ### Utils ###
-alias disk_manager='ncdu'
+alias disk-manager='ncdu'
 
 
 command -v lsd > /dev/null && alias ls='lsd --group-dirs first' && \
