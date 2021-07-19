@@ -35,7 +35,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(
   git
-  #kubectl
+  kubectl
   #kube-ps1
   zsh-completions
   zsh-autosuggestions
