@@ -19,6 +19,8 @@ echo " ==== UTILS ===="
 echo " 11) VirtualBox Extension Pack"
 echo " 12) Deckboard"
 echo " 13) NordVPN"
+echo " 14) Git Config"
+
 echo " ==============="
 echo " 0)Exit"
 
@@ -35,6 +37,7 @@ case $n in
     11) bash utils/virtualbox/virtualbox-ext-pack.sh ;;
     12) bash utils/deckboard/deckboard.sh ;;
     13) sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh) ;;
+    14) bash utils/git-config/git-config.sh ;;
 # ===================================================================================
     0)  echo "Bye" || exit ;;
 # ===================================================================================
