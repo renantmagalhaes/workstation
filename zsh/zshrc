@@ -442,6 +442,8 @@ alias l='ls -F'
 alias disk-manager='ncdu'
 
 
+# command -v exa > /dev/null && alias ls='exa --icons --group-directories-first -g -b -h' && \
+#   alias tree='exa --tree'
 command -v lsd > /dev/null && alias ls='lsd --group-dirs first' && \
 	alias tree='lsd --tree'
 #command -v colorls > /dev/null && alias ls='colorls --sd --gs' && \
