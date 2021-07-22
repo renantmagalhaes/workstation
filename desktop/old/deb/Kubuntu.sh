@@ -242,12 +242,12 @@ sudo apt-get -f install -y
 
 ### TESTS ###
 
-#Parachute
-git clone https://github.com/tcorreabr/Parachute.git ~/GIT-REPOS/CORE/Parachute && cd ~/GIT-REPOS/CORE/Parachute
-make install
-## set super key to open by default
-kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.kglobalaccel,/component/kwin,org.kde.kglobalaccel.Component,invokeShortcut,Parachute"
-qdbus org.kde.KWin /KWin reconfigure
+# #Parachute
+# git clone https://github.com/tcorreabr/Parachute.git ~/GIT-REPOS/CORE/Parachute && cd ~/GIT-REPOS/CORE/Parachute
+# make install
+# ## set super key to open by default
+# kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.kglobalaccel,/component/kwin,org.kde.kglobalaccel.Component,invokeShortcut,Parachute"
+# qdbus org.kde.KWin /KWin reconfigure
 
 
 # Plasma sync configs
