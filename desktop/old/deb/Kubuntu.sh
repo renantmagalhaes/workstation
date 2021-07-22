@@ -48,8 +48,7 @@ fi
 # Add keys, ppa and repos
 ## VirtualBox
 #wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-## Flat-Remix Theme
-#sudo add-apt-repository ppa:daniruiz/flat-remix
+
 ## Vivaldi Browser
 wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo apt-key add -
 sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
@@ -150,9 +149,6 @@ sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluet
 sudo pip3 install virtualenv virtualenvwrapper pylint
 sudo pip3 install bpytop --upgrade
 sudo apt-get -f install -y
-
-#Isolate Alt-Tab workspaces
-gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # New VIM
 sudo apt-get install -y build-essential
