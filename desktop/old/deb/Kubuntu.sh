@@ -190,6 +190,11 @@ cp /tmp/ttf/CascadiaCode.ttf  ~/.local/share/fonts/
 
 fc-cache -vf ~/.local/share/fonts/
 
+# Kvantum
+sudo add-apt-repository ppa:papirus/papirus
+sudo apt-get update
+sudo apt install -y qt5-style-kvantum 
+
 # Themes
 # Qogir
 git clone https://github.com/vinceliuice/Qogir-kde.git ~/GIT-REPOS/CORE/Qogir-kde
