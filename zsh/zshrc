@@ -413,6 +413,7 @@ else
 fi
 
 alias folder="nautilus"
+alias pdf="evince"
 alias killtmux="pidof tmux |xargs kill -9"
 alias python="python3"
 alias killvivaldi="pidof vivaldi-bin |xargs kill -9"
