@@ -152,6 +152,10 @@
 #//   - Link with Tmux / ZSH / Software / Shell Color folders
 # //  - Regex to modify orchis top bar size   
 
+    # TODO: V3 - Validation
+    # echo $XDG_CURRENT_DESKTOP
+    # echo $XDG_SESSION_TYPE 
+
 # RTM
 
 # Verifications 
