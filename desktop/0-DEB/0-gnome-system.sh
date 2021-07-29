@@ -238,7 +238,7 @@ wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.12.2-amd64.
 sudo dpkg -i /tmp/slack-desktop.deb
 
 ## LSD
-wget https://github.com/Peltoche/lsd/releases/download/0.19.0/lsd_0.19.0_amd64.deb -O /tmp/lsd_amd64.deb
+wget https://github.com/Peltoche/lsd/releases/download/0.20.1/lsd_0.20.1_amd64.deb -O /tmp/lsd_amd64.deb
 sudo dpkg -i /tmp/lsd_amd64.deb
 
 ## Fix python default path
