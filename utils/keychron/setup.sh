@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Verifications 
+if [ “$(id -u)” != “0” ]; then
+echo “run this script as root” 2>&1
+exit 1
+fi
 
 ## Makefile
 cat <<EOF >> /etc/systemd/system/keychron.service
