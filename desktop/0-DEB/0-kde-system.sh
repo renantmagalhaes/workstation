@@ -209,6 +209,9 @@ sh -c "~/GIT-REPOS/CORE/Orchis-kde/install.sh"
 git clone https://github.com/vinceliuice/ChromeOS-kde.git ~/GIT-REPOS/CORE/ChromeOS-kde
 sh -c "~/GIT-REPOS/CORE/ChromeOS-kde/install.sh"
 
+git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/ChromeOS-theme
+sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
+
 # WhiteSur
 git clone https://github.com/vinceliuice/WhiteSur-kde.git ~/GIT-REPOS/CORE/WhiteSur-kde
 sh -c "~/GIT-REPOS/CORE/WhiteSur-kde/install.sh"
@@ -221,6 +224,11 @@ sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh -a"
 git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-Indigo-Dark
+
+# SDDM
+## 
+wget https://github.com/renantmagalhaes/workstation/raw/static-files/sddm/sugar-candy.tar.gz -O /tmp/sugar-candy.tar.gz
+sudo tar -xzvf /tmp/sugar-candy.tar.gz -C /usr/share/sddm/themes
 
 # Colorls
 sudo apt install -y ruby-dev
