@@ -7,7 +7,7 @@ exit 1
 fi
 
 ## Makefile
-cat <<EOF >> /etc/systemd/system/keychron.service
+cat <<EOF > /etc/systemd/system/keychron.service
 [Unit]
 Description=The command to make the Keychron K2 work
 
