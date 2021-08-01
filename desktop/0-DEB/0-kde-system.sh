@@ -261,6 +261,32 @@ sudo apt-get -f install -y
 ln -s -f $PWD/desktop/0-DEB/kde-config/kvantum.kvconfig ~/.config/Kvantum/kvantum.kvconfig
 ## Global shortcuts
 ln -s -f $PWD/desktop/0-DEB/kde-config/kglobalshortcutsrc ~/.config/kglobalshortcutsrc
+## Global kwin
+ln -s -f $PWD/desktop/0-DEB/kde-config/kwinrc ~/.config/kwinrc
+## Cursors
+ln -s -f $PWD/desktop/0-DEB/kde-config/kcminputrc ~/.config/kcminputrc
+
+## kdeglobals
+cat <<EOF >> ~/.config/kdeglobals
+
+[General]
+BrowserApplication=vivaldi-stable.desktop
+ColorScheme=ChromeOSDark
+Name=ChromeOSDark
+shadeSortColumn=true
+widgetStyle=Breeze
+
+[Icons]
+Theme=Tela-circle-blue
+
+[KDE]
+ColorScheme=Breeze
+LookAndFeelPackage=com.github.vinceliuice.ChromeOS-dark
+contrast=4
+widgetStyle=kvantum
+EOF
+
+
 
 ### TESTS ###
 
