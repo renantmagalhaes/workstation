@@ -225,6 +225,17 @@ git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-Indigo-Dark
 
+
+# Fluent Theme
+git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
+sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh"
+
+git clone https://github.com/vinceliuice/Fluent-icon-theme.git ~/GIT-REPOS/CORE/Fluent-icon-theme
+sh -c "~/GIT-REPOS/CORE/Fluent-icon-theme/install.sh"
+sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist /usr/share/icons/Fluent-cursors
+sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist-dark /usr/share/icons/Fluent-dark-cursors
+
+
 # SDDM
 ## 
 wget https://github.com/renantmagalhaes/workstation/raw/static-files/sddm/sugar-candy.tar.gz -O /tmp/sugar-candy.tar.gz

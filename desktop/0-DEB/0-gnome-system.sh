@@ -361,6 +361,11 @@ sudo apt-get -f install -y
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
 sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh"
 
+git clone https://github.com/vinceliuice/Fluent-icon-theme.git ~/GIT-REPOS/CORE/Fluent-icon-theme
+sh -c "~/GIT-REPOS/CORE/Fluent-icon-theme/install.sh"
+sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist /usr/share/icons/Fluent-cursors
+sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist-dark /usr/share/icons/Fluent-dark-cursors
+
 # Dracula theme
 wget https://github.com/dracula/gtk/archive/master.zip -O ~/.themes/Dracula.zip
 unzip ~/.themes/Dracula.zip -d ~/.themes/Dracula
