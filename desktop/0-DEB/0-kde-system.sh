@@ -255,6 +255,12 @@ sudo apt-get install -y clamav-daemon
 # Make sure all package are installed
 sudo apt-get -f install -y
 
+# KDE plasma config files
+
+## Kvantum theme
+ln -s -f $PWD/desktop/0-DEB/kde-config/kvantum.kvconfig ~/.config/Kvantum/kvantum.kvconfig
+## Global shortcuts
+ln -s -f $PWD/desktop/0-DEB/kde-config/kglobalshortcutsrc ~/.config/kglobalshortcutsrc
 
 ### TESTS ###
 
