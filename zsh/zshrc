@@ -404,15 +404,31 @@ check_cmd() {
 
 
 #Aliases
+gnome_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "GNOME" | awk '{print tolower($0)}'`
+kde_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "KDE" | awk '{print tolower($0)}'`
+
 if check_cmd apt-get; then # FOR DEB SYSTEMS
     alias update-all="sudo apt update && sudo apt upgrade -y && sudo flatpak update -y && sudo snap refresh"
+    if [[ $gnome_check == "gnome" ]]; then
+    alias folder="nautilus"
+    elif [[ $kde_check == "kde" ]]; then
+    alias folder="dolphin"
+    else
+    echo "Not able to identify desktop environment"
+    fi
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
     alias update-all="sudo dnf update -y && sudo flatpak update -y && sudo snap refresh"
+    if [[ $gnome_check == "gnome" ]]; then
+    alias folder="nautilus"
+    elif [[ $kde_check == "kde" ]]; then
+    alias folder="dolphin"
+    else
+    echo "Not able to identify desktop environment"
+    fi
 else
     echo "Not able to identify the system"
 fi
 
-alias folder="nautilus"
 alias pdf="evince"
 alias killtmux="pidof tmux |xargs kill -9"
 alias python="python3"
