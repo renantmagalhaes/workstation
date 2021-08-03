@@ -8,6 +8,8 @@ Icons -> Tela Circle
 
 # System Settings
 
+- Compositor
+  - Rendering backend (OpenGL 3.1)
 - Application Style
   - Configure GNOME/GTK
 - Desktop effects
