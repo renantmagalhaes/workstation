@@ -107,7 +107,7 @@ sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-non
 sudo dnf groupupdate -y core
 
 # Install the packages from fedora repo
-sudo dnf install -y zsh vlc clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina nload arc-theme chrome-gnome-shell gnome-menus pwgen sysstat alacarte gnome-extensions-app alacritty fzf ffmpeg neofetch util-linux-user grub-customizer xclip flameshot unrar bat gawk net-tools coreutils ncdu whois pdfshuffler piper lsd openssl
+sudo dnf install -y zsh vlc clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl vpnc x2goclient git idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip snapd gtk-murrine-engine gtk2-engines krita audacity filezilla tree remmina nload arc-theme pwgen sysstat alacarte fzf ffmpeg neofetch util-linux-user grub-customizer xclip flameshot unrar bat gawk net-tools coreutils ncdu whois pdfshuffler piper lsd openssl gnome-keyring kvantum
 
 # Aditional fedora packages
 ## Plugins Core
@@ -216,57 +216,21 @@ curl -sLf https://spacevim.org/install.sh | bash
 echo "set ignorecase" >> ~/.vim/vimrc
 echo "set paste" >> ~/.vim/vimrc
 
-# Flat-remix Theme
-# sudo dnf copr enable -y daniruiz/flat-remix
-# sudo dnf install -y flat-remix-gnome  flat-remix-gtk2-theme flat-remix-gtk3-theme flat-remix-icon-theme
+# Themes
+# Orchis
+git clone https://github.com/vinceliuice/Orchis-kde.git ~/GIT-REPOS/CORE/Orchis-kde
+sh -c "~/GIT-REPOS/CORE/Orchis-kde/install.sh"
 
-# Install GTK theme Vimix
-git clone https://github.com/vinceliuice/vimix-gtk-themes.git ~/GIT-REPOS/CORE/vimix-gtk-themes
-cd ~/GIT-REPOS/CORE/vimix-gtk-themes
-sh -c "./install.sh"
-cd
+# ChromeOS
+git clone https://github.com/vinceliuice/ChromeOS-kde.git ~/GIT-REPOS/CORE/ChromeOS-kde
+sh -c "~/GIT-REPOS/CORE/ChromeOS-kde/install.sh"
 
-# Install Vimix Icons
-git clone https://github.com/vinceliuice/vimix-icon-theme.git ~/GIT-REPOS/CORE/vimix-icons
-cd ~/GIT-REPOS/CORE/vimix-icons
-sh -c "./install.sh"
-cd
-
-# Nordic theme
-git clone https://github.com/EliverLara/Nordic.git ~/GIT-REPOS/CORE/Nordic
-sudo mv ~/GIT-REPOS/CORE/Nordic /usr/share/themes/
-
-# Qogir theme
-git clone https://github.com/vinceliuice/Qogir-theme.git ~/GIT-REPOS/CORE/Qogir-theme
-sh -c "~/GIT-REPOS/CORE/Qogir-theme/install.sh"
-
-# Orchis theme
-git clone https://github.com/vinceliuice/Orchis-theme.git ~/GIT-REPOS/CORE/Orchis-theme
-sh -c "~/GIT-REPOS/CORE/Orchis-theme/install.sh"
-
-# ChromeOS theme
 git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/ChromeOS-theme
 sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
 
-## WhiteSur-gtk-theme
-sudo dnf install -y sassc optipng inkscape glib2-devel
-git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/GIT-REPOS/CORE/WhiteSur-gtk-theme
-sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/install.sh -i void -N mojave -c dark -c light -t all 
-# sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/tweaks.sh -g 
-
-# Fluent Theme
-git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
-sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh"
-
-git clone https://github.com/vinceliuice/Fluent-icon-theme.git ~/GIT-REPOS/CORE/Fluent-icon-theme
-sh -c "~/GIT-REPOS/CORE/Fluent-icon-theme/install.sh"
-sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist /usr/share/icons/Fluent-cursors
-sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist-dark /usr/share/icons/Fluent-dark-cursors
-
-# Dracula theme
-wget https://github.com/dracula/gtk/archive/master.zip -O ~/.themes/Dracula.zip
-unzip ~/.themes/Dracula.zip -d ~/.themes/Dracula
-mv ~/.themes/Dracula/gtk-master/* ~/.themes/Dracula
+# WhiteSur
+git clone https://github.com/vinceliuice/WhiteSur-kde.git ~/GIT-REPOS/CORE/WhiteSur-kde
+sh -c "~/GIT-REPOS/CORE/WhiteSur-kde/install.sh"
 
 # Tela-circle-icon-theme
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
@@ -277,10 +241,20 @@ git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-Indigo-Dark
 
-## Dock icon 
-#mv ~/.local/share/icons/Flatery-Indigo-Dark/actions/16/view-grid.svg ~/.local/share/icons/Flatery-Indigo-Dark/actions/16/view-grid-backup.svg
-#cp  ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/src/assets/gnome-shell/activities-black/activities-void.svg ~/.local/share/icons/Flatery-Indigo-Dark/actions/16/view-grid.svg
 
+# Fluent Theme
+git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
+sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh"
+
+git clone https://github.com/vinceliuice/Fluent-icon-theme.git ~/GIT-REPOS/CORE/Fluent-icon-theme
+sh -c "~/GIT-REPOS/CORE/Fluent-icon-theme/install.sh"
+sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist /usr/share/icons/Fluent-cursors
+sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist-dark /usr/share/icons/Fluent-dark-cursors
+
+# SDDM
+# ## 
+# wget https://github.com/renantmagalhaes/workstation/raw/static-files/sddm/sugar-candy.tar.gz -O /tmp/sugar-candy.tar.gz
+# sudo tar -xzvf /tmp/sugar-candy.tar.gz -C /usr/share/sddm/themes
 
 ######################### Using gnome-boxes now #########################
 # VirtualBox
@@ -309,50 +283,6 @@ sudo dnf install -y clamav clamtk
 
 # RTM
 #clear
-echo "#################################"
-echo "#                               #"
-echo "#         rtm.codes             #"
-echo "#     Please reboot your pc     #"
-echo "#                               #"
-echo "#################################"
-
-#clear
-echo "*** AFTER INSTALL *** "
-
-echo ""
-echo "*** Gnome *** "
-echo "# Setup Theme
-* Applications: ChromeOS-dark-compact 
-* Cursor: Breeze_Snow
-* Icons: Flatery-Indigo-Dark
-* Shell: Orchis-dark-compact"
-
-echo ""
-
-echo "# Gnome extensions
-* Extensions Sync "
-
-echo ""
-
-echo "Set startup applications
-* Guake"
-
-echo "*** FONTS *** "
-echo "*** Terminal *** "
-echo "FiraCode Nerd Font Medium 10"
-echo "*** FONTS *** "
-
-echo "*** Guake Terminal Color - Gogh / RTM VERSION *** "
-
-echo ""
-
-echo " ### Install the other tools in this repo! ###"
-echo "* ZSH"
-echo "* TMUX"
-echo "* DEV-TOOLS \n \n"
-
-echo ""
-
 echo "#################################"
 echo "#                               #"
 echo "#         rtm.codes             #"
