@@ -51,6 +51,10 @@ Icons -> Tela Circle
 ```
 
 ```
+Mute microphone
+```
+
+```
 [org.flameshot.Flameshot.desktop]
 Capture=Ctrl+Print,,Take screenshot
 Configure=,,Configure
