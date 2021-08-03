@@ -109,6 +109,9 @@ sudo dnf groupupdate -y core
 # Install the packages from fedora repo
 sudo dnf install -y zsh vlc clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl vpnc x2goclient git idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip snapd gtk-murrine-engine gtk2-engines krita audacity filezilla tree remmina nload arc-theme pwgen sysstat alacarte fzf ffmpeg neofetch util-linux-user grub-customizer xclip flameshot unrar bat gawk net-tools coreutils ncdu whois pdfshuffler piper lsd openssl gnome-keyring kvantum
 
+# kde workspace
+sudo dnf groupinstall -y "KDE Plasma Workspaces"
+
 # Aditional fedora packages
 ## Plugins Core
 sudo dnf -y install dnf-plugins-core
