@@ -41,6 +41,7 @@ Icons -> Tela Circle
 - Center Menu11
 - Systemtray
   - Disable Mediaplayer
+  - Network (always show)
 
 
 ## Shortcuts
