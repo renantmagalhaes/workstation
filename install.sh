@@ -22,7 +22,9 @@ echo " 13) NordVPN"
 echo " 14) Git Config"
 
 echo " ==============="
-echo " 0)Exit"
+echo " 99) Post-Installation Instructions"
+echo " ==============="
+echo " 0) Exit"
 
 read n
 case $n in
@@ -39,6 +41,8 @@ case $n in
     13) sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh) ;;
     14) bash utils/git-config/git-config.sh ;;
 # ===================================================================================
+    99) bash utils/post-install/env-detector.sh ;;
+# ==================================================================================
     0)  echo "Bye" || exit ;;
 # ===================================================================================
   *) echo "Invalid option";;
