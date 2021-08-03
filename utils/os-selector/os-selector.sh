@@ -17,7 +17,13 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     echo "Not able to identify desktop environment"
     fi
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
-     bash desktop/1-RPM/0-system.sh
+    if [[ $gnome_check == "gnome" ]]; then
+    bash desktop/1-RPM/1-gnome-system.sh
+    elif [[ $kde_check == "kde" ]]; then
+    bash desktop/1-RPM/1-kde-system.sh
+    else
+    echo "Not able to identify desktop environment"
+    fi
 else
     echo "Not able to identify the system"
 fi
