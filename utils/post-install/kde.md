@@ -52,6 +52,7 @@ Icons -> Tela Circle
 
 ```
 Mute microphone
+Dolphin
 ```
 
 ```
