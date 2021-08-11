@@ -1,0 +1,33 @@
+### WSL2 ###
+
+https://docs.microsoft.com/en-us/windows/wsl/install-win10#manual-installation-steps
+
+
+                "name": "Ubuntu-20.04",
+                "source": "Windows.Terminal.Wsl",
+                "fontFace": "FuraCode Nerd Font"
+
+
+FiraMono
+https://www.nerdfonts.com/font-downloads
+
+
+
+
+### Windows Store ###
+
+Windows Terminal
+Ubuntu LTS
+
+
+### Windows Programs ###
+
+Utils: https://ninite.com
+
+Screenshot: lightshot
+
+Screen recorder: OBS Studio
+
+Terminal:
+  * Cmder
+  * Cygwin
