@@ -2,16 +2,14 @@
 
 https://docs.microsoft.com/en-us/windows/wsl/install-win10#manual-installation-steps
 
-
+```
                 "name": "Ubuntu-20.04",
                 "source": "Windows.Terminal.Wsl",
                 "fontFace": "FuraCode Nerd Font"
-
+```
 
 FiraMono
 https://www.nerdfonts.com/font-downloads
-
-
 
 
 ### Windows Store ###
@@ -33,5 +31,7 @@ Terminal:
   * Cmder
   * Cygwin
 
+# Programs
 
-Python3
+1. Python3
+2. WinDirStat
