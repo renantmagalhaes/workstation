@@ -29,5 +29,9 @@ Screenshot: lightshot
 Screen recorder: OBS Studio
 
 Terminal:
+  * Git for windows (https://gitforwindows.org)
   * Cmder
   * Cygwin
+
+
+Python3
