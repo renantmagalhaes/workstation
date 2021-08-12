@@ -14,7 +14,7 @@ then
     echo "#[fg=green]VPN Connected [$nordCountry] #[fg=white]|"
 elif [[ $nordStatus == "Connecting" ]]
 then
-    echo "#[fg=yellow]VPN Connecting"
+    echo "#[fg=yellow]VPN Connecting |"
 else
-    echo "NordVPN not installed"
+    echo "NordVPN not installed |"
 fi
