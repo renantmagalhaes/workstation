@@ -26,7 +26,7 @@
 # Changelog
 #
 #   V0.1 2019-09-21 RTM:
-#       - Initial release for OpenSUSE Thumbleweed
+#       - Initial release for OpenSUSE Tumbleweed
 #
 # TODO:
 
@@ -52,58 +52,55 @@ fi
 
 #User check
 #echo "#########################"
-#echo "#			#"
-#echo "#	User Config	#"
-#echo "#			#"
+#echo "#			           #"
+#echo "#	  User Config      #"
+#echo "#			           #"
 #echo "#########################"
 
-#echo "Enter your default user name:"
-#read user
-
-
-# Grub2 config - Save last option
-# sudo runuser -l  root -c 'echo "GRUB_DEFAULT=saved" >> /etc/default/grub'
-# sudo runuser -l  root -c 'echo "GRUB_SAVEDEFAULT=true" >> /etc/default/grub'
-# sudo grub2-editenv create
-# sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
-
-# Increase fedora package manager speed
-sudo runuser -l  root -c 'echo "max_parallel_downloads=10" >> /etc/dnf/dnf.conf'
 
 # Update / upgrade
-sudo dnf update -y
+sudo zypper refresh && sudo zypper update
 
-# Install rpm fusion
-sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf groupupdate -y core
+# # Install rpm fusion
+# sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+# sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+# sudo dnf groupupdate -y core
+
+# Kvantum
+sudo zypper ar obs://home:trmdi trmdi
+sudo zypper in -r trmdi kvantum
 
 # Install the packages from fedora repo
-sudo dnf install -y zsh vlc clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl vpnc x2goclient git idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip snapd gtk-murrine-engine gtk2-engines krita audacity filezilla tree remmina nload arc-theme pwgen sysstat alacarte fzf ffmpeg neofetch util-linux-user grub-customizer xclip flameshot unrar bat gawk net-tools coreutils ncdu whois pdfshuffler piper lsd openssl gnome-keyring kvantum
+sudo zypper install -y zsh vlc clementine vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring
 
 # kde workspace
-sudo dnf groupinstall -y "KDE Plasma Workspaces"
+# sudo dnf groupinstall -y "KDE Plasma Workspaces"
 
 # Aditional fedora packages
 ## Plugins Core
-sudo dnf -y install dnf-plugins-core
+# sudo dnf -y install dnf-plugins-core
 
 ## multimedia codecs
-sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-sudo dnf groupupdate -y sound-and-video
+# sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+# sudo dnf groupupdate -y sound-and-video
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-#Utils
+#Install snap
+sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Tumbleweed snappy
+sudo zypper --gpg-auto-import-keys refresh
+sudo zypper dup --from snappy
+sudo zypper install -y snapd
+source /etc/profile
+sudo systemctl enable --now snapd
+sudo systemctl enable --now snapd.apparmor
 ## Fix snapd
 sudo ln -s /var/lib/snapd/snap /snap
 
-##Isolate Alt-Tab workspaces
-gsettings set org.gnome.shell.app-switcher current-workspace-only true
-
-# Enable BT FastConnectable
-sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
+#Utils
+# # Enable BT FastConnectable
+# sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
 
 # Install pip packages
 sudo pip3 install virtualenv virtualenvwrapper pylint
@@ -134,25 +131,31 @@ sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
 ## MkCron
 sudo snap install mkcron
 
+# ## LSD
+# sudo snap install lsd
+
 ## Install Teamviewer
-wget https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
-sudo dnf -y install teamviewer.x86_64.rpm
-rm teamviewer.x86_64.rpm
-sudo sed -i 's/failovermethod\=priority//' /etc/yum.repos.d/teamviewer.repo
+wget https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm -O /tmp/teamviewer.x86_64.rpm
+sudo zypper install /tmp/teamviewer.x86_64.rpm
+# sudo sed -i 's/failovermethod\=priority//' /etc/yum.repos.d/teamviewer.repo
 
 #Install Google Chrome
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -O /tmp/google-chrome-stable_current_x86_64.rpm
-sudo dnf install -y /tmp/google-chrome-stable_current_x86_64.rpm
+sudo zypper ar http://dl.google.com/linux/chrome/rpm/stable/x86_64 Google-Chrome
+wget https://dl.google.com/linux/linux_signing_key.pub -O /tmp/linux_signing_key.pub
+sudo rpm --import /tmp/linux_signing_key.pub
+sudo zypper ref
+sudo zypper install -y google-chrome-stable
+
 
 # Install Vivaldi
-sudo dnf config-manager --add-repo https://repo.vivaldi.com/archive/vivaldi-fedora.repo
-sudo dnf install -y vivaldi-stable
+sudo zypper ar https://repo.vivaldi.com/archive/vivaldi-suse.repo
+sudo zypper in vivaldi-stable
 
 ## Install Visual Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
-sudo dnf check-update
-sudo dnf install -y code
+sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/zypp/repos.d/vscode.repo'
+sudo zypper refresh
+sudo zypper install -y code
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
@@ -249,11 +252,15 @@ sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist-dark /usr/share/icons
 ######################### Using gnome-boxes now #########################
 
 # Colorls
-sudo dnf install -y ruby ruby-devel
+sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel
 sudo gem install colorls
 
+# Install LSD
+curl https://sh.rustup.rs -sSf | sh
+~/.cargo/bin/cargo install lsd
+
 # Install ClamAV
-sudo dnf install -y clamav clamtk
+sudo zypper install -y clamav clamtk
 # sudo dnf install -y clamav-daemon
 
 # RTM

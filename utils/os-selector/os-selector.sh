@@ -24,6 +24,14 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     else
     echo "Not able to identify desktop environment"
     fi
+elif check_cmd zypper; then  # FOR OPENSUSE SYSTEMS
+    if [[ $gnome_check == "gnome" ]]; then
+    bash desktop/2-ZYPPER/2-gnome-system.sh
+    elif [[ $kde_check == "kde" ]]; then
+    bash desktop/2-ZYPPER/2-kde-system.sh
+    else
+    echo "Not able to identify desktop environment"
+    fi
 else
     echo "Not able to identify the system"
 fi

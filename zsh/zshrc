@@ -425,6 +425,15 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     else
     echo "Not able to identify desktop environment"
     fi
+elif check_cmd zypper; then  # FOR RPM SYSTEMS
+    alias update-all="sudo zypper refresh && sudo zypper update -y && sudo flatpak update -y && sudo snap refresh"
+    if [[ $gnome_check == "gnome" ]]; then
+    alias folder="nautilus"
+    elif [[ $kde_check == "kde" ]]; then
+    alias folder="dolphin"
+    else
+    echo "Not able to identify desktop environment"
+    fi
 else
     echo "Not able to identify the system"
 fi
