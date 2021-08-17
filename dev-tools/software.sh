@@ -85,6 +85,16 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     sudo sed -i 's/failovermethod\=priority//' /etc/yum.repos.d/*
     sudo dnf update -y
     sudo dnf install -y yarn nodejs
+
+elif check_cmd zypper; then  # FOR RPM SYSTEMS
+    ## docker
+    sudo zypper install -y docker python3-docker-compose
+    sudo systemctl enable docker
+    sudo usermod -G docker -a $USER
+    sudo systemctl restart docker
+
+    # ## yarn / nodejs
+    sudo zypper install -y yarn nodejs
 else
     echo "Not able to identify the system"
 fi
