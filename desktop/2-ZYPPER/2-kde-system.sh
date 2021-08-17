@@ -61,10 +61,8 @@ fi
 # Update / upgrade
 sudo zypper refresh && sudo zypper update
 
-# # Install rpm fusion
-# sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-# sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-# sudo dnf groupupdate -y core
+# Install OPI
+sudo zypper install -y opi
 
 # Kvantum
 sudo zypper ar obs://home:trmdi trmdi
@@ -73,16 +71,8 @@ sudo zypper in -r trmdi kvantum
 # Install the packages from fedora repo
 sudo zypper install -y zsh vlc clementine vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring
 
-# kde workspace
-# sudo dnf groupinstall -y "KDE Plasma Workspaces"
-
-# Aditional fedora packages
-## Plugins Core
-# sudo dnf -y install dnf-plugins-core
-
 ## multimedia codecs
-# sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-# sudo dnf groupupdate -y sound-and-video
+sudo opi codecs
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -103,8 +93,10 @@ sudo ln -s /var/lib/snapd/snap /snap
 # sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
 
 # Install pip packages and python path fix
-sudo ln -s /usr/bin/python3 /usr/bin/python
-sudo ln -s /usr/bin/pip3 /usr/bin/pip
+# sudo ln -s /usr/bin/python3 /usr/bin/python
+# sudo ln -s /usr/bin/python3.9 /usr/bin/python3
+# sudo ln -s /usr/bin/pip3 /usr/bin/pip
+sudo pip3 install wheel
 sudo pip3 install virtualenv virtualenvwrapper pylint
 sudo pip3 install bpytop --upgrade
 
@@ -133,13 +125,9 @@ sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
 ## MkCron
 sudo snap install mkcron
 
-# ## LSD
-# sudo snap install lsd
 
 ## Install Teamviewer
-wget https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm -O /tmp/teamviewer.x86_64.rpm
-sudo zypper install /tmp/teamviewer.x86_64.rpm
-# sudo sed -i 's/failovermethod\=priority//' /etc/yum.repos.d/teamviewer.repo
+sudo opi teamviewer
 
 #Install Google Chrome
 sudo zypper ar http://dl.google.com/linux/chrome/rpm/stable/x86_64 Google-Chrome
@@ -150,8 +138,9 @@ sudo zypper install -y google-chrome-stable
 
 
 # Install Vivaldi
-sudo zypper ar https://repo.vivaldi.com/archive/vivaldi-suse.repo
-sudo zypper in vivaldi-stable
+# sudo zypper ar https://repo.vivaldi.com/archive/vivaldi-suse.repo
+# sudo zypper in vivaldi-stable
+sudo opi vivaldi
 
 ## Install Visual Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
