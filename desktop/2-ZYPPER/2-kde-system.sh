@@ -50,9 +50,6 @@ else
     exit 1
 fi
 
-# Disable wayland
-sudo sed -i 's/\#WaylandEnable\=false/WaylandEnable\=false/' /etc/gdm/custom.conf
-
 #User check
 #echo "#########################"
 #echo "#			#"
