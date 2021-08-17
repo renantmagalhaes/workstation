@@ -102,7 +102,9 @@ sudo ln -s /var/lib/snapd/snap /snap
 # # Enable BT FastConnectable
 # sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
 
-# Install pip packages
+# Install pip packages and python path fix
+sudo ln -s /usr/bin/python3 /usr/bin/python
+sudo ln -s /usr/bin/pip3 /usr/bin/pip
 sudo pip3 install virtualenv virtualenvwrapper pylint
 sudo pip3 install bpytop --upgrade
 
