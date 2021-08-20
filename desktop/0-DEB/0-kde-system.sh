@@ -268,7 +268,11 @@ sudo apt-get -f install -y
 
 # # Remove titlebar when maximized window
 # kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
-# qdbus org.kde.KWin /KWin reconfigure
+# qdbus-qt5 org.kde.KWin /KWin reconfigure
+
+# # Latte dock remap key
+# kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta  "org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu"
+# qdbus-qt5 org.kde.KWin /KWin reconfigure
 
 # Plasma sync configs
 # TODO: find a way to install all packages via cli.
