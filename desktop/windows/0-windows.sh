@@ -13,12 +13,14 @@ echo “Dont run this script as root” 2>&1
 exit 1
 fi
 
+# refresh repos
+sudo apt-get update
+
 # Set tz
-sudo apt install ntpdate
+sudo apt install -y ntpdate
 sudo ntpdate pool.ntp.org
 
-
-# Update / upgrade
+# upgrade
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
