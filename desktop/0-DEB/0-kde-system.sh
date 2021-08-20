@@ -266,48 +266,9 @@ sudo apt-get install -y clamav-daemon
 # Make sure all package are installed
 sudo apt-get -f install -y
 
-# # KDE plasma config files
-
-# ## Kvantum theme
-# ln -s -f $PWD/desktop/0-DEB/kde-config/kvantum.kvconfig ~/.config/Kvantum/kvantum.kvconfig
-# ## Global shortcuts
-# ln -s -f $PWD/desktop/0-DEB/kde-config/kglobalshortcutsrc ~/.config/kglobalshortcutsrc
-# ## Global kwin
-# ln -s -f $PWD/desktop/0-DEB/kde-config/kwinrc ~/.config/kwinrc
-# ## Cursors
-# ln -s -f $PWD/desktop/0-DEB/kde-config/kcminputrc ~/.config/kcminputrc
-
-# ## kdeglobals
-# cat <<EOF >> ~/.config/kdeglobals
-
-# [General]
-# BrowserApplication=vivaldi-stable.desktop
-# ColorScheme=ChromeOSDark
-# Name=ChromeOSDark
-# shadeSortColumn=true
-# widgetStyle=Breeze
-
-# [Icons]
-# Theme=Tela-circle-blue
-
-# [KDE]
-# ColorScheme=Breeze
-# LookAndFeelPackage=com.github.vinceliuice.ChromeOS-dark
-# contrast=4
-# widgetStyle=kvantum
-# EOF
-
-
-
-### TESTS ###
-
-# #Parachute
-# git clone https://github.com/tcorreabr/Parachute.git ~/GIT-REPOS/CORE/Parachute && cd ~/GIT-REPOS/CORE/Parachute
-# make install
-# ## set super key to open by default
-# kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.kglobalaccel,/component/kwin,org.kde.kglobalaccel.Component,invokeShortcut,Parachute"
+# # Remove titlebar when maximized window
+# kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
 # qdbus org.kde.KWin /KWin reconfigure
-
 
 # Plasma sync configs
 # TODO: find a way to install all packages via cli.

@@ -287,6 +287,10 @@ sudo gem install colorls
 sudo dnf install -y clamav clamtk
 # sudo dnf install -y clamav-daemon
 
+# # Remove titlebar when maximized window
+# kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
+# qdbus org.kde.KWin /KWin reconfigure
+
 # RTM
 #clear
 echo "#################################"
