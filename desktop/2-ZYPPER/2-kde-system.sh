@@ -93,8 +93,8 @@ sudo ln -s /var/lib/snapd/snap /snap
 # sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
 
 # Install pip packages and python path fix
-# sudo ln -s /usr/bin/python3 /usr/bin/python
-# sudo ln -s /usr/bin/python3.9 /usr/bin/python3
+sudo ln -s /usr/bin/python3.9 /usr/bin/python
+sudo ln -s /usr/bin/python3.9 /usr/bin/python3
 # sudo ln -s /usr/bin/pip3 /usr/bin/pip
 sudo pip3 install wheel
 sudo pip3 install virtualenv virtualenvwrapper pylint
