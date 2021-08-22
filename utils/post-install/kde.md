@@ -33,6 +33,9 @@ Icons -> Tela Circle
 
 - Menu11
 - Two spacers (and center task Manager)
+- Virtual Desktop Bar(https://github.com/wsdfhjxc/virtual-desktop-bar)
+- Dash to panel style indicator (latte-dock)
+- Latte Separator
 
 ### Configs
 - Alternative Show desktop to Minimize all Windows 
