@@ -65,9 +65,7 @@ Configure=,,Configure
 Launcher=,,Open launcher
 _k_friendly_name=Flameshot
 _launch=,,Flameshot
-```
 
-```
 [kwin]
 Activate Window Demanding Attention=Ctrl+Alt+A,Ctrl+Alt+A,Activate Window Demanding Attention
 Decrease Opacity=none,none,Decrease Opacity of Active Window by 5 %
