@@ -254,6 +254,10 @@ git clone https://github.com/wsdfhjxc/virtual-desktop-bar.git ~/GIT-REPOS/CORE/v
 yes | sh -c "~/GIT-REPOS/CORE/virtual-desktop-bar/scripts/install-dependencies-ubuntu.sh"
 cd ~/GIT-REPOS/CORE/virtual-desktop-bar/scripts && ./install-applet.sh
 
+## Dash to panel indicator
+git clone https://github.com/psifidotos/latte-indicator-dashtopanel.git ~/GIT-REPOS/CORE/latte-indicator-dashtopanel
+cd ~/GIT-REPOS/CORE/latte-indicator-dashtopanel && kpackagetool5 -i . -t Latte/Indicator
+
 # Colorls
 sudo apt install -y ruby-dev
 sudo gem install colorls
