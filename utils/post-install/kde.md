@@ -18,11 +18,14 @@ Icons -> Tela Circle
     - Animation 170ms
   - Enable Wobby Windows
   - Uncheck Wobbly when resizing.
+  - Desktop Grid
+    - Layout mode: Pager
 - Task Switcher
   - Thumbnail Grid
 - Virtual Desktops
   - Add 4 rows
   - Add 4 Desktops
+  - Disable Navigation Wraps Around
 - Screen Edges
   - Top left corner
     - Present Windows (current desktop)
