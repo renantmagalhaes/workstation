@@ -75,7 +75,6 @@ deb-src http://deb.debian.org/debian-security/ bullseye-security main contrib no
 
 deb http://deb.debian.org/debian bullseye-updates main contrib non-free
 deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free
-deb https://repo.vivaldi.com/archive/deb/ stable main
 EOF'
 
 ## Vivaldi Browser
@@ -155,7 +154,6 @@ sudo apt-get -f install -y
 
 ## Guake Configs
 mkdir -p ~/.config/autostart/
-
 
 # Enable BT FastConnectable
 sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
@@ -260,23 +258,33 @@ sudo apt install -y clamav clamtk
 sudo apt-get -f install -y
 sudo apt-get install -y clamav-daemon
 
+# Widgets
+## Virtual Desktop Bar
+git clone https://github.com/wsdfhjxc/virtual-desktop-bar.git ~/GIT-REPOS/CORE/virtual-desktop-bar
+yes | sh -c "~/GIT-REPOS/CORE/virtual-desktop-bar/scripts/install-dependencies-ubuntu.sh"
+cd ~/GIT-REPOS/CORE/virtual-desktop-bar/scripts && ./install-applet.sh
+
+## Dash to panel indicator
+git clone https://github.com/psifidotos/latte-indicator-dashtopanel.git ~/GIT-REPOS/CORE/latte-indicator-dashtopanel
+cd ~/GIT-REPOS/CORE/latte-indicator-dashtopanel && kpackagetool5 -i . -t Latte/Indicator
+
 # Make sure all package are installed
 sudo apt-get -f install -y
 
 # # Remove titlebar when maximized window
-# kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
-# qdbus-qt5 org.kde.KWin /KWin reconfigure
+kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
+qdbus org.kde.KWin /KWin reconfigure
 
 # # Latte dock remap key
-# kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta  "org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu"
-# qdbus-qt5 org.kde.KWin /KWin reconfigure
+kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta  "org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu"
+qdbus org.kde.KWin /KWin reconfigure
+
+
 
 # Plasma sync configs
 # TODO: find a way to install all packages via cli.
 # https://store.kde.org/p/1298955/
 
-
-# RTM
 # RTM
 
 echo "#################################"
