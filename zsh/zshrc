@@ -377,10 +377,10 @@ POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='green'
 source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-#Python virtualenv and Virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
+# #Python virtualenv and Virtualenvwrapper
+# export WORKON_HOME=$HOME/.virtualenvs
+# export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+# source /usr/local/bin/virtualenvwrapper.sh
 
 #source
 source $ZSH/oh-my-zsh.sh
@@ -427,6 +427,16 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     fi
 elif check_cmd zypper; then  # FOR RPM SYSTEMS
     alias update-all="sudo zypper refresh && sudo zypper update -y && sudo flatpak update -y && sudo snap refresh"
+    if [[ $gnome_check == "gnome" ]]; then
+    alias folder="nautilus"
+    elif [[ $kde_check == "kde" ]]; then
+    alias folder="dolphin"
+    # export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.9
+    else
+    echo "Not able to identify desktop environment"
+    fi
+elif check_cmd pacman; then  # FOR RPM SYSTEMS
+    alias update-all="sudo pacman -Syu && sudo yay -Syu -y && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
     alias folder="nautilus"
     elif [[ $kde_check == "kde" ]]; then

@@ -32,6 +32,14 @@ elif check_cmd zypper; then  # FOR OPENSUSE SYSTEMS
     else
     echo "Not able to identify desktop environment"
     fi
+elif check_cmd pacman; then  # FOR OPENSUSE SYSTEMS
+    if [[ $gnome_check == "gnome" ]]; then
+    echo "not ready"
+    elif [[ $kde_check == "kde" ]]; then
+    bash desktop/3-ARCH/3-kde-system.sh
+    else
+    echo "Not able to identify desktop environment"
+    fi
 else
     echo "Not able to identify the system"
 fi

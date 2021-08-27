@@ -25,7 +25,7 @@
 #
 # Changelog
 #
-#   V0.1 2019-09-21 RTM:
+#   V0.1 2021-08-27 RTM:
 #       - Started development
 #
 # TODO: timeshift
@@ -65,7 +65,7 @@ yes | sudo pacman -Syu
 mkdir -p ~/GIT-REPOS/CORE
 
 # Install the packages from fedora repo
-yes | sudo pacman -Sy zsh vlc clementine vim nmap blender brasero gparted wireshark-qt tmux curl vpnc git htop meld openvpn guake krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring kvantum-qt5 python-pip flatpak
+yes | sudo pacman -Sy zsh vlc clementine vim nmap blender brasero gparted wireshark-qt tmux curl vpnc git htop meld openvpn guake krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring kvantum-qt5 python-pip flatpak unzip latte-dock
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -73,7 +73,7 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 #Install snap
 git clone https://aur.archlinux.org/snapd.git ~/GIT-REPOS/CORE/snapd
 cd ~/GIT-REPOS/CORE/snapd
-makepkg -si
+yes | makepkg -si
 sudo systemctl enable --now snapd
 
 ## Fix snapd
@@ -86,6 +86,8 @@ sudo ln -s /var/lib/snapd/snap /snap
 # Install pip packages and python path fix
 sudo pip3 install virtualenv virtualenvwrapper pylint
 sudo pip3 install bpytop --upgrade
+sudo ln -s /usr/bin/python3 /usr/bin/python
+sudo ln -s /usr/bin/pip3 /usr/bin/pip
 
 # Flathub Packages
 ## Slack
@@ -117,23 +119,13 @@ sudo snap install mkcron
 # sudo opi teamviewer
 
 # #Install Google Chrome
-# sudo zypper ar http://dl.google.com/linux/chrome/rpm/stable/x86_64 Google-Chrome
-# wget https://dl.google.com/linux/linux_signing_key.pub -O /tmp/linux_signing_key.pub
-# sudo rpm --import /tmp/linux_signing_key.pub
-# sudo zypper ref
-# sudo zypper install -y google-chrome-stable
-
+yay -Sy google-chrome
 
 # # Install Vivaldi
-# # sudo zypper ar https://repo.vivaldi.com/archive/vivaldi-suse.repo
-# # sudo zypper in vivaldi-stable
-# sudo opi vivaldi
+yes | sudo pacman -Syu vivaldi vivaldi-ffmpeg-codecs
 
 # ## Install Visual Code
-# sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-# sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/zypp/repos.d/vscode.repo'
-# sudo zypper refresh
-# sudo zypper install -y code
+yes | yay -S visual-studio-code-bin
 
 # Install Fonts
 git clone https://github.com/powerline/fonts.git ~/GIT-REPOS/CORE/fonts/
@@ -204,39 +196,25 @@ sh -c "~/GIT-REPOS/CORE/Fluent-icon-theme/install.sh"
 sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist /usr/share/icons/Fluent-cursors
 sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist-dark /usr/share/icons/Fluent-dark-cursors
 
-# SDDM
-# ## 
-# wget https://github.com/renantmagalhaes/workstation/raw/static-files/sddm/sugar-candy.tar.gz -O /tmp/sugar-candy.tar.gz
-# sudo tar -xzvf /tmp/sugar-candy.tar.gz -C /usr/share/sddm/themes
+# Widgets
+## Virtual Desktop Bar
+git clone https://github.com/wsdfhjxc/virtual-desktop-bar.git ~/GIT-REPOS/CORE/virtual-desktop-bar
+yes | sh -c "~/GIT-REPOS/CORE/virtual-desktop-bar/scripts/install-dependencies-arch.sh"
+cd ~/GIT-REPOS/CORE/virtual-desktop-bar/scripts && ./install-applet.sh
 
-######################### Using gnome-boxes now #########################
-# VirtualBox
-#sudo dnf install VirtualBox.x86_64
-#sudo dnf -y install wget
-#wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
-#sudo mv virtualbox.repo /etc/yum.repos.d/virtualbox.repo
-#sudo dnf install -y gcc binutils make glibc-devel patch libgomp glibc-headers  kernel-headers kernel-devel-`uname -r` dkms
-#sudo dnf install -y VirtualBox-6.1
-#sudo usermod -a -G vboxusers ${USER}
-#sudo /usr/lib/virtualbox/vboxdrv.sh setup
-#cd ~/
-#wget https://download.virtualbox.org/virtualbox/6.1.2/Oracle_VM_VirtualBox_Extension_Pack-6.1.2.vbox-extpack
-
-## If kernel update problem
-## https://www.virtualbox.org/wiki/Testbuilds > Linux 64-bit > Run .run file
-######################### Using gnome-boxes now #########################
+## Dash to panel indicator
+git clone https://github.com/psifidotos/latte-indicator-dashtopanel.git ~/GIT-REPOS/CORE/latte-indicator-dashtopanel
+cd ~/GIT-REPOS/CORE/latte-indicator-dashtopanel && kpackagetool5 -i . -t Latte/Indicator
 
 # # Colorls
-# sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel
-# sudo gem install colorls
+yes | sudo pacman -Sy ruby
+sudo gem install colorls
 
 # # Install LSD
-# curl https://sh.rustup.rs -sSf | sh
-# ~/.cargo/bin/cargo install lsd
+yes | sudo pacman -Sy lsd
 
 # # Install ClamAV
-# sudo zypper install -y clamav clamtk
-# # sudo dnf install -y clamav-daemon
+yes | sudo pacman -Sy clamav clamtk
 
 # RTM
 #clear
