@@ -115,7 +115,7 @@ sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
 # ## MkCron
 # sudo snap install mkcron
 
-# ## Install Teamviewer
+# Install Teamviewer
 yay -Sy teamviewer
 
 # Timeshift 
@@ -124,11 +124,16 @@ yay -Sy timeshift
 # #Install Google Chrome
 yay -Sy google-chrome
 
-# # Install Vivaldi
+# Install Vivaldi
 yes | sudo pacman -Syu vivaldi vivaldi-ffmpeg-codecs
 
-# ## Install Visual Code
+# Install Visual Code
 yay -Sy visual-studio-code-bin
+
+# nordvpn
+yay -Sy nordvpn-bin
+sudo systemctl enable --now nordvpnd
+sudo gpasswd -a $USER nordvpn
 
 # Install Fonts
 git clone https://github.com/powerline/fonts.git ~/GIT-REPOS/CORE/fonts/
