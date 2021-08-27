@@ -67,6 +67,25 @@ mkdir -p ~/GIT-REPOS/CORE
 # Install the packages from fedora repo
 yes | sudo pacman -Sy zsh vlc clementine vim nmap blender brasero gparted wireshark-qt tmux curl vpnc git htop meld openvpn guake krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring kvantum-qt5 python-pip flatpak unzip latte-dock libreoffice-fresh 
 
+# Bluetooth
+yes | sudo pacman -S --needed bluez bluez-utils pulseaudio-bluetooth bluedevil
+sudo systemctl enable --now bluetooth
+# sudo echo "# automatically switch to newly-connected devices " >> /etc/pulse/default.pa
+# sudo echo "load-module module-switch-on-connect" >> /etc/pulse/default.pa
+
+# It happens after updates or if you use dual-booting with Windows that the headset only connects HSB/HFP.
+#
+# Sometimes it helps to simple disable and re-enable device.
+#
+# If that does not help try to remove the disable device and reinitialize it.
+#
+# And last if all of that do not work try rfkill:
+#
+# sudo rfkill block bluetooth
+# sudo rfkill unblock bluetooth
+# sudo systemctl restart bluetooth
+
+
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
@@ -81,7 +100,7 @@ sudo ln -s /var/lib/snapd/snap /snap
 
 #Utils
 # # Enable BT FastConnectable
-# sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
+sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
 
 # Install pip packages and python path fix
 sudo pip3 install virtualenv virtualenvwrapper pylint
@@ -91,8 +110,7 @@ sudo ln -s /usr/bin/pip3 /usr/bin/pip
 
 # Flathub Packages
 ## Slack
-# sudo flatpak install -y flathub com.slack.Slack
-yay -Sy snapd
+sudo flatpak install -y flathub com.slack.Slack
 
 ## Skype 
 sudo flatpak install -y flathub com.skype.Client
