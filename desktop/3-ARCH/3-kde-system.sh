@@ -209,6 +209,11 @@ yes | sudo pacman -Sy lsd
 # # Install ClamAV
 yes | sudo pacman -Sy clamav clamtk
 
+# Virtualbox
+sudo pacman -Sy virtualbox virtualbox-guest-iso
+sudo usermod -aG vboxusers $USER
+sudo modprobe vboxdrv
+
 # Widgets
 ## Virtual Desktop Bar
 git clone https://github.com/wsdfhjxc/virtual-desktop-bar.git ~/GIT-REPOS/CORE/virtual-desktop-bar
