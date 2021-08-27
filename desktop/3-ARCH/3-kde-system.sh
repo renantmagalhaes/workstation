@@ -65,7 +65,7 @@ yes | sudo pacman -Syu
 mkdir -p ~/GIT-REPOS/CORE
 
 # Install the packages from fedora repo
-yes | sudo pacman -Sy zsh vlc clementine vim nmap blender brasero gparted wireshark-qt tmux curl vpnc git htop meld openvpn guake krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring kvantum-qt5 python-pip flatpak unzip latte-dock
+yes | sudo pacman -Sy zsh vlc clementine vim nmap blender brasero gparted wireshark-qt tmux curl vpnc git htop meld openvpn guake krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring kvantum-qt5 python-pip flatpak unzip latte-dock libreoffice-fresh 
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -91,7 +91,8 @@ sudo ln -s /usr/bin/pip3 /usr/bin/pip
 
 # Flathub Packages
 ## Slack
-sudo flatpak install -y flathub com.slack.Slack
+# sudo flatpak install -y flathub com.slack.Slack
+yay -Sy snapd
 
 ## Skype 
 sudo flatpak install -y flathub com.skype.Client
@@ -111,12 +112,14 @@ sudo flatpak install -y flathub com.obsproject.Studio
 ## FFaudioConverter
 sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
 
-## MkCron
-sudo snap install mkcron
-
+# ## MkCron
+# sudo snap install mkcron
 
 # ## Install Teamviewer
-# sudo opi teamviewer
+yay -Sy teamviewer
+
+# Timeshift 
+yay -Sy timeshift
 
 # #Install Google Chrome
 yay -Sy google-chrome
@@ -125,7 +128,7 @@ yay -Sy google-chrome
 yes | sudo pacman -Syu vivaldi vivaldi-ffmpeg-codecs
 
 # ## Install Visual Code
-yes | yay -S visual-studio-code-bin
+yay -Sy visual-studio-code-bin
 
 # Install Fonts
 git clone https://github.com/powerline/fonts.git ~/GIT-REPOS/CORE/fonts/
@@ -196,6 +199,16 @@ sh -c "~/GIT-REPOS/CORE/Fluent-icon-theme/install.sh"
 sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist /usr/share/icons/Fluent-cursors
 sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist-dark /usr/share/icons/Fluent-dark-cursors
 
+# # Colorls
+yes | sudo pacman -Sy ruby
+sudo gem install colorls
+
+# # Install LSD
+yes | sudo pacman -Sy lsd
+
+# # Install ClamAV
+yes | sudo pacman -Sy clamav clamtk
+
 # Widgets
 ## Virtual Desktop Bar
 git clone https://github.com/wsdfhjxc/virtual-desktop-bar.git ~/GIT-REPOS/CORE/virtual-desktop-bar
@@ -206,15 +219,13 @@ cd ~/GIT-REPOS/CORE/virtual-desktop-bar/scripts && ./install-applet.sh
 git clone https://github.com/psifidotos/latte-indicator-dashtopanel.git ~/GIT-REPOS/CORE/latte-indicator-dashtopanel
 cd ~/GIT-REPOS/CORE/latte-indicator-dashtopanel && kpackagetool5 -i . -t Latte/Indicator
 
-# # Colorls
-yes | sudo pacman -Sy ruby
-sudo gem install colorls
+# # Remove titlebar when maximized window
+kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
+qdbus-qt5 org.kde.KWin /KWin reconfigure
 
-# # Install LSD
-yes | sudo pacman -Sy lsd
-
-# # Install ClamAV
-yes | sudo pacman -Sy clamav clamtk
+# # Latte dock remap key
+kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta  "org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu"
+qdbus-qt5 org.kde.KWin /KWin reconfigure
 
 # RTM
 #clear
