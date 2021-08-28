@@ -70,9 +70,8 @@ yes | sudo pacman -Sy zsh vlc clementine vim nmap blender brasero gparted wiresh
 # Bluetooth
 yes | sudo pacman -S --needed bluez bluez-utils pulseaudio-bluetooth bluedevil
 sudo systemctl enable --now bluetooth
-# sudo echo "# automatically switch to newly-connected devices " >> /etc/pulse/default.pa
-# sudo echo "load-module module-switch-on-connect" >> /etc/pulse/default.pa
-
+sudo bash -c 'echo "# automatically switch to newly-connected devices " >> /etc/pulse/default.pa'
+sudo bash -c 'echo "load-module module-switch-on-connect" >> /etc/pulse/default.pa'
 # It happens after updates or if you use dual-booting with Windows that the headset only connects HSB/HFP.
 #
 # Sometimes it helps to simple disable and re-enable device.
