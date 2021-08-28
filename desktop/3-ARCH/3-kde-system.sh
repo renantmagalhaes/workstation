@@ -65,25 +65,13 @@ yes | sudo pacman -Syu
 mkdir -p ~/GIT-REPOS/CORE
 
 # Install the packages from fedora repo
-yes | sudo pacman -Sy zsh vlc clementine vim nmap blender brasero gparted wireshark-qt tmux curl vpnc git htop meld openvpn guake krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring kvantum-qt5 python-pip flatpak unzip latte-dock libreoffice-fresh 
+sudo pacman -Sy zsh vlc clementine vim nmap blender brasero gparted wireshark-qt tmux curl vpnc git htop meld openvpn guake krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring kvantum-qt5 python-pip flatpak unzip latte-dock libreoffice-fresh 
 
 # Bluetooth
 yes | sudo pacman -S --needed bluez bluez-utils pulseaudio-bluetooth bluedevil
 sudo systemctl enable --now bluetooth
 sudo bash -c 'echo "# automatically switch to newly-connected devices " >> /etc/pulse/default.pa'
 sudo bash -c 'echo "load-module module-switch-on-connect" >> /etc/pulse/default.pa'
-# It happens after updates or if you use dual-booting with Windows that the headset only connects HSB/HFP.
-#
-# Sometimes it helps to simple disable and re-enable device.
-#
-# If that does not help try to remove the disable device and reinitialize it.
-#
-# And last if all of that do not work try rfkill:
-#
-# sudo rfkill block bluetooth
-# sudo rfkill unblock bluetooth
-# sudo systemctl restart bluetooth
-
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -206,18 +194,8 @@ sh -c "~/GIT-REPOS/CORE/WhiteSur-kde/install.sh"
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
 sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh -a"
 
-# Flatery Icon Theme
-git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
-ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
-ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-Indigo-Dark
-
-
-# Fluent Theme
-git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
-sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh"
-
-git clone https://github.com/vinceliuice/Fluent-icon-theme.git ~/GIT-REPOS/CORE/Fluent-icon-theme
-sh -c "~/GIT-REPOS/CORE/Fluent-icon-theme/install.sh"
+# Flatery Icon Theme# sudo echo "load-module module-switch-on-connect" >> /etc/pulse/default.pa
+-icon-theme/install.sh"
 sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist /usr/share/icons/Fluent-cursors
 sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist-dark /usr/share/icons/Fluent-dark-cursors
 
