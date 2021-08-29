@@ -138,7 +138,7 @@
 #        - GTK WhiteSur script fix
 #        - Order of events in script changed to better fit the flow
 #
-#    TODO: V1
+#//    TODO: V1
 #//   - Check if is the system is a Pop!_OS installation 
 #//   - Install Aws K8S toolkit (cli and auth) - will not do
 #//   - System stats inside ZSH (remove Vitals from gnome-extensions)
@@ -147,14 +147,14 @@
 #//   - Test automated deploy
 
 #
-#    TODO: V2
+#//    TODO: V2
 #   - Test exa(https://github.com/ogham/exa) over lsd, when available on stable repo
 #//   - Link with Tmux / ZSH / Software / Shell Color folders
 # //  - Regex to modify orchis top bar size   
 
-    # TODO: V3 - Validation
-    # echo $XDG_CURRENT_DESKTOP
-    # echo $XDG_SESSION_TYPE 
+    #// TODO: V3 - Validation
+    #// echo $XDG_CURRENT_DESKTOP
+    #// echo $XDG_SESSION_TYPE 
 
 # RTM
 
@@ -175,14 +175,14 @@ else
     exit 1
 fi
 
-# ## Is Pop!_OS ?
-# grep -o "ID=pop" /etc/os-release
-# RESULT=$?
-# if [ $RESULT -eq 0 ]; then
-#   echo "Pop!_OS detected"
-# else
-#   read -rsn1 -p "You are NOT running Pop!_OS. Are you sure to continue? (Press ANY key to confirm)"
-# fi
+## Is Pop!_OS ?
+grep -o "ID=pop" /etc/os-release
+RESULT=$?
+if [ $RESULT -eq 0 ]; then
+  echo "Pop!_OS detected"
+else
+  read -rsn1 -p "You are NOT running Pop!_OS. Are you sure to continue? (Press ANY key to confirm)"
+fi
 
 # Add keys, ppa and repos
 ## VirtualBox
