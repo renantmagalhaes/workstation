@@ -356,7 +356,6 @@ sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/install.sh -i void -N mojave -c dark -c
 # sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/tweaks.sh -g 
 sudo apt-get -f install -y
 
-
 # Fluent Theme
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
 sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh"
@@ -370,6 +369,10 @@ sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist-dark /usr/share/icons
 wget https://github.com/dracula/gtk/archive/master.zip -O ~/.themes/Dracula.zip
 unzip ~/.themes/Dracula.zip -d ~/.themes/Dracula
 mv ~/.themes/Dracula/gtk-master/* ~/.themes/Dracula
+
+# Matcha Theme
+git clone https://github.com/vinceliuice/Matcha-gtk-theme.git ~/GIT-REPOS/CORE/Matcha-gtk-theme
+sh -c "~/GIT-REPOS/CORE/Matcha-gtk-theme/install.sh"
 
 # Tela-circle-icon-theme
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
