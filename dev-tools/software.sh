@@ -9,7 +9,8 @@ sudo flatpak install -y flathub net.xmind.XMind8
 sudo flatpak install -y flathub net.xmind.ZEN
 
 # Redis
-sudo snap install redis-desktop-manager
+sudo flatpak install -y flathub dev.rdm.RDM
+#sudo snap install redis-desktop-manager
 #wget https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v1.3.9/Another-Redis-Desktop-Manager.1.3.9.AppImage -O ~/Apps/Another-Redis-Desktop-Manager.1.3.9.AppImage
 #chmod +x ~/Apps/Another-Redis-Desktop-Manager.1.3.9.AppImage
 ##! Add this program in menu using Alacarte package
