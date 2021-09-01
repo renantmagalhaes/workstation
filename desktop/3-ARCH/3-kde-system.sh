@@ -199,6 +199,15 @@ git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-Indigo-Dark
 
+# Dracula theme
+wget https://github.com/dracula/gtk/archive/master.zip -O ~/.themes/Dracula.zip
+unzip ~/.themes/Dracula.zip -d ~/.themes/Dracula
+mv ~/.themes/Dracula/gtk-master/* ~/.themes/Dracula
+
+# Matcha Theme
+git clone https://github.com/vinceliuice/Matcha-gtk-theme.git ~/GIT-REPOS/CORE/Matcha-gtk-theme
+sh -c "~/GIT-REPOS/CORE/Matcha-gtk-theme/install.sh"
+
 # # Colorls
 yes | sudo pacman -Sy ruby
 sudo gem install colorls
