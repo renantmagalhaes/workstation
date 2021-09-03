@@ -436,12 +436,11 @@ elif check_cmd zypper; then  # FOR RPM SYSTEMS
     echo "Not able to identify desktop environment"
     fi
 elif check_cmd pacman; then  # FOR RPM SYSTEMS
-    alias update-all="sudo pacman -Syu && sudo yay -Syu -y && sudo flatpak update -y && sudo snap refresh"
+    alias update-all="yay -Syu && sudo pacman -Syu && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
     alias folder="nautilus"
     elif [[ $kde_check == "kde" ]]; then
     alias folder="dolphin"
-    # export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.9
     else
     echo "Not able to identify desktop environment"
     fi
