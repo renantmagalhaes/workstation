@@ -65,7 +65,7 @@ yes | sudo pacman -Syu
 mkdir -p ~/GIT-REPOS/CORE
 
 # Install the packages from fedora repo
-sudo pacman -Sy zsh vlc clementine vim nmap blender brasero gparted wireshark-qt tmux curl vpnc git htop meld openvpn guake krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring kvantum-qt5 python-pip flatpak unzip latte-dock libreoffice-fresh 
+sudo pacman -Sy zsh vlc clementine vim nmap blender brasero gparted wireshark-qt tmux curl vpnc git htop meld openvpn guake krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring kvantum-qt5 python-pip flatpak unzip latte-dock libreoffice-fresh kdeplasma-addons
 
 # Bluetooth
 yes | sudo pacman -S --needed bluez bluez-utils pulseaudio-bluetooth bluedevil
@@ -94,6 +94,7 @@ sudo pip3 install virtualenv virtualenvwrapper pylint
 sudo pip3 install bpytop --upgrade
 sudo ln -s /usr/bin/python3 /usr/bin/python
 sudo ln -s /usr/bin/pip3 /usr/bin/pip
+
 
 # Flathub Packages
 ## Slack
@@ -207,6 +208,10 @@ mv ~/.themes/Dracula/gtk-master/* ~/.themes/Dracula
 # Matcha Theme
 git clone https://github.com/vinceliuice/Matcha-gtk-theme.git ~/GIT-REPOS/CORE/Matcha-gtk-theme
 sh -c "~/GIT-REPOS/CORE/Matcha-gtk-theme/install.sh"
+
+# Fluent Theme
+git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
+sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh"
 
 # # Colorls
 yes | sudo pacman -Sy ruby
