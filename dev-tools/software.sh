@@ -36,12 +36,6 @@ sudo flatpak install -y flathub net.sourceforge.jpdftweak.jPdfTweak
 # K8S IDE - Lens
 sudo snap install kontena-lens --classic
 
-# pgAdmin
-sudo curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
-sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
-sudo apt install -y pgadmin4-desktop
-
-
 # RPM OR DEB env
 
 # check cmd function
@@ -51,6 +45,12 @@ check_cmd() {
 
 # Add the repository key with either wget or curl
 if check_cmd apt-get; then # FOR DEB SYSTEMS
+    ## pgAdmin
+    
+    sudo curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
+    sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
+    sudo apt install -y pgadmin4-desktop
+    
     ## docker
     sudo apt install -y apt-transport-https \
         ca-certificates \
