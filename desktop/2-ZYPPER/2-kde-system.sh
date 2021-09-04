@@ -93,8 +93,8 @@ sudo ln -s /var/lib/snapd/snap /snap
 # sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
 
 # Install pip packages and python path fix
-sudo ln -s /usr/bin/python3.9 /usr/bin/python
-sudo ln -s /usr/bin/python3.9 /usr/bin/python3
+# sudo ln -s /usr/bin/python3.9 /usr/bin/python
+# sudo ln -s /usr/bin/python3.9 /usr/bin/python3
 # sudo ln -s /usr/bin/pip3 /usr/bin/pip
 sudo pip3 install wheel
 sudo pip3 install virtualenv virtualenvwrapper pylint
@@ -210,6 +210,9 @@ git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-Indigo-Dark
 
+# Matcha Theme
+git clone https://github.com/vinceliuice/Matcha-gtk-theme.git ~/GIT-REPOS/CORE/Matcha-gtk-theme
+sh -c "~/GIT-REPOS/CORE/Matcha-gtk-theme/install.sh"
 
 # Fluent Theme
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
@@ -253,6 +256,19 @@ curl https://sh.rustup.rs -sSf | sh
 # Install ClamAV
 sudo zypper install -y clamav clamtk
 # sudo dnf install -y clamav-daemon
+
+
+# Widgets
+## Virtual Desktop Bar
+git clone https://github.com/wsdfhjxc/virtual-desktop-bar.git ~/GIT-REPOS/CORE/virtual-desktop-bar
+yes | sh -c "~/GIT-REPOS/CORE/virtual-desktop-bar/scripts/install-dependencies-arch.sh"
+cd ~/GIT-REPOS/CORE/virtual-desktop-bar/scripts && ./install-applet.sh
+
+## Dash to panel indicator
+git clone https://github.com/psifidotos/latte-indicator-dashtopanel.git ~/GIT-REPOS/CORE/latte-indicator-dashtopanel
+cd ~/GIT-REPOS/CORE/latte-indicator-dashtopanel && kpackagetool5 -i . -t Latte/Indicator
+
+
 
 # # Remove titlebar when maximized window
 # kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
