@@ -261,7 +261,7 @@ sudo zypper install -y clamav clamtk
 # Widgets
 ## Virtual Desktop Bar
 git clone https://github.com/wsdfhjxc/virtual-desktop-bar.git ~/GIT-REPOS/CORE/virtual-desktop-bar
-yes | sh -c "~/GIT-REPOS/CORE/virtual-desktop-bar/scripts/install-dependencies-arch.sh"
+sh -c "~/GIT-REPOS/CORE/virtual-desktop-bar/scripts/install-dependencies-opensuse.sh"
 cd ~/GIT-REPOS/CORE/virtual-desktop-bar/scripts && ./install-applet.sh
 
 ## Dash to panel indicator
@@ -271,12 +271,12 @@ cd ~/GIT-REPOS/CORE/latte-indicator-dashtopanel && kpackagetool5 -i . -t Latte/I
 
 
 # # Remove titlebar when maximized window
-# kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
-# qdbus-qt5 org.kde.KWin /KWin reconfigure
+kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
+qdbus-qt5 org.kde.KWin /KWin reconfigure
 
 # # Latte dock remap key
-# kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta  "org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu"
-# qdbus-qt5 org.kde.KWin /KWin reconfigure
+kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta  "org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu"
+qdbus-qt5 org.kde.KWin /KWin reconfigure
 
 # RTM
 #clear
