@@ -1,7 +1,7 @@
 # KDE
 
 # Themes
-Kvantum -> ChromeOS
+Kvantum -> Orchis-dark
 Global Theme -> ChromeOS
 Icons -> Tela Circle
 
