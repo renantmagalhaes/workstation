@@ -55,6 +55,14 @@ Icons -> Tela Circle
   - Network (always show)
 
 
+### KDE Invisible top scroll bar
+1. Add commond empty panel
+2. Edit ~/.config/plasma-org.kde.plasma.desktop-appletsrc
+   1. add under [ActionPlugins][1]
+      1. wheel:Vertical;NoModifier=org.kde.switchdesktop
+3. Change ~/.config/plasmashellrc
+   1. thickness=5 to thickness=3
+
 ## Shortcuts
 
 ```
