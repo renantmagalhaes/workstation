@@ -69,7 +69,14 @@ sudo zypper ar obs://home:trmdi trmdi
 sudo zypper in -r trmdi kvantum
 
 # Install the packages from fedora repo
-sudo zypper install -y zsh vlc clementine vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring timeshift latte-dock
+sudo zypper install -y zsh vlc clementine vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring timeshift latte-dock virtualbox
+
+
+# virtualbox users
+sudo usermod -aG vboxusers $USER
+#sudo gpasswd -a $USER vboxusers
+
+
 
 ## multimedia codecs
 sudo opi codecs
