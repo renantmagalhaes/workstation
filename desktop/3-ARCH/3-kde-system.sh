@@ -213,6 +213,10 @@ sh -c "~/GIT-REPOS/CORE/Matcha-gtk-theme/install.sh"
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
 sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh"
 
+# Reversal
+git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git ~/GIT-REPOS/CORE/Reversal-icon-theme
+sh -c "~/GIT-REPOS/CORE/Reversal-icon-theme/install.sh -a"
+
 # # Colorls
 yes | sudo pacman -Sy ruby
 sudo gem install colorls

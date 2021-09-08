@@ -279,6 +279,10 @@ sh -c "~/GIT-REPOS/CORE/Matcha-gtk-theme/install.sh"
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
 sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh -a"
 
+# Reversal
+git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git ~/GIT-REPOS/CORE/Reversal-icon-theme
+sh -c "~/GIT-REPOS/CORE/Reversal-icon-theme/install.sh -a"
+
 # Flatery Icon Theme
 git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
