@@ -230,7 +230,13 @@ sh -c "~/GIT-REPOS/CORE/WhiteSur-kde/install.sh"
 
 # Tela-circle-icon-theme
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
-sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh -a"
+sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh blue"
+sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh black"
+
+# Tela--icon-theme
+git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/GIT-REPOS/CORE/Tela-icon-theme
+sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh blue"
+sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh black"
 
 # Reversal
 git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git ~/GIT-REPOS/CORE/Reversal-icon-theme
