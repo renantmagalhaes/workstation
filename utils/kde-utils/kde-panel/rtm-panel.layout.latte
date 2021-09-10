@@ -23,7 +23,7 @@ immutability=1
 plugin=org.kde.plasma.clipboard
 
 [Containments][11][Applets][13][Configuration]
-PreloadWeight=2
+PreloadWeight=0
 
 [Containments][11][Applets][14]
 immutability=1
@@ -76,14 +76,14 @@ immutability=1
 plugin=org.kde.plasma.networkmanagement
 
 [Containments][11][Applets][21][Configuration]
-PreloadWeight=7
+PreloadWeight=27
 
 [Containments][11][Applets][28]
 immutability=1
 plugin=org.kde.plasma.bluetooth
 
 [Containments][11][Applets][28][Configuration]
-PreloadWeight=7
+PreloadWeight=5
 
 [Containments][11][Applets][33]
 immutability=1
@@ -97,21 +97,21 @@ immutability=1
 plugin=org.kde.plasma.pkupdates
 
 [Containments][11][Applets][50][Configuration]
-PreloadWeight=2
+PreloadWeight=5
 
 [Containments][11][Applets][51]
 immutability=1
 plugin=org.kde.plasma.keyboardlayout
 
 [Containments][11][Applets][51][Configuration]
-PreloadWeight=2
+PreloadWeight=0
 
 [Containments][11][Applets][52]
 immutability=1
 plugin=org.kde.plasma.mediacontroller
 
 [Containments][11][Applets][52][Configuration]
-PreloadWeight=42
+PreloadWeight=34
 
 [Containments][11][ConfigDialog]
 DialogHeight=540
@@ -149,7 +149,7 @@ immutability=1
 plugin=org.kde.plasma.systemtray
 
 [Containments][2][Applets][10][Configuration]
-PreloadWeight=92
+PreloadWeight=100
 SystrayContainmentId=11
 
 [Containments][2][Applets][26]
@@ -175,7 +175,7 @@ immutability=1
 plugin=org.kde.plasma.minimizeall
 
 [Containments][2][Applets][27][Configuration]
-PreloadWeight=70
+PreloadWeight=45
 
 [Containments][2][Applets][27][Configuration][ConfigDialog]
 DialogHeight=558
@@ -212,14 +212,18 @@ immutability=1
 plugin=org.kde.plasma.digitalclock
 
 [Containments][2][Applets][5][Configuration]
-PreloadWeight=7
+PreloadWeight=92
+
+[Containments][2][Applets][5][Configuration][ConfigDialog]
+DialogHeight=558
+DialogWidth=720
 
 [Containments][2][Applets][9]
 immutability=1
 plugin=menu11
 
 [Containments][2][Applets][9][Configuration]
-PreloadWeight=69
+PreloadWeight=100
 
 [Containments][2][Applets][9][Configuration][General]
 favoriteSystemActions=logout
@@ -250,7 +254,7 @@ lengthExtMargin=18
 mouseWheelActions=false
 panelPosition=10
 panelSize=100
-panelTransparency=81
+panelTransparency=25
 plasmaBackgroundForPopups=true
 scrollAction=ScrollDesktops
 shadows=None
@@ -258,7 +262,6 @@ shadowsUpgraded=true
 showAudioBadge=false
 showOnlyCurrentActivity=false
 showOnlyCurrentDesktop=true
-solidBackgroundForMaximized=true
 splitterPosition=2
 splitterPosition2=5
 tasksUpgraded=true
