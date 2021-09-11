@@ -431,6 +431,7 @@ elif check_cmd zypper; then  # FOR RPM SYSTEMS
     alias folder="nautilus"
     elif [[ $kde_check == "kde" ]]; then
     alias folder="dolphin"
+    alias restart-kde="kwin_x11 --replace &"
     # export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.9
     else
     echo "Not able to identify desktop environment"
