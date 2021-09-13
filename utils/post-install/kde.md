@@ -34,6 +34,15 @@ Icons -> Tela Circle
 - General Behaviour (double click)
   - Clicking files or folders: 
     - Selects them
+- Left Click on desktop -> Configure Desktop and Wallpaper
+  - Wallpaper Type -> GetNEw Plugins -> Inactive Blur
+    - Blur by 40% over 400ms
+- Left Click on desktop -> Configure Desktop and Wallpaper
+  - Wallpaper Type -> GetNEw Plugins -> Smart Video Wallpaper
+    - https://mylivewallpapers.com
+    - https://www.pexels.com/videos/
+    - https://pixabay.com/videos/search/live%20wallpaper/
+
 
 ## KDE Taskbar
 
