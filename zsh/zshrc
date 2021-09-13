@@ -47,6 +47,7 @@ plugins=(
   tmux
   virtualenv
   git-auto-fetch
+  aws
 )
 
 
