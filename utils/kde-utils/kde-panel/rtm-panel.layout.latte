@@ -16,14 +16,14 @@ immutability=1
 plugin=org.kde.plasma.volume
 
 [Containments][11][Applets][12][Configuration]
-PreloadWeight=2
+PreloadWeight=0
 
 [Containments][11][Applets][13]
 immutability=1
 plugin=org.kde.plasma.clipboard
 
 [Containments][11][Applets][13][Configuration]
-PreloadWeight=2
+PreloadWeight=0
 
 [Containments][11][Applets][14]
 immutability=1
@@ -76,14 +76,14 @@ immutability=1
 plugin=org.kde.plasma.networkmanagement
 
 [Containments][11][Applets][21][Configuration]
-PreloadWeight=7
+PreloadWeight=24
 
 [Containments][11][Applets][28]
 immutability=1
 plugin=org.kde.plasma.bluetooth
 
 [Containments][11][Applets][28][Configuration]
-PreloadWeight=7
+PreloadWeight=32
 
 [Containments][11][Applets][33]
 immutability=1
@@ -97,21 +97,21 @@ immutability=1
 plugin=org.kde.plasma.pkupdates
 
 [Containments][11][Applets][50][Configuration]
-PreloadWeight=2
+PreloadWeight=7
 
 [Containments][11][Applets][51]
 immutability=1
 plugin=org.kde.plasma.keyboardlayout
 
 [Containments][11][Applets][51][Configuration]
-PreloadWeight=2
+PreloadWeight=0
 
 [Containments][11][Applets][52]
 immutability=1
 plugin=org.kde.plasma.mediacontroller
 
 [Containments][11][Applets][52][Configuration]
-PreloadWeight=42
+PreloadWeight=26
 
 [Containments][11][ConfigDialog]
 DialogHeight=540
@@ -149,7 +149,7 @@ immutability=1
 plugin=org.kde.plasma.systemtray
 
 [Containments][2][Applets][10][Configuration]
-PreloadWeight=92
+PreloadWeight=100
 SystrayContainmentId=11
 
 [Containments][2][Applets][26]
@@ -164,7 +164,7 @@ animationWindowAddedInGroup=false
 hoverAction=PreviewAndHighlightWindows
 infoBadgeProminentColorEnabled=true
 isInLatteDock=true
-launchers59=applications:vivaldi-stable.desktop,applications:org.kde.dolphin.desktop,applications:code.desktop,applications:com.slack.Slack.desktop
+launchers59=applications:vivaldi-stable.desktop,applications:org.kde.dolphin.desktop,applications:code.desktop,applications:org.kde.konsole.desktop,applications:com.slack.Slack.desktop,applications:systemsettings.desktop,applications:virtualbox.desktop
 leftClickAction=CycleThroughTasks
 showAudioBadge=false
 showOnlyCurrentActivity=false
@@ -175,7 +175,7 @@ immutability=1
 plugin=org.kde.plasma.minimizeall
 
 [Containments][2][Applets][27][Configuration]
-PreloadWeight=70
+PreloadWeight=87
 
 [Containments][2][Applets][27][Configuration][ConfigDialog]
 DialogHeight=558
@@ -212,14 +212,23 @@ immutability=1
 plugin=org.kde.plasma.digitalclock
 
 [Containments][2][Applets][5][Configuration]
-PreloadWeight=7
+PreloadWeight=92
+
+[Containments][2][Applets][5][Configuration][Appearance]
+customDateFormat=dd/M/yy
+dateFormat=custom
+use24hFormat=2
+
+[Containments][2][Applets][5][Configuration][ConfigDialog]
+DialogHeight=558
+DialogWidth=720
 
 [Containments][2][Applets][9]
 immutability=1
 plugin=menu11
 
 [Containments][2][Applets][9][Configuration]
-PreloadWeight=69
+PreloadWeight=100
 
 [Containments][2][Applets][9][Configuration][General]
 favoriteSystemActions=logout
@@ -239,6 +248,7 @@ alignmentUpgraded=true
 animationWindowAddedInGroup=false
 appletOrder=31;9;26;10;5;27
 appletShadowsEnabled=false
+disablePanelShadowForMaximized=true
 dragActiveWindowEnabled=true
 durationTime=x1
 hoverAction=PreviewAndHighlightWindows
@@ -246,11 +256,10 @@ iconSize=26
 inConfigureAppletsMode=true
 infoBadgeProminentColorEnabled=true
 leftClickAction=CycleThroughTasks
-lengthExtMargin=18
-mouseWheelActions=false
+lengthExtMargin=10
 panelPosition=10
 panelSize=100
-panelTransparency=81
+panelTransparency=20
 plasmaBackgroundForPopups=true
 scrollAction=ScrollDesktops
 shadows=None
@@ -262,9 +271,8 @@ solidBackgroundForMaximized=true
 splitterPosition=2
 splitterPosition2=5
 tasksUpgraded=true
-themeColors=SmartThemeColors
+themeColors=DarkThemeColors
 thickMargin=15
-titleTooltips=false
 userBlocksColorizingApplets=31;10
 zoomLevel=0
 
