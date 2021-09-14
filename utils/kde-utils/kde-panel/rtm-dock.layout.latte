@@ -15,7 +15,7 @@ name=
 onPrimary=true
 plugin=org.kde.latte.containment
 raiseOnActivityChange=false
-raiseOnDesktopChange=false
+raiseOnDesktopChange=true
 timerHide=700
 timerShow=0
 viewType=0
@@ -28,7 +28,8 @@ plugin=org.kde.latte.plasmoid
 
 [Containments][1][Applets][57][Configuration][General]
 isInLatteDock=true
-launchers59=applications:vivaldi-stable.desktop,applications:org.kde.dolphin.desktop,applications:org.kde.konsole.desktop,applications:code.desktop,applications:robo3t-snap_robo3t.desktop,applications:io.dbeaver.DBeaverCommunity.desktop,applications:kontena-lens_kontena-lens.desktop,applications:wireshark.desktop,applications:com.getpostman.Postman.desktop,applications:org.remmina.Remmina.desktop,applications:com.obsproject.Studio.desktop,applications:org.kde.krita.desktop,applications:org.kde.kdenlive.desktop,applications:com.microsoft.Teams.desktop,applications:com.skype.Client.desktop,applications:us.zoom.Zoom.desktop,applications:virtualbox.desktop
+launchers59=applications:vivaldi-stable.desktop,applications:org.kde.dolphin.desktop,applications:org.kde.konsole.desktop,applications:code.desktop,applications:robo3t-snap_robo3t.desktop,applications:io.dbeaver.DBeaverCommunity.desktop,applications:kontena-lens_kontena-lens.desktop,applications:wireshark.desktop,applications:com.getpostman.Postman.desktop,applications:org.remmina.Remmina.desktop,applications:com.obsproject.Studio.desktop,applications:org.kde.krita.desktop,applications:org.kde.kdenlive.desktop,applications:com.slack.Slack.desktop,applications:com.microsoft.Teams.desktop,applications:com.skype.Client.desktop,applications:us.zoom.Zoom.desktop,applications:virtualbox.desktop
+showAudioBadge=false
 showOnlyCurrentActivity=false
 showOnlyCurrentDesktop=true
 
@@ -85,21 +86,21 @@ immutability=1
 plugin=org.kde.plasma.bluetooth
 
 [Containments][1][Applets][83][Configuration]
-PreloadWeight=75
+PreloadWeight=80
 
 [Containments][1][Applets][84]
 immutability=1
 plugin=org.kde.plasma.mediacontroller
 
 [Containments][1][Applets][84][Configuration]
-PreloadWeight=75
+PreloadWeight=80
 
 [Containments][1][Applets][86]
 immutability=1
 plugin=org.kde.plasma.volume
 
 [Containments][1][Applets][86][Configuration]
-PreloadWeight=70
+PreloadWeight=100
 
 [Containments][1][Applets][87]
 immutability=1
@@ -129,6 +130,7 @@ iconMargin=0
 iconSize=46
 inConfigureAppletsMode=true
 maxLength=90
+mouseWheelActions=false
 panelPosition=10
 panelSize=100
 panelTransparency=10
