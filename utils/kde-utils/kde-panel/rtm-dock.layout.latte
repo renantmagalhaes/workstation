@@ -27,8 +27,11 @@ immutability=1
 plugin=org.kde.latte.plasmoid
 
 [Containments][1][Applets][57][Configuration][General]
+hoverAction=PreviewWindows
+infoBadgeProminentColorEnabled=true
 isInLatteDock=true
 launchers59=applications:vivaldi-stable.desktop,applications:org.kde.dolphin.desktop,applications:org.kde.konsole.desktop,applications:code.desktop,applications:robo3t-snap_robo3t.desktop,applications:io.dbeaver.DBeaverCommunity.desktop,applications:kontena-lens_kontena-lens.desktop,applications:wireshark.desktop,applications:com.getpostman.Postman.desktop,applications:org.remmina.Remmina.desktop,applications:com.obsproject.Studio.desktop,applications:org.kde.krita.desktop,applications:org.kde.kdenlive.desktop,applications:com.slack.Slack.desktop,applications:com.microsoft.Teams.desktop,applications:com.skype.Client.desktop,applications:us.zoom.Zoom.desktop,applications:virtualbox.desktop
+leftClickAction=CycleThroughTasks
 showAudioBadge=false
 showOnlyCurrentActivity=false
 showOnlyCurrentDesktop=true
@@ -81,19 +84,22 @@ thickMargin=4
 immutability=1
 plugin=org.kde.plasma.minimizeall
 
+[Containments][1][Applets][67][Configuration]
+PreloadWeight=55
+
+[Containments][1][Applets][67][Configuration][ConfigDialog]
+DialogHeight=558
+DialogWidth=720
+
+[Containments][1][Applets][67][Shortcuts]
+global=Meta+D
+
 [Containments][1][Applets][83]
 immutability=1
 plugin=org.kde.plasma.bluetooth
 
 [Containments][1][Applets][83][Configuration]
-PreloadWeight=80
-
-[Containments][1][Applets][84]
-immutability=1
-plugin=org.kde.plasma.mediacontroller
-
-[Containments][1][Applets][84][Configuration]
-PreloadWeight=80
+PreloadWeight=95
 
 [Containments][1][Applets][86]
 immutability=1
@@ -116,6 +122,36 @@ DesktopIndicatorsStyle=3
 DesktopLabelsBoldFontForCurrentDesktop=true
 DesktopLabelsStyle=1
 
+[Containments][1][Applets][88]
+immutability=1
+plugin=org.kde.plasma.weather
+
+[Containments][1][Applets][88][Configuration]
+PreloadWeight=90
+pressureUnit=5028
+showHumidityInTooltip=false
+showPressureInTooltip=false
+showTemperatureInCompactMode=false
+showTemperatureInTooltip=true
+showWindInTooltip=true
+source=wettercom|weather|Murrhardt, Baden-Württemberg, DE|DE0007113;Murrhardt
+speedUnit=9001
+temperatureUnit=6001
+updateInterval=30
+visibilityUnit=2007
+weatherServiceProviders=bbcukmet,wettercom
+
+[Containments][1][Applets][88][Configuration][ConfigDialog]
+DialogHeight=558
+DialogWidth=720
+
+[Containments][1][Applets][89]
+immutability=1
+plugin=org.kde.plasma.notifications
+
+[Containments][1][Applets][89][Configuration]
+PreloadWeight=65
+
 [Containments][1][ConfigDialog]
 DialogHeight=600
 DialogWidth=586
@@ -123,17 +159,18 @@ DialogWidth=586
 [Containments][1][General]
 advanced=false
 alignmentUpgraded=true
-appletOrder=59;65;57;61;84;83;86;63;87;67
+appletOrder=59;65;57;61;89;88;83;86;63;87;67
 autoDecreaseIconSize=false
 backgroundAllCorners=true
+durationTime=x1
 iconMargin=0
 iconSize=46
 inConfigureAppletsMode=true
-maxLength=90
 mouseWheelActions=false
 panelPosition=10
 panelSize=100
 panelTransparency=10
+screenEdgeMargin=5
 shadowOpacity=35
 shadowSize=45
 shadowsUpgraded=true
@@ -143,12 +180,28 @@ splitterPosition=3
 splitterPosition2=4
 tasksUpgraded=true
 thickMargin=15
-zoomLevel=0
+zoomLevel=1
 
 [Containments][1][Indicator]
 customType=org.kde.latte.dashtopanel
 enabled=true
-type=org.kde.latte.dashtopanel
+type=org.kde.latte.default
+
+[Containments][1][Indicator][org.kde.latte.dashtopanel][General]
+lineThickness=0.02
+maxBackgroundOpacity=0.05
+style=Ciliora
+
+[Containments][1][Indicator][org.kde.latte.default][General]
+extraDotOnActive=true
+glowApplyTo=OnActive
+glowEnabled=true
+minimizedTaskColoredDifferently=true
+size=0.12
+
+[Containments][1][Indicator][org.kde.latte.plasma][General]
+clickedAnimationEnabled=true
+lengthPadding=0.1
 
 [LayoutSettings]
 activities=
