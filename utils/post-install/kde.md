@@ -20,6 +20,7 @@ Icons -> Tela Circle
   - Uncheck Wobbly when resizing.
   - Desktop Grid
     - Layout mode: Pager
+  - Disable Screen Edge (highlight)
 - Task Switcher
   - Thumbnail Grid
 - Virtual Desktops
@@ -69,7 +70,8 @@ Icons -> Tela Circle
 2. Edit ~/.config/plasma-org.kde.plasma.desktop-appletsrc
    1. add under [ActionPlugins][1]
       1. wheel:Vertical;NoModifier=org.kde.switchdesktop
-3. Change ~/.config/plasmashellrc
+3. Keyboard and shortcut for menu -> Alt + F1
+4. Change ~/.config/plasmashellrc
    1. thickness=5 to thickness=3
 
 ## Shortcuts
