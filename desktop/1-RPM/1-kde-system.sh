@@ -163,7 +163,7 @@ sudo flatpak install -y flathub com.obsproject.Studio
 sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
 
 ## MkCron
-sudo snap install mkcron
+# sudo snap install mkcron
 
 ## Install Teamviewer
 wget https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm

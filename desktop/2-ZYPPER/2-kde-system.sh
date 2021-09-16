@@ -129,8 +129,8 @@ sudo flatpak install -y flathub com.obsproject.Studio
 ## FFaudioConverter
 sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
 
-## MkCron
-sudo snap install mkcron
+# ## MkCron
+# sudo snap install mkcron
 
 
 ## Install Teamviewer
