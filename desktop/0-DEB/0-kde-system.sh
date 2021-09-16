@@ -105,7 +105,7 @@ sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
 sudo flatpak install flathub -y org.kde.kdenlive
 
 ## MkCron
-sudo snap install mkcron
+# sudo snap install mkcron
 
 ## Slack
 wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.12.2-amd64.deb -O /tmp/slack-desktop.deb
