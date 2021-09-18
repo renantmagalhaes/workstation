@@ -71,7 +71,8 @@ Icons -> Tela Circle
    1. add under [ActionPlugins][1]
       1. wheel:Vertical;NoModifier=org.kde.switchdesktop
 3. Keyboard and shortcut for menu -> Alt + F1
-4. Change ~/.config/plasmashellrc
+4. Disable notification system tray (top panel)
+5. Change ~/.config/plasmashellrc
    1. thickness=5 to thickness=3
 
 ## Shortcuts
