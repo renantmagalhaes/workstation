@@ -281,8 +281,8 @@ cd ~/GIT-REPOS/CORE/virtual-desktop-bar/scripts && ./install-applet.sh
 git clone https://github.com/psifidotos/latte-indicator-dashtopanel.git ~/GIT-REPOS/CORE/latte-indicator-dashtopanel
 cd ~/GIT-REPOS/CORE/latte-indicator-dashtopanel && kpackagetool5 -i . -t Latte/Indicator
 
-## Window AppMenu Applet
-sudo zypper install -y applet-window-appmenu
+## Applets
+sudo zypper install -y applet-window-appmenu applet-window-title applet-window-buttons
 
 
 # # Remove titlebar when maximized window
