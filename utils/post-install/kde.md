@@ -65,15 +65,35 @@ Icons -> Tela Circle
   - Network (always show)
 
 
-### KDE Invisible top scroll bar
+### KDE top scroll bar
 1. Add commond empty panel
 2. Edit ~/.config/plasma-org.kde.plasma.desktop-appletsrc
    1. add under [ActionPlugins][1]
       1. wheel:Vertical;NoModifier=org.kde.switchdesktop
 3. Keyboard and shortcut for menu -> Alt + F1
 4. Disable notification system tray (top panel)
-5. Change ~/.config/plasmashellrc
-   1. thickness=5 to thickness=3
+<!-- 5. Change ~/.config/plasmashellrc
+   1. thickness=5 to thickness=3 -->
+
+- Widgets
+  - Windows Buttons / Windows Title / AppMenu
+  
+Configs
+
+- Windows Buttons
+  - Decoration WhiteSur
+  - Active windows is maximized
+  - Show only for windows in current screen
+
+- Windows Title
+  - Behaviour
+    - Show only windows information from current screen
+    - Disable scroll to cycle and minimize through your tasks
+    - Disable placeholder
+  
+- AppMenu
+  - Menu Colors Orchis Dark
+  - Filters ONLY: Show only menus from current screen
 
 ## Shortcuts
 
