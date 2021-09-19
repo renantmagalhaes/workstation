@@ -39,6 +39,7 @@ plugins=(
   #kube-ps1
   zsh-completions
   zsh-autosuggestions
+  zsh-syntax-highlighting
   colored-man-pages
   colorize
   command-not-found
@@ -378,6 +379,7 @@ POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='green'
 source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+
 # #Python virtualenv and Virtualenvwrapper
 # export WORKON_HOME=$HOME/.virtualenvs
 # export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
@@ -502,8 +504,7 @@ command -v htop > /dev/null && alias top='htop'
 command -v bpytop > /dev/null && alias top='bpytop'
 
 # Completion.
-autoload -Uz compinit
-compinit
+autoload -U compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
 zstyle ':completion:*' rehash true                              # automatically find new executables in path 
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
@@ -523,5 +524,5 @@ autoload -U +X bashcompinit && bashcompinit
 
 ######################### General Setup ########################
 
-## Code
-export PATH="/usr/share/code/bin:$PATH"
+# Additional paths
+export PATH="/usr/sbin:/usr/share/code/bin:$PATH"
