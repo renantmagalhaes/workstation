@@ -4,6 +4,7 @@
 Kvantum -> Orchis-dark
 Global Theme -> ChromeOS
 Icons -> Tela Circle
+Window Decorations -> Orchis-dark
 
 
 # System Settings
@@ -28,8 +29,9 @@ Icons -> Tela Circle
   - Add 4 Desktops
   - Disable Navigation Wraps Around
 - Screen Edges
-  - Top left corner
-    - Present Windows (current desktop)
+  - Disable all
+  <!-- - Top left corner
+    - Present Windows (current desktop) -->
 - Desktop Session
   - Start with an empty session
 - General Behaviour (double click)
@@ -95,6 +97,10 @@ Configs
   - Menu Colors Orchis Dark
   - Filters ONLY: Show only menus from current screen
 
+
+# KWin Scripts
+
+Hide Titles
 ## Shortcuts
 
 ```
