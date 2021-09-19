@@ -30,8 +30,8 @@ Window Decorations -> Orchis-dark
   - Disable Navigation Wraps Around
 - Screen Edges
   - Disable all
-  <!-- - Top left corner
-    - Present Windows (current desktop) -->
+  - Top left corner
+    - Present Windows (current desktop)
 - Desktop Session
   - Start with an empty session
 - General Behaviour (double click)
