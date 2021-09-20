@@ -71,12 +71,12 @@ sudo zypper in -r trmdi kvantum
 # Install the packages from fedora repo
 sudo zypper install -y zsh vlc clementine vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring timeshift latte-dock virtualbox droidcam android-tools
 
-
 # virtualbox users
 sudo usermod -aG vboxusers $USER
 #sudo gpasswd -a $USER vboxusers
 
-
+# Piper group
+sudo usermod -aG games $USER
 
 ## multimedia codecs
 sudo opi codecs
