@@ -414,8 +414,10 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     alias update-all="sudo apt update && sudo apt upgrade -y && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
     alias folder="nautilus"
+    alias pdf="evince"
     elif [[ $kde_check == "kde" ]]; then
     alias folder="dolphin"
+    alias pdf="okular"
     else
     echo "Not able to identify desktop environment"
     fi
@@ -423,8 +425,10 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     alias update-all="sudo dnf update -y && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
     alias folder="nautilus"
+    alias pdf="evince"
     elif [[ $kde_check == "kde" ]]; then
     alias folder="dolphin"
+    alias pdf="okular"
     else
     echo "Not able to identify desktop environment"
     fi
@@ -432,9 +436,11 @@ elif check_cmd zypper; then  # FOR RPM SYSTEMS
     alias update-all="sudo zypper refresh && sudo zypper update -y && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
     alias folder="nautilus"
+    alias pdf="evince"
     elif [[ $kde_check == "kde" ]]; then
     alias folder="dolphin"
     alias restart-kde="kwin_x11 --replace &"
+    alias pdf="okular"
     # export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.9
     else
     echo "Not able to identify desktop environment"
@@ -452,7 +458,6 @@ else
     echo "Not able to identify the system"
 fi
 
-alias pdf="evince"
 alias killtmux="pidof tmux |xargs kill -9"
 alias python="python3"
 alias killvivaldi="pidof vivaldi-bin |xargs kill -9"
