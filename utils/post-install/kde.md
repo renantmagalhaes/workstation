@@ -15,6 +15,8 @@ Window Decorations -> Orchis-dark
   - Configure GNOME/GTK
 - Desktop effects
   - Enable Blur
+  - Dim Screen for Administrator Mode
+  - Slide Back
   - Enable Magic Lamp
     - Animation 170ms
   - Enable Wobby Windows
