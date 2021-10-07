@@ -38,7 +38,7 @@ case $n in
 # ===================================================================================
     11) bash utils/virtualbox/virtualbox-ext-pack.sh ;;
     12) bash utils/deckboard/deckboard.sh ;;
-    13) sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh) && sudo usermod -aG nordvpn $USER ;;
+    13) sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh) && sudo usermod -aG nordvpn $USER && sudo systemctl enable --now nordvpnd.service ;;
     14) bash utils/git-config/git-config.sh ;;
 # ===================================================================================
     99) bash utils/post-install/env-detector.sh ;;
