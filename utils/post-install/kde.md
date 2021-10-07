@@ -2,9 +2,11 @@
 
 # Themes
 Kvantum -> Orchis-dark
-Global Theme -> ChromeOS
+Global Theme -> Orchis-dark
 Icons -> Tela Circle
 Window Decorations -> Orchis-dark
+Cursors -> Breeze Light
+Splash Screen -> QuarksSplashDark
 
 
 # System Settings
@@ -19,8 +21,8 @@ Window Decorations -> Orchis-dark
   - Slide Back
   - Enable Magic Lamp
     - Animation 170ms
-  - Enable Wobby Windows
-  - Uncheck Wobbly when resizing.
+  <!-- - Enable Wobby Windows -->
+    <!-- - Uncheck Wobbly when resizing. -->
   - Desktop Grid
     - Layout mode: Pager
   - Disable Screen Edge (highlight)
@@ -69,13 +71,13 @@ Window Decorations -> Orchis-dark
   - Network (always show)
 
 
-### KDE top scroll bar
+<!-- ### KDE top scroll bar
 1. Add commond empty panel
 2. Edit ~/.config/plasma-org.kde.plasma.desktop-appletsrc
    1. add under [ActionPlugins][1]
       1. wheel:Vertical;NoModifier=org.kde.switchdesktop
 3. Keyboard and shortcut for menu -> Alt + F1
-4. Disable notification system tray (top panel)
+4. Disable notification system tray (top panel) -->
 <!-- 5. Change ~/.config/plasmashellrc
    1. thickness=5 to thickness=3 -->
 
@@ -88,6 +90,7 @@ Configs
   - Decoration WhiteSur
   - Active windows is maximized
   - Show only for windows in current screen
+  - Nodic Window Decorations
 
 - Windows Title
   - Behaviour
