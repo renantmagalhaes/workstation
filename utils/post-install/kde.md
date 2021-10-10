@@ -1,6 +1,8 @@
 # KDE
 
 # Themes
+
+## Option1
 Kvantum -> Orchis-dark
 Global Theme -> Orchis-dark
 Icons -> Tela Circle
@@ -8,6 +10,14 @@ Window Decorations -> Orchis-dark
 Cursors -> Breeze Light
 Splash Screen -> QuarksSplashDark
 
+## Option2
+Kvantum -> Orchis-dark
+Global Theme -> Materia Dark
+Icons -> Tela Circle
+Window Decorations -> Materia Dark
+Plasma Style -> Materia Color
+Cursors -> Breeze Light
+Splash Screen -> QuarksSplashDark
 
 # System Settings
 
