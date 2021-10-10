@@ -223,6 +223,9 @@ sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh"
 git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git ~/GIT-REPOS/CORE/Reversal-icon-theme
 sh -c "~/GIT-REPOS/CORE/Reversal-icon-theme/install.sh -a"
 
+# Materia KDE
+wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/materia-kde/master/install.sh | sh
+
 # # Colorls
 yes | sudo pacman -Sy ruby
 sudo gem install colorls
