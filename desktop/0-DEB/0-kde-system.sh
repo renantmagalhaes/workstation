@@ -257,6 +257,9 @@ sh -c "~/GIT-REPOS/CORE/Fluent-icon-theme/install.sh"
 sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist /usr/share/icons/Fluent-cursors
 sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist-dark /usr/share/icons/Fluent-dark-cursors
 
+# Materia KDE
+wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/materia-kde/master/install.sh | sh
+
 
 # Widgets
 ## Virtual Desktop Bar
