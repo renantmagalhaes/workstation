@@ -227,7 +227,11 @@ sudo flatpak install -y flathub com.microsoft.Teams
 sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
 
 ## Kdenlive
-sudo flatpak install flathub -y org.kde.kdenlive
+sudo flatpak install -y flathub -y org.kde.kdenlive
+
+## Telegram Desktop
+sudo flatpak install -y flathub org.telegram.desktop
+
 
 ## MkCron
 # sudo snap install mkcron
