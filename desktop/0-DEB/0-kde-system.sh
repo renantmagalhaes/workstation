@@ -71,7 +71,8 @@ sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install latte-dock zsh clementine breeze-cursor-theme vim vim-gui-common nmap vlc blender fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 x2goclient git idle3 fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn snapd guake guake-indicator krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload virtualbox flatpak pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 obs-studio cheese ncdu whois pdfshuffler piper libratbag-tools qt5-style-kvantum qt5-style-kvantum-themes gnome-keyring timeshift 
+sudo apt-get -y install zsh clementine breeze-cursor-theme vim vim-gui-common nmap vlc blender fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 x2goclient git idle3 fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn snapd guake guake-indicator krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload virtualbox flatpak pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 obs-studio cheese ncdu whois pdfshuffler piper libratbag-tools qt5-style-kvantum qt5-style-kvantum-themes gnome-keyring timeshift adb fastboot materia-gtk-theme xournal
+#sudo apt-get -y install latte-dock # installing git version for now.
 sudo apt-get -f install -y
 
 
@@ -279,6 +280,12 @@ sudo apt install -y ruby-dev
 sudo gem install colorls
 sudo apt-get -f install -y
 
+# Droidcam
+cd /tmp/
+wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_1.8.0.zip
+unzip droidcam_latest.zip -d droidcam
+cd droidcam && sudo ./install-client
+sudo ./install-videos
 
 # Install ClamAV
 sudo apt install -y clamav clamtk
@@ -289,19 +296,30 @@ sudo apt-get install -y clamav-daemon
 sudo apt-get -f install -y
 
 # # Remove titlebar when maximized window
-# kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
-#Revert to kde dock
-#kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu"
-
-# qdbus-qt5 org.kde.KWin /KWin reconfigure
+#kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
+#qdbus org.kde.KWin /KWin reconfigure
 
 # # Latte dock remap key
-# kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta  "org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu"
-# qdbus-qt5 org.kde.KWin /KWin reconfigure
+#kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta  "org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu"
+#qdbus org.kde.KWin /KWin reconfigure
+#Revert to kde dock
+#kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu"
+#qdbus org.kde.KWin /KWin reconfigure
 
 # Plasma sync configs
 # TODO: find a way to install all packages via cli.
 # https://store.kde.org/p/1298955/
+
+# Latte-dock
+sudo apt-get install -y cmake extra-cmake-modules qtdeclarative5-dev libqt5x11extras5-dev libkf5iconthemes-dev libkf5plasma-dev libkf5windowsystem-dev libkf5declarative-dev libkf5xmlgui-dev libkf5activities-dev build-essential libxcb-util-dev libkf5wayland-dev git gettext libkf5archive-dev libkf5notifications-dev libxcb-util0-dev libsm-dev libkf5crash-dev libkf5newstuff-dev libxcb-shape0-dev libxcb-randr0-dev libx11-dev libx11-xcb-dev kirigami2-dev
+git clone https://invent.kde.org/plasma/latte-dock.git ~/GIT-REPOS/CORE/latte-dock
+cd ~/GIT-REPOS/CORE/latte-dock && sh install.sh
+
+# Widgets
+## Virtual Desktop Bar
+git clone https://github.com/wsdfhjxc/virtual-desktop-bar.git ~/GIT-REPOS/CORE/virtual-desktop-bar
+sh -c "~/GIT-REPOS/CORE/virtual-desktop-bar/scripts/install-dependencies-ubuntu.sh"
+cd ~/GIT-REPOS/CORE/virtual-desktop-bar/scripts && ./install-applet.sh
 
 
 # RTM
