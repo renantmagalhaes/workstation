@@ -311,8 +311,8 @@ sudo apt-get -f install -y
 # https://store.kde.org/p/1298955/
 
 # Latte-dock
-sudo apt-get install -y cmake extra-cmake-modules qtdeclarative5-dev libqt5x11extras5-dev libkf5iconthemes-dev libkf5plasma-dev libkf5windowsystem-dev libkf5declarative-dev libkf5xmlgui-dev libkf5activities-dev build-essential libxcb-util-dev libkf5wayland-dev git gettext libkf5archive-dev libkf5notifications-dev libxcb-util0-dev libsm-dev libkf5crash-dev libkf5newstuff-dev libxcb-shape0-dev libxcb-randr0-dev libx11-dev libx11-xcb-dev kirigami2-dev
 git clone https://invent.kde.org/plasma/latte-dock.git ~/GIT-REPOS/CORE/latte-dock
+sudo apt-get install -y cmake extra-cmake-modules qtdeclarative5-dev libqt5x11extras5-dev libkf5iconthemes-dev libkf5plasma-dev libkf5windowsystem-dev libkf5declarative-dev libkf5xmlgui-dev libkf5activities-dev build-essential libxcb-util-dev libkf5wayland-dev git gettext libkf5archive-dev libkf5notifications-dev libxcb-util0-dev libsm-dev libkf5crash-dev libkf5newstuff-dev libxcb-shape0-dev libxcb-randr0-dev libx11-dev libx11-xcb-dev kirigami2-dev
 cd ~/GIT-REPOS/CORE/latte-dock && sh install.sh
 
 # Widgets
@@ -321,6 +321,14 @@ git clone https://github.com/wsdfhjxc/virtual-desktop-bar.git ~/GIT-REPOS/CORE/v
 sh -c "~/GIT-REPOS/CORE/virtual-desktop-bar/scripts/install-dependencies-ubuntu.sh"
 cd ~/GIT-REPOS/CORE/virtual-desktop-bar/scripts && ./install-applet.sh
 
+## applet-window-buttons
+git clone https://github.com/psifidotos/applet-window-buttons.git ~/GIT-REPOS/CORE/applet-window-buttons
+sudo apt install -y g++ extra-cmake-modules qtbase5-dev qtdeclarative5-dev libkf5declarative-dev libkf5plasma-dev libkdecorations2-dev gettext
+cd ~/GIT-REPOS/CORE/applet-window-buttons && sh install.sh
+
+## applet-window-title
+git clone https://github.com/psifidotos/applet-window-title.git ~/GIT-REPOS/CORE/applet-window-title
+cd ~/GIT-REPOS/CORE/applet-window-title && plasmapkg2 -i .
 
 # RTM
 # RTM
