@@ -60,6 +60,11 @@ fi
 ## VirtualBox
 #wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
 
+## Ubuntu backports for latte-dock
+sudo add-apt-repository ppa:kubuntu-ppa/backports
+sudo apt update
+sudo apt dist-upgrade
+
 ## Vivaldi Browser
 wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo apt-key add -
 sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
