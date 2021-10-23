@@ -197,7 +197,7 @@ sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install plank zsh clementine breeze-cursor-theme dia vim vim-gtk vim-gui-common nmap vlc blender fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle3 fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 flatpak chrome-gnome-shell gnome-menus pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors obs-studio cheese ncdu whois pdfshuffler piper libratbag-tools timeshift
+sudo apt-get -y install plank zsh clementine breeze-cursor-theme dia vim vim-gtk vim-gui-common nmap vlc blender fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle3 fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload chrome-gnome-shell virtualbox gnome-shell-extensions gnome-menus gir1.2-gmenu-3.0 flatpak chrome-gnome-shell gnome-menus pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors obs-studio cheese ncdu whois pdfshuffler piper libratbag-tools timeshift adb fastboot materia-gtk-theme xournal
 sudo apt-get -f install -y
 
 # vboxuser
@@ -227,7 +227,11 @@ sudo flatpak install -y flathub com.microsoft.Teams
 sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
 
 ## Kdenlive
-sudo flatpak install flathub -y org.kde.kdenlive
+sudo flatpak install -y flathub -y org.kde.kdenlive
+
+## Telegram Desktop
+sudo flatpak install -y flathub org.telegram.desktop
+
 
 ## MkCron
 # sudo snap install mkcron
@@ -406,6 +410,12 @@ sudo apt-get -f install -y
 # sudo apt install -y flat-remix-gnome flat-remix flat-remix-gtk
 # sudo apt-get -f install -y
 
+# Droidcam
+cd /tmp/
+wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_1.8.0.zip
+unzip droidcam_latest.zip -d droidcam
+cd droidcam && sudo ./install-client
+sudo ./install-videos
 
 # Install ClamAV
 sudo apt install -y clamav clamtk

@@ -135,6 +135,9 @@ sudo flatpak install -y flathub com.obsproject.Studio
 ## FFaudioConverter
 sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
 
+## Telegram
+sudo flatpak install -y flathub org.telegram.desktop
+
 # ## MkCron
 # sudo snap install mkcron
 
