@@ -86,7 +86,7 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     sudo systemctl restart docker
 
     ## yarn / nodejs
-        sudo dnf install -y curl gnupg2 gcc-c++ make
+    sudo dnf install -y curl gnupg2 gcc-c++ make
     sudo curl -sL https://rpm.nodesource.com/setup_12.x | sudo bash -
     sudo curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
     sudo sed -i 's/failovermethod\=priority//' /etc/yum.repos.d/*
