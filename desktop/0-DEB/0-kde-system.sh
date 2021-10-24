@@ -335,6 +335,11 @@ cd ~/GIT-REPOS/CORE/applet-window-buttons && sh install.sh
 git clone https://github.com/psifidotos/applet-window-title.git ~/GIT-REPOS/CORE/applet-window-title
 cd ~/GIT-REPOS/CORE/applet-window-title && plasmapkg2 -i .
 
+## applet-window-appmenu
+git clone https://github.com/psifidotos/applet-window-appmenu.git ~/GIT-REPOS/CORE/applet-window-appmenu
+sudo apt-get install -y make cmake extra-cmake-modules qtdeclarative5-dev libkf5plasma-dev libqt5x11extras5-dev g++ libsm-dev libkf5configwidgets-dev libkdecorations2-dev libxcb-randr0-dev libkf5wayland-dev plasma-workspace-dev
+cd ~/GIT-REPOS/CORE/applet-window-appmenu && sh install.sh
+
 # RTM
 # RTM
 
