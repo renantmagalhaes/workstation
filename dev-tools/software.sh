@@ -34,7 +34,7 @@ sudo flatpak install -y flathub com.github.artemanufrij.regextester
 sudo flatpak install -y flathub net.sourceforge.jpdftweak.jPdfTweak
 
 # K8S IDE - Lens
-sudo snap install kontena-lens --classic
+# sudo snap install kontena-lens --classic
 
 # RPM OR DEB env
 
@@ -74,6 +74,10 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     sudo echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
     sudo apt update -y
     sudo apt install -y yarn nodejs
+
+    ## kontena-lens
+    wget https://api.k8slens.dev/binaries/Lens-5.2.5-latest.20211001.2.amd64.deb -O /tmp/Lens.deb
+    sudo dpkg -i /tmp/Lens.deb
     
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
     ## docker
