@@ -298,7 +298,7 @@ git clone https://github.com/psifidotos/latte-indicator-dashtopanel.git ~/GIT-RE
 cd ~/GIT-REPOS/CORE/latte-indicator-dashtopanel && kpackagetool5 -i . -t Latte/Indicator
 
 ## Applets
-sudo zypper install -y  applet-window-title applet-window-buttons
+sudo zypper install -y  applet-window-title applet-window-buttons applet-window-appmenu
 
 
 # # Remove titlebar when maximized window
