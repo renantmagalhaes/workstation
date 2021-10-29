@@ -112,7 +112,7 @@ sudo pip3 install bpytop --upgrade
 # Flathub Packages
 ## Slack
 sudo flatpak install -y flathub com.slack.Slack
-# sudo flatpak override --filesystem=home:ro com.slack.Slack
+sudo flatpak override --filesystem=home:ro com.slack.Slack
 
 ## Skype 
 sudo flatpak install -y flathub com.skype.Client
@@ -122,6 +122,7 @@ sudo flatpak install -y flathub us.zoom.Zoom
 
 ## Microsoft Teams
 sudo flatpak install -y flathub com.microsoft.Teams
+sudo flatpak override --filesystem=home:ro com.microsoft.Teams
 
 ## Kdenlive
 sudo flatpak install -y flathub org.kde.kdenlive
@@ -129,11 +130,12 @@ sudo flatpak install -y flathub org.kde.kdenlive
 ## OBS Studio
 sudo flatpak install -y flathub com.obsproject.Studio
 
-## FFaudioConverter
-sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
+# ## FFaudioConverter
+# sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
 
 ## Telegram
 sudo flatpak install -y flathub org.telegram.desktop
+sudo flatpak override --filesystem=home:ro org.telegram.desktop
 
 # ## MkCron
 # sudo snap install mkcron
