@@ -462,6 +462,7 @@ alias killtmux="pidof tmux |xargs kill -9"
 alias python="python3"
 alias killvivaldi="pidof vivaldi-bin |xargs kill -9"
 alias bluetooth-restart="sudo rfkill block bluetooth && sudo rfkill unblock bluetooth && sudo systemctl restart bluetooth"
+alias vga-info="/sbin/lspci -nnk |grep -A3 VGA"
 
 alias cp='cp -iv'
 alias rm='rm -ir'
