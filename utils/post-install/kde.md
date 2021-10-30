@@ -2,17 +2,6 @@
 
 # Themes
 
-## Option1
-
-    Kvantum -> Orchis-dark
-    Global Theme -> Orchis-dark
-    Icons -> Tela Circle
-    Window Decorations -> Orchis-dark
-    Cursors -> Breeze Light
-    Splash Screen -> QuarksSplashDark
-
-## Option2
-
     Kvantum -> Orchis-dark
     Global Theme -> Materia Dark
     Icons -> Tela Circle
@@ -20,6 +9,7 @@
     Plasma Style -> Materia Color
     Cursors -> Breeze Light
     Splash Screen -> QuarksSplashDark
+    SDDM -> Darkine
 
 # System Settings
 
@@ -117,7 +107,8 @@ Configs
 
 # KWin Scripts
 
-Hide Titles
+- Hide Titles
+
 ## Shortcuts
 
 ```
