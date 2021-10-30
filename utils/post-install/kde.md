@@ -277,7 +277,7 @@ view_zoom_out=Meta+-,Meta+-,Zoom Out
 
 
 
-# v2
+# OpenSuse
 
 ```
 [org.flameshot.Flameshot.desktop]
