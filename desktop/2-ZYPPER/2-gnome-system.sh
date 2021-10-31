@@ -112,7 +112,7 @@ sudo pip3 install bpytop --upgrade
 # Flathub Packages
 ## Slack
 sudo flatpak install -y flathub com.slack.Slack
-# sudo flatpak override --filesystem=home:ro com.slack.Slack
+sudo flatpak override --filesystem=home:ro com.slack.Slack
 
 ## Skype 
 sudo flatpak install -y flathub com.skype.Client
