@@ -433,7 +433,7 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     echo "Not able to identify desktop environment"
     fi
 elif check_cmd zypper; then  # FOR RPM SYSTEMS
-    alias update-all="sudo zypper refresh && sudo zypper update -y && sudo flatpak update -y && sudo snap refresh"
+    alias update-all="sudo zypper ref && sudo zypper dup && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
     alias folder="nautilus"
     alias pdf="evince"
