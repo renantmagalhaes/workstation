@@ -533,3 +533,4 @@ autoload -U +X bashcompinit && bashcompinit
 
 # Additional paths
 export PATH="/usr/sbin:/usr/share/code/bin:$PATH"
+if [ -e /home/rtm/.nix-profile/etc/profile.d/nix.sh ]; then . /home/rtm/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
