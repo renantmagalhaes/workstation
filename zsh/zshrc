@@ -464,6 +464,7 @@ alias killvivaldi="pidof vivaldi-bin |xargs kill -9"
 alias bluetooth-restart="sudo rfkill block bluetooth && sudo rfkill unblock bluetooth && sudo systemctl restart bluetooth"
 alias vga-info="lspci -nnk |grep -A3 VGA"
 alias latte-restart="pidof latte-dock |xargs kill -9 && latte-dock &"
+alias flatpak-home-permission="sudo flatpak override --filesystem=home:ro"
 
 alias cp='cp -iv'
 alias rm='rm -ir'
