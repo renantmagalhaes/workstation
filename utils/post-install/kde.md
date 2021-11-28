@@ -109,7 +109,7 @@ Configs
 
 - Hide Titles
 
-# Set KRunner shortcut to meta key
+# Set KRunner shortcut to meta key and config
 
 ```
 ~/.config/kwinrc
@@ -119,6 +119,8 @@ Configs
 [ModifierOnlyShortcuts]
 Meta=org.kde.krunner,/App,,display
 ```
+
+- Disable desktop search
 
 ## Shortcuts
 
