@@ -108,7 +108,7 @@ immutability=1
 plugin=org.kde.plasma.minimizeall
 
 [Containments][1][Applets][67][Configuration]
-PreloadWeight=33
+PreloadWeight=93
 
 [Containments][1][Applets][67][Configuration][ConfigDialog]
 DialogHeight=558
@@ -129,7 +129,7 @@ immutability=1
 plugin=org.kde.plasma.volume
 
 [Containments][1][Applets][86][Configuration]
-PreloadWeight=98
+PreloadWeight=100
 
 [Containments][1][Applets][86][Configuration][ConfigDialog]
 DialogHeight=558
@@ -157,14 +157,14 @@ immutability=1
 plugin=org.kde.plasma.notifications
 
 [Containments][1][Applets][89][Configuration]
-PreloadWeight=23
+PreloadWeight=33
 
 [Containments][1][Applets][91]
 immutability=1
 plugin=org.kde.plasma.clipboard
 
 [Containments][1][Applets][91][Configuration]
-PreloadWeight=10
+PreloadWeight=15
 
 [Containments][1][ConfigDialog]
 DialogHeight=600
@@ -179,6 +179,7 @@ alignmentUpgraded=true
 appletOrder=59;65;57;61;89;91;83;86;63;87;67
 autoDecreaseIconSize=false
 backgroundAllCorners=true
+backgroundRadius=20
 durationTime=x1
 iconMargin=0
 iconSize=46
@@ -194,7 +195,6 @@ shadowOpacity=35
 shadowSize=45
 shadowsUpgraded=true
 showGlow=false
-solidBackgroundForMaximized=true
 splitterPosition=3
 splitterPosition2=4
 tasksUpgraded=true
@@ -363,7 +363,7 @@ immutability=1
 plugin=org.kde.plasma.digitalclock
 
 [Containments][25][Applets][108][Configuration]
-PreloadWeight=21
+PreloadWeight=51
 
 [Containments][25][Applets][108][Configuration][Appearance]
 customDateFormat=d-MM-yy
@@ -432,7 +432,7 @@ immutability=1
 plugin=org.kde.plasma.systemtray
 
 [Containments][25][Applets][94][Configuration]
-PreloadWeight=51
+PreloadWeight=100
 SystrayContainmentId=95
 
 [Containments][25][ConfigDialog]
@@ -534,7 +534,7 @@ immutability=1
 plugin=org.kde.plasma.networkmanagement
 
 [Containments][95][Applets][106][Configuration]
-PreloadWeight=10
+PreloadWeight=17
 
 [Containments][95][Applets][107]
 immutability=1
@@ -580,6 +580,10 @@ plugin=org.kde.plasma.mediacontroller
 [Containments][95][Applets][134][Configuration]
 PreloadWeight=42
 
+[Containments][95][Applets][135]
+immutability=1
+plugin=org.kde.kdeconnect
+
 [Containments][95][Applets][96]
 immutability=1
 plugin=org.kde.plasma.pkupdates
@@ -606,9 +610,9 @@ DialogHeight=558
 DialogWidth=720
 
 [Containments][95][General]
-extraItems=org.kde.plasma.volume,org.kde.plasma.networkmanagement,org.kde.plasma.printmanager,org.kde.plasma.bluetooth,org.kde.plasma.battery,org.kde.plasma.devicenotifier,org.kde.plasma.keyboardindicator,org.kde.plasma.nightcolorcontrol,org.kde.plasma.keyboardlayout,org.kde.plasma.weather,org.kde.plasma.manage-inputmethod,org.kde.plasma.pkupdates,org.kde.plasma.mediacontroller
+extraItems=org.kde.plasma.volume,org.kde.plasma.networkmanagement,org.kde.plasma.printmanager,org.kde.plasma.bluetooth,org.kde.plasma.battery,org.kde.plasma.devicenotifier,org.kde.plasma.keyboardindicator,org.kde.plasma.nightcolorcontrol,org.kde.plasma.keyboardlayout,org.kde.plasma.weather,org.kde.plasma.manage-inputmethod,org.kde.plasma.pkupdates,org.kde.plasma.mediacontroller,org.kde.kdeconnect
 hiddenItems=org.kde.plasma.volume,org.kde.plasma.bluetooth,org.kde.plasma.devicenotifier,org.kde.plasma.weather
-knownItems=org.kde.plasma.volume,org.kde.plasma.networkmanagement,org.kde.plasma.printmanager,org.kde.plasma.bluetooth,org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.mediacontroller,org.kde.plasma.notifications,org.kde.plasma.keyboardindicator,org.kde.plasma.nightcolorcontrol,org.kde.plasma.keyboardlayout,org.kde.plasma.manage-inputmethod,org.kde.plasma.pkupdates
+knownItems=org.kde.plasma.volume,org.kde.plasma.networkmanagement,org.kde.plasma.printmanager,org.kde.plasma.bluetooth,org.kde.plasma.battery,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.mediacontroller,org.kde.plasma.notifications,org.kde.plasma.keyboardindicator,org.kde.plasma.nightcolorcontrol,org.kde.plasma.keyboardlayout,org.kde.plasma.manage-inputmethod,org.kde.plasma.pkupdates,org.kde.kdeconnect
 shownItems=org.kde.plasma.networkmanagement
 
 [LayoutSettings]
