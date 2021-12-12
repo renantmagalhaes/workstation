@@ -1,3 +1,4 @@
+#!/bin/bash
 # TODO:
 #//  - Check if Deb or RPM distribution
 
