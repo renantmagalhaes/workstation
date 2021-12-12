@@ -1,17 +1,11 @@
 [ActivityManager]
 _k_friendly_name=Activity Manager
-switch-to-activity-c5b866d0-9612-4e10-8611-6cf9be64f246=none,none,Switch to activity "Default"
+switch-to-activity-12cc0b77-cdc8-47e3-86ec-2ed48c793299=none,none,Switch to activity "Default"
 
 [KDE Keyboard Layout Switcher]
 Switch keyboard layout to English (US)=none,none,Switch keyboard layout to English (US)
 Switch to Next Keyboard Layout=Ctrl+Alt+K,none,Switch to Next Keyboard Layout
-_k_friendly_name=KDE Daemon
-
-[flameshot.desktop]
-Capture=Ctrl+Print,none,Take screenshot
-Configure=none,none,Configure
-_k_friendly_name=Launch Flameshot
-_launch=,none,Launch Flameshot
+_k_friendly_name=Keyboard Layout Switcher
 
 [kaccess]
 Toggle Screen Reader On and Off=Meta+Alt+S,Meta+Alt+S,Toggle Screen Reader On and Off
@@ -21,7 +15,7 @@ _k_friendly_name=Accessibility
 Disable Touchpad=Touchpad Off,Touchpad Off,Disable Touchpad
 Enable Touchpad=Touchpad On,Touchpad On,Enable Touchpad
 Toggle Touchpad=Touchpad Toggle,Touchpad Toggle,Toggle Touchpad
-_k_friendly_name=KDE Daemon
+_k_friendly_name=Touchpad
 
 [kded5]
 Show System Activity=Ctrl+Esc,Ctrl+Esc,Show System Activity
@@ -29,9 +23,9 @@ _k_friendly_name=KDE Daemon
 display=Display\tMeta+P,Display\tMeta+P,Switch Display
 
 [khotkeys]
-_k_friendly_name=KDE Daemon
-{15adea2b-3aac-4afe-9187-b6159cbca6ae}=Ctrl+Alt+T,none,Launch Konsole
+_k_friendly_name=Custom Shortcuts Service
 {d03619b6-9b3c-48cc-9d9c-a2aadb485550}=,none,Search
+{d2ce1278-ef45-449e-82b4-9ed8f4893ffb}=Ctrl+Alt+T,none,Launch Konsole
 
 [kmix]
 _k_friendly_name=Audio Volume
@@ -39,21 +33,16 @@ decrease_microphone_volume=Microphone Volume Down,Microphone Volume Down,Decreas
 decrease_volume=Volume Down,Volume Down,Decrease Volume
 increase_microphone_volume=Microphone Volume Up,Microphone Volume Up,Increase Microphone Volume
 increase_volume=Volume Up,Volume Up,Increase Volume
-mic_mute=Microphone Mute,Microphone Mute,Mute Microphone
-mute=Volume Mute,Volume Mute,Mute
-
-[krunner.desktop]
-RunClipboard=Alt+Shift+F2,Alt+Shift+F2,Run command on clipboard contents
-_k_friendly_name=KRunner
-_launch=Alt+Space\tAlt+F2\tSearch,Alt+Space\tAlt+F2\tSearch,KRunner
+mic_mute=Volume Mute,Microphone Mute\tMeta+Volume Mute,Mute Microphone
+mute=none,Volume Mute,Mute
 
 [ksmserver]
-Halt Without Confirmation=Ctrl+Alt+Shift+PgDown,none,Halt Without Confirmation
+Halt Without Confirmation=none,none,Halt Without Confirmation
 Lock Session=Meta+L\tCtrl+Alt+L\tScreensaver,Meta+L\tCtrl+Alt+L\tScreensaver,Lock Session
-Log Out=Ctrl+Alt+Del,none,Log Out
-Log Out Without Confirmation=Ctrl+Alt+Shift+Del,none,Log Out Without Confirmation
-Reboot Without Confirmation=Ctrl+Alt+Shift+PgUp,none,Reboot Without Confirmation
-_k_friendly_name=ksmserver
+Log Out=Ctrl+Alt+Del,Ctrl+Alt+Del,Log Out
+Log Out Without Confirmation=none,none,Log Out Without Confirmation
+Reboot Without Confirmation=none,none,Reboot Without Confirmation
+_k_friendly_name=Session Management
 
 [kwin]
 Activate Window Demanding Attention=Ctrl+Alt+A,Ctrl+Alt+A,Activate Window Demanding Attention
@@ -102,9 +91,9 @@ Switch to Desktop 6=none,none,Switch to Desktop 6
 Switch to Desktop 7=none,none,Switch to Desktop 7
 Switch to Desktop 8=none,none,Switch to Desktop 8
 Switch to Desktop 9=none,none,Switch to Desktop 9
-Switch to Next Desktop=none,none,Switch to Next Desktop
+Switch to Next Desktop=Meta+Ctrl+Right,none,Switch to Next Desktop
 Switch to Next Screen=,none,Switch to Next Screen
-Switch to Previous Desktop=none,none,Switch to Previous Desktop
+Switch to Previous Desktop=Meta+Ctrl+Left,none,Switch to Previous Desktop
 Switch to Previous Screen=none,none,Switch to Previous Screen
 Switch to Screen 0=none,none,Switch to Screen 0
 Switch to Screen 1=none,none,Switch to Screen 1
@@ -142,10 +131,10 @@ Window Minimize=Meta+PgDown,Meta+PgDown,Minimize Window
 Window Move=none,none,Move Window
 Window No Border=none,none,Hide Window Border
 Window On All Desktops=none,none,Keep Window on All Desktops
-Window One Desktop Down=Ctrl+Alt+Shift+Down,none,Window One Desktop Down
-Window One Desktop Up=Ctrl+Alt+Shift+Up,none,Window One Desktop Up
-Window One Desktop to the Left=none,none,Window One Desktop to the Left
-Window One Desktop to the Right=none,none,Window One Desktop to the Right
+Window One Desktop Down=Ctrl+Alt+Shift+Down,Meta+Ctrl+Shift+Down,Window One Desktop Down
+Window One Desktop Up=Ctrl+Alt+Shift+Up,Meta+Ctrl+Shift+Up,Window One Desktop Up
+Window One Desktop to the Left=Meta+Ctrl+Shift+Left,Meta+Ctrl+Shift+Left,Window One Desktop to the Left
+Window One Desktop to the Right=Meta+Ctrl+Shift+Right,Meta+Ctrl+Shift+Right,Window One Desktop to the Right
 Window Operations Menu=Alt+F3,Alt+F3,Window Operations Menu
 Window Pack Down=none,none,Pack Window Down
 Window Pack Left=none,none,Pack Window to the Left
@@ -185,9 +174,9 @@ Window to Desktop 7=none,none,Window to Desktop 7
 Window to Desktop 8=none,none,Window to Desktop 8
 Window to Desktop 9=none,none,Window to Desktop 9
 Window to Next Desktop=none,none,Window to Next Desktop
-Window to Next Screen=Meta+Return,none,Window to Next Screen
+Window to Next Screen=Meta+Return,Meta+Shift+Right,Window to Next Screen
 Window to Previous Desktop=none,none,Window to Previous Desktop
-Window to Previous Screen=none,none,Window to Previous Screen
+Window to Previous Screen=none,Meta+Shift+Left,Window to Previous Screen
 Window to Screen 0=none,none,Window to Screen 0
 Window to Screen 1=none,none,Window to Screen 1
 Window to Screen 2=none,none,Window to Screen 2
@@ -196,23 +185,97 @@ Window to Screen 4=none,none,Window to Screen 4
 Window to Screen 5=none,none,Window to Screen 5
 Window to Screen 6=none,none,Window to Screen 6
 Window to Screen 7=none,none,Window to Screen 7
-_k_friendly_name=KWin
+_k_friendly_name=Latte Dock
+addDesktop=none,none,Virtual Desktop Bar - Add Desktop
+moveCurrentDesktopToLeft=none,none,Virtual Desktop Bar - Move Current Desktop to Left
+moveCurrentDesktopToRight=none,none,Virtual Desktop Bar - Move Current Desktop to Right
+removeCurrentDesktop=none,none,Virtual Desktop Bar - Remove Current Desktop
+removeLastDesktop=none,none,Virtual Desktop Bar - Remove Last Desktop
+renameCurrentDesktop=none,none,Virtual Desktop Bar - Rename Current Desktop
+switchToRecentDesktop=none,none,Virtual Desktop Bar - Switch to Recent Desktop
 view_actual_size=,Meta+0,Actual Size
 view_zoom_in=Meta+=,Meta+=,Zoom In
 view_zoom_out=Meta+-,Meta+-,Zoom Out
+
+[lattedock]
+_k_friendly_name=Latte Dock
+activate entry 1=,Meta+1,Activate Entry 1
+activate entry 10=Meta+0,Meta+0,Activate Entry 10
+activate entry 11=Meta+Z,Meta+Z,Activate Entry 11
+activate entry 12=Meta+X,Meta+X,Activate Entry 12
+activate entry 13=Meta+C,Meta+C,Activate Entry 13
+activate entry 14=,Meta+V,Activate Entry 14
+activate entry 15=Meta+B,Meta+B,Activate Entry 15
+activate entry 16=Meta+N,Meta+N,Activate Entry 16
+activate entry 17=Meta+M,Meta+M,Activate Entry 17
+activate entry 18=Meta+\\,,Meta+\\,,Activate Entry 18
+activate entry 19=,Meta+.,Activate Entry 19
+activate entry 2=,Meta+2,Activate Entry 2
+activate entry 3=,Meta+3,Activate Entry 3
+activate entry 4=,Meta+4,Activate Entry 4
+activate entry 5=,Meta+5,Activate Entry 5
+activate entry 6=,Meta+6,Activate Entry 6
+activate entry 7=,Meta+7,Activate Entry 7
+activate entry 8=,Meta+8,Activate Entry 8
+activate entry 9=,Meta+9,Activate Entry 9
+activate widget 67=Meta+D,none,Activate Minimize all Windows Widget
+clear-history=none,none,Clear Clipboard History
+clipboard_action=,Ctrl+Alt+X,Enable Clipboard Actions
+cycleNextAction=none,none,Next History Item
+cyclePrevAction=none,none,Previous History Item
+edit_clipboard=none,none,Edit Contents…
+new instance for entry 1=,Meta+Ctrl+1,New Instance for Entry 1
+new instance for entry 10=Meta+Ctrl+0,Meta+Ctrl+0,New Instance for Entry 10
+new instance for entry 11=Meta+Ctrl+Z,Meta+Ctrl+Z,New Instance for Entry 11
+new instance for entry 12=Meta+Ctrl+X,Meta+Ctrl+X,New Instance for Entry 12
+new instance for entry 13=Meta+Ctrl+C,Meta+Ctrl+C,New Instance for Entry 13
+new instance for entry 14=Meta+Ctrl+V,Meta+Ctrl+V,New Instance for Entry 14
+new instance for entry 15=Meta+Ctrl+B,Meta+Ctrl+B,New Instance for Entry 15
+new instance for entry 16=,Meta+Ctrl+N,New Instance for Entry 16
+new instance for entry 17=,Meta+Ctrl+M,New Instance for Entry 17
+new instance for entry 18=Meta+Ctrl+\\,,Meta+Ctrl+\\,,New Instance for Entry 18
+new instance for entry 19=Meta+Ctrl+.,Meta+Ctrl+.,New Instance for Entry 19
+new instance for entry 2=,Meta+Ctrl+2,New Instance for Entry 2
+new instance for entry 3=Meta+Ctrl+3,Meta+Ctrl+3,New Instance for Entry 3
+new instance for entry 4=Meta+Ctrl+4,Meta+Ctrl+4,New Instance for Entry 4
+new instance for entry 5=Meta+Ctrl+5,Meta+Ctrl+5,New Instance for Entry 5
+new instance for entry 6=Meta+Ctrl+6,Meta+Ctrl+6,New Instance for Entry 6
+new instance for entry 7=Meta+Ctrl+7,Meta+Ctrl+7,New Instance for Entry 7
+new instance for entry 8=Meta+Ctrl+8,Meta+Ctrl+8,New Instance for Entry 8
+new instance for entry 9=Meta+Ctrl+9,Meta+Ctrl+9,New Instance for Entry 9
+repeat_action=,Ctrl+Alt+R,Manually Invoke Action on Current Clipboard
+show latte global settings=Meta+W,Meta+W,Show Latte Global Settings
+show latte view=Meta+`,Meta+`,Show Latte Dock/Panel
+show view settings=Meta+A,Meta+A,Cycle Through Dock/Panel Settings Windows
+show-barcode=none,none,Show Barcode…
+show-on-mouse-pos=,Meta+V,Open Klipper at Mouse Position
 
 [mediacontrol]
 _k_friendly_name=Media Controller
 mediavolumedown=none,none,Media volume down
 mediavolumeup=none,none,Media volume up
 nextmedia=Media Next,Media Next,Media playback next
+pausemedia=Media Pause,Media Pause,Pause media playback
+playmedia=none,none,Play media playback
 playpausemedia=Media Play,Media Play,Play/Pause media playback
 previousmedia=Media Previous,Media Previous,Media playback previous
 stopmedia=Media Stop,Media Stop,Stop media playback
 
+[org.flameshot.Flameshot.desktop]
+Capture=Ctrl+Print,,Take screenshot
+Configure=,,Configure
+Launcher=,,Open launcher
+_k_friendly_name=Flameshot
+_launch=,,Flameshot
+
 [org.kde.dolphin.desktop]
 _k_friendly_name=Dolphin
-_launch=Meta+F,Meta+E,Dolphin
+_launch=Meta+E,Meta+E,Dolphin
+
+[org.kde.krunner.desktop]
+RunClipboard=Alt+Shift+F2,Alt+Shift+F2,Run command on clipboard contents
+_k_friendly_name=KRunner
+_launch=Alt+Space\tAlt+F2\tSearch,Alt+Space\tAlt+F2\tSearch,KRunner
 
 [org.kde.plasma.emojier.desktop]
 _k_friendly_name=Emoji Selector
@@ -223,6 +286,7 @@ ActiveWindowScreenShot=Meta+Print,Meta+Print,Capture Active Window
 CurrentMonitorScreenShot=,none,Capture Current Monitor
 FullScreenScreenShot=Shift+Print,Shift+Print,Capture Entire Desktop
 RectangularRegionScreenShot=Meta+Shift+Print,Meta+Shift+Print,Capture Rectangular Region
+WindowUnderCursorScreenShot=Meta+Ctrl+Print,Meta+Ctrl+Print,Capture Window Under Cursor
 _k_friendly_name=Spectacle
 _launch=Print,Print,Launch Spectacle
 
@@ -232,6 +296,7 @@ Decrease Screen Brightness=Monitor Brightness Down,Monitor Brightness Down,Decre
 Hibernate=Hibernate,Hibernate,Hibernate
 Increase Keyboard Brightness=Keyboard Brightness Up,Keyboard Brightness Up,Increase Keyboard Brightness
 Increase Screen Brightness=Monitor Brightness Up,Monitor Brightness Up,Increase Screen Brightness
+PowerDown=Power Down,Power Down,Power Down
 PowerOff=Power Off,Power Off,Power Off
 Sleep=Sleep,Sleep,Suspend
 Toggle Keyboard Backlight=Keyboard Light On/Off,Keyboard Light On/Off,Toggle Keyboard Backlight
@@ -239,9 +304,9 @@ Turn Off Screen=none,none,Turn Off Screen
 _k_friendly_name=Power Management
 
 [plasmashell]
-_k_friendly_name=Plasma
+_k_friendly_name=Latte Dock
 activate task manager entry 1=Meta+1,Meta+1,Activate Task Manager Entry 1
-activate task manager entry 10=Meta+0,Meta+0,Activate Task Manager Entry 10
+activate task manager entry 10=,Meta+0,Activate Task Manager Entry 10
 activate task manager entry 2=Meta+2,Meta+2,Activate Task Manager Entry 2
 activate task manager entry 3=Meta+3,Meta+3,Activate Task Manager Entry 3
 activate task manager entry 4=Meta+4,Meta+4,Activate Task Manager Entry 4
@@ -250,25 +315,43 @@ activate task manager entry 6=Meta+6,Meta+6,Activate Task Manager Entry 6
 activate task manager entry 7=Meta+7,Meta+7,Activate Task Manager Entry 7
 activate task manager entry 8=Meta+8,Meta+8,Activate Task Manager Entry 8
 activate task manager entry 9=Meta+9,Meta+9,Activate Task Manager Entry 9
-activate widget 23=,none,Activate Icons-only Task Manager Widget
-activate widget 31=Meta+D,none,Activate Minimize all Windows Widget
 activate widget 4=Alt+F1,none,Activate Application Launcher Widget
 clear-history=none,none,Clear Clipboard History
 clipboard_action=Ctrl+Alt+X,Ctrl+Alt+X,Enable Clipboard Actions
 cycleNextAction=none,none,Next History Item
 cyclePrevAction=none,none,Previous History Item
-edit_clipboard=none,none,Edit Contents...
-manage activities=Meta+Q,Meta+Q,Activities...
+edit_clipboard=none,none,Edit Contents…
+manage activities=Meta+Q,Meta+Q,Show Activity Switcher
 next activity=,Meta+Tab,Walk through activities
 previous activity=Meta+Shift+Tab,Meta+Shift+Tab,Walk through activities (Reverse)
 repeat_action=Ctrl+Alt+R,Ctrl+Alt+R,Manually Invoke Action on Current Clipboard
 show dashboard=Ctrl+F12,Ctrl+F12,Show Desktop
-show-barcode=none,none,Show Barcode...
-show-on-mouse-pos=none,none,Open Klipper at Mouse Position
+show-barcode=none,none,Show Barcode…
+show-on-mouse-pos=Meta+V,Meta+V,Open Klipper at Mouse Position
 stop current activity=Meta+S,Meta+S,Stop Current Activity
 switch to next activity=none,none,Switch to Next Activity
 switch to previous activity=none,none,Switch to Previous Activity
 toggle do not disturb=none,none,Toggle do not disturb
+
+[plasmawindowed]
+_k_friendly_name=plasmawindowed
+clear-history=none,none,Clear Clipboard History
+clipboard_action=,Ctrl+Alt+X,Enable Clipboard Actions
+cycleNextAction=none,none,Next History Item
+cyclePrevAction=none,none,Previous History Item
+edit_clipboard=none,none,Edit Contents…
+repeat_action=,Ctrl+Alt+R,Manually Invoke Action on Current Clipboard
+show-barcode=none,none,Show Barcode…
+show-on-mouse-pos=,Meta+V,Open Klipper at Mouse Position
+
+[systemsettings.desktop]
+_k_friendly_name=System Settings
+_launch=Tools,Tools,System Settings
+kcm-kscreen=,,Display Configuration
+kcm-lookandfeel=,,Global Theme
+kcm-users=,,Users
+powerdevilprofilesconfig=,,Energy Saving
+screenlocker=,,Screen Locking
 
 [wacomtablet]
 Map to fullscreen=Meta+Ctrl+F,Meta+Ctrl+F,Map to fullscreen
