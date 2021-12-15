@@ -40,3 +40,4 @@ Terminal:
 1. [Ueli Launcher](https://github.com/oliverschwendener/ueli)
 2. [Windows PowerToys](https://github.com/microsoft/PowerToys)
 3. Start11
+4. Patchmypc
