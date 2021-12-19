@@ -415,7 +415,7 @@ cd /tmp/
 wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_1.8.0.zip
 unzip droidcam_latest.zip -d droidcam
 cd droidcam && sudo ./install-client
-sudo ./install-videos
+sudo ./install-video
 
 # Install ClamAV
 sudo apt install -y clamav clamtk
