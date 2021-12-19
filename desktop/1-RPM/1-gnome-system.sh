@@ -110,7 +110,7 @@ sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-non
 sudo dnf groupupdate -y core
 
 # Install the packages from fedora repo
-sudo dnf install -y zsh vlc clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina nload arc-theme chrome-gnome-shell gnome-menus pwgen sysstat alacarte gnome-extensions-app alacritty fzf ffmpeg neofetch util-linux-user grub-customizer xclip flameshot unrar bat gawk net-tools coreutils ncdu whois pdfshuffler piper lsd openssl timeshift
+sudo dnf install -y zsh vlc clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl vpnc x2goclient git gnome-icon-theme idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip gnome-tweaks snapd gtk-murrine-engine gtk2-engines gnome-tweaks krita frei0r-plugins audacity filezilla tree remmina nload arc-theme chrome-gnome-shell gnome-menus pwgen sysstat alacarte gnome-extensions-app alacritty fzf ffmpeg neofetch util-linux-user grub-customizer xclip flameshot unrar bat gawk net-tools coreutils ncdu whois pdfshuffler piper lsd openssl timeshift  adb fastboot materia-gtk-theme xournal
 
 # Aditional fedora packages
 ## Plugins Core
@@ -156,15 +156,6 @@ sudo flatpak install -y flathub org.kde.kdenlive
 ## OBS Studio
 sudo flatpak install -y flathub com.obsproject.Studio
 
-## FFaudioConverter
-sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
-
-## Telegram
-sudo flatpak install -y flathub org.telegram.desktop
-
-
-## MkCron
-# sudo snap install mkcron
 
 ## Install Teamviewer
 wget https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
@@ -284,7 +275,7 @@ git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/
 sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh blue"
 sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh black"
 
-# Tela--icon-theme
+# Tela-icon-theme
 git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/GIT-REPOS/CORE/Tela-icon-theme
 sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh blue"
 sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh black"
@@ -323,6 +314,13 @@ ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-
 # Colorls
 sudo dnf install -y ruby ruby-devel
 sudo gem install colorls
+
+# Droidcam
+cd /tmp/
+wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_1.8.0.zip
+unzip droidcam_latest.zip -d droidcam
+cd droidcam && sudo ./install-client
+sudo ./install-video
 
 # Install ClamAV
 sudo dnf install -y clamav clamtk
