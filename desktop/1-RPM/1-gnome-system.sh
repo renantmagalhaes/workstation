@@ -140,6 +140,7 @@ sudo pip3 install bpytop --upgrade
 # Flathub Packages
 ## Slack
 sudo flatpak install -y flathub com.slack.Slack
+sudo flatpak override --filesystem=home:ro com.slack.Slack
 
 ## Skype 
 sudo flatpak install -y flathub com.skype.Client
@@ -149,6 +150,7 @@ sudo flatpak install -y flathub us.zoom.Zoom
 
 ## Microsoft Teams
 sudo flatpak install -y flathub com.microsoft.Teams
+sudo flatpak override --filesystem=home:ro com.microsoft.Teams
 
 ## Kdenlive
 sudo flatpak install -y flathub org.kde.kdenlive
