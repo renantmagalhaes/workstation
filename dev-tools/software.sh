@@ -83,7 +83,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     sudo dpkg -i /tmp/Lens.deb
     
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
-    ## docker
+    # docker
     sudo dnf -y install dnf-plugins-core
     sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
     sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-compose
@@ -91,6 +91,9 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     sudo groupadd docker
     sudo usermod -aG docker $USER
     sudo systemctl restart docker
+
+    ## podman
+    # sudo dnf -y install podman podman-compose
 
     ## yarn / nodejs
     sudo dnf install -y curl gnupg2 gcc-c++ make
