@@ -29,12 +29,3 @@ echo "#      rtm.codes          #"
 echo "#       DONE              #"
 echo "#                         #"
 echo "###########################"
-
-
-
-
-
-
-
-
-sudo pip3 install "ansible-lint[yamllint]"
