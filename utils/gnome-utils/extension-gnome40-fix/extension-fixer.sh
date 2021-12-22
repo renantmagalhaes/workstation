@@ -1,7 +1,10 @@
 #!/bin/bash
 
+# Download deskrop scroller
+git clone https://github.com/BrOrlandi/Desktop-Scroller-GNOME-Extension.git ~/.local/share/gnome-shell/extensions/desktop-scroller@brorlandi
+
 #Fix Desktop Scroller
-sed -i 's/3\.30/40/' ~/.local/share/gnome-shell/extensions/desktop-scroller@brorlandi/metadata.json
+sed -i 's/3\.30/41/' ~/.local/share/gnome-shell/extensions/desktop-scroller@brorlandi/metadata.json
 
 
 
