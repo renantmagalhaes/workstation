@@ -103,6 +103,12 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     sudo dnf update -y
     sudo dnf install -y yarn nodejs
 
+    # Fix fontissue robo3t
+    sudo rm -rf /var/cache/fontconfig/*
+    rm -rf ~/.cache/fontconfig/*
+    sudo rm -rf ~/snap/robo3t-snap/common/.cache/fontconfig/*
+    sudo fc-cache -r
+
 elif check_cmd zypper; then  # FOR RPM SYSTEMS
     ## docker
     sudo zypper install -y docker python3-docker-compose
