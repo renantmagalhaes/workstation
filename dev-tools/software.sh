@@ -83,6 +83,11 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     sudo dpkg -i /tmp/Lens.deb
     
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
+
+    #pgadmin 
+    sudo rpm -i https://ftp.postgresql.org/pub/pgadmin/pgadmin4/yum/pgadmin4-fedora-repo-2-1.noarch.rpm
+    sudo yum install -y pgadmin4
+
     # docker
     sudo dnf -y install dnf-plugins-core
     sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
