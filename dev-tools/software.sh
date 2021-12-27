@@ -5,6 +5,9 @@
 # Default folder
 mkdir -p ~/Apps
 
+# Brew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
 #Mindmap
 sudo flatpak install -y flathub net.xmind.XMind8
 sudo flatpak override --filesystem=home:ro net.xmind.XMind8
