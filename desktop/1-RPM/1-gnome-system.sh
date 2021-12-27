@@ -256,7 +256,7 @@ sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/install.sh -i void -N mojave -c dark -c
 
 # Fluent Theme
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
-sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh"
+sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh --tweaks float"
 
 git clone https://github.com/vinceliuice/Fluent-icon-theme.git ~/GIT-REPOS/CORE/Fluent-icon-theme
 sh -c "~/GIT-REPOS/CORE/Fluent-icon-theme/install.sh"
