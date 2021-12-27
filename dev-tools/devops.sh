@@ -11,7 +11,6 @@ unzip awscliv2.zip
 sudo ./aws/install
 
 ## EKS
-
 ### aws-iam-authenticator
 brew install aws-iam-authenticator
 
@@ -19,6 +18,12 @@ brew install aws-iam-authenticator
 brew tap weaveworks/tap
 brew install weaveworks/tap/eksctl
 
+### kubectl
+brew install kubectl
+
+# Terraform
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
 
 # Ansible
 sudo pip3 install ansible
@@ -34,23 +39,16 @@ brew install argocd
 #FluxCD
 brew install fluxcd/tap/flux
 
+
 if check_cmd apt-get; then # FOR DEB SYSTEMS
-    # Terraform
-    curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-    sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-    sudo apt install -y terraform
+
     
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
-    # Terraform
-    sudo dnf install -y dnf-plugins-core
-    sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
-    sudo dnf install -y terraform  
+
 
 elif check_cmd zypper; then  # FOR RPM SYSTEMS
-    # Terraform
-    # sudo zypper install -y terraform
-    brew tap hashicorp/tap
-    brew install hashicorp/tap/terraform
+
+
 
 
     echo "Not able to identify the system"
