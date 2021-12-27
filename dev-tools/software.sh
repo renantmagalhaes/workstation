@@ -10,8 +10,8 @@ mkdir -p ~/Apps
 echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/rtm/.zprofile
 
 #Mindmap
-sudo flatpak install -y flathub net.xmind.XMind8
-sudo flatpak override --filesystem=home:ro net.xmind.XMind8
+# sudo flatpak install -y flathub net.xmind.XMind8
+# sudo flatpak override --filesystem=home:ro net.xmind.XMind8
 sudo flatpak install -y flathub net.xmind.ZEN
 sudo flatpak override --filesystem=home:ro net.xmind.ZEN
 
