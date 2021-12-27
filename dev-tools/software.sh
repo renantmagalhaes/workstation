@@ -124,8 +124,11 @@ elif check_cmd zypper; then  # FOR RPM SYSTEMS
     sudo usermod -G docker -a $USER
     sudo systemctl restart docker
 
-    # ## yarn / nodejs
+    ## yarn / nodejs
     sudo zypper install -y yarn nodejs
+
+    #pgadmin4
+    # sudo zypper install pgadmin4 pgadmin4-web
 else
     echo "Not able to identify the system"
 fi
