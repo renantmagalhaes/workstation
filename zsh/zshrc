@@ -411,7 +411,7 @@ gnome_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "GNOME" | awk '{print tolo
 kde_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "KDE" | awk '{print tolower($0)}'`
 
 if check_cmd apt-get; then # FOR DEB SYSTEMS
-    alias update-all="sudo apt update && sudo apt upgrade -y && sudo flatpak update -y && sudo snap refresh"
+    alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
     alias folder="nautilus"
     alias pdf="evince"
@@ -422,7 +422,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     echo "Not able to identify desktop environment"
     fi
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
-    alias update-all="sudo dnf update -y && sudo flatpak update -y && sudo snap refresh"
+    alias update-all="sudo dnf update -y brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
     alias folder="nautilus"
     alias pdf="evince"
@@ -437,7 +437,7 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     echo "Not able to identify desktop environment"
     fi
 elif check_cmd zypper; then  # FOR ZYPPER SYSTEMS
-    alias update-all="sudo zypper ref && sudo zypper dup && sudo flatpak update -y && sudo snap refresh"
+    alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
     alias folder="nautilus"
     alias pdf="evince"
@@ -450,7 +450,7 @@ elif check_cmd zypper; then  # FOR ZYPPER SYSTEMS
     echo "Not able to identify desktop environment"
     fi
 elif check_cmd pacman; then  # FOR RPM SYSTEMS
-    alias update-all="yay -Syu && sudo pacman -Syu && sudo flatpak update -y && sudo snap refresh"
+    alias update-all="yay -Syu && sudo pacman -Syu && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
     alias folder="nautilus"
     elif [[ $kde_check == "kde" ]]; then
