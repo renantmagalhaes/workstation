@@ -56,7 +56,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     sudo curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
     sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
     sudo apt install -y pgadmin4-desktop
-    
+
     ## docker
     sudo apt install -y apt-transport-https \
         ca-certificates \
@@ -129,6 +129,11 @@ elif check_cmd zypper; then  # FOR RPM SYSTEMS
 
     #pgadmin4
     # sudo zypper install pgadmin4 pgadmin4-web
+
+    # robo3t
+    # wget `curl --silent "https://api.github.com/repos/Studio3T/robomongo/releases/latest" |grep browser_download_url | grep tar.gz |grep -Po '"browser_download_url": "\K.*?(?=")'` -O ~/Apps/robo3t.tar.gz
+    # ln -s /usr/lib64/libcurl.so.4 ~/Apps/bin/robo3t-1.4.1/lib/libcurl-gnutls.so.4
+
 else
     echo "Not able to identify the system"
 fi
