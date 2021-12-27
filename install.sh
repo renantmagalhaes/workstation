@@ -14,7 +14,7 @@ echo " 3) Install Oh my ZSH"
 echo " 4) Install ZSH additional packages"
 echo " 5) Guake Settings"
 echo " 6) Install DEV Tools"
-echo " 7) Cron Jobs"
+echo " 7) Install DevOps Tools"
 echo " ==== UTILS ===="
 echo " 11) VirtualBox Extension Pack"
 echo " 12) Deckboard"
@@ -35,7 +35,7 @@ case $n in
     4) bash zsh/zsh.sh ;;
     5) guake --restore-preferences utils/guake/rtm-guake-settings && echo "Done" ;;
     6) bash dev-tools/software.sh ;;
-    7) bash cron/cron-scripts.sh && echo "Done" ;;
+    7) bash dev-tools/devops.sh ;;
 # ===================================================================================
     11) bash utils/virtualbox/virtualbox-ext-pack.sh ;;
     12) bash utils/deckboard/deckboard.sh ;;

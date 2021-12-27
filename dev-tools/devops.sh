@@ -1,5 +1,7 @@
 #!/bin/bash
 
+type brew >/dev/null 2>&1 || { echo >&2 "The brew cli is required for this script to run."; exit 1; }
+
 check_cmd() {
     command -v "$1" 2> /dev/null
 }
