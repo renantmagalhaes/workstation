@@ -38,8 +38,11 @@ brew install skaffold
 # ArgoCD
 brew install argocd
 
-#FluxCD
+# FluxCD
 brew install fluxcd/tap/flux
+
+# kubescape
+curl -s https://raw.githubusercontent.com/armosec/kubescape/master/install.sh | /bin/bash
 
 
 if check_cmd apt-get; then # FOR DEB SYSTEMS
