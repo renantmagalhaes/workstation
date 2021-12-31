@@ -39,6 +39,12 @@ echo “Dont run this script as root” 2>&1
 exit 1
 fi
 
+##############
+bash desktop/source/gnome/1.sh
+echo XXX
+exit 1
+##############
+
 # Check Window System
 if [[ $XDG_SESSION_TYPE == "wayland" ]] ; then
     echo "Wayland detected. Please change to x11 before running this script"
@@ -202,45 +208,6 @@ echo "set paste" >> ~/.vim/vimrc
 
 # Themes
 
-# Nordic theme
-git clone https://github.com/EliverLara/Nordic.git ~/GIT-REPOS/CORE/Nordic
-sudo mv ~/GIT-REPOS/CORE/Nordic /usr/share/themes/
-
-# Orchis theme
-git clone https://github.com/vinceliuice/Orchis-theme.git ~/GIT-REPOS/CORE/Orchis-theme
-sh -c "~/GIT-REPOS/CORE/Orchis-theme/install.sh"
-
-# ChromeOS
-git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/ChromeOS-theme
-sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
-
-# Matcha Theme
-git clone https://github.com/vinceliuice/Matcha-gtk-theme.git ~/GIT-REPOS/CORE/Matcha-gtk-theme
-sh -c "~/GIT-REPOS/CORE/Matcha-gtk-theme/install.sh"
-
-# Fluent Theme
-git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
-sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh --tweaks float"
-
-git clone https://github.com/vinceliuice/Fluent-icon-theme.git ~/GIT-REPOS/CORE/Fluent-icon-theme
-sh -c "~/GIT-REPOS/CORE/Fluent-icon-theme/install.sh"
-sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist /usr/share/icons/Fluent-cursors
-sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist-dark /usr/share/icons/Fluent-dark-cursors
-
-# Tela-circle-icon-theme
-git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
-sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh blue"
-sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh black"
-
-# Tela-icon-theme
-git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/GIT-REPOS/CORE/Tela-icon-theme
-sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh blue"
-sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh black"
-
-# Flatery Icon Theme
-git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
-ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
-ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-Indigo-Dark
 
 # Colorls
 sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel
