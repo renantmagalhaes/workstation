@@ -39,12 +39,6 @@ echo “Dont run this script as root” 2>&1
 exit 1
 fi
 
-##############
-bash desktop/source/gnome/1.sh
-echo XXX
-exit 1
-##############
-
 # Check Window System
 if [[ $XDG_SESSION_TYPE == "wayland" ]] ; then
     echo "Wayland detected. Please change to x11 before running this script"
@@ -207,6 +201,8 @@ echo "set ignorecase" >> ~/.vim/vimrc
 echo "set paste" >> ~/.vim/vimrc
 
 # Themes
+
+bash desktop/source/gnome/themes.sh
 
 
 # Colorls
