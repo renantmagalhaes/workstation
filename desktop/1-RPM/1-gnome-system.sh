@@ -137,27 +137,8 @@ sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluet
 sudo pip3 install virtualenv virtualenvwrapper pylint
 sudo pip3 install bpytop --upgrade
 
-# Flathub Packages
-## Slack
-sudo flatpak install -y flathub com.slack.Slack
-sudo flatpak override --filesystem=home:ro com.slack.Slack
-
-## Skype 
-sudo flatpak install -y flathub com.skype.Client
-
-## Zoom
-sudo flatpak install -y flathub us.zoom.Zoom
-
-## Microsoft Teams
-sudo flatpak install -y flathub com.microsoft.Teams
-sudo flatpak override --filesystem=home:ro com.microsoft.Teams
-
-## Kdenlive
-sudo flatpak install -y flathub org.kde.kdenlive
-
-## OBS Studio
-sudo flatpak install -y flathub com.obsproject.Studio
-
+# Flatpack
+bash desktop/source/any/flatpak.sh
 
 ## Install Teamviewer
 wget https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
