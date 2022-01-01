@@ -76,7 +76,7 @@ sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install zsh clementine breeze-cursor-theme vim vim-gui-common nmap vlc blender fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 x2goclient git idle3 fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn snapd guake guake-indicator krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload virtualbox flatpak pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 obs-studio cheese ncdu whois pdfshuffler piper libratbag-tools qt5-style-kvantum qt5-style-kvantum-themes gnome-keyring timeshift adb fastboot materia-gtk-theme xournal
+sudo apt-get -y install zsh clementine breeze-cursor-theme vim vim-gui-common nmap vlc blender fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 x2goclient git idle3 fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn snapd guake guake-indicator krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload virtualbox flatpak pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 cheese ncdu whois pdfshuffler piper libratbag-tools qt5-style-kvantum qt5-style-kvantum-themes gnome-keyring timeshift adb fastboot materia-gtk-theme xournal
 #sudo apt-get -y install latte-dock # installing git version for now.
 sudo apt-get -f install -y
 
@@ -92,33 +92,8 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 ## Fix snapd
 sudo ln -s /var/lib/snapd/snap /snap
 
-## Skype
-sudo flatpak install -y flathub com.skype.Client
-
-## Zoom
-sudo flatpak install -y flathub us.zoom.Zoom
-
-## Install Handbrake - Video Converter
-sudo flatpak install -y flathub fr.handbrake.ghbE
-
-## Microsoft teams
-sudo flatpak install -y flathub com.microsoft.Teams
-
-## FFaudioConverter
-sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
-
-## Kdenlive
-sudo flatpak install -y flathub -y org.kde.kdenlive
-
-## Telegram Desktop
-sudo flatpak install -y flathub org.telegram.desktop
-
-## MkCron
-# sudo snap install mkcron
-
-## Slack
-wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.12.2-amd64.deb -O /tmp/slack-desktop.deb
-sudo dpkg -i /tmp/slack-desktop.deb
+# Flatpack
+bash desktop/source/any/flatpak.sh
 
 ## LSD
 wget https://github.com/Peltoche/lsd/releases/download/0.20.1/lsd_0.20.1_amd64.deb -O /tmp/lsd_amd64.deb

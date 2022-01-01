@@ -113,36 +113,8 @@ sudo pip3 install wheel
 sudo pip3 install virtualenv virtualenvwrapper pylint
 sudo pip3 install bpytop --upgrade
 
-# Flathub Packages
-## Slack
-sudo flatpak install -y flathub com.slack.Slack
-sudo flatpak override --filesystem=home:ro com.slack.Slack
-
-## Skype 
-sudo flatpak install -y flathub com.skype.Client
-
-## Zoom
-sudo flatpak install -y flathub us.zoom.Zoom
-
-## Microsoft Teams
-sudo flatpak install -y flathub com.microsoft.Teams
-sudo flatpak override --filesystem=home:ro com.microsoft.Teams
-
-## Kdenlive
-sudo flatpak install -y flathub org.kde.kdenlive
-
-## OBS Studio
-sudo flatpak install -y flathub com.obsproject.Studio
-
-## FFaudioConverter
-# sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
-
-## Telegram
-# sudo flatpak install -y flathub org.telegram.desktop
-
-# ## MkCron
-# sudo snap install mkcron
-
+# Flatpack
+bash desktop/source/any/flatpak.sh
 
 ## Install Teamviewer
 sudo opi teamviewer
