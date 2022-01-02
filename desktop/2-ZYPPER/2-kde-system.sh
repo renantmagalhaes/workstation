@@ -150,55 +150,10 @@ echo "set ignorecase" >> ~/.vim/vimrc
 echo "set paste" >> ~/.vim/vimrc
 
 # Themes
-# Orchis
-git clone https://github.com/vinceliuice/Orchis-kde.git ~/GIT-REPOS/CORE/Orchis-kde
-sh -c "~/GIT-REPOS/CORE/Orchis-kde/install.sh"
+bash desktop/source/gnome/themes.sh
+bash desktop/source/kde/themes.sh
 
-# ChromeOS
-git clone https://github.com/vinceliuice/ChromeOS-kde.git ~/GIT-REPOS/CORE/ChromeOS-kde
-sh -c "~/GIT-REPOS/CORE/ChromeOS-kde/install.sh"
 
-git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/ChromeOS-theme
-sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
-
-# WhiteSur
-git clone https://github.com/vinceliuice/WhiteSur-kde.git ~/GIT-REPOS/CORE/WhiteSur-kde
-sh -c "~/GIT-REPOS/CORE/WhiteSur-kde/install.sh"
-
-# Matcha Theme
-git clone https://github.com/vinceliuice/Matcha-gtk-theme.git ~/GIT-REPOS/CORE/Matcha-gtk-theme
-sh -c "~/GIT-REPOS/CORE/Matcha-gtk-theme/install.sh"
-
-# Fluent Theme
-git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
-sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh"
-
-git clone https://github.com/vinceliuice/Fluent-icon-theme.git ~/GIT-REPOS/CORE/Fluent-icon-theme
-sh -c "~/GIT-REPOS/CORE/Fluent-icon-theme/install.sh"
-sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist /usr/share/icons/Fluent-cursors
-sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist-dark /usr/share/icons/Fluent-dark-cursors
-
-# Layan Theme
-git clone https://github.com/vinceliuice/Layan-kde.git ~/GIT-REPOS/CORE/Layan-kde
-sh -c "~/GIT-REPOS/CORE/Layan-kde/install.sh"
-
-# Tela-circle-icon-theme
-git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
-sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh blue"
-sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh black"
-
-# Tela--icon-theme
-git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/GIT-REPOS/CORE/Tela-icon-theme
-sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh blue"
-sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh black"
-
-# Flatery Icon Theme
-git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
-ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
-ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-Indigo-Dark
-
-# Materia KDE
-wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/materia-kde/master/install.sh | sh
 
 # SDDM
 # ## 
