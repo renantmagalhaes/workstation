@@ -131,13 +131,8 @@ sudo pip3 install virtualenv virtualenvwrapper pylint
 sudo pip3 install bpytop --upgrade
 sudo apt-get -f install -y
 
-# New VIM
-sudo apt-get install -y build-essential
-curl -sLf https://spacevim.org/install.sh | bash
-echo "set ignorecase" >> ~/.vim/vimrc
-echo "set cryptmethod=blowfish2" >> ~/.vim/vimrc
-echo "set viminfo=" >> ~/.vim/vimrc
-sudo apt-get -f install -y
+# VIM
+bash desktop/source/any/vim.sh
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE

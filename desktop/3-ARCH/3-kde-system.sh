@@ -122,10 +122,8 @@ sudo gpasswd -a $USER nordvpn
 # Fonts
 bash desktop/source/any/fonts.sh
 
-# New VIM
-curl -sLf https://spacevim.org/install.sh | bash
-echo "set ignorecase" >> ~/.vim/vimrc
-echo "set paste" >> ~/.vim/vimrc
+# VIM
+bash desktop/source/any/vim.sh
 
 # Themes
 bash desktop/source/gnome/themes.sh

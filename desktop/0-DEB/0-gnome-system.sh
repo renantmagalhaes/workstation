@@ -252,13 +252,8 @@ sudo apt-get -f install -y
 #Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
-# New VIM
-sudo apt-get install -y build-essential
-curl -sLf https://spacevim.org/install.sh | bash
-echo "set ignorecase" >> ~/.vim/vimrc
-echo "set cryptmethod=blowfish2" >> ~/.vim/vimrc
-echo "set viminfo=" >> ~/.vim/vimrc
-sudo apt-get -f install -y
+# VIM
+bash desktop/source/any/vim.sh
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
