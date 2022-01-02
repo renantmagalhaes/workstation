@@ -166,10 +166,8 @@ mkdir -p ~/GIT-REPOS/CORE
 # Fonts
 bash desktop/source/any/fonts.sh
 
-# New VIM
-curl -sLf https://spacevim.org/install.sh | bash
-echo "set ignorecase" >> ~/.vim/vimrc
-echo "set paste" >> ~/.vim/vimrc
+# VIM
+bash desktop/source/any/vim.sh
 
 # Flat-remix Theme
 # sudo dnf copr enable -y daniruiz/flat-remix
