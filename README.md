@@ -2,7 +2,7 @@
 ```My full desktop environment.```
 
 ### Disclaimer !
-Use the script ``install.sh`` and run all modules, running the scripts directly may result in system malfunction. 
+Use the script ``install.sh``. Running the scripts directly may result in system malfunction. 
 
 # KDE Plasma 5.2X
 
