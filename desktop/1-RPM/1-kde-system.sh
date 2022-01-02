@@ -81,17 +81,6 @@ fi
 # Disable wayland
 sudo sed -i 's/\#WaylandEnable\=false/WaylandEnable\=false/' /etc/gdm/custom.conf
 
-#User check
-#echo "#########################"
-#echo "#			#"
-#echo "#	User Config	#"
-#echo "#			#"
-#echo "#########################"
-
-#echo "Enter your default user name:"
-#read user
-
-
 # Grub2 config - Save last option
 # sudo runuser -l  root -c 'echo "GRUB_DEFAULT=saved" >> /etc/default/grub'
 # sudo runuser -l  root -c 'echo "GRUB_SAVEDEFAULT=true" >> /etc/default/grub'
@@ -176,25 +165,6 @@ bash desktop/source/any/vim.sh
 bash desktop/source/gnome/themes.sh
 bash desktop/source/kde/themes.sh
 
-
-
-######################### Using gnome-boxes now #########################
-# VirtualBox
-#sudo dnf install VirtualBox.x86_64
-#sudo dnf -y install wget
-#wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
-#sudo mv virtualbox.repo /etc/yum.repos.d/virtualbox.repo
-#sudo dnf install -y gcc binutils make glibc-devel patch libgomp glibc-headers  kernel-headers kernel-devel-`uname -r` dkms
-#sudo dnf install -y VirtualBox-6.1
-#sudo usermod -a -G vboxusers ${USER}
-#sudo /usr/lib/virtualbox/vboxdrv.sh setup
-#cd ~/
-#wget https://download.virtualbox.org/virtualbox/6.1.2/Oracle_VM_VirtualBox_Extension_Pack-6.1.2.vbox-extpack
-
-## If kernel update problem
-## https://www.virtualbox.org/wiki/Testbuilds > Linux 64-bit > Run .run file
-######################### Using gnome-boxes now #########################
-
 # Colorls
 sudo dnf install -y ruby ruby-devel
 sudo gem install colorls
@@ -202,17 +172,6 @@ sudo gem install colorls
 # Install ClamAV
 sudo dnf install -y clamav clamtk
 # sudo dnf install -y clamav-daemon
-
-# # Remove titlebar when maximized window
-# kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
-#Revert to kde dock
-#kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu"
-
-# qdbus-qt5 org.kde.KWin /KWin reconfigure
-
-# # Latte dock remap key
-# kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta  "org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu"
-# qdbus-qt5 org.kde.KWin /KWin reconfigure
 
 # RTM
 #clear

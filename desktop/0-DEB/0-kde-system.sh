@@ -57,9 +57,6 @@ else
 fi
 
 # Add keys, ppa and repos
-## VirtualBox
-#wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-
 ## Ubuntu backports for latte-dock
 sudo add-apt-repository ppa:kubuntu-ppa/backports
 sudo apt update
@@ -174,17 +171,6 @@ sudo apt-get install -y clamav-daemon
 
 # Make sure all package are installed
 sudo apt-get -f install -y
-
-# # Remove titlebar when maximized window
-#kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
-#qdbus org.kde.KWin /KWin reconfigure
-
-# # Latte dock remap key
-#kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta  "org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu"
-#qdbus org.kde.KWin /KWin reconfigure
-#Revert to kde dock
-#kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu"
-#qdbus org.kde.KWin /KWin reconfigure
 
 # Plasma sync configs
 # TODO: find a way to install all packages via cli.

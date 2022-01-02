@@ -185,10 +185,6 @@ else
 fi
 
 # Add keys, ppa and repos
-## VirtualBox
-#wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-## Flat-Remix Theme
-#sudo add-apt-repository ppa:daniruiz/flat-remix
 ## Vivaldi Browser
 wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo apt-key add -
 sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'

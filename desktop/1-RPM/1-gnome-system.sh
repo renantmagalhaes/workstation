@@ -81,17 +81,6 @@ fi
 # Disable wayland
 sudo sed -i 's/\#WaylandEnable\=false/WaylandEnable\=false/' /etc/gdm/custom.conf
 
-#User check
-#echo "#########################"
-#echo "#			#"
-#echo "#	User Config	#"
-#echo "#			#"
-#echo "#########################"
-
-#echo "Enter your default user name:"
-#read user
-
-
 # Grub2 config - Save last option
 # sudo runuser -l  root -c 'echo "GRUB_DEFAULT=saved" >> /etc/default/grub'
 # sudo runuser -l  root -c 'echo "GRUB_SAVEDEFAULT=true" >> /etc/default/grub'
@@ -169,10 +158,6 @@ bash desktop/source/any/fonts.sh
 # VIM
 bash desktop/source/any/vim.sh
 
-# Flat-remix Theme
-# sudo dnf copr enable -y daniruiz/flat-remix
-# sudo dnf install -y flat-remix-gnome  flat-remix-gtk2-theme flat-remix-gtk3-theme flat-remix-icon-theme
-
 # Install GTK theme Vimix
 git clone https://github.com/vinceliuice/vimix-gtk-themes.git ~/GIT-REPOS/CORE/vimix-gtk-themes
 cd ~/GIT-REPOS/CORE/vimix-gtk-themes
@@ -186,25 +171,8 @@ sh -c "./install.sh"
 cd
 
 # Themes
-
 bash desktop/source/gnome/themes.sh
 
-######################### Using gnome-boxes now #########################
-# VirtualBox
-#sudo dnf install VirtualBox.x86_64
-#sudo dnf -y install wget
-#wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
-#sudo mv virtualbox.repo /etc/yum.repos.d/virtualbox.repo
-#sudo dnf install -y gcc binutils make glibc-devel patch libgomp glibc-headers  kernel-headers kernel-devel-`uname -r` dkms
-#sudo dnf install -y VirtualBox-6.1
-#sudo usermod -a -G vboxusers ${USER}
-#sudo /usr/lib/virtualbox/vboxdrv.sh setup
-#cd ~/
-#wget https://download.virtualbox.org/virtualbox/6.1.2/Oracle_VM_VirtualBox_Extension_Pack-6.1.2.vbox-extpack
-
-## If kernel update problem
-## https://www.virtualbox.org/wiki/Testbuilds > Linux 64-bit > Run .run file
-######################### Using gnome-boxes now #########################
 
 # Colorls
 sudo dnf install -y ruby ruby-devel
