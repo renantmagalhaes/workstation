@@ -81,17 +81,6 @@ fi
 # Disable wayland
 sudo sed -i 's/\#WaylandEnable\=false/WaylandEnable\=false/' /etc/gdm/custom.conf
 
-#User check
-#echo "#########################"
-#echo "#			#"
-#echo "#	User Config	#"
-#echo "#			#"
-#echo "#########################"
-
-#echo "Enter your default user name:"
-#read user
-
-
 # Grub2 config - Save last option
 # sudo runuser -l  root -c 'echo "GRUB_DEFAULT=saved" >> /etc/default/grub'
 # sudo runuser -l  root -c 'echo "GRUB_SAVEDEFAULT=true" >> /etc/default/grub'
@@ -140,33 +129,8 @@ sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluet
 sudo pip3 install virtualenv virtualenvwrapper pylint
 sudo pip3 install bpytop --upgrade
 
-# Flathub Packages
-## Slack
-sudo flatpak install -y flathub com.slack.Slack
-
-## Skype 
-sudo flatpak install -y flathub com.skype.Client
-
-## Zoom
-sudo flatpak install -y flathub us.zoom.Zoom
-
-## Microsoft Teams
-sudo flatpak install -y flathub com.microsoft.Teams
-
-## Kdenlive
-sudo flatpak install -y flathub org.kde.kdenlive
-
-## OBS Studio
-sudo flatpak install -y flathub com.obsproject.Studio
-
-## FFaudioConverter
-sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
-
-## Telegram
-sudo flatpak install -y flathub org.telegram.desktop
-
-## MkCron
-# sudo snap install mkcron
+# Flatpack
+bash desktop/source/any/flatpak.sh
 
 ## Install Teamviewer
 wget https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
@@ -191,109 +155,15 @@ sudo dnf install -y code
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
 
-# Install Fonts
-git clone https://github.com/powerline/fonts.git ~/GIT-REPOS/CORE/fonts/
-bash ~/GIT-REPOS/CORE/fonts/install.sh
+# Fonts
+bash desktop/source/any/fonts.sh
 
-wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf -O ~/.local/share/fonts/PowerlineSymbols.otf
-
-mkdir -p ~/.config/fontconfig/conf.d/
-wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf -O ~/.config/fontconfig/conf.d/10-powerline-symbols.conf
-
-git clone https://github.com/gabrielelana/awesome-terminal-fonts.git ~/GIT-REPOS/CORE/awesome-terminal-fonts
-sh -c "~/GIT-REPOS/CORE/awesome-terminal-fonts/install.sh"
-
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip -O ~/.local/share/fonts/FiraCode.zip
-unzip ~/.local/share/fonts/FiraCode.zip -d ~/.local/share/fonts/
-
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/3270.zip -O ~/.local/share/fonts/3270.zip
-unzip ~/.local/share/fonts/3270.zip -d ~/.local/share/fonts/
-
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Agave.zip -O ~/.local/share/fonts/Agave.zip
-unzip ~/.local/share/fonts/Agave.zip -d ~/.local/share/fonts/
-
-## cascadia font for vscode
-wget https://github.com/microsoft/cascadia-code/releases/download/v2105.24/CascadiaCode-2105.24.zip -O /tmp/CascadiaCode-2105.24.zip
-unzip /tmp/CascadiaCode-2105.24.zip -d /tmp/
-cp /tmp/ttf/CascadiaCodePL.ttf  ~/.local/share/fonts/
-cp /tmp/ttf/CascadiaCode.ttf  ~/.local/share/fonts/
-
-fc-cache -vf ~/.local/share/fonts/
-
-# New VIM
-curl -sLf https://spacevim.org/install.sh | bash
-echo "set ignorecase" >> ~/.vim/vimrc
-echo "set paste" >> ~/.vim/vimrc
+# VIM
+bash desktop/source/any/vim.sh
 
 # Themes
-# Orchis
-git clone https://github.com/vinceliuice/Orchis-kde.git ~/GIT-REPOS/CORE/Orchis-kde
-sh -c "~/GIT-REPOS/CORE/Orchis-kde/install.sh"
-
-# ChromeOS
-git clone https://github.com/vinceliuice/ChromeOS-kde.git ~/GIT-REPOS/CORE/ChromeOS-kde
-sh -c "~/GIT-REPOS/CORE/ChromeOS-kde/install.sh"
-
-git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/ChromeOS-theme
-sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
-
-# WhiteSur
-git clone https://github.com/vinceliuice/WhiteSur-kde.git ~/GIT-REPOS/CORE/WhiteSur-kde
-sh -c "~/GIT-REPOS/CORE/WhiteSur-kde/install.sh"
-
-# Tela-circle-icon-theme
-git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
-sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh blue"
-sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh black"
-
-# Tela--icon-theme
-git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/GIT-REPOS/CORE/Tela-icon-theme
-sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh blue"
-sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh black"
-
-# Reversal
-git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git ~/GIT-REPOS/CORE/Reversal-icon-theme
-sh -c "~/GIT-REPOS/CORE/Reversal-icon-theme/install.sh -a"
-
-# Flatery Icon Theme
-git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
-ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
-ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-Indigo-Dark
-
-
-# Fluent Theme
-git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
-sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh"
-
-git clone https://github.com/vinceliuice/Fluent-icon-theme.git ~/GIT-REPOS/CORE/Fluent-icon-theme
-sh -c "~/GIT-REPOS/CORE/Fluent-icon-theme/install.sh"
-sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist /usr/share/icons/Fluent-cursors
-sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist-dark /usr/share/icons/Fluent-dark-cursors
-
-# Materia KDE
-wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/materia-kde/master/install.sh | sh
-
-# SDDM
-# ## 
-# wget https://github.com/renantmagalhaes/workstation/raw/static-files/sddm/sugar-candy.tar.gz -O /tmp/sugar-candy.tar.gz
-# sudo tar -xzvf /tmp/sugar-candy.tar.gz -C /usr/share/sddm/themes
-
-######################### Using gnome-boxes now #########################
-# VirtualBox
-#sudo dnf install VirtualBox.x86_64
-#sudo dnf -y install wget
-#wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
-#sudo mv virtualbox.repo /etc/yum.repos.d/virtualbox.repo
-#sudo dnf install -y gcc binutils make glibc-devel patch libgomp glibc-headers  kernel-headers kernel-devel-`uname -r` dkms
-#sudo dnf install -y VirtualBox-6.1
-#sudo usermod -a -G vboxusers ${USER}
-#sudo /usr/lib/virtualbox/vboxdrv.sh setup
-#cd ~/
-#wget https://download.virtualbox.org/virtualbox/6.1.2/Oracle_VM_VirtualBox_Extension_Pack-6.1.2.vbox-extpack
-
-## If kernel update problem
-## https://www.virtualbox.org/wiki/Testbuilds > Linux 64-bit > Run .run file
-######################### Using gnome-boxes now #########################
+bash desktop/source/gnome/themes.sh
+bash desktop/source/kde/themes.sh
 
 # Colorls
 sudo dnf install -y ruby ruby-devel
@@ -302,17 +172,6 @@ sudo gem install colorls
 # Install ClamAV
 sudo dnf install -y clamav clamtk
 # sudo dnf install -y clamav-daemon
-
-# # Remove titlebar when maximized window
-# kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
-#Revert to kde dock
-#kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu"
-
-# qdbus-qt5 org.kde.KWin /KWin reconfigure
-
-# # Latte dock remap key
-# kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta  "org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu"
-# qdbus-qt5 org.kde.KWin /KWin reconfigure
 
 # RTM
 #clear

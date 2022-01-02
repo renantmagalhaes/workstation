@@ -57,9 +57,6 @@ else
 fi
 
 # Add keys, ppa and repos
-## VirtualBox
-#wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-
 ## Ubuntu backports for latte-dock
 sudo add-apt-repository ppa:kubuntu-ppa/backports
 sudo apt update
@@ -76,7 +73,7 @@ sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install zsh clementine breeze-cursor-theme vim vim-gui-common nmap vlc blender fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 x2goclient git idle3 fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn snapd guake guake-indicator krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload virtualbox flatpak pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 obs-studio cheese ncdu whois pdfshuffler piper libratbag-tools qt5-style-kvantum qt5-style-kvantum-themes gnome-keyring timeshift adb fastboot materia-gtk-theme xournal
+sudo apt-get -y install zsh clementine breeze-cursor-theme vim vim-gui-common nmap vlc blender fonts-powerline brasero gparted wireshark tmux curl net-tools iproute2 x2goclient git idle3 fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn snapd guake guake-indicator krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload virtualbox flatpak pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 cheese ncdu whois pdfshuffler piper libratbag-tools qt5-style-kvantum qt5-style-kvantum-themes gnome-keyring timeshift adb fastboot materia-gtk-theme xournal
 #sudo apt-get -y install latte-dock # installing git version for now.
 sudo apt-get -f install -y
 
@@ -92,33 +89,8 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 ## Fix snapd
 sudo ln -s /var/lib/snapd/snap /snap
 
-## Skype
-sudo flatpak install -y flathub com.skype.Client
-
-## Zoom
-sudo flatpak install -y flathub us.zoom.Zoom
-
-## Install Handbrake - Video Converter
-sudo flatpak install -y flathub fr.handbrake.ghbE
-
-## Microsoft teams
-sudo flatpak install -y flathub com.microsoft.Teams
-
-## FFaudioConverter
-sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
-
-## Kdenlive
-sudo flatpak install -y flathub -y org.kde.kdenlive
-
-## Telegram Desktop
-sudo flatpak install -y flathub org.telegram.desktop
-
-## MkCron
-# sudo snap install mkcron
-
-## Slack
-wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.12.2-amd64.deb -O /tmp/slack-desktop.deb
-sudo dpkg -i /tmp/slack-desktop.deb
+# Flatpack
+bash desktop/source/any/flatpak.sh
 
 ## LSD
 wget https://github.com/Peltoche/lsd/releases/download/0.20.1/lsd_0.20.1_amd64.deb -O /tmp/lsd_amd64.deb
@@ -148,23 +120,6 @@ sudo sed -i 's/\,arm64\,armhf//g' /etc/apt/sources.list.d/vscode.list
 sudo apt-get -f install -y
 
 
-## Guake Configs
-mkdir -p ~/.config/autostart/
-#guake --save-preferences ../../guake/rtm-guake-settings
-guake --restore-preferences ../../guake/rtm-guake-settings 
-cat <<EOF >> ~/.config/autostart/guake.desktop
-[Desktop Entry]
-Name=Guake Terminal
-Comment=Use the command line in a Quake-like terminal
-TryExec=guake
-Exec=guake
-Icon=guake
-Type=Application
-Categories=GNOME;GTK;System;Utility;TerminalEmulator;
-StartupNotify=true
-X-Desktop-File-Install-Version=0.22
-EOF
-
 # Enable BT FastConnectable
 sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
 
@@ -173,101 +128,18 @@ sudo pip3 install virtualenv virtualenvwrapper pylint
 sudo pip3 install bpytop --upgrade
 sudo apt-get -f install -y
 
-# New VIM
-sudo apt-get install -y build-essential
-curl -sLf https://spacevim.org/install.sh | bash
-echo "set ignorecase" >> ~/.vim/vimrc
-echo "set cryptmethod=blowfish2" >> ~/.vim/vimrc
-echo "set viminfo=" >> ~/.vim/vimrc
-sudo apt-get -f install -y
+# VIM
+bash desktop/source/any/vim.sh
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
 
-# Install Fonts
-git clone https://github.com/powerline/fonts.git ~/GIT-REPOS/CORE/fonts/
-bash ~/GIT-REPOS/CORE/fonts/install.sh
-
-wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf -O ~/.local/share/fonts/PowerlineSymbols.otf
-
-mkdir -p ~/.config/fontconfig/conf.d/
-wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf -O ~/.config/fontconfig/conf.d/10-powerline-symbols.conf
-
-git clone https://github.com/gabrielelana/awesome-terminal-fonts.git ~/GIT-REPOS/CORE/awesome-terminal-fonts
-sh -c "~/GIT-REPOS/CORE/awesome-terminal-fonts/install.sh"
-
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip -O ~/.local/share/fonts/FiraCode.zip
-unzip ~/.local/share/fonts/FiraCode.zip -d ~/.local/share/fonts/
-
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/3270.zip -O ~/.local/share/fonts/3270.zip
-unzip ~/.local/share/fonts/3270.zip -d ~/.local/share/fonts/
-
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Agave.zip -O ~/.local/share/fonts/Agave.zip
-unzip ~/.local/share/fonts/Agave.zip -d ~/.local/share/fonts/
-
-## cascadia font for vscode
-wget https://github.com/microsoft/cascadia-code/releases/download/v2105.24/CascadiaCode-2105.24.zip -O /tmp/CascadiaCode-2105.24.zip
-unzip /tmp/CascadiaCode-2105.24.zip -d /tmp/
-cp /tmp/ttf/CascadiaCodePL.ttf  ~/.local/share/fonts/
-cp /tmp/ttf/CascadiaCode.ttf  ~/.local/share/fonts/
-
-fc-cache -vf ~/.local/share/fonts/
+# Fonts
+bash desktop/source/any/fonts.sh
 
 # Themes
-# Qogir
-git clone https://github.com/vinceliuice/Qogir-kde.git ~/GIT-REPOS/CORE/Qogir-kde
-sh -c "~/GIT-REPOS/CORE/Qogir-kde/install.sh"
-
-# Layan
-git clone https://github.com/vinceliuice/Layan-kde.git ~/GIT-REPOS/CORE/Layan-kde
-sh -c "~/GIT-REPOS/CORE/Layan-kde/install.sh"
-
-# Orchis
-git clone https://github.com/vinceliuice/Orchis-kde.git ~/GIT-REPOS/CORE/Orchis-kde
-sh -c "~/GIT-REPOS/CORE/Orchis-kde/install.sh"
-
-# ChromeOS
-git clone https://github.com/vinceliuice/ChromeOS-kde.git ~/GIT-REPOS/CORE/ChromeOS-kde
-sh -c "~/GIT-REPOS/CORE/ChromeOS-kde/install.sh"
-
-git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/ChromeOS-theme
-sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
-
-# WhiteSur
-git clone https://github.com/vinceliuice/WhiteSur-kde.git ~/GIT-REPOS/CORE/WhiteSur-kde
-sh -c "~/GIT-REPOS/CORE/WhiteSur-kde/install.sh"
-
-# Tela-circle-icon-theme
-git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
-sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh blue"
-sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh black"
-
-# Tela--icon-theme
-git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/GIT-REPOS/CORE/Tela-icon-theme
-sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh blue"
-sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh black"
-
-# Reversal
-git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git ~/GIT-REPOS/CORE/Reversal-icon-theme
-sh -c "~/GIT-REPOS/CORE/Reversal-icon-theme/install.sh -a"
-
-# Flatery Icon Theme
-git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
-ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
-ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-Indigo-Dark
-
-
-# Fluent Theme
-git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
-sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh"
-
-git clone https://github.com/vinceliuice/Fluent-icon-theme.git ~/GIT-REPOS/CORE/Fluent-icon-theme
-sh -c "~/GIT-REPOS/CORE/Fluent-icon-theme/install.sh"
-sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist /usr/share/icons/Fluent-cursors
-sudo cp -r ~/GIT-REPOS/CORE/Fluent-icon-theme/cursors/dist-dark /usr/share/icons/Fluent-dark-cursors
-
-# Materia KDE
-wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/materia-kde/master/install.sh | sh
+bash desktop/source/gnome/themes.sh
+bash desktop/source/kde/themes.sh
 
 
 # Widgets
@@ -299,17 +171,6 @@ sudo apt-get install -y clamav-daemon
 
 # Make sure all package are installed
 sudo apt-get -f install -y
-
-# # Remove titlebar when maximized window
-#kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true
-#qdbus org.kde.KWin /KWin reconfigure
-
-# # Latte dock remap key
-#kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta  "org.kde.lattedock,/Latte,org.kde.LatteDock,activateLauncherMenu"
-#qdbus org.kde.KWin /KWin reconfigure
-#Revert to kde dock
-#kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.plasmashell,/PlasmaShell,org.kde.PlasmaShell,activateLauncherMenu"
-#qdbus org.kde.KWin /KWin reconfigure
 
 # Plasma sync configs
 # TODO: find a way to install all packages via cli.
