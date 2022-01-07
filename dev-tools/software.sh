@@ -134,6 +134,14 @@ elif check_cmd zypper; then  # FOR RPM SYSTEMS
     # wget `curl --silent "https://api.github.com/repos/Studio3T/robomongo/releases/latest" |grep browser_download_url | grep tar.gz |grep -Po '"browser_download_url": "\K.*?(?=")'` -O ~/Apps/robo3t.tar.gz
     # ln -s /usr/lib64/libcurl.so.4 ~/Apps/bin/robo3t-1.4.1/lib/libcurl-gnutls.so.4
 
+elif check_cmd pacman; then 
+    ## docker
+    yes | sudo pacman -Sy docker docker-compose
+    sudo systemctl enable docker
+    sudo usermod -G docker -a $USER
+
+    ## pgadmin4
+    yes | sudo pacman -Sy pgadmin4
 else
     echo "Not able to identify the system"
 fi
