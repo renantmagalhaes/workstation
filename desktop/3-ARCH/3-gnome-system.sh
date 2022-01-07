@@ -65,7 +65,7 @@ yes | sudo pacman -Syu
 mkdir -p ~/GIT-REPOS/CORE
 
 # Install the packages from fedora repo
-sudo pacman -Sy zsh vlc clementine vim nmap blender brasero gparted wireshark-qt tmux curl vpnc git htop meld openvpn guake krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring python-pip flatpak unzip libreoffice-fresh
+sudo pacman -Sy zsh vlc clementine vim nmap blender brasero gparted wireshark-qt tmux curl vpnc git htop meld openvpn guake krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring python-pip flatpak unzip libreoffice-fresh materia-gtk-theme xournalpp android-tools jq
 yay -Sy chrome-gnome-shell
 
 # Bluetooth
@@ -141,6 +141,13 @@ yes | sudo pacman -Sy clamav clamtk
 sudo pacman -Sy virtualbox virtualbox-guest-iso
 sudo usermod -aG vboxusers $USER
 sudo modprobe vboxdrv
+
+# Droidcam
+cd /tmp/
+wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_1.8.0.zip
+unzip droidcam_latest.zip -d droidcam
+cd droidcam && sudo ./install-client
+sudo ./install-video
 
 # RTM
 #clear
