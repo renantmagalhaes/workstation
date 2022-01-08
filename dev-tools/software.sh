@@ -117,6 +117,9 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     sudo rm -rf ~/snap/robo3t-snap/common/.cache/fontconfig/*
     sudo fc-cache -r
 
+    ## lib dependency
+    sudo ln -s /usr/lib64/libcurl.so.4 /usr/lib64/libcurl-gnutls.so.4
+
 elif check_cmd zypper; then  # FOR RPM SYSTEMS
     ## docker
     sudo zypper install -y docker python3-docker-compose
