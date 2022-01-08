@@ -422,7 +422,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     echo "Not able to identify desktop environment"
     fi
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
-    alias update-all="sudo dnf update -y brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+    alias update-all="sudo dnf update -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
     alias folder="nautilus"
     alias pdf="evince"
