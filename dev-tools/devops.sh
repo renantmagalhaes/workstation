@@ -46,16 +46,14 @@ curl -s https://raw.githubusercontent.com/armosec/kubescape/master/install.sh | 
 
 
 if check_cmd apt-get; then # FOR DEB SYSTEMS
-
-    
+    neofetch
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
-
-
-elif check_cmd zypper; then  # FOR RPM SYSTEMS
-
-
-
-
+    neofetch
+elif check_cmd zypper; then  # FOR SUSE SYSTEMS
+    neofetch
+elif check_cmd pacman; then  # FOR Arch SYSTEMS
+    neofetch
+else 
     echo "Not able to identify the system"
 fi
 
