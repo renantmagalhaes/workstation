@@ -1,14 +1,24 @@
 # RTM default mode
 
+# Logo
+g logo FFFFFF # #FFFFFF
 
 # Custom Keys
 k play ff7700 # #ff7700
-k print_screen ff7700 # #ff7700
 k tilde ff00ff # #ff00ff
 k escape ff0000     # #ff0000
 
-# Logo
-g logo FFFFFF # #FFFFFF
+# coding keys
+k 4 52F352 # #52F352
+k 9 52F352 # #52F352
+k 0 52F352 # #52F352
+k open_bracket 52F352 # #52F352
+k close_bracket 52F352 # #52F352
+k comma 52F352 # #52F352
+k period 52F352 # #52F352
+k slash ff7700 # #ff7700
+k pipe ff7700 # #ff7700
+k dollar ff7700 # #ff7700 actually is \ and | key
 
 
 g indicators 00FFD8      # #00FFD8
@@ -20,14 +30,6 @@ g numeric DCE821  # #DCE821
 g functions 00FFD8      # #00FFD8
 g keys B082D9       # ##B082D9
 g gkeys 00FFD8      # #00FFD8 
-k 1 DCE821  # #DCE821
-k 2 DCE821  # #DCE821
-k 3 DCE821  # #DCE821
-k 4 DCE821  # #DCE821
-k 5 DCE821  # #DCE821
-k 6 DCE821  # #DCE821
-k 7 DCE821  # #DCE821
-k 8 DCE821  # #DCE821
-k 9 DCE821  # #DCE821
-k 0 DCE821  # #DCE821
+
+
 c                   # Commit changes
