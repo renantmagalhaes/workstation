@@ -1,0 +1,30 @@
+# RTM default mode
+
+
+# Custom Keys
+k play ff7700
+k print_screen ff7700
+k tilde ff00ff # #ff00ff
+k escape ff0000     # #ff0000
+
+# Logo
+g logo FFFFFF       # #FFFFFF
+
+
+g indicators ffffff # White
+g multimedia 009600 # Green
+g fkeys 00FFD8      # #00FFD8
+g modifiers ff7700  # #ff7700
+g arrows 0000ff     # Red
+g numeric 00ff00    # Green
+g functions ffffff  # White
+g keys ff00ff       # #ff00ff
+g gkeys FFFFFF       # #FFFFFF
+k W 0000ff          # Blue {
+k A 0000ff
+k S 0000ff
+k D 0000ff          # }         
+c                   # Commit changes
+
+
+#00FFD8
