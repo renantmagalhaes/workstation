@@ -55,6 +55,16 @@ mv ~/.themes/Dracula/gtk-master/* ~/.themes/Dracula
 git clone https://github.com/vinceliuice/Matcha-gtk-theme.git ~/GIT-REPOS/CORE/Matcha-gtk-theme
 sh -c "~/GIT-REPOS/CORE/Matcha-gtk-theme/install.sh"
 
+
+# Graphite-gtk-theme
+git clone https://github.com/vinceliuice/Graphite-gtk-theme.git ~/GIT-REPOS/CORE/Graphite-gtk-theme
+sh -c "~/GIT-REPOS/CORE/Graphite-gtk-theme/install.sh --tweaks black normal"
+# sh -c "~/GIT-REPOS/CORE/Graphite-gtk-theme/install.sh --tweaks nord"
+
+
+##############################################
+# ICONS
+
 # Tela-circle-icon-theme
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
 sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh blue"
@@ -64,7 +74,6 @@ sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh black"
 git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/GIT-REPOS/CORE/Tela-icon-theme
 sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh blue"
 sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh black"
-
 
 # Reversal
 git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git ~/GIT-REPOS/CORE/Reversal-icon-theme
