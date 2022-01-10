@@ -1,0 +1,24 @@
+# RTM default mode
+
+
+# Custom Keys
+k play ff7700       # #ff7700
+k escape ff0000     # #ff0000
+
+# Logo
+g logo FFFFFF       # #FFFFFF
+
+
+g indicators ffffff # #ffffff
+g multimedia 009600 # #009600
+g fkeys B082D9      # #00FFD8
+g modifiers B082D9  # #52F352
+g arrows B082D9     # #B082D9
+g numeric DCE821    # #DCE821
+g keys 52F352       # #B082D9
+g gkeys FFFFFF       # #FFFFFF
+
+
+c                   # Commit changes
+
+
