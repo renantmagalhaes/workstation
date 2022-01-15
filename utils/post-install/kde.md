@@ -5,7 +5,7 @@
     Kvantum -> Orchis-dark
     Global Theme -> Materia Dark
     Icons -> reversal-purple-dark
-    Window Decorations -> Materia Dark
+    Window Decorations -> Materia Dark / Graphite-dark
     Plasma Style -> Materia Color
     Cursors -> Breeze Light
     Splash Screen -> QuarksSplashDark
