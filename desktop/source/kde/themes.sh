@@ -21,6 +21,10 @@ sh -c "~/GIT-REPOS/CORE/WhiteSur-kde/install.sh"
 git clone https://github.com/vinceliuice/Layan-kde.git ~/GIT-REPOS/CORE/Layan-kde
 sh -c "~/GIT-REPOS/CORE/Layan-kde/install.sh"
 
+# Graphite Theme
+git clone https://github.com/vinceliuice/Graphite-kde-theme.git ~/GIT-REPOS/CORE/Graphite-kde-theme
+sh -c "~/GIT-REPOS/CORE/Graphite-kde-theme/install.sh"
+
 # SDDM
 # ## 
 # wget https://github.com/renantmagalhaes/workstation/raw/static-files/sddm/sugar-candy.tar.gz -O /tmp/sugar-candy.tar.gz
