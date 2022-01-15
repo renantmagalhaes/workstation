@@ -134,6 +134,11 @@ elif check_cmd zypper; then  # FOR RPM SYSTEMS
     # sudo zypper install pgadmin4 pgadmin4-web
 
     # robo3t
+    ## Fix fontissue robo3t
+    sudo rm -rf /var/cache/fontconfig/*
+    rm -rf ~/.cache/fontconfig/*
+    sudo rm -rf ~/snap/robo3t-snap/common/.cache/fontconfig/*
+    sudo fc-cache -r
     # wget `curl --silent "https://api.github.com/repos/Studio3T/robomongo/releases/latest" |grep browser_download_url | grep tar.gz |grep -Po '"browser_download_url": "\K.*?(?=")'` -O ~/Apps/robo3t.tar.gz
     # ln -s /usr/lib64/libcurl.so.4 ~/Apps/bin/robo3t-1.4.1/lib/libcurl-gnutls.so.4
 
