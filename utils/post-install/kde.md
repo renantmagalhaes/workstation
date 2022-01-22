@@ -3,13 +3,13 @@
 # Themes
 
     Kvantum -> Orchis-dark
-    Global Theme -> Materia Dark
+    Global Theme -> Fluent-round-dark / Materia Dark
+    Plasma Style -> Fluent-round-dark
+    Window Decorations -> Graphite-dark-round / Materia Dark
     Icons -> reversal-purple-dark
-    Window Decorations -> Materia Dark / Graphite-dark
-    Plasma Style -> Materia Color
     Cursors -> Breeze Light
-    Splash Screen -> QuarksSplashDark
-    SDDM -> Darkine
+    Splash Screen -> QuarksSplashDark / Fluent-round-dark
+    SDDM -> ArcMidnight-dark / Darkine
 
 # System Settings
 
