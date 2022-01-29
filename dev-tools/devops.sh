@@ -41,6 +41,9 @@ brew install argocd
 # FluxCD
 brew install fluxcd/tap/flux
 
+# popeye
+brew install derailed/popeye/popeye
+
 # kubescape
 curl -s https://raw.githubusercontent.com/armosec/kubescape/master/install.sh | /bin/bash
 
