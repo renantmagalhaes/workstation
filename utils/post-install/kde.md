@@ -6,7 +6,7 @@
     Global Theme -> Fluent-round-dark / Materia Dark
     Plasma Style -> Fluent-round-dark
     Window Decorations -> Graphite-dark-round / Materia Dark
-    Icons -> reversal-purple-dark
+    Icons -> tela circle blue dark / round reversal-purple-dark
     Cursors -> Breeze Light
     Splash Screen -> QuarksSplashDark / Fluent-round-dark
     SDDM -> ArcMidnight-dark / Darkine
