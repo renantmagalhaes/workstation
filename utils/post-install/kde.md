@@ -18,6 +18,7 @@
 - Application Style
   - Configure GNOME/GTK
 - Desktop effects
+  - Overview (assign shortcut if necessary)
   - Enable Blur
   - Dim Screen for Administrator Mode
   - Slide Back
