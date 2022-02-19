@@ -39,8 +39,7 @@ sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
 
 # Fluent Theme
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
-sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh --tweaks float solid round"
-# sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh --tweaks float dark round"
+sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh --tweaks float solid"
 
 git clone https://github.com/vinceliuice/Fluent-icon-theme.git ~/GIT-REPOS/CORE/Fluent-icon-theme
 sh -c "~/GIT-REPOS/CORE/Fluent-icon-theme/install.sh"
@@ -85,6 +84,8 @@ git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-Indigo-Dark
 
-# Catppuccin
-wget `curl --silent "https://api.github.com/repos/catppuccin/gtk/releases/latest" |grep browser_download_url | grep Catppuccin-dark-compact.zip |grep -Po '"browser_download_url": "\K.*?(?=")'` -O ~/.themes/Catppuccin-dark-compact.zip
-unzip ~/.themes/Catppuccin-dark-compact.zip
+# # Catppuccin
+# wget `curl --silent "https://api.github.com/repos/catppuccin/gtk/releases/latest" |grep browser_download_url | grep Catppuccin-dark-compact.zip |grep -Po '"browser_download_url": "\K.*?(?=")'` -O ~/.themes/Catppuccin-dark-compact.zip
+# unzip ~/.themes/Catppuccin-dark-compact.zip
+# wget `curl --silent "https://api.github.com/repos/catppuccin/gtk/releases/latest" |grep browser_download_url | grep Catppuccin-purple-dark-compact.zip |grep -Po '"browser_download_url": "\K.*?(?=")'` -O ~/.themes/wget `curl --silent "https://api.github.com/repos/catppuccin/gtk/releases/latest" |grep browser_download_url | grep Catppuccin-purple-dark-compact.zip |grep -Po '"browser_download_url": "\K.*?(?=")'` -O ~/.themes/Catppuccin-purple-dark-compact.zip
+# unzip ~/.themes/Catppuccin-purple-dark-compact.zip
