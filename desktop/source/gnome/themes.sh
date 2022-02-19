@@ -84,3 +84,7 @@ sh -c "~/GIT-REPOS/CORE/Reversal-icon-theme/install.sh -a"
 git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-Indigo-Dark
+
+# Catppuccin
+wget `curl --silent "https://api.github.com/repos/catppuccin/gtk/releases/latest" |grep browser_download_url | grep Catppuccin-dark-compact.zip |grep -Po '"browser_download_url": "\K.*?(?=")'` -O ~/.themes/Catppuccin-dark-compact.zip
+unzip ~/.themes/Catppuccin-dark-compact.zip
