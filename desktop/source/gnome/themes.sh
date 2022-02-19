@@ -58,7 +58,8 @@ sh -c "~/GIT-REPOS/CORE/Matcha-gtk-theme/install.sh"
 
 # Graphite-gtk-theme
 git clone https://github.com/vinceliuice/Graphite-gtk-theme.git ~/GIT-REPOS/CORE/Graphite-gtk-theme
-sh -c "~/GIT-REPOS/CORE/Graphite-gtk-theme/install.sh --tweaks black normal"
+sh -c "~/GIT-REPOS/CORE/Graphite-gtk-theme/install.sh --tweaks black normal rimless"
+# sh -c "~/GIT-REPOS/CORE/Graphite-gtk-theme/install.sh --tweaks black normal"
 # sh -c "~/GIT-REPOS/CORE/Graphite-gtk-theme/install.sh --tweaks nord"
 
 
