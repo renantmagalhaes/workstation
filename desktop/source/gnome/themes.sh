@@ -39,7 +39,7 @@ sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
 
 # Fluent Theme
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
-sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh --tweaks float"
+sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh --tweaks float solid round"
 # sh -c "~/GIT-REPOS/CORE/Fluent-gtk-theme/install.sh --tweaks float dark round"
 
 git clone https://github.com/vinceliuice/Fluent-icon-theme.git ~/GIT-REPOS/CORE/Fluent-icon-theme
