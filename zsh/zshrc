@@ -234,10 +234,10 @@ POWERLEVEL9K_MODE='nerdfont-complete'
 # #POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX=" ❯ "
 # POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX=" %2F𝝺 "
 
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX='╭─ '
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX='%4F╭─ '
 POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_PREFIX='├─ '
 # POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='╰─ 𝝺  '
-POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='╰─❯ '
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='%4F╰─❯ '
 
 POWERLEVEL9K_NVM_BACKGROUND='clear'
 POWERLEVEL9K_NVM_FOREGROUND='green'
@@ -546,3 +546,7 @@ if [ -e /home/rtm/.nix-profile/etc/profile.d/nix.sh ]; then . /home/rtm/.nix-pro
 
 #brew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# P10K External config file
+# # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

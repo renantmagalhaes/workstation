@@ -10,6 +10,9 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 #zsh config 
 ln -s -f $PWD/zsh/zshrc ~/.zshrc
 
+#p10k config 
+ln -s -f $PWD/zsh/p10k.zsh ~/.p10k.zsh
+
 #lsd config
 mkdir -p  ~/.config/lsd/
 ln -s -f $PWD/lsd-config.yaml ~/.config/lsd/config.yaml
