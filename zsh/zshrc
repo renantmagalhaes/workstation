@@ -549,6 +549,8 @@ if [ -e /home/rtm/.nix-profile/etc/profile.d/nix.sh ]; then . /home/rtm/.nix-pro
 #brew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+# POWERLEVEL9K_TRANSIENT_PROMPT=always
+
 # P10K External config file
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zshs ]] || source ~/.p10k.zsh
