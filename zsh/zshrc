@@ -31,7 +31,7 @@ export ZSH="/home/$USER/.oh-my-zsh"
 POWERLEVEL9K_MODE='nerdfont-complete'
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-#Plugins
+# #Plugins
 
 plugins=(
   git
@@ -52,340 +52,18 @@ plugins=(
 )
 
 
-# # Configure env kubectl
-# source "$ZSH/plugins/kube-ps1/kube-ps1.plugin.zsh"
-# prompt_kube_ps1(){
-#    echo -n `kube_ps1`
-# }
-# KUBE_PS1_NS_ENABLE="false"
-# KUBE_PS1_DIVIDER=""
-# KUBE_PS1_SYMBOL_USE_IMG="\u2638"
 
-# # Display
-# POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=1
-# POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=2
-#
-## User with skull
-# user_with_skull() {
-#     echo -n "\uf1d0 $(whoami)@$(hostname)"
-# }
-# POWERLEVEL9K_CUSTOM_USER="user_with_skull"
-
-
-#Kubecontext
-#read_kube_config_context() {
-#	    cat ~/.kube/config |grep name |tail -n2 |awk {'print $3'}
-#    }
-#
-# read_kube_config_context() {
-# 	    kubectl config current-context
-#     }
-# POWERLEVEL9K_CUSTOM_COMMAND="read_kube_config_context"
-
-custom_symbol(){
-  echo -e '\u2638'
-}
-POWERLEVEL9K_CUSTOM_SYMBOL="custom_symbol"
-
-# Default Prompt Elements
-
-# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator virtualenv dir dir_writable_joined custom_git_pair vcs_joined)
-# #POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='%F{008}\uf460%F{008}'
-
-# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time go_version virtualenv nvm background_jobs)
-# With load ram disk_usage
-# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time go_version nvm load ram disk_usage background_jobs kubecontext)
-
-
-# #POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
-# #POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%F{008}\uf104%F{008}'
-# POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='\uE0B1'
-#   # Separator between same-color segments on the right.
-# POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='\uE0B3'
-#   # Separator between different-color segments on the left.
-# POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='\uE0B0'
-#   # Separator between different-color segments on the right.
-# POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR='\uE0B2'
-#   # The right end of left prompt.
-# POWERLEVEL9K_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL='❯'
-#   # The left end of right prompt.
-# POWERLEVEL9K_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL='\uE0B2'
-#   # The left end of left prompt.
-# POWERLEVEL9K_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=''
-#   # The right end of right prompt.
-# POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL='\ue0c6'
-# #POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL='\uE0B4'
-# #POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL='\uE0B0'
-# #POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL='▓▒░'
-#   # Left prompt terminator for lines without any segments.
-# POWERLEVEL9K_EMPTY_LINE_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=
-
-
-
-# POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-# POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-
-# ### command_execution_time
-# POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='black'
-# POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND='clear'
-# POWERLEVEL9K_COMMAND_EXECUTION_TIME_VISUAL_IDENTIFIER_EXPANSION='ﲊ'
-# #
-# ### kunnecontext
-# #POWERLEVEL9K_KUBECONTEXT_BACKGROUND='clear'
-# #POWERLEVEL9K_KUBECONTEXT_FOREGROUND='231'
-
-# #Virtualenv
-# POWERLEVEL9K_VIRTUALENV_BACKGROUND='clear'
-# POWERLEVEL9K_VIRTUALENV_FOREGROUND='green'
-
-# #Custom collors
-# POWERLEVEL9K_CUSTOM_USER_BACKGROUND='clear'
-# POWERLEVEL9K_CUSTOM_USER_FOREGROUND='blue'
-
-# POWERLEVEL9K_CUSTOM_COMMAND_BACKGROUND='clear'
-# POWERLEVEL9K_CUSTOM_COMMAND_FOREGROUND='231'
-
-# POWERLEVEL9K_CUSTOM_SYMBOL_BACKGROUND='clear'
-# POWERLEVEL9K_CUSTOM_SYMBOL_FOREGROUND='blue'
-
-##################################[ load: load usage ]################################## 
-# Show average CPU load over this many last minutes. Valid values are 1, 5 and 15.
-  typeset -g POWERLEVEL9K_LOAD_WHICH=5
-  # Load color when load is under 50%.
-  # typeset -g POWERLEVEL9K_LOAD_NORMAL_FOREGROUND=0
-  # typeset -g POWERLEVEL9K_LOAD_NORMAL_BACKGROUND=2
-  # Load color when load is between 50% and 70%.
-  # typeset -g POWERLEVEL9K_LOAD_WARNING_FOREGROUND=0
-  # typeset -g POWERLEVEL9K_LOAD_WARNING_BACKGROUND=3
-  # Load color when load is over 70%.
-  # typeset -g POWERLEVEL9K_LOAD_CRITICAL_FOREGROUND=0
-  # typeset -g POWERLEVEL9K_LOAD_CRITICAL_BACKGROUND=1
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_LOAD_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
-##################################[ ram: ram usage ]################################## 
-
-  # RAM color.
-   typeset -g POWERLEVEL9K_RAM_FOREGROUND=0
-   typeset -g POWERLEVEL9K_RAM_BACKGROUND=3
-  # Custom icon.
-  #typeset -g POWERLEVEL9K_RAM_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
-##################################[ disk_usage: disk usage ]##################################
-  # Colors for different levels of disk usage.
-  # typeset -g POWERLEVEL9K_DISK_USAGE_NORMAL_FOREGROUND=3
-  # typeset -g POWERLEVEL9K_DISK_USAGE_NORMAL_BACKGROUND=0
-  # typeset -g POWERLEVEL9K_DISK_USAGE_WARNING_FOREGROUND=0
-  # typeset -g POWERLEVEL9K_DISK_USAGE_WARNING_BACKGROUND=3
-  # typeset -g POWERLEVEL9K_DISK_USAGE_CRITICAL_FOREGROUND=7
-  # typeset -g POWERLEVEL9K_DISK_USAGE_CRITICAL_BACKGROUND=1
-  # Thresholds for different levels of disk usage (percentage points).
-  typeset -g POWERLEVEL9K_DISK_USAGE_WARNING_LEVEL=90
-  typeset -g POWERLEVEL9K_DISK_USAGE_CRITICAL_LEVEL=95
-  # If set to true, hide disk usage when below $POWERLEVEL9K_DISK_USAGE_WARNING_LEVEL percent.
-  typeset -g POWERLEVEL9K_DISK_USAGE_ONLY_WARNING=false
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_DISK_USAGE_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
-function sp {
-  git branch > /dev/null 2>&1 || return 1
-  git config user.initials
-}
-
-######################### COLOR THEME ########################
-
-POWERLEVEL9K_DIR_BACKGROUND='237'
-POWERLEVEL9K_CUSTOM_GIT_PAIR="echo \$(sp)"
-POWERLEVEL9K_CUSTOM_GIT_PAIR_BACKGROUND="clear"
-POWERLEVEL9K_CUSTOM_GIT_PAIR_FOREGROUND="blue"
-POWERLEVEL9K_CUSTOM_GIT_PAIR_ICON="\uf7af"
-POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="clear"
-POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="012"
-POWERLEVEL9K_DIR_FOREGROUND='010'
-POWERLEVEL9K_DIR_HOME_BACKGROUND="clear"
-POWERLEVEL9K_DIR_HOME_FOREGROUND="white"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="clear"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="004"
-POWERLEVEL9K_DIR_PATH_SEPARATOR="%F{008}/%F{cyan}"
-
-POWERLEVEL9K_DIR_ETC_BACKGROUND="clear"
-POWERLEVEL9K_ETC_ICON='%F{blue}\uf423'
-POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="red"
-POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND="clear"
-
-POWERLEVEL9K_GO_ICON="\uf7b7"
-POWERLEVEL9K_GO_VERSION_BACKGROUND='clear'
-POWERLEVEL9K_GO_VERSION_FOREGROUND='081'
-
-# Home Icon
-#Home folder icon
-POWERLEVEL9K_HOME_SUB_ICON='\uf07b '
-#POWERLEVEL9K_FOLDER_ICON='\uf114'
-POWERLEVEL9K_HOME_ICON="\uf1d0 "
-#POWERLEVEL9K_HOME_ICON="\ue7a7 "
-
-POWERLEVEL9K_LINUX_MANJARO_ICON="\uf312 "
-POWERLEVEL9K_LINUX_UBUNTU_ICON="\uf31b "
-
-POWERLEVEL9K_MODE='nerdfont-complete'
-
-# POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=''
-# #POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX=" \uf101 "
-# POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%4F❯ "
-# # POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%4F𝝺 "
-
-
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX='%4F╭─ '
-#POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_PREFIX=zsh'├─ '
-# POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='╰─ 𝝺  '
-POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='%4F╰─❯ '
-
-
-POWERLEVEL9K_NVM_BACKGROUND='clear'
-POWERLEVEL9K_NVM_FOREGROUND='green'
-
-POWERLEVEL9K_OS_ICON_BACKGROUND='7'
-POWERLEVEL9K_OS_ICON_FOREGROUND='232'
-
-POWERLEVEL9K_SHORTEN_DELIMITER='%F{008} …%F{008}'
-POWERLEVEL9K_SHORTEN_STRATEGY="none"
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=10
-
-
-#POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
-#POWERLEVEL9K_SHORTEN_DELIMITER=""
-#POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
-
-#STATUS Command 
-POWERLEVEL9K_STATUS_ERROR_BACKGROUND="white"
-POWERLEVEL9K_STATUS_ERROR_FOREGROUND="001"
-POWERLEVEL9K_STATUS_OK_BACKGROUND="black"
-POWERLEVEL9K_STATUS_BACKGROUND="clear"
-POWERLEVEL9K_CARRIAGE_RETURN_ICON="\uf071"
-POWERLEVEL9K_STATUS_OK_VISUAL_IDENTIFIER_EXPANSION=''
-
-POWERLEVEL9K_TIME_FORMAT="%D{%H:%M \uE868  %d.%m}"
-
-POWERLEVEL9K_VCS_CLEAN_BACKGROUND='clear'
-POWERLEVEL9K_VCS_CLEAN_FOREGROUND='green'
-POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='clear'
-POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='yellow'
-POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='clear'
-POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='green'
-
-# Reverse git colors
-#POWERLEVEL9K_VCS_CLEAN_BACKGROUND='green'
-#POWERLEVEL9K_VCS_CLEAN_FOREGROUND='black'
-#POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='yellow'
-#POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='black'
-#POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='green'
-#POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='black'
-
-######################### COLOR THEME ########################
-
-
-# ######################### KubeContext ########################
-# #############[ kubecontext: current kubernetes context (https://kubernetes.io/) ]#############
-#   # Show kubecontext only when the the command you are typing invokes one of these tools.
-#   # Tip: Remove the next line to always show kubecontext.
-# #POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito|k9s|helmfile'
-
-#   # Kubernetes context classes for the purpose of using different colors, icons and expansions with
-#   # different contexts.
-#   #
-#   # POWERLEVEL9K_KUBECONTEXT_CLASSES is an array with even number of elements. The first element
-#   # in each pair defines a pattern against which the current kubernetes context gets matched.
-#   # More specifically, it's P9K_CONTENT prior to the application of context expansion (see below)
-#   # that gets matched. If you unset all POWERLEVEL9K_KUBECONTEXT_*CONTENT_EXPANSION parameters,
-#   # you'll see this value in your prompt. The second element of each pair in
-#   # POWERLEVEL9K_KUBECONTEXT_CLASSES defines the context class. Patterns are tried in order. The
-#   # first match wins.
-#   #
-#   # For example, given these settings:
-#   #
-#   #   POWERLEVEL9K_KUBECONTEXT_CLASSES=(
-#   #     '*prod*'  PROD
-#   #     '*test*'  TEST
-#   #     '*'       DEFAULT)
-#   #
-#   # If your current kubernetes context is "deathray-testing/default", its class is TEST
-#   # because "deathray-testing/default" doesn't match the pattern '*prod*' but does match '*test*'.
-#   #
-#   # You can define different colors, icons and content expansions for different classes:
-#   #
-#   #   POWERLEVEL9K_KUBECONTEXT_TEST_FOREGROUND=0
-#   #   POWERLEVEL9K_KUBECONTEXT_TEST_BACKGROUND=2
-#   #   POWERLEVEL9K_KUBECONTEXT_TEST_VISUAL_IDENTIFIER_EXPANSION='⭐'
-#   #   POWERLEVEL9K_KUBECONTEXT_TEST_CONTENT_EXPANSION='> ${P9K_CONTENT} <'
-#   POWERLEVEL9K_KUBECONTEXT_CLASSES=(
-#       # '*prod*'  PROD    # These values are examples that are unlikely
-#       # '*test*'  TEST    # to match your needs. Customize them as needed.
-#       '*'       DEFAULT)
-#   POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=white
-#   POWERLEVEL9K_KUBECONTEXT_DEFAULT_BACKGROUND=blue
-  
-#   # POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
-#   # Use POWERLEVEL9K_KUBECONTEXT_CONTENT_EXPANSION to specify the content displayed by kubecontext
-#   # segment. Parameter expansions are very flexible and fast, too. See reference:
-#   # http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion.
-#   #
-#   # Within the expansion the following parameters are always available:
-#   #
-#   # - P9K_CONTENT                The content that would've been displayed if there was no content
-#   #                              expansion defined.
-#   # - P9K_KUBECONTEXT_NAME       The current context's name. Corresponds to column NAME in the
-#   #                              output of `kubectl config get-contexts`.
-#   # - P9K_KUBECONTEXT_CLUSTER    The current context's cluster. Corresponds to column CLUSTER in the
-#   #                              output of `kubectl config get-contexts`.
-#   # - P9K_KUBECONTEXT_NAMESPACE  The current context's namespace. Corresponds to column NAMESPACE
-#   #                              in the output of `kubectl config get-contexts`. If there is no
-#   #                              namespace, the parameter is set to "default".
-#   # - P9K_KUBECONTEXT_USER       The current context's user. Corresponds to column AUTHINFO in the
-#   #                              output of `kubectl config get-contexts`.
-#   #
-#   # If the context points to Google Kubernetes Engine (GKE) or Elastic Kubernetes Service (EKS),
-#   # the following extra parameters are available:
-#   #
-#   # - P9K_KUBECONTEXT_CLOUD_NAME     Either "gke" or "eks".
-#   # - P9K_KUBECONTEXT_CLOUD_ACCOUNT  Account/project ID.
-#   # - P9K_KUBECONTEXT_CLOUD_ZONE     Availability zone.
-#   # - P9K_KUBECONTEXT_CLOUD_CLUSTER  Cluster.
-#   #
-#   # P9K_KUBECONTEXT_CLOUD_* parameters are derived from P9K_KUBECONTEXT_CLUSTER. For example,
-#   # if P9K_KUBECONTEXT_CLUSTER is "gke_my-account_us-east1-a_my-cluster-01":
-#   #
-#   #   - P9K_KUBECONTEXT_CLOUD_NAME=gke
-#   #   - P9K_KUBECONTEXT_CLOUD_ACCOUNT=my-account
-#   #   - P9K_KUBECONTEXT_CLOUD_ZONE=us-east1-a
-#   #   - P9K_KUBECONTEXT_CLOUD_CLUSTER=my-cluster-01
-#   #
-#   # If P9K_KUBECONTEXT_CLUSTER is "arn:aws:eks:us-east-1:123456789012:cluster/my-cluster-01":
-#   #
-#   #   - P9K_KUBECONTEXT_CLOUD_NAME=eks
-#   #   - P9K_KUBECONTEXT_CLOUD_ACCOUNT=123456789012
-#   #   - P9K_KUBECONTEXT_CLOUD_ZONE=us-east-1
-#   #   - P9K_KUBECONTEXT_CLOUD_CLUSTER=my-cluster-01
-#   POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION=
-#   # Show P9K_KUBECONTEXT_CLOUD_CLUSTER if it's not empty and fall back to P9K_KUBECONTEXT_NAME.
-#   POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${P9K_KUBECONTEXT_CLOUD_CLUSTER:-${P9K_KUBECONTEXT_NAME}}'
-#   # Append the current context's namespace if it's not "default".
-#   POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${${:-/$P9K_KUBECONTEXT_NAMESPACE}:#/default}'
-# ######################### KubeContext ########################
-
-######################### General Setup ########################
-#characters backspace 
-#WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+# ######################### General Setup ########################
 
 #Custom plugins
 source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
-# #Python virtualenv and Virtualenvwrapper
-# export WORKON_HOME=$HOME/.virtualenvs
-# export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-# source /usr/local/bin/virtualenvwrapper.sh
+#Python virtualenv and Virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
 
 #source
 source $ZSH/oh-my-zsh.sh
@@ -398,15 +76,10 @@ export ENHANCD_FILTER
 # crontab editor
 export VISUAL=vim
 
-# Quiet output
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-
 # check cmd function
 check_cmd() {
     command -v "$1" >/dev/null 2>&1
 }
-
-
 
 #Aliases
 gnome_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "GNOME" | awk '{print tolower($0)}'`
@@ -540,7 +213,7 @@ zstyle ':completion:*' cache-path ~/.cache/zcache
 # automatically load bash completion functions
 autoload -U +X bashcompinit && bashcompinit
 
-######################### General Setup ########################
+######################### PATHS ########################
 
 # Additional paths
 export PATH="/usr/sbin:/usr/share/code/bin:$PATH"
