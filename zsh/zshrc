@@ -61,9 +61,9 @@ plugins=(
 # KUBE_PS1_DIVIDER=""
 # KUBE_PS1_SYMBOL_USE_IMG="\u2638"
 
-# Display
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=1
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=2
+# # Display
+# POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=1
+# POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=2
 #
 ## User with skull
 # user_with_skull() {
@@ -77,10 +77,10 @@ POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=2
 #	    cat ~/.kube/config |grep name |tail -n2 |awk {'print $3'}
 #    }
 #
-read_kube_config_context() {
-	    kubectl config current-context
-    }
-POWERLEVEL9K_CUSTOM_COMMAND="read_kube_config_context"
+# read_kube_config_context() {
+# 	    kubectl config current-context
+#     }
+# POWERLEVEL9K_CUSTOM_COMMAND="read_kube_config_context"
 
 custom_symbol(){
   echo -e '\u2638'
@@ -89,64 +89,64 @@ POWERLEVEL9K_CUSTOM_SYMBOL="custom_symbol"
 
 # Default Prompt Elements
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator virtualenv dir dir_writable_joined custom_git_pair vcs_joined)
-#POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='%F{008}\uf460%F{008}'
+# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator virtualenv dir dir_writable_joined custom_git_pair vcs_joined)
+# #POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='%F{008}\uf460%F{008}'
 
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time go_version virtualenv nvm background_jobs)
+# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time go_version virtualenv nvm background_jobs)
 # With load ram disk_usage
 # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time go_version nvm load ram disk_usage background_jobs kubecontext)
 
 
-#POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
-#POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%F{008}\uf104%F{008}'
-POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='\uE0B1'
-  # Separator between same-color segments on the right.
-POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='\uE0B3'
-  # Separator between different-color segments on the left.
-POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='\uE0B0'
-  # Separator between different-color segments on the right.
-POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR='\uE0B2'
-  # The right end of left prompt.
-POWERLEVEL9K_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL='❯'
-  # The left end of right prompt.
-POWERLEVEL9K_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL='\uE0B2'
-  # The left end of left prompt.
-POWERLEVEL9K_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=''
-  # The right end of right prompt.
-POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL='\ue0c6'
-#POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL='\uE0B4'
-#POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL='\uE0B0'
-#POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL='▓▒░'
-  # Left prompt terminator for lines without any segments.
-POWERLEVEL9K_EMPTY_LINE_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=
+# #POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
+# #POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%F{008}\uf104%F{008}'
+# POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='\uE0B1'
+#   # Separator between same-color segments on the right.
+# POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='\uE0B3'
+#   # Separator between different-color segments on the left.
+# POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='\uE0B0'
+#   # Separator between different-color segments on the right.
+# POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR='\uE0B2'
+#   # The right end of left prompt.
+# POWERLEVEL9K_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL='❯'
+#   # The left end of right prompt.
+# POWERLEVEL9K_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL='\uE0B2'
+#   # The left end of left prompt.
+# POWERLEVEL9K_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=''
+#   # The right end of right prompt.
+# POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL='\ue0c6'
+# #POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL='\uE0B4'
+# #POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL='\uE0B0'
+# #POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL='▓▒░'
+#   # Left prompt terminator for lines without any segments.
+# POWERLEVEL9K_EMPTY_LINE_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=
 
 
 
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+# POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+# POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 
-### command_execution_time
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='black'
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND='clear'
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_VISUAL_IDENTIFIER_EXPANSION='ﲊ'
-#
-### kunnecontext
-#POWERLEVEL9K_KUBECONTEXT_BACKGROUND='clear'
-#POWERLEVEL9K_KUBECONTEXT_FOREGROUND='231'
+# ### command_execution_time
+# POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='black'
+# POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND='clear'
+# POWERLEVEL9K_COMMAND_EXECUTION_TIME_VISUAL_IDENTIFIER_EXPANSION='ﲊ'
+# #
+# ### kunnecontext
+# #POWERLEVEL9K_KUBECONTEXT_BACKGROUND='clear'
+# #POWERLEVEL9K_KUBECONTEXT_FOREGROUND='231'
 
-#Virtualenv
-POWERLEVEL9K_VIRTUALENV_BACKGROUND='clear'
-POWERLEVEL9K_VIRTUALENV_FOREGROUND='green'
+# #Virtualenv
+# POWERLEVEL9K_VIRTUALENV_BACKGROUND='clear'
+# POWERLEVEL9K_VIRTUALENV_FOREGROUND='green'
 
-#Custom collors
-POWERLEVEL9K_CUSTOM_USER_BACKGROUND='clear'
-POWERLEVEL9K_CUSTOM_USER_FOREGROUND='blue'
+# #Custom collors
+# POWERLEVEL9K_CUSTOM_USER_BACKGROUND='clear'
+# POWERLEVEL9K_CUSTOM_USER_FOREGROUND='blue'
 
-POWERLEVEL9K_CUSTOM_COMMAND_BACKGROUND='clear'
-POWERLEVEL9K_CUSTOM_COMMAND_FOREGROUND='231'
+# POWERLEVEL9K_CUSTOM_COMMAND_BACKGROUND='clear'
+# POWERLEVEL9K_CUSTOM_COMMAND_FOREGROUND='231'
 
-POWERLEVEL9K_CUSTOM_SYMBOL_BACKGROUND='clear'
-POWERLEVEL9K_CUSTOM_SYMBOL_FOREGROUND='blue'
+# POWERLEVEL9K_CUSTOM_SYMBOL_BACKGROUND='clear'
+# POWERLEVEL9K_CUSTOM_SYMBOL_FOREGROUND='blue'
 
 ##################################[ load: load usage ]################################## 
 # Show average CPU load over this many last minutes. Valid values are 1, 5 and 15.

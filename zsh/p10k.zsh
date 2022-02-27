@@ -1667,3 +1667,25 @@ typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
 
 (( ${#p10k_config_opts} )) && setopt ${p10k_config_opts[@]}
 'builtin' 'unset' 'p10k_config_opts'
+
+
+# RTM
+typeset -g  POWERLEVEL9K_HOME_ICON="\uf1d0 "
+
+
+#STATUS Command 
+typeset -g POWERLEVEL9K_STATUS_ERROR_BACKGROUND="white"
+typeset -g POWERLEVEL9K_STATUS_ERROR_FOREGROUND="001"
+typeset -g POWERLEVEL9K_STATUS_OK_BACKGROUND="black"
+typeset -g POWERLEVEL9K_STATUS_BACKGROUND="clear"
+typeset -g POWERLEVEL9K_CARRIAGE_RETURN_ICON="\uf071"
+typeset -g POWERLEVEL9K_STATUS_OK_VISUAL_IDENTIFIER_EXPANSION=''
+
+
+
+typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND='clear'
+typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND='green'
+typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='clear'
+typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='yellow'
+typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='clear'
+typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='green'
