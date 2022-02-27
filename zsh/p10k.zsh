@@ -257,7 +257,7 @@
 
   ##################################[ dir: current directory ]##################################
   # Default current directory color.
-  typeset -g POWERLEVEL9K_DIR_FOREGROUND=31
+  typeset -g POWERLEVEL9K_DIR_FOREGROUND=111
   # If directory is too long, shorten some of its segments to the shortest possible unique
   # prefix. The shortened directory can be tab-completed to the original.
   typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
@@ -267,7 +267,7 @@
   typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=103
   # Color of the anchor directory segments. Anchor segments are never shortened. The first
   # segment is always an anchor.
-  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=39
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=063
   # Display anchor directory segments in bold.
   typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
   # Don't shorten directories that contain any of these files. They are anchors.
@@ -333,7 +333,7 @@
 
   # The default icon shown next to non-writable and non-existent directories when
   # POWERLEVEL9K_DIR_SHOW_WRITABLE is set to v3.
-  # typeset -g POWERLEVEL9K_LOCK_ICON='⭐'
+  typeset -g POWERLEVEL9K_LOCK_ICON='%009F'
 
   # POWERLEVEL9K_DIR_CLASSES allows you to specify custom icons and colors for different
   # directories. It must be an array with 3 * N elements. Each triplet consists of:
@@ -528,8 +528,8 @@
   typeset -g POWERLEVEL9K_VCS_{STAGED,UNSTAGED,UNTRACKED,CONFLICTED,COMMITS_AHEAD,COMMITS_BEHIND}_MAX_NUM=-1
 
   # Icon color.
-  typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_COLOR=76
-  typeset -g POWERLEVEL9K_VCS_LOADING_VISUAL_IDENTIFIER_COLOR=244
+  # typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_COLOR=76
+  # typeset -g POWERLEVEL9K_VCS_LOADING_VISUAL_IDENTIFIER_COLOR=244
   # Custom icon.
   # typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
@@ -1670,22 +1670,4 @@ typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
 
 
 # RTM
-typeset -g  POWERLEVEL9K_HOME_ICON="\uf1d0 "
-
-
-#STATUS Command 
-typeset -g POWERLEVEL9K_STATUS_ERROR_BACKGROUND="white"
-typeset -g POWERLEVEL9K_STATUS_ERROR_FOREGROUND="001"
-typeset -g POWERLEVEL9K_STATUS_OK_BACKGROUND="black"
-typeset -g POWERLEVEL9K_STATUS_BACKGROUND="clear"
-typeset -g POWERLEVEL9K_CARRIAGE_RETURN_ICON="\uf071"
-typeset -g POWERLEVEL9K_STATUS_OK_VISUAL_IDENTIFIER_EXPANSION=''
-
-
-
-typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND='clear'
-typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND='green'
-typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='clear'
-typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='yellow'
-typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='clear'
-typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='green'
+typeset -g  POWERLEVEL9K_HOME_ICON="%255F\uf1d0 "
