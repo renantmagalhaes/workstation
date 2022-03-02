@@ -195,6 +195,7 @@ command -v htop > /dev/null && alias top='htop'
 command -v bpytop > /dev/null && alias top='bpytop'
 
 # Completion.
+fpath+=(~/.config/hcloud/completion/zsh)
 autoload -U compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
 zstyle ':completion:*' rehash true                              # automatically find new executables in path 
