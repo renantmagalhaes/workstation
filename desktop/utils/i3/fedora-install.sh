@@ -12,3 +12,4 @@ ln -s -f $PWD/config/i3-config ~/.config/i3/config
 
 # Polybar config
 ln -s -f $PWD/config/polybar-config ~/.config/polybar/config
+ln -s -f $PWD/config/poly-launch.sh ~/.config/polybar/poly-launch.sh
