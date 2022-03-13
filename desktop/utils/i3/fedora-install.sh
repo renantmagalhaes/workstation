@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Packages
-sudo dnf install -y i3-gaps rofi polybar
+sudo dnf install -y i3-gaps rofi polybar feh
 sudo pip3 install pywal
 
 # Create folders
