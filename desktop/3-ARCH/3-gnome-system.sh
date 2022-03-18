@@ -65,7 +65,7 @@ yes | sudo pacman -Syu
 mkdir -p ~/GIT-REPOS/CORE
 
 # Install the packages from fedora repo
-sudo pacman -Sy zsh vlc clementine vim nmap blender brasero gparted wireshark-qt tmux curl vpnc git htop meld openvpn guake krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring python-pip flatpak unzip libreoffice-fresh materia-gtk-theme xournalpp android-tools jq
+sudo pacman -Sy zsh vlc clementine vim nmap blender brasero gparted wireshark-qt tmux curl vpnc git htop meld openvpn guake krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring python-pip flatpak unzip libreoffice-fresh materia-gtk-theme xournalpp android-tools jq neovim
 yay -Sy chrome-gnome-shell
 
 # Bluetooth
