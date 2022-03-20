@@ -5,7 +5,7 @@ sudo dnf install -y i3-gaps rofi polybar feh lxappearance qt5-qtconfiguration pi
 sudo pip3 install pywal
 
 # Create folders
-mkdir -p ~/.config/polybar ~/.config/i3
+mkdir -p ~/.config/polybar ~/.config/i3 ~/.config/picom
 
 # I3 config
 ln -s -f $PWD/config/i3-config ~/.config/i3/config
@@ -13,6 +13,9 @@ ln -s -f $PWD/config/i3-config ~/.config/i3/config
 # Polybar config
 ln -s -f $PWD/config/polybar-config ~/.config/polybar/config
 ln -s -f $PWD/config/poly-launch.sh ~/.config/polybar/poly-launch.sh
+
+# Picom config
+ln -s -f $PWD/config/picom.conf ~/.config/picom/picom.conf
 
 ## Polybar themes
 #https://github.com/adi1090x/polybar-themes
