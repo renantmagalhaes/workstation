@@ -199,6 +199,9 @@ exec_always --no-startup-id feh --bg-scale ~/Pictures/background
 # Launch polybar
 exec_always --no-startup-id $HOME/.config/polybar/poly-launch.sh
 
+# Launch Picom
+exec_always --no-startup-id picom
+
 # GAPS Configuration
 # You can also use any non-zero value if you'd like to have a border
 for_window [class=".*"] border pixel 1
