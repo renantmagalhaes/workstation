@@ -41,8 +41,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-
+bindsym $mod+Return exec gnome-terminal
 
 # kill focused window
 bindsym $mod+q kill
@@ -195,3 +194,9 @@ exec_always --no-startup-id feh --bg-scale ~/Pictures/background
 
 # Launch polybar
 exec_always --no-startup-id $HOME/.config/polybar/poly-launch.sh
+
+# GAPS Configuration
+# You can also use any non-zero value if you'd like to have a border
+for_window [class=".*"] border pixel 2
+gaps inner 2
+gaps outer 2
