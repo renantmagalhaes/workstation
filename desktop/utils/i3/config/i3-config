@@ -202,10 +202,11 @@ exec_always --no-startup-id $HOME/.config/polybar/poly-launch.sh
 # Launch Picom
 exec_always --no-startup-id picom --experimental-backend
 
+## Refresh rate monitor 1
+# exec_always --no-startup-id xrandr --output DisplayPort-0 --mode 2560x1440 -r 144.00
+
 # GAPS Configuration
 # You can also use any non-zero value if you'd like to have a border
-for_window [class=".*"] border pixel 1
+for_window [class=".*"] border pixel 2
 gaps inner 5
 gaps outer 5
-
-
