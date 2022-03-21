@@ -13,7 +13,7 @@ ln -s -f $PWD/config/i3/i3-config ~/.config/i3/config
 
 # Polybar config
 ln -s -f $PWD/config/polybar/polybar-config ~/.config/polybar/config
-ln -s -f $PWD/config/polybar/poly-launch.sh ~/.config/polybar/poly-launch.sh
+ln -s -f $PWD/config/polybar/launch.sh ~/.config/polybar/launch.sh
 
 # Picom config
 ln -s -f $PWD/config/picom/picom.conf ~/.config/picom/picom.conf
