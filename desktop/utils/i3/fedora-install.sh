@@ -5,7 +5,8 @@ sudo dnf install -y i3-gaps rofi polybar feh lxappearance qt5-qtconfiguration pi
 sudo pip3 install pywal
 
 # Create folders
-mkdir -p ~/.config/polybar ~/.config/i3 ~/.config/picom ~/.config/rofi
+mkdir -p ~/.config/polybar ~/.config/i3 ~/.config/picom ~/.config/rofi ~/.local/share/rofi/themes/
+
 
 # I3 config
 ln -s -f $PWD/config/i3/i3-config ~/.config/i3/config
@@ -18,8 +19,9 @@ ln -s -f $PWD/config/polybar/poly-launch.sh ~/.config/polybar/poly-launch.sh
 ln -s -f $PWD/config/picom/picom.conf ~/.config/picom/picom.conf
 
 # Rofi config
+git clone https://github.com/lr-tech/rofi-themes-collection.git ~/GIT-REPOS/CORE/rofi-themes-collection
+cp -r ~/GIT-REPOS/CORE/rofi-themes-collection/themes/* ~/.local/share/rofi/themes/
 ln -s -f $PWD/config/rofi/config.rasi ~/.config/rofi/config.rasi
-ln -s -f $PWD/config/rofi/rounded-common.rasi ~/.config/rofi/rounded-common.rasi
 
 ## Polybar themes
 #https://github.com/adi1090x/polybar-themes
