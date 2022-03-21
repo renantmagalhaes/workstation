@@ -173,9 +173,24 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
 # Statup applications
 exec_always guake
 exec_always flameshot
+
+# Color settings
+client.focused #6272a4 #6272a4 #6272a4 #6272a4
+# client.focused_inactive #2C2C2C #2C2C2C #ffffff #2C2C2C
+# client.unfocused #2C2C2C #2C2C2C #ffffff #2C2C2C
+# client.urgent #00C1FF #00C1FF #000088 #00C1FF
+
+# Do not follow the mouse
+focus_follows_mouse no
 
 # Shortcuts
 bindsym $mod+e exec nautilus

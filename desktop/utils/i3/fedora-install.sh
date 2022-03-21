@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Packages
-sudo dnf install -y i3-gaps rofi polybar feh lxappearance qt5-qtconfiguration picom blueman
+sudo dnf install -y i3-gaps rofi polybar feh lxappearance qt5-qtconfiguration picom blueman playerctl
 sudo pip3 install pywal
 
 # Create folders
