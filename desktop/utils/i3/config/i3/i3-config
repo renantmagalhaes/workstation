@@ -50,7 +50,7 @@ bindsym $mod+q kill
 # bindsym $mod+x exec --no-startup-id rofi -show combi -run-command "i3-msg exec '{cmd}'" -show-icons
 bindsym $mod+x exec --no-startup-id ~/GIT-REPOS/workstation/desktop/utils/i3/config/rofi/scripts/rofi.sh
 ## Set rofi to run with super key
-exec_always --no-startup-id xcape -e 'Super_L=Super_L|x'
+exec_always --no-startup-id pidof xcape |xargs kill -9 && xcape -e 'Super_L=Super_L|x'
 
 # # change focus
 # bindsym $mod+j focus left
