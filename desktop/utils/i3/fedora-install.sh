@@ -19,6 +19,7 @@ ln -s -f $PWD/config/picom/picom.conf ~/.config/picom/picom.conf
 
 # Rofi config
 ln -s -f $PWD/config/rofi/config.rasi ~/.config/rofi/config.rasi
+ln -s -f $PWD/config/rofi/rounded-common.rasi ~/.config/rofi/rounded-common.rasi
 
 ## Polybar themes
 #https://github.com/adi1090x/polybar-themes
