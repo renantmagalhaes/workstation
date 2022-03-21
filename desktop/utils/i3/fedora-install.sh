@@ -1,12 +1,15 @@
 #!/bin/bash
 
 # Packages
-sudo dnf install -y i3-gaps rofi polybar feh lxappearance qt5-qtconfiguration picom blueman playerctl
+sudo dnf install -y i3-gaps rofi polybar feh lxappearance qt5-qtconfiguration picom blueman playerctl mpd
 sudo pip3 install pywal
 
 # Create folders
 mkdir -p ~/.config/polybar ~/.config/i3 ~/.config/picom ~/.config/rofi ~/.local/share/rofi/themes/
 
+# MPD config
+sudo systemctl enable mpd
+sudo systemctl start mpd
 
 # I3 config
 ln -s -f $PWD/config/i3/i3-config ~/.config/i3/config
