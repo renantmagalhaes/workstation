@@ -177,9 +177,11 @@ bindsym $mod+r mode "resize"
 
 # Statup applications
 exec_always guake
+exec_always flameshot
 
 # Shortcuts
 bindsym $mod+e exec nautilus
+bindsym Print exec flameshot gui
 
 ## Set rofi to run with super key
 exec_always --no-startup-id xcape -e 'Super_L=Super_L|x'
