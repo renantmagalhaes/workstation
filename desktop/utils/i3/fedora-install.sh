@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Packages
-sudo dnf install -y i3-gaps rofi polybar feh lxappearance qt5-qtconfiguration picom blueman playerctl mpd
+sudo dnf install -y i3-gaps rofi polybar feh lxappearance qt5-qtconfiguration picom blueman playerctl mpd alacritty
 sudo pip3 install pywal
 
 # Create folders
-mkdir -p ~/.config/polybar ~/.config/i3 ~/.config/picom ~/.config/rofi ~/.local/share/rofi/themes/
+mkdir -p ~/.config/polybar ~/.config/i3 ~/.config/picom ~/.config/rofi ~/.local/share/rofi/themes/ ~/.config/alacritty/
 
 # MPD config
 sudo systemctl enable mpd
@@ -26,8 +26,9 @@ git clone https://github.com/lr-tech/rofi-themes-collection.git ~/GIT-REPOS/CORE
 cp -r ~/GIT-REPOS/CORE/rofi-themes-collection/themes/* ~/.local/share/rofi/themes/
 ln -s -f $PWD/config/rofi/config.rasi ~/.config/rofi/config.rasi
 
-## Polybar themes
-#https://github.com/adi1090x/polybar-themes
+# Alacritty
+ln -s -f $PWD/config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+
 
 #XCAPE - Bind rofi to SuperKey
 sudo dnf install -y git gcc make pkgconfig libX11-devel libXtst-devel libXi-devel
