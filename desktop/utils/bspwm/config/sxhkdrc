@@ -7,8 +7,8 @@ super + Return
 	gnome-terminal
 
 # program launcher
-super + @space
-	rofi -modi run,drun,window -show drun -show-icons -sidebar-mode
+super + u
+	~/GIT-REPOS/workstation/desktop/utils/i3/config/rofi/scripts/rofi.sh
 
 # make sxhkd reload its configuration files:
 super + Escape
