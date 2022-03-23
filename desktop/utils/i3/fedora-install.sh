@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Packages
-sudo dnf install -y i3-gaps rofi polybar feh lxappearance qt5-qtconfiguration picom blueman playerctl libmpd libmpdclient-devel alacritty
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+
+sudo dnf install -y i3-gaps rofi polybar feh lxappearance qt5-qtconfiguration picom blueman playerctl mpd alacritty
 sudo pip3 install pywal
 
 # Create folders
