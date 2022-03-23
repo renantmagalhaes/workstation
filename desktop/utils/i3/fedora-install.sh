@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Packages
-sudo dnf install -y i3-gaps rofi polybar feh lxappearance qt5-qtconfiguration picom blueman playerctl mpd alacritty
+sudo dnf install -y i3-gaps rofi polybar feh lxappearance qt5-qtconfiguration picom blueman playerctl libmpd libmpdclient-devel alacritty
 sudo pip3 install pywal
 
 # Create folders
