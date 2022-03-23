@@ -4,11 +4,11 @@
 
 # terminal emulator
 super + Return
-	gnome-terminal
+	alacritty
 
 # program launcher
-super + u
-	~/GIT-REPOS/workstation/desktop/utils/i3/config/rofi/scripts/rofi.sh
+super + x
+	$HOME/GIT-REPOS/workstation/desktop/utils/bspwm/config/rofi/scripts/rofi.sh
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -17,6 +17,14 @@ super + Escape
 #
 # bspwm hotkeys
 #
+
+# Open file manager
+super + e
+	nautilus
+
+# Screenshot
+Print
+	flameshot gui
 
 # quit/restart bspwm
 super + alt + {q,r}
