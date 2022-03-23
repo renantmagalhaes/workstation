@@ -6,7 +6,8 @@ $HOME/.config/polybar/launch.sh &
 picom --experimental-backend &
 pgrep -x sxhkd > /dev/null || sxhkd &
 $HOME/GIT-REPOS/workstation/desktop/utils/bspwm/config/xcape/xcape.sh
-
+guake &
+feh --bg-scale ~/Pictures/background &
 
 bspc monitor -d I II III IV V VI VII VIII IX X
 
