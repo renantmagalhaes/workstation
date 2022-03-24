@@ -7,7 +7,7 @@ sudo dnf install -y i3-gaps rofi polybar feh lxappearance qt5-qtconfiguration pi
 sudo pip3 install pywal
 
 # Create folders
-mkdir -p ~/.config/polybar ~/.config/i3 ~/.config/picom ~/.config/rofi ~/.local/share/rofi/themes/ ~/.config/alacritty/
+mkdir -p ~/.config/polybar ~/.config/i3 ~/.config/picom ~/.config/rofi ~/.local/share/rofi/themes/ ~/.config/alacritty/ ~/.local/share/fonts
 
 # MPD config
 sudo systemctl enable mpd
@@ -30,6 +30,9 @@ ln -s -f $PWD/config/rofi/config.rasi ~/.config/rofi/config.rasi
 
 # Alacritty
 ln -s -f $PWD/config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+
+# Copy fonts
+cp $PWD/config/fonts/*  ~/.local/share/fonts/ 
 
 
 #XCAPE - Bind rofi to SuperKey
