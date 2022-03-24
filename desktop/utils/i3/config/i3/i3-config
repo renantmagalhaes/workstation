@@ -222,6 +222,9 @@ focus_follows_mouse no
 bindsym $mod+e exec nautilus
 bindsym Print exec flameshot gui
 
+# Fix mouse with X
+exec_always --no-startup-id xsetroot -cursor_name left_ptr
+
 # Background
 #ln -s picture.png background
 exec_always --no-startup-id feh --bg-scale ~/Pictures/background
