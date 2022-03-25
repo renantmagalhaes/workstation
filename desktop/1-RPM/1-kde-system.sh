@@ -79,7 +79,7 @@ else
 fi
 
 # Disable wayland
-sudo sed -i 's/\#WaylandEnable\=false/WaylandEnable\=false/' /etc/gdm/custom.conf
+#sudo sed -i 's/\#WaylandEnable\=false/WaylandEnable\=false/' /etc/gdm/custom.conf
 
 # Grub2 config - Save last option
 # sudo runuser -l  root -c 'echo "GRUB_DEFAULT=saved" >> /etc/default/grub'
@@ -118,9 +118,6 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 #Utils
 ## Fix snapd
 sudo ln -s /var/lib/snapd/snap /snap
-
-##Isolate Alt-Tab workspaces
-gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # Enable BT FastConnectable
 sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
