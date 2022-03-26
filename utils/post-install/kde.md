@@ -30,7 +30,7 @@
     - Layout mode: Pager
   - Disable Screen Edge (highlight)
 - Task Switcher
-  - Thumbnail Grid
+  - Thumbnail Gridsho
 - Virtual Desktops
   - Add 4 rows
   - Add 4 Desktops
@@ -146,12 +146,10 @@ Meta=org.kde.krunner,/App,,display
 
 ## Import file
 
+### Opensuse
 ```
 /workstation/desktop/utils/kde-config/rtm-kde-shortcurt-scheme.kksrc
 ```
-
-
-
 
 ```
 [org.flameshot.Flameshot.desktop]
