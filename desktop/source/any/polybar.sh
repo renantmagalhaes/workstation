@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # pkg
-sudo dnf install -y polybar mpd wmctrl
+sudo dnf install -y polybar mpd wmctrl playerctl
 
 # MPD config
 sudo systemctl enable mpd
