@@ -2,7 +2,7 @@
 Name=xcape
 GenericName=XCAPE
 Comment=XCAPE script to open rofi
-Exec=/home/rtm/GIT-REPOS/workstation/desktop/source/any/config/rofi/scripts/xcape.sh
+Exec=/home/rtm/GIT-REPOS/workstation/desktop/source/any/config/xcape/xcape.sh
 Terminal=false
 Type=Application
 X-GNOME-Autostart-enabled=true
