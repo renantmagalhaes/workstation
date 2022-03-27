@@ -18,3 +18,6 @@ git clone https://github.com/alols/xcape.git ~/GIT-REPOS/CORE/xcape
 cd ~/GIT-REPOS/CORE/xcape
 make
 sudo make install
+
+# XCAPE syslink to autostart (gnome)
+ln -s -f $PWD/config/rofi/scripts/xcape.desktop ~/.config/autostart/xcape.desktop
