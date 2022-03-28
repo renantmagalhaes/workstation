@@ -51,13 +51,17 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
+#KDE SCROLL
+scroll-up = ~/.config/polybar/scripts/kde-virtual-desktops-polybar/kde-previous-desktop
+scroll-down = ~/.config/polybar/scripts/kde-virtual-desktops-polybar/kde-next-desktop
+
 font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
-modules-left = bspwm i3
-modules-center = mpd
-modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-left = bspwm i3 kde-virtual-desktops mpd
+modules-center =
+modules-right = filesystem xbacklight memory cpu wlan eth battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -77,56 +81,56 @@ tray-padding = 2
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-[bar/secondary]
-; monitor = ${env:MONITOR:HDMI-2}
-monitor = HDMI-A-0
-width = 100%
-height = 27
-;offset-x = 1%
-;offset-y = 1%
-radius = 6.0
-fixed-center = false
+; [bar/secondary]
+; ; monitor = ${env:MONITOR:HDMI-2}
+; monitor = HDMI-A-0
+; width = 100%
+; height = 27
+; ;offset-x = 1%
+; ;offset-y = 1%
+; radius = 6.0
+; fixed-center = false
 
-background = ${colors.background}
-foreground = ${colors.foreground}
+; background = ${colors.background}
+; foreground = ${colors.foreground}
 
-line-size = 3
-line-color = #f00
+; line-size = 3
+; line-color = #f00
 
-border-size = 4
-border-color = #00000000
+; border-size = 4
+; border-color = #00000000
 
-padding-left = 0
-padding-right = 2
+; padding-left = 0
+; padding-right = 2
 
-module-margin-left = 1
-module-margin-right = 2
+; module-margin-left = 1
+; module-margin-right = 2
 
-font-0 = fixed:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
+; font-0 = fixed:pixelsize=10;1
+; font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+; font-2 = siji:pixelsize=10;1
 
-modules-left = bspwm i3
-; modules-center = mpd
-; modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
+; modules-left = bspwm i3
+; ; modules-center = mpd
+; ; modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
 
-tray-position = right
-tray-padding = 2
-;tray-background = #0063ff
+; tray-position = right
+; tray-padding = 2
+; ;tray-background = #0063ff
 
-;wm-restack = bspwm
-;wm-restack = i3
+; ;wm-restack = bspwm
+; ;wm-restack = i3
 
-;override-redirect = true
+; ;override-redirect = true
 
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
+; ;scroll-up = bspwm-desknext
+; ;scroll-down = bspwm-deskprev
 
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
+; ;scroll-up = i3wm-wsnext
+; ;scroll-down = i3wm-wsprev
 
-cursor-click = pointer
-cursor-scroll = ns-resize
+; cursor-click = pointer
+; cursor-scroll = ns-resize
 
 [module/xwindow]
 type = internal/xwindow
@@ -179,6 +183,14 @@ label-empty-padding = 2
 
 ; Separator in between workspaces
 ; label-separator = |
+
+[module/kde-virtual-desktops]
+type = custom/script
+exec = ~/.config/polybar/scripts/kde-virtual-desktops-polybar/kde-virtual-desktops
+scroll-up = ~/.config/polybar/scripts/kde-virtual-desktops-polybar/kde-previous-desktop
+scroll-down = ~/.config/polybar/scripts/kde-virtual-desktops-polybar/kde-next-desktop
+tail = true
+label = %output%
 
 [module/i3]
 type = internal/i3
@@ -271,7 +283,7 @@ label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = net1
+interface = wlp5s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
@@ -293,7 +305,7 @@ ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = virbr0
+interface = wlp5s0
 interval = 3.0
 
 format-connected-underline = #55aa55
@@ -323,60 +335,60 @@ format-underline = #0a6cf5
 
 label = %date% %time%
 
-[module/pulseaudio]
-type = internal/pulseaudio
+; [module/pulseaudio]
+; type = internal/pulseaudio
 
-format-volume = <label-volume> <bar-volume>
-label-volume = VOL %percentage%%
-label-volume-foreground = ${root.foreground}
+; format-volume = <label-volume> <bar-volume>
+; label-volume = VOL %percentage%%
+; label-volume-foreground = ${root.foreground}
 
-label-muted = 🔇 muted
-label-muted-foreground = #666
+; label-muted = 🔇 muted
+; label-muted-foreground = #666
 
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+; bar-volume-width = 10
+; bar-volume-foreground-0 = #55aa55
+; bar-volume-foreground-1 = #55aa55
+; bar-volume-foreground-2 = #55aa55
+; bar-volume-foreground-3 = #55aa55
+; bar-volume-foreground-4 = #55aa55
+; bar-volume-foreground-5 = #f5a70a
+; bar-volume-foreground-6 = #ff5555
+; bar-volume-gradient = false
+; bar-volume-indicator = |
+; bar-volume-indicator-font = 2
+; bar-volume-fill = ─
+; bar-volume-fill-font = 2
+; bar-volume-empty = ─
+; bar-volume-empty-font = 2
+; bar-volume-empty-foreground = ${colors.foreground-alt}
 
-[module/alsa]
-type = internal/alsa
+; [module/alsa]
+; type = internal/alsa
 
-format-volume = <label-volume> <bar-volume>
-label-volume = VOL
-label-volume-foreground = ${root.foreground}
+; format-volume = <label-volume> <bar-volume>
+; label-volume = VOL
+; label-volume-foreground = ${root.foreground}
 
-format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
-label-muted = sound muted
+; format-muted-prefix = " "
+; format-muted-foreground = ${colors.foreground-alt}
+; label-muted = sound muted
 
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+; bar-volume-width = 10
+; bar-volume-foreground-0 = #55aa55
+; bar-volume-foreground-1 = #55aa55
+; bar-volume-foreground-2 = #55aa55
+; bar-volume-foreground-3 = #55aa55
+; bar-volume-foreground-4 = #55aa55
+; bar-volume-foreground-5 = #f5a70a
+; bar-volume-foreground-6 = #ff5555
+; bar-volume-gradient = false
+; bar-volume-indicator = |
+; bar-volume-indicator-font = 2
+; bar-volume-fill = ─
+; bar-volume-fill-font = 2
+; bar-volume-empty = ─
+; bar-volume-empty-font = 2
+; bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/battery]
 type = internal/battery
