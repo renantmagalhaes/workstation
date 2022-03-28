@@ -242,6 +242,9 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # Launch Picom
 exec_always --no-startup-id picom --experimental-backend
 
+# Fix mouse icon
+exec_always --no-startup-id xsetroot -cursor_name left_ptr
+
 ## Refresh rate monitor 1
 # exec_always --no-startup-id xrandr --output DisplayPort-0 --mode 2560x1440 -r 144.00
 
