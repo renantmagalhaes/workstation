@@ -59,8 +59,8 @@ font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
-modules-left = bspwm i3 kde-virtual-desktops mpd
-modules-center =
+modules-left = bspwm i3
+modules-center = mpd
 modules-right = filesystem xbacklight memory cpu wlan eth battery temperature date powermenu
 
 tray-position = right
@@ -184,13 +184,13 @@ label-empty-padding = 2
 ; Separator in between workspaces
 ; label-separator = |
 
-[module/kde-virtual-desktops]
-type = custom/script
-exec = ~/.config/polybar/scripts/kde-virtual-desktops-polybar/kde-virtual-desktops
-scroll-up = ~/.config/polybar/scripts/kde-virtual-desktops-polybar/kde-previous-desktop
-scroll-down = ~/.config/polybar/scripts/kde-virtual-desktops-polybar/kde-next-desktop
-tail = true
-label = %output%
+; [module/kde-virtual-desktops]
+; type = custom/script
+; exec = ~/.config/polybar/scripts/kde-virtual-desktops-polybar/kde-virtual-desktops
+; scroll-up = ~/.config/polybar/scripts/kde-virtual-desktops-polybar/kde-previous-desktop
+; scroll-down = ~/.config/polybar/scripts/kde-virtual-desktops-polybar/kde-next-desktop
+; tail = true
+; label = %output%
 
 [module/i3]
 type = internal/i3
