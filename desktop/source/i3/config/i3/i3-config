@@ -222,7 +222,7 @@ focus_follows_mouse no
 bindsym $mod+e exec nautilus
 bindsym Print exec flameshot gui
 bindsym $mod+s exec gnome-control-center sound
-bindsym $mod+b exec gnome-control-center bluetooth
+bindsym $mod+b exec blueman-manager
 
 # Fix mouse with X
 exec_always --no-startup-id xsetroot -cursor_name left_ptr
