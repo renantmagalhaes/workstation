@@ -12,7 +12,7 @@ while pgrep -x polybar >/dev/null; do sleep 1; done
 
 # Launch bars
 polybar main &
-# polybar secondary &
+polybar secondary &
 
 
 echo "Bars launched..."
