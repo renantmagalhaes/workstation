@@ -221,6 +221,8 @@ focus_follows_mouse no
 # Shortcuts
 bindsym $mod+e exec nautilus
 bindsym Print exec flameshot gui
+bindsym $mod+s exec gnome-control-center sound
+bindsym $mod+b exec gnome-control-center bluetooth
 
 # Fix mouse with X
 exec_always --no-startup-id xsetroot -cursor_name left_ptr
@@ -235,6 +237,7 @@ exec_always --no-startup-id feh --bg-scale ~/Pictures/background
 # bar {
 #         status_command i3status
 # }
+
 
 # Launch polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
