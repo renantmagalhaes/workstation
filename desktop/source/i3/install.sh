@@ -16,4 +16,4 @@ ln -s -f $PWD/config/i3/i3-config ~/.config/i3/config
 ln -s -f $PWD/config/picom/picom.conf ~/.config/picom/picom.conf
 
 # Copy fonts
-cp $PWD/config/fonts/*  ~/.local/share/fonts/
+cp -r $PWD/config/fonts/*  ~/.local/share/fonts/
