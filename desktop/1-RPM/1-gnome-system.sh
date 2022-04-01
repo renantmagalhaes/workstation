@@ -189,6 +189,10 @@ sudo ./install-video
 sudo dnf install -y clamav clamtk
 # sudo dnf install -y clamav-daemon
 
+# Flat remix theme
+sudo dnf install flat-remix-gtk2-theme flat-remix-gtk3-theme flat-remix-theme
+
+
 # RTM
 #clear
 echo "#################################"
