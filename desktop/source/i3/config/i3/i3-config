@@ -52,7 +52,7 @@ bindsym $mod+q kill
 bindsym $mod+z exec --no-startup-id ~/GIT-REPOS/workstation/desktop/source/any/config/rofi/scripts/rofi-startup.sh
 ## Set rofi to run with super key
 # exec_always --no-startup-id $HOME/.config/xcape/xcape.sh
-exec_always --no-startup-id xcape -e 'Super_L=Super_L|x'
+exec_always --no-startup-id xcape -e 'Super_L=Super_L|z'
 
 
 # # change focus
