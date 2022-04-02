@@ -18,3 +18,6 @@ dconf write /org/gnome/desktop/wm/preferences/num-workspaces 4
 
 # Resource Monitor
 #https://extensions.gnome.org/extension/1634/resource-monitor/
+
+# Blur me
+# https://extensions.gnome.org/extension/4236/blur-me/
