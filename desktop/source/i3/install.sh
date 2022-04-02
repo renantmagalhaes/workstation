@@ -27,3 +27,6 @@ DesktopNames=KDE
 Name=Plasma with i3
 Comment=Plasma with i3
 EOF
+
+# startkderc config for Fedora
+sudo sed -i 's/true/false/g' /etc/xdg/startkderc

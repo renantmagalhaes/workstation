@@ -117,6 +117,7 @@ enable-ipc = true
 scroll-down = i3-msg workspace next_on_output
 scroll-up = i3-msg workspace prev_on_output
 
+
 [module/xworkspaces]
 type = internal/xworkspaces
 
