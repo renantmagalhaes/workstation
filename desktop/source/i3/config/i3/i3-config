@@ -43,6 +43,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym Ctrl+Shift+t exec alacritty
+# bindsym Ctrl+Mod1+t exec alacritty
 
 # kill focused window
 bindsym $mod+q kill
@@ -272,6 +273,8 @@ exec_always --no-startup-id xsetroot -cursor_name left_ptr
 for_window [class=".*"] border pixel 2
 gaps inner 5
 gaps outer 5
+gaps horizontal 5
+gaps vertical 5
 
 # # Plasma compatibility improvements
 # for_window [window_role="pop-up"] floating enable
