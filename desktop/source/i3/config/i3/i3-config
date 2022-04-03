@@ -266,7 +266,7 @@ exec_always --no-startup-id picom --experimental-backend
 exec_always --no-startup-id xsetroot -cursor_name left_ptr
 
 ## Refresh rate monitor 1
-# exec_always --no-startup-id xrandr --output DisplayPort-0 --mode 2560x1440 -r 144.00
+exec_always --no-startup-id xrandr --output DisplayPort-0 --mode 2560x1440 -r 144.00
 
 # GAPS Configuration
 # You can also use any non-zero value if you'd like to have a border
