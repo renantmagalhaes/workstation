@@ -50,9 +50,9 @@ separator-foreground = ${colors.disabled}
 
 font-0 = FiraCode Nerd Font;2
 
-modules-left = xworkspaces xwindow
-modules-center = mpdxxx
-modules-right = filesystem pulseaudio memory cpu wlan date
+modules-left = launcher xworkspaces xwindow
+modules-center = date
+modules-right = filesystem pulseaudio memory cpu wlan sysmenu
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -95,11 +95,12 @@ module-margin = 1
 separator = |
 separator-foreground = ${colors.disabled}
 
-font-0 = monospace;2
+font-0 = FiraCode Nerd Font;2
+
 
 modules-left = xworkspaces xwindow
 modules-center =
-modules-right =
+modules-right = sysmenu
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -141,7 +142,7 @@ label-empty-padding = 1
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:60:...%
+label = %title:0:20:...%
 
 [module/filesystem]
 type = internal/fs
@@ -216,8 +217,8 @@ interval = 1
 date = "%Y-%m-%d"
 date-alt = "%Y-%m-%d"
 
-time = %H:%M:%S
-time-alt = %H:%M
+time = "%H:%M:%S"
+time-alt = "%H:%M:%S"
 
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
@@ -310,3 +311,32 @@ bar-progress-width = 45
 bar-progress-indicator = |
 bar-progress-fill = ─
 bar-progress-empty = ─
+
+[module/launcher]
+type = custom/text
+
+content = " "
+content-foreground = ${color.purple}
+
+; "click-(left|middle|right)" will be executed using "/usr/bin/env sh -c $COMMAND"
+click-left = ~/.config/polybar/scripts/launcher/launcher.sh &
+;;click-middle = ~/.config/polybar/forest/scripts/launcher-full
+; click-right = ~/.config/polybar/scripts/style-switch.sh &
+
+; "scroll-(up|down)" will be executed using "/usr/bin/env sh -c $COMMAND"
+;;scroll-up = ~/.config/polybar/forest/scripts/launcher.sh &
+;;scroll-down = ~/.config/polybar/forest/scripts/color-switch.sh &
+
+[module/sysmenu]
+type = custom/text
+
+content = 
+content-foreground = ${color.cyan}
+
+click-left = ~/.config/polybar/scripts/launcher/powermenu.sh &
+
+[module/sep]
+type = custom/text
+content = |
+
+content-foreground = ${color.sep}
