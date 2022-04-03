@@ -25,6 +25,41 @@ secondary = #8ABEB7
 alert = #A54242
 disabled = #707880
 
+[color]
+
+;; Active Colors
+bg = #641B1B1B
+fg = #EAEAEA
+fg-alt = #9C9C9C
+
+trans = #00000000
+white = #FFFFFF
+black = #000000
+
+;; Material Colors
+
+red = #e53935
+pink = #d81b60
+purple = #8e24aa
+deep-purple = #5e35b1
+indigo = #3949ab
+blue = #1e88e5
+light-blue = #039be5
+cyan = #00acc1
+teal = #00897b
+green = #43a047
+light-green = #7cb342
+lime = #c0ca33
+yellow = #fdd835
+amber = #ffb300
+orange = #fb8c00
+deep-orange = #f4511e
+brown = #6d4c41
+grey = #757575
+blue-gray = #546e7a
+
+
+
 [bar/main]
 width = 100%
 height = 18pt
@@ -32,8 +67,8 @@ radius = 6
 
 ; dpi = 96
 
-background = ${colors.background}
-foreground = ${colors.foreground}
+background = ${color.bg}
+foreground = ${color.fg}
 
 line-size = 3pt
 
@@ -45,14 +80,20 @@ padding-right = 1
 
 module-margin = 1
 
-separator = |
+; separator = |
+separator =
 separator-foreground = ${colors.foreground}
 
-font-0 = FiraCode Nerd Font;2
+font-0 = "Droid Sans:size=10:weight=bold;3"
+font-1 = "Iosevka Nerd Font:size=12;3"
 
-modules-left = launcher xworkspaces xwindow
+; modules-left = launcher xworkspaces xwindow
+; modules-center = date
+; modules-right = filesystem pulseaudio memory cpu wlan sysmenu
+
+modules-left =  xworkspaces xwindow
 modules-center = date
-modules-right = filesystem pulseaudio memory cpu wlan sysmenu
+modules-right = pulseaudio network sysmenu
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -77,6 +118,7 @@ radius = 6
 
 monitor = HDMI-A-0
 
+
 ; dpi = 96
 
 background = ${colors.background}
@@ -95,7 +137,8 @@ module-margin = 1
 separator = |
 separator-foreground = ${colors.disabled}
 
-font-0 = FiraCode Nerd Font;2
+font-0 = "Droid Sans:size=10:weight=bold;3"
+font-1 = "Iosevka Nerd Font:size=12;3"
 
 
 modules-left = xworkspaces xwindow
@@ -117,6 +160,40 @@ enable-ipc = true
 
 scroll-down = i3-msg workspace next_on_output
 scroll-up = i3-msg workspace prev_on_output
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = 
+label-focused-background = ${colors.background-alt}
+##label-focused-underline= #f00
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = 
+label-unfocused-padding = 2
+##label-unfocused-underline= #fff
+
+
+
+; urgent = Workspace with urgency hint set
+label-urgent = 
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+; Separator in between workspaces
+; label-separator = |
 
 
 [module/xworkspaces]
@@ -200,31 +277,96 @@ format-connected = <label-connected>
 format-disconnected = <label-disconnected>
 label-disconnected = %{F#F0C674}%ifname%%{F#707880} disconnected
 
-[module/wlan]
-inherit = network-base
-interface-type = wireless
-label-connected = %{F#5d42f5}%ifname%%{F-} %essid%
+[module/network]
+type = internal/network
 
-[module/eth]
-inherit = network-base
-interface-type = wired
-label-connected = %{F#F0C674}%ifname%%{F-} %local_ip%
+interface = wlp5s0
+interval = 1.0
+
+;ping-interval = 3
+;;udspeed-minwidth = 5
+accumulate-stats = true
+unknown-as-up = true
+
+; Available tags:
+;   <label-connected> (default)
+;   <ramp-signal>
+format-connected = <label-connected>
+
+; Available tags:
+;   <label-disconnected> (default)
+format-disconnected = <label-disconnected>
+
+; Available tags:
+;   <label-connected> (default)
+;   <label-packetloss>
+;   <animation-packetloss>
+;;format-packetloss = <animation-packetloss> <label-connected>
+
+; Available tokens:
+;   %ifname%    [wireless+wired]
+;   %local_ip%  [wireless+wired]
+;   %local_ip6% [wireless+wired]
+;   %essid%     [wireless]
+;   %signal%    [wireless]
+;   %upspeed%   [wireless+wired]
+;   %downspeed% [wireless+wired]
+;   %linkspeed% [wired]
+; Default: %ifname% %local_ip%
+label-connected = "%{A1:networkmanager_dmenu &:}直%{A}"
+
+; Available tokens:
+;   %ifname%    [wireless+wired]
+; Default: (none)
+label-disconnected = "%{A1:networkmanager_dmenu &:}睊%{A}"
+label-disconnected-foreground = ${color.fg-alt}
+
+; Available tokens:
+;   %ifname%    [wireless+wired]
+;   %local_ip%  [wireless+wired]
+;   %local_ip6% [wireless+wired]
+;   %essid%     [wireless]
+;   %signal%    [wireless]
+;   %upspeed%   [wireless+wired]
+;   %downspeed% [wireless+wired]
+;   %linkspeed% [wired]
+; Default: (none)
+;label-packetloss = %essid%
+;label-packetloss-foreground = #eefafafa
+
+ramp-signal-0 = 直
+ramp-signal-1 = 直
+ramp-signal-2 = 直
+ramp-signal-3 = 直
+ramp-signal-4 = 直
+
 
 [module/date]
 type = internal/date
-interval = 1
 
-date = "%a %d %b"
-date-alt = "%Y-%m-%d"
+interval = 1.0
 
-time = "%H:%M"
-time-alt = "%H:%M:%S"
+time = "%a %b %d    %H:%M"
+;time-alt = "%Y-%m-%d %H:%M:%S"
 
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-; format-underline = #0a6cf5
+format = <label>
+label = %time%
 
-label = %date% %time%
+; [module/date]
+; type = internal/date
+; interval = 1
+
+; date = "%a %d %b"
+; date-alt = "%Y-%m-%d"
+
+; time = "%H:%M"
+; time-alt = "%H:%M:%S"
+
+; format-prefix = " "
+; format-prefix-foreground = ${colors.foreground-alt}
+; ; format-underline = #0a6cf5
+
+; label = %date% %time%
 
 [settings]
 screenchange-reload = true
@@ -346,3 +488,68 @@ type = custom/text
 content = " "
 
 content-foreground = ${color.sep}
+
+[module/battery]
+type = internal/battery
+
+full-at = 99
+
+; $ ls -1 /sys/class/power_supply/
+battery = BAT1
+adapter = ACAD
+
+poll-interval = 2
+time-format = %H:%M
+
+; Available tags:
+;   <label-charging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-charging>
+format-charging = <animation-charging>
+
+; Available tags:
+;   <label-discharging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-discharging>
+format-discharging = <ramp-capacity>
+
+; Available tags:
+;   <label-full> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;format-full = <ramp-capacity> <label-full>
+
+; Available tokens:
+;   %percentage% (default)
+;   %time%
+;   %consumption% (shows current charge rate in watts)
+label-charging = %percentage%%
+
+; Available tokens:
+;   %percentage% (default)
+;   %time%
+;   %consumption% (shows current discharge rate in watts)
+label-discharging = %percentage%%
+
+; Available tokens:
+;   %percentage% (default)
+;label-full = Fully Charged
+label-full = 
+label-full-foreground = ${color.green}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+
+; Framerate in milliseconds
+animation-charging-framerate = 750
