@@ -245,6 +245,9 @@ for_window [class="*steam*"] floating enable
 # Fix mouse with X
 exec_always --no-startup-id xsetroot -cursor_name left_ptr
 
+# Numlock activated
+exec_always --no-startup-id xdotool key --clearmodifiers Num_Lock
+
 # Background
 #ln -s picture.png background
 exec_always --no-startup-id feh --bg-scale ~/Pictures/background
