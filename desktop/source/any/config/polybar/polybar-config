@@ -46,9 +46,9 @@ padding-right = 1
 module-margin = 1
 
 separator = |
-separator-foreground = ${colors.disabled}
+separator-foreground = ${colors.foreground}
 
-font-0 = FiraCode Nerd Font=10;2
+font-0 = FiraCode Nerd Font;2
 
 modules-left = launcher xworkspaces xwindow
 modules-center = date
@@ -95,7 +95,7 @@ module-margin = 1
 separator = |
 separator-foreground = ${colors.disabled}
 
-font-0 = FiraCode Nerd Font=10;2
+font-0 = FiraCode Nerd Font;2
 
 
 modules-left = xworkspaces xwindow
@@ -214,15 +214,15 @@ label-connected = %{F#F0C674}%ifname%%{F-} %local_ip%
 type = internal/date
 interval = 1
 
-date = "%Y-%m-%d"
+date = "%a %d %b"
 date-alt = "%Y-%m-%d"
 
-time = "%H:%M:%S"
+time = "%H:%M"
 time-alt = "%H:%M:%S"
 
-format-prefix = 
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
+; format-underline = #0a6cf5
 
 label = %date% %time%
 
@@ -338,5 +338,11 @@ click-left = ~/.config/polybar/scripts/launcher/powermenu.sh &
 [module/sep]
 type = custom/text
 content = |
+
+content-foreground = ${color.sep}
+
+[module/space]
+type = custom/text
+content = " "
 
 content-foreground = ${color.sep}
