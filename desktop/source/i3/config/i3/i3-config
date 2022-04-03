@@ -223,7 +223,8 @@ exec_always guake
 exec_always flameshot
 
 # Color settings
-client.focused #6272a4 #6272a4 #6272a4 #6272a4
+# client.focused #6272a4 #6272a4 #6272a4 #6272a4
+client.focused #9EFF7C #9EFF7C #9EFF7C #9EFF7C
 # client.focused_inactive #2C2C2C #2C2C2C #ffffff #2C2C2C
 # client.unfocused #2C2C2C #2C2C2C #ffffff #2C2C2C
 # client.urgent #00C1FF #00C1FF #000088 #00C1FF
@@ -236,7 +237,7 @@ bindsym $mod+e exec nautilus
 bindsym Print exec flameshot gui
 bindsym $mod+s exec gnome-control-center sound
 bindsym $mod+b exec blueman-manager
-
+bindsym $mod+n exec gnome-control-center wifi
 # Steam config
 # for_window [class="(?i)*steam*"] floating enable
 for_window [class="*steam*"] floating enable
