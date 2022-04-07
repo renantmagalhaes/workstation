@@ -37,6 +37,7 @@ just-perfection-desktop@just-perfection
 ~/.themes/Graphite-dark/gnome-shell/gnome-shell.css
 
 ```
+/* Top Bar */
 #panel {
   background-color: black;
   font-weight: bold;
