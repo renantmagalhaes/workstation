@@ -34,6 +34,54 @@ just-perfection-desktop@just-perfection
 
 ## Theme edit
 
+### Fluent-dark
+~/.themes/Fluent-dark/gnome-shell/gnome-shell.css
+
+```
+/* Top Bar */
+#panel {
+  font-weight: bold;
+  font-size: 11pt;
+  font-feature-settings: "tnum";
+  transition-duration: 250ms;
+  background-color: #202020;
+  border-radius: 6px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 12px;
+  margin-right: 12px;
+  height: 38px;
+}
+
+#panel #panelLeft, #panel #panelCenter {
+  spacing: 0;
+}
+
+#panel .panel-corner {
+  -panel-corner-radius: 0;
+  -panel-corner-background-color: #202020;
+  -panel-corner-border-width: 0;
+  -panel-corner-border-color: transparent;
+  -panel-corner-opacity: 0;
+  transition-duration: 250ms;
+}
+
+#panel .panel-button {
+  -natural-hpadding: 8px;
+  -minimum-hpadding: 4px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.945)
+  transition-duration: 150ms;
+  text-shadow: none;
+  border: none;
+  border-radius: 0;
+}
+```
+
+
+
+### Graphite-dark
+
 ~/.themes/Graphite-dark/gnome-shell/gnome-shell.css
 
 ```
