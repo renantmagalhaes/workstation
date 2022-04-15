@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install dependencies
-sudo dnf update
+sudo dnf update -y
 sudo dnf install -y bspwm sxhkd rofi polybar feh lxappearance qt5-qtconfiguration picom blueman playerctl mpd alacritty
 
 # Create folders
@@ -20,28 +20,28 @@ chmod +x ~/.config/bspwm/bspwmrc
 ln -s -f $PWD/config/sxhkdrc ~/.config/sxhkd/sxhkdrc
 chmod +x ~/.config/sxhkd/sxhkdrc
 
-# Polybar config
-ln -s -f $PWD/config/polybar/polybar-config ~/.config/polybar/config
-ln -s -f $PWD/config/polybar/launch.sh ~/.config/polybar/launch.sh
+# # Polybar config
+# ln -s -f $PWD/config/polybar/polybar-config ~/.config/polybar/config
+# ln -s -f $PWD/config/polybar/launch.sh ~/.config/polybar/launch.sh
 
-# Picom config
-ln -s -f $PWD/config/picom/picom.conf ~/.config/picom/picom.conf
+# # Picom config
+# ln -s -f $PWD/config/picom/picom.conf ~/.config/picom/picom.conf
 
-# Rofi config
-git clone https://github.com/lr-tech/rofi-themes-collection.git ~/GIT-REPOS/CORE/rofi-themes-collection
-cp -r ~/GIT-REPOS/CORE/rofi-themes-collection/themes/* ~/.local/share/rofi/themes/
-ln -s -f $PWD/config/rofi/config.rasi ~/.config/rofi/config.rasi
+# # Rofi config
+# git clone https://github.com/lr-tech/rofi-themes-collection.git ~/GIT-REPOS/CORE/rofi-themes-collection
+# cp -r ~/GIT-REPOS/CORE/rofi-themes-collection/themes/* ~/.local/share/rofi/themes/
+# ln -s -f $PWD/config/rofi/config.rasi ~/.config/rofi/config.rasi
 
-# Alacritty
-ln -s -f $PWD/config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+# # Alacritty
+# ln -s -f $PWD/config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
 
 
-#XCAPE - Bind rofi to SuperKey
-sudo dnf install -y git gcc make pkgconfig libX11-devel libXtst-devel libXi-devel
-git clone https://github.com/alols/xcape.git ~/GIT-REPOS/CORE/xcape 
-cd ~/GIT-REPOS/CORE/xcape
-make
-sudo make install
+# #XCAPE - Bind rofi to SuperKey
+# sudo dnf install -y git gcc make pkgconfig libX11-devel libXtst-devel libXi-devel
+# git clone https://github.com/alols/xcape.git ~/GIT-REPOS/CORE/xcape 
+# cd ~/GIT-REPOS/CORE/xcape
+# make
+# sudo make install
 
 # # slim and slimlock
 # sudo apt install -y slim libpam0g-dev libxrandr-dev libfreetype6-dev libimlib2-dev libxft-dev

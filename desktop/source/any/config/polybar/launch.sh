@@ -14,6 +14,6 @@ polybar secondary &
 
 echo "Bars launched..."
 
-# if in kde, this will display tray icons
-pidof xembedsniproxy |xargs kill -9
+# # if in kde, this will display tray icons
+# pidof xembedsniproxy |xargs kill -9
 
