@@ -22,7 +22,7 @@ ln -s -f $PWD/config/dunst ~/.config/dunst
 
 # Nitrogen config
 rm -rf ~/.config/nitrogen
-ln -s -f $PWD/config/nitrogen ~/.config/nitrogen
+cp -r $PWD/config/nitrogen ~/.config/
 
 # Copy fonts
 cp -r $PWD/config/fonts/*  ~/.local/share/fonts/
