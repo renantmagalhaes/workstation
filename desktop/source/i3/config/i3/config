@@ -31,9 +31,13 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
+# set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+# # volume
+# bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
+# bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
+
 # bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 # bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
@@ -203,8 +207,8 @@ bindsym $mod+Control+Left workspace prev
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# exit-menu
+bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -325,31 +329,4 @@ exec_always --no-startup-id xrandr --output DisplayPort-0 --mode 2560x1440 -r 14
 for_window [class=".*"] border pixel 1
 gaps inner 5
 gaps outer 5
-# gaps horizontal 5
-# gaps vertical 5
-
-
-# # Plasma compatibility improvements
-# for_window [window_role="pop-up"] floating enable
-# for_window [window_role="task_dialog"] floating enable
-
-# for_window [class="yakuake"] floating enable
-# for_window [class="systemsettings"] floating enable
-# for_window [class="plasmashell"] floating enable;
-# for_window [class="Plasma"] floating enable; border none
-# for_window [title="plasma-desktop"] floating enable; border none
-# for_window [title="win7"] floating enable; border none
-# for_window [class="krunner"] floating enable; border none
-# for_window [class="Kmix"] floating enable; border none
-# for_window [class="Klipper"] floating enable; border none
-# for_window [class="Plasmoidviewer"] floating enable; border none
-# for_window [class="(?i)*nextcloud*"] floating disable
-# for_window [class="plasmashell" window_type="notification"] border none, move right 700px, move down 450pxx
-# no_focus [class="plasmashell" window_type="notification"]
-
-# # Killing the existing window that covers everything
-# for_window [title="Desktop — Plasma"] kill; floating enable; border none
-
-# using plasma's logout screen instead of i3's
-# bindsym $mod+Shift+e exec --no-startup-id qdbus-qt5 org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
 
