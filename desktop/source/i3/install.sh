@@ -3,17 +3,26 @@
 # Packages
 sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 
-sudo dnf install -y i3-gaps feh lxappearance qt5-qtconfiguration picom playerctl blueman xsetroot
+sudo dnf install -y i3-gaps feh lxappearance qt5-qtconfiguration picom playerctl blueman xsetroot dunst nitrogen scrot
 sudo pip3 install pywal
 
 # Create folders
 mkdir -p ~/.config/i3 ~/.config/picom/ ~/.local/share/fonts
 
 # I3 config
-ln -s -f $PWD/config/i3/i3-config ~/.config/i3/config.ini
+rm -rf ~/.config/i3
+ln -s -f $PWD/config/i3 ~/.config/i3
 
 # Picom config
 ln -s -f $PWD/config/picom/picom.conf ~/.config/picom/picom.conf
+
+# Dunst config
+rm -rf ~/.config/dunst
+ln -s -f $PWD/config/dunst ~/.config/dunst
+
+# Nitrogen config
+rm -rf ~/.config/nitrogen
+ln -s -f $PWD/config/nitrogen ~/.config/nitrogen
 
 # Copy fonts
 cp -r $PWD/config/fonts/*  ~/.local/share/fonts/
