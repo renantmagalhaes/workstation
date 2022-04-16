@@ -1,2 +1,7 @@
 .vscode/settings.json
+
+# Nitrogen
+desktop/source/i3/config/nitrogen/
+desktop/source/i3/config/nitrogen/*
 desktop/source/i3/config/nitrogen/bg-saved.cfg
+desktop/source/i3/config/nitrogen/nitrogen.cfg
