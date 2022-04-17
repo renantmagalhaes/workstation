@@ -3,7 +3,7 @@
 # Packages
 sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 
-sudo dnf install -y i3-gaps feh lxappearance qt5-qtconfiguration picom playerctl blueman xsetroot dunst nitrogen scrot xdotool
+sudo dnf install -y i3-gaps feh lxappearance qt5-qtconfiguration picom playerctl blueman xsetroot dunst nitrogen scrot xdotool network-manager-applet lm_sensors
 sudo pip3 install pywal
 
 # Create folders
