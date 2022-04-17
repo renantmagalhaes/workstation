@@ -264,12 +264,13 @@ set $grey		#b0b5bd
 set $mediumgrey		#8b8b8b
 set $yellowbrown	#e1b700
 set $dracula            #6272a4
+set $lime               #04FF7E
 
 # define colors for windows:
 #class		        	border		bground		text		indicator	child_border
-client.focused		        $dracula	$dracula	$dracula	$dracula	$dracula
-# client.unfocused	        $grey   	$grey   	$grey		$grey		$darkgrey
-# client.focused_inactive	        $$grey   	$grey   	$grey		$grey		$back
+client.focused		        $lime	        $lime	        $lime	        $lime	        $lime
+client.unfocused	        $grey   	$grey   	$grey		$grey		$grey
+client.focused_inactive	        $black   	$black   	$black		$black		$black
 client.urgent		        $urgentred	$urgentred	$urgentred	$urgentred	$urgentred
 
 
