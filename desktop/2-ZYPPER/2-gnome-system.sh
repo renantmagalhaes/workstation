@@ -64,8 +64,8 @@ sudo zypper refresh && sudo zypper update
 # Install OPI
 sudo zypper install -y opi
 
-# Install the packages from fedora repo
-sudo zypper install -y zsh vlc clementine breeze5-cursors vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring timeshift chrome-gnome-shell virtualbox droidcam android-tools telnet openssh materia-gtk-theme xournal neovim
+# Install the packages from suse repo
+sudo zypper install -y zsh vlc clementine breeze5-cursors vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring timeshift chrome-gnome-shell virtualbox droidcam android-tools telnet openssh materia-gtk-theme xournal neovim alacritty
 
 # virtualbox users
 sudo usermod -aG vboxusers $USER
@@ -96,6 +96,8 @@ sudo systemctl enable --now snapd
 sudo systemctl enable --now snapd.apparmor
 ## Fix snapd
 sudo ln -s /var/lib/snapd/snap /snap
+
+
 
 #Utils
 # Install pip packages and python path fix
@@ -155,6 +157,9 @@ curl https://sh.rustup.rs -sSf | sh
 # Install ClamAV
 sudo zypper install -y clamav clamtk
 # sudo dnf install -y clamav-daemon
+
+##Isolate Alt-Tab workspaces
+gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # RTM
 #clear
