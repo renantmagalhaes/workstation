@@ -1,8 +1,8 @@
 # Simply workspace
 #https://github.com/andyrichardson/simply-workspaces
-git clone https://github.com/andyrichardson/simply-workspaces.git ~/.local/share/gnome-shell/extensions/simply.workspaces@andyrichardson.dev
-dconf write /org/gnome/shell/overrides/dynamic-workspaces false
-dconf write /org/gnome/desktop/wm/preferences/num-workspaces 4
+# git clone https://github.com/andyrichardson/simply-workspaces.git ~/.local/share/gnome-shell/extensions/simply.workspaces@andyrichardson.dev
+# dconf write /org/gnome/shell/overrides/dynamic-workspaces false
+# dconf write /org/gnome/desktop/wm/preferences/num-workspaces 4
 
 # Mutter Rounded (plus blur effect)
 # https://github.com/yilozt/mutter-rounded
@@ -21,3 +21,15 @@ dconf write /org/gnome/desktop/wm/preferences/num-workspaces 4
 
 # Blur me
 # https://extensions.gnome.org/extension/4236/blur-me/
+
+# Rounded Corners
+# https://extensions.gnome.org/extension/1514/rounded-corners/
+
+# gTile
+# https://extensions.gnome.org/extension/28/gtile/
+
+# Pop Launcher Super-Key 
+# https://extensions.gnome.org/extension/4797/pop-launcher-super-key/
+
+# Tiling Assistant
+# https://extensions.gnome.org/extension/3733/tiling-assistant/
