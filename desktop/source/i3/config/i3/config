@@ -67,7 +67,7 @@ floating_modifier $mod
 bindsym $mod+l exec ~/.config/i3/scripts/blur-lock
 
 # start a terminal
-bindsym Ctrl+Shift+t exec alacritty
+bindsym Ctrl+Alt+t exec alacritty
 # bindsym Ctrl+Mod1+t exec alacritty
 
 # kill focused window
