@@ -67,7 +67,7 @@ floating_modifier $mod
 bindsym $mod+l exec ~/.config/i3/scripts/blur-lock
 
 # start a terminal
-bindsym Ctrl+Alt+t exec alacritty
+bindsym Ctrl+Shift+t exec alacritty
 # bindsym Ctrl+Mod1+t exec alacritty
 
 # kill focused window
@@ -127,7 +127,7 @@ bindsym $mod+Shift+space floating toggle
 # bindsym $mod+d focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -281,7 +281,7 @@ focus_follows_mouse no
 # Shortcuts
 bindsym $mod+e exec nautilus
 bindsym Print exec flameshot gui
-bindsym $mod+s exec gnome-control-center sound
+bindsym $mod+a exec gnome-control-center sound
 bindsym $mod+b exec blueman-manager
 bindsym $mod+n exec gnome-control-center wifi
 # Steam config
