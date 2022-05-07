@@ -7,8 +7,10 @@ super + Return
 	alacritty
 
 # program launcher
-super + x
-	$HOME/GIT-REPOS/workstation/desktop/utils/bspwm/config/rofi/scripts/rofi.sh
+super + Pause
+	$HOME/GIT-REPOS/workstation/desktop/source/any/config/rofi/scripts/rofi-startup.sh
+super + z
+	$HOME/GIT-REPOS/workstation/desktop/source/any/config/rofi/scripts/rofi-startup.sh
 
 # make sxhkd reload its configuration files:
 super + Escape
