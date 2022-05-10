@@ -2,7 +2,13 @@
 
 # Install dependencies
 sudo dnf update -y
-sudo dnf install -y bspwm sxhkd rofi polybar feh lxappearance qt5-qtconfiguration picom blueman playerctl mpd alacritty
+
+# Packages
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+
+sudo dnf install -y bspwm sxhkd feh lxappearance qt5-qtconfiguration picom playerctl blueman xsetroot dunst nitrogen scrot xdotool network-manager-applet lm_sensors playerctl
+sudo pip3 install pywal
+
 
 # Create folders
 mkdir -p ~/.config/polybar ~/.config/i3 ~/.config/picom ~/.config/rofi ~/.local/share/rofi/themes/ ~/.config/alacritty/
@@ -10,42 +16,22 @@ mkdir -p ~/GIT-REPOS/CORE
 mkdir -p ~/.config/bspwm/
 mkdir -p ~/.config/sxhkd/
 
-# MPD config
-sudo systemctl enable mpd
-sudo systemctl start mpd
-
 ## BSPWM
 ln -s -f $PWD/config/bspwmrc ~/.config/bspwm/bspwmrc
 chmod +x ~/.config/bspwm/bspwmrc
 ln -s -f $PWD/config/sxhkdrc ~/.config/sxhkd/sxhkdrc
 chmod +x ~/.config/sxhkd/sxhkdrc
 
-# # Polybar config
-# ln -s -f $PWD/config/polybar/polybar-config ~/.config/polybar/config
-# ln -s -f $PWD/config/polybar/launch.sh ~/.config/polybar/launch.sh
+# Picom config
+ln -s -f $PWD/config/picom/picom.conf ~/.config/picom/picom.conf
 
-# # Picom config
-# ln -s -f $PWD/config/picom/picom.conf ~/.config/picom/picom.conf
+# Dunst config
+rm -rf ~/.config/dunst
+ln -s -f $PWD/config/dunst ~/.config/dunst
 
-# # Rofi config
-# git clone https://github.com/lr-tech/rofi-themes-collection.git ~/GIT-REPOS/CORE/rofi-themes-collection
-# cp -r ~/GIT-REPOS/CORE/rofi-themes-collection/themes/* ~/.local/share/rofi/themes/
-# ln -s -f $PWD/config/rofi/config.rasi ~/.config/rofi/config.rasi
+# Nitrogen config
+rm -rf ~/.config/nitrogen
+cp -r $PWD/config/nitrogen ~/.config/
 
-# # Alacritty
-# ln -s -f $PWD/config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
-
-
-# #XCAPE - Bind rofi to SuperKey
-# sudo dnf install -y git gcc make pkgconfig libX11-devel libXtst-devel libXi-devel
-# git clone https://github.com/alols/xcape.git ~/GIT-REPOS/CORE/xcape 
-# cd ~/GIT-REPOS/CORE/xcape
-# make
-# sudo make install
-
-# # slim and slimlock
-# sudo apt install -y slim libpam0g-dev libxrandr-dev libfreetype6-dev libimlib2-dev libxft-dev
-# sudo dpkg-reconfigure gdm3 #select slim
-# cd  ~/GIT-REPOS/CORE/blue-sky
-# sudo cp slim.conf /etc && sudo cp slimlock.conf /etc
-# sudo cp default /usr/share/slim/themes
+# Copy fonts
+# cp -r $PWD/config/fonts/*  ~/.local/share/fonts/

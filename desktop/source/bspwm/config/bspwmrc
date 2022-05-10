@@ -5,10 +5,10 @@
 $HOME/.config/polybar/launch.sh &
 picom --experimental-backend &
 pgrep -x sxhkd > /dev/null || sxhkd &
-$HOME/GIT-REPOS/workstation/desktop/utils/bspwm/config/xcape/xcape.sh
 guake &
 feh --bg-scale ~/Pictures/background &
 xsetroot -cursor_name left_ptr & # Fix mouse with X
+$HOME/GIT-REPOS/workstation/desktop/source/any/config/xcape/xcape.sh &
 
 # Monitor setup
 bspc monitor DisplayPort-0 -d 1 2 3 4 5
@@ -27,4 +27,4 @@ bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a guake state=floating
-bspc rule -a Guake state=floatingz
+bspc rule -a Guake state=floating
