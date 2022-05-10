@@ -76,6 +76,18 @@ export ENHANCD_FILTER
 # crontab editor
 export VISUAL=vim
 
+# History 
+HISTFILE="$HOME/.zsh_history"
+## Number of events loaded into memory
+HISTSIZE=1000000
+## Number of events stored in the zsh history file
+SAVEHIST=1000000
+## Do not save duplicate commands to history
+setopt HIST_IGNORE_ALL_DUPS
+## Do not find duplicate command when searching
+setopt HIST_FIND_NO_DUPS
+
+
 # check cmd function
 check_cmd() {
     command -v "$1" >/dev/null 2>&1
