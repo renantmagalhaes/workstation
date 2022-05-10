@@ -60,6 +60,7 @@ source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
+
 #Python virtualenv and Virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
@@ -67,6 +68,9 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 #source
 source $ZSH/oh-my-zsh.sh
+
+# fzf search 
+source /usr/share/fzf/shell/key-bindings.zsh
 
 # enhancd
 source $ZSH/custom/plugins/enhancd/init.sh
@@ -246,3 +250,5 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # P10K External config file
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
