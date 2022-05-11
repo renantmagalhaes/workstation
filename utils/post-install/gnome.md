@@ -87,14 +87,21 @@ just-perfection-desktop@just-perfection
 ```
 /* Top Bar */
 #panel {
-  background-color: black;
+  /* background-color: black; */
+  background-color: rgba(0,0,0,0.7);
   font-weight: bold;
   height: 32px;
   color: rgba(255, 255, 255, 0.7);
   font-feature-settings: "tnum";
   transition-duration: 250ms;
   font-size: 11pt;
+  border-radius: 6px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 12px;
+  margin-right: 12px;
 }
+
 
 #panel .panel-corner {
   -panel-corner-radius: 0;
