@@ -6,4 +6,4 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 
 # Flathub Packages for gnome only
 ## Slack
-sudo flatpak install flathub org.gnome.Extensions
+sudo flatpak install -y flathub org.gnome.Extensions
