@@ -99,7 +99,7 @@ sudo dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-non
 sudo dnf groupupdate -y core
 
 # Install the packages from fedora repo
-sudo dnf install -y alacritty zsh vlc clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl vpnc x2goclient git idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip snapd gtk-murrine-engine gtk2-engines krita audacity filezilla tree remmina nload arc-theme pwgen sysstat alacarte fzf ffmpeg neofetch util-linux-user grub-customizer xclip flameshot unrar bat gawk net-tools coreutils ncdu whois pdfshuffler piper lsd openssl gnome-keyring kvantum timeshift neovim
+sudo dnf install -y alacritty zsh vlc clementine breeze-cursor-theme vim nmap blender gconf-editor brasero gparted wireshark tmux curl vpnc x2goclient git idle3 numix-gtk-theme numix-icon-theme htop meld openvpn guake python3-pip snapd gtk-murrine-engine gtk2-engines krita audacity filezilla tree remmina nload arc-theme pwgen sysstat alacarte fzf ffmpeg neofetch util-linux-user grub-customizer xclip flameshot unrar bat gawk net-tools coreutils ncdu whois pdfshuffler piper lsd openssl gnome-keyring kvantum timeshift neovim adb fastboot materia-gtk-theme xournal neovim scrot i3-gaps
 
 # kde workspace
 sudo dnf groupinstall -y "KDE Plasma Workspaces"
@@ -165,6 +165,13 @@ bash desktop/source/kde/themes.sh
 # Colorls
 sudo dnf install -y ruby ruby-devel
 sudo gem install colorls
+
+# Droidcam
+cd /tmp/
+wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_1.8.0.zip
+unzip droidcam_latest.zip -d droidcam
+cd droidcam && sudo ./install-client
+sudo ./install-video
 
 # Install ClamAV
 sudo dnf install -y clamav clamtk
