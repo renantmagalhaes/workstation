@@ -6,13 +6,19 @@ $HOME/.config/polybar/launch.sh &
 picom --experimental-backend &
 pgrep -x sxhkd > /dev/null || sxhkd &
 guake &
-feh --bg-scale ~/Pictures/background &
+# feh --bg-scale ~/Pictures/background &
 xsetroot -cursor_name left_ptr & # Fix mouse with X
 $HOME/GIT-REPOS/workstation/desktop/source/any/config/xcape/xcape.sh &
+
+# Notifications
+dbus-launch dunst --config ~/.config/dunst/dunstrc &
 
 # Monitor setup
 bspc monitor DisplayPort-0 -d 1 2 3 4 5
 bspc monitor HDMI-A-0 -d 6 7 8 9 10
+
+# Setup resolution
+xrandr --output DisplayPort-0 --mode 2560x1440 -r 144.00 &
 
 bspc config border_width         2
 bspc config window_gap          12
