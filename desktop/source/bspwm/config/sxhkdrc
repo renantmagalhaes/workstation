@@ -3,7 +3,7 @@
 #
 
 # terminal emulator
-super + Return
+ctrl + alt + t
 	alacritty
 
 # program launcher
@@ -27,13 +27,15 @@ super + e
 # Screenshot
 Print
 	flameshot gui
+ctrl + Print
+	gnome-screenshot -i
 
 # quit/restart bspwm
 super + alt + {q,r}
 	bspc {quit,wm -r}
 
 # close and kill
-super + {_,shift + }w
+super + q
 	bspc node -{c,k}
 
 # alternate between the tiled and monocle layout
