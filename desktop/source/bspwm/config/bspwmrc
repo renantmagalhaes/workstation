@@ -7,11 +7,18 @@ picom --experimental-backend &
 pgrep -x sxhkd > /dev/null || sxhkd &
 guake &
 # feh --bg-scale ~/Pictures/background &
+nitrogen --restore &
 xsetroot -cursor_name left_ptr & # Fix mouse with X
 $HOME/GIT-REPOS/workstation/desktop/source/any/config/xcape/xcape.sh &
 
+# # Network
+# nm-applet &
+
+# Enable num lock
+xdotool key --clearmodifiers Num_Lock &
+
 # Notifications
-dbus-launch dunst --config ~/.config/dunst/dunstrc &
+dunst --config ~/.config/dunst/dunstrc &
 
 # Monitor setup
 bspc monitor DisplayPort-0 -d 1 2 3 4 5
@@ -22,6 +29,8 @@ xrandr --output DisplayPort-0 --mode 2560x1440 -r 144.00 &
 
 bspc config border_width         2
 bspc config window_gap          12
+bspc config focused_border_color \#21F689
+
 
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
