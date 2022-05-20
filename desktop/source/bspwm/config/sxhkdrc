@@ -68,12 +68,21 @@ super + g
 #
 
 # set the window state
-super + {t,shift + t,s,f}
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+# super + {t,shift + t,s,f}
+# 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
-# set the node flags
-super + ctrl + {m,x,y,z}
-	bspc node -g {marked,locked,sticky,private}
+super + y
+	bspc node -t floating
+
+super + t
+	bspc node -t tiled
+
+
+
+
+# # set the node flags
+# super + ctrl + {m,x,y,z}
+# 	bspc node -g {marked,locked,sticky,private}
 
 #
 # focus/swap
@@ -95,12 +104,20 @@ super + {_,shift + }c
 super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
 
-super + ctrl + {Left,Right}
-	bspc desktop -f {prev,next}.local
+# super + ctrl + {Left,Right}
+# 	bspc desktop -f {prev,next}.local
+
+super + ctrl + Left
+	mon=`bspc query -D -d focused --names | cut -c1` && bspc desktop --focus $((mon)) && bspc desktop --focus $((mon - 1))$((mon - 1)) && bspc desktop --focus $((mon - 1))
+
+super + ctrl + Right
+	mon=`bspc query -D -d focused --names | cut -c1` && bspc desktop --focus $((mon)) && bspc desktop --focus $((mon + 1))$((mon + 1)) && bspc desktop --focus $((mon + 1))
+
+
 
 # focus desktop / send window to desktop
-super + {_,shift + }{JJJJ
-    bspc {desktop -f,node -d} ^{1-9,10}
+# super + {_,shift + }{JJJJ
+#     bspc {desktop -f,node -d} ^{1-9,10}
 
 # focus the last node/desktop
 super + {grave,Tab}
@@ -112,16 +129,16 @@ super + {o,i}
 	bspc node {older,newer} -f; \
 	bspc wm -h on
 
-# focus or send to the given desktop
-super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
+# # focus or send to the given desktop
+# super + {_,shift + }{1-9,0}
+# 	bspc {desktop -f,node -d} '^{1-9,10}'
 
 #
 # preselect
 #
 
 # preselect the direction
-super + ctrl + {h,j,k,l}
+super + ctrl + {h,j,k,l}HJH
 	bspc node -p {west,south,north,east}
 
 # preselect the ratio
@@ -141,16 +158,19 @@ super + ctrl + shift + space
 #
 
 # expand a window by moving one of its side outward
-super + alt + {h,j,k,l}
+super + alt + {Left,Up,Down,Right}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # contract a window by moving one of its side inward
-super + alt + shift + {h,j,k,l}
+super + alt + shift + {Left,Up,Down,Right}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
+# super + alt + {Right,Up,Down,Left}
+# 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
 # move a floating window
-# super + {Left,Down,Up,Right}
-# 	bspc node -v {-20 0,0 20,0 -20,20 0}
+super + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
 
 # Media keys
 XF86AudioMute
@@ -174,3 +194,16 @@ XF86AudioPrev
 super + alt + Escape
   bspc quit
 
+# Focus sync
+super + 1
+ bspc desktop --focus '1' && bspc desktop --focus '11'
+super + 2
+ bspc desktop --focus '2' && bspc desktop --focus '22'
+super + 3
+ bspc desktop --focus '3' && bspc desktop --focus '33'
+super + 4
+ bspc desktop --focus '4' && bspc desktop --focus '44'
+super + 5
+ bspc desktop --focus '5' && bspc desktop --focus '55'
+
+ 
