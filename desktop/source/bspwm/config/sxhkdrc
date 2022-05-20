@@ -37,6 +37,10 @@ super + b
 super + n
 gnome-control-center wifi
 
+# Lock screen
+super + l
+	$HOME/.config/i3/scripts/blur-lock
+
 
 # quit/restart bspwm
 super + alt + {q,r}
@@ -169,3 +173,4 @@ XF86AudioPrev
 # Logout
 super + alt + Escape
   bspc quit
+
