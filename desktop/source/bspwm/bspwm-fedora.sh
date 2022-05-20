@@ -10,8 +10,8 @@ sudo dnf install -y bspwm sxhkd feh lxappearance qt5-qtconfiguration picom playe
 sudo pip3 install pywal
 
 
-# Create folders
-mkdir -p ~/.config/polybar ~/.config/i3 ~/.config/picom ~/.config/rofi ~/.local/share/rofi/themes/ ~/.config/alacritty/
+# Create folders 
+mkdir -p ~/.config/polybar ~/.config/i3 ~/.config/picom ~/.config/rofi ~/.local/share/rofi/themes/ ~/.config/alacritty/ ~/.config/dunst/
 mkdir -p ~/GIT-REPOS/CORE
 mkdir -p ~/.config/bspwm/
 mkdir -p ~/.config/sxhkd/
@@ -26,8 +26,8 @@ chmod +x ~/.config/sxhkd/sxhkdrc
 ln -s -f $PWD/config/picom/picom.conf ~/.config/picom/picom.conf
 
 # Dunst config
-rm -rf ~/.config/dunst
-ln -s -f $PWD/config/dunst ~/.config/dunst
+rm -rf ~/.config/dunst/dunstrc
+ln -s -f $PWD/config/dunst ~/.config/dunst/dunstrc
 
 # Nitrogen config
 rm -rf ~/.config/nitrogen
