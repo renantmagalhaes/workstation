@@ -27,7 +27,7 @@ ln -s -f $PWD/config/picom/picom.conf ~/.config/picom/picom.conf
 
 # Dunst config
 rm -rf ~/.config/dunst/dunstrc
-ln -s -f $PWD/config/dunst ~/.config/dunst/dunstrc
+ln -s -f $PWD/config/dunst/dunstrc ~/.config/dunst/dunstrc
 
 # Nitrogen config
 rm -rf ~/.config/nitrogen
