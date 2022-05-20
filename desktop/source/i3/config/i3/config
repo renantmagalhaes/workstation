@@ -209,7 +209,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit-menu
-bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu
+bindsym $mod+Shift+e exec ~/.config/i3/scripts/powermenu-i3
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -302,7 +302,7 @@ exec --no-startup-id sleep 2 && nitrogen --restore
 bindsym $mod+d exec ~/.config/i3/scripts/empty_workspace
 
 # Desktop notifications
-exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
+exec --no-startup-id dunst --config ~/.config/dunst/dunstrc
 # alternative if you installed aside with XFCE4:
 # exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
