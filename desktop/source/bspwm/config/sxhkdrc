@@ -101,18 +101,25 @@ super + {_,shift + }c
 	bspc node -f {next,prev}.local.!hidden.window
 
 # focus the next/previous desktop in the current monitor
-super + bracket{left,right}
-	bspc desktop -f {prev,next}.local
+# super + bracket{left,right}
+# 	bspc desktop -f {prev,next}.local
 
 # super + ctrl + {Left,Right}
 # 	bspc desktop -f {prev,next}.local
 
+# Navigate between workspaces
 super + ctrl + Left
 	mon=`bspc query -D -d focused --names | cut -c1` && bspc desktop --focus $((mon)) && bspc desktop --focus $((mon - 1))$((mon - 1)) && bspc desktop --focus $((mon - 1))
 
 super + ctrl + Right
 	mon=`bspc query -D -d focused --names | cut -c1` && bspc desktop --focus $((mon)) && bspc desktop --focus $((mon + 1))$((mon + 1)) && bspc desktop --focus $((mon + 1))
 
+# Move windows between workspaces
+super + ctrl + shift + Right
+	bspc node -d next --follow
+
+super + ctrl + shift + Left
+	bspc node -d prev --follow
 
 
 # focus desktop / send window to desktop
@@ -206,4 +213,8 @@ super + 4
 super + 5
  bspc desktop --focus '5' && bspc desktop --focus '55'
 
- 
+
+
+
+# super + bracket{left,right}
+#     bspc node -d 11 --follow
