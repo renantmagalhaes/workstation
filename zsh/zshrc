@@ -110,7 +110,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     alias folder="dolphin"
     alias pdf="okular"
     else
-    echo "Not able to identify desktop environment"
+    echo ""
     fi
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
     alias update-all="sudo dnf update -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
@@ -130,7 +130,7 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     # alias docker="podman"
     # alias docker-compose="podman-compose"
     else
-    echo "Not able to identify desktop environment"
+    echo ""
     fi
 elif check_cmd zypper; then  # FOR ZYPPER SYSTEMS
     alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
@@ -143,7 +143,7 @@ elif check_cmd zypper; then  # FOR ZYPPER SYSTEMS
     alias pdf="okular"
     # export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.9
     else
-    echo "Not able to identify desktop environment"
+    echo ""
     fi
 elif check_cmd pacman; then  # FOR RPM SYSTEMS
     alias update-all="yay -Syu && sudo pacman -Syu && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
@@ -155,7 +155,7 @@ elif check_cmd pacman; then  # FOR RPM SYSTEMS
     echo "Not able to identify desktop environment"
     fi
 else
-    echo "Not able to identify the system"
+    echo ""
 fi
 
 alias killtmux="pidof tmux |xargs kill -9"
