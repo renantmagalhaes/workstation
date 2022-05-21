@@ -113,6 +113,11 @@ super + ctrl + Left
 super + ctrl + Right
 	mon=`bspc query -D -d focused --names | cut -c1` && bspc desktop --focus $((mon)) && bspc desktop --focus $((mon + 1))$((mon + 1)) && bspc desktop --focus $((mon + 1))
 
+# Send window to next monitor
+super + Return
+    bspc node -m last --follow
+
+
 # Move windows between workspaces
 super + ctrl + shift + Right
 	bspc node -d next --follow
@@ -162,14 +167,11 @@ super + ctrl + shift + space
 #
 # move/resize
 #
-
-# expand a window by moving one of its side outward
-super + alt + {Left,Up,Down,Right}
-	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
-
-# contract a window by moving one of its side inward
-super + alt + shift + {Left,Up,Down,Right}
-	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+# Expand/contract a window by moving one of its side outward/inward
+super + alt + {Left,Down,Up,Right}
+    STEP=20; SELECTION={1,2,3,4}; \
+    bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
+    bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
 
 # super + alt + {Right,Up,Down,Left}
 # 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
