@@ -22,6 +22,9 @@ chmod +x ~/.config/bspwm/bspwmrc
 ln -s -f $PWD/config/sxhkdrc ~/.config/sxhkd/sxhkdrc
 chmod +x ~/.config/sxhkd/sxhkdrc
 
+# scripts
+ln -s -f $PWD/config/scripts ~/.config/bspwm/scripts
+
 # Picom config
 ln -s -f $PWD/config/picom/picom.conf ~/.config/picom/picom.conf
 
