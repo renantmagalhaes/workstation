@@ -30,11 +30,11 @@
     height = 300
 
     # Position the notification in the top right corner
-    origin = bottom-right
-    # origin = top-right
+    # origin = bottom-right
+    origin = top-right
 
     # Offset from the origin
-    offset = 30x40
+    offset = 20x35
     # offset = 30x40
 
     # Scale factor. It is auto-detected if value is 0.
@@ -91,8 +91,10 @@
     frame_width = 1
 
     # Defines color of the frame around the notification window.
-    frame_color = "#7f3fbf"
+    # frame_color = "#7f3fbf"
     # frame_color = "#ffffff"
+    frame_color = "#000000"
+
 
 
     # Define a color for the separator.
@@ -312,8 +314,8 @@
     default_icon = ~/.config/dunst/normal.png
 
 [urgency_normal]
-    # background = "#2c2738"
-    background = "#28143c"
+    background = "#2c2738"
+    # background = "#28143c"
     foreground = "#ffffff"
     timeout = 5
     # Icon for notifications with normal urgency, uncomment to enable
