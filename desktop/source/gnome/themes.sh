@@ -62,6 +62,9 @@ sh -c "~/GIT-REPOS/CORE/Graphite-gtk-theme/install.sh --tweaks black normal riml
 # sh -c "~/GIT-REPOS/CORE/Graphite-gtk-theme/install.sh --tweaks black normal"
 # sh -c "~/GIT-REPOS/CORE/Graphite-gtk-theme/install.sh --tweaks nord"
 
+# Colloid-gtk-theme
+git clone https://github.com/vinceliuice/Colloid-gtk-theme.git ~/GIT-REPOS/CORE/Colloid-gtk-theme
+cd  ~/GIT-REPOS/CORE/Colloid-gtk-theme && sh -c "./install.sh --tweaks --tweaks dracula"
 
 ##############################################
 # ICONS
