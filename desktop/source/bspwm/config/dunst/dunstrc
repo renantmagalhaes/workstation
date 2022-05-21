@@ -91,7 +91,9 @@
     frame_width = 1
 
     # Defines color of the frame around the notification window.
-    frame_color = "#7f3fbf"
+    # frame_color = "#7f3fbf"
+    frame_color = "#ffffff"
+
 
     # Define a color for the separator.
     # possible values are:
@@ -206,7 +208,7 @@
     icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
     ### History ###
 
-    history=
+    # history=ctrl+space
 
     # context=ctrl+space
     # Should a notification popped up from history be sticky or timeout
@@ -301,13 +303,15 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#28143c"
+    background = "#2c2738"
+    # background = "#28143c"
     foreground = "#ffffff"
     timeout = 5
     # Icon for notifications with low urgency, uncomment to enable
     default_icon = ~/.config/dunst/normal.png
 
 [urgency_normal]
+    # background = "#2c2738"
     background = "#28143c"
     foreground = "#ffffff"
     timeout = 5
