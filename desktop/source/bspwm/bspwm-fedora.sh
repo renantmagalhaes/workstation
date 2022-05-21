@@ -29,8 +29,8 @@ ln -s -f $PWD/config/scripts ~/.config/bspwm/scripts
 ln -s -f $PWD/config/picom/picom.conf ~/.config/picom/picom.conf
 
 # Dunst config
-rm -rf ~/.config/dunst/dunstrc
-ln -s -f $PWD/config/dunst/dunstrc ~/.config/dunst/dunstrc
+rm -rf ~/.config/dunst/
+ln -s -f $PWD/config/dunst ~/.config/dunst
 
 # Nitrogen config
 rm -rf ~/.config/nitrogen
