@@ -100,7 +100,7 @@
     separator_color = auto
 
     # Sort messages by urgency.
-    sort = yes
+    sort = no
 
     # Don't remove messages, if the user is idle (no mouse or keyboard input)
     # for longer than idle_threshold seconds.
@@ -111,11 +111,11 @@
 
     ### Text ###
 
-    font = Noto Sans Regular 9
+    font = Hack 9
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
-    line_height = 0
+    line_height = 2
 
     # Possible values are:
     # full: Allow a small subset of html markup in notifications:
@@ -155,7 +155,7 @@
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
-    alignment = left
+    alignment = center
 
     # Vertical alignment of message text and icon.
     # Possible values are "top", "center" and "bottom".
@@ -164,7 +164,7 @@
     # Show age of message if message is older than show_age_threshold
     # seconds.
     # Set to -1 to disable.
-    show_age_threshold = 60
+    show_age_threshold = -1
 
     # Specify where to make an ellipsis in long lines.
     # Possible values are "start", "middle" and "end".
@@ -182,6 +182,10 @@
     # Display indicators for URLs (U) and actions (A).
     show_indicators = yes
 
+    # Split notifications into multiple lines if they don't fit into
+    # geometry.
+    word_wrap = no
+
     ### Icons ###
 
     # Align icons left/right/off
@@ -196,17 +200,16 @@
     max_icon_size = 32
 
     # Paths to default icons.
-    #icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
-    icon_path = /usr/share/icons/Qogir/16/status:/usr/share/icons/Qogir/16/devices/:/usr/share/icons/Qogir/16/apps/:/usr/share/pixmaps/
-
+    # icon_path = /usr/share/icons/Paper/16x16/mimetypes/:/usr/share/icons/Paper/48x48/status/:/usr/share/icons/Paper/16x16/devices/:/usr/share/icons/Paper/48x48/notifications/:/usr/share/icons/Paper/48x48/emblems/:/usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    icon_path = /usr/share/icons/Paper/16x16/mimetypes/:/usr/share/icons/Paper/48x48/status/:/usr/share/icons/Paper/16x16/devices/:/usr/share/icons/Paper/48x48/notifications/:/usr/share/icons/Paper/48x48/emblems/:/usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
     ### History ###
 
     # Should a notification popped up from history be sticky or timeout
     # as if it would normally do.
-    sticky_history = false
+    sticky_history = yes
 
     # Maximum amount of notifications kept in history
-    history_length = 0
+    history_length = 15
 
     ### Misc/Advanced ###
 
@@ -297,22 +300,23 @@
     foreground = "#ffffff"
     timeout = 5
     # Icon for notifications with low urgency, uncomment to enable
-    icon = /usr/share/icons/Arc-X-D/status/16/dialog-information.png
+    #default_icon = /path/to/icon
 
 [urgency_normal]
     background = "#28143c"
     foreground = "#ffffff"
     timeout = 5
     # Icon for notifications with normal urgency, uncomment to enable
-    icon = /usr/share/icons/Arc-X-D/status/16/dialog-question.png
+    #default_icon = /path/to/icon
 
 [urgency_critical]
-    background = "#28143c"
-    foreground = "#ffffff"
-    frame_color = "#ff7f7f"
-    timeout = 120
+    frame_color = "#B7472A"
+    foreground = "#B7472A"
+    background = "#191311"
+    #background = "#2B313C"
+    timeout = 8
     # Icon for notifications with critical urgency, uncomment to enable
-    icon = /usr/share/icons/Arc-X-D/status/16/dialog-warning.png
+    #default_icon = /path/to/icon
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
@@ -429,9 +433,15 @@
 #    appname = Pidgin
 #    summary = *twitter.com*
 #    urgency = normal
+[telegram]
+   appname = web.telegram.org
+   summary = *web.telegram.org*
+   background = "#454545"
+   foreground = "#ffffff"
+#    urgency = normal
 #
-[stack-volumes]
-    appname = "some_volume_notifiers"
-    set_stack_tag = "volume"
+#[stack-volumes]
+#    appname = "some_volume_notifiers"
+#    set_stack_tag = "volume"
 #
 # vim: ft=cfg
