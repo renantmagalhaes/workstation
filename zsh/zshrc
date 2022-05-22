@@ -100,6 +100,7 @@ check_cmd() {
 gnome_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "GNOME" | awk '{print tolower($0)}'`
 kde_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "KDE" | awk '{print tolower($0)}'`
 i3_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "I3" | awk '{print tolower($0)}'`
+bspwm_check=`env |grep DESKTOP_SESSION |grep -ioh "bspwm" | awk '{print tolower($0)}'`
 
 if check_cmd apt-get; then # FOR DEB SYSTEMS
     alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
@@ -125,6 +126,11 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     # alias docker="podman"
     # alias docker-compose="podman-compose"
     elif [[ $i3_check == "i3" ]]; then
+    alias folder="nautilus"
+    alias pdf="evince"
+    # alias docker="podman"
+    # alias docker-compose="podman-compose"
+    elif [[ $bspwm_check == "bspwm" ]]; then
     alias folder="nautilus"
     alias pdf="evince"
     # alias docker="podman"
