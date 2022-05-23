@@ -17,20 +17,20 @@ mkdir -p ~/.config/bspwm/
 mkdir -p ~/.config/sxhkd/
 
 ## BSPWM
-ln -s $PWD/config/bspwmrc ~/.config/bspwm/bspwmrc
+ln -s -f $PWD/config/bspwmrc ~/.config/bspwm/bspwmrc
 chmod +x ~/.config/bspwm/bspwmrc
-ln -s $PWD/config/sxhkdrc ~/.config/sxhkd/sxhkdrc
+ln -s -f $PWD/config/sxhkdrc ~/.config/sxhkd/sxhkdrc
 chmod +x ~/.config/sxhkd/sxhkdrc
 
 # scripts
-ln -s $PWD/config/scripts ~/.config/bspwm/scripts
+ln -s -f $PWD/config/scripts ~/.config/bspwm/scripts
 
 # Picom config
-ln -s $PWD/config/picom/picom.conf ~/.config/picom/picom.conf
+ln -s -f $PWD/config/picom/picom.conf ~/.config/picom/picom.conf
 
 # Dunst config
 rm -rf ~/.config/dunst/
-ln -s $PWD/config/dunst ~/.config/dunst
+ln -s -f $PWD/config/dunst ~/.config/dunst
 
 # Nitrogen config
 rm -rf ~/.config/nitrogen
