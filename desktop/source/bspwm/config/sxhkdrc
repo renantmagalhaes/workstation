@@ -120,10 +120,10 @@ super + Return
 
 # Move windows between workspaces
 super + ctrl + shift + Right
-	bspc node -d next --follow
+	bspc node -d next --follow && mon=`bspc query -D -d focused --names | cut -c1` && bspc desktop --focus $mon && bspc desktop --focus $mon$mon && bspc desktop --focus $mon
 
 super + ctrl + shift + Left
-	bspc node -d prev --follow
+	bspc node -d prev --follow && mon=`bspc query -D -d focused --names | cut -c1` && bspc desktop --focus $mon && bspc desktop --focus $mon$mon && bspc desktop --focus $mon
 
 
 # focus desktop / send window to desktop
