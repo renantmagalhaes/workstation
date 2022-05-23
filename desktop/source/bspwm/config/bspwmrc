@@ -28,6 +28,9 @@ dunst --config ~/.config/dunst/dunstrc &
 bspc monitor DisplayPort-0 -d 1 2 3 4 5
 bspc monitor HDMI-A-0 -d 11 22 33 44 55
 
+# Focus on first screen on boot
+bspc desktop --focus 11 && bspc desktop --focus 1 &
+
 
 # Setup resolution
 xrandr --output DisplayPort-0 --mode 2560x1440 -r 144.00 &
