@@ -101,6 +101,7 @@ gnome_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "GNOME" | awk '{print tolo
 kde_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "KDE" | awk '{print tolower($0)}'`
 i3_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "I3" | awk '{print tolower($0)}'`
 bspwm_check=`env |grep DESKTOP_SESSION |grep -ioh "bspwm" | awk '{print tolower($0)}'`
+wsl_check=`env |grep WSL |grep -ioh "ubuntu"| awk '{print tolower($0)}'`
 
 if check_cmd apt-get; then # FOR DEB SYSTEMS
     alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
@@ -110,6 +111,8 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     elif [[ $kde_check == "kde" ]]; then
     alias folder="dolphin"
     alias pdf="okular"
+    elif [[ $wsl_check == "ubuntu" ]]; then
+    alias folder="explorer.exe"
     else
     echo ""
     fi
