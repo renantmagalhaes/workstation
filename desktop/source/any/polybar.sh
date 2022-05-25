@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # pkg
-sudo dnf install -y polybar mpd wmctrl playerctl
+sudo dnf install -y polybar mpd wmctrl playerctl material-icons-fonts material-design-light material-design-dark
 
 # MPD config
 sudo systemctl enable mpd

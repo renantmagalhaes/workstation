@@ -25,4 +25,7 @@ unzip /tmp/CascadiaCode-2105.24.zip -d /tmp/
 cp /tmp/ttf/CascadiaCodePL.ttf  ~/.local/share/fonts/
 cp /tmp/ttf/CascadiaCode.ttf  ~/.local/share/fonts/
 
+## jetbrains
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+
 fc-cache -vf ~/.local/share/fonts/
