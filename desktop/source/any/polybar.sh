@@ -1,17 +1,19 @@
 #!/bin/bash
 
 # pkg
-sudo dnf install -y polybar mpd wmctrl playerctl material-icons-fonts material-design-light material-design-dark
+sudo dnf install -y polybar mpd wmctrl playerctl material-icons-fonts material-design-light material-design-dark yad
 
 # MPD config
 sudo systemctl enable mpd
 sudo systemctl start mpd
 
 # folder
-mkdir -p ~/.config/polybar
+rm -rf ~/.config/polybar
 
 # Polybar config
-ln -s -f $PWD/config/polybar/polybar-config ~/.config/polybar/config.ini
-ln -s -f $PWD/config/polybar/launch.sh ~/.config/polybar/launch.sh
-ln -s -f $PWD/config/polybar/scripts ~/.config/polybar/scripts
-ln -s -f $PWD/config/polybar/files ~/.config/polybar/files
+ln -s -f $PWD/config/polybar ~/.config/polybar
+
+# ln -s -f $PWD/config/polybar/polybar-config ~/.config/polybar/config.ini
+# ln -s -f $PWD/config/polybar/launch.sh ~/.config/polybar/launch.sh
+# ln -s -f $PWD/config/polybar/scripts ~/.config/polybar/scripts
+# ln -s -f $PWD/config/polybar/files ~/.config/polybar/files
