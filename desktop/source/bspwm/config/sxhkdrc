@@ -115,8 +115,8 @@ super + ctrl + Right
 
 # Send window to next monitor
 super + Return
-    bspc node -m last --follow
-
+    # bspc node -m last --follow
+	bspc node -m next
 
 # Move windows between workspaces
 super + ctrl + shift + Right
