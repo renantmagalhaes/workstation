@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 theme="default"
-dir="$HOME/.config/rofi/launchers"
+dir="$HOME/.config/rofi/scripts/launchers"
 
 rofi -no-lazy-grab -show drun -modi drun -theme $dir/"$theme"
 # rofi -no-lazy-grab \
