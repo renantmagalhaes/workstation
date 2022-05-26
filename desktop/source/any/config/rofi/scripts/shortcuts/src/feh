@@ -1,0 +1,52 @@
+a                                          Toggle actions display (see --draw-actions)
+A                                          Enable/Disable anti-aliasing
+c                                          Caption entry mode.
+d                                          Toggle filename display (see --draw-filename)
+e                                          (only if compiled with exif=1) Toggle EXIF tag display
+f                                          Save the current filelist as "feh_PID_ID_filelist"
+h                                          Pause/Continue the slideshow.
+i                                          Toggle info display (see --info)
+k                                          Toggle zoom and viewport keeping.
+m                                          Show menu.  Use the arrow keys and return to select items,<escape> to close the menu.
+n, <Space>, <Right>                        Show next image
+o                                          Toggle pointer visibility
+p, <Backspace>, <Left>                     Show previous image
+q, <Escape>                                Quit feh
+r                                          Reload current image.  Useful for webcams
+s                                          Save the current image as "feh_PID_ID_FILENAME"
+v                                          Toggle fullscreen
+w                                          Change window size to fit current image size
+x                                          Close current window
+z                                          Jump to a random position in the current filelist
+<, >                                       In place editing - rotate the images 90 degrees(counter)clockwise.
+_                                          In place editing - vertical flip
+|                                          In place editing - horizontal flip.  Again, see jpegtran(1) formore information.
+0 .. 9                                     Execute the corresponding action (0 = --action, 1 = --action1etc.)
+<Return>                                   Run the command defined by --action
+<home>                                     Show first image
+<end>                                      Show last image
+<page up>                                  Go forward ~5% of the filelist
+<page down>                                Go backward ~5% of the filelist
++                                          Increase reload delay by 1 second
+-                                          Decrease reload delay by 1 second
+<delete>                                   Remove current file from filelist
+<CTRL+delete>                              Remove current file from filelist and delete it
+<keypad left>, <Ctrl+Left>                 Scroll to the left
+<keypad right>, <Ctrl+Right>               Scroll to the right
+<keypad up>, <Ctrl+Up>                     Scroll up
+<keypad down>, <Ctrl+Down>                 Scroll down.  Note that the scroll keys work withoutanti-aliasing for performance reasons, hit the render key afterscrolling to antialias the image.
+<Alt+Left>                                Scroll to the left by one page
+<Alt+Right>                               Scroll to the right by one page
+<Alt+Up>                                  Scroll up by one page
+<Alt+Down>                                Scroll down by one page
+R, <keypad begin>                          Antialias the image
+<keypad +>, <Up>                           Zoom in
+<keypad ->, <Down>                         Zoom out
+*, <keypad *>                              Zoom to 100%
+/, <keypad />                              Zoom to fit the window size
+<Escape>                                   Close the menu
+<Up>                                       Highlight previous menu item
+<Down>                                     Highlight next menu item
+<Left>                                     Highlight parent menu item
+<Right>                                    Highlight child menu item
+<Return>, <Space>                          Select highlighted menu item
