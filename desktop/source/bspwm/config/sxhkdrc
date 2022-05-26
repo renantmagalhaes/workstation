@@ -41,6 +41,10 @@ gnome-control-center wifi
 super + l
 	$HOME/.config/bspwm/scripts/blur-lock
 
+# Startup script
+super + F12
+	~/.config/bspwm/scripts/rtm-startup-session.sh
+
 # quit/restart bspwm
 super + alt + {q,r}
 	bspc {quit,wm -r}
