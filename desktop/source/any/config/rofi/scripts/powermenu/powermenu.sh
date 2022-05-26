@@ -85,9 +85,7 @@ case $chosen in
     $suspend)
 		ans=$(confirm_exit &)
 		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-			mpc -q pause
-			amixer set Master mute
-			systemctl suspend
+			exit 0
 		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
 			exit 0
         else
