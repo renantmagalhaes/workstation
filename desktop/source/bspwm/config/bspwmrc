@@ -33,7 +33,7 @@ bspc desktop --focus 11 && bspc desktop --focus 1 &
 
 
 # Setup resolution
-xrandr --output DisplayPort-0 --mode 2560x1440 -r 144.00 &
+xrandr --output DisplayPort-0 --mode 2560x1440 -r 143.91 &
 
 bspc config border_width         2
 bspc config window_gap          12
