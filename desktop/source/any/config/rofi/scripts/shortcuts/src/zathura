@@ -1,0 +1,106 @@
+<b>General</b>                                                   <i>general works in all mode</i>
+Go to next page                                                  <b>J               </b>
+Go to next page                                                  <b>Page Down       </b>
+Go to previous page                                              <b>K               </b>
+Go to previous page                                              <b>Page Up         </b>
+Scroll to the left, down, up or right direction                  <b>H               </b>
+Scroll to the left, down, up or right direction                  <b>K               </b>
+Scroll to the left, down, up or right direction                  <b>J               </b>
+Scroll to the left, down, up or right direction                  <b>L               </b>
+Scroll to the left, down, up or right direction                  <b>Arrow keys      </b>
+Scroll a half page left, down, up or right                       <b>Ctrl + T        </b>
+Scroll a half page left, down, up or right                       <b>Ctrl + D        </b>
+Scroll a half page left, down, up or right                       <b>Ctrl + U        </b>
+Scroll a half page left, down, up or right                       <b>Ctrl + Y        </b>
+Scroll a full page left, down, up or right                       <b>T               </b>
+Scroll a full page left, down, up or right                       <b>Ctrl + F        </b>
+Scroll a full page left, down, up or right                       <b>Ctrl + B        </b>
+Scroll a full page left, down, up or right                       <b>Space           </b>
+Scroll a full page left, down, up or right                       <b>Shift + Space   </b>
+Scroll a full page left, down, up or right                       <b>Y               </b>
+Goto to the first page                                           <b>G then G        </b>
+Go to last page                                                  <b>Shift + G       </b>
+Go to a specific page                                            <b>N then Shift + G</b>
+Go to top of the current page                                    <b>Shift + H       </b>
+Go to bottom of the current page                                 <b>Shift + L       </b>
+Move backward through the jump list                              <b>Ctrl + O        </b>
+Move forward through the jump list                               <b>Ctrl + I        </b>
+Bisect forward and backward between the last two jump points     <b>Ctrl + J        </b>
+Bisect forward and backward between the last two jump points     <b>Ctrl + K        </b>
+Abort                                                            <b>Ctrl + C        </b>
+Abort                                                            <b>Esc             </b>
+Adjust window in best-fit or width mode                          <b>A               </b>
+Adjust window in best-fit or width mode                          <b>S               </b>
+Search for text                                                  <b>/               </b>
+Search for text                                                  <b>?               </b>
+Search for the next result                                       <b>N               </b>
+Search for the previous result                                   <b>Shift + N       </b>
+Open document                                                    <b>O               </b>
+Open document                                                    <b>Shift + O       </b>
+Follow links                                                     <b>F               </b>
+Display link target                                              <b>Shift + F       </b>
+Enter command                                                    <b>:               </b>
+Rotate by 90 degrees                                             <b>R               </b>
+Recolor (grayscale and invert colors)                            <b>Ctrl + R        </b>
+Reload document                                                  <b>Shift + R       </b>
+Show index and switch to Index mode                              <b>Tab             </b>
+Toggle dual page view                                            <b>D               </b>
+Switch to presentation mode                                      <b>F5              </b>
+Switch to fullscreen mode                                        <b>F11             </b>
+Toggle inputbar                                                  <b>Ctrl + M        </b>
+Toggle statusbar                                                 <b>Ctrl + N        </b>
+Zoom in                                                          <b>+               </b>
+Zoom out                                                         <b>-               </b>
+Zoom to the original size                                        <b>=               </b>
+Zoom in                                                          <b>Z then I        </b>
+Zoom out                                                         <b>Z then O        </b>
+Zoom to the original size                                        <b>Z then 0        </b>
+Zoom to size n                                                   <b>N then =        </b>
+Set a quickmark to a letter or number X                          <b>M then Shift + X</b>
+Goto quickmark saved at letter or number X                       <b>' then Shift + X</b>
+Quit                                                             <b>Q               </b>
+
+<b>Fullscreen mode</b>
+Go to next or previous page                                      <b>J               </b>
+Go to next or previous page                                      <b>K               </b>
+Scroll a full page                                               <b>Space           </b>
+Scroll down                                                      <b>Shift + Space   </b>
+Scroll up                                                        <b>Backspace       </b>
+Go to the first page                                             <b>G then G        </b>
+Go to the last page                                              <b>Shift + G       </b>
+Go to a specific page                                            <b>N then Shift + G</b>
+Abort                                                            <b>Ctrl + C        </b>
+Abort                                                            <b>Esc             </b>
+Switch to normal mode                                            <b>F11             </b>
+Zoom in                                                          <b>+               </b>
+Zoom out                                                         <b>-               </b>
+Zoom to the original size                                        <b>=               </b>
+Zoom in                                                          <b>Z then I        </b>
+Zoom out                                                         <b>Z then O        </b>
+Zoom to the original size                                        <b>Z then 0        </b>
+Zoom to size n                                                   <b>N then =        </b>
+Quit                                                             <b>Q               </b>
+
+<b>Presentation mode</b>
+Scroll a full page                                               <b>Space        </b>
+Scroll down                                                      <b>Shift + Space</b>
+Scroll up                                                        <b>Backspace    </b>
+Abort                                                            <b>Ctrl + C     </b>
+Abort                                                            <b>Esc          </b>
+Switch to normal mode                                            <b>F5           </b>
+Quit                                                             <b>Q            </b>
+
+<b>Index mode</b>
+Move to upper or lower entry                                     <b>K        </b>
+Expand enrty                                                     <b>J        </b>
+Expand all entries                                               <b>L        </b>
+Collapse entry                                                   <b>H        </b>
+Collapse all entries                                             <b>Shift + H</b>
+Select an open entry                                             <b>Space    </b>
+Select an open entry                                             <b>Enter    </b>
+
+<b>Mouse bindings</b>
+Scroll up or down                                                <b>wheelupdown                 </b>
+Zoom in or out                                                   <b>Ctrl + wheelupdown          </b>
+Pan the document                                                 <b>Right click + Move the mouse</b>
+Follow link                                                      <b>Left click                  </b>

@@ -9,8 +9,9 @@ mkdir -p ~/.config/rofi ~/.local/share/rofi/themes/
 # Rofi config
 git clone https://github.com/lr-tech/rofi-themes-collection.git ~/GIT-REPOS/CORE/rofi-themes-collection
 cp -r ~/GIT-REPOS/CORE/rofi-themes-collection/themes/* ~/.local/share/rofi/themes/
-ln -s -f $PWD/config/rofi/rtm-rofi-theme.rasi ~/.config/rofi/rtm-rofi-theme.rasi
-ln -s -f $PWD/config/rofi/config.rasi ~/.config/rofi/config.rasi
+# ln -s -f $PWD/config/rofi/rtm-rofi-theme.rasi ~/.config/rofi/rtm-rofi-theme.rasi
+# ln -s -f $PWD/config/rofi/config.rasi ~/.config/rofi/config.rasi
+ln -s -f $PWD/config/rofi ~/.config/rofi
 
 
 #XCAPE - Bind rofi to SuperKey
