@@ -56,4 +56,4 @@ bspc rule -a yad-calendar state=floating
 
 
 # #session
-$HOME/.config/bspwm/scripts/rtm-startup-session.sh &
+# $HOME/.config/bspwm/scripts/rtm-startup-session.sh &
