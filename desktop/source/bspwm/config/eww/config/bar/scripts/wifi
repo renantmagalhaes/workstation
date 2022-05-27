@@ -1,7 +1,7 @@
 #!/bin/bash
 
 status=$(nmcli g | grep -oE "disconnected")
-essid=$(nmcli c | grep wlp2s0 | awk '{print ($1)}')
+essid=$(nmcli c | grep wlp5s0 | awk '{print ($1)}')
 
 if [ $status ] ; then
     icon=""
