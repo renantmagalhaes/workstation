@@ -28,7 +28,7 @@ case "$1" in
     if [ "$Y" -gt "$((HEIGHT / 2))" ]; then #Bottom
         : $((pos_y = HEIGHT - YAD_HEIGHT - BAR_HEIGHT - BORDER_SIZE))
     else #Top
-        : $((pos_y = BAR_HEIGHT + BORDER_SIZE))
+        : $((pos_y = BAR_HEIGHT + 12 + BORDER_SIZE))
     fi
 
     yad --calendar --undecorated --fixed --close-on-unfocus --no-buttons \
