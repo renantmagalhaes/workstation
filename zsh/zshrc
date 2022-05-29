@@ -79,6 +79,12 @@ export ENHANCD_FILTER
 # crontab editor
 export VISUAL=vim
 
+# FZF color scheme
+## with transparent
+export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#9cf598,prompt:#7499f7,pointer:#ffb86c --color=marker:#ffb86c,spinner:#9cf598,header:#6272a4'
+## with opaque bg
+# export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+
 # History 
 HISTFILE="$HOME/.zsh_history"
 ## Number of events loaded into memory
