@@ -94,6 +94,7 @@
     # frame_color = "#7f3fbf"
     # frame_color = "#ffffff"
     frame_color = "#000000"
+    # frame_color = "#96CDFB"
 
 
 
@@ -104,6 +105,7 @@
     #  * frame: use the same color as the frame;
     #  * anything else will be interpreted as a X color.
     separator_color = auto
+    # separator_color= frame
 
     # Sort messages by urgency.
     sort = no
@@ -329,7 +331,23 @@
     #background = "#2B313C"
     timeout = 8
     # Icon for notifications with critical urgency, uncomment to enable
-    #default_icon = /path/to/icon
+    # default_icon = /path/to/icon
+
+
+# catppuccin
+    # [urgency_low]
+    # background = "#1E1E2E"
+    # foreground = "#D9E0EE"
+    
+    # [urgency_normal]
+    # background = "#1E1E2E"
+    # foreground = "#D9E0EE"
+    
+    # [urgency_critical]
+    # background = "#1E1E2E"
+    # foreground = "#D9E0EE"
+    # frame_color = "#F8BD96"
+
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
