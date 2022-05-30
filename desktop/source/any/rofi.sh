@@ -4,7 +4,7 @@ sudo dnf install -y rofi
 
 
 # Folders
-mkdir -p ~/.config/rofi ~/.local/share/rofi/themes/ 
+mkdir -p ~/.local/share/rofi/themes/ 
 
 # Rofi config
 git clone https://github.com/lr-tech/rofi-themes-collection.git ~/GIT-REPOS/CORE/rofi-themes-collection
