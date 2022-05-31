@@ -2,11 +2,13 @@
 
 PICTURE=/tmp/i3lock.png
 SCREENSHOT="scrot $PICTURE"
+# ICON=/home/rtm/.config/bspwm/scripts/files/images/circlelock.png
 
-# BLUR="5x4"
-BLUR="10x9"
+BLUR="5x4"
+# BLUR="10x9"
 
 $SCREENSHOT
 convert $PICTURE -blur $BLUR $PICTURE
+# convert $PICTURE $ICON -gravity center -composite -matte $PICTURE
 i3lock -i $PICTURE
 rm $PICTURE
