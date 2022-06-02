@@ -8,7 +8,7 @@
  */
 
 configuration {
-  font: "Iosevka Nerd Font Medium 12";
+  font: "Cascadia Code 12";
 
   drun {
     display-name: "";
@@ -41,10 +41,16 @@ configuration {
 	blue-alt: #61AFEF15;
 	red: #E06C75;
   red-alt: #E06C7515;
+  white: #FFFFFF;
+  gray: #424242;
+  purple: #6666ff;
+  purple-alt: #6666ff15;
+  green: #00ff99;
 
   background-color: @bg;
   text-color: @fg;
 }
+
 
 window {
   border: 2px;
@@ -59,8 +65,8 @@ mainbox {
 }
 
 inputbar {
-  border: 0 0 0 2px;
-  border-color: @blue;
+  border: 0 2px 0 2px;
+  border-color: @green;
   border-radius: 6px;
   children: [icon-search, entry];
   margin: 0 0 6px 0;
@@ -69,7 +75,7 @@ inputbar {
 entry {
   background-color: @blue-alt;
   padding: 10px;
-  text-color: @blue;
+  text-color: @white;
 }
 
 listview {
@@ -77,12 +83,12 @@ listview {
 }
 
 element {
-  border: 0 0 0 2px;
+  border: 0 2px 0 2px;
   children: [element-text];
 }
 
 element selected {
-  border-color: @red;
+  border-color: @purple;
   border-radius: 6px;
 }
 
@@ -91,13 +97,13 @@ element-text {
 }
 
 element-text selected {
-  background-color: @red-alt;
-  text-color: @red;
+  background-color: @purple-alt;
+  text-color: @purple;
 }
 
 icon-search {
     expand:     false;
-    filename:   "search";
+    filename:   "xterm";
     size: 48px;
 }
 
