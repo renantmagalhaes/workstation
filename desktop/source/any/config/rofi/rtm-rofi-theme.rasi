@@ -27,7 +27,7 @@ window {
 }
 
 inputbar {
-    font:       "Montserrat 20";
+    font:       "Cascadia Code 20";
     padding:    12px;
     spacing:    12px;
     children:   [ icon-search, entry ];
@@ -36,7 +36,7 @@ inputbar {
 icon-search {
     expand:     false;
     filename:   "search";
-    size: 28px;
+    size: 48px;
 }
 
 icon-search, entry, element-icon, element-text {
