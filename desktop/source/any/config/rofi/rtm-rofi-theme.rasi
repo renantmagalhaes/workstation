@@ -11,11 +11,11 @@ configuration {
   font: "Iosevka Nerd Font Medium 12";
 
   drun {
-    display-name: "";
+    display-name: "";
   }
 
   run {
-    display-name: "";
+    display-name: "";
   }
 
   window {
@@ -36,7 +36,7 @@ configuration {
 
   bg: #000000;
 	fg: #ABB2BF;
-    fg2: #DEDEDE80;
+    fg2:#DEDEDE80;
 	blue: #61AFEF;
 	blue-alt: #61AFEF15;
 	red: #E06C75;
@@ -115,3 +115,20 @@ entry {
     placeholder         : "Search";
     placeholder-color   : @fg2;
 }
+
+  element {
+    children: [element-icon, element-text];
+  }
+  
+  element-icon {
+    padding: 10px 10px;
+  }
+  
+  element-text {
+    padding: 10px 0;
+    text-color: @fg;
+  }
+  
+  element-text selected {
+    text-color: @fg;
+  }
