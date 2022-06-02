@@ -1,8 +1,8 @@
 #!/bin/bash
 
-THEME=$HOME/.config/rofi/shortcuts/themes/onedark.rasi
-THEME1=$HOME/.config/rofi/shortcuts/themes/slate.rasi
-SOURCES=$HOME/.config/rofi/shortcuts/src
+THEME=$HOME/.config/rofi/scripts/shortcuts/themes/onedark.rasi
+THEME1=$HOME/.config/rofi/scripts/shortcuts/themes/slate.rasi
+SOURCES=$HOME/.config/rofi/scripts/shortcuts/src
 
 # add more programs
 declare -a options=(
