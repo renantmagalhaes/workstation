@@ -1,36 +1,98 @@
+/*
+ * ROFI color theme
+ *
+ * Based on Something Found in the Internet
+ *
+ * User: Contributors
+ * Copyright: *!
+ */
+
+configuration {
+  font: "Iosevka Nerd Font Medium 12";
+
+  drun {
+    display-name: "";
+  }
+
+  run {
+    display-name: "";
+  }
+
+  window {
+    display-name: "";
+  }
+
+  timeout {
+    delay: 20;
+    action: "kb-cancel";
+  }
+}
+
 * {
-    font:   "Montserrat 12";
+  border: 0;
+  margin: 0;
+  padding: 0;
+  spacing: 0;
 
-    bg0:    #000000;
-    bg1:    #7E7E7E80;
-    bg2:    #0860f2E6;
+  bg: #000000;
+	fg: #ABB2BF;
+    fg2: #DEDEDE80;
+	blue: #61AFEF;
+	blue-alt: #61AFEF15;
+	red: #E06C75;
+  red-alt: #E06C7515;
 
-    fg0:    #DEDEDE;
-    fg1:    #FFFFFF;
-    fg2:    #DEDEDE80;
-
-    background-color:   transparent;
-    text-color:         @fg0;
-
-    margin:     0;
-    padding:    0;
-    spacing:    0;
+  background-color: @bg;
+  text-color: @fg;
 }
 
 window {
-    background-color:   @bg0;
+  border: 2px;
+  border-color: @blue-alt;
+  border-radius: 6px;
+  padding: 6px;
+  transparency: "real";
+}
 
-    location:       center;
-    width:          640;
-    y-offset:       -200;
-    border-radius:  8;
+mainbox {
+  children: [inputbar, listview];
 }
 
 inputbar {
-    font:       "Cascadia Code 20";
-    padding:    12px;
-    spacing:    12px;
-    children:   [ icon-search, entry ];
+  border: 0 0 0 2px;
+  border-color: @blue;
+  border-radius: 6px;
+  children: [icon-search, entry];
+  margin: 0 0 6px 0;
+}
+
+entry {
+  background-color: @blue-alt;
+  padding: 10px;
+  text-color: @blue;
+}
+
+listview {
+  lines: 10;
+}
+
+element {
+  border: 0 0 0 2px;
+  children: [element-text];
+}
+
+element selected {
+  border-color: @red;
+  border-radius: 6px;
+}
+
+element-text {
+  padding: 10px;
+}
+
+element-text selected {
+  background-color: @red-alt;
+  text-color: @red;
 }
 
 icon-search {
@@ -43,51 +105,13 @@ icon-search, entry, element-icon, element-text {
     vertical-align: 0.5;
 }
 
+element-icon {
+    size:   1em;
+}
+
 entry {
     font:   inherit;
 
     placeholder         : "Search";
     placeholder-color   : @fg2;
-}
-
-message {
-    border:             2px 0 0;
-    border-color:       @bg1;
-    background-color:   @bg1;
-}
-
-textbox {
-    padding:    8px 24px;
-}
-
-listview {
-    lines:      10;
-    columns:    1;
-
-    fixed-height:   false;
-    border:         1px 0 0;
-    border-color:   @bg1;
-}
-
-element {
-    padding:            8px 16px;
-    spacing:            16px;
-    background-color:   transparent;
-}
-
-element normal active {
-    text-color: @bg2;
-}
-
-element selected normal, element selected active {
-    background-color:   @bg2;
-    text-color:         @fg1;
-}
-
-element-icon {
-    size:   1em;
-}
-
-element-text {
-    text-color: inherit;
 }
