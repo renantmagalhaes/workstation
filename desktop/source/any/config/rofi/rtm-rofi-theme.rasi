@@ -23,7 +23,7 @@ configuration {
   }
 
   timeout {
-    delay: 20;
+    delay: 60;
     action: "kb-cancel";
   }
 }
