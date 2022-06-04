@@ -17,6 +17,9 @@ nm-applet &
 # Enable num lock
 xdotool key --clearmodifiers Num_Lock &
 
+# Hot Corner
+# xdotool behave_screen_edge --quiesce 600 --delay 0 top-left exec $HOME/.config/rofi/scripts/launchers/launch.sh &
+
 # Notifications
 dunst --config ~/.config/dunst/dunstrc &
 
