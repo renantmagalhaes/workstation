@@ -12,7 +12,7 @@ xsetroot -cursor_name left_ptr & # Fix mouse with X
 $HOME/GIT-REPOS/workstation/desktop/source/any/config/xcape/xcape.sh &
 
 # # Network
-# nm-applet &
+nm-applet &
 
 # Enable num lock
 xdotool key --clearmodifiers Num_Lock &

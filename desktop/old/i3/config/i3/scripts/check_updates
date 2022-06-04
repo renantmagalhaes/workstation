@@ -1,5 +1,0 @@
-#!/bin/bash
-
-DNF_CHECK=`dnf check-update -y -q |wc -l |grep -Eo '[0-9]{1,6}'`
-
-echo " $DNF_CHECK"
