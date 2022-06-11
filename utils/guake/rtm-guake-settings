@@ -4,10 +4,11 @@ compat-delete='delete-sequence'
 default-shell='/usr/bin/tmux'
 display-n=-1
 display-tab-names=0
-gtk-theme-name='Orchis-dark-compact'
+gtk-prefer-dark-theme=true
+gtk-theme-name='Graphite-dark'
 history-size=100000
 max-tab-name-length=100
-mouse-display=false
+mouse-display=true
 open-tab-cwd=true
 prompt-on-quit=true
 quick-open-command-line='gedit %(file_path)s'
@@ -17,6 +18,7 @@ save-tabs-when-changed=true
 scroll-keystroke=true
 start-at-login=true
 use-default-font=false
+use-login-shell=false
 use-popup=true
 use-scrollbar=true
 use-trayicon=false
@@ -25,17 +27,18 @@ window-height=83
 window-losefocus=false
 window-refocus=false
 window-tabbar=false
+window-vertical-displacement=0
 window-width=100
 
 [keybindings/global]
 show-hide='<Primary>Return'
 
 [style/background]
-transparency=100
+transparency=92
 
 [style/font]
 allow-bold=true
 bold-is-bright=false
-palette='#222222222222:#ffff00000f0f:#8c8ce0e00a0a:#ffffb9b90000:#00008d8df8f8:#6c6c4343a5a5:#0000d7d7ebeb:#ffffffffffff:#444444444444:#ffff27273f3f:#ababe0e05a5a:#ffffd1d14141:#00009292ffff:#9a9a5f5febeb:#6767ffffefef:#ffffffffffff:#fffffafaf3f3:#192119d01a73'
+palette='#222222222222:#ffff00000f0f:#8c8ce0e00a0a:#ffffb9b90000:#00008d8df8f8:#6c6c4343a5a5:#0000d7d7ebeb:#ffffffffffff:#777776767b7b:#ffff27273f3f:#ababe0e05a5a:#ffffd1d14141:#00009292ffff:#9a9a5f5febeb:#6767ffffefef:#ffffffffffff:#fffffafaf3f3:#192119d01a73'
 palette-name='Custom'
 style='FiraCode Nerd Font 10'
