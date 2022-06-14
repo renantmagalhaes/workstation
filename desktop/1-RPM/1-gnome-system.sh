@@ -89,6 +89,7 @@ sudo sed -i 's/\#WaylandEnable\=false/WaylandEnable\=false/' /etc/gdm/custom.con
 
 # Increase fedora package manager speed
 sudo runuser -l  root -c 'echo "max_parallel_downloads=15" >> /etc/dnf/dnf.conf'
+sudo runuser -l  root -c 'echo "fastestmirror=True" >> /etc/dnf/dnf.conf'
 
 # Update / upgrade
 sudo dnf update -y
