@@ -2,7 +2,9 @@
 
 # Install dependencies
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-sudo dnf install -y curl dnf-plugins-core cmake gcc clang make rust-glib-sys-devel cairo rust-pangocairo-devel gdk-pixbuf2 gdk-pixbuf2-devel gdk-pixbuf2.x86_64 rust-gdk+default-devel
+sudo dnf install -y curl dnf-plugins-core cmake gcc clang make rust-glib-sys-devel cairo rust-pangocairo-devel gdk-pixbuf2 gdk-pixbuf2-devel gdk-pixbuf2.x86_64 rust-gdk+default-devel rust-gio-sys-devel rust-gtk-sys-devel.noarch rust-pangocairo-devel gdk-pixbuf2.x86_64 rust-gdk+default-devel 
+#sudo xbps-install pkg-config libglib-devel cairo-devel pango-devel atk-devel gdk-pixbuf-devel gtk+3-devel
+
 rustup toolchain install nightly
 
 # link config file
