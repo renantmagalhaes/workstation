@@ -1,5 +1,8 @@
 #!/bin/bash
 
+###### NEED TO RUN WITH ROOT USER #####
+###### MORE TESTS FOR AUTOMATIC DEPLOY ARE NEEDED ######
+
 # Install dependencies
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 sudo dnf install -y curl dnf-plugins-core cmake gcc clang make rust-glib-sys-devel cairo rust-pangocairo-devel gdk-pixbuf2 gdk-pixbuf2-devel gdk-pixbuf2.x86_64 rust-gdk+default-devel rust-gio-sys-devel rust-gtk-sys-devel.noarch rust-pangocairo-devel gdk-pixbuf2.x86_64 rust-gdk+default-devel 
