@@ -27,6 +27,7 @@ wsl --install
 11. [Vivaldi](https://vivaldi.com)
 12. [Patchmypc](https://patchmypc.com/home-updater)
 13. [Postman](https://www.postman.com/downloads/)
+14. [AHK](https://www.autohotkey.com)
 
 ## Ninite
 
@@ -69,6 +70,17 @@ wsl --install
    3. Add **C:\bin** on Windows PATH
       1.  System > Advanced system settings > Advanced > Environment Variables > Path > Edit > New > C:\bin > > Ok
 
+
+
 ## Windows11
 
 1. Start11
+
+## Enhance virtual desktops
+
+### Enable app navigation via keyboard
+
+- shortcut
+  - ```ctrl + shit +win + left/right```
+
+[Copy this script](https://raw.githubusercontent.com/renantmagalhaes/workstation/master/desktop/windows/scripts/window-virtual-desktop-changer.ahk) to `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup` or `shell:startup`
