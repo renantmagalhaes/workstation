@@ -155,7 +155,7 @@ else
 fi
 
 # scrcpy
-brew install scrcpy
+sudo snap install scrcpy
 
 #clear
 echo "###########################"
