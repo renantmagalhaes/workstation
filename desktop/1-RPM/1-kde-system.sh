@@ -166,6 +166,9 @@ bash desktop/source/kde/themes.sh
 sudo dnf install -y ruby ruby-devel
 sudo gem install colorls
 
+# Install distrobox
+sudo dnf install -y distrobox
+
 # Droidcam
 cd /tmp/
 wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_1.8.0.zip

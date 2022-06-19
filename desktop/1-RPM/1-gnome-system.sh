@@ -187,6 +187,9 @@ unzip droidcam_latest.zip -d droidcam
 cd droidcam && sudo ./install-client
 sudo ./install-video
 
+# Install distrobox
+sudo dnf install -y distrobox
+
 # Install ClamAV
 sudo dnf install -y clamav clamtk
 # sudo dnf install -y clamav-daemon
