@@ -154,6 +154,9 @@ else
     echo "Not able to identify the system"
 fi
 
+# scrcpy
+brew install scrcpy
+
 #clear
 echo "###########################"
 echo "#                         #"
