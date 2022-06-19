@@ -11,7 +11,10 @@ nitrogen --restore &
 xsetroot -cursor_name left_ptr & # Fix mouse with X
 $HOME/GIT-REPOS/workstation/desktop/source/any/config/xcape/xcape.sh &
 
-# # Network
+# # Audio widget
+# pasystray &
+
+# Network
 nm-applet &
 
 # Enable num lock
