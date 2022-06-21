@@ -31,3 +31,6 @@ sudo flatpak install -y flathub com.obsproject.Studio
 ## Telegram
 # sudo flatpak install -y flathub org.telegram.desktop
 # sudo flatpak override --filesystem=home:ro org.telegram.desktop
+
+# neovim
+sudo flatpak install -y flathub io.neovim.nvim
