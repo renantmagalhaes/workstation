@@ -7,8 +7,16 @@ check_cmd() {
 
 # Add the repository key with either wget or curl
 if check_cmd apt-get; then # FOR DEB SYSTEMS
-    sudo apt-get install -y bspwm sxhkd feh lxappearance picom playerctl blueman x11-xserver-utils dunst nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pasystray
+    sudo apt-get install -y bspwm sxhkd feh lxappearance picom playerctl blueman x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pasystray
     sudo pip3 install pywal
+
+    # Dunst
+    sudo apt install -y libdbus-1-dev libx11-dev libxinerama-dev libxrandr-dev libxss-dev libglib2.0-dev libpango1.0-dev libgtk2.0-dev libxdg-basedir-dev libnotify-dev xdg-utils libwayland-client0
+    git clone https://github.com/dunst-project/dunst.git ~/GIT-REPOS/CORE/dunst
+    cd ~/GIT-REPOS/CORE/dunst
+    sudo it config --global --add safe.directory ~/GIT-REPOS/CORE/dunst
+    make -j5 WAYLAND=0
+    sudo make WAYLAND=0 install
 
 
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
