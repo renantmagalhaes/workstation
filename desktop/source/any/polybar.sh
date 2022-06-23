@@ -1,7 +1,22 @@
 #!/bin/bash
 
-# pkg
-sudo dnf install -y polybar mpd wmctrl playerctl material-icons-fonts material-design-light material-design-dark yad xsel 
+check_cmd() {
+    command -v "$1" 2> /dev/null
+}
+
+# Add the repository key with either wget or curl
+if check_cmd apt-get; then # FOR DEB SYSTEMS
+    #pgk
+    sudo apt-get install -y polybar mpd wmctrl playerctl fonts-material-design-icons-iconfont fonts-materialdesignicons-webfont yad xsel
+
+elif check_cmd dnf; then  # FOR RPM SYSTEMS
+    # pkg
+    sudo dnf install -y polybar mpd wmctrl playerctl material-icons-fonts material-design-light material-design-dark yad xsel
+
+else
+    echo "Not able to identify the system"
+    exit 0
+fi
 
 # MPD config
 sudo systemctl enable mpd
