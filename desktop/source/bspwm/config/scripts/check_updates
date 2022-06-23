@@ -1,5 +1,24 @@
 #!/bin/bash
 
-DNF_CHECK=`dnf check-update -y -q |wc -l |grep -Eo '[0-9]{1,6}'`
+# check cmd function
+check_cmd() {
+    command -v "$1" > /dev/null 2> /dev/null
+}
 
-echo " $DNF_CHECK"
+# Add the repository key with either wget or curl
+if check_cmd apt-get; then # FOR DEB SYSTEMS
+    APT_CHECK=`apt list --silent -q  --upgradeable > /dev/null 2> /dev/null`
+    APT_LIST=`cat /tmp/packages-upgradeable |wc -l`
+    echo " $APT_LIST"
+
+elif check_cmd dnf; then  # FOR RPM SYSTEMS
+    DNF_CHECK=`dnf check-update -y -q |wc -l |grep -Eo '[0-9]{1,6}'`
+    echo " $DNF_CHECK"
+
+else
+    echo "Not able to identify the system"
+    exit 0
+fi
+
+
+
