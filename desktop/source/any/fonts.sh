@@ -19,6 +19,9 @@ unzip ~/.local/share/fonts/3270.zip -d ~/.local/share/fonts/
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/`curl --silent "https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest" |grep tag_name |awk '{print $2}' |sed 's/\"//g; s/\,//g'`/Agave.zip -O ~/.local/share/fonts/Agave.zip
 unzip ~/.local/share/fonts/Agave.zip -d ~/.local/share/fonts/
 
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/`curl --silent "https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest" |grep tag_name |awk '{print $2}' |sed 's/\"//g; s/\,//g'`/Iosevka.zip -O ~/.local/share/fonts/Iosevka.zip
+unzip ~/.local/share/fonts/Iosevka.zip -d ~/.local/share/fonts/
+
 ## cascadia font for vscode
 wget https://github.com/microsoft/cascadia-code/releases/download/v2105.24/CascadiaCode-2105.24.zip -O /tmp/CascadiaCode-2105.24.zip
 unzip /tmp/CascadiaCode-2105.24.zip -d /tmp/
