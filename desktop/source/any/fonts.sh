@@ -31,4 +31,8 @@ cp /tmp/ttf/CascadiaCode.ttf  ~/.local/share/fonts/
 ## jetbrains
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
 
+# droid sans
+wget https://www.fontsquirrel.com/fonts/download/droid-sans -O ~/.local/share/fonts/droid-sans.zip
+unzip ~/.local/share/fonts/droid-sans.zip -d ~/.local/share/fonts/
+
 fc-cache -vf ~/.local/share/fonts/
