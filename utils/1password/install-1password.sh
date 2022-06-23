@@ -14,12 +14,12 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
     sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
     curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
-    sudo apt update && sudo apt install -y 1password
+    sudo apt update && sudo apt install 1password
 
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
     sudo rpm --import https://downloads.1password.com/linux/keys/1password.asc
     sudo sh -c 'echo -e "[1password]\nname=1Password Stable Channel\nbaseurl=https://downloads.1password.com/linux/rpm/stable/\$basearch\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=\"https://downloads.1password.com/linux/keys/1password.asc\"" > /etc/yum.repos.d/1password.repo'
-    sudo dnf install -y 1password
+    sudo dnf install 1password
 
 
 else
