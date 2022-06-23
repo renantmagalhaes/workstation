@@ -1,10 +1,32 @@
 #!/bin/bash
-# Create folder
-sudo dnf install -y rofi
+
+# check cmd function
+check_cmd() {
+    command -v "$1" 2> /dev/null
+}
+
+# Add the repository key with either wget or curl
+if check_cmd apt-get; then # FOR DEB SYSTEMS
+    
+    #XCAPE - Bind rofi to SuperKey
+    sudo apt-get install -y rofi
+
+    sudo apt-get install -y git gcc make pkg-config libx11-dev libxtst-dev libxi-dev
+
+elif check_cmd dnf; then  # FOR RPM SYSTEMS
+    sudo dnf install -y rofi
+    
+    #XCAPE - Bind rofi to SuperKey
+    sudo dnf install -y git gcc make pkgconfig libX11-devel libXtst-devel libXi-devel
+
+else
+    echo "Not able to identify the system"
+    exit 0
+fi
 
 
 # Folders
-mkdir -p ~/.local/share/rofi/themes/ 
+mkdir -p ~/.local/share/rofi/themes/
 
 # Rofi config
 git clone https://github.com/lr-tech/rofi-themes-collection.git ~/GIT-REPOS/CORE/rofi-themes-collection
@@ -15,11 +37,10 @@ ln -s -f $PWD/config/rofi ~/.config/rofi
 
 
 #XCAPE - Bind rofi to SuperKey
-sudo dnf install -y git gcc make pkgconfig libX11-devel libXtst-devel libXi-devel
 git clone https://github.com/alols/xcape.git ~/GIT-REPOS/CORE/xcape 
 cd ~/GIT-REPOS/CORE/xcape
 make
 sudo make install
 
 # XCAPE syslink to autostart
-ln -s -f $PWD/config/rofi/scripts/xcape.desktop ~/.config/autostart/xcape.desktop
+ln -s -f ~/.config/rofi/scripts/xcape.desktop ~/.config/autostart/xcape.desktop
