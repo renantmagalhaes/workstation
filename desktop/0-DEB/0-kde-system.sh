@@ -77,6 +77,8 @@ sudo apt-get -y install zsh clementine breeze-cursor-theme vim vim-gui-common nm
 #sudo apt-get -y install latte-dock # installing git version for now.
 sudo apt-get -f install -y
 
+# Brew
+bash desktop/source/any/brew.sh
 
 # vboxuser
 sudo usermod -aG vboxusers $USER

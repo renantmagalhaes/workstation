@@ -106,6 +106,9 @@ sudo dnf install -y zsh vlc clementine breeze-cursor-theme vim nmap blender gcon
 ## Plugins Core
 sudo dnf -y install dnf-plugins-core
 
+# Brew
+bash desktop/source/any/brew.sh
+
 ## multimedia codecs
 sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 sudo dnf groupupdate -y sound-and-video

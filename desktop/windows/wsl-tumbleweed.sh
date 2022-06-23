@@ -24,6 +24,8 @@ sudo ntpdate pool.ntp.org
 # Install the packages from repo
 sudo zypper install zsh vim tmux curl net-tools iproute2 git htop meld tree nload pwgen sysstat fzf neofetch xclip unrar unzip python3 python3-pip net-tools ncdu whois neovim 
 
+# Brew
+bash desktop/source/any/brew.sh
 
 #Utils
 

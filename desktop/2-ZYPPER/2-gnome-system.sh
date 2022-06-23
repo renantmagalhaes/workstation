@@ -71,6 +71,9 @@ sudo zypper install -y zsh vlc clementine breeze5-cursors vim nmap blender brase
 sudo usermod -aG vboxusers $USER
 #sudo gpasswd -a $USER vboxusers
 
+# Brew
+bash desktop/source/any/brew.sh
+
 # Piper group
 sudo usermod -aG games $USER
 
