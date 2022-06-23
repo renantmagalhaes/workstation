@@ -6,6 +6,8 @@ display-n=-1
 display-tab-names=0
 gtk-prefer-dark-theme=true
 gtk-theme-name='Graphite-dark'
+gtk-use-system-default-theme=true
+hide-tabs-if-one-tab=false
 history-size=100000
 max-tab-name-length=100
 mouse-display=true
@@ -23,12 +25,12 @@ use-popup=true
 use-scrollbar=true
 use-trayicon=false
 window-halignment=0
-window-height=83
+window-height=73
 window-losefocus=false
 window-refocus=false
 window-tabbar=false
 window-vertical-displacement=0
-window-width=100
+window-width=99
 
 [keybindings/global]
 show-hide='<Primary>Return'
