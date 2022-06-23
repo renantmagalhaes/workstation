@@ -27,6 +27,9 @@ sudo apt-get update && sudo apt-get -y upgrade
 sudo apt-get -y install zsh fonts-powerline vim tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat fzf neofetch xclip unrar unzip python3 python3-pip net-tools  ncdu whois 
 sudo apt-get -f install -y
 
+# Brew
+bash desktop/source/any/brew.sh
+
 #Utils
 
 ## LSD

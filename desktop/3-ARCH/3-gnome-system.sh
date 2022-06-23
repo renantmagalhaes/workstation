@@ -71,6 +71,9 @@ yay -Sy chrome-gnome-shell
 # Bluetooth
 sudo systemctl enable --now bluetooth
 
+# Brew
+bash desktop/source/any/brew.sh
+
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 

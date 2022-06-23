@@ -108,6 +108,9 @@ sudo dnf groupinstall -y "KDE Plasma Workspaces"
 ## Plugins Core
 sudo dnf -y install dnf-plugins-core
 
+# Brew
+bash desktop/source/any/brew.sh
+
 ## multimedia codecs
 sudo dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 sudo dnf groupupdate -y sound-and-video

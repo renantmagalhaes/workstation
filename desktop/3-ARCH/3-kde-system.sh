@@ -73,6 +73,9 @@ sudo systemctl enable --now bluetooth
 sudo bash -c 'echo "# automatically switch to newly-connected devices " >> /etc/pulse/default.pa'
 sudo bash -c 'echo "load-module module-switch-on-connect" >> /etc/pulse/default.pa'
 
+# Brew
+bash desktop/source/any/brew.sh
+
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
