@@ -41,6 +41,7 @@ mkdir -p ~/.config/bspwm/
 mkdir -p ~/.config/sxhkd/
 
 ## BSPWM
+cd ~/GIT-REPOS/workstation/desktop/source/bspwm
 ln -s -f $PWD/config/bspwmrc ~/.config/bspwm/bspwmrc
 chmod +x ~/.config/bspwm/bspwmrc
 ln -s -f $PWD/config/sxhkdrc ~/.config/sxhkd/sxhkdrc
