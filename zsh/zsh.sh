@@ -36,6 +36,11 @@ sed -i 's/ENHANCD_DISABLE_HYPHEN\:\-0/ENHANCD_DISABLE_HYPHEN\:\-1/g' ${ZSH_CUSTO
 # install powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
+# fix fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+sudo mkdir -p /usr/share/fzf/shell/
+sudo cp ~/.fzf/shell/key-bindings.zsh /usr/share/fzf/shell/
 
 #set zsh as default shell
 clear

@@ -40,6 +40,7 @@ git clone https://github.com/lr-tech/rofi-themes-collection.git ~/GIT-REPOS/CORE
 cp -r ~/GIT-REPOS/CORE/rofi-themes-collection/themes/* ~/.local/share/rofi/themes/
 # ln -s -f $PWD/config/rofi/rtm-rofi-theme.rasi ~/.config/rofi/rtm-rofi-theme.rasi
 # ln -s -f $PWD/config/rofi/config.rasi ~/.config/rofi/config.rasi
+rm -rf ~/.config/rofi
 ln -s -f $PWD/config/rofi ~/.config/rofi
 
 
@@ -50,4 +51,5 @@ make
 sudo make install
 
 # XCAPE syslink to autostart
+mkdir -p  ~/.config/autostart/
 ln -s -f ~/.config/rofi/scripts/xcape.desktop ~/.config/autostart/xcape.desktop
