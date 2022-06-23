@@ -25,11 +25,11 @@ use-popup=true
 use-scrollbar=true
 use-trayicon=false
 window-halignment=0
-window-height=73
+window-height=67
 window-losefocus=false
 window-refocus=false
 window-tabbar=false
-window-vertical-displacement=0
+window-vertical-displacement=35
 window-width=99
 
 [keybindings/global]
