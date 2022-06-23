@@ -12,4 +12,4 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 sudo mkdir -p /usr/share/fzf/shell/
 
 # Copy keybinding
-sudo cp key-bindings.zsh /usr/share/fzf/shell/
+sudo cp ~/.fzf/shell/key-bindings.zsh /usr/share/fzf/shell/
