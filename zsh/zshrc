@@ -120,9 +120,18 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     alias pdf="okular"
     elif [[ $wsl_check == "ubuntu" ]]; then
     alias folder="explorer.exe"
+    elif [[ $i3_check == "i3" ]]; then
+    alias folder="nautilus"
+    alias pdf="evince"
+    # alias docker="podman"
+    # alias docker-compose="podman-compose"
+    elif [[ $bspwm_check == "bspwm" ]]; then
+    alias folder="nautilus"
+    alias pdf="evince"
     else
     echo ""
     fi
+
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
     alias update-all="sudo dnf update -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
@@ -148,6 +157,7 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     else
     echo ""
     fi
+
 elif check_cmd zypper; then  # FOR ZYPPER SYSTEMS
     alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
@@ -161,6 +171,7 @@ elif check_cmd zypper; then  # FOR ZYPPER SYSTEMS
     else
     echo ""
     fi
+    
 elif check_cmd pacman; then  # FOR RPM SYSTEMS
     alias update-all="yay -Syu && sudo pacman -Syu && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
