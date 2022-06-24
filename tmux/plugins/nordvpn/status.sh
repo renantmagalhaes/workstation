@@ -2,7 +2,7 @@
 
 #if [[ `nordvpn status |grep Status |awk '{print $4}'` == "Disconnected" ]] ; then echo "#[fg=red]VPN Disconnected:" ; else echo "#[fg=blue]VPN Connected:" ; fi
 
-nordStatus=`nordvpn status |grep Status |awk '{print $6}'`
+nordStatus=`nordvpn status |grep Status |awk '{print $3}'`
 nordCountry=`nordvpn status |grep Country: |awk '{print $2}'`
 
 
