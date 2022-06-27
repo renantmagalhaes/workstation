@@ -7,6 +7,10 @@ check_cmd() {
 
 # Add the repository key with either wget or curl
 if check_cmd apt-get; then # FOR DEB SYSTEMS
+
+    # aptdcon --refresh
+    # aptdcon --safe-upgrade
+
     APT_CHECK=`apt list --silent -q  --upgradeable > /tmp/packages-upgradeable 2> /dev/null`
         FILE=/tmp/packages-upgradeable
         if test -f "$FILE"; then
@@ -15,7 +19,8 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
         else
             echo " 0"
         fi
-    
+
+    rm -rf /tmp/packages-upgradeable
 
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
     DNF_CHECK=`dnf check-update -y -q |wc -l |grep -Eo '[0-9]{1,6}'`
