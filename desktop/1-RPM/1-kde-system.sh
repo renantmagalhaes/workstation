@@ -169,6 +169,11 @@ bash desktop/source/kde/themes.sh
 sudo dnf install -y ruby ruby-devel
 sudo gem install colorls
 
+# Install cargo / rust / lsd
+curl https://sh.rustup.rs -sSf | sh
+source $HOME/.cargo/env
+cargo install lsd
+
 # Install distrobox
 sudo dnf install -y distrobox
 
