@@ -190,6 +190,11 @@ unzip droidcam_latest.zip -d droidcam
 cd droidcam && sudo ./install-client
 sudo ./install-video
 
+# Install cargo / rust / lsd
+curl https://sh.rustup.rs -sSf | sh
+source $HOME/.cargo/env
+cargo install lsd
+
 # Install distrobox
 sudo dnf install -y distrobox
 
