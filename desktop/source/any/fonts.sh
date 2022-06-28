@@ -38,6 +38,6 @@ unzip ~/.local/share/fonts/droid-sans.zip -d ~/.local/share/fonts/
 # fonts aawesome
 wget https://github.com/FortAwesome/Font-Awesome/releases/download/`curl --silent "https://api.github.com/repos/FortAwesome/Font-Awesome/releases/latest" |grep tag_name |awk '{print $2}' |sed 's/\"//g; s/\,//g'`/fontawesome-free-`curl --silent "https://api.github.com/repos/FortAwesome/Font-Awesome/releases/latest" |grep tag_name |awk '{print $2}' |sed 's/\"//g; s/\,//g'`-desktop.zip -O ~/.local/share/fonts/Font-Awesome.zip
 unzip ~/.local/share/fonts/Font-Awesome.zip -d ~/.local/share/fonts/
-mv ~/.local/share/fonts/fontawesome-free-`curl --silent "https://api.github.com/repos/FortAwesome/Font-Awesome/releases/latest" |grep tag_name |awk '{print $2}' |sed 's/\"//g; s/\,//g'`-desktop/otfs/* ~/.local/share/fonts/
+
 
 fc-cache -vf ~/.local/share/fonts/
