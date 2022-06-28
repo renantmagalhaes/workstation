@@ -7,7 +7,7 @@ check_cmd() {
 
 # Add the repository key with either wget or curl
 if check_cmd apt-get; then # FOR DEB SYSTEMS
-    sudo apt-get install -y bspwm sxhkd feh lxappearance picom playerctl blueman x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pasystray pavucontrol
+    sudo apt-get install -y bspwm sxhkd feh lxappearance picom playerctl blueman x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu
     sudo pip3 install pywal
 
     # Dunst
@@ -26,7 +26,7 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     # Packages
     sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 
-    sudo dnf install -y bspwm sxhkd feh lxappearance qt5-qtconfiguration picom playerctl blueman xsetroot dunst nitrogen scrot xdotool network-manager-applet lm_sensors playerctl i3lock papirus-icon-theme pasystray pavucontrol
+    sudo dnf install -y bspwm sxhkd feh lxappearance qt5-qtconfiguration picom playerctl blueman xsetroot dunst nitrogen scrot xdotool network-manager-applet lm_sensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu
     sudo pip3 install pywal
 
 else
@@ -40,12 +40,19 @@ mkdir -p ~/GIT-REPOS/CORE
 mkdir -p ~/.config/bspwm/
 mkdir -p ~/.config/sxhkd/
 
+# xqp
+git clone https://github.com/baskerville/xqp.git ~/GIT-REPOS/CORE/xqp
+cd ~/GIT-REPOS/CORE/xqp
+make
+sudo make install
+
 ## BSPWM
 cd ~/GIT-REPOS/workstation/desktop/source/bspwm
 ln -s -f $PWD/config/bspwmrc ~/.config/bspwm/bspwmrc
 chmod +x ~/.config/bspwm/bspwmrc
 ln -s -f $PWD/config/sxhkdrc ~/.config/sxhkd/sxhkdrc
 chmod +x ~/.config/sxhkd/sxhkdrc
+
 
 # scripts
 ln -s -f $PWD/config/scripts ~/.config/bspwm/scripts
@@ -60,6 +67,10 @@ ln -s -f $PWD/config/dunst ~/.config/dunst
 # Nitrogen config
 rm -rf ~/.config/nitrogen
 cp -r $PWD/config/nitrogen ~/.config/
+
+# jgmenu config
+rm -rf ~/.config/jgmenu/
+ln -s -f $PWD/config/jgmenu ~/.config/jgmenu
 
 # Copy fonts
 # cp -r $PWD/config/fonts/*  ~/.local/share/fonts/
