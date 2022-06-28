@@ -1,0 +1,24 @@
+Restart BSPWM,bspc wm -r 
+Restart Polybar,poly-reset,xfce4-systray
+Restart SXHKD,keeb-reset,input-keyboard
+Restart Pipewire,systemctl --user restart pipewire.service pipewire-pulse.socket && poly-reset,audio-speakers
+^sep()
+
+Find Window Class,dunstify -i window_list "Find Window Class" "$(xprop WM_CLASS | tr -d '\n' | xclip -selection 'clipboard' -f)",window_list
+Randomize Wallpaper,feh --no-fehbg --bg-fill --randomize "$HOME/Pictures/Wallpapers",phototonic
+^sep()
+
+Terminal,alacritty,utilities-terminal
+Neovim,xfce4-terminal -x nvim,nvim
+Ranger,xfce4-terminal -x ranger,stock_folder
+^sep()
+
+Lock,lock,system-lock-screen
+Logout,pkill -KILL -u "$USER" &,system-log-out
+Exit,^checkout(exit)
+
+^tag(exit)
+Suspend,lock | systemctl suspend,system-suspend
+Reboot,reboot,system-reboot
+Poweroff,poweroff,system-shutdown
+

@@ -6,6 +6,9 @@
 ctrl + alt + t
 	alacritty
 
+~button3
+	xqp 0 $(xdo id -N Bspwm -n root) && jgmenu_run
+
 # program launcher
 super + Pause
 	$HOME/GIT-REPOS/workstation/desktop/source/any/config/rofi/scripts/rofi-startup.sh
