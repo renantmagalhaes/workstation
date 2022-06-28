@@ -26,6 +26,9 @@ xdotool key --clearmodifiers Num_Lock &
 # Notifications
 dunst --config ~/.config/dunst/dunstrc &
 
+# Top padding 
+bspc config top_padding     30
+
 # Monitor setup
 # bspc monitor DisplayPort-0 -d 1 2 3 4 5
 # bspc monitor HDMI-A-0 -d 6 7 8 9 10
@@ -59,6 +62,7 @@ bspc rule -a guake state=floating
 bspc rule -a Guake state=floating
 bspc rule -a Yad state=floating
 bspc rule -a yad-calendar state=floating
+
 
 
 # #session
