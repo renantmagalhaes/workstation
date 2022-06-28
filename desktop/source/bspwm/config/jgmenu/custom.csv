@@ -7,10 +7,13 @@ Restart BSPWM,bspc wm -r && dunstify -i window_list "Successfully restarted BSPW
 Restart Polybar,~/.config/polybar/launch.sh,xfce4-systray
 Restart SXHKD,keeb-reset,input-keyboard
 Restart Pipewire,systemctl --user restart pipewire.service pipewire-pulse.socket && poly-reset,audio-speakers
+
 ^sep()
 
 Find Window Class,dunstify -i window_list "Find Window Class" "$(xprop WM_CLASS | tr -d '\n' | xclip -selection 'clipboard' -f)",window_list
-Randomize Wallpaper,feh --no-fehbg --bg-fill --randomize "$HOME/Pictures/Wallpapers",phototonic
+Change Wallpaper,nitrogen,nitrogen
+Appearance,lxappearance,mtpaint
+Randomize Wallpaper,feh --no-fehbg --bg-fill --randomize "$HOME/Pictures",phototonic
 ^sep()
 
 Lock,~/.config/bspwm/scripts/blur-lock,system-lock-screen
