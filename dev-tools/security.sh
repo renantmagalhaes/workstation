@@ -8,11 +8,11 @@ check_cmd() {
 # Add the repository key with either wget or curl
 if check_cmd apt-get; then # FOR DEB SYSTEMS
 
-    sudo apt-get install -y sqlitebrowser
+    sudo apt-get install -y sqlitebrowser aircrack-ng
 
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
 
-    sudo dnf install -y sqlitebrowser
+    sudo dnf install -y sqlitebrowser aircrack-ng
 
 
 elif check_cmd zypper; then  # FOR RPM SYSTEMS
