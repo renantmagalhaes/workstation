@@ -8,8 +8,10 @@ while pgrep -x polybar >/dev/null; do sleep 1; done
 
 # Launch bars
 polybar main >>~/polybar.log 2>&1 &
+polybar main-scroll >>~/polybar-scroll.log 2>&1 &
 sleep 2
 polybar secondary >>~/polybar.log 2>&1 &
+polybar secondary-scroll >>~/polybar-scroll.log 2>&1 &
 
 
 
