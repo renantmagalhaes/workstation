@@ -47,7 +47,7 @@ super + F12
 
 # quit/restart bspwm
 super + alt + r
-	bspc wm -r
+	bspc wm -r && dunstify -i window_list "Successfully restarted BSPWM"
 
 # close and kill
 super + q
