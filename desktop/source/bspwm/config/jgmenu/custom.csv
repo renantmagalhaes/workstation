@@ -1,3 +1,8 @@
+Menu,~/.config/rofi/scripts/rofi-startup.sh,appimagekit-archipelago
+Terminal,alacritty,Alacritty
+File Explorer,nautilus,stock_folder
+^sep()
+
 Restart BSPWM,bspc wm -r && dunstify -i window_list "Successfully restarted BSPWM",terminal
 Restart Polybar,~/.config/polybar/launch.sh,xfce4-systray
 Restart SXHKD,keeb-reset,input-keyboard
@@ -6,11 +11,6 @@ Restart Pipewire,systemctl --user restart pipewire.service pipewire-pulse.socket
 
 Find Window Class,dunstify -i window_list "Find Window Class" "$(xprop WM_CLASS | tr -d '\n' | xclip -selection 'clipboard' -f)",window_list
 Randomize Wallpaper,feh --no-fehbg --bg-fill --randomize "$HOME/Pictures/Wallpapers",phototonic
-^sep()
-
-Menu,~/.config/rofi/scripts/rofi-startup.sh,appimagekit-archipelago
-Terminal,alacritty,Alacritty
-Folder,nautilus,stock_folder
 ^sep()
 
 Lock,~/.config/bspwm/scripts/blur-lock,system-lock-screen
