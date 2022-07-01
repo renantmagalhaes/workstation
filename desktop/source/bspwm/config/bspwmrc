@@ -10,6 +10,7 @@ guake &
 nitrogen --restore &
 xsetroot -cursor_name left_ptr & # Fix mouse with X
 $HOME/GIT-REPOS/workstation/desktop/source/any/config/xcape/xcape.sh &
+mate-polkit &
 
 # # Audio widget
 # pasystray &
