@@ -10,7 +10,23 @@ guake &
 nitrogen --restore &
 xsetroot -cursor_name left_ptr & # Fix mouse with X
 $HOME/GIT-REPOS/workstation/desktop/source/any/config/xcape/xcape.sh &
-mate-polkit &
+
+# system configs
+check_cmd() {
+    command -v "$1" 2> /dev/null
+}
+
+if check_cmd apt-get; then # FOR DEB SYSTEMS
+    # polkit
+    mate-polkit &
+
+
+elif check_cmd dnf; then  # FOR RPM SYSTEMS
+    echo "TBD"
+else
+    echo "Not able to identify the system" > ~/bspwm.log
+fi
+
 
 # # Audio widget
 # pasystray &
@@ -27,7 +43,7 @@ xdotool key --clearmodifiers Num_Lock &
 # Notifications
 dunst --config ~/.config/dunst/dunstrc &
 
-# Top padding 
+# Top padding
 bspc config top_padding     30
 
 # Monitor setup
