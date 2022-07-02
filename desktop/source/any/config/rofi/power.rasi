@@ -1,7 +1,43 @@
-inputbar {
-  children: [entry];
-}
 
 listview {
         lines: 3;
 }
+* {
+    width: 600;
+
+}
+
+configuration {
+  font: "Cascadia Code 12";
+
+  window {
+    display-name: "";
+  }
+
+  timeout {
+    delay: 60;
+    action: "kb-cancel";
+  }
+}
+
+inputbar {
+  border: 0 2px 0 2px;
+  border-color: @green;
+  border-radius: 6px;
+  children: [icon-search, entry];
+  margin: 0 0 6px 0;
+}
+
+icon-search {
+    expand:     false;
+    filename:   "terminal";
+    size: 48px;
+}
+
+entry {
+    font:   inherit;
+
+    placeholder         : "Select one option bellow";
+    placeholder-color   : @fg2;
+}
+
