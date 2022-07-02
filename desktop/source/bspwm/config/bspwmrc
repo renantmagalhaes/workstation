@@ -22,7 +22,8 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
 
 
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
-    echo "TBD"
+    # polkit
+    lxpolkit &
 else
     echo "Not able to identify the system" > ~/bspwm.log
 fi
