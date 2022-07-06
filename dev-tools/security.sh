@@ -8,11 +8,11 @@ check_cmd() {
 # Add the repository key with either wget or curl
 if check_cmd apt-get; then # FOR DEB SYSTEMS
 
-    sudo apt-get install -y sqlitebrowser aircrack-ng nmap jq
+    sudo apt-get install -y golang sqlitebrowser aircrack-ng nmap jq
 
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
 
-    sudo dnf install -y sqlitebrowser aircrack-ng nmap jq
+    sudo dnf install -y golang sqlitebrowser aircrack-ng nmap jq
 
 else
     echo "Not able to identify the system"
@@ -57,3 +57,19 @@ sudo mv /tmp/dnsx /usr/local/bin/
 wget `curl --silent "https://api.github.com/repos/projectdiscovery/subfinder/releases/latest" |grep browser_download_url | grep linux_amd64.zip |grep -Po '"browser_download_url": "\K.*?(?=")'` -O /tmp/subfinder.zip
 unzip /tmp/subfinder.zip -d /tmp/
 sudo mv /tmp/subfinder /usr/local/bin/
+
+# hakrawler
+go install github.com/hakluke/hakrawler@latest
+sudo mv ~/go/bin/hakrawler /usr/local/bin/
+
+# waybackurls
+go install github.com/tomnomnom/waybackurls@latest
+sudo mv ~/go/bin/waybackurls /usr/local/bin/
+
+# gau
+go install github.com/lc/gau/v2/cmd/gau@latest
+sudo mv ~/go/bin/gau /usr/local/bin/
+
+# anew
+go install -v github.com/tomnomnom/anew@latest
+sudo mv ~/go/bin/anew /usr/local/bin/
