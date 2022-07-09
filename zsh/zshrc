@@ -226,6 +226,8 @@ alias disk-manager='ncdu'
 alias mouse-battery='upower --dump |grep -A 5 mouse | egrep -oh '"'"'[0-9]*%'"'"''
 alias ascii-image='jp2a --output=ascii.txt --colors $1'
 
+### Security Tools
+alias sherlock='docker run theyahya/sherlock $1'
 
 # command -v exa > /dev/null && alias ls='exa --icons --group-directories-first -g -b -h' && \
 #   alias tree='exa --tree'

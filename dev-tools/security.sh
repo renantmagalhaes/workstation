@@ -73,3 +73,16 @@ sudo mv ~/go/bin/gau /usr/local/bin/
 # anew
 go install -v github.com/tomnomnom/anew@latest
 sudo mv ~/go/bin/anew /usr/local/bin/
+
+# Sherlock
+# docker run theyahya/sherlock user123
+
+# # Z4nzu/hackingtool
+# git clone https://github.com/Z4nzu/hackingtool.git ~/GIT-REPOS/CORE/hackingtool
+# chmod -R 755 ~/GIT-REPOS/CORE/hackingtool && cd ~/GIT-REPOS/CORE/hackingtool
+# sudo pip3 install -r requirement.txt
+# bash install.sh
+
+# pspy
+sudo wget `curl --silent "https://api.github.com/repos/DominicBreuker/pspy/releases/latest" |grep browser_download_url | grep pspy64 |grep -Po '"browser_download_url": "\K.*?(?=")'` -O /usr/local/bin/pspy64
+sudo chmod +x /usr/local/bin/pspy64
