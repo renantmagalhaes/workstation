@@ -687,7 +687,7 @@ colors: *RTM
 window:
   # opacity: 1.0
   # opacity: 0.99
-  opacity: 0.80
+  opacity: 0.90
   # opacity: 0.6
 
 #selection:
