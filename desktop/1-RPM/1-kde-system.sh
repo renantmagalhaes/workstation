@@ -179,7 +179,6 @@ sudo dnf install -y distrobox
 
 # Droidcam
 cd /tmp/
-sudo dnf install -y libappindicator-gtk3
 wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_1.8.2.zip
 unzip droidcam_latest.zip -d droidcam
 cd droidcam && sudo ./install-client
