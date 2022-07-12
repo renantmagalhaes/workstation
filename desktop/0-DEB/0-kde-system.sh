@@ -161,7 +161,6 @@ sudo apt-get -f install -y
 
 # Droidcam
 cd /tmp/
-sudo apt-get install -y libappindicator3-1
 wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_1.8.2.zip
 unzip droidcam_latest.zip -d droidcam
 cd droidcam && sudo ./install-client
