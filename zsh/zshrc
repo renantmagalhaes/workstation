@@ -225,6 +225,7 @@ alias vi='nvim'
 alias disk-manager='ncdu'
 alias mouse-battery='upower --dump |grep -A 5 mouse | egrep -oh '"'"'[0-9]*%'"'"''
 alias ascii-image='jp2a --output=ascii.txt --colors $1'
+alias pdf-signature='xournal'
 
 ### Security Tools
 alias sherlock='docker run theyahya/sherlock $1'
