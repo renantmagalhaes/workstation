@@ -1,16 +1,5 @@
 #! /bin/sh
 
-
-# Startups
-$HOME/.config/polybar/launch.sh &
-picom --experimental-backend &
-pgrep -x sxhkd > /dev/null || sxhkd &
-guake &
-# feh --bg-scale ~/Pictures/background &
-nitrogen --restore &
-xsetroot -cursor_name left_ptr & # Fix mouse with X
-$HOME/GIT-REPOS/workstation/desktop/source/any/config/xcape/xcape.sh &
-
 # system configs
 check_cmd() {
     command -v "$1" 2> /dev/null
@@ -81,7 +70,16 @@ bspc rule -a Guake state=floating
 bspc rule -a Yad state=floating
 bspc rule -a yad-calendar state=floating
 
-
+# Startups
+picom --experimental-backend &
+pgrep -x sxhkd > /dev/null || sxhkd &
+guake &
+# feh --bg-scale ~/Pictures/background &
+nitrogen --restore &
+xsetroot -cursor_name left_ptr & # Fix mouse with X
+$HOME/GIT-REPOS/workstation/desktop/source/any/config/xcape/xcape.sh &
+sleep 3
+$HOME/.config/polybar/launch.sh &
 
 # #session
 # $HOME/.config/bspwm/scripts/rtm-startup-session.sh &
