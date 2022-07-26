@@ -297,6 +297,14 @@ sudo apt-get install -y clamav-daemon
 # Nordvpn
 sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)
 
+# JgMenu
+wget https://github.com/johanmalm/jgmenu/archive/refs/tags/v4.4.0.zip -O ~/GIT-REPOS/CORE/jgmenu.zip
+cd ~/GIT-REPOS/CORE/ && unzip jgmenu.zip
+cd jgmenu-4.4.0
+sudo apt-get install -y librsvg2-dev libxml2-dev libmenu-cache-dev libxfce4panel-2.0-dev
+dpkg-buildpackage -tc -b -us -uc
+sudo dpkg -i ../jgmenu_4.4.0-1_amd64.deb
+
 # Make sure all package are installed
 sudo apt-get -f install -y
 
