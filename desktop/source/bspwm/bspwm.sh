@@ -7,7 +7,7 @@ check_cmd() {
 
 # Add the repository key with either wget or curl
 if check_cmd apt-get; then # FOR DEB SYSTEMS
-    sudo apt-get install -y bspwm sxhkd feh lxappearance picom playerctl blueman x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit mate-polkit-bin libnotify-bin
+    sudo apt-get install -y bspwm sxhkd feh lxappearance playerctl blueman x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit mate-polkit-bin libnotify-bin 
     sudo pip3 install pywal
 
     # Dunst
@@ -18,6 +18,14 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     make -j5 WAYLAND=0
     sudo make WAYLAND=0 install
 
+    # Picom
+    sudo apt-get install -y libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev meson
+    git clone https://github.com/yshui/picom.git ~/GIT-REPOS/CORE/picom
+    cd ~/GIT-REPOS/CORE/picom
+    git submodule update --init --recursive
+    meson --buildtype=release . build
+    ninja -C build
+    sudo ninja -C build install
 
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
     # Install dependencies
