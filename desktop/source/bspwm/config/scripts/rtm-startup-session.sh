@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sleep 1
 bspc desktop --focus 1 ; vivaldi &
 sleep 1
 bspc desktop --focus 11 ; vivaldi  &
