@@ -4,9 +4,12 @@ action=$1
 rightVol=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $12}' | tr -dc '0-9')
 leftVol=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | tr -dc '0-9')
 muteOrNot=$(pactl get-sink-mute @DEFAULT_SINK@ | awk -F: '{ print $2 }')
-inc=2
+inc=5
 
 if [ $action = 'up' ]; then
+		if [[ $rightVol -ge 120 ]]; then
+		exit
+		fi
 	pactl set-sink-volume @DEFAULT_SINK@ +$inc%
   	if [ $muteOrNot = 'no' ]; then
   		dunstify "$(expr $rightVol + $inc)" -i volume -u low -t 1000 -r 9993 -h int:value:$rightVol
