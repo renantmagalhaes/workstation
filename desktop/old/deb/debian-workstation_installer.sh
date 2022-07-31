@@ -305,6 +305,16 @@ sudo apt-get install -y librsvg2-dev libxml2-dev libmenu-cache-dev libxfce4panel
 dpkg-buildpackage -tc -b -us -uc
 sudo dpkg -i ../jgmenu_4.4.0-1_amd64.deb
 
+
+# Update pulseaudio
+git clone http://anongit.freedesktop.org/git/pulseaudio/pulseaudio.git ~/GIT-REPOS/CORE/pulseaudio
+cd ~/GIT-REPOS/CORE/pulseaudio
+sudo apt-get build-dep pulseaudio -y
+meson build
+ninja -C build
+sudo ninja -C build install
+sudo ldconfig
+
 # Make sure all package are installed
 sudo apt-get -f install -y
 
