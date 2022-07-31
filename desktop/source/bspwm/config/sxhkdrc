@@ -192,10 +192,12 @@ XF86AudioMute
 	pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 XF86AudioRaiseVolume
-	pactl set-sink-volume @DEFAULT_SINK@ +5%
+	$HOME/.config/dunst/volume/volume.sh up
+	# pactl set-sink-volume @DEFAULT_SINK@ +5%
 
 XF86AudioLowerVolume
-	pactl set-sink-volume @DEFAULT_SINK@ -5%
+	$HOME/.config/dunst/volume/volume.sh down
+	# pactl set-sink-volume @DEFAULT_SINK@ -5%
 
 XF86AudioPlay
 	playerctl play-pause
