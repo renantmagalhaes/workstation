@@ -37,6 +37,14 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     sudo dnf install -y bspwm sxhkd feh lxappearance qt5-qtconfiguration picom playerctl blueman xsetroot dunst nitrogen scrot xdotool network-manager-applet lm_sensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu lxpolkit libnotify libnotify-devel
     sudo pip3 install pywal
 
+    # Picom
+    sudo dnf install -y dbus-devel gcc git libconfig-devel libdrm-devel libev-devel libX11-devel libX11-xcb libXext-devel libxcb-devel mesa-libGL-devel meson pcre-devel pixman-devel uthash-devel xcb-util-image-devel xcb-util-renderutil-devel xorg-x11-proto-devel
+    git clone https://github.com/yshui/picom.git ~/GIT-REPOS/CORE/picom
+    cd ~/GIT-REPOS/CORE/picom
+    git submodule update --init --recursive
+    meson --buildtype=release . build
+    ninja -C build
+    sudo ninja -C build install
 else
     echo "Not able to identify the system"
     exit 0
