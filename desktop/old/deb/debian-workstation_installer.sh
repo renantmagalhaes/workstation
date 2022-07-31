@@ -307,7 +307,9 @@ sudo dpkg -i ../jgmenu_4.4.0-1_amd64.deb
 
 
 # Update pulseaudio
-git clone http://anongit.freedesktop.org/git/pulseaudio/pulseaudio.git ~/GIT-REPOS/CORE/pulseaudio
+# git clone http://anongit.freedesktop.org/git/pulseaudio/pulseaudio.git ~/GIT-REPOS/CORE/pulseaudio
+git clone https://gitlab.freedesktop.org/pulseaudio/pulseaudio.git ~/GIT-REPOS/CORE/pulseaudio
+
 cd ~/GIT-REPOS/CORE/pulseaudio
 sudo apt-get build-dep pulseaudio -y
 meson build
