@@ -13,7 +13,7 @@ Restart Pipewire,systemctl --user restart pipewire.service pipewire-pulse.socket
 Find Window Class,dunstify -i window_list "Find Window Class" "$(xprop WM_CLASS | tr -d '\n' | xclip -selection 'clipboard' -f)",window_list
 Change Wallpaper,nitrogen,nitrogen
 Appearance,lxappearance,mtpaint
-Randomize Wallpaper,feh --no-fehbg --bg-fill --randomize "$HOME/Pictures",phototonic
+Randomize Wallpaper,feh --no-fehbg --bg-fill --randomize "$HOME/Pictures/wallpapers",phototonic
 ^sep()
 
 Lock,~/.config/bspwm/scripts/blur-lock,system-lock-screen
