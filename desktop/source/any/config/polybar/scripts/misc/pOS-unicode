@@ -1,0 +1,13 @@
+#!/bin/sh
+
+
+chosen=$(cut -d ';' -f1 $pOS_CONFIG_DIR/pOS-emoji-choose | rofi -dmenu -i -p "Which emoji to copy?" | sed "s/ .*//")
+
+[ -z "$chosen" ] && exit
+
+if [ -n "$1" ]; then
+	xdotool type "$chosen"
+else
+	echo "$chosen" | tr -d '\n' | xclip -selection clipboard
+	notify-send "'$chosen' copied to clipboard." &
+fi

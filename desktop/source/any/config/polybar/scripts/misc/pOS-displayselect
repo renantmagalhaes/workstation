@@ -1,0 +1,151 @@
+#!/bin/sh
+
+# A UI for detecting and selecting all displays. Probes xrandr for connected
+# displays and lets user select one to use. User may also select "manual
+# selection" which opens arandr.
+
+te() {
+    [ -z $1 ] && exit
+}
+
+calc_scale() {
+    x_res=$(echo $1 | tr -s "x" " "  | awk '{print $1}')
+    y_res=$(echo $1 | tr -s "x" " " | awk '{print $NF}')
+    if [ -z $2 ]; then
+        x_dim=$(xrandr -q | awk '/ connected [0-9]/ {print $(NF-2)-0}')
+        y_dim=$(xrandr -q | awk '/ connected [0-9]/ {print $NF-0}')
+    else
+        x_dim=$(xrandr -q | awk '/ connected primary/ {print $(NF-2)-0}')
+        y_dim=$(xrandr -q | awk '/ connected primary/ {print $NF-0}')
+    fi
+    # x_dpi=$(bc -l <<< (x_res/(x_dim/2.54))) # Dpi calc will be done later
+    # y_dpi=$(bc -l <<< (y_res/(y_dim/2.54)))
+    x_scale=$(bc -l <<< "(2560/$x_res)")
+    y_scale=$(bc -l <<< "(1440/$y_res)")
+}
+
+twoscreen() { # If multi-monitor is selected and there are two screens.
+
+    mirror=$(printf "No\\nYes" | rofi -dmenu -i -p "Mirror displays?")
+    # Mirror displays using native resolution of external display and a scaled
+    # version for the internal display
+    if [ "$mirror" = "Yes" ]; then
+        external=$(echo "$screens" | rofi -dmenu -i -p "Optimize resolution for:")
+        internal=$(echo "$screens" | grep -v "$external")
+
+        res_external=$(xrandr --query | sed -n "/^$external/,/\+/p" | \
+            tail -n 1 | awk '{print $1}')
+        res_internal=$(xrandr --query | sed -n "/^$internal/,/\+/p" | \
+            tail -n 1 | awk '{print $1}')
+
+        res_ext_x=$(echo "$res_external" | sed 's/x.*//')
+        res_ext_y=$(echo "$res_external" | sed 's/.*x//')
+        res_int_x=$(echo "$res_internal" | sed 's/x.*//')
+        res_int_y=$(echo "$res_internal" | sed 's/.*x//')
+
+        x_scale=$(echo "$res_ext_x / $res_int_x" | bc -l)
+        y_scale=$(echo "$res_ext_y / $res_int_y" | bc -l)
+
+        xrandr --output "$external" --auto --scale 1.0x1.0 \
+            --output "$internal" --auto --same-as "$external" \
+            --scale "$x_scale"x"$y_scale"
+    else
+        primary=$(echo "$screens" | rofi -dmenu -i -p "Select primary display:")
+        te $primary
+		primaryrate=$(xrandr -q | tr -d "*+" | sed -n "/$primary/{n;p;}" | cut -d ' ' -f 9- | tr -s " " "\n" | rofi -dmenu -i -p "Set refresh rate for '$primary':")
+        echo $primaryrate
+        te $primaryrate
+		primaryres=$(xrandr -q | sed -n "/$primary/{n;p;}" | awk '{ print $1 }')
+        calc_scale $primaryres primary
+        p_scale_x=$x_scale
+        p_scale_y=$y_scale
+        secondary=$(echo "$screens" | grep -v "$primary")
+		secondaryres=$(xrandr -q | sed -n "/$secondary/{n;p;}" | awk '{ print $1 }')
+		secondaryrate=$(xrandr -q | tr -d "*+" | sed -n "/$secondary/{n;p;}" | cut -d ' ' -f 9- | tr -s " " "\n" | rofi -dmenu -i -p "Set refresh rate for '$secondary':")
+        te $secondaryrate
+        calc_scale $secondaryres
+        s_scale_x=$x_scale
+        s_scale_y=$y_scale
+        direction=$(printf "left\\nright\\nabove" | rofi -dmenu -i -p "What side of $primary should $secondary be on?")
+        te $direction
+        is_scale=$(printf "Yes\nNo" | rofi -dmenu -i -p "Set dynamic scale? :")
+        te $is_scale
+        save_config=$(printf "Yes\nNo" | rofi -dmenu -i -p "Set configuration as permanent?")
+        te $save_config
+        [ $save_config = "Yes" ] && printf "#!/bin/bash\n" > "$HOME/.xsync" && chmod +x "$HOME/.xsync"
+
+        if [ $is_scale = "Yes" ]; then
+            xrandr --output "$primary" --rate "$primaryrate" --mode "$primaryres" --scale "${p_scale_x}x${p_scale_y}" --output "$secondary" --"$direction"-of "$primary" --rate "$secondaryrate" --mode "$secondaryres" --scale "${s_scale_x}x${s_scale_y}"
+            printf "xrandr --output "$primary" --rate "$primaryrate" --mode "$primaryres" --scale "${p_scale_x}x${p_scale_y}" --output "$secondary" --"$direction"-of "$primary" --rate "$secondaryrate" --mode "$secondaryres" --scale "${s_scale_x}x${s_scale_y}"" >> "$HOME/.xsync"
+        else
+            xrandr --output "$primary" --rate "$primaryrate" --mode "$primaryres" --scale 1.0x1.0 --output "$secondary" --"$direction"-of "$primary" --rate "$secondaryrate" --mode "$secondaryres" --scale 1.0x1.0
+            printf "xrandr --output "$primary" --rate "$primaryrate" --mode "$primaryres" --scale 1.0x1.0 --output "$secondary" --"$direction"-of "$primary" --rate "$secondaryrate" --mode "$secondaryres" --scale 1.0x1.0" >> "$HOME/.xsync"
+        fi
+    fi
+    }
+
+morescreen() { # If multi-monitor is selected and there are more than two screens.
+	primary=$(echo "$screens" | rofi -dmenu -i -p "Select primary display:")
+	primaryrate=$(xrandr -q | tr -d "+" |  sed -n "/$primary/{n;p;}" | cut -d ' ' -f 9- | tr -s " " "\n" | rofi -dmenu -i -p "Set refresh rate for '$primary':")
+	primaryres=$(xrandr -q | sed -n "/$primary/{n;p;}" | awk '{ print $1 }')
+	secondary=$(echo "$screens" | grep -v "$primary" | rofi -dmenu -i -p "Select secondary display:")
+	secondaryres=$(xrandr -q | sed -n "/$secondary/{n;p;}" | awk '{ print $1 }')
+	secondaryrate=$(xrandr -q | tr -d "+" |  sed -n "/$secondary/{n;p;}" | cut -d ' ' -f 9- | tr -s " " "\n" | rofi -dmenu -i -p "Set refresh rate for '$secondary':")
+	direction=$(printf "left\\nright\\nabove" | rofi -dmenu -i -p "What side of $primary should $secondary be on?")
+	tertiary=$(echo "$screens" | grep -v "$primary" | grep -v "$secondary" | rofi -dmenu -i -p "Select third display:")
+	tertiaryres=$(xrandr -q | tr -d "+" |  sed -n "/$tertiary/{n;p;}" | awk '{ print $1 }')
+	tertiaryrate=$(xrandr -q | sed -n "/$tertiary/{n;p;}" | cut -d ' ' -f 9- | tr -s " " "\n" | rofi -dmenu -i -p "Set refresh rate for '$tertiary':")
+	xrandr --output "$primary" --mode "$primaryres" --rate "$primaryrate" --output "$secondary" --"$direction"-of "$primary" --mode "$secondaryres" --rate "$secondaryrate" --output "$tertiary" --"$(printf "left\\nright\\nabove" | grep -v "$direction")"-of "$primary" --mode "$tertiaryres" --rate "$tertiaryrate"
+	}
+
+multimon() { # Multi-monitor handler.
+	case "$(echo "$screens" | wc -l)" in
+		2) twoscreen ;;
+		*) morescreen ;;
+	esac ;}
+
+onescreen() { # If only one output available or chosen.
+        chosenres=$(xrandr -q | awk '{print $1}' | grep "x" | rofi -dmenu -i -p "Choose your resolution:")
+        te $chosenres
+        primaryrate=$(xrandr -q | tr -d "+*" | sed "/connected/d;/current/d" | grep $chosenres | sed -e "s/[^ ]*x[^ ]*//ig" | sed 's/^ *//g' | tr -s " " "\n" | rofi -dmenu -i -p "Set refresh rate for '$1':")
+        te $primaryrate
+        is_scale=$(printf "Yes\nNo" | rofi -dmenu -i -p "Set dynamic scale? :")
+        te $is_scale
+        save_config=$(printf "Yes\nNo" | rofi -dmenu -i -p "Set configuration as permanent?")
+        te $save_config
+        [ $save_config = "Yes" ] && printf "#!/bin/bash\n" > "$HOME/.xsync" && chmod +x "$HOME/.xsync"
+        if [ $is_scale = "Yes" ]; then
+            calc_scale $chosenres
+            xrandr --output "$1" --mode "$chosenres" --rate "$primaryrate" --scale "${x_scale}x${y_scale}"
+            [ $save_config = "Yes" ] && printf "xrandr --output "$1" --mode "$chosenres" --rate "$primaryrate" --scale "${x_scale}x${y_scale}"" >> "$HOME"/.xsync
+        else
+            xrandr --output "$1" --mode "$chosenres" --rate "$primaryrate" --scale 1.0x1.0
+            [ $save_config = "Yes" ] && printf "xrandr --output "$1" --mode "$chosenres" --rate "$primaryrate" --scale 1.0x1.0" >> "$HOME"/.xsync
+        fi
+	}
+
+postrun() { # Stuff to run to clean up.
+	pOS-setbg # Fix background if screen size/arangement has changed.
+	pOS-remaps # Re-remap keys if keyboard added (for laptop bases)
+	{ killall dunst ; setsid -f dunst ;} >/dev/null 2>&1 # Restart dunst to ensure proper location on screen
+	}
+
+# Get all possible displays
+allposs=$(xrandr -q | grep "connected")
+
+# Get all connected screens.
+screens=$(echo "$allposs" | awk '/ connected/ {print $1}')
+
+# If there's only one screen
+[ "$(echo "$screens" | wc -l)" -lt 2 ] &&
+	{ onescreen "$screens"; postrun; exit ;}
+
+# Get user choice including multi-monitor and manual selection:
+chosen=$(printf "%s\\nMulti-Monitor\\nManual Selection" "$screens" | rofi -dmenu -i -p "Select display arangement:") &&
+case "$chosen" in
+	"Manual selection") arandr ; exit ;;
+	"Multi-Monitor") multimon ;;
+	*) onescreen "$chosen" ;;
+esac
+
+postrun
