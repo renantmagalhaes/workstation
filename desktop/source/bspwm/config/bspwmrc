@@ -28,7 +28,7 @@ nm-applet &
 xdotool key --clearmodifiers Num_Lock &
 
 # Hot Corner
-xdotool behave_screen_edge --quiesce 600 --delay 0 top-left exec $HOME/.config/rofi/scripts/rofi-hotcorner.sh &
+# xdotool behave_screen_edge --quiesce 600 --delay 0 top-left exec $HOME/.config/rofi/scripts/rofi-hotcorner.sh &
 
 # Notifications
 dunst --config ~/.config/dunst/dunstrc &
