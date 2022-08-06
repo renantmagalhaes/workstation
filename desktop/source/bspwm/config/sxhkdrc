@@ -11,9 +11,9 @@ ctrl + alt + t
 
 # program launcher
 super + Pause
-	$HOME/GIT-REPOS/workstation/desktop/source/any/config/rofi/scripts/rofi-startup.sh
+	$HOME/GIT-REPOS/workstation/desktop/source/any/config/rofi/scripts/rofi-menu.sh
 super + z
-	$HOME/GIT-REPOS/workstation/desktop/source/any/config/rofi/scripts/rofi-startup.sh
+	$HOME/GIT-REPOS/workstation/desktop/source/any/config/rofi/scripts/rofi-menu.sh
 
 # make sxhkd reload its configuration files:
 super + Escape
