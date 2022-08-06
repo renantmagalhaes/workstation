@@ -1,0 +1,10 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+	1) setsid -f "$TERMINAL" -e htop ;;
+	2) notify-send "龍 Cpu module" "\- Shows average load." ;;
+esac
+
+icon="龍"
+load=$(uptime | awk '{ print $(NF-2) $(NF-1) $NF }' | tr "," " ")
+printf "$icon $load"

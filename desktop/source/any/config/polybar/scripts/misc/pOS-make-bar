@@ -1,0 +1,36 @@
+#!/bin/bash
+
+
+bars=( $(ls "$HOME/.config/phyos/dwmblocks/statusbar") )
+declare bars
+
+tput setaf 39
+echo "### Write space seperated number to include below bars (Example: 1 3 5 2 7): ###"
+tput sgr0
+echo
+tput setaf 46
+for ((i=0; i<${#bars[@]}; i++)); do
+    echo "$i: ${bars[i]::-4}"
+done
+tput sgr0
+
+sb="blocks = (\n"
+
+read -r line
+
+for choice in $line; do
+    if (( $choice < 0 )) || (( $choice >= ${#bars[@]})); then
+        tput setaf 160
+        echo "Bad index: $choice"
+        echo "Please run the script again, exitting."
+        tput sgr0
+        exit 1
+    fi
+
+    sb+="@include \"statusbar/${bars[choice]}\",\n"
+done
+
+sb="${sb::-3}\n);"
+
+printf "$sb" > "$HOME/.config/phyos/dwmblocks/dwmblocks.cfg"
+pOS-powermenu restart

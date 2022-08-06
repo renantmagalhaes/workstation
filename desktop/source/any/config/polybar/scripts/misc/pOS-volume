@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# Prints the current volume or 🔇 if muted.
+
+
+case $BLOCK_BUTTON in
+	1) setsid -f "$TERMINAL" -e pulsemixer ;;
+esac
+
+function send_notification {
+  iconSound=""
+  iconMuted=""
+  if [ $(pamixer --get-mute) = true ]; then
+    dunstify --close=3
+    dunstify -r 3 -a center --timeout=1500 -i "$pOS_NOTIF_IMG_DIR/mute.png" ""
+  else
+    bar=$(seq --separator="─" 0 "$((vol / 5))" | sed 's/[0-9]//g')
+    dunstify -r 3 -a top-center -u normal "$iconSound $bar"
+  fi
+}
+
+vol="$(pamixer --get-volume)"
+
+[ $(pamixer --get-mute) = true ] && send_notification && echo ﱝ && exit
+
+if [ "$vol" -gt "70" ]; then
+	icon=""
+elif [ "$vol" -lt "30" ]; then
+	icon="奄"
+else
+	icon="墳"
+fi
+
+send_notification && echo "$icon $vol%"

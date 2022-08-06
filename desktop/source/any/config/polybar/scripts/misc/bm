@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [[ $1 = "add" ]]; then
+	cd $2
+	dir=$(pwd)
+	cfg="$ZSHCFG/bookmarks/$3"
+	ln -sf "$dir" $cfg && echo "Bookmark: $3 saved succesfully"
+elif [[ $1 = "rm" ]]; then
+	rm "$ZSHCFG/bookmarks/$2"
+	echo "Bookmark: $2 erased succesfully"
+elif [[ $1 = "clear" ]]; then
+    yes | rm -r $ZSHCFG/bookmarks/*
+    echo "Bookmarks cleared succesfully"
+else
+	echo "Wrong operation, please use one of below:"
+	echo "bm add 'source' 'aliasname' adds bookmark"
+	echo "bm rm 'aliasname' deletes bookmark"
+fi
