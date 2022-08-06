@@ -25,19 +25,19 @@ NUM_WORKSPACES=$((GET_TOTAL_NUM_WORKSPACES / (GET_TOTAL_NUM_MONITORS - 1)))
 
 if [[ $GET_CURRENT_WORKSPACE == 1 ]] || [[ $GET_CURRENT_WORKSPACE == 11 ]]
 then
-    echo "    "
+    echo "    " |  rofi -dmenu -theme workspace-switch &
 elif [[ $GET_CURRENT_WORKSPACE == 2 ]] || [[ $GET_CURRENT_WORKSPACE == 22 ]]
 then
-    echo "    "
+    echo "    " |  rofi -dmenu -theme workspace-switch &
 elif [[ $GET_CURRENT_WORKSPACE == 3 ]] || [[ $GET_CURRENT_WORKSPACE == 33 ]]
 then
-    echo "    "
+    echo "    " |  rofi -dmenu -theme workspace-switch &
 elif [[ $GET_CURRENT_WORKSPACE == 4 ]] || [[ $GET_CURRENT_WORKSPACE == 44 ]]
 then
-    echo "    "
+    echo "    " |  rofi -dmenu -theme workspace-switch &
 elif [[ $GET_CURRENT_WORKSPACE == 5 ]] || [[ $GET_CURRENT_WORKSPACE == 55 ]]
 then
-    echo "    "
+    echo "    " |  rofi -dmenu -theme workspace-switch &
 fi
 
 
