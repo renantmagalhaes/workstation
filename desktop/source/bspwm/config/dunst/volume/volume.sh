@@ -7,7 +7,7 @@ muteOrNot=$(pactl get-sink-mute @DEFAULT_SINK@ | awk -F: '{ print $2 }')
 inc=5
 
 if [ $action = 'up' ]; then
-		if [[ $rightVol -ge 120 ]]; then
+		if [[ $rightVol -ge 175 ]]; then
 		exit
 		fi
 	pactl set-sink-volume @DEFAULT_SINK@ +$inc%
