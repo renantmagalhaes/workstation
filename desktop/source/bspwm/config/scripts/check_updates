@@ -13,6 +13,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
         if test -f "$FILE"; then
             APT_LIST=`cat /tmp/packages-upgradeable |wc -l`
             echo " $APT_LIST"
+            # echo " `apt-get dist-upgrade -s --quiet=2 | grep ^Inst | wc -l`"
         else
             echo " 0"
         fi
