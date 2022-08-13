@@ -1,14 +1,13 @@
-
 listview {
         lines: 3;
 }
 * {
-    width: 600;
+    width: 400;
 
 }
 
 configuration {
-  font: "Cascadia Code 12";
+  font: "Cascadia Code 24";
 
   window {
     display-name: "";
@@ -37,7 +36,12 @@ icon-search {
 entry {
     font:   inherit;
 
-    placeholder         : "Select one option bellow";
+    placeholder         : "SYS MENU";
     placeholder-color   : @fg2;
 }
-
+/*
+element-text {
+    background-color: rgba ( 0, 0, 0, 0 % );
+    horizontal-align: 0.50;
+    text-color:       inherit;
+} */
