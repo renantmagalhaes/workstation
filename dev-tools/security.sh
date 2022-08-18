@@ -60,8 +60,8 @@ sudo mv ~/go/bin/assetfinder /usr/local/bin/
 sudo wget `curl --silent "https://api.github.com/repos/DominicBreuker/pspy/releases/latest" |grep browser_download_url | grep -m 1 pspy64 |awk {'print $2'} |sed 's/\"//g'` -O /usr/local/bin/pspy64 && sudo chmod +x /usr/local/bin/pspy64
 
 # DNS Recon
-git clone https://github.com/darkoperator/dnsrecon.git ~/dnsrecon && \
-cd ~/dnsrecon && sudo pip3 install -r requirements.txt --no-warn-script-location && \
+git clone https://github.com/darkoperator/dnsrecon.git ~/GIT-REPOS/CORE/dnsrecon && \
+cd ~/GIT-REPOS/CORE/dnsrecon && sudo pip3 install -r requirements.txt --no-warn-script-location && \
 sudo ln -s -f  $PWD/dnsrecon.py /usr/local/bin/dnsrecon
 
 # Findomain
