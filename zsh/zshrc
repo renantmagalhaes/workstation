@@ -232,7 +232,7 @@ alias nordvpn-d='nordvpn set killswitch off && nordvpn disconnect'
 ### Security Tools
 alias sherlock='docker run -i theyahya/sherlock'
 alias legion='docker run -it carlospolop/legion:latest sh -c "/legion/legion.py"'
-alias waymore='python3 ~/GIT-REPOS/CORE/waymore/build/lib/waymore.py'
+alias waymore='python3 ~/GIT-REPOS/CORE/waymore/waymore.py'
 
 # command -v exa > /dev/null && alias ls='exa --icons --group-directories-first -g -b -h' && \
 #   alias tree='exa --tree'
