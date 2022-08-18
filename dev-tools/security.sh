@@ -38,6 +38,12 @@ sudo mv ~/go/bin/hakrawler /usr/local/bin/
 go install github.com/tomnomnom/waybackurls@latest && \
 sudo mv ~/go/bin/waybackurls /usr/local/bin/
 
+# waymore
+git clone https://github.com/xnl-h4ck3r/waymore.git ~/GIT-REPOS/CORE/waymore
+cd ~/GIT-REPOS/CORE/waymore
+sudo python setup.py install
+sudo chmod +x ~/GIT-REPOS/CORE/waymore/build/lib/waymore.py
+
 # gau
 go install github.com/lc/gau/v2/cmd/gau@latest && \
 sudo mv ~/go/bin/gau /usr/local/bin/
