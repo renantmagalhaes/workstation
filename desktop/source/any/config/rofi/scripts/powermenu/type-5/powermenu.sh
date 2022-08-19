@@ -11,7 +11,7 @@
 
 # Current Theme
 dir="$HOME/.config/rofi/scripts/powermenu/type-5"
-theme='style-2'
+theme='style-6'
 
 # CMDs
 lastlogin="`last $USER | head -n1 | tr -s ' ' | cut -d' ' -f5,6,7`"
@@ -44,15 +44,15 @@ confirm_cmd() {
 		-theme-str 'element-text {horizontal-align: 0.5;}' \
 		-theme-str 'textbox {horizontal-align: 0.5;}' \
 		-dmenu \
-		-p 'Confirmation' \
-		-mesg 'Are you Sure?' \
+		# -p 'Confirmation' \
+		# -mesg 'Are you Sure?' \
 		-theme ${dir}/${theme}.rasi
 }
 
-# Ask for confirmation
-confirm_exit() {
-	echo -e "$yes\n$no" | confirm_cmd
-}
+# # Ask for confirmation
+# confirm_exit() {
+# 	echo -e "$yes\n$no" | confirm_cmd
+# }
 
 # Pass variables to rofi dmenu
 run_rofi() {
@@ -61,8 +61,8 @@ run_rofi() {
 
 # Execute Command
 run_cmd() {
-	selected="$(confirm_exit)"
-	if [[ "$selected" == "$yes" ]]; then
+	# selected="$(confirm_exit)"
+	# if [[ "$selected" == "$yes" ]]; then
 		if [[ $1 == '--shutdown' ]]; then
 			systemctl poweroff
 		elif [[ $1 == '--reboot' ]]; then
@@ -84,9 +84,9 @@ run_cmd() {
 				qdbus org.kde.ksmserver /KSMServer logout 0 0 0
 			fi
 		fi
-	else
-		exit 0
-	fi
+	# else
+		# exit 0
+	# fi
 }
 
 # Actions
@@ -102,11 +102,7 @@ case ${chosen} in
 		run_cmd --hibernate
         ;;
     $lock)
-		if [[ -x '/usr/bin/betterlockscreen' ]]; then
-			betterlockscreen -l
-		elif [[ -x '/usr/bin/i3lock' ]]; then
-			i3lock
-		fi
+		~/.config/bspwm/scripts/blur-lock
         ;;
     $suspend)
 		run_cmd --suspend
