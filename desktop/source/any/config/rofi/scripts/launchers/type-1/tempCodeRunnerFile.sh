@@ -1,0 +1,1 @@
+/home/rtm/GIT-REPOS/CORE/rofi/files/launchers
