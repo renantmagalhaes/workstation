@@ -39,5 +39,10 @@ unzip ~/.local/share/fonts/droid-sans.zip -d ~/.local/share/fonts/
 wget https://github.com/FortAwesome/Font-Awesome/releases/download/`curl --silent "https://api.github.com/repos/FortAwesome/Font-Awesome/releases/latest" |grep tag_name |awk '{print $2}' |sed 's/\"//g; s/\,//g'`/fontawesome-free-`curl --silent "https://api.github.com/repos/FortAwesome/Font-Awesome/releases/latest" |grep tag_name |awk '{print $2}' |sed 's/\"//g; s/\,//g'`-desktop.zip -O ~/.local/share/fonts/Font-Awesome.zip
 unzip ~/.local/share/fonts/Font-Awesome.zip -d ~/.local/share/fonts/
 
+# Fonts for rofi menu
+wget https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/GrapeNuts-Regular.ttf -O ~/.local/share/fonts/GrapeNuts-Regular.ttf
+wget https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/Icomoon-Feather.ttf -O ~/.local/share/fonts/Icomoon-Feather.ttf
+# wget https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/Iosevka-Nerd-Font-Complete.ttf ~/.local/share/fonts/
+# wget https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/JetBrains-Mono-Nerd-Font-Complete.ttf ~/.local/share/fonts/
 
 fc-cache -vf ~/.local/share/fonts/
