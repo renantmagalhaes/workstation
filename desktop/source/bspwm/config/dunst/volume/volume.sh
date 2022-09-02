@@ -12,7 +12,7 @@ if [ $action = 'up' ]; then
 		fi
 	pactl set-sink-volume @DEFAULT_SINK@ +$inc%
   	if [ $muteOrNot = 'no' ]; then
-  		dunstify "$(expr $rightVol + $inc)" -i volume -u low -t 1000 -r 9993 -h int:value:$rightVol
+  		dunstify "$(expr $rightVol + $inc)" -i audio-volume-high  -u low -t 1000 -r 9993 -h int:value:$rightVol
   	elif [$muteOrNot = 'yes' ]; then
 		dunstify "$(expr $rightVol + $inc)" -i mute -u low -t 1000 -r 9993 -h int:value:$rightVol
 	fi
@@ -20,19 +20,19 @@ elif [ $action = 'down' ]; then
 	pactl set-sink-volume @DEFAULT_SINK@ -$inc%
 	if [ $rightVol = 0 ]; then
 	if [ $muteOrNot = 'no' ]; then
-		dunstify "0" -i volume -u mute -t 1000 -r 9993 -h int:value:0
+		dunstify "0" -i audio-volume-medium -u mute -t 1000 -r 9993 -h int:value:0
 	elif [$muteOrNot = 'yes' ]; then
-		dunstify "0" -i mute  -u mute -t 1000 -r 9993 -h int:value:0
+		dunstify "0" -i audio-volume-high  -u mute -t 1000 -r 9993 -h int:value:0
 	fi
 	elif [ $muteOrNot = 'no' ]; then
-		dunstify "$(expr $rightVol - $inc)" -i volume -u low -t 1000 -r 9993 -h int:value:$rightVol
+		dunstify "$(expr $rightVol - $inc)" -i audio-volume-medium -u low -t 1000 -r 9993 -h int:value:$rightVol
 	elif [$muteOrNot = 'yes' ]; then
 		dunstify "$(expr $rightVol - $inc)" -i mute -u low -t 1000 -r 9993 -h int:value:$rightVol
 	fi
 elif [ $action = 'mute' ]; then
 	pactl set-sink-mute @DEFAULT_SINK@ toggle
 		if [ $muteOrNot = 'no' ]; then
-			dunstify "$rightVol" -i volume -u low -t 1000 -r 9993 -h int:value:$rightVol
+			dunstify "$rightVol" -i audio-volume-medium -u low -t 1000 -r 9993 -h int:value:$rightVol
   		elif [ $muteOrNot = 'yes' ]; then
 			dunstify "$rightVol" -i mute -u low -t 1000 -r 9993 -h int:value:$rightVol
 		fi
