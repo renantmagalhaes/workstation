@@ -213,7 +213,7 @@
     icon_path = /usr/share/icons/material-design-dark/scalable/status/:/usr/share/icons/Papirus/16x16/actions/:/usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
     ### History ###
 
-    history=ctrl+period
+    # history=ctrl+period
 
     # context=ctrl+space
     # Should a notification popped up from history be sticky or timeout
