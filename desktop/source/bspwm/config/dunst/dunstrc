@@ -210,7 +210,7 @@
 
     # Paths to default icons.
     # icon_path = /usr/share/icons/Paper/16x16/mimetypes/:/usr/share/icons/Paper/48x48/status/:/usr/share/icons/Paper/16x16/devices/:/usr/share/icons/Paper/48x48/notifications/:/usr/share/icons/Paper/48x48/emblems/:/usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
-    icon_path = /usr/share/icons/material-design-dark/scalable/status/:/usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    icon_path = /usr/share/icons/material-design-dark/scalable/status/:/usr/share/icons/Papirus/16x16/actions/:/usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
     ### History ###
 
     history=ctrl+period
