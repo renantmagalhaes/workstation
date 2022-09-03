@@ -25,6 +25,9 @@ sudo flatpak install -y flathub org.kde.kdenlive
 ## OBS Studio
 sudo flatpak install -y flathub com.obsproject.Studio
 
+## Obsidian
+sudo flatpak install -y flathub md.obsidian.Obsidian
+
 # ## FFaudioConverter
 # sudo flatpak install -y flathub com.github.Bleuzen.FFaudioConverter
 
