@@ -26,6 +26,9 @@ wget https://portswigger.net/burp/releases/startdownload?product=community&versi
 chmod +x /tmp/burp.sh
 sh -c "/tmp/burp.sh"
 
+# RustScan
+brew install rustscan
+
 # Amass
 brew tap caffix/amass
 brew install amass
