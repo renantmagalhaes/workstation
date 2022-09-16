@@ -66,6 +66,13 @@ sh -c "~/GIT-REPOS/CORE/Graphite-gtk-theme/install.sh --tweaks black normal riml
 git clone https://github.com/vinceliuice/Colloid-gtk-theme.git ~/GIT-REPOS/CORE/Colloid-gtk-theme
 cd  ~/GIT-REPOS/CORE/Colloid-gtk-theme && sh -c "./install.sh --tweaks --tweaks dracula"
 
+
+# Jasper-gtk-theme
+git clone https://github.com/vinceliuice/Jasper-gtk-theme.git ~/GIT-REPOS/CORE/Jasper-gtk-theme
+sh -c "~/GIT-REPOS/CORE/Jasper-gtk-theme/install.sh -t grey --tweaks nord"
+sh -c "~/GIT-REPOS/CORE/Jasper-gtk-theme/install.sh -t grey --tweaks black"
+sh -c "~/GIT-REPOS/CORE/Jasper-gtk-theme/install.sh -t grey --tweaks dracula"
+
 ##############################################
 # ICONS
 
@@ -93,3 +100,5 @@ wget `curl --silent "https://api.github.com/repos/catppuccin/gtk/releases/latest
 unzip -d ~/.themes/ ~/.themes/Catppuccin-blue.zip 
 wget `curl --silent "https://api.github.com/repos/catppuccin/gtk/releases/latest" |grep browser_download_url | grep Catppuccin-purple.zip |grep -Po '"browser_download_url": "\K.*?(?=")'` -O ~/.themes/Catppuccin-purple.zip
 unzip -d ~/.themes/ ~/.themes/Catppuccin-purple.zip
+
+
