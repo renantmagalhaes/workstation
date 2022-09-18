@@ -21,6 +21,7 @@ echo " 12) Deckboard"
 echo " 13) NordVPN"
 echo " 14) Git Config"
 echo " 15) Wallpapers"
+echo " 16) Custom grub2 screen"
 echo " ==== EXTRA ===="
 echo " 20) Nix package manager"
 echo " ==============="
@@ -43,6 +44,7 @@ case $n in
     13) sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh) && sudo usermod -aG nordvpn $USER && sudo systemctl enable --now nordvpnd.service ;;
     14) bash utils/git-config/git-config.sh ;;
     15) bash utils/wallpapers/wallpapers.sh ;;
+    16) sudo bash utils/grub2-customizer/custom-grub2.sh ;;
 # ===================================================================================
     20) curl -L https://nixos.org/nix/install | sh ;;
 # ===================================================================================
