@@ -4,11 +4,13 @@ compat-delete='delete-sequence'
 default-shell='/usr/bin/tmux'
 display-n=-1
 display-tab-names=0
+fullscreen-hide-tabbar=true
 gtk-prefer-dark-theme=true
-gtk-theme-name='Graphite-dark'
+gtk-theme-name='Catppuccin-blue'
 gtk-use-system-default-theme=true
 hide-tabs-if-one-tab=false
-history-size=100000
+history-size=1000000
+infinite-history=true
 max-tab-name-length=100
 mouse-display=false
 open-tab-cwd=true
@@ -22,7 +24,7 @@ start-at-login=true
 use-default-font=false
 use-login-shell=false
 use-popup=true
-use-scrollbar=true
+use-scrollbar=false
 use-trayicon=false
 window-halignment=0
 window-height=67
@@ -36,7 +38,7 @@ window-width=99
 show-hide='<Primary>Return'
 
 [style/background]
-transparency=92
+transparency=88
 
 [style/font]
 allow-bold=true
