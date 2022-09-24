@@ -7,7 +7,7 @@ vivaldi https://youtube.com &
 sleep 2
 bspc desktop --focus 2 ; /opt/vivaldi/vivaldi --profile-directory=Default --app-id=hnpfjngllnobngcgfapefoaidbinmjnm &
 sleep 1
-bspc desktop --focus 22 ; /opt/vivaldi/vivaldi --profile-directory=Default --app-id=majiogicmcnmdhhlgmkahaleckhjbmlk &
+bspc desktop --focus 22 ; /opt/vivaldi/vivaldi --profile-directory=Default --app-id=aeejceomnhmjmeacdckmmopfaigimnkl &
 sleep 0.5
 bspc desktop --focus 5
 vivaldi --args --incognito &
