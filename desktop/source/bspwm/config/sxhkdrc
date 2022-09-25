@@ -32,6 +32,8 @@ Print
 	flameshot gui
 ctrl + Print
 	gnome-screenshot -i
+alt + Print
+	flameshot screen
 
 super + a 
 	pavucontrol
