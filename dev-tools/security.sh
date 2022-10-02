@@ -30,8 +30,8 @@ sh -c "/tmp/burp.sh"
 brew install rustscan
 
 # Amass
-brew tap caffix/amass
-brew install amass
+RUN go install -v github.com/OWASP/Amass/v3/...@master && \
+mv ~/go/bin/amass /usr/local/bin/
 
 # hakrawler
 go install github.com/hakluke/hakrawler@latest && \
