@@ -72,6 +72,14 @@ sudo ln -s -f  $PWD/dnsrecon.py /usr/local/bin/dnsrecon
 sudo wget https://github.com/findomain/findomain/releases/latest/download/findomain-linux -O /usr/local/bin/findomain && \
 sudo chmod +x /usr/local/bin/findomain
 
+# gowitness
+go install github.com/sensepost/gowitness@latest  && \
+sudo mv ~/go/bin/gowitness /usr/local/bin/
+
+# httprobe
+go install github.com/tomnomnom/httprobe@latest && \
+sudo mv ~/go/bin/httprobe /usr/local/bin/
+
 # httpx
 go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest && \
 sudo mv ~/go/bin/httpx /usr/local/bin/
