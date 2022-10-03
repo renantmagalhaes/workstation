@@ -14,6 +14,10 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
 
     sudo dnf install -y golang sqlitebrowser aircrack-ng nmap jq
 
+elif check_cmd zypper; then  # FOR RPM SYSTEMS
+
+    sudo zypper install -y go sqlitebrowser aircrack-ng nmap jq
+
 else
     echo "Not able to identify the system"
 fi
@@ -21,17 +25,12 @@ fi
 # Legion
 # https://github.com/carlospolop/legion
 
-# Burp
-wget https://portswigger.net/burp/releases/startdownload?product=community&version=2022.5.2&type=Linux -O /tmp/burp.sh
-chmod +x /tmp/burp.sh
-sh -c "/tmp/burp.sh"
-
 # RustScan
 brew install rustscan
 
 # Amass
-RUN go install -v github.com/OWASP/Amass/v3/...@master && \
-mv ~/go/bin/amass /usr/local/bin/
+go install -v github.com/OWASP/Amass/v3/...@master && \
+sudo mv ~/go/bin/amass /usr/local/bin/
 
 # hakrawler
 go install github.com/hakluke/hakrawler@latest && \
@@ -95,3 +94,10 @@ sudo mv ~/go/bin/subfinder /usr/local/bin/
 # uncover
 go install -v github.com/projectdiscovery/uncover/cmd/uncover@latest && \
 sudo mv ~/go/bin/uncover /usr/local/bin/
+
+####
+
+# Burp
+curl -L 'https://portswigger.net/burp/releases/startdownload?product=community&version=2022.5.2&type=Linux' --output /tmp/burp.sh
+chmod +x /tmp/burp.sh
+sh -c "/tmp/burp.sh"

@@ -13,6 +13,11 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
     # polkit
     lxpolkit &
+
+if check_cmd zypper; then # FOR OpenSuse SYSTEMS
+    # polkit
+    mate-polkit &
+
 else
     echo "Not able to identify the system" > ~/bspwm.log
 fi
