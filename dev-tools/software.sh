@@ -70,12 +70,12 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     sudo usermod -aG docker $USER
 
     ## yarn / Nodejs
-    sudo apt install -y curl gnupg2 make
-    sudo curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
-    sudo curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-    sudo echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-    sudo apt update -y
-    sudo apt install -y yarn nodejs
+    # sudo apt install -y curl gnupg2 make
+    # sudo curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
+    # sudo curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    # sudo echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+    # sudo apt update -y
+    # sudo apt install -y yarn nodejs
 
     ## kontena-lens
     wget https://api.k8slens.dev/binaries/Lens-5.2.5-latest.20211001.2.amd64.deb -O /tmp/Lens.deb
@@ -99,13 +99,13 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     ## podman
     # sudo dnf -y install podman podman-compose
 
-    ## yarn / nodejs
-    sudo dnf install -y curl gnupg2 gcc-c++ make
-    sudo curl -sL https://rpm.nodesource.com/setup_12.x | sudo bash -
-    sudo curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
-    sudo sed -i 's/failovermethod\=priority//' /etc/yum.repos.d/*
-    sudo dnf update -y
-    sudo dnf install -y yarn nodejs
+    # ## yarn / nodejs
+    # sudo dnf install -y curl gnupg2 gcc-c++ make
+    # sudo curl -sL https://rpm.nodesource.com/setup_12.x | sudo bash -
+    # sudo curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
+    # sudo sed -i 's/failovermethod\=priority//' /etc/yum.repos.d/*
+    # sudo dnf update -y
+    # sudo dnf install -y yarn nodejs
 
     # Fix fontissue robo3t
     sudo rm -rf /var/cache/fontconfig/*
