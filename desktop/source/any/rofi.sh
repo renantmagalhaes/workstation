@@ -26,6 +26,12 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     #XCAPE - Bind rofi to SuperKey
     sudo dnf install -y git gcc make pkgconfig libX11-devel libXtst-devel libXi-devel
 
+elif check_cmd zypper; then  # FOR RPM SYSTEMS
+    sudo zypper install -y rofi
+
+    #XCAPE - Bind rofi to SuperKey
+    sudo zypper install -y git gcc make pkgconfig libX11-devel libXtst-devel libXi-devel
+
 else
     echo "Not able to identify the system"
     exit 0
