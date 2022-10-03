@@ -39,7 +39,7 @@ case $n in
     6) bash dev-tools/software.sh ;;
     7) bash dev-tools/devops.sh ;;
 # ===================================================================================
-    11) bash utils/virtualbox/virtualbox-ext-pack.sh ;;
+    11) bash utils/virtualization/virtualbox/virtualbox-ext-pack.sh ;;
     12) bash utils/deckboard/deckboard.sh ;;
     13) sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh) && sudo usermod -aG nordvpn $USER && sudo systemctl enable --now nordvpnd.service ;;
     14) bash utils/git-config/git-config.sh ;;

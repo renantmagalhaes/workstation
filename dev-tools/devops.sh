@@ -23,29 +23,29 @@ brew install weaveworks/tap/eksctl
 ### kubectl
 brew install kubectl
 
-# Terraform
-brew tap hashicorp/tap
-brew install hashicorp/tap/terraform
+# # Terraform
+# brew tap hashicorp/tap
+# brew install hashicorp/tap/terraform
 
-# Ansible
-sudo pip3 install ansible
-sudo pip3 install "ansible-lint[yamllint]"
-sudo pip3 install argcomplete
+# # Ansible
+# sudo pip3 install ansible
+# sudo pip3 install "ansible-lint[yamllint]"
+# sudo pip3 install argcomplete
 
-# Skaffold
-brew install skaffold
+# # Skaffold
+# brew install skaffold
 
-# ArgoCD
-brew install argocd
+# # ArgoCD
+# brew install argocd
 
-# FluxCD
-brew install fluxcd/tap/flux
+# # FluxCD
+# brew install fluxcd/tap/flux
 
-# popeye
-brew install derailed/popeye/popeye
+# # popeye
+# brew install derailed/popeye/popeye
 
-# kubescape
-curl -s https://raw.githubusercontent.com/armosec/kubescape/master/install.sh | /bin/bash
+# # kubescape
+# curl -s https://raw.githubusercontent.com/armosec/kubescape/master/install.sh | /bin/bash
 
 
 if check_cmd apt-get; then # FOR DEB SYSTEMS
