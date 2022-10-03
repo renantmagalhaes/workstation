@@ -23,6 +23,20 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     # pkg
     sudo dnf install -y polybar mpd wmctrl playerctl material-icons-fonts material-design-light material-design-dark yad xsel
 
+
+elif check_cmd zypper; then  # FOR OpenSuse SYSTEMS
+    # pkg
+    sudo zypper install -y polybar mpd wmctrl playerctl yad xsel
+    wget https://download-ib01.fedoraproject.org/pub/fedora/linux/releases/36/Everything/x86_64/os/Packages/m/material-design-dark-1.6.2-3.fc36.noarch.rpm -O /tmp/material-design-dark.rpm
+    sudo rpm -i /tmp/material-design-dark.rpm
+    wget https://download-ib01.fedoraproject.org/pub/fedora/linux/updates/36/Everything/aarch64/Packages/m/material-design-light-1.6.2-6.fc36.noarch.rpm -O /tmp/material-design-light.rpm
+    sudo rpm -i /tmp/material-design-light.rpm
+    wget https://github.com/google/material-design-icons/raw/master/font/MaterialIcons-Regular.ttf -O ~/.local/share/fonts/MaterialIcons-Regular.ttf
+    wget https://github.com/google/material-design-icons/raw/master/font/MaterialIconsOutlined-Regular.otf -O ~/.local/share/fonts/MaterialIconsOutlined-Regular.otf
+    wget https://github.com/google/material-design-icons/raw/master/font/MaterialIconsRound-Regular.otf -O ~/.local/share/fonts/MaterialIconsRound-Regular.otf
+    wget https://github.com/google/material-design-icons/raw/master/font/MaterialIconsSharp-Regular.otf -O ~/.local/share/fonts/MaterialIconsSharp-Regular.otf
+    wget https://github.com/google/material-design-icons/raw/master/font/MaterialIconsTwoTone-Regular.otf -O ~/.local/share/fonts/MaterialIconsTwoTone-Regular.otf
+    sudo fc-cache -vf ~/.local/share/fonts/
 else
     echo "Not able to identify the system"
     exit 0
