@@ -130,12 +130,6 @@ sudo zypper install -y google-chrome-stable
 # sudo zypper in vivaldi-stable
 sudo opi vivaldi
 
-## Install Visual Code
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/zypp/repos.d/vscode.repo'
-sudo zypper refresh
-sudo zypper install -y code
-
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
 
