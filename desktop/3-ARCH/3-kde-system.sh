@@ -114,9 +114,6 @@ yay -Sy google-chrome
 # Install Vivaldi
 yes | sudo pacman -Syu vivaldi vivaldi-ffmpeg-codecs
 
-# Install Visual Code
-yay -Sy visual-studio-code-bin
-
 # nordvpn
 yay -Sy nordvpn-bin
 sudo systemctl enable --now nordvpnd
