@@ -9,7 +9,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     sudo apt-get install -y install hplip xsane sane
     hp-setup
 elif check_cmd dnf; then
-    sudo dnf install -y hplip xsane sane hplip-gui
+    sudo dnf install -y hplip xsane libsane-hpaio libinsane-devel hplip-gui
     hp-setup
 else
     echo "system not found"
