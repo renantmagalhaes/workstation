@@ -9,10 +9,6 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 sudo flatpak install -y flathub com.slack.Slack
 sudo flatpak override --filesystem=home:ro com.slack.Slack
 
-# VSCode
-sudo flatpak install -y flathub com.visualstudio.code
-sudo flatpak override --filesystem=home:ro com.visualstudio.code
-
 ## Skype 
 sudo flatpak install -y flathub com.skype.Client
 

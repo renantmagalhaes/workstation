@@ -115,6 +115,13 @@ sudo apt-get -f install -y
 ## Install Vivaldi Browser
 sudo apt install -y vivaldi-stable
 
+## Install Visual Code
+wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
+sudo dpkg -i /tmp/visual_code_amd64.deb
+sudo sed -i 's/\,arm64\,armhf//g' /etc/apt/sources.list.d/vscode.list
+sudo apt-get -f install -y
+
+
 # Enable BT FastConnectable
 sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
 
