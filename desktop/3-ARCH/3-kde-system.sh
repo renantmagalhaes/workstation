@@ -65,7 +65,7 @@ yes | sudo pacman -Syu
 mkdir -p ~/GIT-REPOS/CORE
 
 # Install the packages from fedora repo
-sudo pacman -Sy zsh vlc clementine vim nmap blender brasero gparted wireshark-qt tmux curl vpnc git htop meld openvpn guake krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring kvantum-qt5 python-pip flatpak unzip latte-dock libreoffice-fresh kdeplasma-addons neovim
+sudo pacman -Sy zsh vlc clementine vim nmap blender brasero gparted wireshark-qt tmux curl vpnc git htop meld openvpn guake krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring kvantum-qt5 python-pip flatpak unzip latte-dock libreoffice-fresh kdeplasma-addons
 
 # Bluetooth
 yes | sudo pacman -S --needed bluez bluez-utils pulseaudio-bluetooth bluedevil
