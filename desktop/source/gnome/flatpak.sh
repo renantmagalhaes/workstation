@@ -3,10 +3,3 @@
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-
-# Flathub Packages for gnome only
-## Slack
-sudo flatpak install -y flathub org.gnome.Extensions
-
-## Plex media player
-sudo flatpak install -y flathub tv.plex.PlexDesktop
