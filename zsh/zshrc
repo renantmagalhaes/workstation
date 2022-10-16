@@ -188,6 +188,7 @@ fi
 alias killtmux="pidof tmux |xargs kill -9"
 alias python="python3"
 alias killvivaldi="pidof vivaldi-bin |xargs kill -9"
+alias killgnome="killall -HUP gnome-shell"
 # alias bluetooth-restart="sudo rfkill block bluetooth && sudo rfkill unblock bluetooth && sudo systemctl restart bluetooth"
 alias bluetooth-restart="sudo systemctl stop bluetooth.service && sudo rm -rf /var/lib/bluetooth/* && sudo systemctl start bluetooth.service"
 alias vga-info="lspci -nnk |grep -A3 VGA"
