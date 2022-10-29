@@ -14,7 +14,7 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     # polkit
     lxpolkit &
 
-if check_cmd zypper; then # FOR OpenSuse SYSTEMS
+elif check_cmd zypper; then # FOR OpenSuse SYSTEMS
     # polkit
     mate-polkit &
 
