@@ -230,7 +230,10 @@ alias pdf-signature='xournal'
 alias nordvpn-c='nordvpn connect && nordvpn set tpl on && nordvpn set killswitch on && nordvpn set autoconnect on'
 alias nordvpn-d='nordvpn set autoconnect off && nordvpn set killswitch off && nordvpn set tpl off && nordvpn disconnect'
 
-### Security Tools
+### System ###
+alias pip='python -m pip'
+
+### Security Tools ###
 alias sherlock='docker run -i theyahya/sherlock'
 alias legion='docker run -it carlospolop/legion:latest sh -c "/legion/legion.py"'
 alias waymore='python3 ~/GIT-REPOS/CORE/waymore/waymore.py'
@@ -242,7 +245,7 @@ command -v lsd > /dev/null && alias ls='lsd --group-dirs first' && \
 # command -v colorls > /dev/null && alias ls='colorls --sd --gs' && \
 # 	alias tree='colorls --tree'
 
-### CAT & LESS
+### CAT & LESS ###
 #command -v batcat > /dev/null && \
 #	alias batcat='batcat --theme=ansi-$([ "$COLOR_SCHEME" = "light" ] && echo "light" || echo "dark")' && \
 #	alias cat='batcat --pager=never' && \
@@ -251,7 +254,7 @@ command -v lsd > /dev/null && alias ls='lsd --group-dirs first' && \
 # colorize ls
 [ -x /usr/bin/dircolors ] && eval "$(dircolors -b)"
 
-### TOP
+### TOP ###
 command -v htop > /dev/null && alias top='htop'
 command -v bpytop > /dev/null && alias top='bpytop'
 
