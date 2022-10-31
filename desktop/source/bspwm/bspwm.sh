@@ -89,14 +89,14 @@ chmod +x ~/.config/sxhkd/sxhkdrc
 
 
 # scripts
-ln -s -f $PWD/config/scripts ~/.config/bspwm/scripts
+ln -s -f $PWD/config/scripts ~/.config/bspwm/
 
 # Picom config
 ln -s -f $PWD/config/picom/picom.conf ~/.config/picom/picom.conf
 
 # Dunst config
-rm -rf ~/.config/dunst/
-ln -s -f $PWD/config/dunst ~/.config/dunst
+rm -rf ~/.config/dunst
+ln -s -f $PWD/config/dunst ~/.config/
 
 # Nitrogen config
 rm -rf ~/.config/nitrogen
@@ -104,7 +104,7 @@ cp -r $PWD/config/nitrogen ~/.config/
 
 # jgmenu config
 rm -rf ~/.config/jgmenu/
-ln -s -f $PWD/config/jgmenu ~/.config/jgmenu
+ln -s -f $PWD/config/jgmenu ~/.config/
 
 # Copy fonts
 # cp -r $PWD/config/fonts/*  ~/.local/share/fonts/
