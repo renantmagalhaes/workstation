@@ -301,8 +301,8 @@ sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)
 wget https://github.com/johanmalm/jgmenu/archive/refs/tags/v4.4.0.zip -O ~/GIT-REPOS/CORE/jgmenu.zip
 cd ~/GIT-REPOS/CORE/ && unzip jgmenu.zip
 cd jgmenu-4.4.0
-sudo apt-get install -y librsvg2-dev libxml2-dev libmenu-cache-dev libxfce4panel-2.0-dev
-dpkg-buildpackage -tc -b -us -uc
+sudo apt-get install -y librsvg2-dev libxml2-dev libmenu-cache-dev libxfce4panel-2.0-dev debhelper
+sudo dpkg-buildpackage -tc -b -us -uc
 sudo dpkg -i ../jgmenu_4.4.0-1_amd64.deb
 
 
@@ -311,7 +311,7 @@ sudo dpkg -i ../jgmenu_4.4.0-1_amd64.deb
 git clone https://gitlab.freedesktop.org/pulseaudio/pulseaudio.git ~/GIT-REPOS/CORE/pulseaudio
 
 cd ~/GIT-REPOS/CORE/pulseaudio
-sudo apt-get build-dep pulseaudio -y
+sudo apt-get build-dep pulseaudio meson -y
 meson build
 ninja -C build
 sudo ninja -C build install
