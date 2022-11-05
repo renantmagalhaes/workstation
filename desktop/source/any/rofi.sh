@@ -47,7 +47,7 @@ cp -r ~/GIT-REPOS/CORE/rofi-themes-collection/themes/* ~/.local/share/rofi/theme
 # ln -s -f $PWD/config/rofi/rtm-rofi-theme.rasi ~/.config/rofi/rtm-rofi-theme.rasi
 # ln -s -f $PWD/config/rofi/config.rasi ~/.config/rofi/config.rasi
 rm -rf ~/.config/rofi
-ln -s -f $PWD/config/rofi ~/.config/rofi
+ln -s -f $PWD/config/rofi ~/.config/
 
 
 #XCAPE - Bind rofi to SuperKey
