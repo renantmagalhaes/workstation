@@ -8,8 +8,9 @@ check_cmd() {
 
 # Add the repository key with either wget or curl
 if check_cmd apt-get; then # FOR DEB SYSTEMS
-    wget https://downloads.1password.com/linux/debian/amd64/stable/1password-latest.deb -O /tmp/1password-latest.rpm
-    sudo dpkg -i /tmp/1password-latest.rpm
+    wget https://downloads.1password.com/linux/debian/amd64/stable/1password-latest.deb -O /tmp/1password-latest.deb
+    sudo dpkg -i /tmp/1password-latest.deb
+    sudo apt-get -f install
 
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
     wget https://downloads.1password.com/linux/rpm/stable/x86_64/1password-latest.rpm -O /tmp/1password-latest.rpm
