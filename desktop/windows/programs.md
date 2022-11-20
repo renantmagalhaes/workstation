@@ -16,7 +16,7 @@ wsl --install
 
 1. [Python3](https://www.python.org/downloads/)
 2. [WinDirStart](https://windirstat.net/download.html)
-3. [Lightshot](https://app.prntscr.com/en/index.html)
+3. [Flameshot](https://github.com/flameshot-org/flameshot/releases/latest)
 4. [Robo3t](https://robomongo.org/download)
 5. [DBeaver](https://dbeaver.io/download/)
 6. [pgAdmin](https://www.pgadmin.org/download/pgadmin-4-windows/)

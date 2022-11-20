@@ -33,12 +33,12 @@ bash ../source/any/brew.sh
 #Utils
 
 ## LSD
-wget https://github.com/Peltoche/lsd/releases/download/0.22.0/lsd-musl_0.22.0_amd64.deb -O /tmp/lsd_amd64.deb
+wget https://github.com/Peltoche/lsd/releases/download/0.23.1/lsd-musl_0.23.1_amd64.deb -O /tmp/lsd_amd64.deb
 sudo dpkg -i /tmp/lsd_amd64.deb
 
 ## Fix python default path
 sudo ln -s /usr/bin/python3 /usr/bin/python
-sudo ln -s /usr/bin/pip3 /usr/bin/pip
+
 
 # Install pip packages
 sudo pip3 install virtualenv virtualenvwrapper pylint
