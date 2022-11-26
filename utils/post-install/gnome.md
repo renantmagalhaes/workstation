@@ -84,6 +84,29 @@ just-perfection-desktop@just-perfection
 
 ~/.themes/Graphite-dark/gnome-shell/gnome-shell.css
 
+#### Gaps panel
+
+Need to remove the `/* Top Bar */` header to work
+
+```
+#panel{
+  background-color: transparent;
+  height: 32px;
+}
+.workspace-animation{ background-color: #272727; }
+.panel-button,
+.clock,
+.clock-display StIcon{
+color: #ffffff;
+  border-radius: 14px;
+  border: 3px solid transparent;
+  background-color: #131313;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+```
+
+
+#### Floating panel
 ```
 /* Top Bar */
 #panel {
