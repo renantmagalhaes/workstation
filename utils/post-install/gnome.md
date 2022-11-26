@@ -91,6 +91,7 @@ Need to remove the `/* Top Bar */` header to work
 ```
 #panel{
   background-color: transparent;
+  margin: 2px;
   height: 32px;
 }
 .workspace-animation{ background-color: #272727; }
