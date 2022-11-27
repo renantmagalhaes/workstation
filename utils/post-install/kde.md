@@ -109,6 +109,11 @@ Configs
 # KWin Scripts
 
 - Hide Titles
+- Force Blur
+  - guake
+  - Guake
+  - alacritty
+  - Alacritty
 
 # Set KRunner shortcut to meta key and config
 
