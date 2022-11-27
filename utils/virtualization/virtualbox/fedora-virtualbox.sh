@@ -19,6 +19,6 @@ EOF
 
 # Installation
 sudo dnf search virtualbox
-sudo dnf install -y VirtualBox-6.1
+sudo dnf install -y VirtualBox-7.0
 sudo usermod -a -G vboxusers $USER
 newgrp vboxusers
