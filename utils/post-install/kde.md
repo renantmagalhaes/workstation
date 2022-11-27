@@ -2,15 +2,6 @@
 
 # Themes
 
-    Kvantum -> Orchis-dark
-    Global Theme -> Fluent-round-dark / Materia Dark
-    Plasma Style -> Fluent-round-dark
-    Window Decorations -> Graphite-dark-round / Materia Dark
-    Icons -> tela circle blue dark / round reversal-purple-dark
-    Cursors -> Breeze Light
-    Splash Screen -> QuarksSplashDark / Fluent-round-dark
-    SDDM -> ArcMidnight-dark / Darkine
-
 # System Settings
 
 - Compositor
@@ -30,15 +21,14 @@
     - Layout mode: Pager
   - Disable Screen Edge (highlight)
 - Task Switcher
-  - Thumbnail Gridsho
+  - Thumbnail Grid
 - Virtual Desktops
   - Add 4 rows
-  - Add 4 Desktops
   - Disable Navigation Wraps Around
 - Screen Edges
   - Disable all
   - Top left corner
-    - Present Windows (current desktop)
+    - Overview
 - Desktop Session
   - Start with an empty session
 - General Behaviour (double click)
