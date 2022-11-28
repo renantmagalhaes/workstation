@@ -31,6 +31,34 @@ transparent-shell@siroj42.github.io
 just-perfection-desktop@just-perfection
 ```
 
+# PopShell
+
+- Install on Fedora
+
+```shell
+sudo dnf install gnome-shell-extension-pop-shell --exclude=gnome-shell-extension-pop-shell-shortcut-overrides
+```
+
+- Add border radius
+```
+sudo vi /usr/share/gnome-shell/extensions/pop-shell@system76.com/dark.css
+sudo vi /usr/share/gnome-shell/extensions/pop-shell@system76.com/dark.css 
+```
+
+- Replace the first 6 lines with 
+
+```
+.pop-shell-active-hint {
+    border-style: solid;
+    border-color: #FBB86C;
+    border-radius: 12px;
+    box-shadow: inset 0 0 0 1px rgba(24, 23, 23, 0)
+}
+```
+
+- Restart the PC and change the radius in the configuration
+
+![picture 2](../../images/b309589d32499d2cc3bc0ed66c31ff6dc481aa8ef51d10410a2bfc61907019d1.png)  
 
 ## Theme edit
 
