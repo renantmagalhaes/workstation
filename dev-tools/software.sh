@@ -90,7 +90,7 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     # docker
     sudo dnf -y install dnf-plugins-core
     sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
-    sudo dnf install -y containerd.io docker-compose docker-compose-plugin
+    sudo dnf install -y docker-ce containerd.io docker-compose docker-compose-plugin
     sudo systemctl enable docker
     sudo groupadd docker
     sudo usermod -aG docker $USER
