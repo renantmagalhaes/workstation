@@ -16,7 +16,7 @@ fi
 bash desktop/source/any/brew.sh
 
 # Default packages
-brew install wget \tree
+brew install wget \tree\ htop
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
 
@@ -32,6 +32,9 @@ sudo gem install colorls
 
 # LSD
 brew install lsd
+
+# Tilling Window
+brew install --cask amethyst
 
 # RTM
 #clear
