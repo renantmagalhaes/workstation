@@ -2,6 +2,8 @@
 # Select DEB or RPM system
 gnome_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "GNOME" | awk '{print tolower($0)}'`
 kde_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "KDE" | awk '{print tolower($0)}'`
+macos_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
+linux_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
 
 # check cmd function
 check_cmd() {
@@ -40,6 +42,10 @@ elif check_cmd pacman; then  # FOR OPENSUSE SYSTEMS
     else
     echo "Not able to identify desktop environment"
     fi
-else
-    echo "Not able to identify the system"
+elif check_cmd sw_vers; then  # FOR MACOS SYSTEMS
+    if [[ $macos_check == "darwin" ]]; then
+    bash desktop/99-MACOS/macos.sh
+    else
+    echo "Not able to identify desktop environment"
+    fi
 fi
