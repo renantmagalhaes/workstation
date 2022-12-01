@@ -15,6 +15,8 @@ fi
 # Brew
 bash desktop/source/any/brew.sh
 
+# Default packages
+brew install wget \tree
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
 
@@ -30,3 +32,12 @@ sudo gem install colorls
 
 # LSD
 brew install lsd
+
+# RTM
+#clear
+echo "#################################"
+echo "#                               #"
+echo "#         rtm.codes             #"
+echo "#     Please reboot your pc     #"
+echo "#                               #"
+echo "#################################"
