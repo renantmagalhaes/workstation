@@ -37,6 +37,28 @@ brew install lsd
 # Tilling Window
 brew install --cask amethyst
 
+# System settings
+## MacOS use dimmed icons for hidden applications
+defaults write com.apple.Dock showhidden -boolean yes
+## Revert
+#defaults write com.apple.Dock showhidden -boolean no; killall Dock
+
+## make animation when hiding or showing dock much faster
+defaults write com.apple.dock autohide-time-modifier -float 0.15
+## Revert
+#defaults delete com.apple.dock autohide-time-modifier;killall Dock
+
+## Reduce delay to activate dock
+defaults write com.apple.Dock autohide-delay -float 0.05
+
+## Restart dock
+killall Dock
+
+## Disabling Time Machine Use New Drive Setup Requests in Mac OS X
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+## Revert
+#defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool false
+
 # RTM
 #clear
 echo "#################################"

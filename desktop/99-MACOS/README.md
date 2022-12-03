@@ -1,4 +1,6 @@
-# Programs
+# Apps
+
+## Free
 
 - [Amethyst](https://ianyh.com/amethyst/) - Tilling Window Manager
 - [VSCode](https://code.visualstudio.com/docs?dv=osx)
@@ -8,6 +10,11 @@
 - [Hand Mirror](https://apps.apple.com/us/app/hand-mirror/id1502839586?mt=12) - Get a mirror on top bar
 - [CopyClip](https://apps.apple.com/us/app/copyclip-clipboard-history/id595191960?mt=12) - Clipboard Manager
 - [Karabiner](https://karabiner-elements.pqrs.org) - Remap MacOS keybinds
+- [IINA](https://iina.io) - Video Player
+
+# Paid
+
+- Magnet - Windows Resizing
 
 # Settings
 
