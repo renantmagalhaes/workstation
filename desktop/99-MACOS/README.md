@@ -6,6 +6,7 @@
 - [Shottr](https://shottr.cc) - Screenshot annotation tool powered by AI
 - [Hidden bar](https://apps.apple.com/de/app/hidden-bar/id1452453066?mt=12) - Hide top icons from macos bar
 - [Hand Mirror](https://apps.apple.com/us/app/hand-mirror/id1502839586?mt=12) - Get a mirror on top bar
+- [CopyClip](https://apps.apple.com/us/app/copyclip-clipboard-history/id595191960?mt=12) - Clipboard Manager
 - [Karabiner](https://karabiner-elements.pqrs.org) - Remap MacOS keybinds
 
 # Settings

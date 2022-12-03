@@ -16,7 +16,8 @@ fi
 bash desktop/source/any/brew.sh
 
 # Default packages
-brew install wget \tree\ htop\ iterm2\ tmux
+brew install wget \tree \htop \iterm2 \tmux
+
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
 
