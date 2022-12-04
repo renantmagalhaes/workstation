@@ -1,6 +1,18 @@
 #!/bin/bash
 # TODO:
-#//  - Check if Deb or RPM distribution
+
+########### MAC OS APPS ###########
+macos_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
+
+if [[ $macos_check == "darwin" ]]; then
+    brew install --cask pgadmin4
+    # brew install --cask robo-3t ### OUTDATED ?
+    brew install --cask dbeaver-community
+    brew install --cask postman
+
+    exit
+fi
+########### MAC OS APPS ###########
 
 # Default folder
 mkdir -p ~/Apps
