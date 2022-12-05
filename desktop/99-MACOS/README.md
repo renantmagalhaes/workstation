@@ -18,6 +18,10 @@
 
 - [Amethyst](https://ianyh.com/amethyst/) - Tilling Window Manager
 
+# Try in the future
+
+- [Sketchy Bar](https://github.com/FelixKratz/SketchyBar)
+
 # Settings
 
 ![picture 2](../../images/ac203af70603f12b7b58ec5bd0ff0b115ddf38e3ec052ca275b7d2a83a07fd2c.png)  
