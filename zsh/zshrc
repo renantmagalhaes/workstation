@@ -284,6 +284,14 @@ zstyle ':completion:*' cache-path ~/.cache/zcache
 # automatically load bash completion functions
 autoload -U +X bashcompinit && bashcompinit
 
+
+# Speed SSH readings
+function refresh_ssh_autocomplete () {
+    host_list=($(cat ~/.ssh/config | grep 'Host '  | awk '{s = s $2 " "} END {print s}'))
+    zstyle ':completion:*:(ssh|scp|sftp):*' hosts $host_list
+}
+refresh_ssh_autocomplete
+
 ######################### PATHS ########################
 
 # Additional paths
