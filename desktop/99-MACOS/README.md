@@ -2,7 +2,6 @@
 
 ## Free
 
-- [Amethyst](https://ianyh.com/amethyst/) - Tilling Window Manager
 - [VSCode](https://code.visualstudio.com/docs?dv=osx)
 - [Docker](https://docs.docker.com/desktop/install/mac-install/)
 - [Raycast](https://www.raycast.com) - Spotlight alternative
@@ -13,12 +12,11 @@
 - [Karabiner](https://karabiner-elements.pqrs.org) - Remap MacOS keybinds
 - [IINA](https://iina.io) - Video Player
 - [xMind](https://www.xmind.app/go/appstore/xmind-mac?ct=OfficialWebsite) - Mind Map
+- [Rectangle](https://rectangleapp.com/) - Windows Resizing
 
+# Testing phase
 
-# Paid
-
-- Magnet - Windows Resizing
-
+- [Amethyst](https://ianyh.com/amethyst/) - Tilling Window Manager
 
 # Settings
 
