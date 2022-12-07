@@ -17,6 +17,7 @@
 # Testing phase
 
 - [Amethyst](https://ianyh.com/amethyst/) - Tilling Window Manager
+- only-switch - Crash on ventura
 
 # Try in the future
 
