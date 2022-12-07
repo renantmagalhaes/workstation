@@ -13,7 +13,7 @@
 - [IINA](https://iina.io) - Video Player
 - [xMind](https://www.xmind.app/go/appstore/xmind-mac?ct=OfficialWebsite) - Mind Map
 - [Rectangle](https://rectangleapp.com/) - Windows Resizing
-
+- [Caffeine](https://www.macupdate.com/app/mac/24120/caffeine)
 # Testing phase
 
 - [Amethyst](https://ianyh.com/amethyst/) - Tilling Window Manager
@@ -21,6 +21,9 @@
 # Try in the future
 
 - [Sketchy Bar](https://github.com/FelixKratz/SketchyBar)
+
+# Bar layout
+![picture 1](../../images/241251d1e022c646ca6b61b8bdf56de25a2075c58a9e807ade04fc4ba0fd31e9.png)  
 
 # Settings
 
