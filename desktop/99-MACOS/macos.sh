@@ -16,7 +16,7 @@ fi
 bash desktop/source/any/brew.sh
 
 # Default packages
-brew install wget \tree \htop \iterm2 \tmux \go \neofetch \rectangle \coreutils \warp \stats
+brew install wget \tree \htop \iterm2 \tmux \go \neofetch \rectangle \coreutils \warp \stats \lsd \telnet
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
@@ -31,8 +31,8 @@ bash desktop/source/any/vim.sh
 brew install ruby
 sudo gem install colorls
 
-# LSD
-brew install lsd
+# Maccy
+brew install --cask maccy
 
 # Tilling Window
 brew install --cask amethyst
