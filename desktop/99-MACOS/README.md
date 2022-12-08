@@ -6,6 +6,7 @@
 - [Docker](https://docs.docker.com/desktop/install/mac-install/)
 - [Raycast](https://www.raycast.com) - Spotlight alternative
 - [Shottr](https://shottr.cc) - Screenshot annotation tool powered by AI
+- [Xnip](https://www.xnipapp.com) - Another nice screenschot tool
 - [Hidden bar](https://apps.apple.com/de/app/hidden-bar/id1452453066?mt=12) - Hide top icons from macos bar
 - [Hand Mirror](https://apps.apple.com/us/app/hand-mirror/id1502839586?mt=12) - Get a mirror on top bar
 - [Karabiner](https://karabiner-elements.pqrs.org) - Remap MacOS keybinds
