@@ -15,19 +15,20 @@ wsl --install
 # Programs
 
 1. [Python3](https://www.python.org/downloads/)
-2. [WinDirStart](https://windirstat.net/download.html)
-3. [Flameshot](https://github.com/flameshot-org/flameshot/releases/latest)
-4. [Robo3t](https://robomongo.org/download)
-5. [DBeaver](https://dbeaver.io/download/)
-6. [pgAdmin](https://www.pgadmin.org/download/pgadmin-4-windows/)
-7. [Lens](https://k8slens.dev)
-8. [Wireshark](https://www.wireshark.org/#download)
-9. [OBS Studio](https://obsproject.com/download)
-10. [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-11. [Vivaldi](https://vivaldi.com)
-12. [Patchmypc](https://patchmypc.com/home-updater)
-13. [Postman](https://www.postman.com/downloads/)
-14. [AHK](https://www.autohotkey.com)
+2. [winXcorners](https://github.com/vhanla/winxcorners/releases)
+3. [WinDirStart](https://windirstat.net/download.html)
+4. [Flameshot](https://github.com/flameshot-org/flameshot/releases/latest)
+5. [Robo3t](https://robomongo.org/download)
+6. [DBeaver](https://dbeaver.io/download/)
+7. [pgAdmin](https://www.pgadmin.org/download/pgadmin-4-windows/)
+8. [Lens](https://k8slens.dev)
+9. [Wireshark](https://www.wireshark.org/#download)
+10. [OBS Studio](https://obsproject.com/download)
+11. [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+12. [Vivaldi](https://vivaldi.com)
+13. [Patchmypc](https://patchmypc.com/home-updater)
+14. [Postman](https://www.postman.com/downloads/)
+15. [AHK](https://www.autohotkey.com)
 
 ## Ninite
 
