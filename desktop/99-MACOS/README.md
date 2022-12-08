@@ -13,6 +13,7 @@
 - [xMind](https://www.xmind.app/go/appstore/xmind-mac?ct=OfficialWebsite) - Mind Map
 - [Rectangle](https://rectangleapp.com/) - Windows Resizing
 - [Caffeine](https://www.macupdate.com/app/mac/24120/caffeine)
+- [TopNotch](https://topnotch.app) - Remove Notch / Change menu bar color
 # Testing phase
 
 - [Amethyst](https://ianyh.com/amethyst/) - Tilling Window Manager
