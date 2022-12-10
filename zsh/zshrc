@@ -191,15 +191,26 @@ else
     echo ""
 fi
 
-alias killtmux="pidof tmux |xargs kill -9"
-alias python="python3"
-alias killvivaldi="pidof vivaldi-bin |xargs kill -9"
-alias killgnome="killall -HUP gnome-shell"
-# alias bluetooth-restart="sudo rfkill block bluetooth && sudo rfkill unblock bluetooth && sudo systemctl restart bluetooth"
-alias bluetooth-restart="sudo systemctl stop bluetooth.service && sudo rm -rf /var/lib/bluetooth/* && sudo systemctl start bluetooth.service"
-alias vga-info="lspci -nnk |grep -A3 VGA"
-alias latte-restart="pidof latte-dock |xargs kill -9 && latte-dock &"
-alias flatpak-home-permission="sudo flatpak override --filesystem=home:ro"
+# SYSTEM ALIASES
+if [[ $macos_check == "darwin" ]]; then
+    alias killtmux="killall tmux"
+    alias python="python3"
+    alias killvivaldi="killall Vivaldi"
+    
+elif [[ $linux_check == "linux" ]]; then
+    alias killtmux="pidof tmux |xargs kill -9"
+    alias python="python3"
+    alias killvivaldi="pidof vivaldi-bin |xargs kill -9"
+    alias killgnome="killall -HUP gnome-shell"
+    # alias bluetooth-restart="sudo rfkill block bluetooth && sudo rfkill unblock bluetooth && sudo systemctl restart bluetooth"
+    alias bluetooth-restart="sudo systemctl stop bluetooth.service && sudo rm -rf /var/lib/bluetooth/* && sudo systemctl start bluetooth.service"
+    alias vga-info="lspci -nnk |grep -A3 VGA"
+    alias latte-restart="pidof latte-dock |xargs kill -9 && latte-dock &"
+    alias flatpak-home-permission="sudo flatpak override --filesystem=home:ro"
+else
+    echo "error on SO check"
+fi
+
 
 alias cp='cp -iv'
 alias rm='rm -ir'
