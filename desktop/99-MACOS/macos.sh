@@ -16,7 +16,7 @@ fi
 bash desktop/source/any/brew.sh
 
 # Default packages
-brew install wget \tree \htop \iterm2 \tmux \go \neofetch \rectangle \coreutils \warp \stats \lsd \telnet
+brew install wget \tree \htop \iterm2 \tmux \go \neofetch \rectangle \coreutils \warp \stats \lsd \telnet \ncdu
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
