@@ -74,10 +74,7 @@ source $ZSH/oh-my-zsh.sh
 # fzf search 
 # source /usr/share/fzf/shell/key-bindings.zsh
 
-# enhancd
-source $ZSH/custom/plugins/enhancd/init.sh
-ENHANCD_FILTER=fzf
-export ENHANCD_FILTER
+
 
 # crontab editor
 export VISUAL=vim
@@ -297,6 +294,11 @@ zstyle ':completion:*' cache-path ~/.cache/zcache
 
 # automatically load bash completion functions
 autoload -U +X bashcompinit && bashcompinit
+
+# enhancd
+source $ZSH/custom/plugins/enhancd/init.sh
+ENHANCD_FILTER=fzf
+export ENHANCD_FILTER
 
 
 # Speed SSH readings
