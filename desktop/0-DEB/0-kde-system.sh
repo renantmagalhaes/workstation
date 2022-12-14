@@ -66,6 +66,11 @@ sudo apt dist-upgrade
 wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo apt-key add -
 sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
 
+# Brave Browser
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+
+
 # ## Kvantum
 # sudo add-apt-repository ppa:papirus/papirus
 
@@ -114,6 +119,9 @@ sudo apt-get -f install -y
 
 ## Install Vivaldi Browser
 sudo apt install -y vivaldi-stable
+
+## Install Brave Browser
+sudo apt install -y brave-browser
 
 ## Install Visual Code
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
