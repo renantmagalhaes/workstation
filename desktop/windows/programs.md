@@ -8,7 +8,7 @@ wsl --install
 
 # Microsoft Store
 
-1. Windows Terminal 
+1. Windows Terminal
 2. Microsoft PowerToys
 3. Visual Studio Code
 
@@ -29,6 +29,7 @@ wsl --install
 13. [Patchmypc](https://patchmypc.com/home-updater)
 14. [Postman](https://www.postman.com/downloads/)
 15. [AHK](https://www.autohotkey.com)
+
 
 ## Ninite
 
@@ -70,6 +71,18 @@ wsl --install
       1. curl -o kubectl.exe https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/windows/amd64/kubectl.exe
    3. Add **C:\bin** on Windows PATH
       1.  System > Advanced system settings > Advanced > Environment Variables > Path > Edit > New > C:\bin > > Ok
+
+## Sandbox
+
+Add windows sandbox environment
+
+1. Control Panel
+2. Programs and Features
+   1. Turn Windows features on or off
+   2. Enable sandbox and restart computer
+
+![picture 1](../../images/65067858b45866139a2ef25b3c10aea2a9b10509965acc7f8bb8816964fe9072.png)
+
 
 
 
