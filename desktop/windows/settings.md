@@ -10,6 +10,14 @@ Taskbar > Disable Show my taskbar on all displays
 Win(Left) + Enter -> Win(Left) + Shift(Left) + Right Arrow Key
 ```
 
+# Windows SO
+
+## Personalization
+
+1. Personalization
+   1. Colors
+   2. Transparency effects -> ON
+   3. Show accent colour on title bars and windows borders -> ON
 # Windows Terminal
 
 ## Startup
