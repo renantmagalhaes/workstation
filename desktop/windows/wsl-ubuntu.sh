@@ -24,8 +24,12 @@ sudo ntpdate pool.ntp.org
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install zsh fonts-powerline vim tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat fzf neofetch xclip unrar unzip python3 python3-pip net-tools  ncdu whois 
+sudo apt-get -y install zsh fonts-powerline vim tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat fzf neofetch xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak snapd xournal evince
 sudo apt-get -f install -y
+
+
+# Flatpack
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 # Brew
 bash ../source/any/brew.sh
@@ -62,6 +66,12 @@ sudo apt-get -f install -y
 
 # Make sure all package are installed
 sudo apt-get -f install -y
+
+# Enable Systemd
+sudo bash -c 'cat << EOF > /etc/wsl.conf
+[boot]
+systemd=true
+EOF'
 
 # RTM
 # RTM

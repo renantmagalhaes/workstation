@@ -110,82 +110,88 @@ i3_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "I3" | awk '{print tolower($0
 bspwm_check=`env |grep DESKTOP_SESSION |grep -ioh "bspwm" | awk '{print tolower($0)}'`
 wsl_check=`env |grep WSL |grep -ioh "ubuntu"| awk '{print tolower($0)}'`
 
-if check_cmd apt-get; then # FOR DEB SYSTEMS
+if check_cmd wsl.exe; then # FOR WSL SYSTEMS
+    alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+    alias folder="explorer.exe"
+    #alias folder="nautilus"
+    alias pdf="evince"
+    alias wsl-update="wsl.exe --update"
+    alias wsl-shutdown="wsl.exe --shutdown"
+
+elif check_cmd apt-get; then # FOR DEB SYSTEMS
     alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
-    alias folder="nautilus"
-    alias pdf="evince"
+        alias folder="nautilus"
+        alias pdf="evince"
     elif [[ $kde_check == "kde" ]]; then
-    alias folder="dolphin"
-    alias pdf="okular"
-    elif [[ $wsl_check == "ubuntu" ]]; then
-    alias folder="explorer.exe"
+        alias folder="dolphin"
+        alias pdf="okular"
     elif [[ $i3_check == "i3" ]]; then
-    alias folder="nautilus"
-    alias pdf="evince"
+        alias folder="nautilus"
+        alias pdf="evince"
     # alias docker="podman"
     # alias docker-compose="podman-compose"
     elif [[ $bspwm_check == "bspwm" ]]; then
-    alias folder="nautilus"
-    alias pdf="evince"
+        alias folder="nautilus"
+        alias pdf="evince"
     else
-    echo ""
+        echo ""
     fi
 
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
     alias update-all="sudo dnf update -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
-    alias folder="nautilus"
-    alias pdf="evince"
+        alias folder="nautilus"
+        alias pdf="evince"
     # alias docker="podman"
     # alias docker-compose="podman-compose"
     elif [[ $kde_check == "kde" ]]; then
-    alias folder="dolphin"
-    alias pdf="okular"
+        alias folder="dolphin"
+        alias pdf="okular"
     # alias docker="podman"
     # alias docker-compose="podman-compose"
     elif [[ $i3_check == "i3" ]]; then
-    alias folder="nautilus"
-    alias pdf="evince"
+        alias folder="nautilus"
+        alias pdf="evince"
     # alias docker="podman"
     # alias docker-compose="podman-compose"
     elif [[ $bspwm_check == "bspwm" ]]; then
-    alias folder="nautilus"
-    alias pdf="evince"
+        alias folder="nautilus"
+        alias pdf="evince"
     # alias docker="podman"
     # alias docker-compose="podman-compose"
     else
-    echo ""
+        echo ""
     fi
 
 elif check_cmd zypper; then  # FOR ZYPPER SYSTEMS
     alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
-    alias folder="nautilus"
-    alias pdf="evince"
+        alias folder="nautilus"
+        alias pdf="evince"
     elif [[ $kde_check == "kde" ]]; then
-    alias folder="dolphin"
-    alias restart-kde="kwin_x11 --replace &"
-    alias pdf="okular"
+        alias folder="dolphin"
+        alias restart-kde="kwin_x11 --replace &"
+        alias pdf="okular"
     # export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.9
     else
-    echo ""
+        echo ""
     fi
     
 elif check_cmd pacman; then  # FOR RPM SYSTEMS
     alias update-all="yay -Syu && sudo pacman -Syu && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
-    alias folder="nautilus"
+        alias folder="nautilus"
     elif [[ $kde_check == "kde" ]]; then
-    alias folder="dolphin"
+        alias folder="dolphin"
     else
-    echo "Not able to identify desktop environment"
+        echo "Not able to identify desktop environment"
     fi
-elif check_cmd sw_vers; then  # FOR MACOS SYSTEMS
-    alias update-all="brew update && brew upgrade"
-    alias folder="open"
-else
-    echo ""
+    elif check_cmd sw_vers; then  # FOR MACOS SYSTEMS
+        alias update-all="brew update && brew upgrade"
+        alias folder="open"
+    else
+        echo ""
 fi
 
 # SYSTEM ALIASES
