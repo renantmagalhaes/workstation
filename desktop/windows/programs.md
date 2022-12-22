@@ -94,7 +94,6 @@ Add windows sandbox environment
 
 ### Enable app navigation via keyboard
 
-- shortcut
-  - ```ctrl + shit +win + left/right```
+[Copy this](./scripts/window-virtual-desktop-changer.ahk) and [this script](./scripts/super-key-menu-changer.ahk) to `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup` or `shell:startup`
 
-[Copy this script](https://raw.githubusercontent.com/renantmagalhaes/workstation/master/desktop/windows/scripts/window-virtual-desktop-changer.ahk) to `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup` or `shell:startup`
+
