@@ -23,7 +23,7 @@ Win(Left) + Enter -> Win(Left) + Shift(Left) + Right Arrow Key
 
 ### Run
 
-- Activation key -> Super + Space
+- Activation key -> Alt + Space
 - Number of results shown before scrolling -> 5
 - Window Walker
   -  Score modifier -> 10

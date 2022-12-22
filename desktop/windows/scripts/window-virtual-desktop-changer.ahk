@@ -1,4 +1,4 @@
-﻿#NoTrayIcon
+﻿;#NoTrayIcon;
 
 ^+#Left::
   WinGetTitle, Title, A
