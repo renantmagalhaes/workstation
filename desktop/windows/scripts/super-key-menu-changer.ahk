@@ -1,4 +1,4 @@
-﻿#NoTrayIcon
+﻿;#NoTrayIcon;
 
 ;-----------------------------------------;
 ; Winkey PowerToys Run                    ;
@@ -11,7 +11,7 @@ LWin Up::
         send {LWin}
     else ; PTRun is running
         if (A_PriorKey = "LWin") ; A_PriorKey is the key that was last pressed
-            send {LWin Down}{Space Down}{LWin Up}{Space Up}
+            send {LAlt Down}{Space Down}{LAlt Up}{Space Up}
 return
 
 ; Important: Allows Win Key Hotkeys to work
