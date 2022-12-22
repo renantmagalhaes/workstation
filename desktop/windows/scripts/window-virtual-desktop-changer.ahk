@@ -1,4 +1,6 @@
-﻿^+#Left::
+﻿#NoTrayIcon
+
+^+#Left::
   WinGetTitle, Title, A
   WinSet, ExStyle, ^0x80, %Title%
   Send {LWin down}{Ctrl down}{Left}{Ctrl up}{LWin up}
