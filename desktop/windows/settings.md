@@ -43,6 +43,11 @@ Win(left) + Q -> Alt(left) + F4
 
 ## Startup
 
+- Create a shortcut and send to `shell:startup` with Minimized option selected
+
+![picture 1](../../images/a44c9c526cc6f73d3998c7697b807de8bebc3a3a8f6cf8ec97a6e38a400f6f1e.png)  
+
+
 Default profile -> Ubuntu
 Default Terminal application -> Windows Terminal
 
