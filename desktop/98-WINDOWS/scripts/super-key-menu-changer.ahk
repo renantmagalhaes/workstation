@@ -20,7 +20,7 @@ LWin Up::
 return
 
 ; Toggle Start Menu Replacement, also allows Win Key Hotkeys to work
-LWin & Space::
+LWin & Pause::
     If replaceStartMenu
         replaceStartMenu := false
     else
