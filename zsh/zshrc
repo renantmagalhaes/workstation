@@ -256,6 +256,14 @@ alias disk-manager='ncdu'
 ### System ###
 alias pip='python -m pip'
 
+### IP Info tools
+alias ip-info='curl https://wtfismyip.com/json | jq .'
+
+function ip-geolocation() {
+    curl http://ip-api.com/json/$1 | jq .
+}
+
+
 ### Security Tools ###
 alias sherlock='docker run -i theyahya/sherlock'
 alias legion='docker run -it carlospolop/legion:latest sh -c "/legion/legion.py"'
