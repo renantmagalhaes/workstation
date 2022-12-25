@@ -26,7 +26,7 @@ Win(Left) + Enter -> Win(Left) + Shift(Left) + Right Arrow Key
 - Activation key -> Alt + Space
 - Number of results shown before scrolling -> 5
 - Window Walker
-  -  Score modifier -> 10
+  -  Score modifier -> 1000
 
 [Copy this](./scripts/window-virtual-desktop-changer.ahk) and [this script](./scripts/super-key-menu-changer.ahk) to `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup` or `shell:startup`
 ### Quick Accent
