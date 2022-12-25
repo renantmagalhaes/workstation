@@ -1,29 +1,11 @@
 ﻿;#NoTrayIcon;
 
-;-----------------------------------------;
-; Winkey PowerToys Run                    ;
-;-----------------------------------------;
-
-; Variables
-replaceStartMenu := true
-
-; Use replacement Start Menu, or activate Start Menu
-LWin Up::
-    if (replaceStartMenu)
-        if (A_PriorKey = "LWin") ; A_PriorKey is the key that was last pressed
-            send {LAlt Down}{Space Down}{LAlt Up}{Space Up}
-        else
-        return
-    else
-        send {LWin}
-    return
+LWin up::
+If (A_PriorKey = "LWin")
+    send {LAlt Down}{Space Down}{LAlt Up}{Space Up}
 return
 
-; Toggle Start Menu Replacement, also allows Win Key Hotkeys to work
-RControl & Pause::
-    If replaceStartMenu
-        replaceStartMenu := false
-    else
-        replaceStartMenu := true
-    return
-return
+; In this case its necessary to define a custom combination by using "&" or "<#" 
+; to avoid that LWin loses its original function as a modifier key:
+
+<#d:: Send #d  ; <# means LWin
