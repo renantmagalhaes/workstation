@@ -28,7 +28,7 @@ Win(Left) + Enter -> Win(Left) + Shift(Left) + Right Arrow Key
 - Window Walker
   -  Score modifier -> 1000
 
-[Copy this](./scripts/window-virtual-desktop-changer.ahk) and [this script](./scripts/super-key-menu-changer.ahk) to `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup` or `shell:startup`
+[Copy this](./scripts/0-rtm-shortkeys.ahk) to `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup` or `shell:startup`
 ### Quick Accent
 
 - Enable IT!!
