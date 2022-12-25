@@ -12,6 +12,11 @@ wsl --install
 2. Microsoft PowerToys
 3. Visual Studio Code
 
+# Phone Sync
+
+1. Phone Link (Windows)
+2. Link to Windows(Android)
+
 # Programs
 
 1. [Python3](https://www.python.org/downloads/)
