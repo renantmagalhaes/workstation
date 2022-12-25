@@ -24,7 +24,7 @@ sudo ntpdate pool.ntp.org
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install zsh fonts-powerline vim tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat fzf neofetch xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak snapd xournal evince
+sudo apt-get -y install zsh fonts-powerline vim tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat fzf neofetch xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak snapd xournal evince jq
 sudo apt-get -f install -y
 
 
