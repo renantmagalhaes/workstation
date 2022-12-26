@@ -15,7 +15,7 @@ Win(Left) + Enter -> Win(Left) + Shift(Left) + Right Arrow Key
 ## Personalization
 
 1. Personalization
-   1. Colors
+   1. Colors -> Turf Green
    2. Transparency effects -> ON
    3. Show accent colour on title bars and windows borders -> ON
 
@@ -35,10 +35,7 @@ Win(Left) + Enter -> Win(Left) + Shift(Left) + Right Arrow Key
 
 ### Keyboard Manager
 
-```
-Win(left) + enter -> Win(left) + Shift(left) + Right arrow key
-Win(left) + Q -> Alt(left) + F4
-```
+Using `AHK` for that atm
 # Windows Terminal
 
 ## Startup
