@@ -34,6 +34,7 @@ wsl --install
 13. [Patchmypc](https://patchmypc.com/home-updater)
 14. [Postman](https://www.postman.com/downloads/)
 15. [AHK](https://www.autohotkey.com)
+16. [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve)
 
 
 ## Ninite
@@ -53,12 +54,11 @@ wsl --install
 
 # Developer Tools
 
-1. [Docker](https://www.docker.com/products/docker-desktop)
+1. [Docker](https://www.docker.com/products/docker-desktop) - May not be needed with WSL2
 2. [Chocolatey](https://chocolatey.org/install)
    1. Open PowerShell as Admin
    2. Run **Set-ExecutionPolicy AllSigned**
    3. ``` Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) ```
-   
 3. [AWS CLI](https://awscli.amazonaws.com/AWSCLIV2.msi)
 4. [Git for Windows](https://gitforwindows.org)
 
@@ -88,9 +88,6 @@ Add windows sandbox environment
 
 ![picture 1](../../images/65067858b45866139a2ef25b3c10aea2a9b10509965acc7f8bb8816964fe9072.png)
 
-
-
-
 ## Windows11
 
 1. Start11
@@ -100,5 +97,3 @@ Add windows sandbox environment
 ### Enable app navigation via keyboard
 
 [Copy this](./scripts/window-virtual-desktop-changer.ahk) and [this script](./scripts/super-key-menu-changer.ahk) to `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup` or `shell:startup`
-
-
