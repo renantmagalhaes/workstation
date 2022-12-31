@@ -35,7 +35,8 @@ wsl --install
 14. [Postman](https://www.postman.com/downloads/)
 15. [AHK](https://www.autohotkey.com)
 16. [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve)
-
+17. [Elgato Stream Deck MK.2](https://www.elgato.com/en/downloads)
+18. [Avermedia WebCam](https://www.avermedia.com/en/product-detail/PW513#download)
 
 ## Ninite
 
