@@ -102,3 +102,11 @@ Taskbarsize > Small
 ## Control
 
 Set all to Windows Menu
+
+# Stream Deck
+
+- CPU
+- Battery
+- Weather
+- Win Tools
+- Speed Test
