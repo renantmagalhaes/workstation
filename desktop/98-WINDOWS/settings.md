@@ -110,3 +110,5 @@ Set all to Windows Menu
 - Weather
 - Win Tools
 - Speed Test
+- HWiNFO64
+  - [Config file to import](./config/hwinfo/HWiNFO64_settings.reg)
