@@ -1,4 +1,4 @@
-﻿;#NoTrayIcon;
+﻿#NoTrayIcon
 
 #q:: ; Windows+q triggers the following
 Send !{f4} ; Simulates the keypress alt+f4

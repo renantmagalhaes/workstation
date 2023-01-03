@@ -38,6 +38,7 @@ wsl --install
 17. [Elgato Stream Deck MK.2](https://www.elgato.com/en/downloads)
 18. [Avermedia WebCam](https://www.avermedia.com/en/product-detail/PW513#download)
 19. [HWiNFO64](https://www.hwinfo.com/download/)
+20. [WACOM CTL-4100WL](https://www.wacom.com/en-us/support/product-support/drivers)
 
 ## Ninite
 

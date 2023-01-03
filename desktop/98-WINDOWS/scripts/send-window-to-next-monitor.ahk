@@ -1,4 +1,4 @@
-﻿;#NoTrayIcon;
+﻿#NoTrayIcon
 
 #Enter:: ; Windows + Enter triggers the following
   Send <+Left ; Simulates Shift+Win+Left
