@@ -39,7 +39,9 @@ wsl --install
 18. [Avermedia WebCam](https://www.avermedia.com/en/product-detail/PW513#download)
 19. [HWiNFO64](https://www.hwinfo.com/download/)
 20. [WACOM CTL-4100WL](https://www.wacom.com/en-us/support/product-support/drivers)
-
+21. [Microsoft Whiteboard](https://www.microsoft.com/store/apps/9mspc6mp8fm4)
+22. [Excalidraw](https://excalidraw.com/)
+23. [Xmind](https://xmind.app/download/)
 ## Ninite
 
 [Ninite](https://ninite.com)
