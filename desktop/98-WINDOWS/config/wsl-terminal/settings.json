@@ -85,12 +85,6 @@
                 "hidden": true,
                 "name": "Ubuntu-22.04",
                 "source": "Windows.Terminal.Wsl"
-            },
-            {
-                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
-                "hidden": false,
-                "name": "Git Bash",
-                "source": "Git"
             }
         ]
     },
@@ -195,6 +189,29 @@
             "brightBlack": "#666666",
             "brightBlue": "#5C78FF",
             "brightCyan": "#5AC8FF",
+            "brightGreen": "#5AFF91",
+            "brightPurple": "#5EA2FF",
+            "brightRed": "#FF5A5A",
+            "brightWhite": "#FFFFFF",
+            "brightYellow": "#685AFF",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#28B9FF",
+            "foreground": "#F1F1F1",
+            "green": "#13F452",
+            "name": "RTM",
+            "purple": "#2883FF",
+            "red": "#FF2A2A",
+            "selectionBackground": "#FFFFFF",
+            "white": "#F1F1F1",
+            "yellow": "#3D2AFF"
+        },
+        {
+            "background": "#1A1A1A",
+            "black": "#121212",
+            "blue": "#2B4FFF",
+            "brightBlack": "#666666",
+            "brightBlue": "#5C78FF",
+            "brightCyan": "#5AC8FF",
             "brightGreen": "#905AFF",
             "brightPurple": "#5EA2FF",
             "brightRed": "#BA5AFF",
@@ -204,7 +221,7 @@
             "cyan": "#28B9FF",
             "foreground": "#F1F1F1",
             "green": "#7129FF",
-            "name": "RTM",
+            "name": "RTM-Purple-World",
             "purple": "#2883FF",
             "red": "#A52AFF",
             "selectionBackground": "#FFFFFF",
