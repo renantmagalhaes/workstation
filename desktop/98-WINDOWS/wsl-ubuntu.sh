@@ -64,6 +64,16 @@ sudo bash -c 'cat << EOF > /etc/wsl.conf
 systemd=true
 EOF'
 
+# WSL config
+sudo bash -c 'cat << EOF > /mnt/c/Users/renan/.wslconfig
+[wsl2]
+memory=6GB # Limits VM memory in WSL 2
+swap=0
+#processors=4 # Makes the WSL 2 VM use 4 virtual processors
+localhostForwarding=true # Boolean specifying if ports bound to wildcard or localhost in the WSL 2 VM should be connectable from the host via localhost:port.
+EOF'
+
+
 # Install Fonts
 # Fonts
 bash ../source/any/fonts.sh
