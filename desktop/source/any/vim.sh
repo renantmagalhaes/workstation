@@ -1,5 +1,5 @@
 # Space VIM
-mkdir ~/.vim/
+mkdir -p ~/.vim/
 # curl -sLf https://spacevim.org/install.sh | bash
 echo "set ignorecase" >> ~/.vim/vimrc
 echo "set cryptmethod=blowfish2" >> ~/.vim/vimrc

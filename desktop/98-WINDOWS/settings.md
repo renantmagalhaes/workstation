@@ -110,5 +110,8 @@ Set all to Windows Menu
 - Weather
 - Win Tools
 - Speed Test
+- OBS Tools
+- IFTTT
+- Visual Studio Code
 - HWiNFO64
   - [Config file to import](./config/hwinfo/HWiNFO64_settings.reg)

@@ -6,11 +6,13 @@
 wsl --install
 ```
 
+Or Download via Microsoft Store (recommended)
+
 # Microsoft Store
 
-1. Windows Terminal
-2. Microsoft PowerToys
-3. Visual Studio Code
+1. [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701?hl=en-us&gl=us)
+2. [Microsoft PowerToys](https://apps.microsoft.com/store/detail/microsoft-powertoys/XP89DCGQ3K6VLD?hl=en-us&gl=us)
+3. [Visual Studio Code](https://apps.microsoft.com/store/detail/visual-studio-code/XP9KHM4BK9FZ7Q?hl=en-us&gl=us)
 
 # Phone Sync
 
@@ -34,15 +36,19 @@ wsl --install
 13. [Patchmypc](https://patchmypc.com/home-updater)
 14. [Postman](https://www.postman.com/downloads/)
 15. [AHK](https://www.autohotkey.com)
-16. [MiniTool Partition Wizard](https://www.partitionwizard.com/download.html)
-17. [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve)
-18. [Elgato Stream Deck MK.2](https://www.elgato.com/en/downloads)
-19. [Avermedia WebCam](https://www.avermedia.com/en/product-detail/PW513#download)
-20. [HWiNFO64](https://www.hwinfo.com/download/)
-21. [WACOM CTL-4100WL](https://www.wacom.com/en-us/support/product-support/drivers)
-22. [Microsoft Whiteboard](https://www.microsoft.com/store/apps/9mspc6mp8fm4)
-23. [Excalidraw](https://excalidraw.com/)
-24. [Xmind](https://xmind.app/download/)
+16. [1Password](https://1password.com/downloads/windows/)
+17. [Plex](https://www.plex.tv/media-server-downloads/#plex-app)
+18. [Logitech G HUB](https://www.logitechg.com/en-us/innovation/g-hub.html)
+19. [NordVPN](https://nordvpn.com/download/windows/)
+20. [MiniTool Partition Wizard](https://www.partitionwizard.com/download.html)
+21. [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve)
+22. [Elgato Stream Deck MK.2](https://www.elgato.com/en/downloads)
+23. [Avermedia WebCam](https://www.avermedia.com/en/product-detail/PW513#download)
+24. [HWiNFO64](https://www.hwinfo.com/download/)
+25. [WACOM CTL-4100WL](https://www.wacom.com/en-us/support/product-support/drivers)
+26. [Microsoft Whiteboard](https://www.microsoft.com/store/apps/9mspc6mp8fm4)
+27. [Excalidraw](https://excalidraw.com/)
+28. [Xmind](https://xmind.app/download/)
 ## Ninite
 
 [Ninite](https://ninite.com)

@@ -14,6 +14,31 @@ if [[ $macos_check == "darwin" ]]; then
 fi
 ########### MAC OS APPS ###########
 
+########### WINDOWS APPS ###########
+
+wsl_check=`env |grep WSL |grep -ioh "ubuntu"| awk '{print tolower($0)}'`
+
+if [[ $wsl_check == "ubuntu" ]]; then
+    # Docker
+    sudo apt install -y apt-transport-https \
+        ca-certificates \
+        curl \
+        gnupg \
+        lsb-release
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    echo \
+    "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    sudo systemctl enable docker
+    sudo systemctl restart docker
+    sudo usermod -aG docker $USER
+
+    exit
+fi
+
+########### WINDOWS APPS ###########
 # Default folder
 mkdir -p ~/Apps
 
@@ -76,7 +101,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
     $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     sudo apt-get update
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
     sudo systemctl enable docker
     sudo systemctl restart docker
     sudo usermod -aG docker $USER
