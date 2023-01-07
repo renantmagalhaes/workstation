@@ -49,22 +49,13 @@ sudo pip3 install virtualenv virtualenvwrapper pylint
 sudo pip3 install bpytop --upgrade
 sudo apt-get -f install -y
 
-# New VIM
-bash ../source/any/vim.sh
-
 # Create git-folder 
 mkdir -p ~/GIT-REPOS/CORE
 
-# Install Fonts
-# Fonts
-bash ../source/any/fonts.sh
 
 # Colorls
 sudo apt install -y ruby-dev
 sudo gem install colorls
-sudo apt-get -f install -y
-
-# Make sure all package are installed
 sudo apt-get -f install -y
 
 # Enable Systemd
@@ -72,6 +63,16 @@ sudo bash -c 'cat << EOF > /etc/wsl.conf
 [boot]
 systemd=true
 EOF'
+
+# Install Fonts
+# Fonts
+bash ../source/any/fonts.sh
+
+# New VIM
+bash ../source/any/vim.sh
+
+# Make sure all package are installed
+sudo apt-get -f install -y
 
 # RTM
 # RTM
