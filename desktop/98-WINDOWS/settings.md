@@ -33,8 +33,7 @@ Taskbar > Disable Show my taskbar on all displays
 
 ### Keyboard Manager
 
-![picture 1](../../images/2efa1624b4ff78e73b4e91b910d35c03944a722c2f2adbd43b6707a482a3d394.png)  
-
+![picture 3](../../images/20f09a24c72b356598d589a9403515ebc415f4c1c29440bc3545fccdf02ccbc4.png)  
 
 Plus all scripts from [this folder](./scripts/) to `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup` or `shell:startup`
 # Windows Terminal
