@@ -31,11 +31,11 @@ Taskbar > Disable Show my taskbar on all displays
 
 - Enable IT!!
 
-### Keyboard Manager
+### Keyboard Manager (DEPRECATED)
 
 ![picture 3](../../images/20f09a24c72b356598d589a9403515ebc415f4c1c29440bc3545fccdf02ccbc4.png)  
 
-Plus all scripts from [this folder](./scripts/) to `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup` or `shell:startup`
+
 # Windows Terminal
 
 ## Startup
