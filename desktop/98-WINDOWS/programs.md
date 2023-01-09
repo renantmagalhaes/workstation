@@ -103,9 +103,3 @@ Add windows sandbox environment
 ## Windows11
 
 1. Start11
-
-## Enhance virtual desktops
-
-### Enable app navigation via keyboard
-
-[Copy this](./scripts/window-virtual-desktop-changer.ahk) and [this script](./scripts/super-key-menu-changer.ahk) to `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup` or `shell:startup`
