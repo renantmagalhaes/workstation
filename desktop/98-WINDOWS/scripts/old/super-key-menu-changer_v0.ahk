@@ -15,5 +15,5 @@ LWin Up::
 return
 
 ; Important: Allows Win Key Hotkeys to work
-RControl & Pause::
+LWin & Space::
 return
