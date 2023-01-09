@@ -6,9 +6,7 @@ Taskbar > Disable Show my taskbar on all displays
 # Power Toys
 ## Keyboard Manager
 
-```
-Win(Left) + Enter -> Win(Left) + Shift(Left) + Right Arrow Key
-```
+
 
 # Windows SO
 
@@ -28,14 +26,17 @@ Win(Left) + Enter -> Win(Left) + Shift(Left) + Right Arrow Key
 - Window Walker
   -  Score modifier -> 1000
 
-[Copy this](./scripts/0-rtm-shortkeys.ahk) to `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup` or `shell:startup`
+[Copy scripts from this folder](./scripts/) to `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup` or `shell:startup`
 ### Quick Accent
 
 - Enable IT!!
 
 ### Keyboard Manager
 
-Using `AHK` for that atm
+![picture 1](../../images/2efa1624b4ff78e73b4e91b910d35c03944a722c2f2adbd43b6707a482a3d394.png)  
+
+
+Plus all scripts from [this folder](./scripts/) to `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup` or `shell:startup`
 # Windows Terminal
 
 ## Startup
@@ -49,6 +50,8 @@ Default profile -> Ubuntu
 Default Terminal application -> Windows Terminal
 
 ### Interaction
+
+[Copy this JSON to terminal](./config/wsl-terminal/settings.json) or follow:
 
 Enable Automatically copy selection to clipboard
 
