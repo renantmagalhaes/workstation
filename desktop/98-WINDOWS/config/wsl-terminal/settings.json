@@ -40,9 +40,12 @@
             "keys": "win+sc(41)"
         }
     ],
+    "alwaysShowNotificationIcon": true,
     "copyFormatting": "none",
     "copyOnSelect": true,
     "defaultProfile": "{f9ceaf27-504c-58d7-927c-d1d6a7ac7d3c}",
+    "launchMode": "default",
+    "minimizeToNotificationArea": true,
     "profiles": 
     {
         "defaults": {},
@@ -367,6 +370,7 @@
             "yellow": "#808000"
         }
     ],
-    "startOnUserLogin": true,
-    "theme": "dark"
+    "startOnUserLogin": false,
+    "theme": "dark",
+    "useAcrylicInTabRow": true
 }
