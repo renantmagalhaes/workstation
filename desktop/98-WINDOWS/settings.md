@@ -91,6 +91,9 @@ Advanced
 
 Disable all Bell notification
 
+# Fix alt-tab
+
+System -> Multitasking -> Show Microsoft Edge tabs when snapping or pressing Alt + Tab -> Don't show tabs
 # Start11
 
 ## Start Menu
