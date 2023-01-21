@@ -72,7 +72,7 @@ source /usr/local/bin/virtualenvwrapper.sh
 source $ZSH/oh-my-zsh.sh
 
 # fzf search 
-# source /usr/share/fzf/shell/key-bindings.zsh
+source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
 
 
 
