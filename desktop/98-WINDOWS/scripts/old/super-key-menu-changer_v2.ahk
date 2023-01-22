@@ -1,4 +1,4 @@
-﻿#NoTrayIcon
+﻿;#NoTrayIcon
 
 LWin up::
 If (A_PriorKey = "LWin")
