@@ -13,7 +13,3 @@ LWin Up::
         if (A_PriorKey = "LWin") ; A_PriorKey is the key that was last pressed
             send {LAlt Down}{Space Down}{LAlt Up}{Space Up}
 return
-
-; Important: Allows Win Key Hotkeys to work
-LAlt & Space::
-return
