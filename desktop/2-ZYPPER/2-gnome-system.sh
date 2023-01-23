@@ -65,7 +65,7 @@ sudo zypper refresh && sudo zypper update
 sudo zypper install -y opi
 
 # Install the packages from suse repo
-sudo zypper install -y zsh vlc clementine breeze5-cursors vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring timeshift chrome-gnome-shell virtualbox droidcam android-tools telnet openssh materia-gtk-theme alacritty scrot
+sudo zypper install -y zsh vlc clementine breeze5-cursors vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring timeshift chrome-gnome-shell virtualbox droidcam android-tools telnet openssh materia-gtk-theme alacritty scrot libstdc++-devel glibc-static
 
 # virtualbox users
 sudo usermod -aG vboxusers $USER
@@ -112,6 +112,7 @@ sudo pip3 install virtualenv virtualenvwrapper pylint
 sudo pip3 install bpytop --upgrade
 
 # Flatpack
+bash desktop/source/gnome/flatpak.sh
 bash desktop/source/any/flatpak.sh
 
 ## Install Teamviewer
@@ -128,7 +129,14 @@ sudo zypper install -y google-chrome-stable
 # Install Vivaldi
 # sudo zypper ar https://repo.vivaldi.com/archive/vivaldi-suse.repo
 # sudo zypper in vivaldi-stable
-sudo opi vivaldi
+# sudo opi vivaldi
+
+# Install Edge
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sudo zypper ar https://packages.microsoft.com/yumrepos/edge microsoft-edge
+sudo zypper refresh
+sudo zypper install -y microsoft-edge-stable
+
 
 ## Install Visual Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc

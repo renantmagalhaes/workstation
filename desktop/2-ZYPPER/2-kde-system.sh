@@ -39,16 +39,16 @@ echo “Dont run this script as root” 2>&1
 exit 1
 fi
 
-# Check Window System
-if [[ $XDG_SESSION_TYPE == "wayland" ]] ; then
-    echo "Wayland detected. Please change to x11 before running this script"
-    exit 1
-elif [[ $XDG_SESSION_TYPE == "x11" ]] ; then
-     echo "x11 detect."
-else
-    echo "Not able to identify the system"
-    exit 1
-fi
+# # Check Window System
+# if [[ $XDG_SESSION_TYPE == "wayland" ]] ; then
+#     echo "Wayland detected. Please change to x11 before running this script"
+#     exit 1
+# elif [[ $XDG_SESSION_TYPE == "x11" ]] ; then
+#      echo "x11 detect."
+# else
+#     echo "Not able to identify the system"
+#     exit 1
+# fi
 
 #User check
 #echo "#########################"
