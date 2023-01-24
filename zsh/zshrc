@@ -22,6 +22,12 @@ fi
 #   * 
 
 
+# check cmd function
+check_cmd() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+
 #RTM
 macos_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
 linux_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
@@ -66,7 +72,12 @@ source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 #Python virtualenv and Virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+
+if check_cmd zypper; then
+source /usr/bin/virtualenvwrapper.sh
+else
 source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 #source
 source $ZSH/oh-my-zsh.sh
@@ -98,17 +109,13 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_FIND_NO_DUPS
 
 
-# check cmd function
-check_cmd() {
-    command -v "$1" >/dev/null 2>&1
-}
 
 #Aliases
 gnome_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "GNOME" | awk '{print tolower($0)}'`
 kde_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "KDE" | awk '{print tolower($0)}'`
 i3_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "I3" | awk '{print tolower($0)}'`
 bspwm_check=`env |grep DESKTOP_SESSION |grep -ioh "bspwm" | awk '{print tolower($0)}'`
-wsl_check=`env |grep WSL |grep -ioh "ubuntu"| awk '{print tolower($0)}'`
+wsl_ubuntu_check=`env |grep WSL |grep -ioh "ubuntu"| awk '{print tolower($0)}'`
 
 if check_cmd wsl.exe; then # FOR WSL SYSTEMS
     alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
@@ -190,6 +197,12 @@ elif check_cmd pacman; then  # FOR RPM SYSTEMS
     elif check_cmd sw_vers; then  # FOR MACOS SYSTEMS
         alias update-all="brew update && brew upgrade"
         alias folder="open"
+        # Speed SSH readings
+        function refresh_ssh_autocomplete () {
+        host_list=($(cat ~/.ssh/config | grep 'Host '  | awk '{s = s $2 " "} END {print s}'))
+        zstyle ':completion:*:(ssh|scp|sftp):*' hosts $host_list
+        }
+        refresh_ssh_autocomplete
     else
         echo ""
 fi
@@ -314,13 +327,6 @@ source $ZSH/custom/plugins/enhancd/init.sh
 ENHANCD_FILTER=fzf
 export ENHANCD_FILTER
 
-
-# Speed SSH readings
-function refresh_ssh_autocomplete () {
-    host_list=($(cat ~/.ssh/config | grep 'Host '  | awk '{s = s $2 " "} END {print s}'))
-    zstyle ':completion:*:(ssh|scp|sftp):*' hosts $host_list
-}
-refresh_ssh_autocomplete
 
 ######################### PATHS ########################
 
