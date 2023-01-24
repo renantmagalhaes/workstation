@@ -13,50 +13,48 @@ echo “Dont run this script as root” 2>&1
 exit 1
 fi
 
-# refresh repos
-sudo apt-get update
+# refresh repos and upgrade system
+sudo zypper dup
 
 # Set tz
-sudo apt install -y ntpdate
+sudo zypper install -y ntp
 sudo ntpdate pool.ntp.org
 
-# upgrade
-sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install zsh fonts-powerline vim tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak snapd xournal evince jq
-sudo apt-get -f install -y
+sudo zypper install -y zsh vim tmux curl net-tools iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak xournal evince jq
 
+# Install SNAP
+sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Leap_`cat /etc/os-release |grep VERSION_ID |egrep -oh '[0-9][0-9]\.[0-9]'` snappy
+sudo zypper --gpg-auto-import-keys refresh
+sudo zypper dup --from snappy
+sudo zypper install snapd
 
-# Flatpack
-sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 # Brew
-bash ../source/any/brew.sh
+bash desktop/source/any/brew.sh
 
 #Utils
 
-## LSD
-wget https://github.com/Peltoche/lsd/releases/download/0.23.1/lsd-musl_0.23.1_amd64.deb -O /tmp/lsd_amd64.deb
-sudo dpkg -i /tmp/lsd_amd64.deb
+# Colorls
+sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel
+sudo gem install colorls
+
+# Install LSD
+curl https://sh.rustup.rs -sSf | sh
+~/.cargo/bin/cargo install lsd
 
 ## Fix python default path
 sudo ln -s /usr/bin/python3 /usr/bin/python
-
+sudo ln -s /usr/bin/pip3 /usr/bin/pip
 
 # Install pip packages
 sudo pip3 install virtualenv virtualenvwrapper pylint
 sudo pip3 install bpytop --upgrade
-sudo apt-get -f install -y
+
 
 # Create git-folder 
 mkdir -p ~/GIT-REPOS/CORE
-
-
-# Colorls
-sudo apt install -y ruby-dev
-sudo gem install colorls
-sudo apt-get -f install -y
 
 # Enable Systemd
 sudo bash -c 'cat << EOF > /etc/wsl.conf
@@ -81,8 +79,7 @@ bash ../source/any/fonts.sh
 # New VIM
 bash ../source/any/vim.sh
 
-# Make sure all package are installed
-sudo apt-get -f install -y
+
 
 # RTM
 # RTM
