@@ -120,6 +120,7 @@ Set all to Windows Menu
 - Visual Studio Code
 - HWiNFO64
   - [Config file to import](./config/hwinfo/HWiNFO64_settings.reg)
+- On Air Clock
 
 # Rounded TB
 
