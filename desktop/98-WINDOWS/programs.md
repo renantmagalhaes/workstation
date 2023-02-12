@@ -20,8 +20,10 @@ Or Download via Microsoft Store (recommended)
 
 # Phone Sync
 
-1. Phone Link (Windows)
-2. Link to Windows(Android)
+[Intel Unison - Windows](https://apps.microsoft.com/store/detail/intel%C2%AE-unison%E2%84%A2/9PP9GZM2GN26?hl=en-us&gl=us)
+[Intel Unison - Android](https://play.google.com/store/apps/details?id=com.intel.mde&gl=US)
+<!-- 1. Phone Link (Windows)
+2. Link to Windows(Android) -->
 
 # Programs
 

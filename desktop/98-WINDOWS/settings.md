@@ -125,3 +125,49 @@ Set all to Windows Menu
 # Rounded TB
 
 ![picture 1](../../images/5bcd0ad5cb5d3cbd5413f160c6ed1e4ba48db5e6684016b77c5a1ac783ef5ba4.png)  
+
+# Clipboard Sync
+
+First, Enable Clipboard Sync on Windows 10
+To get started with this feature, you’ll need to enable clipboard syncing on your Windows PC. To do that, go to Settings > System > Clipboard. Toggle on “Sync Across Devices.”
+
+Turn on "Sync Across Devices."
+
+On that same page, scroll down a bit further and choose to “Automatically sync text that I copy.” This will ensure that it syncs without any extra work from you.
+
+Enable "Automatically Sync Text That I Copy."
+
+Next, Activate Clipboard Sync on Android
+Now, we can move over to SwiftKey on your Android device. As of November 2021, the feature is available in the stable version. Download it from the Play Store and open the app after it installs.
+
+Download Swiftkey.
+
+You will be asked to set SwiftKey Beta as your default keyboard app. The app will walk you through the process of enabling and selecting SwiftKey as default.
+
+Set Swiftkey as default.
+
+Next, you need to sign in to SwiftKey with the same Microsoft account that you use on your Windows PC. Tap “Account” at the top of the Settings.
+
+Tap "Account."
+
+Then, select “Sign in with Microsoft.” The clipboard syncing doesn’t work with a Google account.
+
+Sign in with your Microsoft account.
+
+After you’re signed in, go back to the SwiftKey Settings and select “Rich Input.”
+
+Select "Rich Input."
+
+Go to “Clipboard.”
+
+Select "Clipboard."
+
+Now, we can toggle on “Sync Clipboard History.”
+
+Turn on "Sync Clipboard History."
+
+You will be asked to sign in to your Microsoft account again to verify. Tap “OK” to do so.
+
+Tap "OK."
+
+That’s the last step! From now on, any text that you copy on Android will be available in the Windows clipboard, and any text that you copy on Windows will be available on the Android clipboard. It works quite seamlessly.
