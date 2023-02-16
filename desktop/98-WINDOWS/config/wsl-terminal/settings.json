@@ -29,26 +29,29 @@
             "keys": "alt+shift+d"
         },
         {
+            "command": "unbound",
+            "keys": "win+sc(41)"
+        },
+        {
             "command": 
             {
                 "action": "quakeMode"
             },
             "keys": "ctrl+enter"
-        },
-        {
-            "command": "unbound",
-            "keys": "win+sc(41)"
         }
     ],
     "alwaysShowNotificationIcon": true,
     "copyFormatting": "none",
     "copyOnSelect": true,
-    "defaultProfile": "{f9ceaf27-504c-58d7-927c-d1d6a7ac7d3c}",
+    "defaultProfile": "{17bf3de4-5353-5709-bcf9-835bd952a95e}",
     "launchMode": "default",
     "minimizeToNotificationArea": true,
     "profiles": 
     {
-        "defaults": {},
+        "defaults": 
+        {
+            "colorScheme": "RTM"
+        },
         "list": 
         [
             {
@@ -70,24 +73,18 @@
                 "source": "Windows.Terminal.Azure"
             },
             {
-                "bellStyle": "taskbar",
                 "colorScheme": "RTM",
+                "elevate": false,
                 "font": 
                 {
                     "face": "FuraCode Nerd Font Retina"
                 },
-                "guid": "{f9ceaf27-504c-58d7-927c-d1d6a7ac7d3c}",
-                "hidden": false,
-                "name": "Ubuntu 22.04.1 LTS",
-                "opacity": 90,
-                "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc",
-                "useAcrylic": true
-            },
-            {
                 "guid": "{17bf3de4-5353-5709-bcf9-835bd952a95e}",
-                "hidden": true,
+                "hidden": false,
                 "name": "Ubuntu-22.04",
-                "source": "Windows.Terminal.Wsl"
+                "opacity": 90,
+                "source": "Windows.Terminal.Wsl",
+                "useAcrylic": true
             }
         ]
     },
@@ -370,7 +367,8 @@
             "yellow": "#808000"
         }
     ],
-    "startOnUserLogin": false,
-    "theme": "dark",
+    "startOnUserLogin": true,
+    "theme": "system",
+    "themes": [],
     "useAcrylicInTabRow": true
 }
