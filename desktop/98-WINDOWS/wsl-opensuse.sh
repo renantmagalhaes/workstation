@@ -22,7 +22,7 @@ sudo ntpdate pool.ntp.org
 
 
 # Install the packages from repo
-sudo zypper install -y zsh vim tmux curl net-tools iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox
+sudo zypper install -y zsh vim tmux curl net-tools iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox net-tools-deprecated
 
 # Install SNAP
 sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Tumbleweed snappy
