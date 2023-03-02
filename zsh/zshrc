@@ -116,15 +116,18 @@ kde_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "KDE" | awk '{print tolower(
 i3_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "I3" | awk '{print tolower($0)}'`
 bspwm_check=`env |grep DESKTOP_SESSION |grep -ioh "bspwm" | awk '{print tolower($0)}'`
 wsl_ubuntu_check=`env |grep WSL |grep -ioh "ubuntu"| awk '{print tolower($0)}'`
+wsl_thumbleweed_check=`env |grep WSL |grep -ioh "openSUSE-Tumbleweed"| awk '{print tolower($0)}'`
 
-if check_cmd wsl.exe; then # FOR WSL SYSTEMS
-    alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+if check_cmd wsl.exe; then
     alias folder="explorer.exe"
-    #alias folder="nautilus"
     alias pdf="evince"
     alias wsl-update="wsl.exe --update"
     alias wsl-shutdown="wsl.exe --shutdown"
-
+        if [[ $wsl_ubuntu_check == "ubuntu" ]]; then
+            alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+        elif [[ $wsl_thumbleweed_check == "opensuse-tumbleweed" ]]; then
+            alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+        fi
 elif check_cmd apt-get; then # FOR DEB SYSTEMS
     alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
