@@ -26,3 +26,9 @@ fi
 
 # Install neovim
 brew install neovim
+
+# Install bat
+brew install bat
+
+# Install git-delta
+brew install git-delta

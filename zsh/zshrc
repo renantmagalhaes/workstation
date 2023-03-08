@@ -85,8 +85,8 @@ source $ZSH/oh-my-zsh.sh
 # fzf search 
 source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
 
-
-
+# alias with preview files on 
+alias pf="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 # crontab editor
 export VISUAL=vim
 
@@ -279,6 +279,35 @@ function ip-geolocation() {
     curl http://ip-api.com/json/$1 | jq .
 }
 
+### pw generator
+function pw () {
+    pwgen -sync "${1:-48}" -1 | if command -v pbcopy > /dev/null 2>&1; then pbcopy; else xclip; fi
+}
+
+### get weather
+function weather () {
+    curl "https://wttr.in/${1}"
+}
+
+### chmod alias
+alias 755d="find . -type d -exec chmod 755 {} \;"
+
+alias 644f="find . -type f -exec chmod 644 {} \;"
+
+### find alias
+function find-folder () {
+find $1 -type d -iname $2 -exec bat {} +
+}
+
+function find-file () {
+find $1 -type f -iname $2 -exec bat {} +
+}
+
+# This is specific to WSL 2. If the WSL 2 VM goes rogue and decides not to free
+# up memory, this command will free your memory after about 20-30 seconds.
+#   Details: https://github.com/microsoft/WSL/issues/4166#issuecomment-628493643
+alias drop_cache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
+
 
 ### Security Tools ###
 alias sherlock='docker run -i theyahya/sherlock'
@@ -293,10 +322,14 @@ command -v lsd > /dev/null && alias ls='lsd --group-dirs first' && \
 # 	alias tree='colorls --tree'
 
 ### CAT & LESS ###
-#command -v batcat > /dev/null && \
-#	alias batcat='batcat --theme=ansi-$([ "$COLOR_SCHEME" = "light" ] && echo "light" || echo "dark")' && \
-#	alias cat='batcat --pager=never' && \
-#	alias less='batcat'
+command -v bat > /dev/null && \
+	alias bat='bat --style=plain --theme=Dracula' && \
+	alias cat='bat --pager=never' && \
+	alias less='bat' && \
+    alias tailf="tail -f $1 | bat --paging=never -l log" && \
+    function gitd() {
+    git diff --name-only --relative --diff-filter=d | xargs bat --diff
+    }
 
 # colorize ls
 [ -x /usr/bin/dircolors ] && eval "$(dircolors -b)"
