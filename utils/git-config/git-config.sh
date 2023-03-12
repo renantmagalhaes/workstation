@@ -1,7 +1,28 @@
 #!/bin/bash
 
-#GIT CONFIG
+# Delta setup
+cat << EOF > ~/.gitconfig
+[core]
+    pager = delta
 
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+    side-by-side = true
+    line-numbers = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
+EOF
+
+#GIT CONFIG
 git config --global user.email "renantmagalhaes@gmail.com"
 git config --global user.name "Renan Toesqui Magalhaes"
 git config --global pull.rebase false
