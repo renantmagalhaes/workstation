@@ -122,6 +122,11 @@ Set all to Windows Menu
   - [Config file to import](./config/hwinfo/HWiNFO64_settings.reg)
 - On Air Clock
 
+# Set tmux as default terminal shell
+
+```bash
+sudo usermod --shell /usr/bin/tmux $USER
+```
 # Rounded TB
 
 ![picture 1](../../images/5bcd0ad5cb5d3cbd5413f160c6ed1e4ba48db5e6684016b77c5a1ac783ef5ba4.png)  
