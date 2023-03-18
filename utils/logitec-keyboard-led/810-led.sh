@@ -18,8 +18,8 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     sudo dnf install -y git make gcc-c++ libusbx-devel
 
 elif check_cmd zypper; then  # FOR SUSE SYSTEMS
-    echo "looking for dependencies"
-    exit 1
+    sudo zypper install -y git make  gcc-c++ libhidapi-devel # for hidapi
+    sudo zypper install -y git make gcc-c++ libusb-1_0-devel
 elif check_cmd pacman; then  # FOR Arch SYSTEMS
     sudo pacman -Sy git gcc make hidapi # for hidapi
     sudo pacman -Sy git gcc make libusb # for libusb
