@@ -323,7 +323,7 @@ command -v lsd > /dev/null && alias ls='lsd --group-dirs first' && \
 
 ### CAT & LESS ###
 command -v bat > /dev/null && \
-	alias bat='bat --style=plain --theme=Dracula' && \
+	alias bat='bat --style=plain --theme=OneHalfDark' && \
 	alias cat='bat --pager=never' && \
 	alias less='bat' && \
     alias tailf="tail -f $1 | bat --paging=never -l log" && \
