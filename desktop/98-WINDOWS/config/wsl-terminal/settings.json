@@ -43,7 +43,7 @@
     "alwaysShowNotificationIcon": true,
     "copyFormatting": "none",
     "copyOnSelect": true,
-    "defaultProfile": "{bc2da056-dd06-5879-b969-1dfcefc8d2c7}",
+    "defaultProfile": "{17bf3de4-5353-5709-bcf9-835bd952a95e}",
     "launchMode": "default",
     "minimizeToNotificationArea": true,
     "profiles": 
@@ -86,18 +86,6 @@
                 "guid": "{17bf3de4-5353-5709-bcf9-835bd952a95e}",
                 "hidden": false,
                 "name": "Ubuntu-22.04",
-                "opacity": 90,
-                "source": "Windows.Terminal.Wsl",
-                "useAcrylic": true
-            },
-            {
-                "font": 
-                {
-                    "face": "FuraCode Nerd Font Retina"
-                },
-                "guid": "{bc2da056-dd06-5879-b969-1dfcefc8d2c7}",
-                "hidden": false,
-                "name": "openSUSE-Tumbleweed",
                 "opacity": 90,
                 "source": "Windows.Terminal.Wsl",
                 "useAcrylic": true
