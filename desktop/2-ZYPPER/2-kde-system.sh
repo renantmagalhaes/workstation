@@ -132,6 +132,12 @@ sudo zypper install -y google-chrome-stable
 # sudo zypper in vivaldi-stable
 sudo opi vivaldi
 
+# Install Edge
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sudo zypper ar https://packages.microsoft.com/yumrepos/edge microsoft-edge
+sudo zypper refresh
+sudo zypper install -y microsoft-edge-stable
+
 ## Install Visual Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/zypp/repos.d/vscode.repo'
@@ -164,18 +170,18 @@ sudo zypper install -y clamav clamtk
 # sudo dnf install -y clamav-daemon
 
 
-# Widgets
-## Virtual Desktop Bar
-git clone https://github.com/wsdfhjxc/virtual-desktop-bar.git ~/GIT-REPOS/CORE/virtual-desktop-bar
-sh -c "~/GIT-REPOS/CORE/virtual-desktop-bar/scripts/install-dependencies-opensuse.sh"
-cd ~/GIT-REPOS/CORE/virtual-desktop-bar/scripts && ./install-applet.sh
+## Widgets
+### Virtual Desktop Bar
+#git clone https://github.com/wsdfhjxc/virtual-desktop-bar.git ~/GIT-REPOS/CORE/virtual-desktop-bar
+#sh -c "~/GIT-REPOS/CORE/virtual-desktop-bar/scripts/install-dependencies-opensuse.sh"
+#cd ~/GIT-REPOS/CORE/virtual-desktop-bar/scripts && ./install-applet.sh
 
-## Dash to panel indicator
-git clone https://github.com/psifidotos/latte-indicator-dashtopanel.git ~/GIT-REPOS/CORE/latte-indicator-dashtopanel
-cd ~/GIT-REPOS/CORE/latte-indicator-dashtopanel && kpackagetool5 -i . -t Latte/Indicator
+### Dash to panel indicator
+#git clone https://github.com/psifidotos/latte-indicator-dashtopanel.git ~/GIT-REPOS/CORE/latte-indicator-dashtopanel
+#cd ~/GIT-REPOS/CORE/latte-indicator-dashtopanel && kpackagetool5 -i . -t Latte/Indicator
 
-## Applets
-sudo zypper install -y  applet-window-title applet-window-buttons applet-window-appmenu
+### Applets
+#sudo zypper install -y  applet-window-title applet-window-buttons applet-window-appmenu
 
 
 # RTM
