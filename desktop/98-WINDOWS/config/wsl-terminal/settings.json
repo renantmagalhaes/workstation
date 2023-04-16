@@ -73,7 +73,8 @@
                 "guid": "{bc2da056-dd06-5879-b969-1dfcefc8d2c7}",
                 "hidden": false,
                 "name": "openSUSE-Tumbleweed",
-                "useAcrylic": true
+                "useAcrylic": true,
+                "tabColor": "#36d27c"
             },
             {
                 "colorScheme": "RTM",
