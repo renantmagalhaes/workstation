@@ -66,17 +66,6 @@
                 "tabColor": "#1670cb",
             },
             {
-                "font": 
-                {
-                    "face": "FuraCode Nerd Font Retina"
-                },
-                "guid": "{bc2da056-dd06-5879-b969-1dfcefc8d2c7}",
-                "hidden": false,
-                "name": "openSUSE-Tumbleweed",
-                "useAcrylic": true,
-                // "tabColor": "#36d27c"
-            },
-            {
                 "colorScheme": "RTM",
                 "elevate": false,
                 "font": 
@@ -89,7 +78,7 @@
                 "opacity": 90,
                 "source": "Windows.Terminal.Wsl",
                 "useAcrylic": true,
-                "tabColor": "#db4612"
+                //"tabColor": "#db4612"
             },
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
