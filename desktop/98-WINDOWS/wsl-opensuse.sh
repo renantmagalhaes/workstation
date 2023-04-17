@@ -14,7 +14,7 @@ exit 1
 fi
 
 # refresh repos and upgrade system
-sudo zypper dup
+sudo zypper ref && sudo zypper up
 
 # Set tz
 sudo zypper install -y ntp
@@ -25,7 +25,7 @@ sudo ntpdate pool.ntp.org
 sudo zypper install -y zsh vim tmux curl net-tools iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox net-tools-deprecated
 
 # Install SNAP
-sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Tumbleweed snappy
+sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Leap_`cat /etc/os-release |grep VERSION_ID |egrep -Eoh '[0-9]{1,2}.[0-9]'` snappy
 sudo zypper --gpg-auto-import-keys refresh
 sudo zypper dup --from snappy
 sudo zypper install -y snapd
@@ -56,6 +56,9 @@ sudo pip3 install bpytop --upgrade
 # Create git-folder 
 mkdir -p ~/GIT-REPOS/CORE
 
+# Fix systemd init
+sudo ln -s /usr/lib/systemd/systemd /sbin/init
+
 # Enable Systemd
 sudo bash -c 'cat << EOF > /etc/wsl.conf
 [boot]
@@ -79,9 +82,6 @@ bash ../source/any/fonts.sh
 # New VIM
 bash ../source/any/vim.sh
 
-
-
-# RTM
 # RTM
 #clear
 echo "#################################"
