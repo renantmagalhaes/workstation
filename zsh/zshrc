@@ -126,7 +126,7 @@ if check_cmd wsl.exe; then
         if [[ $wsl_ubuntu_check == "ubuntu" ]]; then
             alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
         elif [[ $wsl_thumbleweed_check == "opensuse-tumbleweed" ]]; then
-            alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+            alias update-all="sudo zypper ref && sudo zypper up && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
         fi
 elif check_cmd apt-get; then # FOR DEB SYSTEMS
     alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
@@ -175,7 +175,7 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     fi
 
 elif check_cmd zypper; then  # FOR ZYPPER SYSTEMS
-    alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+    alias update-all="sudo zypper ref && sudo zypper up && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
         alias folder="nautilus"
         alias pdf="evince"
@@ -302,6 +302,9 @@ find $1 -type d -iname $2 -exec bat {} +
 function find-file () {
 find $1 -type f -iname $2 -exec bat {} +
 }
+
+# suse tmux fix
+export TMUX_TMPDIR='/tmp'
 
 # This is specific to WSL 2. If the WSL 2 VM goes rogue and decides not to free
 # up memory, this command will free your memory after about 20-30 seconds.
