@@ -65,11 +65,12 @@ sudo zypper refresh && sudo zypper update
 sudo zypper install -y opi
 
 # Kvantum
-sudo zypper ar obs://home:trmdi trmdi
-sudo zypper in -r trmdi kvantum
+sudo zypper install -y kvantum-qt5
+#sudo zypper ar obs://home:trmdi trmdi
+#sudo zypper in -r trmdi kvantum
 
 # Install the packages from Suse repo
-sudo zypper install -y zsh vlc clementine vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring latte-dock virtualbox telnet openssh materia-gtk-theme alacritty scrot net-tools-deprecated busybox-sysvinit-tools
+sudo zypper install -y zsh vlc clementine vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring latte-dock virtualbox telnet openssh materia-gtk-theme alacritty scrot net-tools-deprecated
 
 # virtualbox users
 sudo usermod -aG vboxusers $USER
@@ -159,7 +160,8 @@ bash desktop/source/kde/themes.sh
 
 # Colorls
 sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel
-sudo gem install colorls
+sudo gem install public_suffix -v 4.0.7
+sudo gem install colorls -v 1.4.4
 
 # Install LSD
 curl https://sh.rustup.rs -sSf | sh
