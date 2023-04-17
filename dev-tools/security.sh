@@ -16,7 +16,8 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
 
 elif check_cmd zypper; then  # FOR RPM SYSTEMS
 
-    sudo zypper install -y go sqlitebrowser aircrack-ng nmap jq
+    sudo zypper install -y go sqlitebrowser nmap jq
+    brew install aircrack-ng
 
 else
     echo "Not able to identify the system"
