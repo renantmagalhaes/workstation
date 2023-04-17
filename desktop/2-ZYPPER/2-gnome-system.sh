@@ -90,7 +90,7 @@ sudo opi codecs
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 #Install snap
-sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Tumbleweed snappy
+sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Leap_`cat /etc/os-release |grep VERSION_ID |egrep -Eoh '[0-9]{1,2}.[0-9]'` snappy
 sudo zypper --gpg-auto-import-keys refresh
 sudo zypper dup --from snappy
 sudo zypper install -y snapd
