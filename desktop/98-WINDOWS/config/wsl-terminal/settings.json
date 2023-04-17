@@ -43,7 +43,7 @@
     "alwaysShowNotificationIcon": true,
     "copyFormatting": "none",
     "copyOnSelect": true,
-    "defaultProfile": "{bc2da056-dd06-5879-b969-1dfcefc8d2c7}",
+    "defaultProfile": "{8bb5a90b-1ec6-4add-af59-4e62d34062f1}",
     "launchMode": "default",
     "minimizeToNotificationArea": true,
     "profiles": 
@@ -63,7 +63,21 @@
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
                 "name": "Windows PowerShell",
-                "tabColor": "#1670cb",
+                "tabColor": "#1670CB"
+            },
+            {
+                "commandline": "C:\\Windows\\system32\\wsl.exe -d openSUSE-Leap-15.4",
+                "font": 
+                {
+                    "face": "FuraCode Nerd Font Retina"
+                },
+                "guid": "{8bb5a90b-1ec6-4add-af59-4e62d34062f1}",
+                "hidden": false,
+                "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
+                "name": "openSUSE-Leap-15.X",
+                "opacity": 90,
+                "startingDirectory": "~",
+                "useAcrylic": true
             },
             {
                 "colorScheme": "RTM",
@@ -78,21 +92,21 @@
                 "opacity": 90,
                 "source": "Windows.Terminal.Wsl",
                 "useAcrylic": true,
-                //"tabColor": "#db4612"
+                "tabColor": "#d06c09"
             },
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "Command Prompt",
-                "tabColor": "#5f5f5f"
+                "tabColor": "#320DAD"
             },
             {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
                 "hidden": true,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
-            },
+            }
         ]
     },
     "schemes": 
@@ -374,7 +388,7 @@
             "yellow": "#808000"
         }
     ],
-    "startOnUserLogin": true,
+    "startOnUserLogin": false,
     "theme": "system",
     "themes": [],
     "useAcrylicInTabRow": true
