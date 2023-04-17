@@ -69,7 +69,7 @@ sudo zypper ar obs://home:trmdi trmdi
 sudo zypper in -r trmdi kvantum
 
 # Install the packages from Suse repo
-sudo zypper install -y zsh vlc clementine vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring latte-dock virtualbox telnet openssh materia-gtk-theme alacritty scrot net-tools-deprecated
+sudo zypper install -y zsh vlc clementine vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring latte-dock virtualbox telnet openssh materia-gtk-theme alacritty scrot net-tools-deprecated busybox-sysvinit-tools
 
 # virtualbox users
 sudo usermod -aG vboxusers $USER
