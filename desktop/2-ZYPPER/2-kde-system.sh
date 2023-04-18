@@ -65,12 +65,11 @@ sudo zypper refresh && sudo zypper update
 sudo zypper install -y opi
 
 # Kvantum
-sudo zypper install -y kvantum-qt5
-#sudo zypper ar obs://home:trmdi trmdi
-#sudo zypper in -r trmdi kvantum
+sudo zypper ar obs://home:trmdi trmdi
+sudo zypper in -r trmdi kvantum
 
-# Install the packages from Suse repo
-sudo zypper install -y zsh vlc clementine vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring latte-dock virtualbox telnet openssh materia-gtk-theme alacritty scrot net-tools-deprecated
+# Install the packages from fedora repo
+sudo zypper install -y zsh vlc clementine vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring timeshift latte-dock virtualbox droidcam android-tools telnet openssh materia-gtk-theme alacritty scrot net-tools-deprecated
 
 # virtualbox users
 sudo usermod -aG vboxusers $USER
@@ -95,7 +94,7 @@ sudo opi codecs
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 #Install snap
-sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Leap_`cat /etc/os-release |grep VERSION_ID |egrep -Eoh '[0-9]{1,2}.[0-9]'` snappy
+sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Tumbleweed snappy
 sudo zypper --gpg-auto-import-keys refresh
 sudo zypper dup --from snappy
 sudo zypper install -y snapd
@@ -160,8 +159,7 @@ bash desktop/source/kde/themes.sh
 
 # Colorls
 sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel
-sudo gem install public_suffix -v 4.0.7
-sudo gem install colorls -v 1.4.4
+sudo gem install colorls
 
 # Install LSD
 curl https://sh.rustup.rs -sSf | sh
@@ -172,16 +170,16 @@ sudo zypper install -y clamav clamtk
 # sudo dnf install -y clamav-daemon
 
 
-## Widgets
-### Virtual Desktop Bar
+# Widgets
+## Virtual Desktop Bar
 #git clone https://github.com/wsdfhjxc/virtual-desktop-bar.git ~/GIT-REPOS/CORE/virtual-desktop-bar
 #sh -c "~/GIT-REPOS/CORE/virtual-desktop-bar/scripts/install-dependencies-opensuse.sh"
 #cd ~/GIT-REPOS/CORE/virtual-desktop-bar/scripts && ./install-applet.sh
-
+#
 ### Dash to panel indicator
 #git clone https://github.com/psifidotos/latte-indicator-dashtopanel.git ~/GIT-REPOS/CORE/latte-indicator-dashtopanel
 #cd ~/GIT-REPOS/CORE/latte-indicator-dashtopanel && kpackagetool5 -i . -t Latte/Indicator
-
+#
 ### Applets
 #sudo zypper install -y  applet-window-title applet-window-buttons applet-window-appmenu
 
