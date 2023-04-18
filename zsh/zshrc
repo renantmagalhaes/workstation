@@ -117,6 +117,8 @@ i3_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "I3" | awk '{print tolower($0
 bspwm_check=`env |grep DESKTOP_SESSION |grep -ioh "bspwm" | awk '{print tolower($0)}'`
 wsl_ubuntu_check=`env |grep WSL |grep -ioh "ubuntu"| awk '{print tolower($0)}'`
 wsl_thumbleweed_check=`env |grep WSL |grep -ioh "openSUSE-Tumbleweed"| awk '{print tolower($0)}'`
+wsl_leap_check=`env |grep WSL |grep -ioh "openSUSE-Leap"| awk '{print tolower($0)}'`
+
 
 if check_cmd wsl.exe; then
     alias folder="explorer.exe"
@@ -126,7 +128,9 @@ if check_cmd wsl.exe; then
         if [[ $wsl_ubuntu_check == "ubuntu" ]]; then
             alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
         elif [[ $wsl_thumbleweed_check == "opensuse-tumbleweed" ]]; then
-            alias update-all="sudo zypper ref && sudo zypper up && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+            alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+        elif [[ $wsl_leap_check == "opensuse-leap" ]]; then
+                    alias update-all="sudo zypper ref && sudo zypper up && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
         fi
 elif check_cmd apt-get; then # FOR DEB SYSTEMS
     alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
@@ -174,8 +178,8 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
         echo ""
     fi
 
-elif check_cmd zypper; then  # FOR ZYPPER SYSTEMS
-    alias update-all="sudo zypper ref && sudo zypper up && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+elif check_cmd zypper; then  # FOR ZYPPER TW SYSTEMS
+    alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
     if [[ $gnome_check == "gnome" ]]; then
         alias folder="nautilus"
         alias pdf="evince"
