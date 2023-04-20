@@ -70,7 +70,7 @@ sudo zypper install -y opi
 sudo zypper install -y kvantum-qt5
 
 # Install the packages from fedora repo
-sudo zypper install -y zsh vlc clementine vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring timeshift latte-dock virtualbox droidcam android-tools telnet openssh materia-gtk-theme alacritty scrot net-tools-deprecated
+sudo zypper install -y zsh vlc clementine vim nmap blender brasero gparted wireshark curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar bat gawk net-tools coreutils ncdu whois piper openssl gnome-keyring timeshift latte-dock virtualbox droidcam android-tools telnet openssh materia-gtk-theme alacritty scrot net-tools-deprecated
 
 # virtualbox users
 sudo usermod -aG vboxusers $USER
@@ -169,6 +169,9 @@ curl https://sh.rustup.rs -sSf | sh
 # Install ClamAV
 sudo zypper install -y clamav clamtk
 # sudo dnf install -y clamav-daemon
+
+# Temporary install Tmux via brew
+brew install tmux
 
 
 # Widgets
