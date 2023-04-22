@@ -79,6 +79,8 @@ sudo usermod -aG vboxusers $USER
 # Brew
 bash desktop/source/any/brew.sh
 
+# Temporary install Tmux via brew
+brew install tmux
 # Piper group
 sudo usermod -aG games $USER
 
@@ -169,10 +171,6 @@ curl https://sh.rustup.rs -sSf | sh
 # Install ClamAV
 sudo zypper install -y clamav clamtk
 # sudo dnf install -y clamav-daemon
-
-# Temporary install Tmux via brew
-brew install tmux
-
 
 # Widgets
 ## Virtual Desktop Bar
