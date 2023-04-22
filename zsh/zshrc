@@ -125,6 +125,8 @@ if check_cmd wsl.exe; then
     alias pdf="evince"
     alias wsl-update="wsl.exe --update"
     alias wsl-shutdown="wsl.exe --shutdown"
+    alias wsl-delete="wsl.exe --unregister"
+    alias wsl-list="wsl.exe --list"
         if [[ $wsl_ubuntu_check == "ubuntu" ]]; then
             alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
         elif [[ $wsl_thumbleweed_check == "opensuse-tumbleweed" ]]; then
