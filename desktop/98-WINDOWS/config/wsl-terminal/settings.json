@@ -43,7 +43,7 @@
     "alwaysShowNotificationIcon": true,
     "copyFormatting": "none",
     "copyOnSelect": true,
-    "defaultProfile": "{8bb5a90b-1ec6-4add-af59-4e62d34062f1}",
+    "defaultProfile": "{1bf3ada9-d9fb-4877-aafc-f4fe95197570}",
     "launchMode": "default",
     "minimizeToNotificationArea": true,
     "profiles": 
@@ -66,15 +66,15 @@
                 "tabColor": "#1670CB"
             },
             {
-                "commandline": "C:\\Windows\\system32\\wsl.exe -d openSUSE-Leap-15.4",
+                "commandline": "C:\\Windows\\system32\\wsl.exe -d openSUSE-Tumbleweed",
                 "font": 
                 {
                     "face": "FuraCode Nerd Font Retina"
                 },
-                "guid": "{8bb5a90b-1ec6-4add-af59-4e62d34062f1}",
+                "guid": "{1bf3ada9-d9fb-4877-aafc-f4fe95197570}",
                 "hidden": false,
                 "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
-                "name": "openSUSE-Leap-15.X",
+                "name": "openSUSE-Tumbleweed",
                 "opacity": 90,
                 "startingDirectory": "~",
                 "useAcrylic": true
@@ -91,8 +91,8 @@
                 "name": "Ubuntu-22.04",
                 "opacity": 90,
                 "source": "Windows.Terminal.Wsl",
-                "useAcrylic": true,
-                "tabColor": "#d06c09"
+                "tabColor": "#D06C09",
+                "useAcrylic": true
             },
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
