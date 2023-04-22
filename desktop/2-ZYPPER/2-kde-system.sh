@@ -81,6 +81,7 @@ bash desktop/source/any/brew.sh
 
 # Temporary install Tmux via brew
 /home/linuxbrew/.linuxbrew/bin/brew install tmux
+sudo ln -s -f /home/linuxbrew/.linuxbrew/bin/tmux /usr/bin/tmux
 
 # Piper group
 sudo usermod -aG games $USER
