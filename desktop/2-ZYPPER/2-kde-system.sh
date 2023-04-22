@@ -80,7 +80,8 @@ sudo usermod -aG vboxusers $USER
 bash desktop/source/any/brew.sh
 
 # Temporary install Tmux via brew
-brew install tmux
+/home/linuxbrew/.linuxbrew/bin/brew install tmux
+
 # Piper group
 sudo usermod -aG games $USER
 
