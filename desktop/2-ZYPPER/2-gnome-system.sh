@@ -89,8 +89,14 @@ sudo opi codecs
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-#Install snap
-sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Leap_`cat /etc/os-release |grep VERSION_ID |egrep -Eoh '[0-9]{1,2}.[0-9]'` snappy
+# Install SNAP
+wsl_thumbleweed_check=`env |grep WSL |grep -ioh "openSUSE-Tumbleweed"| awk '{print tolower($0)}'`
+wsl_leap_check=`env |grep WSL |grep -ioh "openSUSE-Leap"| awk '{print tolower($0)}'`
+if [[ $wsl_leap_check == "opensuse-leap" ]]; then
+    sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Leap_`cat /etc/os-release |grep VERSION_ID |egrep -Eoh '[0-9]{1,3}.[0-9]{1,3}'` snappy
+elif [[ $wsl_thumbleweed_check == "opensuse-tumbleweed" ]]; then
+    sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Tumbleweed snappy
+fi
 sudo zypper --gpg-auto-import-keys refresh
 sudo zypper dup --from snappy
 sudo zypper install -y snapd
