@@ -33,6 +33,9 @@ autoload -U compinit && compinit
 
 ## enhancd
 git clone https://github.com/b4b4r07/enhancd ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd
+cd ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd/
+git checkout tags/v2.5.0
+cd -
 
 if [[ $macos_check == "darwin" ]]; then
     sed -i '' 's/\.\./\./g' ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd/init.sh
