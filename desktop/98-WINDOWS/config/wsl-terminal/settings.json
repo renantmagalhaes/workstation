@@ -43,7 +43,7 @@
     "alwaysShowNotificationIcon": true,
     "copyFormatting": "none",
     "copyOnSelect": true,
-    "defaultProfile": "{1bf3ada9-d9fb-4877-aafc-f4fe95197570}",
+    "defaultProfile": "{067a3a9c-c412-49ec-a07e-0f9c085512d7}",
     "launchMode": "default",
     "minimizeToNotificationArea": true,
     "profiles": 
@@ -66,12 +66,12 @@
                 "tabColor": "#1670CB"
             },
             {
-                "commandline": "C:\\Windows\\system32\\wsl.exe -d openSUSE-Tumbleweed",
+                "commandline": "C:\\windows\\system32\\wsl.exe -d openSUSE-Tumbleweed",
                 "font": 
                 {
                     "face": "FuraCode Nerd Font Retina"
                 },
-                "guid": "{1bf3ada9-d9fb-4877-aafc-f4fe95197570}",
+                "guid": "{067a3a9c-c412-49ec-a07e-0f9c085512d7}",
                 "hidden": false,
                 "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
                 "name": "openSUSE-Tumbleweed",
