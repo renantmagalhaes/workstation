@@ -15,7 +15,8 @@ Taskbar > Disable Show my taskbar on all displays
 1. Personalization
    1. Colors -> Turf Green
    2. Transparency effects -> ON
-   3. Show accent colour on title bars and windows borders -> ON
+   3. Select a darker wallpaper (or solid back), with that the blur effect will have a darker tone.
+   4. Show accent colour on title bars and windows borders -> ON
 
 ## PowerToys
 
