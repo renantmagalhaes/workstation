@@ -65,6 +65,7 @@ plugins=(
   systemadmin
   rsync
   fzf
+  fzf-tab
 )
 
 
