@@ -32,3 +32,9 @@ brew install bat
 
 # Install git-delta
 brew install git-delta
+
+# Install tldr
+brew install tldr
+
+# TheFuck
+brew install thefuck
