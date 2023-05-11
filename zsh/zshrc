@@ -58,6 +58,13 @@ plugins=(
   virtualenv
   git-auto-fetch
   aws
+  sudo
+  copyfile
+  copybuffer
+  copypath
+  systemadmin
+  rsync
+  fzf
 )
 
 
@@ -251,6 +258,8 @@ alias ln='ln -sriv'
 alias xclip='xclip -selection c'
 command -v vim > /dev/null && alias vi='vim'
 
+eval $(thefuck --alias)
+
 ### Colorize commands
 #alias ls='ls --color=auto'
 alias grep='grep --color=auto'
@@ -371,6 +380,12 @@ autoload -U +X bashcompinit && bashcompinit
 source $ZSH/custom/plugins/enhancd/init.sh
 ENHANCD_FILTER=fzf
 export ENHANCD_FILTER
+######################### CUSTOM FUNCTIONS ########################
+
+function copydir {
+  pwd | tr -d "\r\n" | xclip
+}
+
 
 
 ######################### PATHS ########################
