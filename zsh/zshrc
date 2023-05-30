@@ -283,7 +283,7 @@ alias vi='nvim'
 
 ### UTILS ###
 alias disk-manager='ncdu'
-
+alias git-sync='git add -A && git commit -m sync && git push'
 
 ### System ###
 alias pip='python -m pip'
