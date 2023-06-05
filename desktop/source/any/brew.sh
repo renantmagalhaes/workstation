@@ -38,3 +38,6 @@ brew install tldr
 
 # TheFuck
 brew install thefuck
+
+# Ripgrep
+brew install ripgrep
