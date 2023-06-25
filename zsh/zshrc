@@ -81,11 +81,11 @@ source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 
-if check_cmd zypper; then
-source /usr/bin/virtualenvwrapper.sh
-else
-source /usr/local/bin/virtualenvwrapper.sh
-fi
+#if check_cmd zypper; then
+#source /usr/bin/virtualenvwrapper.sh
+#else
+#source /usr/local/bin/virtualenvwrapper.sh
+#fi
 
 #source
 source $ZSH/oh-my-zsh.sh
