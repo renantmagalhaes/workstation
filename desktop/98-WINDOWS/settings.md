@@ -136,6 +136,15 @@ sudo usermod --shell /usr/bin/tmux $USER
 
 ![picture 1](../../images/5bcd0ad5cb5d3cbd5413f160c6ed1e4ba48db5e6684016b77c5a1ac783ef5ba4.png)  
 
+# Snipping tool
+Microsoft is testing changes to how the print screen button works in Windows 11, causing it to open the Windows Snipping Tool rather than copying a screenshot to the clipboard.
+
+To be able to use flameshot as default again:
+
+```
+Settings > Accessibility > Keyboard > Turn off "Use the Print Screen key to open Snipping Tool"
+```
+
 # Clipboard Sync
 
 First, Enable Clipboard Sync on Windows 10
