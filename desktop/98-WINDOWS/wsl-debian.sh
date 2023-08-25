@@ -63,6 +63,8 @@ swap=0
 localhostForwarding=true # Boolean specifying if ports bound to wildcard or localhost in the WSL 2 VM should be connectable from the host via localhost:port.
 EOF'
 
+# Set WSL default distro
+wsl.exe --setdefault Debian
 
 # Install Fonts
 # Fonts
