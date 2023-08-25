@@ -20,6 +20,10 @@
             "keys": "ctrl+shift+f"
         },
         {
+            "command": "unbound",
+            "keys": "win+sc(41)"
+        },
+        {
             "command": 
             {
                 "action": "splitPane",
@@ -27,10 +31,6 @@
                 "splitMode": "duplicate"
             },
             "keys": "alt+shift+d"
-        },
-        {
-            "command": "unbound",
-            "keys": "win+sc(41)"
         },
         {
             "command": 
@@ -43,9 +43,15 @@
     "alwaysShowNotificationIcon": true,
     "copyFormatting": "none",
     "copyOnSelect": true,
-    "defaultProfile": "{067a3a9c-c412-49ec-a07e-0f9c085512d7}",
+    "defaultProfile": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
     "launchMode": "default",
     "minimizeToNotificationArea": true,
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
     "profiles": 
     {
         "defaults": 
@@ -66,6 +72,19 @@
                 "tabColor": "#1670CB"
             },
             {
+                "colorScheme": "RTM",
+                "font": 
+                {
+                    "face": "FuraCode Nerd Font Retina"
+                },
+                "guid": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
+                "hidden": false,
+                "name": "Debian",
+                "opacity": 90,
+                "source": "Windows.Terminal.Wsl",
+                "useAcrylic": true
+            },
+            {
                 "commandline": "C:\\windows\\system32\\wsl.exe -d openSUSE-Tumbleweed",
                 "font": 
                 {
@@ -75,23 +94,9 @@
                 "hidden": false,
                 "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
                 "name": "openSUSE-Tumbleweed",
+                "tabColor": "#7de75c",
                 "opacity": 90,
                 "startingDirectory": "~",
-                "useAcrylic": true
-            },
-            {
-                "colorScheme": "RTM",
-                "elevate": false,
-                "font": 
-                {
-                    "face": "FuraCode Nerd Font Retina"
-                },
-                "guid": "{17bf3de4-5353-5709-bcf9-835bd952a95e}",
-                "hidden": false,
-                "name": "Ubuntu-22.04",
-                "opacity": 90,
-                "source": "Windows.Terminal.Wsl",
-                "tabColor": "#D06C09",
                 "useAcrylic": true
             },
             {
@@ -365,6 +370,29 @@
             "yellow": "#A2734C"
         },
         {
+            "background": "#300A24",
+            "black": "#171421",
+            "blue": "#0037DA",
+            "brightBlack": "#767676",
+            "brightBlue": "#08458F",
+            "brightCyan": "#2C9FB3",
+            "brightGreen": "#26A269",
+            "brightPurple": "#A347BA",
+            "brightRed": "#C01C28",
+            "brightWhite": "#F2F2F2",
+            "brightYellow": "#A2734C",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#3A96DD",
+            "foreground": "#FFFFFF",
+            "green": "#26A269",
+            "name": "Ubuntu-ColorScheme",
+            "purple": "#881798",
+            "red": "#C21A23",
+            "selectionBackground": "#FFFFFF",
+            "white": "#CCCCCC",
+            "yellow": "#A2734C"
+        },
+        {
             "background": "#000000",
             "black": "#000000",
             "blue": "#000080",
@@ -390,6 +418,50 @@
     ],
     "startOnUserLogin": false,
     "theme": "system",
-    "themes": [],
+    "themes": 
+    [
+        {
+            "name": "legacyDark",
+            "tab": 
+            {
+                "background": null,
+                "showCloseButton": "always",
+                "unfocusedBackground": null
+            },
+            "window": 
+            {
+                "applicationTheme": "dark",
+                "useMica": false
+            }
+        },
+        {
+            "name": "legacyLight",
+            "tab": 
+            {
+                "background": null,
+                "showCloseButton": "always",
+                "unfocusedBackground": null
+            },
+            "window": 
+            {
+                "applicationTheme": "light",
+                "useMica": false
+            }
+        },
+        {
+            "name": "legacySystem",
+            "tab": 
+            {
+                "background": null,
+                "showCloseButton": "always",
+                "unfocusedBackground": null
+            },
+            "window": 
+            {
+                "applicationTheme": "system",
+                "useMica": false
+            }
+        }
+    ],
     "useAcrylicInTabRow": true
 }
