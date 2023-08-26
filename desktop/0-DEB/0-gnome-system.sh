@@ -11,7 +11,7 @@
 #
 #
 #*  -> Preferred applications
-#*      - Web: Vivaldi / Google Chrome
+#*      - Web: Edge / Google Chrome
 #*      - Editor: Visual Studio Code
 #*      - Music: Clementine / Spotify(web)
 #*      - Video: VLC 
@@ -175,38 +175,49 @@ else
     exit 1
 fi
 
-## Is Pop!_OS ?
-grep -o "ID=pop" /etc/os-release
-RESULT=$?
-if [ $RESULT -eq 0 ]; then
-  echo "Pop!_OS detected"
-else
-  read -rsn1 -p "You are NOT running Pop!_OS. Are you sure to continue? (Press ANY key to confirm)"
-fi
 
-# Add keys, ppa and repos
-## Vivaldi Browser
-wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo apt-key add -
-sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
+# Dependencies 
+## add user to sudo group
+sudo usermod -a -G sudo rtm
 
-
-# Brave Browser
-sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-
+## Disable cdrom
+sudo sed -i 's/deb\ cdrom/\#deb\ cdrom/g' /etc/apt/sources.list
 
 # Update / upgrade
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install alacritty zsh clementine breeze-cursor-theme dia vim vim-gtk vim-gui-common nmap vlc blender fonts-powerline fonts-cantarell brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle3 fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload chrome-gnome-shell virtualbox gnome-menus gir1.2-gmenu-3.0 flatpak chrome-gnome-shell gnome-menus pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors cheese ncdu whois piper libratbag-tools timeshift adb fastboot materia-gtk-theme xournal scrot gnome-screenshot jp2a
-sudo apt-get -f install -y
+sudo apt-get -y install wget  zsh clementine breeze-cursor-theme dia vim vim-gui-common nmap vlc blender fonts-powerline fonts-cantarell brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle3 fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload chrome-gnome-shell gnome-menus gir1.2-gmenu-3.0 flatpak chrome-gnome-shell gnome-menus pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors cheese ncdu whois piper libratbag-tools timeshift adb fastboot materia-gtk-theme xournal scrot gnome-screenshot jp2a unrar-free dnsutils imagemagick alacritty scrot x11-utils wmctrl xdotool software-properties-common apt-transport-https ca-certificates curl lsd flatpak snapd xournal evince jq
+
+# Virtualbox
+wget -O- -q https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmour -o /usr/share/keyrings/oracle_vbox_2016.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] http://download.virtualbox.org/virtualbox/debian bookworm contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
+sudo apt update
+sudo apt install -y virtualbox-7.0
+sudo usermod -aG vboxusers $USER
+
+## Virtualbox ext pack
+VERSION=$(vboxmanage --version |grep -oh ^[0-9].[0-9].[0-9]*)
+wget https://download.virtualbox.org/virtualbox/$VERSION/Oracle_VM_VirtualBox_Extension_Pack-$VERSION.vbox-extpack -O /tmp/Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack
+sudo vboxmanage extpack install /tmp/Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack
+
+
+# Docker
+sudo apt-get install -y docker.io docker-compose
+sudo systemctl enable docker
+sudo systemctl restart docker
+sudo usermod -aG docker $USER
+
+
+# Add keys, ppa and repos
+## Edge Browser
+curl -fSsL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /usr/share/keyrings/microsoft-edge.gpg > /dev/null
+echo 'deb [signed-by=/usr/share/keyrings/microsoft-edge.gpg] https://packages.microsoft.com/repos/edge stable main' | sudo tee /etc/apt/sources.list.d/microsoft-edge.list
+sudo apt update
+sudo apt install -y microsoft-edge-stable
 
 # Brew
 bash desktop/source/any/brew.sh
-
-# vboxuser
-sudo usermod -aG vboxusers $USER
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -220,9 +231,6 @@ sudo ln -s /var/lib/snapd/snap /snap
 bash desktop/source/gnome/flatpak.sh
 bash desktop/source/any/flatpak.sh
 
-## LSD
-wget https://github.com/Peltoche/lsd/releases/download/0.22.0/lsd-musl_0.22.0_amd64.deb -O /tmp/lsd_amd64.deb
-sudo dpkg -i /tmp/lsd_amd64.deb
 
 ## Fix python default path
 sudo ln -s /usr/bin/python3 /usr/bin/python
@@ -238,11 +246,6 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -
 sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
 sudo apt-get -f install -y
 
-## Install Vivaldi Browser
-sudo apt install -y vivaldi-stable
-
-## Install Brave Browser
-sudo apt install -y brave-browser
 
 ## Install Visual Code
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
@@ -254,9 +257,7 @@ sudo apt-get -f install -y
 sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
 
 # Install pip packages
-sudo pip3 install virtualenv virtualenvwrapper pylint
-sudo pip3 install bpytop --upgrade
-sudo apt-get -f install -y
+sudo apt-get -y install bpytop virtualenv virtualenvwrapper pylint
 
 #Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
@@ -276,19 +277,41 @@ bash desktop/source/gnome/themes.sh
 # Colorls
 sudo apt install -y ruby-dev
 sudo gem install colorls
-sudo apt-get -f install -y
 
-# Droidcam
-cd /tmp/
-wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_1.8.2.zip
-unzip droidcam_latest.zip -d droidcam
-cd droidcam && sudo ./install-client
-sudo ./install-video
+## Droidcam
+# cd /tmp/
+# wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_1.8.2.zip
+# unzip droidcam_latest.zip -d droidcam
+# cd droidcam && sudo ./install-client
+# sudo ./install-video
 
 # Install ClamAV
 sudo apt install -y clamav clamtk
 sudo apt-get -f install -y
 sudo apt-get install -y clamav-daemon
+
+# Nordvpn
+sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)
+
+# # JgMenu
+# wget https://github.com/johanmalm/jgmenu/archive/refs/tags/v4.4.0.zip -O ~/GIT-REPOS/CORE/jgmenu.zip
+# cd ~/GIT-REPOS/CORE/ && unzip jgmenu.zip
+# cd jgmenu-4.4.0
+# sudo apt-get install -y librsvg2-dev libxml2-dev libmenu-cache-dev libxfce4panel-2.0-dev debhelper
+# sudo dpkg-buildpackage -tc -b -us -uc
+# sudo dpkg -i ../jgmenu_4.4.0-1_amd64.deb
+
+
+# # Update pulseaudio
+# # git clone http://anongit.freedesktop.org/git/pulseaudio/pulseaudio.git ~/GIT-REPOS/CORE/pulseaudio
+# git clone https://gitlab.freedesktop.org/pulseaudio/pulseaudio.git ~/GIT-REPOS/CORE/pulseaudio
+
+# cd ~/GIT-REPOS/CORE/pulseaudio
+# sudo apt-get build-dep pulseaudio meson -y
+# meson build
+# ninja -C build
+# sudo ninja -C build install
+# sudo ldconfig
 
 # Make sure all package are installed
 sudo apt-get -f install -y

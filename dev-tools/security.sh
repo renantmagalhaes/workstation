@@ -99,6 +99,6 @@ sudo mv ~/go/bin/uncover /usr/local/bin/
 ####
 
 # Burp
-curl -L 'https://portswigger.net/burp/releases/startdownload?product=community&version=2022.5.2&type=Linux' --output /tmp/burp.sh
+curl -L 'https://portswigger.net/burp/releases/startdownload?product=community&version=2023.9.3&type=Linux' --output /tmp/burp.sh
 chmod +x /tmp/burp.sh
 sh -c "/tmp/burp.sh"

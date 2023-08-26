@@ -20,17 +20,7 @@ wsl_check=`env |grep WSL |grep -ioh "ubuntu"| awk '{print tolower($0)}'`
 
 if [[ $wsl_check == "ubuntu" ]]; then
     # Docker
-    sudo apt install -y apt-transport-https \
-        ca-certificates \
-        curl \
-        gnupg \
-        lsb-release
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    echo \
-    "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt-get update
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    sudo apt-get install -y docker.io docker-compose
     sudo systemctl enable docker
     sudo systemctl restart docker
     sudo usermod -aG docker $USER
@@ -86,22 +76,12 @@ check_cmd() {
 # Add the repository key with either wget or curl
 if check_cmd apt-get; then # FOR DEB SYSTEMS
     ## pgAdmin
-    sudo curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
-    sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
-    sudo apt install -y pgadmin4-desktop
+    # sudo curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
+    # sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
+    # sudo apt install -y pgadmin4-desktop
 
-    ## docker
-    sudo apt install -y apt-transport-https \
-        ca-certificates \
-        curl \
-        gnupg \
-        lsb-release
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    echo \
-    "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt-get update
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    # Docker
+    sudo apt-get install -y docker.io docker-compose
     sudo systemctl enable docker
     sudo systemctl restart docker
     sudo usermod -aG docker $USER
@@ -114,9 +94,9 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     # sudo apt update -y
     # sudo apt install -y yarn nodejs
 
-    ## kontena-lens
-    wget https://api.k8slens.dev/binaries/Lens-5.2.5-latest.20211001.2.amd64.deb -O /tmp/Lens.deb
-    sudo dpkg -i /tmp/Lens.deb
+    # ## kontena-lens
+    # wget https://api.k8slens.dev/binaries/Lens-5.2.5-latest.20211001.2.amd64.deb -O /tmp/Lens.deb
+    # sudo dpkg -i /tmp/Lens.deb
     
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
 

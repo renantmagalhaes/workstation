@@ -26,8 +26,6 @@ sudo apt-get update && sudo apt-get -y upgrade
 # Install the packages from repo
 sudo apt-get -y install zsh fonts-powerline vim wget tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat xclip unrar-free unzip python3 python3-pip net-tools ncdu whois flatpak snapd xournal evince jq lsd bpytop virtualenv virtualenvwrapper pylint
 
-
-
 # Flatpack
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
@@ -91,6 +89,12 @@ bash ../source/any/fonts.sh
 
 # New VIM
 bash ../source/any/vim.sh
+
+# Docker
+sudo apt-get -y install docker.io docker-compose
+sudo systemctl enable docker
+sudo systemctl restart docker
+sudo usermod -aG docker $USER
 
 # Make sure all package are installed
 sudo apt-get -f install -y
