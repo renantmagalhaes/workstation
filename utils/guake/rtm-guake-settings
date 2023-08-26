@@ -11,6 +11,7 @@ gtk-use-system-default-theme=true
 hide-tabs-if-one-tab=false
 history-size=1000000
 infinite-history=true
+load-guake-yml=true
 max-tab-name-length=100
 mouse-display=false
 open-tab-cwd=true
@@ -27,11 +28,11 @@ use-popup=true
 use-scrollbar=false
 use-trayicon=false
 window-halignment=0
-window-height=67
+window-height=72
 window-losefocus=false
 window-refocus=false
 window-tabbar=false
-window-vertical-displacement=45
+window-vertical-displacement=1
 window-width=99
 
 [keybindings/global]
