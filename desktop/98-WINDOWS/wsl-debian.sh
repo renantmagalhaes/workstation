@@ -50,8 +50,19 @@ sudo gem install colorls
 
 # Enable Systemd
 sudo bash -c 'cat << EOF > /etc/wsl.conf
+# Set a command to run when a new WSL instance launches.
 [boot]
 systemd=true
+
+# Set whether WSL supports interop process like launching Windows apps and adding path variables. Setting these to false will block the launch of Windows processes and block adding $PATH environment variables.
+[interop]
+appendWindowsPath=true
+
+# Automatically mount Windows drive when the distribution is launched
+[automount]
+
+# Set to true will automount fixed drives (C:/ or D:/) with DrvFs under the root directory set above. Set to false means drives wont be mounted automatically, but need to be mounted manually or with fstab.
+enabled = true
 EOF'
 
 # WSL config
@@ -62,6 +73,14 @@ swap=0
 #processors=4 # Makes the WSL 2 VM use 4 virtual processors
 localhostForwarding=true # Boolean specifying if ports bound to wildcard or localhost in the WSL 2 VM should be connectable from the host via localhost:port.
 EOF'
+
+# Fix WSL2 for debian(temporary solution)
+sudo bash -c 'cat << EOF > /usr/lib/binfmt.d/WSLInterop.conf
+:WSLInterop:M::MZ::/init:PF
+EOF'
+
+# Fix ping
+sudo setcap 'cap_net_raw+p' /bin/ping
 
 # Set WSL default distro
 wsl.exe --setdefault Debian
@@ -76,7 +95,6 @@ bash ../source/any/vim.sh
 # Make sure all package are installed
 sudo apt-get -f install -y
 
-# RTM
 # RTM
 #clear
 echo "#################################"
