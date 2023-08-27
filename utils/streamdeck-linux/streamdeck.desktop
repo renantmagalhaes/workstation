@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=streamdeck
+Exec=/usr/bin/streamdeck -n
