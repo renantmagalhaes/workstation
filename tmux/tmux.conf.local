@@ -257,7 +257,7 @@ tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see
 # tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
 # tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
 tmux_conf_theme_status_left='   #{circled_session_name}  '
-tmux_conf_theme_status_right='#{prefix_highlight} #{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , #(~/GIT-REPOS/workstation/tmux/plugins/nordvpn/status.sh) #[fg=cyan] #(dig +short myip.opendns.com @resolver1.opendns.com) , #{network_bandwidth} , Online:#{online_status} | #[fg=white]#(kubectl config current-context |grep -E -o "\/.{0,20}" |sed "s/\///") ﴱ | ⌬ %Y-%m-%d #(echo "|") #{username}#{root}@#{hostname}  '
+tmux_conf_theme_status_right='#{prefix_highlight} #{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , #(~/GIT-REPOS/workstation/tmux/plugins/nordvpn/status.sh) #[fg=cyan] #(dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com |sed -e "s/\"//g") , #{network_bandwidth} , Online:#{online_status} | #[fg=white]#(kubectl config current-context |grep -E -o "\/.{0,20}" |sed "s/\///") ﴱ | ⌬ %Y-%m-%d #(echo "|") #{username}#{root}@#{hostname}'
 
 # Custom with network and weather options
 #tmux_conf_theme_status_left=' , #{circled_session_name} ,'
