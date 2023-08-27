@@ -59,4 +59,4 @@ sudo make install
 
 # XCAPE syslink to autostart
 mkdir -p  ~/.config/autostart/
-# ln -s -f ~/.config/rofi/scripts/xcape.desktop ~/.config/autostart/xcape.desktop
+ln -s -f ~/.config/rofi/scripts/xcape.desktop ~/.config/autostart/xcape.desktop
