@@ -35,5 +35,7 @@ sudo chown root:root /etc/1password/custom_allowed_browsers && sudo chmod 755 /e
 # Auto start
 bash -c 'cat << EOF > ~/.config/autostart/1password.desktop
 [Desktop Entry]
+Type=Application
+Name=1password
 Exec=/usr/bin/1password --silent
 EOF'
