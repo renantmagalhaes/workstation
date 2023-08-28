@@ -164,6 +164,14 @@ echo “Dont run this script as root” 2>&1
 exit 1
 fi
 
+# Check if the user is a member of the sudo or adm group
+if groups | grep -E -q "(^| )sudo($| )" || groups | grep -E -q "(^| )adm($| )" || groups | grep -E -q "(^| )root($| )"; then
+    echo "User is a member of the sudo, adm or root group."
+else
+    echo "User is not a member of the sudo or adm group."
+    exit 1
+fi
+
 # Check Window System
 if [[ $XDG_SESSION_TYPE == "wayland" ]] ; then
     echo "Wayland detected. Please change to x11 before running this script"
