@@ -2,6 +2,8 @@
 
 import subprocess
 import re
+import time
+
 
 # Get the window ID of the currently active window
 window_id = int(subprocess.getoutput("xdotool getactivewindow"))
@@ -30,10 +32,11 @@ for line in monitor_info.split('\n'):
 
 # Perform actions based on selected monitor width
 if selected_monitor_width == 2560:
-    subprocess.run(["xdotool", "keydown", "Shift", "Super", "Right"])
+    subprocess.run(["xdotool", "key", "super+shift+Right"])
+    
     action = "Shift+Super+Right"
 elif selected_monitor_width == 1920:
-    subprocess.run(["xdotool", "keydown", "Shift", "Super", "Left"])
+    subprocess.run(["xdotool", "key", "super+shift+Left"])
     action = "Shift+Super+Left"
 
 # Print monitor information and action
