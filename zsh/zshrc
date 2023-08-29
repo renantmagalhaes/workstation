@@ -123,7 +123,7 @@ gnome_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "GNOME" | awk '{print tolo
 kde_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "KDE" | awk '{print tolower($0)}'`
 i3_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "I3" | awk '{print tolower($0)}'`
 bspwm_check=`env |grep DESKTOP_SESSION |grep -ioh "bspwm" | awk '{print tolower($0)}'`
-wsl_ubuntu_check=`env |grep WSL |grep -ioh "ubuntu"| awk '{print tolower($0)}'`
+wsl_debian_check=`env |grep WSL |grep -ioh "debian"| awk '{print tolower($0)}'`
 wsl_thumbleweed_check=`env |grep WSL |grep -ioh "openSUSE-Tumbleweed"| awk '{print tolower($0)}'`
 wsl_leap_check=`env |grep WSL |grep -ioh "openSUSE-Leap"| awk '{print tolower($0)}'`
 
@@ -135,7 +135,7 @@ if check_cmd wsl.exe; then
     alias wsl-shutdown="wsl.exe --shutdown"
     alias wsl-delete="wsl.exe --unregister"
     alias wsl-list="wsl.exe --list"
-        if [[ $wsl_ubuntu_check == "ubuntu" ]]; then
+        if [[ $wsl_debian_check == "debian" ]]; then
             alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
         elif [[ $wsl_thumbleweed_check == "opensuse-tumbleweed" ]]; then
             alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
