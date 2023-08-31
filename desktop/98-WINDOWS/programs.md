@@ -26,6 +26,11 @@ Or Download via Microsoft Store (recommended)
 1. [Phone Link (Windows)](https://apps.microsoft.com/store/detail/phone-link/9NMPJ99VJBWV)
 2. [Link to Windows(Android)](https://play.google.com/web/store/apps/details?id=com.microsoft.appmanager&hl=en_AU&gl=US&pli=1)
 
+# Deboat Windows
+
+Run `irm christitus.com/win | iex` from Administrator Terminal (Powershell)
+
+Full documentation can be hound [**here**](https://christitus.com/windows-11-perfect-install/).
 # Programs
 
 1. [Python3](https://www.python.org/downloads/)
