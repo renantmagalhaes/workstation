@@ -287,6 +287,9 @@ bash desktop/source/gnome/themes.sh
 sudo apt install -y ruby-dev
 sudo gem install colorls
 
+#Distrobox
+#https://github.com/89luca89/distrobox#installation
+
 ## Droidcam
 # cd /tmp/
 # wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_1.8.2.zip
