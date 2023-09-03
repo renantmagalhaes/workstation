@@ -9,9 +9,9 @@ echo "$window_name"
 if [[ $window_name == "Edge" ]]; then
     # Simulate Ctrl+Shift+O using xdotool
     sleep 0.1
-    xdotool key ctrl+shift+o
+    xdotool key ctrl+shift+a
 else
     sleep 0.1
-    xdotool key ctrl+space
+    xdotool key F2
     echo "Active window is not Microsoft Edge."
 fi
