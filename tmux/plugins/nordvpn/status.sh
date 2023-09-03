@@ -16,5 +16,5 @@ elif [[ $nordStatus == *"Connecting"* ]]
 then
     echo "#[fg=yellow]VPN Connecting |"
 else
-    echo "NordVPN not found |"
+    echo "NordVPN:❌ |"
 fi
