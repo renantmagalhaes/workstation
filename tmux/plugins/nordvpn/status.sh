@@ -2,19 +2,17 @@
 
 #if [[ `nordvpn status |grep Status |awk '{print $4}'` == "Disconnected" ]] ; then echo "#[fg=red]VPN Disconnected:" ; else echo "#[fg=blue]VPN Connected:" ; fi
 
-nordStatus_apt=`nordvpn status |grep Status |awk '{print $3}'`
-nordStatus_dnf=`nordvpn status |grep Status |awk '{print $6}'`
-nordCountry=`nordvpn status |grep Country: |awk '{print $2}'`
+nordStatus=`nordvpn status | sed -n -e 's/Status: \(.*\)/\1/p'`
+nordCountry=`nordvpn status | sed -n -e 's/Country: \(.*\)/\1/p'`
 
 
-
-if [[ $nordStatus_apt == "Disconnected" ]] || [[ $nordStatus_dnf == "Disconnected" ]]
+if [[ $nordStatus == *"Disconnected"* ]]
 then
     echo "#[fg=red]VPN Disconnected #[fg=white]|"
-elif [[ $nordStatus_apt == "Connected" ]] || [[ $nordStatus_dnf == "Connected" ]]
+elif [[ $nordStatus == *"Connected"* ]]
 then
     echo "#[fg=green]VPN Connected [$nordCountry] #[fg=white]|"
-elif [[ $nordStatus_apt == "Connecting" ]] || [[ $nordStatus_dnf == "Connecting" ]]
+elif [[ $nordStatus == *"Connecting"* ]]
 then
     echo "#[fg=yellow]VPN Connecting |"
 else
