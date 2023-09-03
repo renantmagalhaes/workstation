@@ -8,6 +8,8 @@ printf "$(df --output=source / | tail -n 1) /btrfsroot    btrfs    defaults,subv
 
 sudo mount /btrfsroot
 
+systemctl daemon-reload
+
 sudo btrfs subvol create /btrfsroot/@home
 
 sudo cp -R --reflink=always /home/$(whoami) /btrfsroot/@home
