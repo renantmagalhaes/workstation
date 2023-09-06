@@ -11,7 +11,7 @@
 #
 #
 #*  -> Preferred applications
-#*      - Web: Edge / Google Chrome
+#*      - Web: Edge / Brave
 #*      - Editor: Visual Studio Code
 #*      - Music: Clementine / Spotify(web)
 #*      - Video: VLC 
@@ -225,6 +225,12 @@ curl -fSsL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | s
 echo 'deb [signed-by=/usr/share/keyrings/microsoft-edge.gpg] https://packages.microsoft.com/repos/edge stable main' | sudo tee /etc/apt/sources.list.d/microsoft-edge.list
 sudo apt update
 sudo apt install -y microsoft-edge-stable
+
+## Brave Browser
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo apt update
+sudo apt install -y brave-browser
 
 # Brew
 bash desktop/source/any/brew.sh
