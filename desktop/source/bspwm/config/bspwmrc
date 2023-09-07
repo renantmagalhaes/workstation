@@ -81,6 +81,8 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 guake &
 # feh --bg-scale ~/Pictures/background &
 nitrogen --restore &
+/usr/bin/1password --silent &
+/usr/bin/streamdeck -n &
 xsetroot -cursor_name left_ptr & # Fix mouse with X
 $HOME/GIT-REPOS/workstation/desktop/source/any/config/xcape/xcape.sh &
 sleep 3
