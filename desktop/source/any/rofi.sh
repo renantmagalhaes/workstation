@@ -9,14 +9,14 @@ check_cmd() {
 if check_cmd apt-get; then # FOR DEB SYSTEMS
 
     # sudo apt-get install -y flex libxkbcommon-dev libxkbcommon-x11-dev libxcb-cursor-dev libxcb-xinerama0-dev libstartup-notification0-dev check
-    sudo apt-get install -y rofi
-    # ROFI_RELEASE=1.7.3
-    # wget https://github.com/davatorium/rofi/releases/download/$ROFI_RELEASE/rofi-$ROFI_RELEASE.tar.gz -O ~/GIT-REPOS/CORE/rofi.tar.gz
-    # cd ~/GIT-REPOS/CORE/ && tar -xvf rofi.tar.gz && cd rofi-$ROFI_RELEASE
-    # mkdir build && cd build
-    # ../configure
-    # make
-    # sudo make install
+    # sudo apt-get install -y rofi
+    ROFI_RELEASE=1.7.5
+    wget https://github.com/davatorium/rofi/releases/download/$ROFI_RELEASE/rofi-$ROFI_RELEASE.tar.gz -O ~/GIT-REPOS/CORE/rofi.tar.gz
+    cd ~/GIT-REPOS/CORE/ && tar -xvf rofi.tar.gz && cd rofi-$ROFI_RELEASE
+    mkdir build && cd build
+    ../configure
+    make
+    sudo make install
 
     #XCAPE - Bind rofi to SuperKey
     sudo apt-get install -y git gcc make pkg-config libx11-dev libxtst-dev libxi-dev
