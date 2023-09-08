@@ -104,9 +104,9 @@ super + {_,shift + }{Left,Down,Up,Right}
 # super + {p,b,comma,period}
 # 	bspc node -f @{parent,brother,first,second}
 
-# focus the next/previous window in the current desktop
-super + {_,shift + }c
-	bspc node -f {next,prev}.local.!hidden.window
+# # focus the next/previous window in the current desktop
+# super + {_,shift + }c
+# 	bspc node -f {next,prev}.local.!hidden.window
 
 # focus the next/previous desktop in the current monitor
 # super + bracket{left,right}
@@ -205,9 +205,14 @@ XF86AudioLowerVolume
 	$HOME/.config/dunst/volume/volume.sh down
 	# pactl set-sink-volume @DEFAULT_SINK@ -5%
 
+shift + super + XF86AudioLowerVolume
+	$HOME/.config/dunst/volume/volume.sh down
+	# pactl set-sink-volume @DEFAULT_SINK@ -5%
+
 XF86AudioPlay
 	playerctl play-pause
-
+super + c
+	playerctl play-pause
 XF86AudioNext
 	playerctl next
 XF86AudioPrev
