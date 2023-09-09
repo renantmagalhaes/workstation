@@ -9,7 +9,7 @@ check_cmd() {
 if check_cmd apt-get; then # FOR DEB SYSTEMS
 
     # sudo apt-get install -y rofi
-    sudo apt-get install -y flex libxkbcommon-dev libxkbcommon-x11-dev libxcb-cursor-dev libxcb-xinerama0-dev libstartup-notification0-dev check
+    sudo apt-get install -y flex libxkbcommon-dev libxkbcommon-x11-dev libxcb-cursor-dev libxcb-xinerama0-dev libstartup-notification0-dev check bison
     ROFI_RELEASE=1.7.5
     rofi_script_path=`pwd`
     wget https://github.com/davatorium/rofi/releases/download/$ROFI_RELEASE/rofi-$ROFI_RELEASE.tar.gz -O ~/GIT-REPOS/CORE/rofi.tar.gz
