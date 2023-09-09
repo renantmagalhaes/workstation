@@ -273,7 +273,7 @@ sudo apt-get -f install -y
 sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
 
 # Install pip packages
-python -m pip install psutil
+pip3 install psutil
 sudo apt-get -y install bpytop virtualenv virtualenvwrapper pylint
 
 #Isolate Alt-Tab workspaces
