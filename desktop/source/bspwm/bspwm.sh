@@ -7,7 +7,7 @@ check_cmd() {
 
 # Add the repository key with either wget or curl
 if check_cmd apt-get; then # FOR DEB SYSTEMS
-    sudo apt-get install -y bspwm sxhkd feh lxappearance playerctl blueman x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit mate-polkit-bin libnotify-bin 
+    sudo apt-get install -y bspwm sxhkd feh lxappearance playerctl blueman x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit mate-polkit-bin libnotify-bin qt5ct
     sudo pip3 install pywal
 
     # Dunst
@@ -108,3 +108,50 @@ ln -s -f $PWD/config/jgmenu ~/.config/
 
 # Copy fonts
 # cp -r $PWD/config/fonts/*  ~/.local/share/fonts/
+
+# Themes GTK
+## Create files if not exist
+mkdir -p ~/.config/gtk-3.0
+touch ~/.config/gtk-3.0/settings.ini
+mkdir -p ~/.config/gtk-4.0
+touch ~/.config/gtk-4.0/settings.ini
+## Backup files
+cp ~/.config/gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini.bkp
+cp ~/.config/gtk-4.0/settings.ini ~/.config/gtk-4.0/settings.ini.bkp
+## dump config
+bash -c 'cat << EOF > ~/.config/gtk-3.0/settings.ini
+[Settings]
+gtk-theme-name=Graphite-Dark
+gtk-icon-theme-name=Tela-circle-dracula
+gtk-font-name=Sans 10
+gtk-cursor-theme-name=Breeze_Snow
+gtk-cursor-theme-size=0
+gtk-toolbar-style=GTK_TOOLBAR_BOTH
+gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-button-images=1
+gtk-menu-images=1
+gtk-enable-event-sounds=1
+gtk-enable-input-feedback-sounds=1
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle=hintfull
+gtk-application-prefer-dark-theme=0l
+EOF'
+bash -c 'cat << EOF > ~/.config/gtk-4.0/settings.ini
+[Settings]
+gtk-theme-name=Graphite-Dark
+gtk-icon-theme-name=Tela-circle-dracula
+gtk-font-name=Sans 10
+gtk-cursor-theme-name=Breeze_Snow
+gtk-cursor-theme-size=0
+gtk-toolbar-style=GTK_TOOLBAR_BOTH
+gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-button-images=1
+gtk-menu-images=1
+gtk-enable-event-sounds=1
+gtk-enable-input-feedback-sounds=1
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle=hintfull
+gtk-application-prefer-dark-theme=0
+EOF'
