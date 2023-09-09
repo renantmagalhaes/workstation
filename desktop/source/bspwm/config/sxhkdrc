@@ -79,7 +79,7 @@ super + g
 # super + {t,shift + t,s,f}
 # 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
-super + y
+super + f
 	bspc node -t floating
 
 super + t
