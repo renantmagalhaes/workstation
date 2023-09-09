@@ -122,7 +122,7 @@ cp ~/.config/gtk-4.0/settings.ini ~/.config/gtk-4.0/settings.ini.bkp
 bash -c 'cat << EOF > ~/.config/gtk-3.0/settings.ini
 [Settings]
 gtk-theme-name=Graphite-Dark
-gtk-icon-theme-name=Tela-circle-dracula
+gtk-icon-theme-name=Tela-circle-purple
 gtk-font-name=Sans 10
 gtk-cursor-theme-name=Breeze_Snow
 gtk-cursor-theme-size=0
@@ -140,7 +140,7 @@ EOF'
 bash -c 'cat << EOF > ~/.config/gtk-4.0/settings.ini
 [Settings]
 gtk-theme-name=Graphite-Dark
-gtk-icon-theme-name=Tela-circle-dracula
+gtk-icon-theme-name=Tela-circle-purple
 gtk-font-name=Sans 10
 gtk-cursor-theme-name=Breeze_Snow
 gtk-cursor-theme-size=0
