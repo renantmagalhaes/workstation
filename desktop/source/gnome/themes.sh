@@ -78,13 +78,15 @@ sh -c "~/GIT-REPOS/CORE/Jasper-gtk-theme/install.sh -t grey --tweaks dracula"
 
 # Tela-circle-icon-theme
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
-sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh blue"
-sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh black"
+sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh blue -c nord"
+sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh dracula"
+sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh purple"
 
 # Tela--icon-theme
 git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/GIT-REPOS/CORE/Tela-icon-theme
 sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh blue"
 sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh black"
+sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh purple"
 
 # Reversal
 git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git ~/GIT-REPOS/CORE/Reversal-icon-theme
