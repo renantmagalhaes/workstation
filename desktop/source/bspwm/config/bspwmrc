@@ -79,6 +79,7 @@ bspc rule -a yad-calendar state=floating
 picom --experimental-backend &
 pgrep -x sxhkd > /dev/null || sxhkd &
 guake &
+kdeconnect-indicator &
 # feh --bg-scale ~/Pictures/background &
 nitrogen --restore &
 /usr/bin/1password --silent &
