@@ -6,18 +6,18 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 
 # Flathub Packages
 ## Slack
-sudo flatpak install -y flathub com.slack.Slack
-sudo flatpak override --filesystem=home:ro com.slack.Slack
+#sudo flatpak install -y flathub com.slack.Slack
+#sudo flatpak override --filesystem=home:ro com.slack.Slack
 
 ## Skype 
-sudo flatpak install -y flathub com.skype.Client
+#sudo flatpak install -y flathub com.skype.Client
 
 ## Zoom
-sudo flatpak install -y flathub us.zoom.Zoom
+#sudo flatpak install -y flathub us.zoom.Zoom
 
 ## Microsoft Teams
-sudo flatpak install -y flathub com.microsoft.Teams
-sudo flatpak override --filesystem=home:ro com.microsoft.Teams
+#sudo flatpak install -y flathub com.microsoft.Teams
+#sudo flatpak override --filesystem=home:ro com.microsoft.Teams
 
 ## Kdenlive
 sudo flatpak install -y flathub org.kde.kdenlive
@@ -36,4 +36,4 @@ sudo flatpak install -y flathub md.obsidian.Obsidian
 # sudo flatpak override --filesystem=home:ro org.telegram.desktop
 
 ## Plex media player
-sudo flatpak install -y flathub tv.plex.PlexDesktop
+#sudo flatpak install -y flathub tv.plex.PlexDesktop
