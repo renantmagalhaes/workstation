@@ -42,6 +42,14 @@ super + b
 super + n
 gnome-control-center wifi
 
+# Browser favorites shortcut
+ctrl + space
+	$HOME/GIT-REPOS/workstation/utils/autokey/favorites.sh
+
+# Browser search shortcut
+F2
+	$HOME/GIT-REPOS/workstation/utils/autokey/search.sh
+
 # Lock screen
 super + l
 	$HOME/.config/bspwm/scripts/blur-lock
