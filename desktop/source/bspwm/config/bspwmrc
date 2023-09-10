@@ -80,6 +80,7 @@ picom --experimental-backend &
 pgrep -x sxhkd > /dev/null || sxhkd &
 guake &
 kdeconnect-indicator &
+insync start --no-daemon &
 # feh --bg-scale ~/Pictures/background &
 nitrogen --restore &
 /usr/bin/1password --silent &
