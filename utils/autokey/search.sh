@@ -12,6 +12,9 @@ if [[ $window_name == "Edge" ]]; then
     xdotool key ctrl+shift+a
 else
     sleep 0.1
+    pkill sxhkd
+    sleep 0.1
     xdotool key F2
-    echo "Active window is not Microsoft Edge."
+    sleep 0.1
+    sxhkd &
 fi
