@@ -15,12 +15,12 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     sudo apt-get install insync -y
 
 
-elif check_cmd dnf; then  # FOR RPM SYSTEMS
+elif check_cmd zypper; then  # FOR RPM SYSTEMS
     # add public GPG
     sudo rpm --import https://d2t3ff60b2tol4.cloudfront.net/repomd.xml.key
 
     # Add repo
-cat <<EOF | sudo tee /etc/yum.repos.d/insync.repo
+cat <<EOF | sudo tee /etc/zypp/repos.d/insync.repo
 [insync]
 name=insync repo
 baseurl=http://yum.insync.io/fedora/$releasever/
