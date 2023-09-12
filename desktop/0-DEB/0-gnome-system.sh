@@ -12,153 +12,21 @@
 #
 #*  -> Preferred applications
 #*      - Web: Edge / Brave
-#*      - Editor: Visual Studio Code
-#*      - Music: Clementine / Spotify(web)
+#*      - Editor: Visual Studio Code / Neovim
+#*      - Music: Clementine / YT Music(web)
 #*      - Video: VLC 
 #*      - Terminal: Guake 
 #*      - File Manager: Nautilus
 #*      - Record Desktop: OBS Studio
-#*      - Screenshot tool: Default Gnome / Flameshot
-#//     - Mail: Thunderbird
+#*      - Screenshot tool: Flameshot
 #
 #  --------------------------------------------------------------
 #
-#  Changelog
-#
-#    V0.1 2017-12-02 RTM:
-#        - Initial release
-#
-#    V0.2 2017-12-03 RTM:
-#        - added more packages from debian repo 
-#        - Added tmux plugin manager
-#
-#    V0.4 2017-12-29
-#        - Rework Oh my fish! installation
-#        - Auto install bobthefish
-#
-#    V0.5 2018-05-09
-#        - Working on my own VIM config
-#        - Removed Sublimetext editor -> Using Visual Code
-#        - Change default browser -> Firefox to Google Chrome
-#        - Changed default file manager -> Caja to Thunar
-#        - Updated GTK theme version
-#        - Added Visual Code Studio
-#        - Added xfce plugins
-#        - Added Draw.IO
-#
-#    V0.6 2018-05-28
-#        - Added Gnome3 plugins
-#        - Removed Draw.IO (use web version)
-#        - Minor improvements
-#
-#    V0.7 2018-06-08
-#        - Minor improvements
-#        - Added VirtualBox
-#
-#    V0.7 2018-06-16
-#        - Minor improvements
-#        - Fix virtualbox install
-#        - Fix var in oh-my-fish install
-#
-#    V0.7 2018-07-26
-#        - Minor improvements
-#        - Remove some gnome3 packages
-#        - Add gnome-terminal package
-#        - Add Gogh -Color Scheme for Gnome Terminal and Pantheon Terminal (https://github.com/Mayccoll/Gogh)
-#        - Changed Thunar > Caja
-#        - Changed OMF for Fisherman 
-#        - Change default vim install to spacevim
-#
-#    V0.9 2018-09-08
-#        - Add numix-circle icons
-#        - Add snap package manager
-#        - Add mailspring email client(snap)
-#        - Add Slack (snap)
-#        - Add Telegram-desktop (snap)
-#
-#    V0.9.1 2018-09-08
-#        - Minor spell check adjustment
-#        - Change site to .net domain
-#        - Change description
-#
-#    V1.0 2018-09-29
-#        - All major "TODO" fix
-#        - Change docky for plank
-#        - Add themes for plank
-#
-#    V1.0.1 2018-10-01
-#        - Plank autostart
-#
-#    V1.0.2 2019-02-28
-#        - Vimix Theme
-#        - New icons
-#        - New fonts
-#        - New Cursor
-#
-#    V1.0.2 2019-08-14
-#        - Using Cinnamon now
-#        - New theme
-#        - New icons
-#        - New packages
-# 
-#        - Install krita(image editing)
-#
-#    V1.0.5 2019-12-22
-#        - Major fixes and rework
-#
-#    V1.1.0 2019-12-23
-#        - Fully automated again
-#
-#    V1.1.1 2020-05-08
-#        - Using Ubuntu 20.04 for now
-#        - Minor fixes
-#        - Tweaks in themes
-#
-#    V1.1.2 2020-12-21
-#        - Synced with Fedora installation
-#        - Using Pop!_OS 20.04 for now
-#        - Minor tweaks to make up to date to fedora script
-#
-#    V1.1.3 2020-12-29
-#        - Python path fix
-#        - VsCode architecture fix
-#
-#    V1.1.4 2021-01-02
-#        - Vivaldi installation
-#        - Guake Settings
-#
-#    V1.1.5 2021-01-10
-#        - Guake Settings updated / Guake autostart
-#        - Big ZSH changes (lsd and configs)
-#        - New utilities packages installed.
-#        - Colorls
-#
-#    V1.1.6 2021-02-14
-#        - Check if is the system is a Pop!_OS installation
-#        - GTK WhiteSur script fix
-#        - Order of events in script changed to better fit the flow
-#
-#//    TODO: V1
-#//   - Check if is the system is a Pop!_OS installation 
-#//   - Install Aws K8S toolkit (cli and auth) - will not do
-#//   - System stats inside ZSH (remove Vitals from gnome-extensions)
-#//   - Send system stats to tmux panel
-#//   - Change Show application icon (GDM WhiteSur theme)
-#//   - Test automated deploy
-
-#
-#//    TODO: V2
-#   - Test exa(https://github.com/ogham/exa) over lsd, when available on stable repo
-#//   - Link with Tmux / ZSH / Software / Shell Color folders
-# //  - Regex to modify orchis top bar size   
-
-    #// TODO: V3 - Validation
-    #// echo $XDG_CURRENT_DESKTOP
-    #// echo $XDG_SESSION_TYPE 
-
 # RTM
 
 # Verifications 
+
+## Root check
 if [ “$(id -u)” = “0” ]; then
 echo “Dont run this script as root” 2>&1
 exit 1
@@ -185,8 +53,6 @@ fi
 
 
 # Dependencies 
-## add user to sudo group
-sudo usermod -a -G sudo rtm
 
 ## Disable cdrom
 sudo sed -i 's/deb\ cdrom/\#deb\ cdrom/g' /etc/apt/sources.list
@@ -195,7 +61,7 @@ sudo sed -i 's/deb\ cdrom/\#deb\ cdrom/g' /etc/apt/sources.list
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install breeze-cursor-theme fonts-hack-ttf apt-transport-https network-manager-openvpn network-manager-openvpn-gnome gnome-terminal nautilus gnome-tweaks guake guake-indicator gnome-icon-theme chrome-gnome-shell gnome-menus flatpak remmina remmina-plugin-rdp tree pwgen alacarte ca-certificates software-properties-common gir1.2-gtop-2.0 gir1.2-gmenu-3.0 python3-pip x11-utils nala
+sudo apt-get -y install curl breeze-cursor-theme fonts-hack-ttf apt-transport-https network-manager-openvpn network-manager-openvpn-gnome gnome-terminal nautilus gnome-tweaks guake guake-indicator gnome-icon-theme chrome-gnome-shell gnome-menus flatpak sysstat remmina remmina-plugin-rdp tree pwgen alacarte ca-certificates software-properties-common gir1.2-gtop-2.0 gir1.2-gmenu-3.0 python3-pip x11-utils nala
 
 
 # Install NIX package manager
@@ -212,9 +78,8 @@ ln -s ~/.nix-profile/share/icons ~/.local/share/icons
 # Docker
 sudo apt-get install -y docker.io docker-compose
 sudo systemctl enable docker
-sudo systemctl restart docker
 sudo usermod -aG docker $USER
-
+sudo systemctl restart docker
 
 # Add keys, ppa and repos
 ## Edge Browser
@@ -246,23 +111,18 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 bash desktop/source/any/flatpak.sh
 bash desktop/source/gnome/flatpak.sh
 
-## Fix snapd
-# sudo ln -s /var/lib/snapd/snap /snap
+
+# Enable BT FastConnectable
+sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
 
 ## Fix python default path
 sudo ln -s /usr/bin/python3 /usr/bin/python
 sudo ln -s /usr/bin/pip3 /usr/bin/pip
 
-
-# Enable BT FastConnectable
-sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
-
 # Install pip packages
 pip3 install psutil
 sudo apt-get -y install bpytop virtualenv virtualenvwrapper pylint
 
-#Isolate Alt-Tab workspaces
-gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # VIM
 bash desktop/source/any/vim.sh
@@ -277,19 +137,22 @@ bash desktop/source/any/fonts.sh
 bash desktop/source/gnome/themes.sh
 
 
-#Distrobox
-#https://github.com/89luca89/distrobox#installation
-
 # Install ClamAV
 sudo apt install -y clamav clamtk
 sudo apt-get -f install -y
 sudo apt-get install -y clamav-daemon
+
+#Distrobox
+#https://github.com/89luca89/distrobox#installation
 
 # Nordvpn
 sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)
 
 # Make sure all package are installed
 sudo apt-get -f install -y
+
+#Isolate Alt-Tab workspaces
+gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # RTM
 # RTM
