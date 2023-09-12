@@ -118,11 +118,9 @@ sudo pip3 install virtualenv virtualenvwrapper pylint
 sudo pip3 install bpytop --upgrade
 
 # Flatpack
-bash desktop/source/gnome/flatpak.sh
 bash desktop/source/any/flatpak.sh
+bash desktop/source/gnome/flatpak.sh
 
-## Install Teamviewer
-sudo opi teamviewer
 
 #Install Google Chrome
 sudo zypper ar http://dl.google.com/linux/chrome/rpm/stable/x86_64 Google-Chrome
@@ -132,10 +130,6 @@ sudo zypper ref
 sudo zypper install -y google-chrome-stable
 
 
-# Install Vivaldi
-# sudo zypper ar https://repo.vivaldi.com/archive/vivaldi-suse.repo
-# sudo zypper in vivaldi-stable
-# sudo opi vivaldi
 
 # Install Edge
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -144,11 +138,6 @@ sudo zypper refresh
 sudo zypper install -y microsoft-edge-stable
 
 
-## Install Visual Code
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/zypp/repos.d/vscode.repo'
-sudo zypper refresh
-sudo zypper install -y code
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
@@ -161,15 +150,6 @@ bash desktop/source/any/vim.sh
 
 # Themes
 bash desktop/source/gnome/themes.sh
-
-
-# Colorls
-sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel
-sudo gem install colorls
-
-# Install LSD
-curl https://sh.rustup.rs -sSf | sh
-~/.cargo/bin/cargo install lsd
 
 # Install ClamAV
 sudo zypper install -y clamav clamtk
