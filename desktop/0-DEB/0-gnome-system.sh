@@ -195,19 +195,16 @@ sudo sed -i 's/deb\ cdrom/\#deb\ cdrom/g' /etc/apt/sources.list
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install wget  zsh clementine breeze-cursor-theme dia vim vim-gui-common nmap vlc blender fonts-powerline fonts-cantarell brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle3 fonts-hack-ttf apt-transport-https htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal guake guake-indicator gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload chrome-gnome-shell gnome-menus gir1.2-gmenu-3.0 flatpak chrome-gnome-shell gnome-menus pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot python3-pip bat gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors cheese ncdu whois piper libratbag-tools timeshift adb fastboot materia-gtk-theme xournal scrot gnome-screenshot jp2a unrar-free dnsutils imagemagick alacritty scrot x11-utils wmctrl xdotool software-properties-common apt-transport-https ca-certificates curl lsd flatpak snapd xournal evince jq pulseaudio-utils
+sudo apt-get -y install breeze-cursor-theme fonts-hack-ttf apt-transport-https network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal nautilus gnome-tweaks guake guake-indicator gnome-icon-theme chrome-gnome-shell gnome-menus flatpak remmina remmina-plugin-rdp tree pwgen alacarte ca-certificates software-properties-common gir1.2-gtop-2.0 gir1.2-gmenu-3.0 python3-pip x11-utils
 
-# # Virtualbox
-# wget -O- -q https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmour -o /usr/share/keyrings/oracle_vbox_2016.gpg
-# echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] http://download.virtualbox.org/virtualbox/debian bookworm contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
-# sudo apt update
-# sudo apt install -y virtualbox-7.0
-# sudo usermod -aG vboxusers $USER
 
-# ## Virtualbox ext pack
-# VERSION=$(vboxmanage --version |grep -oh ^[0-9].[0-9].[0-9]*)
-# wget https://download.virtualbox.org/virtualbox/$VERSION/Oracle_VM_VirtualBox_Extension_Pack-$VERSION.vbox-extpack -O /tmp/Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack
-# sudo vboxmanage extpack install /tmp/Oracle_VM_VirtualBox_Extension_Pack.vbox-extpack
+# Install NIX package manager
+sh <(curl -L https://nixos.org/nix/install) --daemon
+## syslink to system search
+rm -rf ~/.local/share/applications
+rm -rf ~/.local/share/icons
+ln -s ~/.nix-profile/share/applications ~/.local/share/applications
+ln -s ~/.nix-profile/share/icons ~/.local/share/icons
 
 # Virtualization using KVM + QEMU + libvirt
  sudo apt-get install -y qemu-system-x86 libvirt-clients libvirt-daemon libvirt-daemon-system virtinst virt-manager bridge-utils
@@ -389,3 +386,4 @@ echo "#         rtm.codes             #"
 echo "#     Please reboot your pc     #"
 echo "#                               #"
 echo "#################################"
+bash
