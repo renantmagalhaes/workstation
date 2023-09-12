@@ -135,9 +135,6 @@ sudo zypper install -y clamav clamtk
 #Distrobox
 #https://github.com/89luca89/distrobox#installation
 
-# Nordvpn
-sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)
-
 ##Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
@@ -149,3 +146,4 @@ echo "#         rtm.codes             #"
 echo "#     Please reboot your pc     #"
 echo "#                               #"
 echo "#################################"
+bash

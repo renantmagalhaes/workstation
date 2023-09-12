@@ -67,10 +67,10 @@ sudo apt-get -y install curl breeze-cursor-theme fonts-hack-ttf apt-transport-ht
 # Install NIX package manager
 sh <(curl -L https://nixos.org/nix/install) --daemon
 ## Enable find nix apps on system search
-rm -rf ~/.local/share/applications
-rm -rf ~/.local/share/icons
-ln -s ~/.nix-profile/share/applications ~/.local/share/applications
-ln -s ~/.nix-profile/share/icons ~/.local/share/icons
+# rm -rf ~/.local/share/applications
+# rm -rf ~/.local/share/icons
+# ln -s ~/.nix-profile/share/applications ~/.local/share/applications
+# ln -s ~/.nix-profile/share/icons ~/.local/share/icons
 
 # Virtualization using KVM + QEMU + libvirt
  sudo apt-get install -y qemu-system-x86 libvirt-clients libvirt-daemon libvirt-daemon-system virtinst virt-manager bridge-utils
@@ -144,9 +144,6 @@ sudo apt-get install -y clamav-daemon
 
 #Distrobox
 #https://github.com/89luca89/distrobox#installation
-
-# Nordvpn
-sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)
 
 # Make sure all package are installed
 sudo apt-get -f install -y

@@ -17,13 +17,14 @@ echo " 6) Install DEV Tools"
 echo " 7) Install DevOps Tools"
 echo " ==== UTILS ===="
 echo " 11) VirtualBox Extension Pack"
-echo " 12) Deckboard"
+echo " 12) 1Password"
 echo " 13) NordVPN"
 echo " 14) Git Config"
 echo " 15) Wallpapers"
-echo " 16) Custom grub2 screen"
+echo " 16) Insync"
 echo " ==== EXTRA ===="
 echo " 20) Nix package manager"
+echo " 21) Custom grub2 screen"
 echo " ==============="
 echo " 99) Post-Installation Instructions"
 echo " ==============="
@@ -40,13 +41,14 @@ case $n in
     7) bash dev-tools/devops.sh ;;
 # ===================================================================================
     11) bash utils/virtualization/virtualbox/virtualbox-ext-pack.sh ;;
-    12) bash utils/deckboard/deckboard.sh ;;
+    12) bash utils/1password/install-1password.sh ;;
     13) sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh) && sudo usermod -aG nordvpn $USER && sudo systemctl enable --now nordvpnd.service && clear && echo "~~~~~~~~~~~~~\nIf NordVPN is slow, try to change the protocol from Nordlynx to OpenVPN \nnordvpn set technology OpenVPN\n~~~~~~~~~~~~~";;
     14) bash utils/git-config/git-config.sh ;;
     15) bash utils/wallpapers/wallpapers.sh ;;
-    16) sudo bash utils/grub2-customizer/custom-grub2.sh ;;
+    16) bash utils/insync/insync-install.sh ;;
 # ===================================================================================
-    20) curl -L https://nixos.org/nix/install | sh ;;
+    20) sh <(curl -L https://nixos.org/nix/install) --daemon ;;
+    21) sudo bash utils/grub2-customizer/custom-grub2.sh ;;
 # ===================================================================================
     99) bash utils/post-install/env-detector.sh ;;
 # ==================================================================================
