@@ -195,12 +195,12 @@ sudo sed -i 's/deb\ cdrom/\#deb\ cdrom/g' /etc/apt/sources.list
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install breeze-cursor-theme fonts-hack-ttf apt-transport-https network-manager-openvpn network-manager-openvpn-gnome snapd gnome-terminal nautilus gnome-tweaks guake guake-indicator gnome-icon-theme chrome-gnome-shell gnome-menus flatpak remmina remmina-plugin-rdp tree pwgen alacarte ca-certificates software-properties-common gir1.2-gtop-2.0 gir1.2-gmenu-3.0 python3-pip x11-utils
+sudo apt-get -y install breeze-cursor-theme fonts-hack-ttf apt-transport-https network-manager-openvpn network-manager-openvpn-gnome gnome-terminal nautilus gnome-tweaks guake guake-indicator gnome-icon-theme chrome-gnome-shell gnome-menus flatpak remmina remmina-plugin-rdp tree pwgen alacarte ca-certificates software-properties-common gir1.2-gtop-2.0 gir1.2-gmenu-3.0 python3-pip x11-utils nala
 
 
 # Install NIX package manager
 sh <(curl -L https://nixos.org/nix/install) --daemon
-## syslink to system search
+## Enable find nix apps on system search
 rm -rf ~/.local/share/applications
 rm -rf ~/.local/share/icons
 ln -s ~/.nix-profile/share/applications ~/.local/share/applications
@@ -229,6 +229,11 @@ echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] http
 sudo apt update
 sudo apt install -y brave-browser
 
+## Install Google Chrome
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
+sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
+sudo apt-get -f install -y
+
 # Brew
 bash desktop/source/any/brew.sh
 
@@ -237,34 +242,17 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 
 #Utils
 
-## Fix snapd
-sudo ln -s /var/lib/snapd/snap /snap
-
 # Flatpack
-bash desktop/source/gnome/flatpak.sh
 bash desktop/source/any/flatpak.sh
+bash desktop/source/gnome/flatpak.sh
 
+## Fix snapd
+# sudo ln -s /var/lib/snapd/snap /snap
 
 ## Fix python default path
 sudo ln -s /usr/bin/python3 /usr/bin/python
 sudo ln -s /usr/bin/pip3 /usr/bin/pip
 
-## Teamviewer
-wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp/teamviewer_amd64.deb
-sudo dpkg -i /tmp/teamviewer_amd64.deb
-sudo apt-get -f install -y
-
-## Install Google Chrome
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
-sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
-sudo apt-get -f install -y
-
-
-## Install Visual Code
-wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
-sudo dpkg -i /tmp/visual_code_amd64.deb
-sudo sed -i 's/\,arm64\,armhf//g' /etc/apt/sources.list.d/vscode.list
-sudo apt-get -f install -y
 
 # Enable BT FastConnectable
 sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
@@ -288,19 +276,9 @@ bash desktop/source/any/fonts.sh
 # Themes
 bash desktop/source/gnome/themes.sh
 
-# Colorls
-sudo apt install -y ruby-dev
-sudo gem install colorls
 
 #Distrobox
 #https://github.com/89luca89/distrobox#installation
-
-## Droidcam
-# cd /tmp/
-# wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_1.8.2.zip
-# unzip droidcam_latest.zip -d droidcam
-# cd droidcam && sudo ./install-client
-# sudo ./install-video
 
 # Install ClamAV
 sudo apt install -y clamav clamtk
@@ -310,76 +288,12 @@ sudo apt-get install -y clamav-daemon
 # Nordvpn
 sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)
 
-# # JgMenu
-# wget https://github.com/johanmalm/jgmenu/archive/refs/tags/v4.4.0.zip -O ~/GIT-REPOS/CORE/jgmenu.zip
-# cd ~/GIT-REPOS/CORE/ && unzip jgmenu.zip
-# cd jgmenu-4.4.0
-# sudo apt-get install -y librsvg2-dev libxml2-dev libmenu-cache-dev libxfce4panel-2.0-dev debhelper
-# sudo dpkg-buildpackage -tc -b -us -uc
-# sudo dpkg -i ../jgmenu_4.4.0-1_amd64.deb
-
-
-# # Update pulseaudio
-# # git clone http://anongit.freedesktop.org/git/pulseaudio/pulseaudio.git ~/GIT-REPOS/CORE/pulseaudio
-# git clone https://gitlab.freedesktop.org/pulseaudio/pulseaudio.git ~/GIT-REPOS/CORE/pulseaudio
-
-# cd ~/GIT-REPOS/CORE/pulseaudio
-# sudo apt-get build-dep pulseaudio meson -y
-# meson build
-# ninja -C build
-# sudo ninja -C build install
-# sudo ldconfig
-
 # Make sure all package are installed
 sudo apt-get -f install -y
 
 # RTM
 # RTM
 #clear
-echo "#################################"
-echo "#                               #"
-echo "#         rtm.codes             #"
-echo "#     Please reboot your pc     #"
-echo "#                               #"
-echo "#################################"
-
-#clear
-echo "*** AFTER INSTALL *** "
-
-echo ""
-echo "*** Gnome *** "
-echo "# Setup Theme
-* Applications: ChromeOS-dark-compact 
-* Cursor: Breeze_Snow
-* Icons: Flatery-Indigo-Dark
-* Shell: Orchis-dark-compact"
-
-echo ""
-
-echo "# Gnome extensions
-* Extensions Sync "
-
-echo ""
-
-echo "Set startup applications
-* Guake"
-
-echo "*** FONTS *** "
-echo "*** Terminal *** "
-echo "FiraCode Nerd Font Medium 10"
-echo "*** FONTS *** "
-
-echo "*** Guake Terminal Color - Gogh / RTM VERSION *** "
-
-echo ""
-
-echo " ### Install the other tools in this repo! ###"
-echo "* ZSH"
-echo "* TMUX"
-echo "* DEV-TOOLS \n \n"
-
-echo ""
-
 echo "#################################"
 echo "#                               #"
 echo "#         rtm.codes             #"

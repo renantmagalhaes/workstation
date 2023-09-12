@@ -55,7 +55,6 @@ nixpkgs.timeshift \
 nixpkgs.android-tools \
 nixpkgs.materia-theme \
 nixpkgs.xournal \
-nixpkgs.scrot \
 nixpkgs.jp2a \
 nixpkgs.unrar \
 nixpkgs.dnsutils \
@@ -68,4 +67,8 @@ nixpkgs.lsd \
 nixpkgs.xournal \
 nixpkgs.evince \
 nixpkgs.jq \
-nixpkgs.pulseaudio
+nixpkgs.pulseaudio \
+nixpkgs.vscode \
+nixpkgs.colorls \
+nixpkgs.droidcam
+
