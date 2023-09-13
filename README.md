@@ -4,6 +4,13 @@
 ### Disclaimer !
 Use the script ``install.sh``. Running the scripts directly may result in system malfunction. 
 
+# TODO
+
+
+- [] Make nix and zsh auto reload and join option 1, 2 , 3, 4 and 5 of the script
+- [] Fix brew installation to be non-interactive.
+- [] Fix font installation to be non-interactive.
+- [] Fix themes installation to be non-interactive.
 # BSPWM
 
 ![1-general_layout_bspwm.png](./images/workstation/1-general_layout-bspwm.png)
