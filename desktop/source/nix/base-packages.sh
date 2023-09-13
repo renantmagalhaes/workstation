@@ -17,8 +17,6 @@ if check_cmd nix-env; then # FOR NIX PKG MANAGER
     # install packages
     nix-env -iA \
     nixpkgs.clementine \
-    nixpkgs.vim \
-    nixpkgs.zsh \
     nixpkgs.nmap \
     nixpkgs.blender \
     nixpkgs.powerline-fonts \

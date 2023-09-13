@@ -60,7 +60,7 @@ sudo zypper refresh && sudo zypper update
 sudo zypper install -y opi
 
 # Install the packages from suse repo
-sudo zypper install -y breeze5-cursors curl guake python3-pip gtk2-engines tree remmina pwgen sysstat alacarte openssl gnome-keyring chrome-gnome-shell libstdc++-devel glibc-static net-tools-deprecated xprop gcc-c++
+sudo zypper install -y zsh vim breeze5-cursors curl guake python3-pip gtk2-engines tree remmina pwgen sysstat alacarte openssl gnome-keyring chrome-gnome-shell libstdc++-devel glibc-static net-tools-deprecated xprop gcc-c++
 
 # Install NIX package manager
 sh <(curl -L https://nixos.org/nix/install) --daemon
