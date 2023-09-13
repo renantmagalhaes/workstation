@@ -11,6 +11,10 @@ Use the script ``install.sh``. Running the scripts directly may result in system
 - [] Fix brew installation to be non-interactive.
 - [] Fix font installation to be non-interactive.
 - [] Fix themes installation to be non-interactive.
+- [] Transition from Alacritty to Kitty
+- [] Revert most packages back to OS repo (including vscode)
+  - Stay only a few for bspwm, rofi, polybar and others
+- [] New bspwm photo display
 # BSPWM
 
 ![1-general_layout_bspwm.png](./images/workstation/1-general_layout-bspwm.png)

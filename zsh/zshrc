@@ -224,6 +224,7 @@ alias git-sync='git add -A && git commit -m sync && git push'
 
 ### System ###
 alias pip='python -m pip'
+export XDG_DATA_DIRS="~/.nix-profile/share/applications:~/.nix-profile/share/icons:$XDG_DATA_DIRS"
 export NIXPKGS_ALLOW_UNFREE=1
 
 ### IP Info tools
@@ -349,7 +350,6 @@ if [[ $macos_check == "darwin" ]]; then
 elif [[ $linux_check == "linux" ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     export PATH="/usr/sbin:/usr/share/code/bin:$PATH"
-    if [ -e /home/$USER/.nix-profile/etc/profile.d/nix.sh ]; then . /home/rtm/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 else
     echo "error on SO check"
 fi
