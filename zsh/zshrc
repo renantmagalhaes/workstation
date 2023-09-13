@@ -235,6 +235,7 @@ alias git-sync='git add -A && git commit -m sync && git push'
 
 ### System ###
 alias pip='python -m pip'
+export NIXPKGS_ALLOW_UNFREE=1
 
 ### IP Info tools
 alias ip-info='curl https://wtfismyip.com/json | jq .'

@@ -21,11 +21,12 @@ check_cmd() {
 # Add the repository key with either wget or curl
 if check_cmd nix-env; then # FOR NIX PKG MANAGER
 
+    export NIXPKGS_ALLOW_UNFREE=1
+
     nix-env -iA \
     nixpkgs.robo3t \
     nixpkgs.pgadmin4 \
-    redisinsight-electron \
-    scrcpy
+    nixpkgs.scrcpy
 
     
 else
