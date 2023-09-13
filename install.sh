@@ -8,13 +8,14 @@ fi
 
 
 echo "#### Menu Selector ####"
-echo " 1) Install Main SO packages"
-echo " 2) Install Tmux"
-echo " 3) Install Oh my ZSH"
-echo " 4) Install ZSH additional packages"
-echo " 5) Guake Settings"
-echo " 6) Install DEV Tools"
-echo " 7) Install DevOps Tools"
+echo " 1) Initial Setup"
+echo " 2) Install Base SO packages"
+echo " 3) Install Tmux"
+echo " 4) Install Oh my ZSH"
+echo " 5) Install ZSH additional packages"
+echo " 6) Guake Settings"
+echo " 7) Install DEV Tools"
+echo " 8) Install DevOps Tools"
 echo " ==== UTILS ===="
 echo " 11) VirtualBox Extension Pack"
 echo " 12) 1Password"
@@ -33,12 +34,13 @@ echo " 0) Exit"
 read n
 case $n in
     1) bash utils/os-selector/os-selector.sh ;;
-    2) bash tmux/tmux.sh ;;
-    3) bash zsh/zsh.sh ;;
+    2) bash /desktop/source/nix/base-packages.sh ;;
+    3) bash tmux/tmux.sh ;;
     4) bash zsh/zsh.sh ;;
-    5) guake --restore-preferences utils/guake/rtm-guake-settings && echo "Done" ;;
-    6) bash dev-tools/software.sh ;;
-    7) bash dev-tools/devops.sh ;;
+    5) bash zsh/zsh.sh ;;
+    6) guake --restore-preferences utils/guake/rtm-guake-settings && echo "Done" ;;
+    7) bash dev-tools/software.sh ;;
+    8) bash dev-tools/devops.sh ;;
 # ===================================================================================
     11) bash utils/virtualization/virtualbox/virtualbox-ext-pack.sh ;;
     12) bash utils/1password/install-1password.sh ;;

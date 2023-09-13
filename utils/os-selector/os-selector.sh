@@ -14,34 +14,22 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     if [[ $gnome_check == "gnome" ]]; then
     bash desktop/0-DEB/0-gnome-system.sh
     elif [[ $kde_check == "kde" ]]; then
-    bash desktop/0-DEB/0-kde-system.sh
+    echo "KDE not supported"
     else
     echo "Not able to identify desktop environment"
     fi
 elif check_cmd dnf; then  # FOR RPM SYSTEMS
-    if [[ $gnome_check == "gnome" ]]; then
-    bash desktop/1-RPM/1-gnome-system.sh
-    elif [[ $kde_check == "kde" ]]; then
-    bash desktop/1-RPM/1-kde-system.sh
-    else
-    echo "Not able to identify desktop environment"
-    fi
+    echo "System not supported"
 elif check_cmd zypper; then  # FOR OPENSUSE SYSTEMS
     if [[ $gnome_check == "gnome" ]]; then
     bash desktop/2-ZYPPER/2-gnome-system.sh
     elif [[ $kde_check == "kde" ]]; then
-    bash desktop/2-ZYPPER/2-kde-system.sh
+    echo "KDE not supported"
     else
     echo "Not able to identify desktop environment"
     fi
-elif check_cmd pacman; then  # FOR OPENSUSE SYSTEMS
-    if [[ $gnome_check == "gnome" ]]; then
-    echo "not ready"
-    elif [[ $kde_check == "kde" ]]; then
-    bash desktop/3-ARCH/3-kde-system.sh
-    else
-    echo "Not able to identify desktop environment"
-    fi
+elif check_cmd pacman; then  # FOR ARCH SYSTEMS
+    echo "System not supported"
 elif check_cmd sw_vers; then  # FOR MACOS SYSTEMS
     if [[ $macos_check == "darwin" ]]; then
     bash desktop/99-MACOS/macos.sh
