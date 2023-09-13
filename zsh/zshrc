@@ -139,7 +139,7 @@ if check_cmd wsl.exe; then
         elif [[ $wsl_thumbleweed_check == "opensuse-tumbleweed" ]]; then
             alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
         elif [[ $wsl_leap_check == "opensuse-leap" ]]; then
-                    alias update-all="sudo zypper ref && sudo zypper up && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+            alias update-all="sudo zypper ref && sudo zypper up && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
         fi
 elif check_cmd apt-get; then # FOR DEB SYSTEMS
     alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && nix-env -u"
@@ -148,14 +148,9 @@ elif check_cmd apt-get; then # FOR DEB SYSTEMS
     if [[ $gnome_check == "gnome" ]]; then
         alias folder="nautilus"
         alias pdf="evince"
-    elif [[ $kde_check == "kde" ]]; then
-        alias folder="dolphin"
-        alias pdf="okular"
     elif [[ $bspwm_check == "bspwm" ]]; then
         alias folder="nautilus"
         alias pdf="evince"
-    else
-        echo ""
     fi
 
 elif check_cmd zypper; then  # FOR ZYPPER TW SYSTEMS
@@ -163,14 +158,8 @@ elif check_cmd zypper; then  # FOR ZYPPER TW SYSTEMS
     if [[ $gnome_check == "gnome" ]]; then
         alias folder="nautilus"
         alias pdf="evince"
-    elif [[ $kde_check == "kde" ]]; then
-        alias folder="dolphin"
-        alias restart-kde="kwin_x11 --replace &"
-        alias pdf="okular"
-    else
-        echo ""
     fi
-
+fi
 
 # SYSTEM ALIASES
 if [[ $macos_check == "darwin" ]]; then
