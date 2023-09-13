@@ -23,7 +23,7 @@ nixpkgs.pasystray \
 nixpkgs.pavucontrol \
 nixpkgs.jgmenu \
 nixpkgs.mate.mate-polkit \
-nixpkgs. libnotify \
+nixpkgs.libnotify \
 nixpkgs.libsForQt5.qt5ct \
 nixpkgs.dunst \
 nixpkgs.picom-jonaburg
@@ -31,8 +31,6 @@ nixpkgs.picom-jonaburg
 
 # pywal
 sudo pip3 install pywal
-
-
 
 
 # Create folders 
