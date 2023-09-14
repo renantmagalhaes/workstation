@@ -41,7 +41,7 @@ sudo ln -s /usr/bin/python3 /usr/bin/python
 mkdir -p ~/GIT-REPOS/CORE
 
 # Install LSD
-curl https://sh.rustup.rs -sSf | sh
+curl https://sh.rustup.rs -sSf | sh -s -- -y
 ~/.cargo/bin/cargo install lsd
 
 # Colorls

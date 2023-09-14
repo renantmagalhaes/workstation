@@ -137,7 +137,7 @@ bash desktop/source/any/fonts.sh
 bash desktop/source/gnome/themes.sh
 
 # Install LSD
-curl https://sh.rustup.rs -sSf | sh
+curl https://sh.rustup.rs -sSf | sh -s -- -y
 ~/.cargo/bin/cargo install lsd
 
 # Colorls

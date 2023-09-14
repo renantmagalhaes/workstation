@@ -54,7 +54,7 @@ sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel
 sudo gem install colorls
 
 # Install LSD
-curl https://sh.rustup.rs -sSf | sh
+curl https://sh.rustup.rs -sSf | sh -s -- -y
 ~/.cargo/bin/cargo install lsd
 
 ## Fix python default path
