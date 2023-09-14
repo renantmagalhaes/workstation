@@ -10,7 +10,7 @@ check_cmd() {
 
 if check_cmd sw_vers; then  # FOR MACOS SYSTEMS
     if [[ $macos_check == "darwin" ]]; then
-        bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /Users/$USER/.zprofile
         echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/$USER/.zprofile
         eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -18,7 +18,7 @@ if check_cmd sw_vers; then  # FOR MACOS SYSTEMS
     echo "Not able to identify desktop environment"
     fi
 else
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/rtm/.zprofile
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/rtm/.profile
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
