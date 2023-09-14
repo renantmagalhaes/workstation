@@ -13,27 +13,6 @@ if [[ $macos_check == "darwin" ]]; then
     exit
 fi
 
-# check cmd function
-check_cmd() {
-    command -v "$1" 2> /dev/null
-}
-
-# Add the repository key with either wget or curl
-if check_cmd nix-env; then # FOR NIX PKG MANAGER
-
-    export NIXPKGS_ALLOW_UNFREE=1
-
-    nix-env -iA \
-    nixpkgs.robo3t \
-    nixpkgs.pgadmin4 \
-    nixpkgs.scrcpy
-
-    
-else
-    echo "Nix package manager not installed, go to https://nixos.org/download"
-    exit
-fi
-
 ########### WINDOWS APPS ###########
 # Default folder
 mkdir -p ~/Apps
@@ -44,6 +23,12 @@ mkdir -p ~/Apps
 sudo flatpak install -y flathub net.xmind.ZEN
 sudo flatpak override --filesystem=home:ro net.xmind.ZEN
 
+# Redis
+sudo flatpak install -y flathub dev.rdm.RDM
+#sudo snap install redis-desktop-manager
+#wget https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v1.3.9/Another-Redis-Desktop-Manager.1.3.9.AppImage -O ~/Apps/Another-Redis-Desktop-Manager.1.3.9.AppImage
+#chmod +x ~/Apps/Another-Redis-Desktop-Manager.1.3.9.AppImage
+##! Add this program in menu using Alacarte package
 
 # DBeaver
 sudo flatpak install -y flathub io.dbeaver.DBeaverCommunity
@@ -60,6 +45,8 @@ sudo flatpak install -y flathub net.sourceforge.jpdftweak.jPdfTweak
 # K8S IDE - Lens
 # sudo snap install kontena-lens --classic
 
+# scrcpy
+# sudo snap install scrcpy
 
 #clear
 echo "###########################"

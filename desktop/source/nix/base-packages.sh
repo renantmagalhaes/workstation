@@ -22,7 +22,6 @@ if check_cmd nix-env; then # FOR NIX PKG MANAGER
     nixpkgs.powerline-fonts \
     nixpkgs.cantarell-fonts \
     nixpkgs.brasero \
-    nixpkgs.gparted \
     nixpkgs.wireshark \
     nixpkgs.tmux \
     nixpkgs.curl \
@@ -36,7 +35,6 @@ if check_cmd nix-env; then # FOR NIX PKG MANAGER
     nixpkgs.meld \
     nixpkgs.dconf \
     nixpkgs.openvpn \
-    nixpkgs.krita \
     nixpkgs.frei0r \
     nixpkgs.audacity \
     nixpkgs.filezilla \
@@ -51,7 +49,6 @@ if check_cmd nix-env; then # FOR NIX PKG MANAGER
     nixpkgs.bat \
     nixpkgs.gawk \
     nixpkgs.coreutils \
-    nixpkgs.lm_sensors \
     nixpkgs.gnome.cheese \
     nixpkgs.ncdu \
     nixpkgs.whois \
@@ -65,7 +62,6 @@ if check_cmd nix-env; then # FOR NIX PKG MANAGER
     nixpkgs.unrar \
     nixpkgs.dnsutils \
     nixpkgs.imagemagick \
-    nixpkgs.alacritty \
     nixpkgs.scrot \
     nixpkgs.wmctrl \
     nixpkgs.xdotool \
@@ -74,7 +70,6 @@ if check_cmd nix-env; then # FOR NIX PKG MANAGER
     nixpkgs.evince \
     nixpkgs.jq \
     nixpkgs.pulseaudio \
-    nixpkgs.vscode \
     nixpkgs.colorls \
     nixpkgs.droidcam
         

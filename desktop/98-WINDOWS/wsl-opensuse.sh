@@ -97,6 +97,12 @@ bash ../source/any/fonts.sh
 # New VIM
 bash ../source/any/vim.sh
 
+# Docker
+sudo zypper install -y docker docker-compose docker-compose-switch
+sudo systemctl enable docker
+sudo usermod -G docker -a $USER
+sudo systemctl restart docker
+
 # RTM
 #clear
 echo "#################################"

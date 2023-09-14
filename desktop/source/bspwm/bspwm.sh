@@ -5,33 +5,48 @@ check_cmd() {
     command -v "$1" 2> /dev/null
 }
 
-# allow unfree
-export NIXPKGS_ALLOW_UNFREE=1
+# Add the repository key with either wget or curl
+if check_cmd apt-get; then # FOR DEB SYSTEMS
+    sudo apt-get install -y bspwm sxhkd feh lxappearance playerctl blueman x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit mate-polkit-bin libnotify-bin qt5ct
+    sudo pip3 install pywal
 
-# install packages
-nix-env -iA \
-nixpkgs.bspwm \
-nixpkgs.sxhkd \
-nixpkgs.feh \
-nixpkgs.lxappearance \
-nixpkgs.playerctl \
-nixpkgs.blueman \
-nixpkgs.nitrogen \
-nixpkgs.i3lock \
-nixpkgs.papirus-icon-theme \
-nixpkgs.pasystray \
-nixpkgs.pavucontrol \
-nixpkgs.jgmenu \
-nixpkgs.mate.mate-polkit \
-nixpkgs.libnotify \
-nixpkgs.libsForQt5.qt5ct \
-nixpkgs.dunst \
-nixpkgs.picom-jonaburg
+    # Dunst
+    sudo apt install -y libdbus-1-dev libx11-dev libxinerama-dev libxrandr-dev libxss-dev libglib2.0-dev libpango1.0-dev libgtk2.0-dev libxdg-basedir-dev libnotify-dev xdg-utils libwayland-client0
+    git clone https://github.com/dunst-project/dunst.git ~/GIT-REPOS/CORE/dunst
+    cd ~/GIT-REPOS/CORE/dunst
+    sudo it config --global --add safe.directory ~/GIT-REPOS/CORE/dunst
+    make -j5 WAYLAND=0
+    sudo make WAYLAND=0 install
 
+    # Picom
+    sudo apt-get install -y libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev meson
+    # git clone https://github.com/yshui/picom.git ~/GIT-REPOS/CORE/picom
+    git clone https://github.com/jonaburg/picom.git ~/GIT-REPOS/CORE/picom
+    cd ~/GIT-REPOS/CORE/picom
+    git submodule update --init --recursive
+    meson --buildtype=release . build
+    ninja -C build
+    sudo ninja -C build install
 
-# pywal
-sudo pip3 install pywal
+elif check_cmd zypper; then  # FOR RPM SYSTEMS
 
+    # Install dependencies
+    sudo zypper install -y bspwm sxhkd feh lxappearance playerctl blueman xsetroot dunst nitrogen scrot xdotool NetworkManager-applet pcp-pmda-lmsensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit libnotify4 libnotify-devel libnotify-tools
+    sudo pip3 install pywal
+
+    # Picom
+    sudo zypper install -y dbus-1-devel gcc git libconfig-devel libdrm-devel libev-devel libX11-devel libX11-xcb1 libXext-devel libxcb-devel Mesa-libGL-devel meson pcre-devel libpixman-1-0-devel uthash-devel xcb-util-image-devel xcb-util-renderutil-devel xorgproto-devel
+    # git clone https://github.com/yshui/picom.git ~/GIT-REPOS/CORE/picom
+    git clone https://github.com/jonaburg/picom.git ~/GIT-REPOS/CORE/picom
+    cd ~/GIT-REPOS/CORE/picom
+    git submodule update --init --recursive
+    meson --buildtype=release . build
+    ninja -C build
+    sudo ninja -C build install
+else
+    echo "Not able to identify the system"
+    exit 0
+fi
 
 # Create folders 
 mkdir -p ~/.config/polybar ~/.config/i3 ~/.config/picom ~/.config/rofi ~/.local/share/rofi/themes/ ~/.config/alacritty/ ~/.config/dunst/

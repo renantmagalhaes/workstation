@@ -6,20 +6,18 @@ check_cmd() {
 }
 
 # Add the repository key with either wget or curl
-if check_cmd nix-env; then # FOR NIX PKG MANAGER
+if check_cmd apt-get; then # FOR DEB SYSTEMS
 
-    nix-env -iA \
-    nixpkgs.go \
-    nixpkgs.sqlitebrowser \
-    nixpkgs.aircrack-ng
-    
+    sudo apt-get install -y golang sqlitebrowser aircrack-ng nmap jq
+
+elif check_cmd zypper; then  # FOR RPM SYSTEMS
+
+    sudo zypper install -y go sqlitebrowser nmap jq SecLists
+    brew install aircrack-ng
+
 else
-    echo "Nix package manager not installed, go to https://nixos.org/download"
-    exit
+    echo "Not able to identify the system"
 fi
-
-# Legion
-# https://github.com/carlospolop/legion
 
 # RustScan
 brew install rustscan
