@@ -91,7 +91,7 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 source $ZSH/oh-my-zsh.sh
 
 # fzf search 
-source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
+# source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
 
 # alias with preview files on 
 alias pf="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"

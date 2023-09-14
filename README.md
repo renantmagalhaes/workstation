@@ -11,7 +11,10 @@ Use the script ``install.sh``. Running the scripts directly may result in system
   - [] Fix brew installation to be non-interactive.
   - [] Fix font installation to be non-interactive.
 - [] Fix themes installation to be non-interactive.
+- [] Make cargo lsd installation to be non-interactive
 - [] New BSPWM desktop showcase
+- [] Add BSPWM installation on install.sh
+  - Automatic installation for Rofi and Polybar
 # BSPWM
 
 ![1-general_layout_bspwm.png](./images/workstation/1-general_layout-bspwm.png)
