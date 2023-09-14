@@ -30,8 +30,8 @@ git clone https://github.com/vinceliuice/Orchis-theme.git ~/GIT-REPOS/CORE/Orchi
 sh -c "~/GIT-REPOS/CORE/Orchis-theme/install.sh"
 
 # ChromeOS theme
-git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/ChromeOS-theme
-sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
+# git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/ChromeOS-theme
+# sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
 
 # WhiteSur-gtk-theme
 # git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/GIT-REPOS/CORE/WhiteSur-gtk-theme
@@ -82,7 +82,7 @@ sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh blue -c nord"
 sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh dracula"
 sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh purple"
 
-# Tela--icon-theme
+# Tela-icon-theme
 git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/GIT-REPOS/CORE/Tela-icon-theme
 sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh blue"
 sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh black"
