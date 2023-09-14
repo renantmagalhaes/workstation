@@ -11,20 +11,20 @@ git clone https://github.com/gabrielelana/awesome-terminal-fonts.git ~/GIT-REPOS
 sh -c "~/GIT-REPOS/CORE/awesome-terminal-fonts/install.sh"
 
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/`curl --silent "https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest" |grep tag_name |awk '{print $2}' |sed 's/\"//g; s/\,//g'`/FiraCode.zip -O ~/.local/share/fonts/FiraCode.zip
-unzip ~/.local/share/fonts/FiraCode.zip -d ~/.local/share/fonts/
+unzip -o ~/.local/share/fonts/FiraCode.zip -d ~/.local/share/fonts/
 
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/`curl --silent "https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest" |grep tag_name |awk '{print $2}' |sed 's/\"//g; s/\,//g'`/3270.zip -O ~/.local/share/fonts/3270.zip
-unzip ~/.local/share/fonts/3270.zip -d ~/.local/share/fonts/
+unzip -o ~/.local/share/fonts/3270.zip -d ~/.local/share/fonts/
 
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/`curl --silent "https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest" |grep tag_name |awk '{print $2}' |sed 's/\"//g; s/\,//g'`/Agave.zip -O ~/.local/share/fonts/Agave.zip
-unzip ~/.local/share/fonts/Agave.zip -d ~/.local/share/fonts/
+unzip -o ~/.local/share/fonts/Agave.zip -d ~/.local/share/fonts/
 
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/2.2.0-RC/Iosevka.zip -O ~/.local/share/fonts/Iosevka.zip -O ~/.local/share/fonts/Iosevka.zip
-unzip ~/.local/share/fonts/Iosevka.zip -d ~/.local/share/fonts/
+unzip -o ~/.local/share/fonts/Iosevka.zip -d ~/.local/share/fonts/
 
 ## cascadia font for vscode
 wget https://github.com/microsoft/cascadia-code/releases/download/v2105.24/CascadiaCode-2105.24.zip -O /tmp/CascadiaCode-2105.24.zip
-unzip /tmp/CascadiaCode-2105.24.zip -d /tmp/
+unzip -o /tmp/CascadiaCode-2105.24.zip -d /tmp/
 cp /tmp/ttf/CascadiaCodePL.ttf  ~/.local/share/fonts/
 cp /tmp/ttf/CascadiaCode.ttf  ~/.local/share/fonts/
 
@@ -33,11 +33,11 @@ cp /tmp/ttf/CascadiaCode.ttf  ~/.local/share/fonts/
 
 # droid sans
 wget https://www.fontsquirrel.com/fonts/download/droid-sans -O ~/.local/share/fonts/droid-sans.zip
-unzip ~/.local/share/fonts/droid-sans.zip -d ~/.local/share/fonts/
+unzip -o ~/.local/share/fonts/droid-sans.zip -d ~/.local/share/fonts/
 
 # fonts aawesome
 wget https://github.com/FortAwesome/Font-Awesome/releases/download/`curl --silent "https://api.github.com/repos/FortAwesome/Font-Awesome/releases/latest" |grep tag_name |awk '{print $2}' |sed 's/\"//g; s/\,//g'`/fontawesome-free-`curl --silent "https://api.github.com/repos/FortAwesome/Font-Awesome/releases/latest" |grep tag_name |awk '{print $2}' |sed 's/\"//g; s/\,//g'`-desktop.zip -O ~/.local/share/fonts/Font-Awesome.zip
-unzip ~/.local/share/fonts/Font-Awesome.zip -d ~/.local/share/fonts/
+unzip -o ~/.local/share/fonts/Font-Awesome.zip -d ~/.local/share/fonts/
 
 # Fonts for rofi menu
 wget https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/GrapeNuts-Regular.ttf -O ~/.local/share/fonts/GrapeNuts-Regular.ttf
