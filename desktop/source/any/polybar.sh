@@ -16,12 +16,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
 
     POLYBAR_RELEASE=3.6.3
     wget https://github.com/polybar/polybar/releases/download/$POLYBAR_RELEASE/polybar-$POLYBAR_RELEASE.tar.gz -O ~/GIT-REPOS/CORE/polybar.tar.gz
-    cd ~/GIT-REPOS/CORE/ && tar -xvf polybar.tar.gz && cd polybar-$POLYBAR_RELEASE && ./build.sh
-
-
-elif check_cmd dnf; then  # FOR RPM SYSTEMS
-    # pkg
-    sudo dnf install -y polybar mpd wmctrl playerctl material-icons-fonts material-design-light material-design-dark yad xsel
+    cd ~/GIT-REPOS/CORE/ && tar -xvf polybar.tar.gz && cd polybar-$POLYBAR_RELEASE && echo "Y" | ./build.sh
 
 
 elif check_cmd zypper; then  # FOR OpenSuse SYSTEMS
