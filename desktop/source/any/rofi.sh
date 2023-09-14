@@ -23,12 +23,6 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     #XCAPE - Bind rofi to SuperKey
     sudo apt-get install -y git gcc make pkg-config libx11-dev libxtst-dev libxi-dev
 
-elif check_cmd dnf; then  # FOR RPM SYSTEMS
-    sudo dnf install -y rofi
-
-    #XCAPE - Bind rofi to SuperKey
-    sudo dnf install -y git gcc make pkgconfig libX11-devel libXtst-devel libXi-devel
-
 elif check_cmd zypper; then  # FOR RPM SYSTEMS
     sudo zypper install -y rofi
 
@@ -50,7 +44,7 @@ cp -r ~/GIT-REPOS/CORE/rofi-themes-collection/themes/* ~/.local/share/rofi/theme
 # ln -s -f $PWD/config/rofi/rtm-rofi-theme.rasi ~/.config/rofi/rtm-rofi-theme.rasi
 # ln -s -f $PWD/config/rofi/config.rasi ~/.config/rofi/config.rasi
 rm -rf ~/.config/rofi
-ln -s -f $PWD/config/rofi ~/.config/
+ln -s -f $PWD/desktop/source/any/config/rofi/ ~/.config/
 
 
 #XCAPE - Bind rofi to SuperKey
