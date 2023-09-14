@@ -60,15 +60,8 @@ sudo zypper refresh && sudo zypper update
 sudo zypper install -y opi
 
 # Install the packages from suse repo
-sudo zypper install -y zsh vim breeze5-cursors curl guake python3-pip gtk2-engines tree remmina pwgen sysstat alacarte openssl gnome-keyring chrome-gnome-shell libstdc++-devel glibc-static net-tools-deprecated xprop gcc-c++
+sudo zypper install -y zsh vlc clementine breeze5-cursors vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar gawk net-tools coreutils ncdu whois piper openssl gnome-keyring chrome-gnome-shell telnet openssh materia-gtk-theme alacritty scrot libstdc++-devel glibc-static net-tools-deprecated xprop wmctrl xdotool gcc-c++ lsd
 
-# Install NIX package manager
-sh <(curl -L https://nixos.org/nix/install) --daemon
-## Enable find nix apps on system search
-# rm -rf ~/.local/share/applications
-# rm -rf ~/.local/share/icons
-# ln -s ~/.nix-profile/share/applications ~/.local/share/applications
-# ln -s ~/.nix-profile/share/icons ~/.local/share/icons
 
 # Brew
 bash desktop/source/any/brew.sh
@@ -117,6 +110,12 @@ sudo zypper ar https://packages.microsoft.com/yumrepos/edge microsoft-edge
 sudo zypper refresh
 sudo zypper install -y microsoft-edge-stable
 
+## Install Visual Code
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/zypp/repos.d/vscode.repo'
+sudo zypper refresh
+sudo zypper install -y code
+
 # VIM
 bash desktop/source/any/vim.sh
 
@@ -128,6 +127,10 @@ bash desktop/source/any/fonts.sh
 
 # Themes
 bash desktop/source/gnome/themes.sh
+
+# Colorls
+sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel
+sudo gem install colorls
 
 # Install ClamAV
 sudo zypper install -y clamav clamtk

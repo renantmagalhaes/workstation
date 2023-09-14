@@ -51,7 +51,6 @@ else
     exit 1
 fi
 
-
 # Dependencies 
 
 ## Disable cdrom
@@ -61,19 +60,10 @@ sudo sed -i 's/deb\ cdrom/\#deb\ cdrom/g' /etc/apt/sources.list
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install zsh vim curl breeze-cursor-theme fonts-hack-ttf apt-transport-https network-manager-openvpn network-manager-openvpn-gnome gnome-terminal nautilus gnome-tweaks guake guake-indicator gnome-icon-theme chrome-gnome-shell gnome-menus flatpak sysstat remmina remmina-plugin-rdp tree pwgen alacarte ca-certificates software-properties-common gir1.2-gtop-2.0 gir1.2-gmenu-3.0 python3-pip x11-utils nala
-
-
-# Install NIX package manager
-sh <(curl -L https://nixos.org/nix/install) --daemon
-## Enable find nix apps on system search
-# rm -rf ~/.local/share/applications
-# rm -rf ~/.local/share/icons
-# ln -s ~/.nix-profile/share/applications ~/.local/share/applications
-# ln -s ~/.nix-profile/share/icons ~/.local/share/icons
+sudo apt-get -y install wget zsh clementine breeze-cursor-theme dia vim vim-gui-common nmap vlc blender fonts-powerline fonts-cantarell brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle3 fonts-hack-ttf htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome gnome-terminal guake guake-indicator gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload chrome-gnome-shell gnome-menus gir1.2-gmenu-3.0 chrome-gnome-shell gnome-menus pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot python3-pip gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors cheese ncdu whois piper libratbag-tools timeshift adb fastboot materia-gtk-theme gnome-screenshot jp2a unrar-free dnsutils imagemagick alacritty scrot x11-utils wmctrl xdotool software-properties-common apt-transport-https ca-certificates curl flatpak xournal evince jq pulseaudio-utils
 
 # Virtualization using KVM + QEMU + libvirt
- sudo apt-get install -y qemu-system-x86 libvirt-clients libvirt-daemon libvirt-daemon-system virtinst virt-manager bridge-utils
+sudo apt-get install -y qemu-system-x86 libvirt-clients libvirt-daemon libvirt-daemon-system virtinst virt-manager bridge-utils
 
 # Docker
 sudo apt-get install -y docker.io docker-compose
@@ -97,6 +87,17 @@ sudo apt install -y brave-browser
 ## Install Google Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
 sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
+sudo apt-get -f install -y
+
+## Install Visual Code
+wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
+sudo dpkg -i /tmp/visual_code_amd64.deb
+sudo sed -i 's/\,arm64\,armhf//g' /etc/apt/sources.list.d/vscode.list
+sudo apt-get -f install -y
+
+## Teamviewer
+wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp/teamviewer_amd64.deb
+sudo dpkg -i /tmp/teamviewer_amd64.deb
 sudo apt-get -f install -y
 
 # Brew
@@ -123,7 +124,6 @@ sudo ln -s /usr/bin/pip3 /usr/bin/pip
 pip3 install psutil
 sudo apt-get -y install bpytop virtualenv virtualenvwrapper pylint
 
-
 # VIM
 bash desktop/source/any/vim.sh
 
@@ -136,6 +136,23 @@ bash desktop/source/any/fonts.sh
 # Themes
 bash desktop/source/gnome/themes.sh
 
+# Install LSD
+curl https://sh.rustup.rs -sSf | sh
+~/.cargo/bin/cargo install lsd
+
+# Colorls
+sudo apt install -y ruby-dev
+sudo gem install colorls
+
+#Distrobox
+#https://github.com/89luca89/distrobox#installation
+
+## Droidcam
+# cd /tmp/
+# wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_1.8.2.zip
+# unzip droidcam_latest.zip -d droidcam
+# cd droidcam && sudo ./install-client
+# sudo ./install-video
 
 # Install ClamAV
 sudo apt install -y clamav clamtk

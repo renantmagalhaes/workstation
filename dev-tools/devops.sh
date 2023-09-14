@@ -42,11 +42,7 @@ brew install kubectl
 
 if check_cmd apt-get; then # FOR DEB SYSTEMS
     neofetch
-elif check_cmd dnf; then  # FOR RPM SYSTEMS
-    neofetch
 elif check_cmd zypper; then  # FOR SUSE SYSTEMS
-    neofetch
-elif check_cmd pacman; then  # FOR Arch SYSTEMS
     neofetch
 elif check_cmd sw_vers; then  # FOR Arch SYSTEMS
     neofetch

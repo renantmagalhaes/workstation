@@ -135,14 +135,16 @@ if check_cmd wsl.exe; then
     alias wsl-delete="wsl.exe --unregister"
     alias wsl-list="wsl.exe --list"
         if [[ $wsl_debian_check == "debian" ]]; then
-            alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+                alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y"
+                alias sudo="sudo "
+                alias apt="nala"
         elif [[ $wsl_thumbleweed_check == "opensuse-tumbleweed" ]]; then
-            alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+            alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y"
         elif [[ $wsl_leap_check == "opensuse-leap" ]]; then
-            alias update-all="sudo zypper ref && sudo zypper up && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+            alias update-all="sudo zypper ref && sudo zypper up && brew update && brew upgrade && sudo flatpak update -y"
         fi
 elif check_cmd apt-get; then # FOR DEB SYSTEMS
-    alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && nix-env -u"
+    alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y"
     alias sudo="sudo "
     alias apt="nala"
     if [[ $gnome_check == "gnome" ]]; then
@@ -154,7 +156,7 @@ elif check_cmd apt-get; then # FOR DEB SYSTEMS
     fi
 
 elif check_cmd zypper; then  # FOR ZYPPER TW SYSTEMS
-    alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && nix-env -u"
+    alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y"
     if [[ $gnome_check == "gnome" ]]; then
         alias folder="nautilus"
         alias pdf="evince"
@@ -224,7 +226,6 @@ alias git-sync='git add -A && git commit -m sync && git push'
 
 ### System ###
 alias pip='python -m pip'
-export XDG_DATA_DIRS="~/.nix-profile/share/applications:~/.nix-profile/share/icons:$XDG_DATA_DIRS"
 export NIXPKGS_ALLOW_UNFREE=1
 
 ### IP Info tools
