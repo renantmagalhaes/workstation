@@ -11,7 +11,7 @@ Use the script ``install.sh``. Running the scripts directly may result in system
   - [x] Fix brew installation to be non-interactive.
   - [x] Fix font installation to be non-interactive.
 - [x] Fix themes installation to be non-interactive.
-- [] Make cargo lsd installation to be non-interactive
+- [x] Make cargo lsd installation to be non-interactive
 - [] New BSPWM desktop showcase
 - [] Add BSPWM installation on install.sh
   - Automatic installation for Rofi and Polybar

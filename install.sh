@@ -22,6 +22,10 @@ echo " 23) NordVPN"
 echo " 24) Git Config"
 echo " 25) Wallpapers"
 echo " 26) Insync"
+echo " ==== BSPWM ===="
+echo " 31) BSPWM"
+echo " 32) Rofi"
+echo " 33) Polybar"
 echo " ==== NIX ===="
 echo " 41) Nix package manager"
 echo " 42) Install NIX base OS packages"
@@ -48,6 +52,10 @@ case $n in
     24) bash utils/git-config/git-config.sh ;;
     25) bash utils/wallpapers/wallpapers.sh ;;
     26) bash utils/insync/insync-install.sh ;;
+# ===================================================================================
+    31) bash desktop/source/bspwm/bspwm.sh ;;
+    32) bash desktop/source/any/rofi.sh ;;
+    33) bash desktop/source/any/polybar.sh  ;;
 # ===================================================================================
     41) sh <(curl -L https://nixos.org/nix/install) --daemon ;;
     42) bash desktop/source/nix/base-packages.sh ;;
