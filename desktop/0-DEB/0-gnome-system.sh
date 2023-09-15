@@ -59,16 +59,14 @@ sudo sed -i 's/deb\ cdrom/\#deb\ cdrom/g' /etc/apt/sources.list
 # Update / upgrade
 sudo apt-get update && sudo apt-get -y upgrade
 
-
 # Install the packages from repo
-export DEBIAN_FRONTEND=noninteractive
-sudo apt-get -y install wget zsh clementine breeze-cursor-theme dia vim vim-gui-common nmap vlc blender fonts-powerline fonts-cantarell brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle3 fonts-hack-ttf htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome gnome-terminal guake guake-indicator gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload chrome-gnome-shell gnome-menus gir1.2-gmenu-3.0 chrome-gnome-shell gnome-menus pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot python3-pip gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors cheese ncdu whois piper libratbag-tools timeshift adb fastboot materia-gtk-theme gnome-screenshot jp2a unrar-free dnsutils imagemagick alacritty scrot x11-utils wmctrl xdotool software-properties-common apt-transport-https ca-certificates curl flatpak xournal evince jq pulseaudio-utils sassc
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wget zsh clementine breeze-cursor-theme dia vim vim-gui-common nmap vlc blender fonts-powerline fonts-cantarell brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle3 fonts-hack-ttf htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome gnome-terminal guake guake-indicator gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload chrome-gnome-shell gnome-menus gir1.2-gmenu-3.0 chrome-gnome-shell gnome-menus pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot python3-pip gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors cheese ncdu whois piper libratbag-tools timeshift adb fastboot materia-gtk-theme gnome-screenshot jp2a unrar-free dnsutils imagemagick alacritty scrot x11-utils wmctrl xdotool software-properties-common apt-transport-https ca-certificates curl flatpak xournal evince jq pulseaudio-utils sassc
 
 # Virtualization using KVM + QEMU + libvirt
-sudo apt-get install -y qemu-system-x86 libvirt-clients libvirt-daemon libvirt-daemon-system virtinst virt-manager bridge-utils
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y qemu-system-x86 libvirt-clients libvirt-daemon libvirt-daemon-system virtinst virt-manager bridge-utils
 
 # Docker
-sudo apt-get install -y docker.io docker-compose
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y docker.io docker-compose
 sudo systemctl enable docker
 sudo usermod -aG docker $USER
 sudo systemctl restart docker
@@ -78,29 +76,29 @@ sudo systemctl restart docker
 curl -fSsL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /usr/share/keyrings/microsoft-edge.gpg > /dev/null
 echo 'deb [signed-by=/usr/share/keyrings/microsoft-edge.gpg] https://packages.microsoft.com/repos/edge stable main' | sudo tee /etc/apt/sources.list.d/microsoft-edge.list
 sudo apt update
-sudo apt install -y microsoft-edge-stable
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y microsoft-edge-stable
 
 ## Brave Browser
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 sudo apt update
-sudo apt install -y brave-browser
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y brave-browser
 
 ## Install Google Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
 sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
-sudo apt-get -f install -y
+
 
 ## Install Visual Code
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
 sudo dpkg -i /tmp/visual_code_amd64.deb
 sudo sed -i 's/\,arm64\,armhf//g' /etc/apt/sources.list.d/vscode.list
-sudo apt-get -f install -y
+
 
 ## Teamviewer
 wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp/teamviewer_amd64.deb
 sudo dpkg -i /tmp/teamviewer_amd64.deb
-sudo apt-get -f install -y
+
 
 # Brew
 bash desktop/source/any/brew.sh
@@ -124,7 +122,7 @@ sudo ln -s /usr/bin/pip3 /usr/bin/pip
 
 # Install pip packages
 pip3 install psutil
-sudo apt-get -y install bpytop virtualenv virtualenvwrapper pylint
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install bpytop virtualenv virtualenvwrapper pylint
 
 # VIM
 bash desktop/source/any/vim.sh
@@ -143,7 +141,7 @@ curl https://sh.rustup.rs -sSf | sh -s -- -y
 ~/.cargo/bin/cargo install lsd
 
 # Colorls
-sudo apt install -y ruby-dev
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y ruby-dev
 sudo gem install colorls
 
 #Distrobox
@@ -157,9 +155,9 @@ sudo gem install colorls
 # sudo ./install-video
 
 # Install ClamAV
-sudo apt install -y clamav clamtk
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y clamav clamtk
 sudo apt-get -f install -y
-sudo apt-get install -y clamav-daemon
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y clamav-daemon
 
 #Distrobox
 #https://github.com/89luca89/distrobox#installation
