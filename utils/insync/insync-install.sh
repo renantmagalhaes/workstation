@@ -8,9 +8,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
 
     # add public GPG
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ACCAF35C
-
-    sudo echo "deb http://apt.insync.io/`cat /etc/os-release |egrep ^ID | cut -f2 -d"="` `cat /etc/os-release |grep VERSION_CODENAME | cut -f2 -d"="` non-free contrib" > /etc/apt/sources.list.d/insync.list
-
+    echo "deb http://apt.insync.io/$(cat /etc/os-release | egrep ^ID | cut -f2 -d"=") $(cat /etc/os-release | grep VERSION_CODENAME | cut -f2 -d"=") non-free contrib" | sudo tee /etc/apt/sources.list.d/insync.list
     sudo apt-get update
     sudo apt-get install insync -y
 
