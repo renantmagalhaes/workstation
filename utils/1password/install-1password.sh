@@ -27,7 +27,7 @@ fi
 # sudo chown root:root /etc/1password/custom_allowed_browsers && sudo chmod 755 /etc/1password/custom_allowed_browsers
 
 # Auto start
-sudo mkdir -p ~/.config/autostart/
+mkdir -p ~/.config/autostart/
 bash -c 'cat << EOF > ~/.config/autostart/1password.desktop
 [Desktop Entry]
 Type=Application
