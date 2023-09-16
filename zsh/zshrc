@@ -91,7 +91,7 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 source $ZSH/oh-my-zsh.sh
 
 # fzf search 
-source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
+# source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
 
 # alias with preview files on 
 alias pf="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
@@ -121,7 +121,6 @@ setopt HIST_FIND_NO_DUPS
 #Aliases
 gnome_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "GNOME" | awk '{print tolower($0)}'`
 kde_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "KDE" | awk '{print tolower($0)}'`
-i3_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "I3" | awk '{print tolower($0)}'`
 bspwm_check=`env |grep DESKTOP_SESSION |grep -ioh "bspwm" | awk '{print tolower($0)}'`
 wsl_debian_check=`env |grep WSL |grep -ioh "debian"| awk '{print tolower($0)}'`
 wsl_thumbleweed_check=`env |grep WSL |grep -ioh "openSUSE-Tumbleweed"| awk '{print tolower($0)}'`
@@ -136,92 +135,32 @@ if check_cmd wsl.exe; then
     alias wsl-delete="wsl.exe --unregister"
     alias wsl-list="wsl.exe --list"
         if [[ $wsl_debian_check == "debian" ]]; then
-            alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+                alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y"
+                alias sudo="sudo "
+                alias apt="nala"
         elif [[ $wsl_thumbleweed_check == "opensuse-tumbleweed" ]]; then
-            alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+            alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y"
         elif [[ $wsl_leap_check == "opensuse-leap" ]]; then
-                    alias update-all="sudo zypper ref && sudo zypper up && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+            alias update-all="sudo zypper ref && sudo zypper up && brew update && brew upgrade && sudo flatpak update -y"
         fi
 elif check_cmd apt-get; then # FOR DEB SYSTEMS
-    alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+    alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y"
+    alias sudo="sudo "
+    alias apt="nala"
     if [[ $gnome_check == "gnome" ]]; then
         alias folder="nautilus"
         alias pdf="evince"
-    elif [[ $kde_check == "kde" ]]; then
-        alias folder="dolphin"
-        alias pdf="okular"
-    elif [[ $i3_check == "i3" ]]; then
-        alias folder="nautilus"
-        alias pdf="evince"
-    # alias docker="podman"
-    # alias docker-compose="podman-compose"
     elif [[ $bspwm_check == "bspwm" ]]; then
         alias folder="nautilus"
         alias pdf="evince"
-    else
-        echo ""
-    fi
-
-elif check_cmd dnf; then  # FOR RPM SYSTEMS
-    alias update-all="sudo dnf update -y && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
-    if [[ $gnome_check == "gnome" ]]; then
-        alias folder="nautilus"
-        alias pdf="evince"
-    # alias docker="podman"
-    # alias docker-compose="podman-compose"
-    elif [[ $kde_check == "kde" ]]; then
-        alias folder="dolphin"
-        alias pdf="okular"
-    # alias docker="podman"
-    # alias docker-compose="podman-compose"
-    elif [[ $i3_check == "i3" ]]; then
-        alias folder="nautilus"
-        alias pdf="evince"
-    # alias docker="podman"
-    # alias docker-compose="podman-compose"
-    elif [[ $bspwm_check == "bspwm" ]]; then
-        alias folder="nautilus"
-        alias pdf="evince"
-    # alias docker="podman"
-    # alias docker-compose="podman-compose"
-    else
-        echo ""
     fi
 
 elif check_cmd zypper; then  # FOR ZYPPER TW SYSTEMS
-    alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
+    alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y"
     if [[ $gnome_check == "gnome" ]]; then
         alias folder="nautilus"
         alias pdf="evince"
-    elif [[ $kde_check == "kde" ]]; then
-        alias folder="dolphin"
-        alias restart-kde="kwin_x11 --replace &"
-        alias pdf="okular"
-    # export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.9
-    else
-        echo ""
     fi
-    
-elif check_cmd pacman; then  # FOR RPM SYSTEMS
-    alias update-all="yay -Syu && sudo pacman -Syu && brew update && brew upgrade && sudo flatpak update -y && sudo snap refresh"
-    if [[ $gnome_check == "gnome" ]]; then
-        alias folder="nautilus"
-    elif [[ $kde_check == "kde" ]]; then
-        alias folder="dolphin"
-    else
-        echo "Not able to identify desktop environment"
-    fi
-    elif check_cmd sw_vers; then  # FOR MACOS SYSTEMS
-        alias update-all="brew update && brew upgrade"
-        alias folder="open"
-        # Speed SSH readings
-        function refresh_ssh_autocomplete () {
-        host_list=($(cat ~/.ssh/config | grep 'Host '  | awk '{s = s $2 " "} END {print s}'))
-        zstyle ':completion:*:(ssh|scp|sftp):*' hosts $host_list
-        }
-        refresh_ssh_autocomplete
-    else
-        echo ""
 fi
 
 # SYSTEM ALIASES
@@ -233,7 +172,7 @@ if [[ $macos_check == "darwin" ]]; then
 elif [[ $linux_check == "linux" ]]; then
     alias killtmux="pidof tmux |xargs kill -9"
     alias python="python3"
-    alias killvivaldi="pidof vivaldi-bin |xargs kill -9"
+    alias killedge="pidof msedge |xargs kill -9"
     alias killgnome="killall -HUP gnome-shell"
     # alias bluetooth-restart="sudo rfkill block bluetooth && sudo rfkill unblock bluetooth && sudo systemctl restart bluetooth"
     alias bluetooth-restart="sudo systemctl stop bluetooth.service && sudo rm -rf /var/lib/bluetooth/* && sudo systemctl start bluetooth.service"
@@ -287,6 +226,7 @@ alias git-sync='git add -A && git commit -m sync && git push'
 
 ### System ###
 alias pip='python -m pip'
+export NIXPKGS_ALLOW_UNFREE=1
 
 ### IP Info tools
 alias ip-info='curl https://wtfismyip.com/json | jq .'
@@ -347,8 +287,7 @@ alias waymore='python3 ~/GIT-REPOS/CORE/waymore/waymore.py'
 #   alias tree='exa --tree'
 command -v lsd > /dev/null && alias ls='lsd --group-dirs first' && \
 	alias tree='lsd --tree'
-# command -v colorls > /dev/null && alias ls='colorls --sd --gs' && \
-# 	alias tree='colorls --tree'
+
 
 ### CAT & LESS ###
 command -v bat > /dev/null && \
@@ -403,8 +342,6 @@ function copydir {
   pwd | tr -d "\r\n" | xclip
 }
 
-
-
 ######################### PATHS ########################
 
 # Additional paths
@@ -414,7 +351,6 @@ if [[ $macos_check == "darwin" ]]; then
 elif [[ $linux_check == "linux" ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     export PATH="/usr/sbin:/usr/share/code/bin:$PATH"
-    if [ -e /home/rtm/.nix-profile/etc/profile.d/nix.sh ]; then . /home/rtm/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 else
     echo "error on SO check"
 fi

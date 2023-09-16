@@ -1,8 +1,16 @@
 # workstation
 ```My full desktop environment.```
 
+For:
+- Debian 12
+- openSUSE Tumbleweed (GNOME version) 
 ### Disclaimer !
 Use the script ``install.sh``. Running the scripts directly may result in system malfunction. 
+
+# TODO
+
+- [] Make step 1~7 non-interactive
+- [] New BSPWM desktop showcase
 
 # BSPWM
 

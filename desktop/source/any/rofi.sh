@@ -9,12 +9,12 @@ check_cmd() {
 if check_cmd apt-get; then # FOR DEB SYSTEMS
 
     # sudo apt-get install -y rofi
-    sudo apt-get install -y flex libxkbcommon-dev libxkbcommon-x11-dev libxcb-cursor-dev libxcb-xinerama0-dev libstartup-notification0-dev check bison
+    sudo apt-get install -y flex libxkbcommon-dev libxkbcommon-x11-dev libxcb-cursor-dev libxcb-xinerama0-dev libstartup-notification0-dev check bison meson libxcb-util-dev libxcb-ewmh-dev libxcb-icccm4-dev
     ROFI_RELEASE=1.7.5
     rofi_script_path=`pwd`
     wget https://github.com/davatorium/rofi/releases/download/$ROFI_RELEASE/rofi-$ROFI_RELEASE.tar.gz -O ~/GIT-REPOS/CORE/rofi.tar.gz
     cd ~/GIT-REPOS/CORE/ && tar -xvf rofi.tar.gz && cd rofi-$ROFI_RELEASE
-    mkdir build && cd build
+    mkdir -p build && cd build
     ../configure
     make
     sudo make install
@@ -22,12 +22,6 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
 
     #XCAPE - Bind rofi to SuperKey
     sudo apt-get install -y git gcc make pkg-config libx11-dev libxtst-dev libxi-dev
-
-elif check_cmd dnf; then  # FOR RPM SYSTEMS
-    sudo dnf install -y rofi
-
-    #XCAPE - Bind rofi to SuperKey
-    sudo dnf install -y git gcc make pkgconfig libX11-devel libXtst-devel libXi-devel
 
 elif check_cmd zypper; then  # FOR RPM SYSTEMS
     sudo zypper install -y rofi
@@ -50,7 +44,7 @@ cp -r ~/GIT-REPOS/CORE/rofi-themes-collection/themes/* ~/.local/share/rofi/theme
 # ln -s -f $PWD/config/rofi/rtm-rofi-theme.rasi ~/.config/rofi/rtm-rofi-theme.rasi
 # ln -s -f $PWD/config/rofi/config.rasi ~/.config/rofi/config.rasi
 rm -rf ~/.config/rofi
-ln -s -f $PWD/config/rofi ~/.config/
+ln -s -f $PWD/desktop/source/any/config/rofi/ ~/.config/
 
 
 #XCAPE - Bind rofi to SuperKey

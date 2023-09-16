@@ -36,4 +36,4 @@ sudo flatpak install -y flathub md.obsidian.Obsidian
 # sudo flatpak override --filesystem=home:ro org.telegram.desktop
 
 ## Plex media player
-#sudo flatpak install -y flathub tv.plex.PlexDesktop
+sudo flatpak install -y flathub tv.plex.PlexDesktop
