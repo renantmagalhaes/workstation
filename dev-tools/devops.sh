@@ -28,7 +28,6 @@ else
     exit
 fi
 
-
 ## EKS
 ### aws-iam-authenticator
 brew install aws-iam-authenticator
@@ -40,38 +39,10 @@ brew install weaveworks/tap/eksctl
 ### kubectl
 brew install kubectl
 
-# # Terraform
-# brew tap hashicorp/tap
-# brew install hashicorp/tap/terraform
-
-# # Ansible
-# sudo pip3 install ansible
-# sudo pip3 install "ansible-lint[yamllint]"
-# sudo pip3 install argcomplete
-
-# # Skaffold
-# brew install skaffold
-
-# # ArgoCD
-# brew install argocd
-
-# # FluxCD
-# brew install fluxcd/tap/flux
-
-# # popeye
-# brew install derailed/popeye/popeye
-
-# # kubescape
-# curl -s https://raw.githubusercontent.com/armosec/kubescape/master/install.sh | /bin/bash
-
 
 if check_cmd apt-get; then # FOR DEB SYSTEMS
     neofetch
-elif check_cmd dnf; then  # FOR RPM SYSTEMS
-    neofetch
 elif check_cmd zypper; then  # FOR SUSE SYSTEMS
-    neofetch
-elif check_cmd pacman; then  # FOR Arch SYSTEMS
     neofetch
 elif check_cmd sw_vers; then  # FOR Arch SYSTEMS
     neofetch

@@ -22,7 +22,7 @@ sudo ntpdate pool.ntp.org
 
 
 # Install the packages from repo
-sudo zypper install -y zsh vim curl net-tools iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox net-tools-deprecated busybox-sysvinit-tools bind-utils gcc-c++ rsync
+sudo zypper install -y zsh vim curl net-tools iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox net-tools-deprecated busybox-sysvinit-tools bind-utils gcc-c++ rsync sassc
 
 # Install SNAP
 wsl_thumbleweed_check=`env |grep WSL |grep -ioh "openSUSE-Tumbleweed"| awk '{print tolower($0)}'`
@@ -54,7 +54,7 @@ sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel
 sudo gem install colorls
 
 # Install LSD
-curl https://sh.rustup.rs -sSf | sh
+curl https://sh.rustup.rs -sSf | sh -s -- -y
 ~/.cargo/bin/cargo install lsd
 
 ## Fix python default path
@@ -96,6 +96,12 @@ bash ../source/any/fonts.sh
 
 # New VIM
 bash ../source/any/vim.sh
+
+# Docker
+sudo zypper install -y docker docker-compose docker-compose-switch
+sudo systemctl enable docker
+sudo usermod -G docker -a $USER
+sudo systemctl restart docker
 
 # RTM
 #clear

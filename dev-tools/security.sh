@@ -10,10 +10,6 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
 
     sudo apt-get install -y golang sqlitebrowser aircrack-ng nmap jq
 
-elif check_cmd dnf; then  # FOR RPM SYSTEMS
-
-    sudo dnf install -y golang sqlitebrowser aircrack-ng nmap jq
-
 elif check_cmd zypper; then  # FOR RPM SYSTEMS
 
     sudo zypper install -y go sqlitebrowser nmap jq SecLists
@@ -22,9 +18,6 @@ elif check_cmd zypper; then  # FOR RPM SYSTEMS
 else
     echo "Not able to identify the system"
 fi
-
-# Legion
-# https://github.com/carlospolop/legion
 
 # RustScan
 brew install rustscan
