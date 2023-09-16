@@ -74,7 +74,7 @@ sudo firewall-cmd --permanent --add-service=ssh
 sudo firewall-cmd --reload
 
 ## multimedia codecs
-sudo opi codecs
+yes | sudo opi -y codecs 
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
