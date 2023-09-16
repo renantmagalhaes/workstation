@@ -1,20 +1,17 @@
 # workstation
 ```My full desktop environment.```
 
+For:
+- Debian 12
+- openSUSE Tumbleweed (GNOME version) 
 ### Disclaimer !
 Use the script ``install.sh``. Running the scripts directly may result in system malfunction. 
 
 # TODO
 
-
-- [] Make step 1~7 totally non-interactive
-  - [x] Fix brew installation to be non-interactive.
-  - [x] Fix font installation to be non-interactive.
-- [x] Fix themes installation to be non-interactive.
-- [x] Make cargo lsd installation to be non-interactive
+- [] Make step 1~7 non-interactive
 - [] New BSPWM desktop showcase
-- [] Add BSPWM installation on install.sh
-  - Automatic installation for Rofi and Polybar
+
 # BSPWM
 
 ![1-general_layout_bspwm.png](./images/workstation/1-general_layout-bspwm.png)
