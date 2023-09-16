@@ -14,7 +14,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
     rofi_script_path=`pwd`
     wget https://github.com/davatorium/rofi/releases/download/$ROFI_RELEASE/rofi-$ROFI_RELEASE.tar.gz -O ~/GIT-REPOS/CORE/rofi.tar.gz
     cd ~/GIT-REPOS/CORE/ && tar -xvf rofi.tar.gz && cd rofi-$ROFI_RELEASE
-    mkdir build && cd build
+    mkdir -p build && cd build
     ../configure
     make
     sudo make install
