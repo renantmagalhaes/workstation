@@ -90,6 +90,9 @@ super + g
 super + f
 	bspc node -t floating
 
+ctrl + shift + F12
+	bspc node -t floating
+
 super + t
 	bspc node -t tiled
 
