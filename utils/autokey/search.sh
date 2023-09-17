@@ -14,7 +14,7 @@ if [[ $window_name == "Edge" ]]; then
     sleep 0.1
     while [[ $edge_search_window_name != "" ]]
     do
-        sleep 0.2
+        sleep 0.1
         edge_search_window_name=$(xdotool getactivewindow getwindowname)
     done
     xdotool key ctrl+shift+F12
