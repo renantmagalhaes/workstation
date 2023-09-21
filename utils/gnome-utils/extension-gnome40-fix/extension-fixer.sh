@@ -2,6 +2,7 @@
 
 # Download deskrop scroller
 rm -rf ~/.local/share/gnome-shell/extensions/desktop-scroller@brorlandi
+# git clone https://github.com/renantmagalhaes/Desktop-Scroller-GNOME-Extension.git ~/.local/share/gnome-shell/extensions/desktop-scroller@brorlandi
 git clone https://github.com/BrOrlandi/Desktop-Scroller-GNOME-Extension.git ~/.local/share/gnome-shell/extensions/desktop-scroller@brorlandi
 
 #Fix Desktop Scroller
