@@ -140,7 +140,7 @@ color: #ffffff;
 /* Top Bar */
 #panel {
   /* background-color: black; */
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.9);
   font-weight: bold;
   height: 32px;
   color: rgba(255, 255, 255, 0.7);
