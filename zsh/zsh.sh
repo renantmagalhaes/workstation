@@ -18,7 +18,7 @@ ln -s -f $PWD/zsh/p10k.zsh ~/.p10k.zsh
 
 #lsd config
 mkdir -p  ~/.config/lsd/
-ln -s -f $PWD/lsd-config.yaml ~/.config/lsd/config.yaml
+ln -s -f $PWD/zsh/lsd-config.yaml ~/.config/lsd/config.yaml
 
 #install plugins
 ##zsh-syntax-highlighting.zsh
