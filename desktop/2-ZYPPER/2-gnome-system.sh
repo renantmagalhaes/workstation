@@ -11,7 +11,7 @@
 #
 #
 #*  -> Preferred applications
-#*      - Web: Edge / Brave
+#*      - Web: Vivaldi / Chrome
 #*      - Editor: Visual Studio Code / Neovim
 #*      - Music: Clementine / YT Music(web)
 #*      - Video: VLC 
@@ -88,19 +88,25 @@ sudo pip3 install bpytop --upgrade
 bash desktop/source/any/flatpak.sh
 bash desktop/source/gnome/flatpak.sh
 
+# Install Vivaldi
+sudo rpm --import https://repo.vivaldi.com/stable/linux_signing_key.pub
+sudo zypper --no-gpg-checks ar https://repo.vivaldi.com/stable/rpm/x86_64/ Vivaldi
+sudo zypper --no-gpg-checks refresh
+sudo zypper install -y vivaldi-stable
+sudo zypper refresh
 
-#Install Google Chrome
+# Install Google Chrome
 sudo zypper ar http://dl.google.com/linux/chrome/rpm/stable/x86_64 Google-Chrome
 wget https://dl.google.com/linux/linux_signing_key.pub -O /tmp/linux_signing_key.pub
 sudo rpm --import /tmp/linux_signing_key.pub
 sudo zypper ref
 sudo zypper install -y google-chrome-stable
 
-# Install Edge
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo zypper ar https://packages.microsoft.com/yumrepos/edge microsoft-edge
-sudo zypper refresh
-sudo zypper install -y microsoft-edge-stable
+# # Install Edge
+# sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+# sudo zypper ar https://packages.microsoft.com/yumrepos/edge microsoft-edge
+# sudo zypper refresh
+# sudo zypper install -y microsoft-edge-stable
 
 ## Install Visual Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
