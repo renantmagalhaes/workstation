@@ -65,6 +65,12 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wget zsh clementine breez
 # Virtualization using KVM + QEMU + libvirt
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install qemu-system-x86 libvirt-clients libvirt-daemon libvirt-daemon-system virtinst virt-manager bridge-utils
 
+# Virtualbox
+wget -O- -q https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmour -o /usr/share/keyrings/oracle_vbox_2016.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] http://download.virtualbox.org/virtualbox/debian bookworm contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
+sudo apt-get update
+sudo apt-get install -y virtualbox-7.0
+
 # Docker
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install docker.io docker-compose
 sudo systemctl enable docker
