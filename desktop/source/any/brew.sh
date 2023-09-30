@@ -10,7 +10,7 @@ check_cmd() {
 
 if check_cmd sw_vers; then  # FOR MACOS SYSTEMS
     if [[ $macos_check == "darwin" ]]; then
-        NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         echo '# Set PATH, MANPATH, etc., for Homebrew.' >> /Users/$USER/.zprofile
         echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/$USER/.zprofile
         eval "$(/opt/homebrew/bin/brew shellenv)"
