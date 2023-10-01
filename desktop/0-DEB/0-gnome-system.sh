@@ -11,7 +11,7 @@
 #
 #
 #*  -> Preferred applications
-#*      - Web: Vivaldi / Chrome
+#*      - Web: Vivaldi / Brave
 #*      - Editor: Visual Studio Code / Neovim
 #*      - Music: Clementine / YT Music(web)
 #*      - Video: VLC 
@@ -77,18 +77,17 @@ sudo systemctl enable docker
 sudo usermod -aG docker $USER
 sudo systemctl restart docker
 
-# Add keys, ppa and repos
-# ## Edge Browser
-# curl -fSsL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /usr/share/keyrings/microsoft-edge.gpg > /dev/null
-# echo 'deb [signed-by=/usr/share/keyrings/microsoft-edge.gpg] https://packages.microsoft.com/repos/edge stable main' | sudo tee /etc/apt/sources.list.d/microsoft-edge.list
-# sudo apt-get update
-# sudo DEBIAN_FRONTEND=noninteractive apt-get -y install microsoft-edge-stable
+# Add keys, ppa and repo
+## Brave Browser
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo apt-get update
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install brave-browser
 
-# ## Brave Browser
-# sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-# echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-# sudo apt-get update
-# sudo DEBIAN_FRONTEND=noninteractive apt-get -y install brave-browser
+## Brave
+sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+sudo zypper addrepo --refresh https://brave-browser-rpm-release.s3.brave.com/x86_64/ brave-browser
+sudo zypper install brave-browser
 
 ## Vivaldi Browser
 wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo apt-key add -
@@ -99,7 +98,6 @@ sudo apt-get install -y vivaldi-stable
 ## Install Google Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
 sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
-
 
 ## Install Visual Code
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
