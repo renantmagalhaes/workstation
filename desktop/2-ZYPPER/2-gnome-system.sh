@@ -11,7 +11,7 @@
 #
 #
 #*  -> Preferred applications
-#*      - Web: Vivaldi / Chrome
+#*      - Web: Vivaldi / Brave
 #*      - Editor: Visual Studio Code / Neovim
 #*      - Music: Clementine / YT Music(web)
 #*      - Video: VLC 
@@ -102,12 +102,6 @@ wget https://dl.google.com/linux/linux_signing_key.pub -O /tmp/linux_signing_key
 sudo rpm --import /tmp/linux_signing_key.pub
 sudo zypper ref
 sudo zypper install -y google-chrome-stable
-
-# # Install Edge
-# sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-# sudo zypper ar https://packages.microsoft.com/yumrepos/edge microsoft-edge
-# sudo zypper refresh
-# sudo zypper install -y microsoft-edge-stable
 
 ## Install Visual Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
