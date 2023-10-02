@@ -350,7 +350,7 @@ if [[ $macos_check == "darwin" ]]; then
     export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 elif [[ $linux_check == "linux" ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    export PATH="/usr/sbin:/usr/share/code/bin:$PATH"
+    export PATH="$HOME/.local/bin:/usr/sbin:/usr/share/code/bin:$PATH"
 else
     echo "error on SO check"
 fi
