@@ -3,7 +3,9 @@
 ## Free
 
 - [VSCode](https://code.visualstudio.com/docs?dv=osx)
+- [Warp](https://www.warp.dev) - Terminal
 - [Docker](https://docs.docker.com/desktop/install/mac-install/)
+- [Colima](https://github.com/abiosoft/colima) - Container runtimes on macOS
 - [Raycast](https://www.raycast.com) - Spotlight alternative
 - [Shottr](https://shottr.cc) - Screenshot annotation tool powered by AI
 - [Xnip](https://www.xnipapp.com) - Another nice screenschot tool
@@ -15,6 +17,7 @@
 - [Rectangle](https://rectangleapp.com/) - Windows Resizing
 - [Caffeine](https://www.macupdate.com/app/mac/24120/caffeine)
 - [TopNotch](https://topnotch.app) - Remove Notch / Change menu bar color
+- [HotKey App](https://apps.apple.com/us/app/hotkey-app/id975890633?mt=12) - Define keyboard shortcuts to launch Applications or to open folders in Finder.
 # Testing phase
 
 - [Amethyst](https://ianyh.com/amethyst/) - Tilling Window Manager
