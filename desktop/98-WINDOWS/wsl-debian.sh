@@ -99,6 +99,10 @@ sudo systemctl enable docker
 sudo systemctl restart docker
 sudo usermod -aG docker $USER
 
+
+# ADB setup
+sudo ln -s -f /mnt/c/Program\ Files/Genymobile/Genymotion/tools/adb.exe /usr/local/bin/adb
+
 # Make sure all package are installed
 sudo apt-get -f install -y
 
