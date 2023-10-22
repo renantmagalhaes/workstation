@@ -11,7 +11,7 @@
 #
 #
 #*  -> Preferred applications
-#*      - Web: Vivaldi / Brave
+#*      - Web: Vivaldi / Chrome
 #*      - Editor: Visual Studio Code / Neovim
 #*      - Music: Clementine / YT Music(web)
 #*      - Video: VLC 
@@ -60,7 +60,7 @@ sudo sed -i 's/deb\ cdrom/\#deb\ cdrom/g' /etc/apt/sources.list
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wget zsh clementine breeze-cursor-theme dia vim vim-gui-common nmap vlc blender fonts-powerline fonts-cantarell brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle3 fonts-hack-ttf htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome gnome-terminal guake guake-indicator gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload chrome-gnome-shell gnome-menus gir1.2-gmenu-3.0 chrome-gnome-shell gnome-menus pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot python3-pip gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors cheese ncdu whois piper libratbag-tools timeshift adb fastboot materia-gtk-theme gnome-screenshot jp2a unrar-free dnsutils imagemagick alacritty scrot x11-utils wmctrl xdotool software-properties-common apt-transport-https ca-certificates curl flatpak xournal evince jq pulseaudio-utils sassc linux-headers-$(uname -r)
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wget zsh clementine breeze-cursor-theme dia vim vim-gui-common nmap vlc blender fonts-powerline fonts-cantarell brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle3 fonts-hack-ttf htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome gnome-terminal guake guake-indicator gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload chrome-gnome-shell gnome-menus gir1.2-gmenu-3.0 chrome-gnome-shell gnome-menus pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot python3-pip gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors cheese ncdu whois piper libratbag-tools timeshift adb fastboot materia-gtk-theme gnome-screenshot jp2a unrar-free dnsutils imagemagick alacritty scrot x11-utils wmctrl xdotool software-properties-common apt-transport-https ca-certificates curl flatpak xournal evince jq pulseaudio-utils sassc kernel-devel gcc make
 
 # Virtualization using KVM + QEMU + libvirt
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install qemu-system-x86 libvirt-clients libvirt-daemon libvirt-daemon-system virtinst virt-manager bridge-utils
@@ -77,18 +77,6 @@ sudo systemctl enable docker
 sudo usermod -aG docker $USER
 sudo systemctl restart docker
 
-# Add keys, ppa and repo
-## Brave Browser
-sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-sudo apt-get update
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y install brave-browser
-
-## Brave
-sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-sudo zypper addrepo --refresh https://brave-browser-rpm-release.s3.brave.com/x86_64/ brave-browser
-sudo zypper install brave-browser
-
 ## Vivaldi Browser
 wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo apt-key add -
 sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
@@ -104,11 +92,9 @@ wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tm
 sudo dpkg -i /tmp/visual_code_amd64.deb
 sudo sed -i 's/\,arm64\,armhf//g' /etc/apt/sources.list.d/vscode.list
 
-
 ## Teamviewer
 wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp/teamviewer_amd64.deb
 sudo dpkg -i /tmp/teamviewer_amd64.deb
-
 
 # Brew
 bash desktop/source/any/brew.sh
@@ -121,7 +107,6 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 # Flatpack
 bash desktop/source/any/flatpak.sh
 bash desktop/source/gnome/flatpak.sh
-
 
 # Enable BT FastConnectable
 sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
@@ -158,11 +143,11 @@ sudo gem install colorls
 #https://github.com/89luca89/distrobox#installation
 
 ## Droidcam
-# cd /tmp/
-# wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_1.8.2.zip
-# unzip droidcam_latest.zip -d droidcam
-# cd droidcam && sudo ./install-client
-# sudo ./install-video
+cd /tmp/
+wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_2.0.0.zip
+unzip droidcam_latest.zip -d droidcam
+cd droidcam && sudo ./install-client
+sudo ./install-video
 
 # Install ClamAV
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y clamav clamtk

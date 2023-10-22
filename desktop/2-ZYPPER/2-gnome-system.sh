@@ -11,7 +11,7 @@
 #
 #
 #*  -> Preferred applications
-#*      - Web: Vivaldi / Brave
+#*      - Web: Vivaldi / Chrome
 #*      - Editor: Visual Studio Code / Neovim
 #*      - Music: Clementine / YT Music(web)
 #*      - Video: VLC 
@@ -124,6 +124,13 @@ bash desktop/source/gnome/themes.sh
 # Colorls
 sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel
 sudo gem install colorls
+
+## Droidcam
+cd /tmp/
+wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_2.0.0.zip
+unzip droidcam_latest.zip -d droidcam
+cd droidcam && sudo ./install-client
+sudo ./install-video
 
 # Install ClamAV
 sudo zypper install -y clamav clamtk
