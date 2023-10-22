@@ -1,0 +1,25 @@
+#tabs-container.left,
+#tabs-container.right {
+    position: absolute !important;
+    height: 100%;
+    z-index: 25;
+    width: 250px; /*Wide state width*/
+    /* Add transition with duration and delay */
+    transition: width 0.1s ease 0.1s; /* transition-duration transition-timing-function transition-delay */
+}
+#tabs-container.left:not(:hover),
+#tabs-container.right:not(:hover) {
+    width: 30px !important; 
+    /* Apply transition only to non-hover state */
+    transition: width 0.1s; /* transition-duration */
+}
+
+/* Tab Background Transparency Fix */
+.tab-strip {
+    background-color: var(--colorAccentBg);
+}
+
+.tab-strip, 
+div.toolbar.toolbar-tabbar.sync-and-trash-container {
+    background-color: var(--colorAccentBg); /* Use the same background color for all selectors */
+}
