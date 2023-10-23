@@ -1,25 +1,188 @@
-#tabs-container.left,
-#tabs-container.right {
-    position: absolute !important;
-    height: 100%;
-    z-index: 25;
-    width: 250px; /*Wide state width*/
-    /* Add transition with duration and delay */
-    transition: width 0.1s ease 0.1s; /* transition-duration transition-timing-function transition-delay */
-}
-#tabs-container.left:not(:hover),
-#tabs-container.right:not(:hover) {
-    width: 30px !important; 
-    /* Apply transition only to non-hover state */
-    transition: width 0.1s; /* transition-duration */
+/*
+Automate Floating Vertical Tabbar for Mouse & Keyboard by dude99 (hotfix by barkocak)
+Option B: Minimize tabbar into favicon
+https://forum.vivaldi.net/topic/46458/automate-floating-vertical-tabbar-for-mouse-keyboard
+*/
+div.tabbar-wrapper:has(#tabs-tabbar-container:is(.left, .right)) {
+  position: fixed;
+  height: -webkit-fill-available !important;
+  box-shadow: #0008 0 0 2px, rgb(0 0 0 / 25%) 0px 3px 6px;
+  clip-path: inset(0 -500px 0 -500px); /*adjust according to tab width*/
+  transition: .25s ease-out .3s !important;
+  /* top:53px; */
 }
 
-/* Tab Background Transparency Fix */
-.tab-strip {
-    background-color: var(--colorAccentBg);
+div.tabbar-wrapper:has(#tabs-tabbar-container.left) {
+  left: 0;
+  z-index: 1;
 }
 
-.tab-strip, 
-div.toolbar.toolbar-tabbar.sync-and-trash-container {
-    background-color: var(--colorAccentBg); /* Use the same background color for all selectors */
+#panels-container.left~div>#tabs-tabbar-container.left {
+  left: unset;
+}
+
+div.tabbar-wrapper:has(#tabs-tabbar-container.right) {
+  right: 0;
+}
+
+#panels-container.right~#tabs-tabbar-container.right {
+  right: 35px;
+}
+
+div.tabbar-wrapper:has(#tabs-tabbar-container.left):not(:focus-within):not(:hover) {
+  will-change: clip-path;
+  clip-path: inset(0% calc(100% - 30px) 0% 0%);
+  transition: .25s ease-out .1s !important;
+}
+
+div.tabbar-wrapper:has(#tabs-tabbar-container.right):not(:focus-within):not(:hover) {
+  will-change: transform;
+  transform: translateX(calc(100% - 30px));
+  transition: .25s ease-out .1s !important;
+}
+
+#tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover)>div.overflow .tab-strip {
+  animation: ofh 0s .01s forwards !important;
+}
+
+@keyframes ofh {
+  to {
+    overflow-y: hidden;
+  }
+}
+
+/* reserved inner space for minimized tabbar by only push webview-container inward */
+#browser:not(.fullscreen).tabs-left #webview-container {
+  margin-left: 30px;
+}
+
+#browser:not(.fullscreen).tabs-right #webview-container {
+  margin-right: 30px;
+}
+
+/* Option 1: minimize into parent column */
+#tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover) {
+  flex-direction: row;
+}
+
+/* Option 2: minimize into child column */
+/* #tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover) {flex-direction: row-reverse;} */
+
+/* canceled left tabbar's parent's DIV width */
+#main>.inner>div:has(#tabs-tabbar-container.left) {
+  max-width: 0px;
+}
+
+/* make space for static statusbar at bottom */
+#browser:has(footer > .toolbar-statusbar) #tabs-tabbar-container {
+  margin-bottom: 27px;
+}
+
+
+
+
+
+
+/* OPTIONAL FEATURES */
+
+
+#tabs-tabbar-container {
+  container-type: size;
+}
+
+
+/* adjust newtab button */
+#tabs-tabbar-container.left .newtab {
+  left: 0 !important;
+}
+
+#tabs-tabbar-container.right .newtab {
+  left: calc(100cqw - 100%) !important;
+  transition: .25s ease-in-out .25s !important;
+}
+
+#tabs-tabbar-container.right:not(:focus-within):not(:hover) .newtab {
+  left: 0 !important;
+  transition: .25s ease-in-out .05s !important;
+}
+
+
+
+/* adjust workspaces and inner text */
+:is(.tabs-left, .tabs-right) .button-toolbar.workspace-popup.tabbar-workspace-button button {
+  padding: 0 2px !important;
+}
+
+.button-toolbar > button .button-icon + .button-title {
+  margin-left: 4px !important;
+}
+
+
+/* resize the tab */
+#tabs-tabbar-container:is(.left, .right) .tab-position {
+  transition: width .15s ease-in-out .3s !important;
+}
+
+#tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover) .tab-position {
+  width: 30px;
+  transition: width .25s ease-in-out .1s !important;
+}
+
+
+
+/* resize pinned tabs separator */
+#tabs-tabbar-container:is(.left, .right) .separator {
+  transition: width .25s ease-in-out .3s !important;
+}
+
+#tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover) .separator {
+  width: 30px;
+  transition: width .25s ease-in-out .1s !important;
+}
+
+
+
+/* shift accordion toggle arrow */
+#tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover) .tab-position.accordion-toggle-arrow {
+  width: 25px;
+  transition: width .25s ease-in-out .1s !important;
+}
+
+
+
+/* shift stack counter */
+#tabs-tabbar-container:is(.left, .right) .stack-counter {
+  position: fixed;
+  left: calc(var(--Width) - 25px);
+  top: 7px;
+  transition: all .25s ease-in-out .3s !important;
+  transition-property: left, top;
+}
+
+#tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover) .stack-counter {
+  left: 6px;
+  top: 25px;
+  transition: all .25s ease-in-out .1s !important;
+}
+
+.color-behind-tabs-off .tab-position .tab.active .stack-counter {
+  background-color: var(--colorAccentBg) !important;
+}
+
+
+
+/* adjust sync and trash container  */
+#tabs-tabbar-container:is(.left, .right) .sync-and-trash-container {
+  margin: inherit;
+  width: 30px;
+}
+
+#tabs-tabbar-container.right .sync-and-trash-container {
+  transform: translateX(calc(100cqw - 100%));
+  transition: all .25s ease-in-out .25s !important;
+}
+
+#tabs-tabbar-container.right:not(:focus-within):not(:hover) .sync-and-trash-container {
+  transform: translateX(0);
+  transition: all .25s ease-in-out .05s !important;
 }
