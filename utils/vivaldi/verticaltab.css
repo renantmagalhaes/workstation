@@ -1,188 +1,136 @@
-/*
-Automate Floating Vertical Tabbar for Mouse & Keyboard by dude99 (hotfix by barkocak)
-Option B: Minimize tabbar into favicon
-https://forum.vivaldi.net/topic/46458/automate-floating-vertical-tabbar-for-mouse-keyboard
-*/
-div.tabbar-wrapper:has(#tabs-tabbar-container:is(.left, .right)) {
-  position: fixed;
-  height: -webkit-fill-available !important;
-  box-shadow: #0008 0 0 2px, rgb(0 0 0 / 25%) 0px 3px 6px;
-  clip-path: inset(0 -500px 0 -500px); /*adjust according to tab width*/
-  transition: .25s ease-out .3s !important;
-  /* top:53px; */
-}
+/* TAB Hover funcion */
 
-div.tabbar-wrapper:has(#tabs-tabbar-container.left) {
-  left: 0;
-  z-index: 1;
-}
 
-#panels-container.left~div>#tabs-tabbar-container.left {
-  left: unset;
-}
-
-div.tabbar-wrapper:has(#tabs-tabbar-container.right) {
-  right: 0;
-}
-
-#panels-container.right~#tabs-tabbar-container.right {
-  right: 35px;
-}
-
-div.tabbar-wrapper:has(#tabs-tabbar-container.left):not(:focus-within):not(:hover) {
-  will-change: clip-path;
-  clip-path: inset(0% calc(100% - 30px) 0% 0%);
-  transition: .25s ease-out .1s !important;
-}
-
-div.tabbar-wrapper:has(#tabs-tabbar-container.right):not(:focus-within):not(:hover) {
-  will-change: transform;
-  transform: translateX(calc(100% - 30px));
-  transition: .25s ease-out .1s !important;
-}
-
-#tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover)>div.overflow .tab-strip {
-  animation: ofh 0s .01s forwards !important;
-}
-
-@keyframes ofh {
-  to {
-    overflow-y: hidden;
-  }
-}
-
-/* reserved inner space for minimized tabbar by only push webview-container inward */
-#browser:not(.fullscreen).tabs-left #webview-container {
-  margin-left: 30px;
-}
-
-#browser:not(.fullscreen).tabs-right #webview-container {
-  margin-right: 30px;
-}
-
-/* Option 1: minimize into parent column */
-#tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover) {
-  flex-direction: row;
-}
-
-/* Option 2: minimize into child column */
-/* #tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover) {flex-direction: row-reverse;} */
-
-/* canceled left tabbar's parent's DIV width */
-#main>.inner>div:has(#tabs-tabbar-container.left) {
-  max-width: 0px;
-}
-
-/* make space for static statusbar at bottom */
-#browser:has(footer > .toolbar-statusbar) #tabs-tabbar-container {
-  margin-bottom: 27px;
+#main .inner > div:has(#tabs-tabbar-container:is(.left, .right)):not(:hover),
+#tabs-tabbar-container:not(:hover):is(.left, .right) {
+  width: 30px !important;
 }
 
 
 
 
-
-
-/* OPTIONAL FEATURES */
-
-
-#tabs-tabbar-container {
-  container-type: size;
+/* popup page zoom control */
+.toolbar-mainbar .page-zoom-controls input[type=range] {
+	position: absolute;
+	width: 142px;
+	transform: translate(-7px, 0);
+	visibility: hidden;
+	opacity: 0;
+	z-index: 9;
+	background-image: repeating-linear-gradient(-50deg, #0000 0 20%, var(--colorBg) 0 21%, #fff6 0 40%, var(--colorBg) 0 41%);
+	box-shadow: 0 0 0 7px var(--colorBg), 0 0 0 8px var(--colorBorder), 0 2px 12px hsl(0deg 0% 0% / 25%);
+	transition: visibility .6s, opacity .2s ease-out .4s, transform .25s ease-in .35s !important;
 }
 
-
-/* adjust newtab button */
-#tabs-tabbar-container.left .newtab {
-  left: 0 !important;
+.toolbar-mainbar .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
+	visibility: visible;
+	opacity: 1;
+	transform: translate(-7px, 29px);
+	transition: opacity .1s ease-out .2s, transform .2s ease-out .1s !important;
 }
 
-#tabs-tabbar-container.right .newtab {
-  left: calc(100cqw - 100%) !important;
-  transition: .25s ease-in-out .25s !important;
+.toolbar-mainbar .page-zoom-controls input[type=range]::after {
+	content: '';
+	position: absolute;
+	top: -19px;
+	left: 13.5%;
+	border: 6px solid hsl(0deg 0% 0% / 0%);
+	border-bottom-color: var(--colorBgLight);
+	filter: drop-shadow(0 -1px var(--colorBorder));
+	pointer-events: none;
 }
 
-#tabs-tabbar-container.right:not(:focus-within):not(:hover) .newtab {
-  left: 0 !important;
-  transition: .25s ease-in-out .05s !important;
+.toolbar-mainbar .page-zoom-controls > input[type=range]::before {
+	content: '';
+	position: absolute;
+	inset: -14px 0 100% 0;
 }
 
-
-
-/* adjust workspaces and inner text */
-:is(.tabs-left, .tabs-right) .button-toolbar.workspace-popup.tabbar-workspace-button button {
-  padding: 0 2px !important;
+.toolbar-mainbar .page-zoom-controls:has(input[type=range]) .button-toolbar[title="Reset Zoom"]:has(button:disabled) {
+	display: none;
 }
 
-.button-toolbar > button .button-icon + .button-title {
-  margin-left: 4px !important;
+.toolbar-mainbar .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
+	position: absolute;
+	align-self: unset;
+	transform: translate(14px, 18.5px);
+	z-index: 19;
+	width: 0;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity .2s ease-in .25s, visibility .5s !important;
 }
 
-
-/* resize the tab */
-#tabs-tabbar-container:is(.left, .right) .tab-position {
-  transition: width .15s ease-in-out .3s !important;
+.toolbar-mainbar .page-zoom-controls:has(input[type=range]):is(:hover, :focus-within) .button-toolbar:has(button[title="Reset Zoom"]) {
+	opacity: 1;
+	visibility: visible;
+	transition: opacity .2s ease-in .13s !important;
 }
 
-#tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover) .tab-position {
-  width: 30px;
-  transition: width .25s ease-in-out .1s !important;
+.toolbar-mainbar .page-zoom-controls:has(input[type=range]) button[title="Reset Zoom"] {
+	border: 0;
+	height: 13px;
 }
 
-
-
-/* resize pinned tabs separator */
-#tabs-tabbar-container:is(.left, .right) .separator {
-  transition: width .25s ease-in-out .3s !important;
+.toolbar-mainbar .page-zoom-controls:has(input[type=range]) button[title="Reset Zoom"] .button-title {
+	min-width: 1ch;
+	max-width: 1ch;
+	font-size: 13px;
+	font-weight: bold;
+	text-shadow: -1px 0 var(--colorBg), 1px 0 var(--colorBg), -2px 0 var(--colorBg), 2px 0 var(--colorBg);
 }
 
-#tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover) .separator {
-  width: 30px;
-  transition: width .25s ease-in-out .1s !important;
+.toolbar-mainbar .page-zoom-controls:has(input[type=range]) button[title="Reset Zoom"]:hover .button-title {
+	font-size: 17px;
+	color: var(--colorHighlightBg);
 }
 
-
-
-/* shift accordion toggle arrow */
-#tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover) .tab-position.accordion-toggle-arrow {
-  width: 25px;
-  transition: width .25s ease-in-out .1s !important;
+/* leftside 1st button */
+.toolbar-mainbar > div:first-child > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
+	transform: translate(3px, 29px);
 }
 
-
-
-/* shift stack counter */
-#tabs-tabbar-container:is(.left, .right) .stack-counter {
-  position: fixed;
-  left: calc(var(--Width) - 25px);
-  top: 7px;
-  transition: all .25s ease-in-out .3s !important;
-  transition-property: left, top;
+.toolbar-mainbar > div:first-child > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
+	transform: translate(24px, 18.5px);
 }
 
-#tabs-tabbar-container:is(.left, .right):not(:focus-within):not(:hover) .stack-counter {
-  left: 6px;
-  top: 25px;
-  transition: all .25s ease-in-out .1s !important;
+/* rightside button */
+.toolbar-mainbar > div:nth-last-child(4) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
+	transform: translate(-10px, 29px);
 }
 
-.color-behind-tabs-off .tab-position .tab.active .stack-counter {
-  background-color: var(--colorAccentBg) !important;
+.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
+	transform: translate(-44px, 29px);
 }
 
-
-
-/* adjust sync and trash container  */
-#tabs-tabbar-container:is(.left, .right) .sync-and-trash-container {
-  margin: inherit;
-  width: 30px;
+.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls input[type=range]::after {
+	left: 40%;
 }
 
-#tabs-tabbar-container.right .sync-and-trash-container {
-  transform: translateX(calc(100cqw - 100%));
-  transition: all .25s ease-in-out .25s !important;
+.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
+	transform: translate(-24px, 18.5px);
 }
 
-#tabs-tabbar-container.right:not(:focus-within):not(:hover) .sync-and-trash-container {
-  transform: translateX(0);
-  transition: all .25s ease-in-out .05s !important;
+.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
+	transform: translate(-78px, 29px);
+}
+
+.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls input[type=range]::after {
+	left: 64%;
+}
+
+.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
+	transform: translate(-58px, 18.5px);
+}
+
+.toolbar-mainbar > div:last-child > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
+	transform: translate(-112px, 29px);
+}
+
+.toolbar-mainbar > div:last-child > .page-zoom-controls input[type=range]::after {
+	left: 88%;
+}
+
+.toolbar-mainbar > div:last-child > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
+	transform: translate(-92px, 18.5px);
 }
