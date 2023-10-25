@@ -5,7 +5,7 @@ For:
 - Debian 12
 - openSUSE Tumbleweed (GNOME version) 
 ### Disclaimer !
-Use the script ``install.sh``. Running the scripts directly may result in system malfunction. 
+Use the script ``install.sh``. Running the scripts directly may result in system malfunction.
 
 # TODO
 
