@@ -1,12 +1,19 @@
 [[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
 [[ -f ~/.zsh/functions.zsh ]] && source ~/.zsh/functions.zsh
 [[ -f ~/.zsh/starship.zsh ]] && source ~/.zsh/starship.zsh
-[[ -f ~/.zsh/nvm.zsh ]] && source ~/.zsh/nvm.zsh
 [[ -f ~/.zsh/wsl2fix.zsh ]] && source ~/.zsh/wsl2fix.zsh
 [[ -f ~/.zsh/goto.zsh ]] && source ~/.zsh/goto.zsh
+
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+#source
+source $ZSH/oh-my-zsh.sh
 
 # Load Starship
 eval "$(starship init zsh)"
 
 # Load Direnv
-eval "$(direnv hook zsh)"
+# eval "$(direnv hook zsh)"
