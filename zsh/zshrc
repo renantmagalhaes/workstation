@@ -18,8 +18,9 @@ fi
 #   V0.1 2019-01-30 RTM:
 #       - Initial release
 #
-#   TODO
-#   * 
+#   V0.2 2023-10-26 RTM:
+#       - Change folder structure
+#
 
 
 # check cmd function
@@ -27,11 +28,9 @@ check_cmd() {
     command -v "$1" >/dev/null 2>&1
 }
 
-
 #RTM
 macos_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
 linux_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
-
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -40,321 +39,14 @@ export ZSH="$HOME/.oh-my-zsh"
 POWERLEVEL9K_MODE='nerdfont-complete'
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# #Plugins
 
-plugins=(
-  git
-  kubectl
-  #kube-ps1
-  zsh-completions
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  colored-man-pages
-  colorize
-  command-not-found
-  docker
-  docker-compose
-  tmux
-  virtualenv
-  git-auto-fetch
-  aws
-  sudo
-  copyfile
-  copybuffer
-  copypath
-  systemadmin
-  rsync
-  fzf
-  fzf-tab
-)
-
-
-
-# ######################### General Setup ########################
-
-#Custom plugins
-source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-
-#Python virtualenv and Virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-
-#if check_cmd zypper; then
-#source /usr/bin/virtualenvwrapper.sh
-#else
-#source /usr/local/bin/virtualenvwrapper.sh
-#fi
+[[ -f ~/.zsh/main.zsh ]] && source ~/.zsh/main.zsh
+[[ -f ~/.zsh/programs.zsh ]] && source ~/.zsh/programs.zsh
+[[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
+[[ -f ~/.zsh/functions.zsh ]] && source ~/.zsh/functions.zsh
 
 #source
 source $ZSH/oh-my-zsh.sh
-
-# fzf search 
-# source $(brew --prefix)/opt/fzf/shell/key-bindings.zsh
-
-# alias with preview files on 
-alias pf="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
-# crontab editor
-export VISUAL=vim
-
-# FZF color scheme
-## with transparent
-#export FZF_DEFAULT_OPTS='--height 40% --inline-info --border --color=fg:#f8f8f2,hl:#88f298 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#88f298 --color=info:#f0fc68,prompt:#7499f7,pointer:#ffb86c --color=marker:#ffb86c,spinner:#9cf598,header:#6272a4'
-export FZF_DEFAULT_OPTS='--height 50% --inline-info --border --color=fg:#f8f8f2,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#9cf598,prompt:#7499f7,pointer:#ffb86c --color=marker:#ffb86c,spinner:#9cf598,header:#6272a4'
-## with opaque bg
-#export FZF_DEFAULT_OPTS='--height 40% --inline-info --border --color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
-
-# History 
-HISTFILE="$HOME/.zsh_history"
-## Number of events loaded into memory
-HISTSIZE=1000000
-## Number of events stored in the zsh history file
-SAVEHIST=1000000
-## Do not save duplicate commands to history
-setopt HIST_IGNORE_ALL_DUPS
-## Do not find duplicate command when searching
-setopt HIST_FIND_NO_DUPS
-
-
-
-#Aliases
-gnome_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "GNOME" | awk '{print tolower($0)}'`
-kde_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "KDE" | awk '{print tolower($0)}'`
-bspwm_check=`env |grep DESKTOP_SESSION |grep -ioh "bspwm" | awk '{print tolower($0)}'`
-wsl_debian_check=`env |grep WSL |grep -ioh "debian"| awk '{print tolower($0)}'`
-wsl_thumbleweed_check=`env |grep WSL |grep -ioh "openSUSE-Tumbleweed"| awk '{print tolower($0)}'`
-wsl_leap_check=`env |grep WSL |grep -ioh "openSUSE-Leap"| awk '{print tolower($0)}'`
-
-
-if check_cmd wsl.exe; then
-    alias folder="explorer.exe"
-    alias pdf="evince"
-    alias wsl-update="wsl.exe --update"
-    alias wsl-shutdown="wsl.exe --shutdown"
-    alias wsl-delete="wsl.exe --unregister"
-    alias wsl-list="wsl.exe --list"
-        if [[ $wsl_debian_check == "debian" ]]; then
-                alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y"
-                alias sudo="sudo "
-                alias apt="nala"
-        elif [[ $wsl_thumbleweed_check == "opensuse-tumbleweed" ]]; then
-            alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y"
-        elif [[ $wsl_leap_check == "opensuse-leap" ]]; then
-            alias update-all="sudo zypper ref && sudo zypper up && brew update && brew upgrade && sudo flatpak update -y"
-        fi
-elif check_cmd apt-get; then # FOR DEB SYSTEMS
-    alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y"
-    alias sudo="sudo "
-    alias apt="nala"
-    if [[ $gnome_check == "gnome" ]]; then
-        alias folder="nautilus"
-        alias pdf="evince"
-    elif [[ $bspwm_check == "bspwm" ]]; then
-        alias folder="nautilus"
-        alias pdf="evince"
-    fi
-
-elif check_cmd zypper; then  # FOR ZYPPER TW SYSTEMS
-    alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y"
-    if [[ $gnome_check == "gnome" ]]; then
-        alias folder="nautilus"
-        alias pdf="evince"
-    fi
-fi
-
-# SYSTEM ALIASES
-if [[ $macos_check == "darwin" ]]; then
-    alias killtmux="killall tmux"
-    alias python="python3"
-    alias killvivaldi="killall Vivaldi"
-
-elif [[ $linux_check == "linux" ]]; then
-    alias killtmux="pidof tmux |xargs kill -9"
-    alias python="python3"
-    alias killedge="pidof msedge |xargs kill -9"
-    alias killgnome="killall -HUP gnome-shell"
-    # alias bluetooth-restart="sudo rfkill block bluetooth && sudo rfkill unblock bluetooth && sudo systemctl restart bluetooth"
-    alias bluetooth-restart="sudo systemctl stop bluetooth.service && sudo rm -rf /var/lib/bluetooth/* && sudo systemctl start bluetooth.service"
-    alias vga-info="lspci -nnk |grep -A3 VGA"
-    alias latte-restart="pidof latte-dock |xargs kill -9 && latte-dock &"
-    alias flatpak-home-permission="sudo flatpak override --filesystem=home:ro"
-    # LINUX UTILS
-    alias mouse-battery='upower --dump |grep -A 5 mouse | egrep -oh '"'"'[0-9]*%'"'"''
-    alias ascii-image='jp2a --output=ascii.txt --colors $1'
-    alias pdf-signature='xournal'
-    alias nordvpn-c='nordvpn connect && nordvpn set tpl on && nordvpn set killswitch on && nordvpn set autoconnect on'
-    alias nordvpn-d='nordvpn set autoconnect off && nordvpn set killswitch off && nordvpn set tpl off && nordvpn disconnect'
-
-else
-    echo "error on SO check"
-fi
-
-
-alias cp='cp -iv'
-alias rm='rm -ir'
-alias mv='mv -iv'
-alias ln='ln -sriv'
-alias xclip='xclip -selection c'
-command -v vim > /dev/null && alias vi='vim'
-
-eval $(thefuck --alias)
-
-### Colorize commands
-#alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-alias diff='diff --color=auto'
-alias ip='ip --color=auto'
-
-### LS & TREE
-alias ll='ls -la'
-alias la='ls -A'
-alias l='ls -F'
-
-### SSH-KEYGEN ###
-alias ssh-keygen-4096='ssh-keygen -t rsa -b 4096'
-alias ssh-keygen-ed25519='ssh-keygen -t ed25519'
-
-# VIM
-alias vi='nvim'
-
-### UTILS ###
-alias disk-manager='ncdu'
-alias git-sync='git add -A && git commit -m sync && git push'
-
-### System ###
-alias pip='python -m pip'
-export NIXPKGS_ALLOW_UNFREE=1
-
-### IP Info tools
-alias ip-info='curl https://wtfismyip.com/json | jq .'
-
-function ip-geolocation() {
-    curl http://ip-api.com/json/$1 | jq .
-}
-
-### pw generator
-function pw () {
-    pwgen -sync "${1:-48}" -1 | if command -v pbcopy > /dev/null 2>&1; then pbcopy; else xclip; fi
-}
-
-### get weather
-function weather () {
-    curl "https://wttr.in/${1}"
-}
-
-### chmod alias
-alias 755d="find . -type d -exec chmod 755 {} \;"
-
-alias 644f="find . -type f -exec chmod 644 {} \;"
-
-### find alias
-function find-folder () {
-find $1 -type d -iname $2 -exec bat {} +
-}
-
-function find-file () {
-find $1 -type f -iname $2 -exec bat {} +
-}
-
-## docker remove all
-
-function docker-remove-all () {
-    sudo docker stop $(sudo docker ps -aq)
-    sudo docker rm $(sudo docker ps -aq)
-    sudo docker rmi $(sudo docker images -q)
-    sudo docker volume rm $(sudo docker volume ls -q)
-    sudo docker network rm $(sudo docker network ls -q)
-}
-
-# suse tmux fix
-export TMUX_TMPDIR='/tmp'
-
-# This is specific to WSL 2. If the WSL 2 VM goes rogue and decides not to free
-# up memory, this command will free your memory after about 20-30 seconds.
-#   Details: https://github.com/microsoft/WSL/issues/4166#issuecomment-628493643
-alias drop_cache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
-
-
-### Security Tools ###
-alias sherlock='docker run -i theyahya/sherlock'
-alias legion='docker run -it carlospolop/legion:latest sh -c "/legion/legion.py"'
-alias waymore='python3 ~/GIT-REPOS/CORE/waymore/waymore.py'
-
-# command -v exa > /dev/null && alias ls='exa --icons --group-directories-first -g -b -h' && \
-#   alias tree='exa --tree'
-command -v lsd > /dev/null && alias ls='lsd --group-dirs first' && \
-	alias tree='lsd --tree'
-
-
-### CAT & LESS ###
-command -v bat > /dev/null && \
-	alias bat='bat --style=plain --theme=OneHalfDark' && \
-	alias cat='bat --pager=never' && \
-	alias less='bat' && \
-    alias tailf="tail -f $1 | bat --paging=never -l log" && \
-    function gitd() {
-    git diff --name-only --relative --diff-filter=d | xargs bat --diff
-    }
-
-# colorize ls
-[ -x /usr/bin/dircolors ] && eval "$(dircolors -b)"
-
-### TOP ###
-command -v htop > /dev/null && alias top='htop'
-command -v bpytop > /dev/null && alias top='bpytop'
-
-# Completion.
-fpath+=(~/.config/hcloud/completion/zsh)
-autoload -U compinit && compinit
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
-zstyle ':completion:*' rehash true                              # automatically find new executables in path 
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
-zstyle ':completion:*' completer _expand _complete _ignored _approximate
-zstyle ':completion:*' menu select=2
-zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
-zstyle ':completion:*:descriptions' format '%U%F{cyan}%d%f%u'
-
-
-# Speed up completions
-zstyle ':completion:*' accept-exact '*(N)'
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.cache/zcache
-
-# automatically load bash completion functions
-autoload -U +X bashcompinit && bashcompinit
-
-
-# fzf-tab
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-zstyle ':fzf-tab:*' prefix '·'
-zstyle ':completion:*:descriptions' format
-
-# enhancd
-source $ZSH/custom/plugins/enhancd/init.sh
-ENHANCD_FILTER=fzf
-export ENHANCD_FILTER
-######################### CUSTOM FUNCTIONS ########################
-
-function copydir {
-  pwd | tr -d "\r\n" | xclip
-}
-
-######################### PATHS ########################
-
-# Additional paths
-if [[ $macos_check == "darwin" ]]; then
-    eval $(/opt/homebrew/bin/brew shellenv)
-    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-elif [[ $linux_check == "linux" ]]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    export PATH="$HOME/.local/bin:/usr/sbin:/usr/share/code/bin:$PATH"
-else
-    echo "error on SO check"
-fi
-
 
 # P10K External config file
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
