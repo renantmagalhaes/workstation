@@ -40,14 +40,15 @@ POWERLEVEL9K_MODE='nerdfont-complete'
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 
-[[ -f ~/.zsh/main.zsh ]] && source ~/.zsh/main.zsh
-[[ -f ~/.zsh/programs.zsh ]] && source ~/.zsh/programs.zsh
-[[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
-[[ -f ~/.zsh/functions.zsh ]] && source ~/.zsh/functions.zsh
-
 #source
 source $ZSH/oh-my-zsh.sh
 
 # P10K External config file
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Load configs
+[[ -f ~/.zsh/main.zsh ]] && source ~/.zsh/main.zsh
+[[ -f ~/.zsh/programs.zsh ]] && source ~/.zsh/programs.zsh
+[[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
+[[ -f ~/.zsh/functions.zsh ]] && source ~/.zsh/functions.zsh
