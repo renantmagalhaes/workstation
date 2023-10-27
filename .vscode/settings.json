@@ -2,5 +2,5 @@
     "python.linting.enabled": true,
     "python.pythonPath": "/usr/bin/python3",
     "cSpell.enabled": false,
-    "editor.fontFamily": "'JetBrains Mono','cascadia code','FiraCode NF','fira code'"
+    "editor.fontFamily": "'FiraCode NF','fira code','FiraCode Nerd Font','cascadia code'"
 }

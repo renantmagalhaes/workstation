@@ -4,6 +4,10 @@
     "actions": 
     [
         {
+            "command": "unbound",
+            "keys": "win+sc(41)"
+        },
+        {
             "command": 
             {
                 "action": "copy",
@@ -16,12 +20,15 @@
             "keys": "ctrl+v"
         },
         {
-            "command": "find",
-            "keys": "ctrl+shift+f"
+            "command": 
+            {
+                "action": "quakeMode"
+            },
+            "keys": "ctrl+enter"
         },
         {
-            "command": "unbound",
-            "keys": "win+sc(41)"
+            "command": "find",
+            "keys": "ctrl+shift+f"
         },
         {
             "command": 
@@ -31,13 +38,6 @@
                 "splitMode": "duplicate"
             },
             "keys": "alt+shift+d"
-        },
-        {
-            "command": 
-            {
-                "action": "quakeMode"
-            },
-            "keys": "ctrl+enter"
         }
     ],
     "alwaysShowNotificationIcon": true,
@@ -46,12 +46,6 @@
     "defaultProfile": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
     "launchMode": "default",
     "minimizeToNotificationArea": true,
-    "newTabMenu": 
-    [
-        {
-            "type": "remainingProfiles"
-        }
-    ],
     "profiles": 
     {
         "defaults": 
@@ -72,10 +66,11 @@
                 "tabColor": "#1670CB"
             },
             {
-                "colorScheme": "RTM",
+                "colorScheme": "RTM-Purple-World",
                 "font": 
                 {
-                    "face": "FuraCode Nerd Font Retina"
+                    "face": "FiraCode Nerd Font",
+                    "size": 13
                 },
                 "guid": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
                 "hidden": false,
@@ -94,9 +89,9 @@
                 "hidden": false,
                 "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
                 "name": "openSUSE-Tumbleweed",
-                "tabColor": "#7de75c",
                 "opacity": 90,
                 "startingDirectory": "~",
+                "tabColor": "#7DE75C",
                 "useAcrylic": true
             },
             {
@@ -111,6 +106,12 @@
                 "hidden": true,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
+            },
+            {
+                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
+                "hidden": false,
+                "name": "Git Bash",
+                "source": "Git"
             }
         ]
     },
@@ -238,6 +239,29 @@
             "brightBlack": "#666666",
             "brightBlue": "#5C78FF",
             "brightCyan": "#5AC8FF",
+            "brightGreen": "#A69BFF",
+            "brightPurple": "#5EA2FF",
+            "brightRed": "#8A43BD",
+            "brightWhite": "#FFFFFF",
+            "brightYellow": "#685AFF",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#28B9FF",
+            "foreground": "#F1F1F1",
+            "green": "#13F452",
+            "name": "RTM-Purple-World",
+            "purple": "#2883FF",
+            "red": "#FF2A2A",
+            "selectionBackground": "#FFFFFF",
+            "white": "#F1F1F1",
+            "yellow": "#3D2AFF"
+        },
+        {
+            "background": "#1A1A1A",
+            "black": "#121212",
+            "blue": "#2B4FFF",
+            "brightBlack": "#666666",
+            "brightBlue": "#5C78FF",
+            "brightCyan": "#5AC8FF",
             "brightGreen": "#905AFF",
             "brightPurple": "#5EA2FF",
             "brightRed": "#BA5AFF",
@@ -247,7 +271,7 @@
             "cyan": "#28B9FF",
             "foreground": "#F1F1F1",
             "green": "#7129FF",
-            "name": "RTM-Purple-World",
+            "name": "RTM-Full-Purple-World",
             "purple": "#2883FF",
             "red": "#A52AFF",
             "selectionBackground": "#FFFFFF",
@@ -418,50 +442,5 @@
     ],
     "startOnUserLogin": false,
     "theme": "system",
-    "themes": 
-    [
-        {
-            "name": "legacyDark",
-            "tab": 
-            {
-                "background": null,
-                "showCloseButton": "always",
-                "unfocusedBackground": null
-            },
-            "window": 
-            {
-                "applicationTheme": "dark",
-                "useMica": false
-            }
-        },
-        {
-            "name": "legacyLight",
-            "tab": 
-            {
-                "background": null,
-                "showCloseButton": "always",
-                "unfocusedBackground": null
-            },
-            "window": 
-            {
-                "applicationTheme": "light",
-                "useMica": false
-            }
-        },
-        {
-            "name": "legacySystem",
-            "tab": 
-            {
-                "background": null,
-                "showCloseButton": "always",
-                "unfocusedBackground": null
-            },
-            "window": 
-            {
-                "applicationTheme": "system",
-                "useMica": false
-            }
-        }
-    ],
     "useAcrylicInTabRow": true
 }
