@@ -58,7 +58,7 @@
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
                 "font": 
                 {
-                    "face": "FuraCode Nerd Font Retina"
+                    "face": "CaskaydiaCove Nerd Font Mono"
                 },
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
@@ -69,8 +69,8 @@
                 "colorScheme": "RTM-Purple-World",
                 "font": 
                 {
-                    "face": "FiraCode Nerd Font",
-                    "size": 13
+                    "face": "SFMono Nerd Font Mono",
+                    "size": 14
                 },
                 "guid": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
                 "hidden": false,
@@ -83,7 +83,7 @@
                 "commandline": "C:\\windows\\system32\\wsl.exe -d openSUSE-Tumbleweed",
                 "font": 
                 {
-                    "face": "FuraCode Nerd Font Retina"
+                    "face": "SFMono Nerd Font Mono"
                 },
                 "guid": "{067a3a9c-c412-49ec-a07e-0f9c085512d7}",
                 "hidden": false,
@@ -96,6 +96,10 @@
             },
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
+                "font": 
+                {
+                    "face": "CaskaydiaCove Nerd Font Mono"
+                },
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "Command Prompt",
@@ -108,6 +112,10 @@
                 "source": "Windows.Terminal.Azure"
             },
             {
+                "font": 
+                {
+                    "face": "CaskaydiaCove Nerd Font Mono"
+                },
                 "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
                 "hidden": false,
                 "name": "Git Bash",
@@ -239,29 +247,6 @@
             "brightBlack": "#666666",
             "brightBlue": "#5C78FF",
             "brightCyan": "#5AC8FF",
-            "brightGreen": "#A69BFF",
-            "brightPurple": "#5EA2FF",
-            "brightRed": "#8A43BD",
-            "brightWhite": "#FFFFFF",
-            "brightYellow": "#685AFF",
-            "cursorColor": "#FFFFFF",
-            "cyan": "#28B9FF",
-            "foreground": "#F1F1F1",
-            "green": "#13F452",
-            "name": "RTM-Purple-World",
-            "purple": "#2883FF",
-            "red": "#FF2A2A",
-            "selectionBackground": "#FFFFFF",
-            "white": "#F1F1F1",
-            "yellow": "#3D2AFF"
-        },
-        {
-            "background": "#1A1A1A",
-            "black": "#121212",
-            "blue": "#2B4FFF",
-            "brightBlack": "#666666",
-            "brightBlue": "#5C78FF",
-            "brightCyan": "#5AC8FF",
             "brightGreen": "#905AFF",
             "brightPurple": "#5EA2FF",
             "brightRed": "#BA5AFF",
@@ -274,6 +259,29 @@
             "name": "RTM-Full-Purple-World",
             "purple": "#2883FF",
             "red": "#A52AFF",
+            "selectionBackground": "#FFFFFF",
+            "white": "#F1F1F1",
+            "yellow": "#3D2AFF"
+        },
+        {
+            "background": "#1A1A1A",
+            "black": "#121212",
+            "blue": "#2B4FFF",
+            "brightBlack": "#666666",
+            "brightBlue": "#5C78FF",
+            "brightCyan": "#5AC8FF",
+            "brightGreen": "#A69BFF",
+            "brightPurple": "#5EA2FF",
+            "brightRed": "#8A43BD",
+            "brightWhite": "#FFFFFF",
+            "brightYellow": "#685AFF",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#28B9FF",
+            "foreground": "#F1F1F1",
+            "green": "#13F452",
+            "name": "RTM-Purple-World",
+            "purple": "#2883FF",
+            "red": "#FF2A2A",
             "selectionBackground": "#FFFFFF",
             "white": "#F1F1F1",
             "yellow": "#3D2AFF"

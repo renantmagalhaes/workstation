@@ -16,6 +16,9 @@ unzip -o ~/.local/share/fonts/FiraCode.zip -d ~/.local/share/fonts/
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/`curl --silent "https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest" |grep tag_name |awk '{print $2}' |sed 's/\"//g; s/\,//g'`/JetBrainsMono.zip -O ~/.local/share/fonts/JetBrainsMono.zip
 unzip -o ~/.local/share/fonts/JetBrainsMono.zip -d ~/.local/share/fonts/
 
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/`curl --silent "https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest" |grep tag_name |awk '{print $2}' |sed 's/\"//g; s/\,//g'`/CascadiaCode.zip -O ~/.local/share/fonts/CascadiaCode.zip
+unzip -o ~/.local/share/fonts/CascadiaCode.zip -d ~/.local/share/fonts/
+
 ## cascadia font for vscode
 wget https://github.com/microsoft/cascadia-code/releases/download/v2111.01/CascadiaCode-2111.01.zip -O /tmp/CascadiaCode.zip
 unzip -o /tmp/CascadiaCode.zip -d /tmp/
@@ -31,5 +34,14 @@ wget https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/Grape
 wget https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/Icomoon-Feather.ttf -O ~/.local/share/fonts/Icomoon-Feather.ttf
 # wget https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/Iosevka-Nerd-Font-Complete.ttf ~/.local/share/fonts/
 # wget https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/JetBrains-Mono-Nerd-Font-Complete.ttf ~/.local/share/fonts/
+
+#SFMono-Nerd-Font-Ligaturized
+git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git /tmp/SFMono-Nerd-Font-Ligaturized
+cp /tmp/SFMono-Nerd-Font-Ligaturized/*.otf ~/.local/share/fonts
+
+#SFMono-Nerd-Font
+git clone https://github.com/securitybydesign/SF-Mono-Nerd-Font.git /tmp/SFMono-Nerd-Font
+cp /tmp/SFMono-Nerd-Font/*.otf ~/.local/share/fonts
+
 
 fc-cache -vf ~/.local/share/fonts/
