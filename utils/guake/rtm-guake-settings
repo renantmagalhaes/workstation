@@ -28,15 +28,18 @@ use-popup=true
 use-scrollbar=false
 use-trayicon=false
 window-halignment=0
-window-height=68
+window-height=57
 window-losefocus=false
 window-refocus=false
 window-tabbar=false
-window-vertical-displacement=45
+window-vertical-displacement=15
 window-width=99
 
 [keybindings/global]
 show-hide='<Primary>Return'
+
+[keybindings/local]
+search-terminal='disabled'
 
 [style/background]
 transparency=88
@@ -46,4 +49,4 @@ allow-bold=true
 bold-is-bright=false
 palette='#222222222222:#ffff00000f0f:#8c8ce0e00a0a:#ffffb9b90000:#00008d8df8f8:#6c6c4343a5a5:#0000d7d7ebeb:#ffffffffffff:#777776767b7b:#ffff27273f3f:#ababe0e05a5a:#ffffd1d14141:#00009292ffff:#9a9a5f5febeb:#6767ffffefef:#ffffffffffff:#fffffafaf3f3:#192119d01a73'
 palette-name='Custom'
-style='FiraCode Nerd Font 10'
+style='SFMono Nerd Font Medium 12'
