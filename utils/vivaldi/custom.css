@@ -752,3 +752,44 @@ left: 88%;
 .toolbar-mainbar > div:last-child > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
 transform: translate(-92px, 18.5px);
 }
+
+/* Curved corners like MSedge */
+/* https://forum.vivaldi.net/topic/83618/edge-like-curved-frame-around-website */
+#browser:not(.fullscreen) #webpage-stack {
+  /* change color (last parameter) to your preferred color */
+      box-shadow: 0 0 0 1rem var(--colorBorder);
+  
+      border-bottom-left-radius: 0.75rem;
+      border-bottom-right-radius: 0.75rem;
+      
+      margin-bottom: 0.25rem;
+      margin-right: 0.25rem;
+  }
+  
+  /* remove this blog to remove the the curved border on the top left */
+  #browser:not(.fullscreen) #webpage-stack::before {
+      content: '';
+      position: absolute;
+      width: .75rem;
+      height: .75rem;
+      background-color: var(--colorBorder); /* change color to your preferred color */
+      -webkit-mask-image: radial-gradient(circle at 0 0, rgba(0, 0, 0, 0) 70%, #000 73%);
+      transform: rotate(180deg);
+      z-index: 1;
+  }
+  
+  /* remove this blog to remove the the curved border on the top right*/
+  #browser:not(.fullscreen) #webpage-stack::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: .75rem;
+      height: .75rem;
+      background-color: var(--colorBorder); /* change color to your preferred color */
+      -webkit-mask-image: radial-gradient(circle at 0 0, rgba(0, 0, 0, 0) 70%, #000 73%);
+      transform: rotate(-90deg);
+      z-index: 1;
+      top: 0;
+      right: 0;
+  }
+  
