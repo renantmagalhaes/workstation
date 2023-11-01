@@ -37,11 +37,11 @@ v1.2.9: Added hover delay (Thanks to u/TwisterMc!)
 */
 
 .tabs-left #main {
-  margin-left: 50px;
+  margin-left: 45px;
 }
 
 .tabs-right #main {
-margin-right: 50px;
+margin-right: 45px;
 }
 
 #browser.fullscreen #main {
@@ -62,7 +62,7 @@ z-index: 99999 !important;
 }
 
 .tabs-right #header .window-buttongroup {
-margin-right: 50px;
+margin-right: 45px;
 z-index: 99 !important;
 }
 
@@ -184,7 +184,7 @@ flex-direction: row-reverse;
 
 #tabs-container.left:not(:hover),
 #tabs-container.right:not(:hover) {
-width: 50px !important;
+width: 45px !important;
 height: 100%;
 position: fixed;
 background-color: var(--colorBg);
@@ -209,7 +209,7 @@ right: 0;
 .tab-strip {
 max-height: calc(100%);
 display: block;
-margin-bottom: 50px;
+margin-bottom: 45px;
 padding: 10px !important;
 overflow-y: overlay !important;
 }
@@ -236,7 +236,7 @@ transform: none !important;
 max-height: 100%;
 max-width: 100%;
 display: flex;
-padding: 5px !important;
+padding: 3px !important;
 border: 1px solid transparent !important;
 border-radius: calc(var(--radius)) !important;
 height: auto !important;
@@ -381,7 +381,7 @@ padding-left: 4px;
 width: 100%;
 position: sticky;
 bottom: 0px;
-padding: 11px;
+padding: 7px;
 text-align: left;
 justify-content: left !important;
 padding-bottom: 5px;
