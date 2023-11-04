@@ -7,7 +7,7 @@ return ; End of auto-execute section
 WheelUp::
     MouseGetPos, _, mouseY
     ScreenHeight := A_ScreenHeight
-    if (mouseY <= 10 or mouseY >= ScreenHeight - 40) ; If the mouse is within 10 pixels of the top or within 40 pixels of the bottom
+    if (mouseY <= 10 or mouseY >= ScreenHeight - 10) ; If the mouse is within 10 pixels of the top or within 10 pixels of the bottom
     {
         Send, ^#{Left} ; Send Ctrl+Win+Left
         Sleep, 30 ; Wait for 30 ms
@@ -21,7 +21,7 @@ WheelUp::
 WheelDown::
     MouseGetPos, _, mouseY
     ScreenHeight := A_ScreenHeight
-    if (mouseY <= 10 or mouseY >= ScreenHeight - 40) ; If the mouse is within 10 pixels of the top or within 40 pixels of the bottom
+    if (mouseY <= 10 or mouseY >= ScreenHeight - 10) ; If the mouse is within 10 pixels of the top or within 10 pixels of the bottom
     {
         Send, ^#{Right} ; Send Ctrl+Win+Right
         Sleep, 30 ; Wait for 30 ms
