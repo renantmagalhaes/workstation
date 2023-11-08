@@ -12,5 +12,9 @@ ln -s -f $PWD/tmux/tmux.conf ~/.tmux.conf
 ln -s -f $PWD/tmux/tmux.conf.local ~/.tmux.conf.local
 
 # Install plugins
-echo " Install Plugins - run: "
-echo "~/.tmux/plugins/tpm/bin/install_plugins"
+tmux new-session -d -s init
+tmux send-keys -t init:0 ~/.tmux/plugins/tpm/tpm Enter
+
+# catppuccin setup
+rm -rf ~/.tmux/plugins/tmux/custom
+ln -s -f  $PWD/tmux/plugins/catppuccin/custom ~/.tmux/plugins/tmux/custom
