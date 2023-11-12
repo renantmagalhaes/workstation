@@ -223,9 +223,14 @@ tmux_conf_theme_window_status_last_attr="none"
 # tmux_conf_theme_right_separator_main=""
 # tmux_conf_theme_right_separator_sub="|"
 tmux_conf_theme_left_separator_main='\uE0B0'  # /!\ you don't need to install Powerline
-tmux_conf_theme_left_separator_sub='\uE0B1'   #   you only need fonts patched with
+#tmux_conf_theme_left_separator_sub='\uE0B1'   #   you only need fonts patched with
 tmux_conf_theme_right_separator_main='\uE0B2' #   Powerline symbols or the standalone
-tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see README.md
+#tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see README.md
+#tmux_conf_theme_left_separator_main=''  
+tmux_conf_theme_left_separator_sub=''   
+#tmux_conf_theme_right_separator_main='' 
+tmux_conf_theme_right_separator_sub=''  
+
 
 # status left/right content:
 #   - separate main sections with "|"
@@ -254,19 +259,8 @@ tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see
 #     - #{uptime_s}
 #     - #{username}
 #     - #{username_ssh}
-# tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
-# tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
-tmux_conf_theme_status_left='   #{circled_session_name}  '
-tmux_conf_theme_status_right='#{prefix_highlight} #{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage #{battery_percentage},} , #(~/GIT-REPOS/workstation/tmux/plugins/nordvpn/status.sh) #[fg=cyan] #(dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com |sed -e "s/\"//g") , #{network_bandwidth} , Online:#{online_status} | #[fg=white]#(kubectl config current-context |grep -E -o "\/.{0,20}" |sed "s/\///") ﴱ | ⌬ %Y-%m-%d #(echo "|") #{username}#{root}@#{hostname}'
-
-# Custom with network and weather options
-#tmux_conf_theme_status_left=' , #{circled_session_name} ,'
-#tmux_conf_theme_status_right='#{prefix_highlight} #{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , VPN:#{nordvpn_status_color}#{nordvpn_status}(#{nordvpn_country}) , Online:#{online_status} , #{network_bandwidth} , ⌬ %Y-%m-%d #{weather} , #{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} | #{username}#{root}#{username_ssh} | #{hostname}#{hostname_ssh} | '
-#old version
-# old
-# tmux_conf_theme_status_left='   #{circled_session_name}  '
-# tmux_conf_theme_status_right='#{prefix_highlight} #{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , #(~/GIT-REPOS/workstation/tmux/plugins/nordvpn/status.sh) #[fg=cyan] #(dig +short myip.opendns.com @resolver1.opendns.com) , #{network_bandwidth} , Online:#{online_status} | #[fg=white]#(kubectl config current-context |grep -E -o "\/.{0,20}" |sed "s/\///") ﴱ | ⌬ %Y-%m-%d #(echo "|") #{username}#{root}#{username_ssh}@#{hostname}#{hostname_ssh}  '
-
+tmux_conf_theme_status_left='   #{circled_session_name} '
+tmux_conf_theme_status_right='#{prefix_highlight} #{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , #(~/GIT-REPOS/workstation/tmux/plugins/nordvpn/status.sh) #[fg=#87D7FF]#[fg=black]#[bg=#87D7FF]󰩠 , #(dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com |sed -e "s/\"//g") ,#[fg=#B7FF08]#[fg=black]#[bg=#B7FF08]󰀂 , #{network_bandwidth} ,#[fg=#AF87FF]#[fg=black]#[bg=#AF87FF]Online , #{online_status}, #[fg=#87AFFF]#[fg=black]#[bg=#87AFFF]󰃰 , %Y-%m-%d, #[fg=#ffff00]#[fg=black]#[bg=#ffff00] , #{username}#{root}@#{hostname} '
 
 # status left style
 # tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_7,$tmux_conf_theme_colour_8"
