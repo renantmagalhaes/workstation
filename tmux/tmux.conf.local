@@ -260,7 +260,7 @@ tmux_conf_theme_right_separator_sub=''
 #     - #{username}
 #     - #{username_ssh}
 tmux_conf_theme_status_left='   #{circled_session_name} '
-tmux_conf_theme_status_right='#{prefix_highlight} #{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , #(~/GIT-REPOS/workstation/tmux/plugins/nordvpn/status.sh) #[fg=#ffB86C]#[fg=black]#[bg=#ffB86C]󰩠 , #(dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com |sed -e "s/\"//g") ,#[fg=#B7FF08]#[fg=black]#[bg=#B7FF08]󰀂 , #{network_bandwidth} ,#[fg=#AF87FF]#[fg=black]#[bg=#AF87FF]Status , #{online_status}, #[fg=#87AFFF]#[fg=black]#[bg=#87AFFF]󰃰 , %Y-%m-%d, #[fg=#ff0069]#[fg=black]#[bg=#ff0069] , #{username}#{root}@#{hostname} '
+tmux_conf_theme_status_right='#{prefix_highlight} #{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} ,#[fg=#ffB86C]#[fg=black]#[bg=#ffB86C]󰩠 , #(dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com |sed -e "s/\"//g") ,#[fg=#B7FF08]#[fg=black]#[bg=#B7FF08]󰀂 , #{network_bandwidth} ,#[fg=#AF87FF]#[fg=black]#[bg=#AF87FF]Status , #{online_status}, #[fg=#87AFFF]#[fg=black]#[bg=#87AFFF]󰃰 , %Y-%m-%d, #[fg=#ff0069]#[fg=black]#[bg=#ff0069] , #{username}#{root}@#{hostname} '
 
 # status left style
 # tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_7,$tmux_conf_theme_colour_8"
