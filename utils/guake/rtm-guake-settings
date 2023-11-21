@@ -47,6 +47,6 @@ transparency=88
 [style/font]
 allow-bold=true
 bold-is-bright=false
-palette='#222222222222:#ffff00000f0f:#8c8ce0e00a0a:#ffffb9b90000:#00008d8df8f8:#6c6c4343a5a5:#0000d7d7ebeb:#ffffffffffff:#777776767b7b:#ffff27273f3f:#ababe0e05a5a:#ffffd1d14141:#00009292ffff:#9a9a5f5febeb:#6767ffffefef:#ffffffffffff:#fffffafaf3f3:#192119d01a73'
+palette='#121212121212:#a5a42a29ffff:#1312f4f45251:#3d3c2a29ffff:#2b2b4f4fffff:#28288383ffff:#2828b9b9ffff:#f1f1f1f1f1f1:#666666666666:#8a8a4343bdbd:#a6a69b9bffff:#68685a5affff:#5c5c7878ffff:#5e5ea2a2ffff:#5a5ac8c8ffff:#ffffffffffff:#fffffafaf3f3:#1a1a1a1a1a1a'
 palette-name='Custom'
 style='SFMono Nerd Font Medium 12'
