@@ -630,6 +630,36 @@ Catppuccin: &Catppuccin
       white:   '0x5f8787'
 
 
+  RTM-purple-world: &RTM-purple-world
+     # Default colors
+    primary:
+      background: '#1A1A1A'
+      foreground: '#F1F1F1'
+
+    cursor:
+      text: '#1d1f21'
+      cursor: '#ffffff'
+
+    normal:
+      black:   '#121212'
+      red:     '#A52AFF'
+      green:   '#13F452'
+      yellow:  '#3D2AFF'
+      blue:    '#2B4FFF'
+      magenta: '#2883FF'
+      cyan:    '#28B9FF'
+      white:   '#F1F1F1'
+
+    bright:
+      black:   '#666666'
+      red:     '#8A43BD'
+      green:   '#A69BFF'
+      yellow:  '0xffc777'
+      blue:    '#5C78FF'
+      magenta: '#5EA2FF'
+      cyan:    '#5AC8FF'
+      white:   '#FFFFFF'
+
 
 ######################################################################
 ## SET THEME: Choose ONE color scheme from those in the above list. ##
@@ -647,8 +677,9 @@ Catppuccin: &Catppuccin
 # *TomorrowNight
 # *Catppuccin
 # *RTM
+# *RTM-purple-world
 
-colors: *RTM
+colors: *RTM-purple-world
 
 #######################################
 ##       END OF COLOR SCHEMES        ##
