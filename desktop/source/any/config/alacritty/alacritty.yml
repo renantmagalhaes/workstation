@@ -654,7 +654,7 @@ Catppuccin: &Catppuccin
       black:   '#666666'
       red:     '#8A43BD'
       green:   '#A69BFF'
-      yellow:  '0xffc777'
+      yellow:  '#3D2AFF'
       blue:    '#5C78FF'
       magenta: '#5EA2FF'
       cyan:    '#5AC8FF'
