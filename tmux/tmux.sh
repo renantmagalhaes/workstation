@@ -16,4 +16,5 @@ bash -c "~/.tmux/plugins/tpm/scripts/install_plugins.sh"
 
 # catppuccin setup
 rm -rf ~/.tmux/plugins/tmux/custom
+mkdir -p ~/.tmux/plugins/tmux/
 ln -s -f  $PWD/tmux/plugins/catppuccin/custom ~/.tmux/plugins/tmux/custom
