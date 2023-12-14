@@ -120,4 +120,6 @@ Add windows sandbox environment
 
 ## Windows11
 
-1. Start11
+1. [Start11](https://www.stardock.com/products/start11/)
+2. [vivetool](https://github.com/thebookisclosed/ViVe/releases)
+   1. `./vivetool /disable /id:42354458`
