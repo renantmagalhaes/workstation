@@ -8,6 +8,9 @@ mkdir -p ~/.config/fontconfig/conf.d/
 wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf -O ~/.config/fontconfig/conf.d/10-powerline-symbols.conf
 
 git clone https://github.com/gabrielelana/awesome-terminal-fonts.git ~/GIT-REPOS/CORE/awesome-terminal-fonts
+cd ~/GIT-REPOS/CORE/awesome-terminal-fonts
+git checkout -b emoji_fix HEAD~1
+cd -
 sh -c "~/GIT-REPOS/CORE/awesome-terminal-fonts/install.sh"
 
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/`curl --silent "https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest" |grep tag_name |awk '{print $2}' |sed 's/\"//g; s/\,//g'`/FiraCode.zip -O ~/.local/share/fonts/FiraCode.zip
