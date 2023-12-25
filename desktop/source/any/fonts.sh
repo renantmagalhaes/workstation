@@ -38,6 +38,13 @@ wget https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/Icomo
 # wget https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/Iosevka-Nerd-Font-Complete.ttf ~/.local/share/fonts/
 # wget https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/JetBrains-Mono-Nerd-Font-Complete.ttf ~/.local/share/fonts/
 
+# droid sans
+wget https://www.fontsquirrel.com/fonts/download/droid-sans -O ~/.local/share/fonts/droid-sans.zip
+unzip -o ~/.local/share/fonts/droid-sans.zip -d ~/.local/share/fonts/
+
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/2.2.0-RC/Iosevka.zip -O ~/.local/share/fonts/Iosevka.zip -O ~/.local/share/fonts/Iosevka.zip
+unzip -o ~/.local/share/fonts/Iosevka.zip -d ~/.local/share/fonts/
+
 #SFMono-Nerd-Font-Ligaturized
 git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git /tmp/SFMono-Nerd-Font-Ligaturized
 cp /tmp/SFMono-Nerd-Font-Ligaturized/*.otf ~/.local/share/fonts
