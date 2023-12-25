@@ -18,7 +18,7 @@ if check_cmd sw_vers; then  # FOR MACOS SYSTEMS
     echo "Not able to identify desktop environment"
     fi
 else
-    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/rtm/.zprofile
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/rtm/.profile
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
