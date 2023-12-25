@@ -52,7 +52,7 @@ sudo zypper refresh && sudo zypper update
 sudo zypper install -y opi
 
 # Install the packages from suse repo
-sudo zypper --non-interactive install -y zsh vlc clementine breeze5-cursors vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar gawk net-tools coreutils ncdu whois piper openssl gnome-keyring chrome-gnome-shell telnet openssh materia-gtk-theme alacritty scrot libstdc++-devel glibc-static net-tools-deprecated xprop wmctrl xdotool gcc-c++ lsd sassc linux-headers virtualbox
+sudo zypper --non-interactive install -y zsh vlc clementine breeze5-cursors vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar gawk net-tools coreutils ncdu whois piper openssl gnome-keyring chrome-gnome-shell telnet openssh materia-gtk-theme alacritty scrot libstdc++-devel glibc-static net-tools-deprecated xprop wmctrl xdotool gcc-c++ lsd sassc virtualbox
 
 # virtualbox user
 sudo usermod -aG vboxusers $USER
@@ -81,9 +81,9 @@ yes | sudo opi -y codecs
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 #Utils
-sudo pip3 install wheel
-sudo pip3 install virtualenv virtualenvwrapper pylint
-sudo pip3 install bpytop --upgrade
+sudo pip3 install wheel --break-system-packages
+sudo pip3 install virtualenv virtualenvwrapper pylint --break-system-packages
+sudo pip3 install bpytop --break-system-packages.
 
 # Flatpack
 bash desktop/source/any/flatpak.sh
