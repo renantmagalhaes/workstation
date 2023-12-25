@@ -24,6 +24,10 @@ elif check_cmd dnf; then  # FOR RPM SYSTEMS
     DNF_CHECK=`dnf check-update -y -q |wc -l |grep -Eo '[0-9]{1,6}'`
     echo " $DNF_CHECK"
 
+elif check_cmd zypper; then  # FOR RPM SYSTEMS
+    ZYPPER_CHECK=`zypper list-updates |wc -l |grep -Eo '[0-9]{1,6}'`
+    echo " $ZYPPER_CHECK"
+
 else
     echo "Not able to identify the system"
     exit 0
