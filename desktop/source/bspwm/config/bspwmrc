@@ -46,8 +46,8 @@ bspc config top_padding     30
 # bspc monitor HDMI-A-0 -d 6 7 8 9 10
 
 # Monitor setup
-bspc monitor DisplayPort-0 -d 1 2 3 4 5
-bspc monitor HDMI-A-0 -d 11 22 33 44 55
+bspc monitor DP-1 -d 1 2 3 4 5
+bspc monitor HDMI-1 -d 11 22 33 44 55
 
 # Focus on first screen on boot
 bspc desktop --focus 11 && bspc desktop --focus 1 &
