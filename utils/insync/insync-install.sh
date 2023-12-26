@@ -18,18 +18,11 @@ elif check_cmd zypper; then  # FOR RPM SYSTEMS
     sudo rpm --import https://d2t3ff60b2tol4.cloudfront.net/repomd.xml.key
 
     # Add repo
-cat <<EOF | sudo tee /etc/zypp/repos.d/insync.repo
-[insync]
-name=insync repo
-baseurl=http://yum.insync.io/fedora/$releasever/
-gpgcheck=1
-gpgkey=https://d2t3ff60b2tol4.cloudfront.net/repomd.xml.key
-enabled=1
-metadata_expire=120m
-EOF
+    sudo zypper ar -f http://yum.insync.io/opensuse-tumbleweed/rolling/ Insync
 
     # Install Insync
-    sudo yum install insync -y
+    sudo zypper refresh
+    sudo zypper install insync
 
 else
     echo "Not able to identify the system"
