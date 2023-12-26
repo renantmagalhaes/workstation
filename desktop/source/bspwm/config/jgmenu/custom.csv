@@ -1,8 +1,8 @@
 Menu,~/.config/rofi/scripts/rofi-menu.sh,appimagekit-archipelago
 Terminal,alacritty,Alacritty
 File Explorer,nautilus,stock_folder
-Edge,/opt/microsoft/msedge/msedge,abrowser
-Edge Private,/opt/microsoft/msedge/msedge -inprivate,abrowser
+Browser,/usr/bin/vivaldi,abrowser
+Browser (Incognito),/usr/bin/vivaldi --incognito,abrowser
 ^sep()
 
 Restart BSPWM,bspc wm -r && dunstify -i window_list "Successfully restarted BSPWM",terminal
