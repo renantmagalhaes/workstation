@@ -98,37 +98,13 @@ cp ~/.config/gtk-4.0/settings.ini ~/.config/gtk-4.0/settings.ini.bkp
 ## dump config
 bash -c 'cat << EOF > ~/.config/gtk-3.0/settings.ini
 [Settings]
+gtk-application-prefer-dark-theme=0
 gtk-theme-name=Graphite-Dark
 gtk-icon-theme-name=Reversal-purple-dark
-gtk-font-name=Sans 10
-gtk-cursor-theme-name=Breeze_Snow
-gtk-cursor-theme-size=0
-gtk-toolbar-style=GTK_TOOLBAR_BOTH
-gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
-gtk-button-images=1
-gtk-menu-images=1
-gtk-enable-event-sounds=1
-gtk-enable-input-feedback-sounds=1
-gtk-xft-antialias=1
-gtk-xft-hinting=1
-gtk-xft-hintstyle=hintfull
-gtk-application-prefer-dark-theme=0l
 EOF'
 bash -c 'cat << EOF > ~/.config/gtk-4.0/settings.ini
 [Settings]
+gtk-application-prefer-dark-theme=0
 gtk-theme-name=Graphite-Dark
 gtk-icon-theme-name=Reversal-purple-dark
-gtk-font-name=Sans 10
-gtk-cursor-theme-name=Breeze_Snow
-gtk-cursor-theme-size=0
-gtk-toolbar-style=GTK_TOOLBAR_BOTH
-gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
-gtk-button-images=1
-gtk-menu-images=1
-gtk-enable-event-sounds=1
-gtk-enable-input-feedback-sounds=1
-gtk-xft-antialias=1
-gtk-xft-hinting=1
-gtk-xft-hintstyle=hintfull
-gtk-application-prefer-dark-theme=0
 EOF'
