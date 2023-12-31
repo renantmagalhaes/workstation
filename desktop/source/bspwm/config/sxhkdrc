@@ -146,6 +146,9 @@ super + ctrl + shift + Left
 	bspc node -d prev --follow && mon=`bspc query -D -d focused --names | cut -c1` && bspc desktop --focus $mon && bspc desktop --focus $mon$mon && bspc desktop --focus $mon
 
 
+alt + Tab
+	$HOME/.config/bspwm/scripts/system/alttab.sh
+
 # focus desktop / send window to desktop
 # super + {_,shift + }{JJJJ
 #     bspc {desktop -f,node -d} ^{1-9,10}
