@@ -2,19 +2,40 @@
 
 # Function to map workspace number to its pair
 map_workspace_to_pair() {
-    case "$1" in
-        1) echo "11" ;;
-        2) echo "22" ;;
-        3) echo "33" ;;
-        4) echo "44" ;;
-        5) echo "55" ;;
-        11) echo "1" ;;
-        22) echo "2" ;;
-        33) echo "3" ;;
-        44) echo "4" ;;
-        55) echo "5" ;;
-        *) echo "unknown" ;;
-    esac
+    local workspace=$1
+
+    # Query the names of workspaces on each monitor
+    local workspaces_monitor1=($(bspc query -D -m DisplayPort-0 --names))
+    local workspaces_monitor2=($(bspc query -D -m HDMI-A-0 --names))
+
+    # Determine the index of the workspace in its monitor's list
+    local index=-1
+    for i in "${!workspaces_monitor1[@]}"; do
+        if [[ "${workspaces_monitor1[$i]}" == "$workspace" ]]; then
+            index=$i
+            break
+        fi
+    done
+
+    # If found on the first monitor, get the corresponding workspace from the second monitor
+    if [[ $index -ne -1 ]]; then
+        echo "${workspaces_monitor2[$index]}"
+        return
+    fi
+
+    # Repeat for the second monitor
+    for i in "${!workspaces_monitor2[@]}"; do
+        if [[ "${workspaces_monitor2[$i]}" == "$workspace" ]]; then
+            index=$i
+            break
+        fi
+    done
+
+    if [[ $index -ne -1 ]]; then
+        echo "${workspaces_monitor1[$index]}"
+    else
+        echo "unknown"
+    fi
 }
 
 # Get the name of the currently focused desktop
