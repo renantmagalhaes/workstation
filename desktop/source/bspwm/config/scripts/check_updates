@@ -8,7 +8,7 @@ check_cmd() {
 # Add the repository key with either wget or curl
 if check_cmd apt-get; then # FOR DEB SYSTEMS
     aptdcon --refresh 2> /dev/null
-    APT_CHECK=`apt list --silent -q  --upgradeable > /tmp/packages-upgradeable 2> /dev/null`
+    APT_CHECK=`/usr/bin/apt list --silent -q  --upgradeable > /tmp/packages-upgradeable 2> /dev/null`
         FILE=/tmp/packages-upgradeable
         if test -f "$FILE"; then
             APT_LIST=`cat /tmp/packages-upgradeable |wc -l`
