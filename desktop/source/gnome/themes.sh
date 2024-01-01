@@ -21,6 +21,15 @@
 git clone https://github.com/EliverLara/Nordic.git ~/GIT-REPOS/CORE/Nordic
 sudo mv ~/GIT-REPOS/CORE/Nordic /usr/share/themes/
 
+# Otis theme
+sudo git clone https://github.com/EliverLara/Otis.git /usr/share/themes/Otis
+
+# Sweet theme
+sudo git clone https://github.com/EliverLara/Sweet.git  /usr/share/themes/Sweet
+
+# Kripton theme
+sudo git clone https://github.com/EliverLara/Kripton.git /usr/share/themes/Kripton
+
 # Qogir theme
 git clone https://github.com/vinceliuice/Qogir-theme.git ~/GIT-REPOS/CORE/Qogir-theme
 sh -c "~/GIT-REPOS/CORE/Qogir-theme/install.sh"
