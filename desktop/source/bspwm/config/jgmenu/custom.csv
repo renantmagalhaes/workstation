@@ -20,9 +20,4 @@ Randomize Wallpaper,feh --no-fehbg --bg-fill --randomize "$HOME/Pictures/wallpap
 
 Lock,~/.config/bspwm/scripts/blur-lock,system-lock-screen
 Logout,pkill -KILL -u "$USER" &,system-log-out
-Exit,^checkout(exit)
-
-^tag(exit)
-Reboot,reboot,system-reboot
-Poweroff,poweroff,system-shutdown
-
+Exit,~/.config/rofi/scripts/powermenu/type-5/powermenu.sh &,system-shutdown
