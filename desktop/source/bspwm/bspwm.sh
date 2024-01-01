@@ -67,6 +67,10 @@ chmod +x ~/.config/bspwm/bspwmrc
 ln -s -f $PWD/config/sxhkdrc ~/.config/sxhkd/sxhkdrc
 chmod +x ~/.config/sxhkd/sxhkdrc
 
+# Auto-update repo
+sudo cp $PWD/config/systemd-service/apt-update.service /etc/systemd/system/apt-update.service
+sudo cp $PWD/config/systemd-service/apt-update.timer /etc/systemd/system/apt-update.timer
+sudo systemctl enable --now apt-update.timer
 
 # scripts
 ln -s -f $PWD/config/scripts ~/.config/bspwm/
