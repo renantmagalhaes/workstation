@@ -5,10 +5,7 @@ Browser,/usr/bin/vivaldi,abrowser
 Browser (Incognito),/usr/bin/vivaldi --incognito,abrowser
 ^sep()
 
-Restart BSPWM,bspc wm -r && dunstify -i window_list "Successfully restarted BSPWM",terminal
-Restart Polybar,~/.config/polybar/launch.sh,xfce4-systray
-Restart SXHKD,pkill -USR1 -x sxhkd,input-keyboard
-Restart Pipewire,systemctl --user restart pipewire.service pipewire-pulse.socket && poly-reset,audio-speakers
+WM Options,^checkout(restart-menu),xfce4-systray
 
 ^sep()
 
@@ -21,3 +18,9 @@ Randomize Wallpaper,feh --no-fehbg --bg-fill --randomize "$HOME/Pictures/wallpap
 Lock,~/.config/bspwm/scripts/blur-lock,system-lock-screen
 Logout,pkill -KILL -u "$USER" &,system-log-out
 Exit,~/.config/rofi/scripts/powermenu/type-5/powermenu.sh &,system-shutdown
+
+^tag(restart-menu)
+Restart BSPWM,bspc wm -r && dunstify -i window_list "Successfully restarted BSPWM",terminal
+Restart Polybar,~/.config/polybar/launch.sh,xfce4-systray
+Restart SXHKD,pkill -USR1 -x sxhkd,input-keyboard
+Restart Pipewire,systemctl --user restart pipewire.service pipewire-pulse.socket && poly-reset,audio-speakers
