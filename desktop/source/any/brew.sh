@@ -27,6 +27,16 @@ fi
 # Install neovim
 brew install neovim
 
+# glow
+brew install glow
+
+# skate
+brew tap charmbracelet/tap && brew install charmbracelet/tap/skate
+
+#charm
+# brew install charmbracelet/tap/charm
+
+
 # Install bat
 brew install bat
 
