@@ -18,12 +18,14 @@ Or Download via Microsoft Store (recommended)
 4. [oh-my-posh](https://apps.microsoft.com/store/detail/ohmyposh/XP8K0HKJFRXGCK)
 
 
+
 # Customization
 
-1. [Explorer Patcher](https://github.com/valinet/ExplorerPatcher)
-2. [Rounded TB](https://apps.microsoft.com/store/detail/9MTFTXSJ9M7F?hl=en-us&gl=US)
-3. [TranslucentTB](https://apps.microsoft.com/detail/9PF4KZ2VN4W9?hl=en-us&gl=US)
-4. 
+1. [FancyWM](https://github.com/FancyWM/fancywm)
+2. [Explorer Patcher](https://github.com/valinet/ExplorerPatcher)
+3. [Rounded TB](https://apps.microsoft.com/store/detail/9MTFTXSJ9M7F?hl=en-us&gl=US)
+4. [TranslucentTB](https://apps.microsoft.com/detail/9PF4KZ2VN4W9?hl=en-us&gl=US)
+
 # Phone Sync
 <!-- [Intel Unison - Windows](https://apps.microsoft.com/store/detail/intel%C2%AE-unison%E2%84%A2/9PP9GZM2GN26?hl=en-us&gl=us)
 [Intel Unison - Android](https://play.google.com/store/apps/details?id=com.intel.mde&gl=US) -->
