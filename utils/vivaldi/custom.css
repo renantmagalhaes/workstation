@@ -1,795 +1,490 @@
-/* TAB Hover funcion */
-/* #main .inner > div:has(#tabs-tabbar-container:is(.left, .right)):not(:hover),
-#tabs-tabbar-container:not(:hover):is(.left, .right) {
-  width: 30px !important;
-} */
-
-
 
 /*
-Author: t. Macleod Sawyer (@Drannex42)
-Version: 1.2.8
-Description: The following file attempts to recreate (and heavily improve!) the Microsoft Edge style vertical tabs (that are currently in very limited alpha release) in the Vivaldi browser. I spent about four or so hours on this.
-URL: https://github.com/drannex42/vivaldi-mods/blob/master/edge_style_vertical_tabs.css
+Author: Tovi
+Version: -
+URL:https://github.com/tovifun/VivalArc
 */
-
-
-/* Update Log
-v1.0.1-1.1.0: Fixed tab positioning, roundness, notification icons, audio icons, improved theme colouring, tab overflow, scrolling, vivaldi/menu icons, and many other.
-v1.1.1: Added tab thumbnails (when enabled in settings) and the appropriate tab positions.
-v1.1.2: Fixed favicon svg on internal pages on light themes.
-v1.1.3: Fixes the coloring on the close buttons, no longer attached to the accent of the window, but on the foreground lightest color. This tends to be far less jarring.
-v1.1.4: Added hibernate (.isdiscarded) class (dims tab - if you change this option in settings, browser restart required), added unread tab indicator. Thanks @Ararararagi for pointing out these needed features!
-v1.1.5: Minor update, notification badge has better positioning and padding.
-v1.1.6: Fixed fullscreen bug on some monitors as reported by /u/Tsopek on reddit, also added label to the synced tags button on the toolbar, fixed the overflow overlay, and the overflow scrollbar appearing in some cases when not hovered.
-v1.1.7: Removed absolute positioning on tabs, and made the new tab button sticky to the bottom of the overflow tab container!
-v1.1.8: Realigned new tab button to be alongside the trash and sync buttons (when tab overflow happens), added config section below, fixed trash & sync svg sizes
-v1.1.9: Fixed tab stack visual (better alignment of tab indicators).
-v1.2.1: Updates for latest vivaldi snapshot changes: added styling for additional tabbar container, readded border width, added removal of the new tab bar container width, fixed sync and trash container from being offset.
-v1.2.2: Flipped the close button and the favicon for users who use this on the right side of the screen.
-v1.2.3: Updated tab selection svg size/border as latest vivaldi changed how they handled tab selections .
-v1.2.4: Fixed new tab position and sync and trash container config
-v1.2.5: Latest Vivaldi Snapshop updates added a new transform property to the tab position class, I have removed that and added an importance tag to the new tab button to override.
-v1.2.6: Removed config settings, as they are no longer needed!
-v1.2.7: Made future editing easier, by forcing the tab width to the size of the tab-container.
-v1.2.8: Latest versions of vivaldi added a new container to the tab-bar, this removes it (in a way) and allows for panels to be resized again.
-v1.2.9: Added hover delay (Thanks to u/TwisterMc!)
-*/
-
-.tabs-left #main {
-  margin-left: 45px;
+/*update:2023.11.09*/
+:root{
+  --window-border:10px; /* window border, recommend 4px~16px */
+  --window-header:calc(var(--window-border) + 0px); /* title bar extra height */
+  --window-button-opacity:0.3;
+  --tab-padding:calc(var(--window-border) / 2);
+  --colorToviTransparent:transparent;
+  --webview-shadow-light:0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 0px var(--window-header) 0px rgba(0, 0, 0, 0.10);
+  --webview-shadow-dark:0px 2px 2px 0px rgba(0, 0, 0, 0.05), 0px 2px 8px 0px rgba(0, 0, 0, 0.05), 0px 0px 0px 1.2px #ffffff18;
 }
 
-.tabs-right #main {
-margin-right: 45px;
+/*displayNewtabButton*/
+#browser:not(.tabs-top):not(.tabs-bottom) .toolbar > .newtab > button{
+  opacity:0.2;
 }
 
-#browser.fullscreen #main {
-margin-left: 0 !important;
-margin-right: 0 !important;
+#browser:not(.tabs-top):not(.tabs-bottom) .toolbar > .newtab > button:hover{
+  opacity:0.7;
 }
 
-.topmenu .horizontal-menu-pagetitle {
-position: absolute;
-width: 100%;
-z-index: 1;
-margin-top: 8px;
+.tabs-left .toolbar-tabbar.sync-and-trash-container, 
+.tabs-right .toolbar-tabbar.sync-and-trash-container{
+  display:none;
 }
 
-.topmenu .menubar.horizontal {
-background: var(--colorBg);
-z-index: 99999 !important;
+/*tabbarDrag*/
+/* .tabbar-wrapper{
+  -webkit-app-region: drag;
+} */
+
+/* footerDisplay*/
+:not(.tabs-bottom):not(.tabs-top)#browser > footer{
+  display:none;
 }
 
-.tabs-right #header .window-buttongroup {
-margin-right: 45px;
-z-index: 99 !important;
+/*header*/
+#browser:not(.is-settingspage):not(.address-top) > #header,
+#browser:not(.is-settingspage):not(.tabs-top) #header,
+.color-behind-tabs-off:not(.is-settingspage)#browser:not(.tabs-top):not(.tabs-bottom) #header
+{
+  box-shadow:none;
+  background:var(--colorTabBar);
+  color:transparent;
+  min-height:var(--window-header) !important;
+  overflow: visible;
 }
 
-#titlebar .window-buttongroup {
-z-index: 99999;
+#browser:not(.is-settingspage).fullscreen > #header,
+#browser:not(.is-settingspage):not(.address-top).tabs-bottom > #header,
+#browser:not(.is-settingspage).tabs-off.address-top > #header,
+.color-behind-tabs-off:not(.is-settingspage)#browser.tabs-bottom #header
+{
+  display: none;
 }
 
-.tabs-right .UrlBar {
-padding-right: 2px;
+/* mac&win window-buttongroup */
+#browser.mac:not(.is-settingspage):not(.tabs-top):not(.tabs-bottom) #titlebar.tabless .window-buttongroup{
+  display:flex;
+  margin-top: calc((var(--window-header) / 2) - 2px);
+  margin-left: calc(var(--window-border) + 2px);
+  height:var(--window-header);
+  align-items:center;
 }
 
-#main .inner {
-position: relative;
+#browser.mac:not(.is-settingspage):not(.tabs-top):not(.tabs-bottom) #header .window-buttongroup button{
+  width:calc(var(--window-header) - 0px);
+  height:calc(var(--window-header) - 0px);
+  padding-right:4px;
+  margin-right:0px;
+  flex:0 0 calc(var(--window-border) - 4px);
 }
 
-.tabs-left #browser:not(.tabs-top) .vivaldi {
-height: 30px;
-padding: 0;
-margin-left: 8px;
-padding-bottom: 10px !important;
-margin-top: 5px !important;
-z-index: 99999999;
+#browser.mac:not(.is-settingspage):not(.tabs-top):not(.tabs-bottom)  #header .window-buttongroup{
+  filter:brightness(0) grayscale(1)  opacity(0.1);
+}
+#browser.mac:not(.is-settingspage):not(.tabs-top):not(.tabs-bottom)  #header .window-buttongroup:hover{
+  filter:brightness(1) opacity(0.7);
 }
 
-
-.tabs-left .vivaldi {
-padding-left: 15px !important;
-height: 30px !important;
-z-index: 999 !important;
+#browser.win:not(.is-settingspage):not(.tabs-top) #titlebar .vivaldi{
+  opacity:var(--window-button-opacity);
+  color: var(--colorFgFadedMost);
+  scale: calc(0.6 / var(
+  --uiZoomLevel));
+  margin-left: -8px;
+  margin-top: -4px;
 }
 
-.tabs-left .topmenu button.vivaldi-horizontal-icon {
-z-index: 999;
-padding-right: 15px;
-padding-left: 7px;
+#browser.win:not(.is-settingspage):not(.tabs-top) #titlebar .vivaldi:hover{
+  opacity:1;
 }
 
-.tabs-left .topmenu button.vivaldi-horizontal-icon svg {
-width: 20px;
-height: 20px;
-margin-left: 7.5px;
+#browser.win:not(.is-settingspage):not(.tabs-top):not(.tabs-bottom) #header #titlebar .window-buttongroup{
+  opacity:var(--window-button-opacity);
+  color:var(--colorFgFaded);
+  line-height:var(--window-header);
 }
 
-#tabs-container {
-border-color: var(--colorBgDarker) !important;
-border-width: 1px;
-z-index: 99999999 !important;
+#browser.win:not(.is-settingspage):not(.tabs-top):not(.tabs-bottom) #header #titlebar .window-buttongroup:hover{
+  opacity:1;
 }
 
-#tabs-tabbar-container {
-width: 0 !important;
-position: fixed;
-top: 0;
-height: 100%;
-z-index: 99999999;
+#browser.win:not(.is-settingspage):not(.tabs-top):not(.tabs-bottom) #header #titlebar .window-buttongroup button,
+#browser.win:not(.is-settingspage):not(.tabs-top):not(.tabs-bottom) #header #titlebar .window-buttongroup button.window-close{
+  width: calc(var(--window-header) * 2);
+  height:var(--window-header);
 }
 
-#tabs-tabbar-container.left {
-left: 0;
+#browser.win:not(.is-settingspage):not(.tabs-top):not(.tabs-bottom) #header #titlebar .window-buttongroup button.window-minimize svg,
+#browser.win:not(.is-settingspage):not(.tabs-top):not(.tabs-bottom) #header #titlebar .window-buttongroup button.window-maximize svg,
+#browser.win:not(.is-settingspage):not(.tabs-top):not(.tabs-bottom) #header #titlebar .window-buttongroup button.window-close svg{
+  scale:0.7;
 }
 
-#tabs-tabbar-container.right {
-right: 0;
+#browser.linux:not(.is-settingspage):not(.tabs-top):not(.tabs-bottom) .window-buttongroup{
+  right: calc(var(--window-border) / var(--uiZoomLevel));
+  top: calc(1px / var(--uiZoomLevel));
 }
 
-.tabs-left.application-icon {
-position: fixed;
-left: 0;
-top: 0;
-background: var(--colorBg);
-padding: 14px;
-padding-top: 6px;
+#browser.linux:not(.is-settingspage):not(.tabs-top):not(.tabs-bottom) .window-buttongroup button{
+  width:calc((var(--window-header) - 2px) * 1.32 / var(--uiZoomLevel));
+  height:calc((var(--window-header) - 2px) / var(--uiZoomLevel));
+  padding:0px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.tabs-left .color-behind-tabs-off .topmenu button.vivaldi-horizontal-icon span.application-icon {
-display: block;
-padding-left: 7px !important;
-padding-bottom: 0;
+#browser.linux:not(.is-settingspage):not(.tabs-top):not(.tabs-bottom) .window-buttongroup button svg{
+  scale: calc(0.6 / var(--uiZoomLevel));
+  opacity:0.5;
 }
 
-.tabs-left .color-behind-tabs-off .topmenu .menubar.horizontal {
-margin-left: 30px;
+/*mainbar*/
+.button-toolbar > button{
+  border-radius:var(--radiusHalf);
 }
 
-#tabs-container {
-z-index: 9 !Important;
+.color-behind-tabs-off.address-top#browser:not(.tabs-top):not(.tabs-bottom) .mainbar,
+.color-behind-tabs-on.address-top#browser:not(.tabs-top):not(.tabs-bottom) .mainbar{
+  border:none;
 }
 
-#tabs-container.left:hover,
-#tabs-container.right:hover {
-position: fixed;
-left: 0;
-z-index: 9999999;
-color: var(--colorFg) !important;
-background-color: var(--colorBg);
-height: 100%;
-top: 0;
-width: 250px !important;
-padding-top: 25px;
-transition-property: width;
-transition-duration: .25s;
-transition-delay: .25s;
-transition-timing-function: ease-in;
-}
-
-#tabs-container.right:hover {
-right: 0px !important;
-left: auto !important;
-}
-
-#tabs-container.right .button-toolbar.newtab {
-flex-direction: row-reverse;
-text-align: right;
-}
-
-#tabs-container.right .tab-header {
-flex-direction: row-reverse;
-}
-
-#tabs-container.left:not(:hover),
-#tabs-container.right:not(:hover) {
-width: 45px !important;
-height: 100%;
-position: fixed;
-background-color: var(--colorBg);
-top: 0;
-left: 0;
-padding-top: 25px;
-}
-
-#tabs-container.right:not(:hover) {
-right: 0px !important;
-left: auto !important;
+.color-behind-tabs-off.address-top#browser:not(.tabs-top):not(.tabs-bottom) .mainbar{
+  background:var(--colorTabBar);
+  color: var(--colorFg);
 }
 
 
-#tabs-container.left {
-left: 0;
-}
-#tabs-container.right {
-right: 0;
+#browser.mac.address-top .toolbar:has(.window-buttongroup.on-mainbar){
+  padding: 0 calc(8px / var(--uiZoomLevel));
+  min-height: calc(40px / var(--uiZoomLevel));
 }
 
-.tab-strip {
-max-height: calc(100%);
-display: block;
-margin-bottom: 45px;
-padding: 10px !important;
-overflow-y: overlay !important;
+#browser:not(.tabs-top):not(.tabs-bottom).address-top .UrlBar-SearchField,
+#browser:not(.tabs-top):not(.tabs-bottom).address-top .UrlBar-AddressField, 
+#browser:not(.tabs-top):not(.tabs-bottom).address-top .SearchField {
+  background-color: var(--colorFgAlpha);
 }
 
-#tabs-container:not(:hover) .tab-strip{
-overflow: hidden !important;
+#browser:not(.tabs-top):not(.tabs-bottom).dim-blurred:not(.hasfocus) .UrlBar-AddressField, 
+#browser:not(.tabs-top):not(.tabs-bottom).dim-blurred:not(.hasfocus) .SearchField, 
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off .SearchField, 
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off .UrlBar-AddressField {
+  border: 1px solid var(--colorFgAlpha);
 }
 
-.tab-position {
-position: absolute;
-max-height: 100%;
-max-width: 100%;
-width: 100% !important;
-display: flex;
-height: auto !important;
-position: relative !important;
-overflow: visible !important;
-top: auto !important;
-margin-bottom: 30px;
-transform: none !important;
+.UrlFragment-Wrapper--ShouldHighlight{
+  --HighlightColor: var(--colorFgIntense);
+  --LowlightColor: var(--colorFgFadedMore);
 }
 
-.tab-position .tab {
-max-height: 100%;
-max-width: 100%;
-display: flex;
-padding: 3px !important;
-border: 1px solid transparent !important;
-border-radius: calc(var(--radius)) !important;
-height: auto !important;
-position: relative !important;
-overflow: visible !important;
-margin: inherit !important;
-margin-bottom: -24px !important;
-font-size: 13px;
-background: none !important;
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off .ExtensionIcon--Hidden{
+  background-color:transparent;
 }
 
-.tab-position .tab:hover {
-background: var(--colorBgDarker) !important;
-color: inherit !important;
-}
-.tab-position .tab.active {
-background-color: var(--colorBgLighter) !important;
-color: var(--colorFg) !important;
-border: 1px solid var(--colorBgDarker) !important;
-box-shadow: 0px 5px 10px var(--colorBgDarker) !important;
-}
-
-#browser:not(.ui-transparent-tabs) .tab-position .tab:hover:not(.active) {
-background-color: var(--colorBgDarker);
+.disable-titlebar .toolbar-mainbar .toolbar-extensions > .button-toolbar > button, 
+.disable-titlebar .toolbar-mainbar .page-zoom-controls > .button-toolbar > button, 
+.disable-titlebar .toolbar-mainbar > .button-toolbar > button, 
+.disable-titlebar .toolbar-mainbar .toolbar-extensions > .toolbar-group > .button-toolbar > button, 
+.disable-titlebar .toolbar-mainbar .page-zoom-controls > .toolbar-group > .button-toolbar > button, 
+.disable-titlebar .toolbar-mainbar > .toolbar-group > .button-toolbar > button,
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off .ExtensionIcon{
+  border-radius:var(--radiusHalf);
 }
 
-
-.tab-position .tab .tab-header {
-padding: 0 !important;
-flex: none !Important;
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off .toolbar-mainbar .toolbar-extensions > .button-toolbar > button:hover,
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off .toolbar-mainbar .page-zoom-controls > .button-toolbar > button:hover,
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off .toolbar-mainbar > .button-toolbar > button:hover, 
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off .toolbar-mainbar .toolbar-extensions > .toolbar-group > .button-toolbar > button:hover,
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off .toolbar-mainbar .page-zoom-controls > .toolbar-group > .button-toolbar > button:hover,
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off .toolbar-mainbar > .toolbar-group > .button-toolbar > button:hover,
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off .ExtensionIcon:hover,
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off .ExtensionIcon--Hidden:hover,
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off .ExtensionIcon--Hidden:active,
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off .bookmark-bar button:hover
+{
+  background-color: var(--colorFgAlpha);
 }
 
-.tab-position .tab .favicon {
-pointer-events: none;
-flex: 0 0 18px;
-border-radius: var(--radiusRounded);
-min-width: 20px;
-padding: 1px;
-filter: unset;
-color: var(--colorFg);
-text-align: center;
+/*bookmark-bar*/
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off.bookmark-bar-top .bookmark-bar,
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off .bookmark-bar button{
+  background:var(--colorTabBar);
+  color:var(--colorFg);
+  border-bottom-width:0;
+  border-radius:var(--radiusHalf);
 }
 
-.tab-position .tab .favicon svg {
-width: 16px;
-height: 16px;
+/*workspace button*/
+#browser #tabs-tabbar-container.left  ::-webkit-scrollbar, 
+#browser #tabs-tabbar-container.right  ::-webkit-scrollbar{
+  display: none;
 }
 
-.theme-dark .tab-position .tab.active .tab-header .favicon:not(.svg) {
-filter: none !important;
+#browser.transparent-tabbar .button-toolbar.workspace-popup.tabbar-workspace-button,
+#browser.transparent-tabbar.tabs-left .button-toolbar.workspace-popup.tabbar-workspace-button,
+#browser.transparent-tabbar.tabs-right .button-toolbar.workspace-popup.tabbar-workspace-button,
+.tabs-left .button-toolbar.workspace-popup.tabbar-workspace-button, 
+.tabs-right .button-toolbar.workspace-popup.tabbar-workspace-button{
+  box-shadow:none;
+  background:var(--colorToviTransparent);
 }
 
-
-.tab-position .tab .title {
--webkit-mask-image: -webkit-linear-gradient(180deg, transparent 0, var(--colorBg) 25px);
--webkit-mask-position: right;
-margin-top: -2px;
-padding-left: 8px;
+#browser:not(.tabs-top):not(.tabs-bottom).transparent-tabbar .button-toolbar.workspace-popup.tabbar-workspace-button.button-menu{
+  color:var(--colorFg);
 }
 
-.tab-strip .tab-position-of-type {
-margin-bottom: 40px;
+#app .tabs-left .button-toolbar.workspace-popup.tabbar-workspace-button button, 
+#app .tabs-right .button-toolbar.workspace-popup.tabbar-workspace-button button{
+  padding-left:4px;
+  padding-right:4px;
 }
 
-#browser:not(.alt-tabs) #tabs-container .close {
-margin-right: 6px;
-margin: 0;
-margin-top: 1px;
+.button-toolbar.button-menu .button-toolbar-menu-indicator.disabled{
+  opacity:0.3;
 }
 
-.tab-position .tab .close svg {
-margin: auto;
-color: var(--colorFgFadedMost);
+/*tabbar left & tabbar right*/
+.tabs-left .inner > .tabbar-wrapper:not(:has(.tab-small)), 
+.tabs-right .inner > .tabbar-wrapper:not(:has(.tab-small)){
+  margin:0 var(--tab-padding);
 }
 
-.tab-position .tab .close svg:hover {
-color: var(--colorFg);
+.tabs-left .accordion-toggle-arrow, 
+.tabs-right .accordion-toggle-arrow{
+  max-width:calc(var(--Width) - 16px + (var(--tab-padding) * 2));
 }
 
-.tab-position .tab .close {
-display: flex;
-background: none;
+#browser:not(.tabs-top):not(.tabs-bottom) .tab-position .tab{
+  color:var(--colorFg);
 }
 
-#tabs-container .tab.isdiscarded .favicon {
-filter: none;
+.tabs-left .tab-position:not(:has(.tab-mini)) .tab > .tab-header, 
+.tabs-right .tab-position:not(:has(.tab-mini)) .tab > .tab-header
+{
+  margin-left:4px;
 }
 
+.tabbar-workspace-button + #tabs-tabbar-container.left, 
+.tabbar-workspace-button + #tabs-tabbar-container.right{
+  padding-top:4px;
+}
 
-.toolbar-tabbar > .button-toolbar > button {
-color: var(--colorFg);
+#browser:not(.theme-dark) #tabs-tabbar-container.left,
+#browser:not(.theme-dark) #tabs-tabbar-container.right{
+  box-shadow:none;
+}
+
+#browser.transparent-tabbar #tabs-tabbar-container.left, 
+#browser.transparent-tabbar #tabs-tabbar-container.right,
+#browser:not(.transparent-tabbar) #tabs-tabbar-container
+{
+  background: var(--colorToviTransparent);
+  border: none;
+  box-shadow:none;
+}
+
+/*panel*/
+#browser:not(.tabs-top):not(.tabs-bottom) #panels #switch,
+#browser:not(.tabs-top):not(.tabs-bottom) #panels,
+#browser:not(.tabs-top):not(.tabs-bottom) #panels-container
+{
+  padding-top: 0px;
+  border: 0;
+}
+
+.icons #switch .addwebpanel-wrapper > button, 
+.icons #switch > .button-toolbar, 
+.icons #switch > * > .button-toolbar, 
+.icons #switch > button{
+  border-radius:calc(var(--radiusHalf));
+}
+
+#browser:not(.tabs-top):not(.tabs-bottom) .icons #switch .addwebpanel-wrapper > button:not(.toolbar-spacer, .toolbar-spacer-flexible, .divider):hover,
+#browser:not(.tabs-top):not(.tabs-bottom) .icons #switch > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible, .divider):hover,
+#browser:not(.tabs-top):not(.tabs-bottom) .icons #switch > * .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible, .divider):hover,
+#browser:not(.tabs-top):not(.tabs-bottom) .icons #switch > button:not(.toolbar-spacer, .toolbar-spacer-flexible, .divider):hover{
+  background:var(--colorFgAlpha);
+}
+
+#browser:not(.tabs-top):not(.tabs-bottom) #panels-container{
+  margin-bottom:var(--window-border);
+  background:var(--colorToviTransparent);
+}
+
+#browser:not(.tabs-top):not(.tabs-bottom) #panels-container.overlay{
+  background:var(--colorBgAlphaBlur);
+}
+
+#browser:not(.tabs-top):not(.tabs-bottom) #panels-container.icons{
+  background: var(--colorToviTransparent);
+}
+
+#browser:not(.tabs-top):not(.tabs-bottom) #panels-container:not(.icons) .panel-group{
+  background:var(--colorBgAlphaBlur);
+}
+
+#browser:not(.tabs-top):not(.tabs-bottom) #panels-container .panel-group{
+  border-radius:var(--radiusCap)
+}
+
+#browser:not(.tabs-top):not(.tabs-bottom) #panels-container.overlay .panel-group{
+  border-radius:0;
+}
+
+/*webview-container*/
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen).tabs-off #webview-container{
+  margin:0px var(--window-border) var(--window-border) var(--window-border);
+}
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen).tabs-left #webview-container{
+  margin:0px var(--window-border) var(--window-border) 0px;
+}
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen).tabs-right #webview-container{
+  margin:0px 0px var(--window-border) var(--window-border);
+}
+
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen).tabs-off #main.left #panels-container.icons ~ #webview-container,
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen).tabs-right #main.left #panels-container.icons ~ #webview-container,
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen).tabs-off #main.left #panels-container.minimized.overlay ~ #webview-container,
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen).tabs-right #main.left #panels-container.minimized.overlay ~ #webview-container{
+  margin-left:0px;
+}
+
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen).tabs-left #main.right #panels-container.icons ~ #webview-container,
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen).tabs-off #main.right #panels-container.icons ~ #webview-container,
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen).tabs-left #main.right #panels-container.minimized.overlay ~ #webview-container,
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen).tabs-off #main.right #panels-container.minimized.overlay ~ #webview-container{
+  margin-right:0px;
+}
+
+/*rounded webview*/
+#main, #main > .inner{
+  overflow:visible;    
+}
+
+#main > .inner{
+  background:var(--colorTabBar);
+  /* background:red; */
+}
+
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) #webpage-stack{
+  border-radius:var(--radiusCap);
+}
+
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen).theme-light #webpage-stack{
+  box-shadow: var(--webview-shadow-light);
+}
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen).theme-dark #webpage-stack{
+  box-shadow: var(--webview-shadow-dark);
+}
+
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) #webpage-stack:has(.tiled .visible),
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) #webpage-stack:has(.mosaic .visible){
+  box-shadow: none;
+}
+
+/*tile*/
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) #webview-container:has(#webpage-stack .tiled .visible),
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) #webview-container:has(#webpage-stack .mosaic .visible){
+  box-shadow: none;
+  padding:0px;
+}
+
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mosaic-split .mosaic-split-line,
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mosaic-split .mosaic-split-line:before, .mosaic-split .mosaic-split-line:after,
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .tile
+{
+  background:transparent;
+  box-shadow:none;
+}
+
+/* tab stack frame */
+.dim-blurred:not(.hasfocus) .svg-tab-stack, .dim-blurred:not(.hasfocus) .stack-frame {
+  stroke: var(--colorBorder);
+}
+.svg-tab-stack, .stack-frame {
+  stroke: var(--colorBgIntense);
+}
+.svg-tab-stack line, .svg-tab-selection line, .svg-tab-stack rect, .svg-tab-selection rect {
+  fill: none;
+  stroke-width: 3px;
+}
+
+/*tab-stack minimal*/
+.tab-indicator{
+  border-top:4px solid transparent;
+  border-bottom:10px solid tranparent;
+  transition-duration: 0.1s;
+  transition:0.1s;
+}
+
+.tab-indicator:hover{
+  border-top:0px solid transparent;
+  border-bottom:10px solid tranparent;
+  transition-duration: 0.1s;
+  transition:0.1s;
+}
+
+.tab-group-indicator{
+  padding:0;
+}
+
+.color-behind-tabs-off .tab-indicator{
+  background-color:var(--colorAccentBgAlpha);
+}
+.color-behind-tabs-off .tab-indicator:hover{
+  background-color:var(--colorAccentBg);
+}
+
+.color-behind-tabs-off .tab-indicator.active{
+  background-color:var(--colorAccentBg);
+}
+
+.color-behind-tabs-off .tab.active + .tab-group-indicator .tab-indicator.active{
+  background-color:var(--colorAccentBg)
+}
+
+/*tabs-stack.tabs-subcontainer*/
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off #tabs-subcontainer.left, 
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off #tabs-subcontainer.right{
+  box-shadow:none;
+}
+
+#browser:not(.tabs-top):not(.tabs-bottom).color-behind-tabs-off #tabs-subcontainer, 
+#browser:not(.tabs-top):not(.tabs-bottom).transparent-tabbar #tabs-subcontainer{
+  background-color:transparent;
+}
+
+/* Transparent Start Page Navigation*/
+.startpage .startpage-navigation { box-shadow: none !important; }
+.startpage .startpage-navigation { background: transparent !important; }
+.startpage .startpage-navigation .startpage-navigation-group { border: 0 !important; } 
+
+/* Transparent Start Page Navigation Buttons */
+button.button-startpage { box-shadow: none !important; }
+button.button-startpage:after { background-image: none !important; }
+button.button-startpage:active { background: none !important; }
+
+/* Mouse hover  -> expand */
+#tabs-container.left, #tabs-subcontainer.left,
+#tabs-container.right, #tabs-subcontainer.right {
+  min-width: 42px;
+  transition: min-width 200ms ease-out !important;
+}
+
+#tabs-container.left:hover, #tabs-subcontainer.left:hover,
+#tabs-container.right:hover, #tabs-subcontainer.right:hover {
+  min-width: 150px !important;
+}
+
+.tabbar-workspace-button {
+  width: 100% !important;
+}
+
+#tabs-tabbar-container.left, #tabs-tabbar-container.right {
+  width: auto !important;
+  min-width: 42px;
 }
 
 .button-toolbar.newtab {
-border-top: 1px solid var(--colorBgDarker);
-padding-top: 5px !important;
-left: 0 !important;
-flex: none !important;
-display: inline-block !important;
-width: 100% !important;
-top: auto !important;
+  left: 0px !important;
+  width: 150px;
 }
-
-.button-toolbar.newtab button {
-width: 100%;
-}
-
-.resize .tab-strip .toolbar-tabbar {
-z-index: 999999;
-background: var(--colorBg);
-position: sticky !important;
-bottom: -30px;
-padding-bottom: 20px;
-}
-}
-
-.toolbar-tabbar .newtab > button {
-width: 100%;
-}
-
-.toolbar-tabbar .newtab > button::hover {
-cursor: pointer;
-}
-.toolbar-tabbar .newtab > button svg {
-height: 30px;
-width: 30px;
-}
-
-#tabs-container:hover .toolbar-tabbar .newtab > button::after {
-content: "New Tab";
-display: inline-block;
-width: 100%;
-margin-top: 0px;
-padding-left: 5px;
-}
-
-.bookmark-bar {
-padding-left: 4px;
-}
-
-.sync-and-trash-container {
-width: 100%;
-position: sticky;
-bottom: 0px;
-padding: 7px;
-text-align: left;
-justify-content: left !important;
-padding-bottom: 5px;
-margin-top: 14px !important;
-max-width: 100% !important;
-}
-
-#tabs-container:hover .sync-and-trash-container {
-padding-right: 0;
-}
-
-.synced-tabs-button {
-display: block;
-width: 100%;
-margin-bottom: -2px;
-}
-
-.sync-and-trash-container .toggle-trash button span svg {
-height: 29px;
-width: 28px;
-}
-.sync-and-trash-container .synced-tabs-button button span svg {
-height: 29px;
-width: 28px;
-}
-
-
-#tabs-container:hover .sync-and-trash-container .toggle-trash button span::after {
-content: "Trash";
-display: inline-block;
-margin-top: 7px;
-padding-left: 8px;
-cursor: pointer;
-}
-
-#tabs-container:hover .sync-and-trash-container .synced-tabs-button span::after {
-content: "Sync";
-display: inline-block;
-margin-top: 7px;
-padding-left: 8px;
-cursor: pointer;
-}
-
-.tab-audio {
-left: 4px !important;
-transform: scale(0.45) !important;
-bottom: -2px;
-}
-
-.tab .button-badge {
-top: 2px;
-right: auto;
-left: 15px;
-font-size: 12px;
-transform: scale(0.75);
-padding: 0px !important;
-border-radius: var(--radiusRound);
-position: fixed;
-padding-bottom: 3px !important;
-}
-
-.tab-position .tab .tab-selection {
-position: absolute;
-pointer-events: none;
-border-radius: var(--radiusHalf);
-top: 0px;
-z-index: 999999;
-left: 0px;
-}
-
-.svg-tab-selection {
-margin-top: -5px;
-margin-left: -5px;
-}
-
-.tab-position .tab.isdiscarded {
-filter: brightness(.8) contrast(.8) opacity(0.65);
-}
-
-#tabs-container.view-thumbs .tab-strip .thumbnail-image {
-display: none !important;
-}
-
-#tabs-container.view-thumbs:hover .tab-strip .thumbnail-image {
-margin-top: 5px !important;
-display: block !Important;
-}
-
-#browser:not(.alt-tabs) #tabs-container .tab:not(.pinned):not(.tab-small).audio-on .favicon, #browser:not(.alt-tabs) #tabs-container .tab:not(.pinned):not(.tab-small).audio-muted .favicon, #browser:not(.alt-tabs) #tabs-container .tab:not(.pinned):not(.tab-small).tab-captured .favicon {
-transform: none !important;
-}
-
-
-/*
-Drop-Down Tab Stacks based on LonM.vivaldi.net (but heavily modified)
-*/
-
-.tab-group-indicator {
-width: 100%;
-}
-
-#tab-container:not(:hover) .tab-group-indicator .tab-indicator {
-margin-right: 1px !important;
-margin-left: 1px !important;
-}
-
-.tab-group-indicator div:last-of-type {
-margin-right: -2px !important;
-}
-
-.tab-group-indicator div:first-of-type {
-margin-left: -1px !important;
-}
-
-
-/* Make the tab group indicator vertical below tab header */
-.tab-group:hover .tab-group-indicator {
-flex-direction: column;
-position: relative;
-}
-
-
-
-/* Space tab indicators vertically */
-.tab-group:hover .tab-indicator {
-height: 30px !important;
-margin-top: 2px;
-flex: none !important;
-top: -26px;
-border: none !important;
-}
-
-/* Background (shape) of tab indicator */
-.tab-group:hover .tab-indicator:before {
-content: '';
-background: var(--colorBgInverser);
-display: flex;
-height: 23px;
-width: 100%;
-border-radius: var(--radiusHalf);
-}
-
-.tab-group:hover .tab-indicator.active:before {
-background: var(--colorAccentBg);
-}
-
-/* Foreground (text) of tab indicator */
-.tab-group:hover .tab-indicator:after {
-content: attr(title);
-display: block;
-width: 90%;
-position: relative;
-top: -20px;
-left: 8px;
-color: var(--colorFg);
-white-space: nowrap;
-overflow: hidden;
-/** Toggle for fade out long text */
--webkit-mask-image: -webkit-linear-gradient(180deg, transparent 0, #fff 16px);
--webkit-mask-position: top right;
-/*  or clip with ... */
-/*text-overflow: ellipsis;*/
-}
-
-.tab-group:hover .tab-indicator {
-background: transparent !important;
-cursor: pointer;
-}
-
-/* Highlight Currently selected tab group indicator */
-.tab-group:hover .tab-indicator.active {
-height: 26px;
-width: 100%;
-border-bottom: none !important;
-border-radius: var(--radiusHalf);
-background: transparent !important;
-}
-
-/* Change active indicator colours */
-.tab-group:hover .tab-indicator:hover:before {
-background: var(--colorAccentBg);
-}
-.tab-group:hover .tab-indicator:hover:after {
-color: var(--colorHighlightFg);
-}
-
-/* different tab positions */
-.tabs-right .tab-group:hover .tab-group-indicator,
-.tabs-left  .tab-group:hover .tab-group-indicator{
-top: 30px !important;
-bottom: unset !important;
-}
-.tabs-right .tab-group:hover .tab-group-indicator:before,
-.tabs-left  .tab-group:hover .tab-group-indicator:before{
-top: 0;
-}
-
-.tabs-top .tab-group:hover .tab-group-indicator{
-top: 26px !important;
-bottom: unset !important;
-left: -6px;
-}
-.tabs-top .tab-group:hover .tab-group-indicator:before {
-top: -30px;
-bottom: unset !important;
-left: 6px;
-width: calc(100% - 10px);
-}
-
-.tabs-bottom .tab-group:hover .tab-group-indicator{
-top: unset !important;
-bottom: 26px !important;
-}
-.tabs-bottom .tab-group:hover .tab-group-indicator:before {
-top: unset !important;
-bottom: -30px;
-}
-
-/* Prevent side tabs z-index upsetting the
-layering of the tab group indicators */
-.tabs-right .tab-position:hover,
-.tabs-left  .tab-position:hover {
-z-index: 3 !important;
-}
-
-.tab-indicator {
-flex: 1 1 100%;
-border-top: 3px solid transparent;
-border-bottom: none;
-background-clip: content-box;
-position: relative;
-margin: 0 1px !important;
-border-color: #ccc;
-height: 2px !important;
-top: -1px;
-}
-
-.tab-position .tab.unread {
-background-image: linear-gradient(-135deg, var(--colorBorderIntense) 5px, transparent 5px) !important;
-background-position: top right !important;
-background-repeat: no-repeat !important;
-}
-
-
-
-/* popup page zoom control */
-.toolbar-mainbar .page-zoom-controls input[type=range] {
-position: absolute;
-width: 142px;
-transform: translate(-7px, 0);
-visibility: hidden;
-opacity: 0;
-z-index: 9;
-background-image: repeating-linear-gradient(-50deg, #0000 0 20%, var(--colorBg) 0 21%, #fff6 0 40%, var(--colorBg) 0 41%);
-box-shadow: 0 0 0 7px var(--colorBg), 0 0 0 8px var(--colorBorder), 0 2px 12px hsl(0deg 0% 0% / 25%);
-transition: visibility .6s, opacity .2s ease-out .4s, transform .25s ease-in .35s !important;
-}
-
-.toolbar-mainbar .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-visibility: visible;
-opacity: 1;
-transform: translate(-7px, 29px);
-transition: opacity .1s ease-out .2s, transform .2s ease-out .1s !important;
-}
-
-.toolbar-mainbar .page-zoom-controls input[type=range]::after {
-content: '';
-position: absolute;
-top: -19px;
-left: 13.5%;
-border: 6px solid hsl(0deg 0% 0% / 0%);
-border-bottom-color: var(--colorBgLight);
-filter: drop-shadow(0 -1px var(--colorBorder));
-pointer-events: none;
-}
-
-.toolbar-mainbar .page-zoom-controls > input[type=range]::before {
-content: '';
-position: absolute;
-inset: -14px 0 100% 0;
-}
-
-.toolbar-mainbar .page-zoom-controls:has(input[type=range]) .button-toolbar[title="Reset Zoom"]:has(button:disabled) {
-display: none;
-}
-
-.toolbar-mainbar .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-position: absolute;
-align-self: unset;
-transform: translate(14px, 18.5px);
-z-index: 19;
-width: 0;
-opacity: 0;
-visibility: hidden;
-transition: opacity .2s ease-in .25s, visibility .5s !important;
-}
-
-.toolbar-mainbar .page-zoom-controls:has(input[type=range]):is(:hover, :focus-within) .button-toolbar:has(button[title="Reset Zoom"]) {
-opacity: 1;
-visibility: visible;
-transition: opacity .2s ease-in .13s !important;
-}
-
-.toolbar-mainbar .page-zoom-controls:has(input[type=range]) button[title="Reset Zoom"] {
-border: 0;
-height: 13px;
-}
-
-.toolbar-mainbar .page-zoom-controls:has(input[type=range]) button[title="Reset Zoom"] .button-title {
-min-width: 1ch;
-max-width: 1ch;
-font-size: 13px;
-font-weight: bold;
-text-shadow: -1px 0 var(--colorBg), 1px 0 var(--colorBg), -2px 0 var(--colorBg), 2px 0 var(--colorBg);
-}
-
-.toolbar-mainbar .page-zoom-controls:has(input[type=range]) button[title="Reset Zoom"]:hover .button-title {
-font-size: 17px;
-color: var(--colorHighlightBg);
-}
-
-/* leftside 1st button */
-.toolbar-mainbar > div:first-child > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-transform: translate(3px, 29px);
-}
-
-.toolbar-mainbar > div:first-child > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-transform: translate(24px, 18.5px);
-}
-
-/* rightside button */
-.toolbar-mainbar > div:nth-last-child(4) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-transform: translate(-10px, 29px);
-}
-
-.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-transform: translate(-44px, 29px);
-}
-
-.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls input[type=range]::after {
-left: 40%;
-}
-
-.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-transform: translate(-24px, 18.5px);
-}
-
-.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-transform: translate(-78px, 29px);
-}
-
-.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls input[type=range]::after {
-left: 64%;
-}
-
-.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-transform: translate(-58px, 18.5px);
-}
-
-.toolbar-mainbar > div:last-child > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-transform: translate(-112px, 29px);
-}
-
-.toolbar-mainbar > div:last-child > .page-zoom-controls input[type=range]::after {
-left: 88%;
-}
-
-.toolbar-mainbar > div:last-child > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-transform: translate(-92px, 18.5px);
-}
-
-/* Curved corners like MSedge */
-/* https://forum.vivaldi.net/topic/83618/edge-like-curved-frame-around-website */
-#browser:not(.fullscreen) #webpage-stack {
-  /* change color (last parameter) to your preferred color */
-      box-shadow: 0 0 0 1rem var(--colorBorder);
-  
-      border-bottom-left-radius: 0.75rem;
-      border-bottom-right-radius: 0.75rem;
-      
-      margin-bottom: 0.25rem;
-      margin-right: 0.25rem;
-  }
-  
-  /* remove this blog to remove the the curved border on the top left */
-  #browser:not(.fullscreen) #webpage-stack::before {
-      content: '';
-      position: absolute;
-      width: .75rem;
-      height: .75rem;
-      background-color: var(--colorBorder); /* change color to your preferred color */
-      -webkit-mask-image: radial-gradient(circle at 0 0, rgba(0, 0, 0, 0) 70%, #000 73%);
-      transform: rotate(180deg);
-      z-index: 1;
-  }
-  
-  /* remove this blog to remove the the curved border on the top right*/
-  #browser:not(.fullscreen) #webpage-stack::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      width: .75rem;
-      height: .75rem;
-      background-color: var(--colorBorder); /* change color to your preferred color */
-      -webkit-mask-image: radial-gradient(circle at 0 0, rgba(0, 0, 0, 0) 70%, #000 73%);
-      transform: rotate(-90deg);
-      z-index: 1;
-      top: 0;
-      right: 0;
-  }
-  
