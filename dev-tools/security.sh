@@ -26,6 +26,10 @@ brew install rustscan
 go install -v github.com/OWASP/Amass/v3/...@master && \
 sudo mv ~/go/bin/amass /usr/local/bin/
 
+# CveMap
+go install github.com/projectdiscovery/cvemap/cmd/cvemap@latest
+sudo mv ~/go/bin/cvemap /usr/local/bin/
+
 # hakrawler
 go install github.com/hakluke/hakrawler@latest && \
 sudo mv ~/go/bin/hakrawler /usr/local/bin/
