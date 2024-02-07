@@ -18,10 +18,11 @@
   opacity:0.7;
 }
 
-.tabs-left .toolbar-tabbar.sync-and-trash-container, 
+/* Remove sync and trash from panel */
+/* .tabs-left .toolbar-tabbar.sync-and-trash-container, 
 .tabs-right .toolbar-tabbar.sync-and-trash-container{
   display:none;
-}
+} */
 
 /*tabbarDrag*/
 /* .tabbar-wrapper{
@@ -483,128 +484,26 @@ button.button-startpage:active { background: none !important; }
   width: 150px;
 }
 
-/* popup page zoom control */
-.toolbar-mainbar .page-zoom-controls input[type=range] {
-  position: absolute;
-  width: 142px;
-  transform: translate(-7px, 0);
-  visibility: hidden;
-  opacity: 0;
-  z-index: 9;
-  background-image: repeating-linear-gradient(-50deg, #0000 0 20%, var(--colorBg) 0 21%, #fff6 0 40%, var(--colorBg) 0 41%);
-  box-shadow: 0 0 0 7px var(--colorBg), 0 0 0 8px var(--colorBorder), 0 2px 12px hsl(0deg 0% 0% / 25%);
-  transition: visibility .6s, opacity .2s ease-out .4s, transform .25s ease-in .35s !important;
-  }
-  
-  .toolbar-mainbar .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-  visibility: visible;
-  opacity: 1;
-  transform: translate(-7px, 29px);
-  transition: opacity .1s ease-out .2s, transform .2s ease-out .1s !important;
-  }
-  
-  .toolbar-mainbar .page-zoom-controls input[type=range]::after {
-  content: '';
-  position: absolute;
-  top: -19px;
-  left: 13.5%;
-  border: 6px solid hsl(0deg 0% 0% / 0%);
-  border-bottom-color: var(--colorBgLight);
-  filter: drop-shadow(0 -1px var(--colorBorder));
-  pointer-events: none;
-  }
-  
-  .toolbar-mainbar .page-zoom-controls > input[type=range]::before {
-  content: '';
-  position: absolute;
-  inset: -14px 0 100% 0;
-  }
-  
-  .toolbar-mainbar .page-zoom-controls:has(input[type=range]) .button-toolbar[title="Reset Zoom"]:has(button:disabled) {
-  display: none;
-  }
-  
-  .toolbar-mainbar .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-  position: absolute;
-  align-self: unset;
-  transform: translate(14px, 18.5px);
-  z-index: 19;
-  width: 0;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity .2s ease-in .25s, visibility .5s !important;
-  }
-  
-  .toolbar-mainbar .page-zoom-controls:has(input[type=range]):is(:hover, :focus-within) .button-toolbar:has(button[title="Reset Zoom"]) {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity .2s ease-in .13s !important;
-  }
-  
-  .toolbar-mainbar .page-zoom-controls:has(input[type=range]) button[title="Reset Zoom"] {
-  border: 0;
-  height: 13px;
-  }
-  
-  .toolbar-mainbar .page-zoom-controls:has(input[type=range]) button[title="Reset Zoom"] .button-title {
-  min-width: 1ch;
-  max-width: 1ch;
-  font-size: 13px;
-  font-weight: bold;
-  text-shadow: -1px 0 var(--colorBg), 1px 0 var(--colorBg), -2px 0 var(--colorBg), 2px 0 var(--colorBg);
-  }
-  
-  .toolbar-mainbar .page-zoom-controls:has(input[type=range]) button[title="Reset Zoom"]:hover .button-title {
-  font-size: 17px;
-  color: var(--colorHighlightBg);
-  }
-  
-  /* leftside 1st button */
-  .toolbar-mainbar > div:first-child > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-  transform: translate(3px, 29px);
-  }
-  
-  .toolbar-mainbar > div:first-child > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-  transform: translate(24px, 18.5px);
-  }
-  
-  /* rightside button */
-  .toolbar-mainbar > div:nth-last-child(4) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-  transform: translate(-10px, 29px);
-  }
-  
-  .toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-  transform: translate(-44px, 29px);
-  }
-  
-  .toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls input[type=range]::after {
-  left: 40%;
-  }
-  
-  .toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-  transform: translate(-24px, 18.5px);
-  }
-  
-  .toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-  transform: translate(-78px, 29px);
-  }
-  
-  .toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls input[type=range]::after {
-  left: 64%;
-  }
-  
-  .toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-  transform: translate(-58px, 18.5px);
-  }
-  
-  .toolbar-mainbar > div:last-child > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
-  transform: translate(-112px, 29px);
-  }
-  
-  .toolbar-mainbar > div:last-child > .page-zoom-controls input[type=range]::after {
-  left: 88%;
-  }
-  
-  .toolbar-mainbar > div:last-child > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
-  transform: translate(-92px, 18.5px);
-  }
+
+/* Increase tab height */
+/* Alternative -> UI Zoom on Vivaldi settings */
+.tab-strip > span {
+  display: flex;
+  margin-bottom: 12px !important;
+}
+
+.tab-position {
+  height: 37px !important;
+}
+
+.tab-position .tab .title {
+  padding-top: 10px;
+}
+
+span.favicon.jstest-favicon-image {
+  padding-top: 5px !important;
+} 
+
+/* Set tab active color scheme  */
+#browser .tab-position .tab.active {background-color: #fef6f4; color: #2e2d2c !important;}
+/* #browser .tab-position .tab.active {background-color: #7740f7; color: rgb(255, 255, 255) !important;} */
