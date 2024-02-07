@@ -467,7 +467,7 @@ button.button-startpage:active { background: none !important; }
 
 #tabs-container.left:hover, #tabs-subcontainer.left:hover,
 #tabs-container.right:hover, #tabs-subcontainer.right:hover {
-  min-width: 150px !important;
+  min-width: 200px !important;
 }
 
 .tabbar-workspace-button {
@@ -481,7 +481,7 @@ button.button-startpage:active { background: none !important; }
 
 .button-toolbar.newtab {
   left: 0px !important;
-  width: 150px;
+  width: 200px;
 }
 
 
@@ -500,10 +500,15 @@ button.button-startpage:active { background: none !important; }
   padding-top: 10px;
 }
 
-span.favicon.jstest-favicon-image {
-  padding-top: 5px !important;
-} 
+.tab-position .tab .tab-header .favicon {
+  padding-top: 3px !important;
+  -webkit-transform:scale(1.25) !important;
+}
 
+/* Gap between favicon and text */
+span.favicon.jstest-favicon-image {
+  margin-right: 4px; /* Adjust this value to increase or decrease the gap */
+}
 /* Set tab active color scheme  */
 #browser .tab-position .tab.active {background-color: #fef6f4; color: #2e2d2c !important;}
 /* #browser .tab-position .tab.active {background-color: #7740f7; color: rgb(255, 255, 255) !important;} */
