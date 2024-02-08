@@ -467,7 +467,7 @@ button.button-startpage:active { background: none !important; }
 
 #tabs-container.left:hover, #tabs-subcontainer.left:hover,
 #tabs-container.right:hover, #tabs-subcontainer.right:hover {
-  min-width: 200px !important;
+  min-width: 220px !important;
 }
 
 .tabbar-workspace-button {
@@ -481,9 +481,15 @@ button.button-startpage:active { background: none !important; }
 
 .button-toolbar.newtab {
   left: 0px !important;
-  width: 200px;
+  width: 220px;
 }
 
+/* Add gap in the boarder when hover */
+#tabs-tabbar-container.left:hover .tab-position,
+#tabs-tabbar-container.right:hover .tab-position {
+  padding-left: 5px;
+  padding-right: 5px;
+}
 
 /* Increase tab height */
 /* Alternative -> UI Zoom on Vivaldi settings */
@@ -497,12 +503,12 @@ button.button-startpage:active { background: none !important; }
 }
 
 .tab-position .tab .title {
-  padding-top: 10px;
+  padding-top: 6px;
 }
 
 .tab-position .tab .tab-header .favicon {
   padding-top: 3px !important;
-  -webkit-transform:scale(1.25) !important;
+  -webkit-transform:scale(1) !important;
 }
 
 /* Gap between favicon and text */
