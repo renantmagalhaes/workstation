@@ -462,12 +462,12 @@ button.button-startpage:active { background: none !important; }
 #tabs-container.left, #tabs-subcontainer.left,
 #tabs-container.right, #tabs-subcontainer.right {
   min-width: 38px;
-  transition: min-width 200ms ease-out !important;
+  transition: min-width 250ms ease-out !important;
 }
 
 #tabs-container.left:hover, #tabs-subcontainer.left:hover,
 #tabs-container.right:hover, #tabs-subcontainer.right:hover {
-  min-width: 200px !important;
+  min-width: 220px !important;
 }
 
 .tabbar-workspace-button {
@@ -481,9 +481,15 @@ button.button-startpage:active { background: none !important; }
 
 .button-toolbar.newtab {
   left: 0px !important;
-  width: 200px;
+  width: 220px;
 }
 
+/* Add gap in the boarder when hover */
+#tabs-tabbar-container.left:hover .tab-position,
+#tabs-tabbar-container.right:hover .tab-position {
+  padding-left: 5px;
+  padding-right: 5px;
+}
 
 /* Increase tab height */
 /* Alternative -> UI Zoom on Vivaldi settings */
@@ -497,12 +503,12 @@ button.button-startpage:active { background: none !important; }
 }
 
 .tab-position .tab .title {
-  padding-top: 10px;
+  padding-top: 6px;
 }
 
 .tab-position .tab .tab-header .favicon {
   padding-top: 3px !important;
-  -webkit-transform:scale(1.25) !important;
+  -webkit-transform:scale(1) !important;
 }
 
 /* Gap between favicon and text */
@@ -512,3 +518,99 @@ span.favicon.jstest-favicon-image {
 /* Set tab active color scheme  */
 #browser .tab-position .tab.active {background-color: #fef6f4; color: #2e2d2c !important;}
 /* #browser .tab-position .tab.active {background-color: #7740f7; color: rgb(255, 255, 255) !important;} */
+
+/* ==================================================
+ * Zoom indicator
+ * ================================================== */
+ #zoom-hover-target {
+  transition: 0.5s;
+}
+
+#zoom-hover-target {
+  height: 22px;
+  --BorderRadius: 4px;
+  font-size: 11.5px;
+  display: flex;
+}
+
+.ZoomButton-Button {
+  height: 100%;
+  border-radius: var(--BorderRadius);
+  border: 1px solid transparent;
+}
+
+.ZoomButton-Button:hover,
+.zoom-hover-target--active {
+  background-color: var(--colorBgDark);
+}
+
+.ZoomButton-Button:hover {
+  border-color: var(--colorBorder);
+}
+
+.ZoomButton-Button .ToolbarButton-Button {
+  border: none;
+  width: auto;
+  height: 100%;
+  margin: 0;
+  padding: 0 6px;
+  margin: auto -3px;
+}
+
+/* ==================================================
+ * Zoom slide out controls
+ * ================================================== */
+.zoom-parent {
+  position: relative;
+}
+
+.zoom-panel {
+  background: linear-gradient(90deg, var(--colorBgDark) 0%, var(--colorBgDark) 96%, rgba(0, 0, 0, 0) 100%);
+  border-radius: var(--radiusHalf);
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: absolute;
+  right: 0;
+  transition: 0.5s;
+  /* hide */
+  width: 0;
+  opacity: 0;
+}
+
+.page-zoom-controls-c {
+  height: 100%;
+}
+
+.button-toolbar-c > button {
+  border-radius: var(--radiusHalf);
+  border: unset !important;
+  display: inline-block;
+  height: 100%;
+}
+
+.button-toolbar-c {
+  display: inline-block;
+  height: 100%;
+}
+
+.button-toolbar-c > button:hover {
+  background-color: var(--colorFgAlpha);
+}
+
+#zoom-percent-c {
+  text-align: center;
+  vertical-align: middle;
+  width: 40px;
+  display: inline-block;
+}
+
+.expanded-nav-c {
+  width: 150px !important;
+  opacity: 1;
+}
+
+.expanded-left-c {
+  margin-right: 150px !important;
+}
+
