@@ -17,10 +17,12 @@ fi
 avail_space_num=$(echo $avail_space | sed 's/[A-Za-z]//g')
 
 # Determine the color based on available space
-if (( $(echo "$avail_space_num <= 20" | bc -l) )); then
-    color=$red
-else
+if [[ $avail_space == *"T"* ]]; then
     color=$grey
+elif (( $(echo "$avail_space_num >= 20" | bc -l) )); then
+    color=$grey
+else
+    color=$red
 fi
 
 # Print the available space with the determined color
