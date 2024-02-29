@@ -107,10 +107,10 @@
     # =========================[ Line #2 ]=========================
     newline
     # vpn_ip                # virtual private network indicator
-    load                  # CPU load
-    disk_usage            # disk usage
-    ram                   # free RAM
-    swap                  # used swap
+    #load                  # CPU load
+    #disk_usage            # disk usage
+    #ram                   # free RAM
+    #swap                  # used swap
     # command_execution_time  # duration of the last command
     # status
     # ip                    # ip address and bandwidth usage for a specified network interface

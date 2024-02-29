@@ -1,29 +1,23 @@
 #!/bin/bash
 
-#if [[ `nordvpn status |grep Status |awk '{print $4}'` == "Disconnected" ]] ; then echo "#[fg=red]VPN Disconnected:" ; else echo "#[fg=blue]VPN Connected:" ; fi
+# Get available memory in MB
+avai_mem_m=$(free -m | grep Mem | awk '{print $7}')
+# Convert available memory to GB for comparison
+avai_mem_gb=$(echo "scale=2; $avai_mem_m / 1024" | bc)
 
-# avail_memory=`free -m |grep Mem |awk '{print $7}'`
-# num=1024
-# ans$((avail_memory / num))
+# Define ANSI color codes
+blue='#[fg=#8b9dc3]'
+orange='#[fg=#ff9f00]'
+red='#[fg=#ED4D5E]'
 
-# echo ans
+# Determine the color based on avai_mem_gb value
+if (( $(echo "$avai_mem_gb < 5" | bc -l) )); then
+    color=$red
+elif (( $(echo "$avai_mem_gb >= 5 && $avai_mem_gb < 10" | bc -l) )); then
+    color=$orange
+else
+    color=$blue
+fi
 
-avai_mem_m=`free -m |grep Mem |awk '{print $7}'`
-converter_to_gb=1024
-
-avai_mem_gb=$((avai_mem_m / converter_to_gb))G
-
-echo "#[fg=#5F8787]  $avai_mem_gb"
-
-# if [[ $current >= "10" ]]
-# then 
-#     echo "#[fg=green]$current"
-# # elif [[ $current_memory >= "30" ]]
-# # then
-# #     echo "#[fg=green]VPN Connected [$nordCountry] #[fg=white]|"
-# # elif [[ $current_memory >= "70" ]]
-# # then
-# #     echo "#[fg=yellow]VPN Connecting |"
-# else
-#     echo "Error, please contact suport |"
-# fi
+# Print the available memory with the determined color
+echo "${color} ${avai_mem_gb}G"
