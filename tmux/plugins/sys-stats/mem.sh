@@ -11,9 +11,9 @@ orange='#[fg=#ff9f00]'
 red='#[fg=#ED4D5E]'
 
 # Determine the color based on avai_mem_gb value
-if (( $(echo "$avai_mem_gb < 5" | bc -l) )); then
+if (( $(echo "$avai_mem_gb < 1" | bc -l) )); then
     color=$red
-elif (( $(echo "$avai_mem_gb >= 5 && $avai_mem_gb < 10" | bc -l) )); then
+elif (( $(echo "$avai_mem_gb >= 1 && $avai_mem_gb < 3" | bc -l) )); then
     color=$orange
 else
     color=$blue
