@@ -43,6 +43,7 @@ plugins=(
 #Custom plugins
 source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.fzf.zsh
 #Auto pair
 # if [[ ! -d $ZSH/custom/plugins/zsh-autopair ]]; then
 #   git clone https://github.com/hlissner/zsh-autopair $ZSH/custom/plugins/zsh-autopair
