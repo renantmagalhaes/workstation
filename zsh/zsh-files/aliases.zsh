@@ -90,7 +90,9 @@ alias rm='rm -ir'
 alias mv='mv -iv'
 alias ln='ln -sriv'
 alias xclip='xclip -selection c'
+alias files='fzf'
 command -v vim > /dev/null && alias vi='vim'
+
 
 eval $(thefuck --alias)
 
