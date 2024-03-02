@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get the system load averages
-load_avg=$(uptime | awk -F',|:' '{print $(NF-2)}')
+load_avg=$(cat /proc/loadavg | awk '{print $1}')
 
 
 # Define color codes
@@ -20,4 +20,4 @@ else
 fi
 
 # Print the load averages with the determined color
-echo -e "${color}$load_avg"
+echo -e "${color} $load_avg"
