@@ -43,7 +43,7 @@
     "alwaysShowNotificationIcon": true,
     "copyFormatting": "none",
     "copyOnSelect": true,
-    "defaultProfile": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
+    "defaultProfile": "{879e2800-c857-467a-8669-078c73bab33e}",
     "launchMode": "default",
     "minimizeToNotificationArea": true,
     "newTabMenu": 
@@ -61,6 +61,22 @@
         "list": 
         [
             {
+                "colorScheme": "RTM-Purple-World",
+                "commandline": "C:\\WINDOWS\\system32\\wsl.exe -d openSUSE-Tumbleweed",
+                "font": 
+                {
+                    "face": "JetBrainsMono Nerd Font"
+                },
+                "guid": "{879e2800-c857-467a-8669-078c73bab33e}",
+                "hidden": false,
+                "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
+                "name": "openSUSE-Tumbleweed",
+                "opacity": 90,
+                "startingDirectory": "~",
+                // "tabColor": "#03ff89",
+                "useAcrylic": true
+            },
+            {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
                 "font": 
                 {
@@ -70,35 +86,6 @@
                 "hidden": false,
                 "name": "Windows PowerShell",
                 "tabColor": "#1670CB"
-            },
-            {
-                "colorScheme": "RTM-Purple-World",
-                "font": 
-                {
-                    "face": "JetBrainsMono Nerd Font",
-                    "size": 14.0
-                },
-                "guid": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
-                "hidden": false,
-                "name": "Debian",
-                "opacity": 90,
-                "source": "Windows.Terminal.Wsl",
-                "useAcrylic": true
-            },
-            {
-                "commandline": "C:\\windows\\system32\\wsl.exe -d openSUSE-Tumbleweed",
-                "font": 
-                {
-                    "face": "SFMono Nerd Font Mono"
-                },
-                "guid": "{067a3a9c-c412-49ec-a07e-0f9c085512d7}",
-                "hidden": false,
-                "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
-                "name": "openSUSE-Tumbleweed",
-                "opacity": 90,
-                "startingDirectory": "~",
-                "tabColor": "#7DE75C",
-                "useAcrylic": true
             },
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
@@ -118,14 +105,31 @@
                 "source": "Windows.Terminal.Azure"
             },
             {
+                "guid": "{626e72b0-03a0-5e20-a856-df5d8ad499ab}",
+                "hidden": false,
+                "name": "Developer Command Prompt for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{88357d6c-3ea5-5e0a-ba7f-b3d1b72b0fc2}",
+                "hidden": false,
+                "name": "Developer PowerShell for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "colorScheme": "RTM-Purple-World",
                 "font": 
                 {
-                    "face": "CaskaydiaCove Nerd Font Mono"
+                    "face": "JetBrainsMono Nerd Font",
+                    "size": 14.0
                 },
-                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
+                "guid": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
                 "hidden": false,
-                "name": "Git Bash",
-                "source": "Git"
+                "name": "Debian",
+                "opacity": 90,
+                "source": "Windows.Terminal.Wsl",
+                "tabColor": "#FA455E",
+                "useAcrylic": true
             }
         ]
     },
