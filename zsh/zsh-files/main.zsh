@@ -43,9 +43,12 @@ plugins=(
 #Custom plugins
 source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+#Auto pair
+# if [[ ! -d $ZSH/custom/plugins/zsh-autopair ]]; then
+#   git clone https://github.com/hlissner/zsh-autopair $ZSH/custom/plugins/zsh-autopair
+# fi
 source $ZSH/custom/plugins/zsh-autopair/autopair.zsh
-
-
+autopair-init
 
 #Python virtualenv and Virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
