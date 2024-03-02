@@ -41,15 +41,27 @@ plugins=(
 # ######################### General Setup ########################
 
 #Custom plugins
+##zsh-syntax-highlighting
+if [[ ! -d $ZSH/custom/plugins/zsh-syntax-highlighting ]]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH/custom/plugins/zsh-syntax-highlighting
+fi
 source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+##zsh-autosuggestions.zsh
+if [[ ! -d $ZSH/custom/plugins/zsh-autosuggestions ]]; then
+  git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH/custom/plugins/zsh-autosuggestions
+fi
 source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.fzf.zsh
-#Auto pair
-# if [[ ! -d $ZSH/custom/plugins/zsh-autopair ]]; then
-#   git clone https://github.com/hlissner/zsh-autopair $ZSH/custom/plugins/zsh-autopair
-# fi
+
+
+##Autopair
+if [[ ! -d $ZSH/custom/plugins/zsh-autopair ]]; then
+  git clone https://github.com/hlissner/zsh-autopair $ZSH/custom/plugins/zsh-autopair
+fi
 source $ZSH/custom/plugins/zsh-autopair/autopair.zsh
-autopair-init
+
+## FZF
+source ~/.fzf.zsh
 
 #Python virtualenv and Virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
