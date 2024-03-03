@@ -51,3 +51,6 @@ brew install thefuck
 
 # Ripgrep
 brew install ripgrep
+
+# Lazygit
+brew install lazygit
