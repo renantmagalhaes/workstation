@@ -5,3 +5,4 @@ desktop/source/i3/config/nitrogen/
 desktop/source/i3/config/nitrogen/*
 desktop/source/i3/config/nitrogen/bg-saved.cfg
 desktop/source/i3/config/nitrogen/nitrogen.cfg
+desktop/source/any/config/nvim/lazy-lock.json
