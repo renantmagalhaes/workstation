@@ -13,3 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("vim-options")
 require("lazy").setup("plugins")
+
+--keymaps
+-- --Save file
+vim.api.nvim_set_keymap('n', '<C-s>', ':w<CR>:echo "File saved"<CR>', { noremap = true, silent = false })

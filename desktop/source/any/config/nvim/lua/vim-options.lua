@@ -13,3 +13,6 @@ vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
 vim.wo.number = true
 
+-- keymaps
+-- Save Document
+vim.keymap.set('n', '<C-s>', ':<cmd> w<CR>')
