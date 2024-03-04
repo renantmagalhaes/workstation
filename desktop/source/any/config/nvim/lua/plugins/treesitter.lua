@@ -8,7 +8,7 @@ return {
         auto_install = true,
         highlight = { enable = true },
         indent = { enable = true },
-        ensure_installed = {"c", "lua", "go", "bash", "bash", "html", "terraform", "sql", "tmux", "ssh_config"}
+        ensure_installed = {"c", "lua", "go", "bash", "bash", "html", "terraform", "sql"}
       })
     end
   }
