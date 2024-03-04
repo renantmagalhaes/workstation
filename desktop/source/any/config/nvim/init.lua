@@ -17,3 +17,5 @@ require("lazy").setup("plugins")
 --keymaps
 -- --Save file
 vim.api.nvim_set_keymap('n', '<C-s>', ':w<CR>:echo "File saved"<CR>', { noremap = true, silent = false })
+-- -- Exit
+vim.api.nvim_set_keymap('n', '<C-w>', ':q<CR>:echo "File saved"<CR>', { noremap = true, silent = false })
