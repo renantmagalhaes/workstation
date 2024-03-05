@@ -8,5 +8,7 @@ return {
     config = function()
     require("barbar").setup()
     end,
+    vim.keymap.set('n', '<A-,>', ':BufferPrevious<CR>'),
+    vim.keymap.set('n', '<A-.>', ':BufferNext<CR>')
   },
 }
