@@ -125,6 +125,7 @@ alias git-sync='git add -A && git commit -m sync && git push'
 alias pip='python -m pip'
 alias vinotes='vi ~/notes.md'
 alias lg='lazygit'
+alias killvi='pidof nvim |xargs kill -9'
 
 ### IP Info tools
 alias ip-info='curl https://wtfismyip.com/json | jq .'
