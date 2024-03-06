@@ -1,12 +1,12 @@
 return {
   {
-    'numToStr/Comment.nvim',
-    config = function ()
-      require('Comment').setup()
+    "numToStr/Comment.nvim",
+    config = function()
+      require("Comment").setup()
     end,
     opts = {
-        -- add any options here
+      -- add any options here
     },
     lazy = false,
-}
+  },
 }
