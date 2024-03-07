@@ -33,3 +33,5 @@ Use the script ``install.sh``. Running the scripts directly may result in system
 ![2-terminal_and_file-manager-gnome.png](./images/workstation/2-terminal_and_file-manager-gnome.png)
 
 ![3-Tiling_window-gnome.png](./images/workstation/3-Tiling_window-gnome.png)
+
+# RTM
