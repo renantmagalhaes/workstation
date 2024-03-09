@@ -121,6 +121,7 @@ bash desktop/source/any/fonts.sh
 
 # Themes
 bash desktop/source/kde/themes.sh
+bash desktop/source/gnome/themes.sh
 
 # Colorls
 sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel
