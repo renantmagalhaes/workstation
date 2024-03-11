@@ -1,5 +1,15 @@
 return {
-
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "stylua",
+        "shellcheck",
+        "shfmt",
+        "flake8",
+      },
+    },
+  },
   -- add pyright to lspconfig
   {
     "neovim/nvim-lspconfig",
