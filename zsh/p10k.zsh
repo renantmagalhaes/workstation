@@ -182,9 +182,10 @@ function prompt_my_icon() {
   # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='󰿊'
   # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='󰝾'
   # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=' '
-  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=' '
+  # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=' '
   # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=' '
   # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='󰿠'
+  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=''
   # Separator between same-color segments on the right.
   typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%244F\uE0B7'
   # Separator between different-color segments on the left.
