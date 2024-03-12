@@ -178,7 +178,12 @@ function prompt_my_icon() {
   typeset -g POWERLEVEL9K_BACKGROUND=236
 
   # Separator between same-color segments on the left.
-  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=''
+  # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='󰜜'
+  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='󰿊'
+  # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='󰝾'
+  # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=''
+  # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=' '
+  # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=' '
   # Separator between same-color segments on the right.
   typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%244F\uE0B7'
   # Separator between different-color segments on the left.
@@ -192,7 +197,7 @@ function prompt_my_icon() {
   # The left end of left prompt.
   #typeset -g POWERLEVEL9K_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=' %255F  %236F\uE0B6'
   # typeset -g POWERLEVEL9K_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL='   %236F\uE0B6'
-  typeset -g POWERLEVEL9K_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=' %236F\uE0B6%K{236}%255F %k%236F\uE0B4 %236F\uE0B6'
+  typeset -g POWERLEVEL9K_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=' %236F\uE0B6%K{236}%255F%k%236F\uE0B4 %236F\uE0B6'
 
   # The right end of right prompt.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL='\uE0B4'
@@ -362,13 +367,14 @@ function prompt_my_icon() {
   # Custom prefix.
   # typeset -g POWERLEVEL9K_DIR_PREFIX='%246Fin '
 
-  #####################################[ vcs: git status ]######################################
-  # Branch icon. Set this parameter to '\uF126 ' for the popular Powerline branch icon.
+   #####################################[ vcs: git status ]######################################
+  # Branch icon. Set this parameter to '\UE0A0 ' for the popular Powerline branch icon.
   typeset -g POWERLEVEL9K_VCS_BRANCH_ICON='\uF126 '
 
   # Untracked files icon. It's really a question mark, your font isn't broken.
   # Change the value of this parameter to show a different icon.
-  typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON='\uF059 '
+  typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON='?'
+  # typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON='\uF059 '
 
   # Formatter for Git status.
   #
@@ -390,18 +396,18 @@ function prompt_my_icon() {
 
     if (( $1 )); then
       # Styling for up-to-date Git status.
-      # local       meta='%f'     # default foreground
-      # local      clean='%76F'   # green foreground
-      # local   modified='%178F'  # yellow foreground
-      # local  untracked='%39F'   # blue foreground
-      # local conflicted='%196F'  # red foreground
+      local       meta='%246F'  # grey foreground
+      local      clean='%76F'   # green foreground
+      local   modified='%178F'  # yellow foreground
+      local  untracked='%39F'   # blue foreground
+      local conflicted='%196F'  # red foreground
     else
       # Styling for incomplete and stale Git status.
-      # local       meta='%244F'  # grey foreground
-      # local      clean='%244F'  # grey foreground
-      # local   modified='%244F'  # grey foreground
-      # local  untracked='%244F'  # grey foreground
-      # local conflicted='%244F'  # grey foreground
+      local       meta='%244F'  # grey foreground
+      local      clean='%244F'  # grey foreground
+      local   modified='%244F'  # grey foreground
+      local  untracked='%244F'  # grey foreground
+      local conflicted='%244F'  # grey foreground
     fi
 
     local res
@@ -443,11 +449,17 @@ function prompt_my_icon() {
       res+=" ${modified}wip"
     fi
 
-    # ⇣42 if behind the remote.
-    (( VCS_STATUS_COMMITS_BEHIND )) && res+=" ${clean} ${VCS_STATUS_COMMITS_BEHIND}"
-    # ⇡42 if ahead of the remote; no leading space if also behind the remote: ⇣42⇡42.
-    (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && res+=" "
-    (( VCS_STATUS_COMMITS_AHEAD  )) && res+="${clean} ${VCS_STATUS_COMMITS_AHEAD}"
+    if (( VCS_STATUS_COMMITS_AHEAD || VCS_STATUS_COMMITS_BEHIND )); then
+      # ⇣42 if behind the remote.
+      (( VCS_STATUS_COMMITS_BEHIND )) && res+=" ${clean}⇣${VCS_STATUS_COMMITS_BEHIND}"
+      # ⇡42 if ahead of the remote; no leading space if also behind the remote: ⇣42⇡42.
+      (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && res+=" "
+      (( VCS_STATUS_COMMITS_AHEAD  )) && res+="${clean}⇡${VCS_STATUS_COMMITS_AHEAD}"
+    elif [[ -n $VCS_STATUS_REMOTE_BRANCH ]]; then
+      # Tip: Uncomment the next line to display '=' if up to date with the remote.
+      # res+=" ${clean}="
+    fi
+
     # ⇠42 if behind the push remote.
     (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" ${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
     (( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" "
@@ -460,9 +472,13 @@ function prompt_my_icon() {
     # ~42 if have merge conflicts.
     (( VCS_STATUS_NUM_CONFLICTED )) && res+=" ${conflicted}~${VCS_STATUS_NUM_CONFLICTED}"
     # +42 if have staged changes.
-    (( VCS_STATUS_NUM_STAGED     )) && res+=" ${modified} ${VCS_STATUS_NUM_STAGED}"
+    (( VCS_STATUS_NUM_STAGED     )) && res+=" ${modified}+${VCS_STATUS_NUM_STAGED}"
+    # (( VCS_STATUS_NUM_STAGED     )) && res+=" ${modified} ${VCS_STATUS_NUM_STAGED}"
+
     # !42 if have unstaged changes.
-    (( VCS_STATUS_NUM_UNSTAGED   )) && res+=" ${modified} ${VCS_STATUS_NUM_UNSTAGED}"
+    (( VCS_STATUS_NUM_UNSTAGED   )) && res+=" ${modified}!${VCS_STATUS_NUM_UNSTAGED}"
+    # (( VCS_STATUS_NUM_UNSTAGED   )) && res+=" ${modified} ${VCS_STATUS_NUM_UNSTAGED}"
+
     # ?42 if have untracked files. It's really a question mark, your font isn't broken.
     # See POWERLEVEL9K_VCS_UNTRACKED_ICON above if you want to use a different icon.
     # Remove the next line if you don't want to see untracked files at all.
@@ -501,13 +517,12 @@ function prompt_my_icon() {
   typeset -g POWERLEVEL9K_VCS_{STAGED,UNSTAGED,UNTRACKED,CONFLICTED,COMMITS_AHEAD,COMMITS_BEHIND}_MAX_NUM=-1
 
   # Icon color.
-  # typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_COLOR=76
-  # typeset -g POWERLEVEL9K_VCS_LOADING_VISUAL_IDENTIFIER_COLOR=244
+  typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_COLOR=76
+  typeset -g POWERLEVEL9K_VCS_LOADING_VISUAL_IDENTIFIER_COLOR=244
   # Custom icon.
   # typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
-  typeset -g POWERLEVEL9K_VCS_PREFIX='%fon '
-  #typeset -g POWERLEVEL9K_VCS_PREFIX='%4F '
+  typeset -g POWERLEVEL9K_VCS_PREFIX='%251Fon '
 
   # Show status of repositories of these types. You can add svn and/or hg if you are
   # using them. If you do, your prompt may become slow even when your current directory
