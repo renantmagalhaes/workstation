@@ -2,8 +2,12 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "witch",
+      colorscheme = "catppuccin-mocha",
     },
+  },
+  -- Make all themes with transparent BG
+  {
+    "xiyaowong/transparent.nvim",
   },
   {
     "catppuccin/nvim",
@@ -12,7 +16,7 @@ return {
     priority = 1000,
     config = function()
       require("catppuccin").setup({
-        transparent_background = true,
+        -- transparent_background = true,
       })
     end,
   },
@@ -24,7 +28,7 @@ return {
     priority = 1000,
     config = function()
       require("tokyonight").setup({
-        transparent = true,
+        -- transparent = true,
       })
     end,
   },
@@ -34,19 +38,16 @@ return {
     priority = 1000,
     config = function()
       require("tokyodark").setup({
-        transparent_background = true,
+        -- transparent_background = true,
       })
     end,
   },
-  {
-    "sontungexpt/witch",
-    priority = 1000,
-    lazy = false,
-    config = function(_, opts)
-      require("witch").setup(opts)
-    end,
-  },
-  {
-    "xiyaowong/transparent.nvim",
-  },
+  -- {
+  --   "sontungexpt/witch",
+  --   priority = 1000,
+  --   lazy = false,
+  --   config = function(_, opts)
+  --     require("witch").setup(opts)
+  --   end,
+  -- },
 }
