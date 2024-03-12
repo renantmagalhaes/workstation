@@ -179,11 +179,12 @@ function prompt_my_icon() {
 
   # Separator between same-color segments on the left.
   # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='󰜜'
-  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='󰿊'
+  # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='󰿊'
   # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='󰝾'
-  # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=''
-  # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=' '
+  # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=' '
+  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=' '
   # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=' '
+  # typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='󰿠'
   # Separator between same-color segments on the right.
   typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%244F\uE0B7'
   # Separator between different-color segments on the left.
@@ -522,7 +523,7 @@ function prompt_my_icon() {
   # Custom icon.
   # typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
-  typeset -g POWERLEVEL9K_VCS_PREFIX='%251Fon '
+  #typeset -g POWERLEVEL9K_VCS_PREFIX='%251Fon '
 
   # Show status of repositories of these types. You can add svn and/or hg if you are
   # using them. If you do, your prompt may become slow even when your current directory
