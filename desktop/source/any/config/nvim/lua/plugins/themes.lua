@@ -2,7 +2,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin-mocha",
+      colorscheme = "witch",
     },
   },
   {
@@ -37,5 +37,16 @@ return {
         transparent_background = true,
       })
     end,
+  },
+  {
+    "sontungexpt/witch",
+    priority = 1000,
+    lazy = false,
+    config = function(_, opts)
+      require("witch").setup(opts)
+    end,
+  },
+  {
+    "xiyaowong/transparent.nvim",
   },
 }
