@@ -1,6 +1,9 @@
 # workstation
 ```My full desktop environment.```
 
+ 
+![workstation](assets/setup.png)
+
 For:
 - Debian 12
 - openSUSE Tumbleweed (GNOME version) 
