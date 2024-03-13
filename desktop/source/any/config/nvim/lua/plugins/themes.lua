@@ -2,7 +2,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin-mocha",
+      colorscheme = "witch",
     },
   },
   -- Make all themes with transparent BG
@@ -42,12 +42,12 @@ return {
       })
     end,
   },
-  -- {
-  --   "sontungexpt/witch",
-  --   priority = 1000,
-  --   lazy = false,
-  --   config = function(_, opts)
-  --     require("witch").setup(opts)
-  --   end,
-  -- },
+  {
+    "sontungexpt/witch",
+    priority = 1000,
+    lazy = false,
+    config = function(_, opts)
+      require("witch").setup(opts)
+    end,
+  },
 }
