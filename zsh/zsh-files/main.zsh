@@ -118,7 +118,7 @@ zstyle ':completion:*:descriptions' format
 
 # Additional paths
 if [[ $macos_check == "darwin" ]]; then
-    eval $(/opt/homebrew/bin/brew shellenv)
+    eval $(/usr/local/bin/brew shellenv)
     export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 elif [[ $linux_check == "linux" ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
