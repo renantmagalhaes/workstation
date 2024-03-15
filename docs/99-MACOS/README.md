@@ -28,21 +28,21 @@
 - [Sketchy Bar](https://github.com/FelixKratz/SketchyBar)
 
 # Bar layout
-![picture 1](../../images/241251d1e022c646ca6b61b8bdf56de25a2075c58a9e807ade04fc4ba0fd31e9.png)  
+![picture 1](../../assets/241251d1e022c646ca6b61b8bdf56de25a2075c58a9e807ade04fc4ba0fd31e9.png)  
 
 # Settings
 
-![picture 2](../../images/ac203af70603f12b7b58ec5bd0ff0b115ddf38e3ec052ca275b7d2a83a07fd2c.png)  
+![picture 2](../../assets/ac203af70603f12b7b58ec5bd0ff0b115ddf38e3ec052ca275b7d2a83a07fd2c.png)  
 
 # Hot corners
-![picture 3](../../images/6cdd0908b4082d08b5cac2cc70f82ba7b5ee5a9c36f218faf20d5f92666df5f1.png)  
+![picture 3](../../assets/6cdd0908b4082d08b5cac2cc70f82ba7b5ee5a9c36f218faf20d5f92666df5f1.png)  
 
 # Keyboard Shortcurts
 
 ## System
-![picture 2](../../images/448bce10dd89705da74d2857b6d5f075634a8e555d0cf52423e3a9002827d41e.png)  
+![picture 2](../../assets/448bce10dd89705da74d2857b6d5f075634a8e555d0cf52423e3a9002827d41e.png)  
 
-![picture 3](../../images/160ecc4c5e80e64d915e4e6d7048eb1fc5cf27773bbe96e1a4d5ae8d0ab96dbe.png)  
+![picture 3](../../assets/160ecc4c5e80e64d915e4e6d7048eb1fc5cf27773bbe96e1a4d5ae8d0ab96dbe.png)  
 
 ## Karabiner
 [Complex Modifications](./config/karabiner.json)

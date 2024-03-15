@@ -118,7 +118,7 @@ Add windows sandbox environment
    1. Turn Windows features on or off
    2. Enable sandbox and restart computer
 
-![picture 1](../../images/65067858b45866139a2ef25b3c10aea2a9b10509965acc7f8bb8816964fe9072.png)
+![picture 1](../../assets/65067858b45866139a2ef25b3c10aea2a9b10509965acc7f8bb8816964fe9072.png)
 
 ## Windows11
 
