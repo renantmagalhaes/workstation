@@ -34,7 +34,7 @@ Taskbar > Disable Show my taskbar on all displays
 
 ### Keyboard Manager (DEPRECATED)
 
-![picture 3](../../images/20f09a24c72b356598d589a9403515ebc415f4c1c29440bc3545fccdf02ccbc4.png)  
+![picture 3](../../assets/20f09a24c72b356598d589a9403515ebc415f4c1c29440bc3545fccdf02ccbc4.png)  
 
 
 # Windows Terminal
@@ -43,7 +43,7 @@ Taskbar > Disable Show my taskbar on all displays
 
 - Create a shortcut and send to `shell:startup` with Minimized option selected
 
-![picture 1](../../images/a44c9c526cc6f73d3998c7697b807de8bebc3a3a8f6cf8ec97a6e38a400f6f1e.png)  
+![picture 1](../../assets/a44c9c526cc6f73d3998c7697b807de8bebc3a3a8f6cf8ec97a6e38a400f6f1e.png)  
 
 
 Default profile -> Ubuntu
@@ -134,7 +134,7 @@ sudo usermod --shell /usr/bin/tmux $USER
 ```
 # Rounded TB
 
-![picture 1](../../images/5bcd0ad5cb5d3cbd5413f160c6ed1e4ba48db5e6684016b77c5a1ac783ef5ba4.png)  
+![picture 1](../../assets/5bcd0ad5cb5d3cbd5413f160c6ed1e4ba48db5e6684016b77c5a1ac783ef5ba4.png)  
 
 # Snipping tool
 Microsoft is testing changes to how the print screen button works in Windows 11, causing it to open the Windows Snipping Tool rather than copying a screenshot to the clipboard.
