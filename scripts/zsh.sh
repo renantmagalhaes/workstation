@@ -11,15 +11,15 @@ linux_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 #zsh config 
-ln -s -f $PWD/zsh/zshrc ~/.zshrc
-ln -s -f $PWD/zsh/zsh-files ~/.zsh
+ln -s -f $PWD/dotfiles/zsh/zshrc ~/.zshrc
+ln -s -f $PWD/dotfiles/zsh/zsh-files ~/.zsh
 
 #p10k config 
-ln -s -f $PWD/zsh/p10k.zsh ~/.p10k.zsh
+ln -s -f $PWD/dotfiles/zsh/p10k.zsh ~/.p10k.zsh
 
 #lsd config
 mkdir -p  ~/.config/lsd/
-ln -s -f $PWD/zsh/lsd-config.yaml ~/.config/lsd/config.yaml
+ln -s -f $PWD/dotfiles/zsh/lsd-config.yaml ~/.config/lsd/config.yaml
 
 #install plugins
 ##zsh-syntax-highlighting.zsh
