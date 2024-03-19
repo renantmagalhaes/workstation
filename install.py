@@ -6,19 +6,15 @@ def initial_setup():
     subprocess.run(["bash", "utils/os-selector/os-selector.sh"])
     subprocess.run(["bash", "scripts/tmux.sh"])
     subprocess.run(["bash", "scripts/zsh.sh"])
-    subprocess.run(["bash", "scripts/zsh.sh"])
     subprocess.run(["bash", "utils/git-config/git-config.sh"])
 
-
-def install_bspwm():
-    subprocess.run(["bash", "zsh/zsh.sh"])
 
 # Add more functions for other actions...
 
 actions = {
     1: ("Workstation base setup", initial_setup),
-    2: ("Install BSPWM", install_bspwm),
-    3: ("Install Oh my ZSH", install_oh_my_zsh),
+    #2: ("Install BSPWM", install_bspwm),
+    #3: ("Install Oh my ZSH", install_oh_my_zsh),
     # Add other actions...
 }
 
