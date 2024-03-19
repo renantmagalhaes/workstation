@@ -8,12 +8,12 @@
 
 #Root check
 if [ “$(id -u)” = “0” ]; then
-echo “Dont run this script as root” 2>&1
-exit 1
+	echo “Dont run this script as root” 2>&1
+	exit 1
 fi
 
 # Brew
-bash desktop/source/any/brew.sh
+bash ./scripts/brew.sh
 
 # Default packages
 brew install wget \tree \htop \iterm2 \tmux \go \neofetch \rectangle \coreutils \warp \stats \lsd \telnet \ncdu
@@ -22,10 +22,10 @@ brew install wget \tree \htop \iterm2 \tmux \go \neofetch \rectangle \coreutils 
 mkdir -p ~/GIT-REPOS/CORE
 
 # Fonts
-bash desktop/source/any/fonts-macos.sh
+bash ./scripts/fonts-macos.sh
 
 # VIM
-bash desktop/source/any/vim.sh
+bash ./scripts/vim.sh
 
 # ColorLS
 brew install ruby
@@ -41,7 +41,7 @@ brew install --cask amethyst
 brew install --cask obs
 
 # AltTab
-brew install --cask alt-tab	
+brew install --cask alt-tab
 
 # System settings
 ## MacOS use dimmed icons for hidden applications
@@ -73,3 +73,4 @@ echo "#         rtm.codes             #"
 echo "#     Please reboot your pc     #"
 echo "#                               #"
 echo "#################################"
+

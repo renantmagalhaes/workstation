@@ -14,8 +14,8 @@
 #*      - Web: Vivaldi / Chrome
 #*      - Editor: Visual Studio Code / Neovim
 #*      - Music: Clementine / YT Music(web)
-#*      - Video: VLC 
-#*      - Terminal: Guake 
+#*      - Video: VLC
+#*      - Terminal: Guake
 #*      - File Manager: Nautilus
 #*      - Record Desktop: OBS Studio
 #*      - Screenshot tool: Flameshot
@@ -24,26 +24,25 @@
 #
 # RTM
 
-
 #RTM
-# Verifications 
+# Verifications
 
 ## Root check
 if [ “$(id -u)” = “0” ]; then
-echo “Dont run this script as root” 2>&1
-exit 1
+	echo “Dont run this script as root” 2>&1
+	exit 1
 fi
 
-# Check Window System
-if [[ $XDG_SESSION_TYPE == "wayland" ]] ; then
-    echo "Wayland detected. Please change to x11 before running this script"
-    exit 1
-elif [[ $XDG_SESSION_TYPE == "x11" ]] ; then
-     echo "x11 detect."
-else
-    echo "Not able to identify the system"
-    exit 1
-fi
+# # Check Window System
+# if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
+# 	echo "Wayland detected. Please change to x11 before running this script"
+# 	exit 1
+# elif [[ $XDG_SESSION_TYPE == "x11" ]]; then
+# 	echo "x11 detect."
+# else
+# 	echo "Not able to identify the system"
+# 	exit 1
+# fi
 
 # Update / upgrade
 sudo zypper refresh && sudo zypper update
@@ -75,7 +74,7 @@ sudo firewall-cmd --permanent --add-service=ssh
 sudo firewall-cmd --reload
 
 ## multimedia codecs
-yes | sudo opi -y codecs 
+yes | sudo opi -y codecs
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -84,10 +83,6 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 sudo pip3 install wheel --break-system-packages
 sudo pip3 install virtualenv virtualenvwrapper pylint --break-system-packages
 sudo pip3 install bpytop --break-system-packages.
-
-# Flatpack
-bash desktop/source/any/flatpak.sh
-bash desktop/source/gnome/flatpak.sh
 
 # Install Vivaldi
 sudo rpm --import https://repo.vivaldi.com/stable/linux_signing_key.pub
@@ -109,17 +104,26 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
 sudo zypper refresh
 sudo zypper install -y code
 
-# VIM
-bash desktop/source/any/vim.sh
-
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
 
-# Fonts
-bash desktop/source/any/fonts.sh
+# SCRIPTS
 
-# Themes
-bash desktop/source/gnome/themes.sh
+## Brew
+bash ./scripts/brew.sh
+
+## Flatpack
+bash ./scripts/flatpak.sh
+bash ./scripts/gnome-flatpak.sh
+
+## VIM
+bash ./scripts/vim.sh
+
+## Fonts
+bash ./scripts/fonts.sh
+
+## Themes
+bash ./scripts/gnome-themes.sh
 
 # Colorls
 sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel
