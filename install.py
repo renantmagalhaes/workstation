@@ -7,16 +7,26 @@ def initial_setup():
     subprocess.run(["bash", "scripts/tmux.sh"])
     subprocess.run(["bash", "scripts/zsh.sh"])
     subprocess.run(["bash", "scripts/alacritty.sh"])
+    subprocess.run(["bash", "guake --restore-preferences utils/guake/rtm-guake-setting"])
     subprocess.run(["bash", "scripts/neofetch.sh"])
     subprocess.run(["bash", "utils/git-config/git-config.sh"])
 
 
-# Add more functions for other actions...
+
+def install_bspwm():
+    subprocess.run(["bash", "scripts/bspwm.sh"])
+
+def install_rofi():
+    subprocess.run(["bash", "scripts/rofi.sh"])
+
+def install_polybar():
+    subprocess.run(["bash", "scripts/polybar.sh"])
 
 actions = {
     1: ("Workstation base setup", initial_setup),
-    #2: ("Install BSPWM", install_bspwm),
-    #3: ("Install Oh my ZSH", install_oh_my_zsh),
+    0000: ("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", ),
+    22: ("BSPWM", install_bspwm),
+
     # Add other actions...
 }
 
