@@ -4,9 +4,11 @@ import subprocess
 
 def initial_setup():
     subprocess.run(["bash", "utils/os-selector/os-selector.sh"])
-    subprocess.run(["bash", "tmux/tmux.sh"])
-    subprocess.run(["bash", "zsh/zsh.sh"])
-    subprocess.run(["bash", "zsh/zsh.sh"])
+    subprocess.run(["bash", "scripts/tmux.sh"])
+    subprocess.run(["bash", "scripts/zsh.sh"])
+    subprocess.run(["bash", "scripts/zsh.sh"])
+    subprocess.run(["bash", "utils/git-config/git-config.sh"])
+
 
 def install_bspwm():
     subprocess.run(["bash", "zsh/zsh.sh"])
