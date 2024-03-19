@@ -8,7 +8,11 @@ macos_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
 linux_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
 
 #install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O /tmp/zsh.sh
+sed -i 's/exec\ zsh\ \-l//g' /tmp/zsh.sh
+chmod +x /tmp/zsh.sh
+sh -c '/tmp/zsh.sh'
 
 #zsh config 
 ln -s -f $PWD/dotfiles/zsh/zshrc ~/.zshrc
