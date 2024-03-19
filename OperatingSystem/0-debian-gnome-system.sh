@@ -14,8 +14,8 @@
 #*      - Web: Vivaldi / Chrome
 #*      - Editor: Visual Studio Code / Neovim
 #*      - Music: Clementine / YT Music(web)
-#*      - Video: VLC 
-#*      - Terminal: Guake 
+#*      - Video: VLC
+#*      - Terminal: Guake
 #*      - File Manager: Nautilus
 #*      - Record Desktop: OBS Studio
 #*      - Screenshot tool: Flameshot
@@ -24,34 +24,32 @@
 #
 # RTM
 
-# Verifications 
+# Verifications
 
 ## Root check
 if [ “$(id -u)” = “0” ]; then
-echo “Dont run this script as root” 2>&1
-exit 1
+	echo “Dont run this script as root” 2>&1
+	exit 1
 fi
+
+# # Check Window System
+# if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
+# 	echo "Wayland detected. Please change to x11 before running this script"
+# 	exit 1
+# elif [[ $XDG_SESSION_TYPE == "x11" ]]; then
+# 	echo "x11 detect."
+# else
+# 	echo "Not able to identify the system"
+# 	exit 1
+# fi
 
 # Check if the user is a member of the sudo or adm group
 if groups | grep -E -q "(^| )sudo($| )" || groups | grep -E -q "(^| )adm($| )" || groups | grep -E -q "(^| )root($| )"; then
-    echo "User is a member of the sudo, adm or root group."
+	echo "User is a member of the sudo, adm or root group."
 else
-    echo "User is not a member of the sudo or adm group."
-    exit 1
+	echo "User is not a member of the sudo or adm group."
+	exit 1
 fi
-
-# Check Window System
-if [[ $XDG_SESSION_TYPE == "wayland" ]] ; then
-    echo "Wayland detected. Please change to x11 before running this script"
-    exit 1
-elif [[ $XDG_SESSION_TYPE == "x11" ]] ; then
-     echo "x11 detect."
-else
-    echo "Not able to identify the system"
-    exit 1
-fi
-
-# Dependencies 
 
 ## Disable cdrom
 sudo sed -i 's/deb\ cdrom/\#deb\ cdrom/g' /etc/apt/sources.list
@@ -96,42 +94,31 @@ sudo sed -i 's/\,arm64\,armhf//g' /etc/apt/sources.list.d/vscode.list
 wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp/teamviewer_amd64.deb
 sudo dpkg -i /tmp/teamviewer_amd64.deb
 
-# Brew
-bash desktop/source/any/brew.sh
-
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-#Utils
-
-# Flatpack
-bash desktop/source/any/flatpak.sh
-bash desktop/source/gnome/flatpak.sh
-
-# Enable BT FastConnectable
-sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
-
-## Fix python default path
-sudo ln -s /usr/bin/python3 /usr/bin/python
-sudo ln -s /usr/bin/pip3 /usr/bin/pip
-
-# Install pip packages
-sudo pip3 install psutil
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y install bpytop virtualenv virtualenvwrapper pylint
-
-# VIM
-bash desktop/source/any/vim.sh
-
-# Create git-folder
+## Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
 
-# Fonts
-bash desktop/source/any/fonts.sh
+# SCRIPTS
 
-# Themes
-bash desktop/source/gnome/themes.sh
+## Brew
+bash ./scripts/brew.sh
 
-# Install LSD
+## Flatpack
+bash ./scripts/flatpak.sh
+bash ./scripts/gnome-flatpak.sh
+
+## VIM
+bash ./scripts/vim.sh
+
+## Fonts
+bash ./scripts/fonts.sh
+
+## Themes
+bash ./scripts/gnome-themes.sh
+
+# LSD
 curl https://sh.rustup.rs -sSf | sh -s -- -y
 ~/.cargo/bin/cargo install lsd
 
@@ -139,8 +126,16 @@ curl https://sh.rustup.rs -sSf | sh -s -- -y
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install ruby-dev
 sudo gem install colorls
 
-#Distrobox
-#https://github.com/89luca89/distrobox#installation
+# Enable BT FastConnectable
+sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
+
+# Fix python default path
+sudo ln -s /usr/bin/python3 /usr/bin/python
+sudo ln -s /usr/bin/pip3 /usr/bin/pip
+
+# Install pip packages
+sudo pip3 install psutil
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install bpytop virtualenv virtualenvwrapper pylint
 
 ## Droidcam
 cd /tmp/
@@ -173,3 +168,4 @@ echo "#     Please reboot your pc     #"
 echo "#                               #"
 echo "#################################"
 bash
+

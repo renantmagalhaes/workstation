@@ -7,10 +7,10 @@
 #
 # RTM
 
-# Verifications 
+# Verifications
 if [ “$(id -u)” = “0” ]; then
-echo “Dont run this script as root” 2>&1
-exit 1
+	echo “Dont run this script as root” 2>&1
+	exit 1
 fi
 
 # refresh repos
@@ -29,16 +29,23 @@ sudo apt-get -y install zsh fonts-powerline vim wget tmux curl net-tools iproute
 # Flatpack
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-# Brew
-bash ../source/any/brew.sh
-
 #Utils
 ## Fix python default path
 sudo ln -s /usr/bin/python3 /usr/bin/python
 
-
-# Create git-folder 
+# Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
+
+# SCRIPTS
+
+## Brew
+bash ./scripts/brew.sh
+
+## VIM
+bash ./scripts/vim.sh
+
+## Fonts
+bash ./scripts/fonts.sh
 
 # Install LSD
 curl https://sh.rustup.rs -sSf | sh -s -- -y
@@ -47,7 +54,6 @@ curl https://sh.rustup.rs -sSf | sh -s -- -y
 # Colorls
 sudo apt install -y ruby-dev
 sudo gem install colorls
-
 
 # Enable Systemd
 sudo bash -c 'cat << EOF > /etc/wsl.conf
@@ -89,19 +95,11 @@ wsl.exe --setdefault Debian
 # Powertoys windows modifier
 pip3.exe install keyboard
 
-# Install Fonts
-# Fonts
-bash ../source/any/fonts.sh
-
-# New VIM
-bash ../source/any/vim.sh
-
 # Docker
 sudo apt-get -y install docker.io docker-compose
 sudo systemctl enable docker
 sudo systemctl restart docker
 sudo usermod -aG docker $USER
-
 
 # ADB setup
 sudo ln -s -f /mnt/c/Program\ Files/Genymobile/Genymotion/tools/adb.exe /usr/local/bin/adb
@@ -117,3 +115,4 @@ echo "#         rtm.codes             #"
 echo "#     Please reboot your pc     #"
 echo "#                               #"
 echo "#################################"
+

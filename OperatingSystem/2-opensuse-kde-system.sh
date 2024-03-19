@@ -58,8 +58,6 @@ sudo zypper --non-interactive install -y zsh vlc clementine breeze6-cursors vim 
 
 # virtualbox user
 sudo usermod -aG vboxusers $USER
-# Brew
-bash desktop/source/any/brew.sh
 
 # Piper group
 sudo usermod -aG games $USER
@@ -87,9 +85,6 @@ sudo pip3 install wheel --break-system-packages
 sudo pip3 install virtualenv virtualenvwrapper pylint --break-system-packages
 sudo pip3 install bpytop --break-system-packages.
 
-# Flatpack
-bash desktop/source/any/flatpak.sh
-
 # Install Vivaldi
 sudo rpm --import https://repo.vivaldi.com/stable/linux_signing_key.pub
 sudo zypper --no-gpg-checks ar https://repo.vivaldi.com/stable/rpm/x86_64/ Vivaldi
@@ -110,18 +105,27 @@ sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.m
 sudo zypper refresh
 sudo zypper install -y code
 
-# VIM
-bash desktop/source/any/vim.sh
-
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
 
-# Fonts
-bash desktop/source/any/fonts.sh
+# SCRIPTS
 
-# Themes
-bash desktop/source/kde/themes.sh
-bash desktop/source/gnome/themes.sh
+## Brew
+bash ./scripts/brew.sh
+
+## Flatpack
+bash ./scripts/flatpak.sh
+bash ./scripts/gnome-flatpak.sh
+
+## VIM
+bash ./scripts/vim.sh
+
+## Fonts
+bash ./scripts/fonts.sh
+
+## Themes
+bash ./scripts/gnome-themes.sh
+bash ./scripts/kde-themes.sh
 
 # Colorls
 sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel

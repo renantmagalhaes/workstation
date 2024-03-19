@@ -7,10 +7,10 @@
 #
 # RTM
 
-# Verifications 
+# Verifications
 if [ “$(id -u)” = “0” ]; then
-echo “Dont run this script as root” 2>&1
-exit 1
+	echo “Dont run this script as root” 2>&1
+	exit 1
 fi
 
 # refresh repos and upgrade system
@@ -20,17 +20,16 @@ sudo zypper ref && sudo zypper up
 sudo zypper install -y ntp
 sudo ntpdate pool.ntp.org
 
-
 # Install the packages from repo
 sudo zypper install -y zsh vim curl net-tools iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox net-tools-deprecated busybox-sysvinit-tools bind-utils gcc-c++ rsync sassc gawk bc cron golang npm
 
 # Install SNAP
-wsl_thumbleweed_check=`env |grep WSL |grep -ioh "openSUSE-Tumbleweed"| awk '{print tolower($0)}'`
-wsl_leap_check=`env |grep WSL |grep -ioh "openSUSE-Leap"| awk '{print tolower($0)}'`
+wsl_thumbleweed_check=$(env | grep WSL | grep -ioh "openSUSE-Tumbleweed" | awk '{print tolower($0)}')
+wsl_leap_check=$(env | grep WSL | grep -ioh "openSUSE-Leap" | awk '{print tolower($0)}')
 if [[ $wsl_leap_check == "opensuse-leap" ]]; then
-    sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Leap_`cat /etc/os-release |grep VERSION_ID |egrep -Eoh '[0-9]{1,3}.[0-9]{1,3}'` snappy
+	sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Leap_$(cat /etc/os-release | grep VERSION_ID | egrep -Eoh '[0-9]{1,3}.[0-9]{1,3}') snappy
 elif [[ $wsl_thumbleweed_check == "opensuse-tumbleweed" ]]; then
-    sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Tumbleweed snappy
+	sudo zypper addrepo --refresh https://download.opensuse.org/repositories/system:/snappy/openSUSE_Tumbleweed snappy
 fi
 
 sudo zypper --gpg-auto-import-keys refresh
@@ -40,8 +39,16 @@ sudo zypper install -y snapd
 # Flatpack
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-# Brew
-bash ../source/any/brew.sh
+# SCRIPTS
+
+## Brew
+bash ./scripts/brew.sh
+
+## VIM
+bash ./scripts/vim.sh
+
+## Fonts
+bash ./scripts/fonts.sh
 
 # Temporary install Tmux via brew
 /home/linuxbrew/.linuxbrew/bin/brew install tmux
@@ -65,8 +72,7 @@ sudo ln -s /usr/bin/pip3 /usr/bin/pip
 sudo pip3 install virtualenv virtualenvwrapper pylint
 sudo pip3 install bpytop --upgrade
 
-
-# Create git-folder 
+# Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
 
 # Fix systemd init
@@ -89,13 +95,6 @@ EOF'
 
 # Set WSL default distro
 wsl.exe --setdefault openSUSE-Tumbleweed
-
-# Install Fonts
-# Fonts
-bash ../source/any/fonts.sh
-
-# New VIM
-bash ../source/any/vim.sh
 
 # Docker
 sudo zypper install -y docker docker-compose docker-compose-switch
