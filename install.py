@@ -10,8 +10,7 @@ def initial_setup():
     subprocess.run(["guake", "--restore-preferences", "utils/guake/rtm-guake-setting"])
     subprocess.run(["bash", "scripts/neofetch.sh"])
     subprocess.run(["bash", "utils/git-config/git-config.sh"])
-
-
+    subprocess.run(["zsh"])
 
 def install_bspwm():
     subprocess.run(["bash", "scripts/bspwm.sh"])
