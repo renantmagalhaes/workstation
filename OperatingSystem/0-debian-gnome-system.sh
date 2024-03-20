@@ -51,6 +51,9 @@ else
 	exit 1
 fi
 
+# Get current folder
+FOLDER_LOCATION=$(PWD)
+
 ## Disable cdrom
 sudo sed -i 's/deb\ cdrom/\#deb\ cdrom/g' /etc/apt/sources.list
 
@@ -158,6 +161,9 @@ sudo apt-get -f install -y
 #Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
+
+# Return to original path
+cd $FOLDER_LOCATION
 # RTM
 # RTM
 #clear

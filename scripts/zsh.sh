@@ -1,3 +1,6 @@
+# Get current folder
+FOLDER_LOCATION=$(PWD)
+
 #verify zsh
 type zsh >/dev/null 2>&1 || { echo >&2 "Install zsh before run this script "; exit 1; }
 
@@ -71,5 +74,7 @@ brew install fzf
 $(brew --prefix)/opt/fzf/install
 
 #set zsh as default shell
-clear
 echo "To set zsh as default shell run sudo chsh -s $(which zsh)"
+
+# Return original path
+cd $FOLDER_LOCATION
