@@ -26,6 +26,8 @@ actions = {
     1: ("Workstation base setup", initial_setup),
     0000: ("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", ),
     22: ("BSPWM", install_bspwm),
+    23: ("Rofi", install_rofi),
+    24: ("polybar", install_polybar),
 
     # Add other actions...
 }
