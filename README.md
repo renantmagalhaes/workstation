@@ -1,7 +1,6 @@
 # workstation
 ```My full desktop environment.```
 
- 
 ![workstation](assets/setup.png)
 
 For:
