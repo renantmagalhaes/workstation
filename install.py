@@ -7,7 +7,7 @@ def initial_setup():
     subprocess.run(["bash", "scripts/tmux.sh"])
     subprocess.run(["bash", "scripts/zsh.sh"])
     subprocess.run(["bash", "scripts/alacritty.sh"])
-    subprocess.run(["bash", "guake --restore-preferences utils/guake/rtm-guake-setting"])
+    subprocess.run(["guake", "--restore-preferences", "utils/guake/rtm-guake-setting"])
     subprocess.run(["bash", "scripts/neofetch.sh"])
     subprocess.run(["bash", "utils/git-config/git-config.sh"])
 
