@@ -1,5 +1,5 @@
 # Get current folder
-FOLDER_LOCATION=$(PWD)
+FOLDER_LOCATION=$(pwd)
 
 #verify zsh
 type zsh >/dev/null 2>&1 || { echo >&2 "Install zsh before run this script "; exit 1; }

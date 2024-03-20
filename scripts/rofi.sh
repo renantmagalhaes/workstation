@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get current folder
-FOLDER_LOCATION=$(PWD)
+FOLDER_LOCATION=$(pwd)
 
 # check cmd function
 check_cmd() {
