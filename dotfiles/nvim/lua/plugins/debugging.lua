@@ -1,4 +1,5 @@
 return {
+  {
   "mfussenegger/nvim-dap",
   dependencies = {
     "leoluz/nvim-dap-go",
@@ -28,4 +29,8 @@ return {
     vim.keymap.set("n", "<Leader>dx", ":DapTerminate<CR>")
     vim.keymap.set("n", "<Leader>do", ":DapStepOver<CR>")
   end,
+},
+  {
+    "nvim-neotest/nvim-nio"
+  }
 }
