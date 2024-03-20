@@ -20,4 +20,5 @@ bash -c "~/.tmux/plugins/tpm/scripts/install_plugins.sh"
 rm -rf ~/.tmux/plugins/tmux/custom
 mkdir -p ~/.tmux/plugins/tmux/
 ln -s -f $PWD/dotfiles/tmux/plugins/catppuccin/custom ~/.tmux/plugins/tmux/custom
+ln -s -f $PWD/dotfiles/tmux/plugins/sys-stats ~/.tmux/plugins/tmux/sys-stats
 
