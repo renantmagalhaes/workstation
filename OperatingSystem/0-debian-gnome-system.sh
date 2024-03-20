@@ -52,7 +52,7 @@ else
 fi
 
 # Get current folder
-FOLDER_LOCATION=$(PWD)
+FOLDER_LOCATION=$(pwd)
 
 ## Disable cdrom
 sudo sed -i 's/deb\ cdrom/\#deb\ cdrom/g' /etc/apt/sources.list

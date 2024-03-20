@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get current folder
-FOLDER_LOCATION=$(PWD)
+FOLDER_LOCATION=$(pwd)
 
 check_cmd() {
 	command -v "$1" 2>/dev/null
