@@ -65,9 +65,9 @@ sudo make install
 
 ## BSPWM
 cd $FOLDER_LOCATION
-ln -s -f ./dotfiles/bspwm/bspwmrc ~/.config/bspwm/bspwmrc
+ln -s -f $PWD/dotfiles/bspwm/bspwmrc ~/.config/bspwm/bspwmrc
 chmod +x ~/.config/bspwm/bspwmrc
-ln -s -f ./dotfiles/bspwm/sxhkdrc ~/.config/sxhkd/sxhkdrc
+ln -s -f $PWD/dotfiles/bspwm/sxhkdrc ~/.config/sxhkd/sxhkdrc
 chmod +x ~/.config/sxhkd/sxhkdrc
 
 # Auto-update repo
@@ -76,22 +76,22 @@ sudo cp ./dotfiles/bspwm/systemd-service/apt-update.timer /etc/systemd/system/ap
 sudo systemctl enable --now apt-update.timer
 
 # scripts
-ln -s -f ./dotfiles/bspwm/scripts ~/.config/bspwm/
+ln -s -f $PWD/dotfiles/bspwm/scripts ~/.config/bspwm/
 
 # Picom config
-ln -s -f ./dotfiles/bspwm/picom/picom.conf ~/.config/picom/picom.conf
+ln -s -f $PWD/dotfiles/bspwm/picom/picom.conf ~/.config/picom/picom.conf
 
 # Dunst config
 rm -rf ~/.config/dunst
-ln -s -f ./dotfiles/bspwm/dunst ~/.config/
+ln -s -f $PWD/dotfiles/bspwm/dunst ~/.config/
 
 # Nitrogen config
 rm -rf ~/.config/nitrogen
-ln -s -f ./dotfiles/bspwm/nitrogen ~/.config/
+ln -s -f $PWD/dotfiles/bspwm/nitrogen ~/.config/
 
 # jgmenu config
 rm -rf ~/.config/jgmenu/
-ln -s -f ./dotfiles/bspwm/jgmenu ~/.config/
+ln -s -f $PWD/dotfiles/bspwm/jgmenu ~/.config/
 
 # Themes GTK
 ## Create files if not exist
