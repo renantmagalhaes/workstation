@@ -48,5 +48,5 @@ rm -rf ~/.config/polybar
 
 # Polybar config
 cd $FOLDER_LOCATION
-ln -s -f ./dotfiles/polybar ~/.config/polybar
+ln -s -f $PWD/dotfiles/polybar ~/.config/polybar
 

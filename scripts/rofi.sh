@@ -47,7 +47,7 @@ cp -r ~/GIT-REPOS/CORE/rofi-themes-collection/themes/* ~/.local/share/rofi/theme
 # ln -s -f $PWD/config/rofi/config.rasi ~/.config/rofi/config.rasi
 rm -rf ~/.config/rofi
 cd $FOLDER_LOCATION
-ln -s -f ../dotfiles/rofi/ ~/.config/
+ln -s -f $PWD/dotfiles/rofi/ ~/.config/
 
 #XCAPE - Bind rofi to SuperKey
 git clone https://github.com/alols/xcape.git ~/GIT-REPOS/CORE/xcape
