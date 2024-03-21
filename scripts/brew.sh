@@ -28,14 +28,13 @@ fi
 brew install neovim
 
 # glow
-brew install glow
+#brew install glow
 
 # skate
-brew tap charmbracelet/tap && brew install charmbracelet/tap/skate
+#brew tap charmbracelet/tap && brew install charmbracelet/tap/skate
 
 #charm
 # brew install charmbracelet/tap/charm
-
 
 # Install bat
 brew install bat
@@ -44,10 +43,10 @@ brew install bat
 brew install git-delta
 
 # Install tldr
-brew install tldr
+#brew install tldr
 
 # TheFuck
-brew install thefuck
+#brew install thefuck
 
 # Ripgrep
 brew install ripgrep
