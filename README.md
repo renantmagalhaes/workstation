@@ -11,11 +11,11 @@ Use the script ``install.sh``. Running the scripts directly may result in system
 
 # TODO
 
-- [ ] Make step 1~7 non-interactive
+- [x] Make step 1~7 non-interactive
 - [ ] New BSPWM desktop showcase
 - [ ] Hyprland setup
-- [ ] Organize dotfiles folder
-  - [ ] Modify all scripts and syslinks
+- [x] Organize dotfiles folder
+  - [x] Modify all scripts and syslinks
 
 # BSPWM
 
