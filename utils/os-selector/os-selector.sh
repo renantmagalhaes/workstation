@@ -10,7 +10,15 @@ check_cmd() {
 	command -v "$1" 2>/dev/null
 }
 
-if check_cmd apt-get; then # FOR DEB SYSTEMS
+if check_cmd explorer.exe; then # FOR WSL SYSTEMS
+	if check_cmd apt-get; then
+		bash ./OperatingSystem/wsl-debian.sh
+	elif check_cmd zypper; then
+		bash ./OperatingSystem/wsl-opensuse.sh
+	else
+		echo "Not able to identify desktop environment"
+	fi
+elif check_cmd apt-get; then # FOR DEB SYSTEMS
 	if [[ $gnome_check == "gnome" ]]; then
 		bash ./OperatingSystem/0-debian-gnome-system.sh
 	elif [[ $kde_check == "kde" ]]; then
