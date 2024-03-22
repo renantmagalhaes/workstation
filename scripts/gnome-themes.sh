@@ -18,30 +18,30 @@
 # TODO:
 
 # Nordic theme
-git clone https://github.com/EliverLara/Nordic.git ~/GIT-REPOS/CORE/Nordic
-sudo mv ~/GIT-REPOS/CORE/Nordic /usr/share/themes/
-
-# Otis theme
-sudo git clone https://github.com/EliverLara/Otis.git /usr/share/themes/Otis
-
-# Sweet theme
-sudo git clone https://github.com/EliverLara/Sweet.git  /usr/share/themes/Sweet
-
-# Kripton theme
-sudo git clone https://github.com/EliverLara/Kripton.git /usr/share/themes/Kripton
-
-# Qogir theme
-git clone https://github.com/vinceliuice/Qogir-theme.git ~/GIT-REPOS/CORE/Qogir-theme
-sh -c "~/GIT-REPOS/CORE/Qogir-theme/install.sh"
-
-# Orchis theme
-git clone https://github.com/vinceliuice/Orchis-theme.git ~/GIT-REPOS/CORE/Orchis-theme
-sh -c "~/GIT-REPOS/CORE/Orchis-theme/install.sh"
-
-# ChromeOS theme
-git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/ChromeOS-theme
-sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
-
+# git clone https://github.com/EliverLara/Nordic.git ~/GIT-REPOS/CORE/Nordic
+# sudo mv ~/GIT-REPOS/CORE/Nordic /usr/share/themes/
+#
+# # Otis theme
+# sudo git clone https://github.com/EliverLara/Otis.git /usr/share/themes/Otis
+#
+# # Sweet theme
+# sudo git clone https://github.com/EliverLara/Sweet.git  /usr/share/themes/Sweet
+#
+# # Kripton theme
+# sudo git clone https://github.com/EliverLara/Kripton.git /usr/share/themes/Kripton
+#
+# # Qogir theme
+# git clone https://github.com/vinceliuice/Qogir-theme.git ~/GIT-REPOS/CORE/Qogir-theme
+# sh -c "~/GIT-REPOS/CORE/Qogir-theme/install.sh"
+#
+# # Orchis theme
+# git clone https://github.com/vinceliuice/Orchis-theme.git ~/GIT-REPOS/CORE/Orchis-theme
+# sh -c "~/GIT-REPOS/CORE/Orchis-theme/install.sh"
+#
+# # ChromeOS theme
+# git clone https://github.com/vinceliuice/ChromeOS-theme.git ~/GIT-REPOS/CORE/ChromeOS-theme
+# sh -c "~/GIT-REPOS/CORE/ChromeOS-theme/install.sh"
+#
 # WhiteSur-gtk-theme
 # git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/GIT-REPOS/CORE/WhiteSur-gtk-theme
 # sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/install.sh -i void -N mojave -c dark -c light -t all 
@@ -60,9 +60,9 @@ wget https://github.com/dracula/gtk/archive/master.zip -O ~/.themes/Dracula.zip
 unzip ~/.themes/Dracula.zip -d ~/.themes/Dracula
 mv ~/.themes/Dracula/gtk-master/* ~/.themes/Dracula
 
-# Matcha Theme
-git clone https://github.com/vinceliuice/Matcha-gtk-theme.git ~/GIT-REPOS/CORE/Matcha-gtk-theme
-sh -c "~/GIT-REPOS/CORE/Matcha-gtk-theme/install.sh"
+# # Matcha Theme
+# git clone https://github.com/vinceliuice/Matcha-gtk-theme.git ~/GIT-REPOS/CORE/Matcha-gtk-theme
+# sh -c "~/GIT-REPOS/CORE/Matcha-gtk-theme/install.sh"
 
 
 # Graphite-gtk-theme
@@ -71,16 +71,16 @@ sh -c "~/GIT-REPOS/CORE/Graphite-gtk-theme/install.sh --tweaks black normal riml
 # sh -c "~/GIT-REPOS/CORE/Graphite-gtk-theme/install.sh --tweaks black normal"
 # sh -c "~/GIT-REPOS/CORE/Graphite-gtk-theme/install.sh --tweaks nord"
 
-# Colloid-gtk-theme
-git clone https://github.com/vinceliuice/Colloid-gtk-theme.git ~/GIT-REPOS/CORE/Colloid-gtk-theme
-cd  ~/GIT-REPOS/CORE/Colloid-gtk-theme && sh -c "./install.sh --tweaks --tweaks dracula"
-
-
-# Jasper-gtk-theme
-git clone https://github.com/vinceliuice/Jasper-gtk-theme.git ~/GIT-REPOS/CORE/Jasper-gtk-theme
-sh -c "~/GIT-REPOS/CORE/Jasper-gtk-theme/install.sh -t grey --tweaks nord"
-sh -c "~/GIT-REPOS/CORE/Jasper-gtk-theme/install.sh -t grey --tweaks black"
-sh -c "~/GIT-REPOS/CORE/Jasper-gtk-theme/install.sh -t grey --tweaks dracula"
+# # Colloid-gtk-theme
+# git clone https://github.com/vinceliuice/Colloid-gtk-theme.git ~/GIT-REPOS/CORE/Colloid-gtk-theme
+# cd  ~/GIT-REPOS/CORE/Colloid-gtk-theme && sh -c "./install.sh --tweaks --tweaks dracula"
+#
+#
+# # Jasper-gtk-theme
+# git clone https://github.com/vinceliuice/Jasper-gtk-theme.git ~/GIT-REPOS/CORE/Jasper-gtk-theme
+# sh -c "~/GIT-REPOS/CORE/Jasper-gtk-theme/install.sh -t grey --tweaks nord"
+# sh -c "~/GIT-REPOS/CORE/Jasper-gtk-theme/install.sh -t grey --tweaks black"
+# sh -c "~/GIT-REPOS/CORE/Jasper-gtk-theme/install.sh -t grey --tweaks dracula"
 
 ##############################################
 # ICONS
