@@ -13,7 +13,6 @@ linux_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
 plugins=(
   git
   kubectl
-  #kube-ps1
   zsh-completions
   zsh-autosuggestions
   zsh-syntax-highlighting
@@ -91,7 +90,6 @@ command -v htop > /dev/null && alias top='htop'
 command -v bpytop > /dev/null && alias top='bpytop'
 
 # Completion.
-fpath+=(~/.config/hcloud/completion/zsh)
 autoload -U compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
 zstyle ':completion:*' rehash true                              # automatically find new executables in path 

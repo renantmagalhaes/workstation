@@ -94,7 +94,7 @@ alias files='fzf'
 command -v vim > /dev/null && alias vi='vim'
 
 
-eval $(thefuck --alias)
+#eval $(thefuck --alias)
 
 ### Colorize commands
 #alias ls='ls --color=auto'
