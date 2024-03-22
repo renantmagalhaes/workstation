@@ -121,6 +121,24 @@ bash ./scripts/fonts.sh
 ## Themes
 bash ./scripts/gnome-themes.sh
 
+## TMUX 
+bash ./scripts/tmux.sh
+
+## ZSH
+bash ./scripts/zsh.sh
+
+## Alacritty 
+bash ./scripts/alacritty.sh
+
+## Guake
+guake --restore-preferences ./utils/guake/rtm-guake-setting
+
+## Neofetch 
+bash ./scripts/neofetch.sh
+
+## GIT
+bash ./utils/git-config/git-config.sh
+
 # LSD
 curl https://sh.rustup.rs -sSf | sh -s -- -y
 ~/.cargo/bin/cargo install lsd
