@@ -125,6 +125,24 @@ bash ./scripts/fonts.sh
 ## Themes
 bash ./scripts/gnome-themes.sh
 
+## TMUX
+bash ./scripts/tmux.sh
+
+## ZSH
+bash ./scripts/zsh.sh
+
+## Alacritty
+bash ./scripts/alacritty.sh
+
+## Guake
+guake --restore-preferences ./utils/guake/rtm-guake-setting
+
+## Neofetch
+bash ./scripts/neofetch.sh
+
+## GIT
+bash ./utils/git-config/git-config.sh
+
 # Colorls
 sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel
 sudo gem install colorls

@@ -47,6 +47,18 @@ bash ./scripts/vim.sh
 ## Fonts
 bash ./scripts/fonts.sh
 
+## TMUX
+bash ./scripts/tmux.sh
+
+## ZSH
+bash ./scripts/zsh.sh
+
+## Neofetch
+bash ./scripts/neofetch.sh
+
+## GIT
+bash ./utils/git-config/git-config.sh
+
 # Install LSD
 curl https://sh.rustup.rs -sSf | sh -s -- -y
 ~/.cargo/bin/cargo install lsd
