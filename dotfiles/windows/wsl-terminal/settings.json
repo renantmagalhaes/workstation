@@ -27,8 +27,14 @@
             "keys": "ctrl+enter"
         },
         {
-            "command": "find",
+            "command": 
+            {
+                "action": "searchWeb"
+            },
             "keys": "ctrl+shift+f"
+        },
+        {
+            "command": "find"
         },
         {
             "command": 
@@ -65,15 +71,17 @@
                 "commandline": "C:\\WINDOWS\\system32\\wsl.exe -d openSUSE-Tumbleweed",
                 "font": 
                 {
-                    "face": "JetBrainsMono Nerd Font"
+                    "face": "CaskaydiaCove Nerd Font",
+                    "size": 14.0,
+                    "weight": "normal"
                 },
                 "guid": "{879e2800-c857-467a-8669-078c73bab33e}",
                 "hidden": false,
                 "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
                 "name": "openSUSE-Tumbleweed",
                 "opacity": 90,
+                "padding": "12",
                 "startingDirectory": "~",
-                // "tabColor": "#03ff89",
                 "useAcrylic": true
             },
             {
@@ -99,34 +107,17 @@
                 "tabColor": "#320DAD"
             },
             {
-                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-                "hidden": true,
-                "name": "Azure Cloud Shell",
-                "source": "Windows.Terminal.Azure"
-            },
-            {
-                "guid": "{626e72b0-03a0-5e20-a856-df5d8ad499ab}",
-                "hidden": false,
-                "name": "Developer Command Prompt for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{88357d6c-3ea5-5e0a-ba7f-b3d1b72b0fc2}",
-                "hidden": false,
-                "name": "Developer PowerShell for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
                 "colorScheme": "RTM-Purple-World",
                 "font": 
                 {
-                    "face": "JetBrainsMono Nerd Font",
+                    "face": "Liga SFMono Nerd Font",
                     "size": 14.0
                 },
                 "guid": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
                 "hidden": false,
                 "name": "Debian",
                 "opacity": 90,
+                "padding": "12",
                 "source": "Windows.Terminal.Wsl",
                 "tabColor": "#FA455E",
                 "useAcrylic": true
