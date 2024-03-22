@@ -50,6 +50,18 @@ bash ./scripts/vim.sh
 ## Fonts
 bash ./scripts/fonts.sh
 
+## TMUX
+bash ./scripts/tmux.sh
+
+## ZSH
+bash ./scripts/zsh.sh
+
+## Neofetch
+bash ./scripts/neofetch.sh
+
+## GIT
+bash ./utils/git-config/git-config.sh
+
 # Temporary install Tmux via brew
 /home/linuxbrew/.linuxbrew/bin/brew install tmux
 sudo ln -s -f /home/linuxbrew/.linuxbrew/bin/tmux /usr/bin/tmux

@@ -27,6 +27,18 @@ bash ./scripts/fonts-macos.sh
 # VIM
 bash ./scripts/vim.sh
 
+## TMUX
+bash ./scripts/tmux.sh
+
+## ZSH
+bash ./scripts/zsh.sh
+
+## Neofetch
+bash ./scripts/neofetch.sh
+
+## GIT
+bash ./utils/git-config/git-config.sh
+
 # ColorLS
 brew install ruby
 sudo gem install colorls
@@ -73,4 +85,3 @@ echo "#         rtm.codes             #"
 echo "#     Please reboot your pc     #"
 echo "#                               #"
 echo "#################################"
-
