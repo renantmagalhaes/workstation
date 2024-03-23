@@ -119,6 +119,9 @@ sudo ln -s -f /mnt/c/Program\ Files/Genymobile/Genymotion/tools/adb.exe /usr/loc
 # Make sure all package are installed
 sudo apt-get -f install -y
 
+# Change to zsh
+zsh
+
 # RTM
 #clear
 echo "#################################"

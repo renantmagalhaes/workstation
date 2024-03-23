@@ -7,5 +7,5 @@ echo "set viminfo=" >>~/.vim/vimrc
 
 # Neo VIM
 rm -rf ~/.local/share/nvim
-ln -s -f $PWD/dotfiles/nvim/ ~/.config/
+ln -s -f $PWD/dotfiles/nvim ~/.config/nvim
 # git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
