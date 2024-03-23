@@ -58,7 +58,7 @@ sudo vi /usr/share/gnome-shell/extensions/pop-shell@system76.com/dark.css
 
 - Restart the PC and change the radius in the configuration
 
-![picture 2](../../images/b309589d32499d2cc3bc0ed66c31ff6dc481aa8ef51d10410a2bfc61907019d1.png)  
+![picture 2](../../assets/b309589d32499d2cc3bc0ed66c31ff6dc481aa8ef51d10410a2bfc61907019d1.png)  
 
 ## Theme edit
 
