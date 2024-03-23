@@ -162,6 +162,9 @@ sudo zypper install -y clamav clamtk
 #Distrobox
 #https://github.com/89luca89/distrobox#installation
 
+# Change to ZSH
+zsh
+
 # RTM
 #clear
 echo "#################################"

@@ -41,11 +41,11 @@ mkdir -p ~/GIT-REPOS/CORE
 ## Brew
 bash ./scripts/brew.sh
 
-## VIM
-bash ./scripts/vim.sh
-
 ## Fonts
 bash ./scripts/fonts.sh
+
+## VIM
+bash ./scripts/vim.sh
 
 ## TMUX
 bash ./scripts/tmux.sh
