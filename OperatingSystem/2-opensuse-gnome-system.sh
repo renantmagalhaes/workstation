@@ -163,6 +163,9 @@ sudo zypper install -y clamav clamtk
 ##Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
+# Change to ZSH
+zsh
+
 # RTM
 #clear
 echo "#################################"

@@ -121,19 +121,19 @@ bash ./scripts/fonts.sh
 ## Themes
 bash ./scripts/gnome-themes.sh
 
-## TMUX 
+## TMUX
 bash ./scripts/tmux.sh
 
 ## ZSH
 bash ./scripts/zsh.sh
 
-## Alacritty 
+## Alacritty
 bash ./scripts/alacritty.sh
 
 ## Guake
 guake --restore-preferences ./utils/guake/rtm-guake-setting
 
-## Neofetch 
+## Neofetch
 bash ./scripts/neofetch.sh
 
 ## GIT
@@ -179,10 +179,11 @@ sudo apt-get -f install -y
 #Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
-
 # Return to original path
 cd $FOLDER_LOCATION
-# RTM
+
+# Change to ZSH
+zsh
 # RTM
 #clear
 echo "#################################"

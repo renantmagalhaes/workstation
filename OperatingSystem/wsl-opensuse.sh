@@ -44,11 +44,11 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 ## Brew
 bash ./scripts/brew.sh
 
-## VIM
-bash ./scripts/vim.sh
-
 ## Fonts
 bash ./scripts/fonts.sh
+
+## VIM
+bash ./scripts/vim.sh
 
 ## TMUX
 bash ./scripts/tmux.sh
@@ -113,6 +113,9 @@ sudo zypper install -y docker docker-compose docker-compose-switch
 sudo systemctl enable docker
 sudo usermod -G docker -a $USER
 sudo systemctl restart docker
+
+# Change to ZSH
+zsh
 
 # RTM
 #clear
