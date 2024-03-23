@@ -6,13 +6,32 @@ if [ “$(id -u)” = “0” ]; then
 	exit 1
 fi
 
+# Menu
+cat <<"EOF"
+                    ██████  ████████ ███    ███                                            
+                    ██   ██    ██    ████  ████                                            
+                    ██████     ██    ██ ████ ██                                            
+                    ██   ██    ██    ██  ██  ██                                            
+                    ██   ██    ██    ██      ██                                            
+                                                                                           
+                                                                                           
+██     ██  ██████  ██████  ██   ██ ███████ ████████  █████  ████████ ██  ██████  ███    ██ 
+██     ██ ██    ██ ██   ██ ██  ██  ██         ██    ██   ██    ██    ██ ██    ██ ████   ██ 
+██  █  ██ ██    ██ ██████  █████   ███████    ██    ███████    ██    ██ ██    ██ ██ ██  ██ 
+██ ███ ██ ██    ██ ██   ██ ██  ██       ██    ██    ██   ██    ██    ██ ██    ██ ██  ██ ██ 
+ ███ ███   ██████  ██   ██ ██   ██ ███████    ██    ██   ██    ██    ██  ██████  ██   ████ 
+EOF
+echo ""
+echo ""
 echo "#### Menu Selector ####"
-echo " 1) Initial Setup"
+echo " 1) Initial Workstation"
+echo ""
+echo "#### Individual Sections ####"
 echo " 2) Install Tmux"
-echo " 3) Install Oh my ZSH"
-echo " 4) Install ZSH additional packages"
-echo " 5) Guake Settings"
-echo " 6) Install DEV Tools"
+echo " 3) Install ZSH setup"
+echo " 4) Guake Settings"
+echo " 5) Install DEV Tools"
+echo " 6) Install DevOps Tools"
 echo " 7) Install DevOps Tools"
 echo ""
 echo " ==== UTILS ===="
@@ -45,10 +64,10 @@ case $n in
 1) bash utils/os-selector/os-selector.sh ;;
 2) bash ./scripts/tmux.sh ;;
 3) bash ./scripts/zsh.sh ;;
-4) bash ./scripts/zsh.sh ;;
-5) guake --restore-preferences dotfiles/guake/rtm-guake-settings && echo "Done" ;;
-6) bash ./DevSecTools/software.sh ;;
-7) bash ./DevSecTools/devops.sh ;;
+4) guake --restore-preferences dotfiles/guake/rtm-guake-settings && echo "Done" ;;
+5) bash ./DevSecTools/software.sh ;;
+6) bash ./DevSecTools/devops.sh ;;
+6) bash ./DevSecTools/security.sh ;;
 	# ===================================================================================
 21) bash utils/virtualization/virtualbox/virtualbox-ext-pack.sh ;;
 22) bash utils/1password/install-1password.sh ;;
