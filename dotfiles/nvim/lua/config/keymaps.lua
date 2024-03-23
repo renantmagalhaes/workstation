@@ -1,0 +1,16 @@
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<C-p>", builtin.find_files, {})
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+
+-- Save file
+vim.keymap.set("n", "<C-s>", ":write<CR>", { silent = true })
+vim.keymap.set("i", "<C-s>", "<Esc>:write<CR>a", { silent = true })
+
+-- Muren Regex
+vim.keymap.set("n", "<leader>R", ":MurenToggle<CR>", { silent = true })
+
+-- Background color for tokyodark theme
+vim.cmd([[highlight Visual ctermbg=grey ctermfg=NONE guibg=#634d81 guifg=NONE]])
