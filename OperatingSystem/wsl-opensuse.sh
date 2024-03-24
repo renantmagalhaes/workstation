@@ -88,7 +88,7 @@ sudo pip3 install bpytop --upgrade
 mkdir -p ~/GIT-REPOS/CORE
 
 # Fix systemd init
-sudo ln -s /usr/lib/systemd/systemd /sbin/init
+#sudo ln -s /usr/lib/systemd/systemd /sbin/init
 
 # # Enable Systemd
 # sudo bash -c 'cat << EOF > /etc/wsl.conf
@@ -109,10 +109,10 @@ EOF'
 wsl.exe --setdefault openSUSE-Tumbleweed
 
 # Docker
-sudo zypper install -y docker docker-compose docker-compose-switch
-sudo systemctl enable docker
-sudo usermod -G docker -a $USER
-sudo systemctl restart docker
+#sudo zypper install -y docker docker-compose docker-compose-switch
+#sudo systemctl enable docker
+#sudo usermod -G docker -a $USER
+#sudo systemctl restart docker
 
 # Change to ZSH
 zsh
