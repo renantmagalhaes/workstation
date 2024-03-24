@@ -21,7 +21,7 @@ sudo zypper install -y ntp
 sudo ntpdate pool.ntp.org
 
 # Install the packages from repo
-sudo zypper install -y zsh vim curl net-tools iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox net-tools-deprecated busybox-sysvinit-tools bind-utils gcc-c++ rsync sassc gawk bc cron golang npm
+sudo zypper install -y zsh vim curl net-tools iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox net-tools-deprecated busybox-sysvinit-tools bind-utils gcc-c++ rsync sassc gawk bc cron golang npm fd
 
 # Install SNAP
 wsl_thumbleweed_check=$(env | grep WSL | grep -ioh "openSUSE-Tumbleweed" | awk '{print tolower($0)}')

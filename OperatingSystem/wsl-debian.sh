@@ -24,7 +24,7 @@ sudo ntpdate pool.ntp.org
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install zsh fonts-powerline vim wget tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat xclip unrar-free unzip python3 python3-pip net-tools ncdu whois flatpak snapd xournal evince jq bpytop virtualenv virtualenvwrapper pylint dnsutils nala sassc gawk telnet bc npm golang
+sudo apt-get -y install zsh fonts-powerline vim wget tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat xclip unrar-free unzip python3 python3-pip net-tools ncdu whois flatpak snapd xournal evince jq bpytop virtualenv virtualenvwrapper pylint dnsutils nala sassc gawk telnet bc npm golang fd-find
 
 # Flatpack
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -32,6 +32,10 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 #Utils
 ## Fix python default path
 sudo ln -s /usr/bin/python3 /usr/bin/python
+
+## FD path
+mkdir -p ~/.local/bin
+ln -s $(which fdfind) ~/.local/bin/fd
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
