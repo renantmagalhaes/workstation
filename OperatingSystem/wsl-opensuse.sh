@@ -51,6 +51,9 @@ bash ./scripts/fonts.sh
 bash ./scripts/vim.sh
 
 ## TMUX
+### Temporary install Tmux via brew
+/home/linuxbrew/.linuxbrew/bin/brew install tmux
+sudo ln -s -f /home/linuxbrew/.linuxbrew/bin/tmux /usr/bin/tmux
 bash ./scripts/tmux.sh
 
 ## ZSH
