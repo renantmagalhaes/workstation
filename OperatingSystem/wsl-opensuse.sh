@@ -21,7 +21,7 @@ sudo zypper install -y ntp
 sudo ntpdate pool.ntp.org
 
 # Install the packages from repo
-sudo zypper install -y zsh vim curl net-tools iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox bind-utils gcc-c++ rsync sassc gawk bc cron golang npm fd
+sudo zypper install -y zsh vim curl net-tools net-tools-deprecated iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox bind-utils gcc-c++ rsync sassc gawk bc cron golang npm fd libcap-progs
 
 # Install SNAP
 wsl_thumbleweed_check=$(env | grep WSL | grep -ioh "openSUSE-Tumbleweed" | awk '{print tolower($0)}')
@@ -86,6 +86,9 @@ sudo pip3 install bpytop --upgrade
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
+
+# Fix ping
+sudo setcap 'cap_net_raw+p' /bin/ping
 
 # Fix systemd init
 #sudo ln -s /usr/lib/systemd/systemd /sbin/init
