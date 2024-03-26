@@ -26,44 +26,11 @@ sudo apt-get update && sudo apt-get -y upgrade
 # Install the packages from repo
 sudo apt-get -y install zsh fonts-powerline vim wget tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat xclip unrar-free unzip python3 python3-pip net-tools ncdu whois flatpak snapd xournal evince jq bpytop virtualenv virtualenvwrapper pylint dnsutils nala sassc gawk telnet bc npm fd-find
 
-# Install GO
-# Set up Go environment variables
-GO_INSTALL_DIR="/usr/local/go"
-PROFILE="/etc/profile.d/go.sh"
+# Latest Go
+bash ./scripts/latest-go.sh
 
-# Remove any previous Go installation
-if [ -d "$GO_INSTALL_DIR" ]; then
-    echo "Removing previous Go installation from $GO_INSTALL_DIR"
-    sudo rm -rf "$GO_INSTALL_DIR"
-fi
-
-# Fetch the latest version of Go
-echo "Fetching the latest Go version..."
-LATEST_GO_VERSION=$(wget -qO- https://go.dev/VERSION?m=text |head -n 1)
-
-# Download the latest Go version
-echo "Downloading Go $LATEST_GO_VERSION..."
-wget https://go.dev/dl/$LATEST_GO_VERSION.linux-amd64.tar.gz -O /tmp/go.tar.gz
-
-# Extract Go to the installation directory
-echo "Extracting Go to $GO_INSTALL_DIR..."
-sudo tar -C /usr/local -xzf /tmp/go.tar.gz
-
-# Clean up the downloaded tar file
-rm /tmp/go.tar.gz
-
-# Set up Go environment by adding Go to the PATH in /etc/profile.d
-if ! grep -q 'export PATH=$PATH:/usr/local/go/bin' $PROFILE; then
-    echo "Setting up Go environment..."
-    echo 'export PATH=$PATH:/usr/local/go/bin' | sudo tee $PROFILE
-fi
-
-# Reload profile to apply changes immediately
-source $PROFILE
-
-# Verify installation
-echo "Go has been installed successfully!"
-go version
+# Latest Node
+bash ./scripts/latest-node.sh
 
 # Flatpack
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
