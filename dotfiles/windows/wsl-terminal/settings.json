@@ -49,7 +49,7 @@
     "alwaysShowNotificationIcon": true,
     "copyFormatting": "none",
     "copyOnSelect": true,
-    "defaultProfile": "{879e2800-c857-467a-8669-078c73bab33e}",
+    "defaultProfile": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
     "launchMode": "default",
     "minimizeToNotificationArea": true,
     "newTabMenu": 
@@ -68,20 +68,17 @@
         [
             {
                 "colorScheme": "RTM-Purple-World",
-                "commandline": "C:\\WINDOWS\\system32\\wsl.exe -d openSUSE-Tumbleweed",
                 "font": 
                 {
-                    "face": "CaskaydiaCove Nerd Font",
-                    "size": 14.0,
-                    "weight": "normal"
+                    "face": "Liga SFMono Nerd Font",
+                    "size": 12.0
                 },
-                "guid": "{879e2800-c857-467a-8669-078c73bab33e}",
+                "guid": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
                 "hidden": false,
-                "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
-                "name": "openSUSE-Tumbleweed",
+                "name": "Debian",
                 "opacity": 90,
-                "padding": "12",
-                "startingDirectory": "~",
+                "padding": "8",
+                "source": "Windows.Terminal.Wsl",
                 "useAcrylic": true
             },
             {
@@ -108,18 +105,21 @@
             },
             {
                 "colorScheme": "RTM-Purple-World",
+                "commandline": "C:\\WINDOWS\\system32\\wsl.exe -d openSUSE-Tumbleweed",
                 "font": 
                 {
-                    "face": "Liga SFMono Nerd Font",
-                    "size": 14.0
+                    "face": "CaskaydiaCove Nerd Font",
+                    "size": 14.0,
+                    "weight": "normal"
                 },
-                "guid": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
+                "guid": "{879e2800-c857-467a-8669-078c73bab33e}",
                 "hidden": false,
-                "name": "Debian",
+                "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
+                "name": "openSUSE-Tumbleweed",
                 "opacity": 90,
                 "padding": "12",
-                "source": "Windows.Terminal.Wsl",
-                "tabColor": "#FA455E",
+                "startingDirectory": "~",
+                "tabColor": "#38E964",
                 "useAcrylic": true
             }
         ]
