@@ -87,7 +87,7 @@ nitrogen --restore &
 /usr/bin/1password --silent &
 streamdeck -n &
 xsetroot -cursor_name left_ptr & # Fix mouse with X
-$HOME/GIT-REPOS/workstation/desktop/source/any/config/xcape/xcape.sh &
+$HOME/.dotfiles/xcape/xcape.sh &
 sleep 3
 $HOME/.config/polybar/launch.sh &
 

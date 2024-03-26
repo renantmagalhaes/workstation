@@ -47,6 +47,9 @@ fi
 # Update / upgrade
 sudo zypper refresh && sudo zypper update
 
+# Dotfiles syslink
+ln -s -f $PWD/dotfiles/ ~/.dotfiles
+
 # Install OPI
 sudo zypper install -y opi
 
