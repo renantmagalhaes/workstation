@@ -90,7 +90,7 @@ return {
           "jsonls",
           "marksman",
           "powershell_es",
-          "jedi_language_server",
+          "pyright",
           "sqls",
           "yamlls",
         },
