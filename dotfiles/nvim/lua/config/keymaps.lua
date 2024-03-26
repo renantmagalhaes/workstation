@@ -14,3 +14,8 @@ vim.keymap.set("n", "<leader>R", ":MurenToggle<CR>", { silent = true })
 
 -- Background color for tokyodark theme
 vim.cmd([[highlight Visual ctermbg=grey ctermfg=NONE guibg=#634d81 guifg=NONE]])
+
+-- Select all text
+vim.keymap.set('n', '<C-a>', 'ggVG', { silent = true })
+vim.keymap.set('i', '<C-a>', '<Esc>ggVG', { silent = true })
+
