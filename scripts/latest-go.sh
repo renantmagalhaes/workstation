@@ -19,7 +19,7 @@ wget https://go.dev/dl/$LATEST_GO_VERSION.linux-amd64.tar.gz -O /tmp/go.tar.gz
 
 ## Extract Go to the installation directory
 echo "Extracting Go to $GO_INSTALL_DIR..."
-sudo tar -C /usr/local/go -xzf /tmp/go.tar.gz
+sudo tar -C /usr/local/ -xzf /tmp/go.tar.gz
 
 ## Clean up the downloaded tar file
 rm /tmp/go.tar.gz
