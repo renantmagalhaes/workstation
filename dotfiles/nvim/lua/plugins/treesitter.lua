@@ -29,6 +29,11 @@ return {
         "typescript",
         "vim",
         "yaml",
+        "hcl",
+        "dockerfile",
+        "terraform",
+        "ssh_config"
+
       },
     },
   },
