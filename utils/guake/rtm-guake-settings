@@ -28,7 +28,7 @@ use-popup=true
 use-scrollbar=false
 use-trayicon=false
 window-halignment=0
-window-height=69
+window-height=86
 window-losefocus=false
 window-refocus=false
 window-tabbar=false
@@ -42,11 +42,11 @@ show-hide='<Primary>Return'
 search-terminal='disabled'
 
 [style/background]
-transparency=88
+transparency=96
 
 [style/font]
 allow-bold=true
 bold-is-bright=false
 palette='#121212121212:#a5a42a29ffff:#1312f4f45251:#3d3c2a29ffff:#2b2b4f4fffff:#28288383ffff:#2828b9b9ffff:#f1f1f1f1f1f1:#666666666666:#8a8a4343bdbd:#a6a69b9bffff:#68685a5affff:#5c5c7878ffff:#5e5ea2a2ffff:#5a5ac8c8ffff:#ffffffffffff:#fffffafaf3f3:#1a1a1a1a1a1a'
 palette-name='Custom'
-style='SFMono Nerd Font Medium 12'
+style='Liga SFMono Nerd Font Medium Italic 12'
