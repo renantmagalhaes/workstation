@@ -7,3 +7,5 @@ desktop/source/i3/config/nitrogen/bg-saved.cfg
 desktop/source/i3/config/nitrogen/nitrogen.cfg
 ./desktop/source/any/config/nvim/lazy-lock.json
 desktop/source/any/config/nvim/lazy-lock.json #lazy-vim pkg files
+./dotfiles/nvim/lazyvim.json
+dotfiles/nvim/lazyvim.json
