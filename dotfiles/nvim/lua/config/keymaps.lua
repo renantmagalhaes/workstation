@@ -19,7 +19,22 @@ vim.cmd([[highlight Visual ctermbg=grey ctermfg=NONE guibg=#634d81 guifg=NONE]])
 vim.keymap.set('n', '<C-a>', 'ggVG', { silent = true })
 vim.keymap.set('i', '<C-a>', '<Esc>ggVG', { silent = true })
 
-
 -- Search with telescope
 vim.keymap.set('n', '<leader>f', '<cmd>Telescope current_buffer_fuzzy_find<CR>', { noremap = true, silent = true })
 vim.keymap.set("i", "<C-f>", "<Esc>:Telescope current_buffer_fuzzy_find<CR>", { silent = true })
+
+-- surround
+-- -- add surrounding pairs normal mode
+vim.keymap.set('n', "<leader>'", "ysiw'",{ remap = true })
+vim.keymap.set('n', '<leader>"',  'ysiw"',{ remap = true })
+vim.keymap.set('n', "<leader>`", "ysiw`",{ remap = true })
+vim.keymap.set('n', "<leader>(", "ysiw(",{ remap = true })
+vim.keymap.set('n', "<leader>{", "ysiw{",{ remap = true })
+vim.keymap.set('n', "<leader>[", "ysiw[",{ remap = true })
+-- -- remove surrounding pairs normal mode
+--vim.keymap.set('n', "<leader>Del", "dsq",{ remap = true })
+-- -- add surrounding pairs inset mode
+-- TBD
+
+
+

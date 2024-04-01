@@ -39,4 +39,9 @@ return {
   },
   --
   { import = "lazyvim.plugins.extras.lang.json" },
+{
+  "nvim-treesitter/nvim-treesitter-textobjects",
+  after = "nvim-treesitter",
+  requires = "nvim-treesitter/nvim-treesitter",
+}
 }
