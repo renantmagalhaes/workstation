@@ -21,6 +21,14 @@ return {
       require("markdown").setup()
     end,
   },
+      {
+        'jakewvincent/mkdnflow.nvim',
+        config = function()
+            require('mkdnflow').setup({
+                -- Config goes here; leave blank for defaults
+            })
+        end
+    }
  -- {
  --        "lukas-reineke/headlines.nvim",
  --        dependencies = "nvim-treesitter/nvim-treesitter",
