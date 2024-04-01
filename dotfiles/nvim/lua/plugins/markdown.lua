@@ -26,6 +26,9 @@ return {
         config = function()
             require('mkdnflow').setup({
                 -- Config goes here; leave blank for defaults
+        mappings = {
+        MkdnCreateLinkFromClipboard = {{'n', 'v'}, '<leader>P'}, -- see MkdnEnter
+        }
             })
         end
     }
