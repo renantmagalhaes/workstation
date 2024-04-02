@@ -2,12 +2,20 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<C-p>", builtin.find_files, {})
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+-- vim.keymap.set("n", "<C-p>", builtin.find_files, {})
+-- vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+
+-- Select all text
+vim.keymap.set('n', '<C-a>', 'ggVG', { silent = true })
+vim.keymap.set('i', '<C-a>', '<Esc>ggVG', { silent = true })
 
 -- Save file
 vim.keymap.set("n", "<C-s>", ":write<CR>", { silent = true })
 vim.keymap.set("i", "<C-s>", "<Esc>:write<CR>a", { silent = true })
+
+-- Exit file
+vim.keymap.set("n", "<C-d>", "<Esc>:q<CR>", { silent = true })
+vim.keymap.set("i", "<C-d>", "<Esc>:q<CR>a", { silent = true })
 
 -- Muren Regex
 vim.keymap.set("n", "<leader>R", ":MurenToggle<CR>", { silent = true })
@@ -15,9 +23,6 @@ vim.keymap.set("n", "<leader>R", ":MurenToggle<CR>", { silent = true })
 -- Background color for tokyodark theme
 vim.cmd([[highlight Visual ctermbg=grey ctermfg=NONE guibg=#634d81 guifg=NONE]])
 
--- Select all text
-vim.keymap.set('n', '<C-a>', 'ggVG', { silent = true })
-vim.keymap.set('i', '<C-a>', '<Esc>ggVG', { silent = true })
 
 -- Search with telescope
 vim.keymap.set('n', '<leader>f', '<cmd>Telescope current_buffer_fuzzy_find<CR>', { noremap = true, silent = true })
