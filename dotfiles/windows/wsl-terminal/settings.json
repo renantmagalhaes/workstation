@@ -8,16 +8,22 @@
             "keys": "win+sc(41)"
         },
         {
+            "command": "unbound",
+            "keys": "ctrl+v"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+c"
+        },
+        {
             "command": 
             {
                 "action": "copy",
                 "singleLine": false
-            },
-            "keys": "ctrl+c"
+            }
         },
         {
-            "command": "paste",
-            "keys": "ctrl+v"
+            "command": "paste"
         },
         {
             "command": 
@@ -67,17 +73,20 @@
         "list": 
         [
             {
+                "backgroundImage": null,
                 "colorScheme": "RTM-Purple-World",
                 "font": 
                 {
                     "face": "Liga SFMono Nerd Font",
-                    "size": 12.0
+                    "size": 12.0,
+                    "weight": "semi-bold"
                 },
                 "guid": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
                 "hidden": false,
+                "intenseTextStyle": "bright",
                 "name": "Debian",
                 "opacity": 90,
-                "padding": "8",
+                "padding": "16",
                 "source": "Windows.Terminal.Wsl",
                 "useAcrylic": true
             },
