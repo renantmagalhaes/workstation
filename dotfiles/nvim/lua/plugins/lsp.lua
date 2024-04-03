@@ -190,6 +190,8 @@ return {
       formatters_by_ft = {
         ["python"] = { { "black", "ruff" } },
         ["markdown"] = { "markdownlint" },
+        ["yaml"] = { "yq" },
+        ["json"] = { "jq" },
       },
     },
   },
