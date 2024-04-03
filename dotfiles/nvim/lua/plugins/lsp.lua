@@ -136,7 +136,7 @@ return {
       lspconfig.docker_compose_language_service.setup({
         capabilities = capabilities,
       })
-      lspconfig.jedi_language_server.setup({
+      lspconfig.pyright.setup({
         capabilities = capabilities,
       })
       lspconfig.yamlls.setup({
@@ -158,5 +158,27 @@ return {
         -- Configuration here, or leave empty to use defaults
       })
     end,
+  },
+  {
+    "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "nvimtools/none-ls.nvim",
+    },
+    config = function()
+      require("mason-null-ls").setup({
+        ensure_installed = { "stylua", "jq", "shfmt", "black", "ruff", "yq", "terraform_fmt", "sqlfluff", "sqlfmt" },
+      })
+    end,
+  },
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = {
+      formatters_by_ft = {
+        ["python"] = { { "black", "ruff" } },
+      },
+    },
   },
 }
