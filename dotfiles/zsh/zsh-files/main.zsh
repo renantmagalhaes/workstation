@@ -67,7 +67,7 @@ export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 
 # git-auto-fetch
-GIT_AUTO_FETCH_INTERVAL=20
+GIT_AUTO_FETCH_INTERVAL=60
 
 # History 
 HISTFILE="$HOME/.zsh_history"
