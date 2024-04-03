@@ -1,11 +1,10 @@
+# vscode workspace
 .vscode/settings.json
 
-# Nitrogen
-desktop/source/i3/config/nitrogen/
-desktop/source/i3/config/nitrogen/*
-desktop/source/i3/config/nitrogen/bg-saved.cfg
-desktop/source/i3/config/nitrogen/nitrogen.cfg
-./desktop/source/any/config/nvim/lazy-lock.json
-desktop/source/any/config/nvim/lazy-lock.json #lazy-vim pkg files
+# NVIM
 ./dotfiles/nvim/lazyvim.json
 dotfiles/nvim/lazyvim.json
+./desktop/source/any/config/nvim/lazy-lock.json
+desktop/source/any/config/nvim/lazy-lock.json #lazy-vim pkg files
+
+## END
