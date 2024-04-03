@@ -1,12 +1,16 @@
 # workstation
+
 ```My full desktop environment.```
 
 ![workstation](assets/setup.png)
 
 For:
+
 - Debian 12
-- openSUSE Tumbleweed (GNOME version) 
-### Disclaimer !
+- openSUSE Tumbleweed (GNOME version)
+
+### Disclaimer
+
 Use the script ``install.sh``. Running the scripts directly may result in system malfunction.
 
 # TODO
@@ -24,15 +28,17 @@ Use the script ``install.sh``. Running the scripts directly may result in system
 ![2-terminal_and_file-manager-bspwm.png](./assets/workstation/2-terminal_and_file-manager-bspwm.png)
 
 ![3-Tiling_window-bspwm.png](./assets/workstation/3-Tiling_window-bspwm.png)
+
 # KDE Plasma 5.2X
 
 ![1-general_layout-kde.png](./assets/workstation/1-general_layout-kde.png)
 
 ![2-terminal_and_file-manager-kde.png](./assets/workstation/2-terminal_and_file-manager-kde.png)
 
-![3-Tiling_window-kde.png](./assets/workstation/3-Tiling_window-kde.png) 
+![3-Tiling_window-kde.png](./assets/workstation/3-Tiling_window-kde.png)
 
 # GNOME Version 41.X
+
 ![1-general_layout-gnome.png](./assets/workstation/1-general_layout-gnome.png)
 
 ![2-terminal_and_file-manager-gnome.png](./assets/workstation/2-terminal_and_file-manager-gnome.png)

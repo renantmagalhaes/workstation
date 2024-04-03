@@ -168,7 +168,18 @@ return {
     },
     config = function()
       require("mason-null-ls").setup({
-        ensure_installed = { "stylua", "jq", "shfmt", "black", "ruff", "yq", "terraform_fmt", "sqlfluff", "sqlfmt" },
+        ensure_installed = {
+          "stylua",
+          "jq",
+          "shfmt",
+          "black",
+          "ruff",
+          "yq",
+          "terraform_fmt",
+          "sqlfluff",
+          "sqlfmt",
+          "markdownlint",
+        },
       })
     end,
   },
@@ -178,6 +189,7 @@ return {
     opts = {
       formatters_by_ft = {
         ["python"] = { { "black", "ruff" } },
+        ["markdown"] = { "markdownlint" },
       },
     },
   },
