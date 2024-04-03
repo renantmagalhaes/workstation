@@ -62,9 +62,12 @@ source $ZSH/custom/plugins/zsh-autopair/autopair.zsh
 ## FZF
 source ~/.fzf.zsh
 
-#Python virtualenv and Virtualenvwrapper
+# Python virtualenv and Virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+
+# git-auto-fetch
+GIT_AUTO_FETCH_INTERVAL=20
 
 # History 
 HISTFILE="$HOME/.zsh_history"
