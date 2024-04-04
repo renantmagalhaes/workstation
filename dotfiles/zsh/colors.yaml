@@ -1,0 +1,24 @@
+user: 50 # bluegreen
+group: 231 # foreground
+permission:
+  read: 105 # dark purple
+  write: 63 # purple
+  exec: 120 # cyan
+  exec-sticky: 81 # cyan
+  no-access: 203 # red
+date:
+# hour-old: 105 # comment 20% lighter
+# day-old: 105 # comment
+# older: 103 # current line
+size:
+  none: 59 # current line
+  small: 105 # purple
+  medium: 222 # orange
+  large: 203 # red
+inode:
+  valid: 231 # foreground
+  invalid: 203 # red
+links:
+  valid: 81 # cyan
+  invalid: 203 # red
+tree-edge: 105 # dark purple

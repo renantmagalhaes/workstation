@@ -2,13 +2,19 @@
 FOLDER_LOCATION=$(pwd)
 
 #verify zsh
-type zsh >/dev/null 2>&1 || { echo >&2 "Install zsh before run this script "; exit 1; }
+type zsh >/dev/null 2>&1 || {
+	echo >&2 "Install zsh before run this script "
+	exit 1
+}
 
 #verify curl
-type curl >/dev/null 2>&1 || { echo >&2 "Install zsh before run this script "; exit 1; }
+type curl >/dev/null 2>&1 || {
+	echo >&2 "Install zsh before run this script "
+	exit 1
+}
 
-macos_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
-linux_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
+macos_check=$(uname -a | awk '{print $1}' | awk '{print tolower($0)}')
+linux_check=$(uname -a | awk '{print $1}' | awk '{print tolower($0)}')
 
 #install oh-my-zsh
 # sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -17,16 +23,17 @@ sed -i 's/exec\ zsh\ \-l//g' /tmp/zsh.sh
 chmod +x /tmp/zsh.sh
 sh -c '/tmp/zsh.sh'
 
-#zsh config 
+#zsh config
 ln -s -f $PWD/dotfiles/zsh/zshrc ~/.zshrc
 ln -s -f $PWD/dotfiles/zsh/zsh-files ~/.zsh
 
-#p10k config 
+#p10k config
 ln -s -f $PWD/dotfiles/zsh/p10k.zsh ~/.p10k.zsh
 
 #lsd config
-mkdir -p  ~/.config/lsd/
+mkdir -p ~/.config/lsd/
 ln -s -f $PWD/dotfiles/zsh/lsd-config.yaml ~/.config/lsd/config.yaml
+ln -s -f $PWD/dotfiles/zsh/colors.yaml ~/.config/lsd/colors.yaml
 
 #install plugins
 ##zsh-syntax-highlighting.zsh
@@ -53,13 +60,13 @@ git checkout tags/v2.5.0
 cd -
 
 if [[ $macos_check == "darwin" ]]; then
-    sed -i '' 's/\.\./\./g' ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd/init.sh
-    sed -i '' 's/ENHANCD_DISABLE_HYPHEN\:\-0/ENHANCD_DISABLE_HYPHEN\:\-1/g' ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd/init.sh
+	sed -i '' 's/\.\./\./g' ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd/init.sh
+	sed -i '' 's/ENHANCD_DISABLE_HYPHEN\:\-0/ENHANCD_DISABLE_HYPHEN\:\-1/g' ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd/init.sh
 elif [[ $linux_check == "linux" ]]; then
-    sed -i 's/\.\./\./g' ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd/init.sh
-    sed -i 's/ENHANCD_DISABLE_HYPHEN\:\-0/ENHANCD_DISABLE_HYPHEN\:\-1/g' ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd/init.sh
+	sed -i 's/\.\./\./g' ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd/init.sh
+	sed -i 's/ENHANCD_DISABLE_HYPHEN\:\-0/ENHANCD_DISABLE_HYPHEN\:\-1/g' ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd/init.sh
 else
-echo "Not able to identify desktop environment"
+	echo "Not able to identify desktop environment"
 fi
 
 #install powerlevel9k
