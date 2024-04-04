@@ -86,13 +86,12 @@ return {
           "eslint",
           "gopls",
           "html",
-          "helm_ls",
           "jsonls",
           "marksman",
-          "powershell_es",
           "pyright",
           "sqls",
           "yamlls",
+          "tflint",
         },
       })
     end,
@@ -109,6 +108,18 @@ return {
 
       local lspconfig = require("lspconfig")
 
+      lspconfig.tflint.setup({
+        capabilities = capabilities,
+      })
+      lspconfig.sqls.setup({
+        capabilities = capabilities,
+      })
+      lspconfig.marksman.setup({
+        capabilities = capabilities,
+      })
+      lspconfig.jsonls.setup({
+        capabilities = capabilities,
+      })
       lspconfig.eslint.setup({
         capabilities = capabilities,
       })
@@ -140,6 +151,9 @@ return {
         capabilities = capabilities,
       })
       lspconfig.yamlls.setup({
+        capabilities = capabilities,
+      })
+      lspconfig.gopls.setup({
         capabilities = capabilities,
       })
 
@@ -175,10 +189,11 @@ return {
           "black",
           "ruff",
           "yq",
-          "terraform_fmt",
+          "tflint",
           "sqlfluff",
           "sqlfmt",
           "markdownlint",
+          "cbfmt",
         },
       })
     end,
@@ -188,10 +203,11 @@ return {
     optional = true,
     opts = {
       formatters_by_ft = {
-        ["python"] = { { "black", "ruff" } },
-        ["markdown"] = { "markdownlint" },
+        ["python"] = { { "ruff", "black" } },
+        ["markdown"] = { { "markdownlint", "cbfmt" } },
         ["yaml"] = { "yq" },
         ["json"] = { "jq" },
+        ["terraform"] = { "tflint" },
       },
     },
   },
