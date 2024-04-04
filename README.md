@@ -16,18 +16,34 @@ Use the script ``install.sh``. Running the scripts directly may result in system
 # TODO
 
 - [x] Make step 1~7 non-interactive
-- [ ] New BSPWM desktop showcase
+- [x] New BSPWM desktop showcase
 - [ ] Hyprland setup
 - [x] Organize dotfiles folder
   - [x] Modify all scripts and syslinks
 
 # BSPWM
 
+### Menu
+
 ![1.general_layout_bspwm-2024](assets/2024-04-04-17-04-38.png)
 
-![2-terminal_and_file-manager-bspwm.png](./assets/workstation/2-terminal_and_file-manager-bspwm.png)
+### Workflow
 
-![3-Tiling_window-bspwm.png](./assets/workstation/3-Tiling_window-bspwm.png)
+![2-terminal_and_file-manager-bspwm-2024](assets/2024-04-04-17-10-29.png)
+
+![3-Tiling_window-bspwm-2024](assets/2024-04-04-17-13-11.png)
+
+### NeoVIM
+
+![4-vim-2024](./assets/4-vim-2024.png)
+
+### Terminal
+
+![terminal-2024](assets/terminal-2024.png)
+
+### Tmux
+
+![tmux-bar](assets/tmux-bar.png)
 
 # KDE Plasma 5.2X
 
