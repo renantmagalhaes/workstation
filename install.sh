@@ -59,7 +59,7 @@ echo " ==============="
 echo ""
 echo " 0) Exit"
 
-read n
+read -r n
 case $n in
 1) bash utils/os-selector/os-selector.sh ;;
 2) bash ./scripts/tmux.sh ;;
@@ -67,7 +67,7 @@ case $n in
 4) guake --restore-preferences dotfiles/guake/rtm-guake-settings && echo "Done" ;;
 5) bash ./DevSecTools/software.sh ;;
 6) bash ./DevSecTools/devops.sh ;;
-6) bash ./DevSecTools/security.sh ;;
+7) bash ./DevSecTools/security.sh ;;
 	# ===================================================================================
 21) bash utils/virtualization/virtualbox/virtualbox-ext-pack.sh ;;
 22) bash utils/1password/install-1password.sh ;;
