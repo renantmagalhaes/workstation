@@ -23,7 +23,7 @@ Use the script ``install.sh``. Running the scripts directly may result in system
 
 # BSPWM
 
-![1-general_layout_bspwm.png](./assets/workstation/1-general_layout-bspwm.png)
+![1.general_layout_bspwm-2024](assets/2024-04-04-17-04-38.png)
 
 ![2-terminal_and_file-manager-bspwm.png](./assets/workstation/2-terminal_and_file-manager-bspwm.png)
 
