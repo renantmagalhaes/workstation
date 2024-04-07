@@ -97,11 +97,9 @@ sudo setcap 'cap_net_raw+p' /bin/ping
 #sudo ln -s /usr/lib/systemd/systemd /sbin/init
 
 # # Enable Systemd
+sudo rm -rf /etc/wsl.conf
 sudo zypper -n in --auto-agree-with-licenses -t pattern wsl_systemd
-# sudo bash -c 'cat << EOF > /etc/wsl.conf
-# [boot]
-# systemd=true
-# EOF'
+sudo zypper in -t pattern wsl_gui
 
 # WSL config
 sudo bash -c 'cat << EOF > /mnt/c/Users/renan/.wslconfig
