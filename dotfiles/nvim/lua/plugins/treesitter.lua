@@ -34,6 +34,7 @@ return {
         "terraform",
         "ssh_config",
         "go",
+        "dockerfile",
       },
     },
   },
