@@ -172,11 +172,7 @@ sudo pip3 install psutil
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install bpytop virtualenv virtualenvwrapper pylint
 
 ## Droidcam
-cd /tmp/
-wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_2.1.2.zip
-unzip droidcam_latest.zip -d droidcam
-cd droidcam && sudo ./install-client
-sudo ./install-video
+bash ./scripts/droidcam.sh
 
 # Install ClamAV
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y clamav clamtk

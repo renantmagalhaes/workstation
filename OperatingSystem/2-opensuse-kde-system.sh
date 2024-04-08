@@ -153,11 +153,7 @@ sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel
 sudo gem install colorls
 
 ## Droidcam
-cd /tmp/
-wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_2.1.2.zip
-unzip droidcam_latest.zip -d droidcam
-cd droidcam && sudo ./install-client
-sudo ./install-video
+bash ./scripts/droidcam.sh
 
 # Install ClamAV
 sudo zypper install -y clamav clamtk
