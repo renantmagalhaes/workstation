@@ -2,16 +2,19 @@
 # TODO:
 
 ########### MAC OS APPS ###########
-macos_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
+macos_check=$(uname -a | awk '{print $1}' | awk '{print tolower($0)}')
 
 if [[ $macos_check == "darwin" ]]; then
-    brew install --cask pgadmin4
-    # brew install --cask robo-3t ### OUTDATED ?
-    brew install --cask dbeaver-community
-    brew install --cask postman
+	brew install --cask pgadmin4
+	# brew install --cask robo-3t ### OUTDATED ?
+	brew install --cask dbeaver-community
+	brew install --cask postman
 
-    exit
+	exit
 fi
+
+########### MAC OS APPS ###########
+########### WINDOWS APPS ###########
 
 ########### WINDOWS APPS ###########
 # Default folder
@@ -44,9 +47,6 @@ sudo flatpak install -y flathub net.sourceforge.jpdftweak.jPdfTweak
 
 # K8S IDE - Lens
 # sudo snap install kontena-lens --classic
-
-# scrcpy
-# sudo snap install scrcpy
 
 #clear
 echo "###########################"
