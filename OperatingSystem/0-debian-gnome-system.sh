@@ -188,6 +188,15 @@ sudo apt-get -f install -y
 #Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
+# scrcpy
+sudo apt install -y ffmpeg libsdl2-2.0-0 adb wget \
+	gcc git pkg-config meson ninja-build libsdl2-dev \
+	libavcodec-dev libavdevice-dev libavformat-dev libavutil-dev \
+	libswresample-dev libusb-1.0-0 libusb-1.0-0-dev
+git clone https://github.com/Genymobile/scrcpy ~/GIT-REPOS/CORE/scrcpy
+cd ~/GIT-REPOS/CORE/scrcpy || return
+bash install_release.sh
+
 # Return to original path
 cd $FOLDER_LOCATION
 
