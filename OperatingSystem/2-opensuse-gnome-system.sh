@@ -150,18 +150,14 @@ bash ./utils/git-config/git-config.sh
 sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel
 sudo gem install colorls
 
-## Droidcam
-cd /tmp/
-wget -O droidcam_latest.zip https://files.dev47apps.net/linux/droidcam_2.1.2.zip
-unzip droidcam_latest.zip -d droidcam
-cd droidcam && sudo ./install-client
-sudo ./install-video
-
 # Install ClamAV
 sudo zypper install -y clamav clamtk
 
 #Distrobox
 #https://github.com/89luca89/distrobox#installation
+
+## Droidcam
+bash ./scripts/droidcam.sh
 
 ##Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
