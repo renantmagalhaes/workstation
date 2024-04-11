@@ -21,20 +21,20 @@ return {
       require("markdown").setup()
     end,
   },
-      {
-        'jakewvincent/mkdnflow.nvim',
-        config = function()
-            require('mkdnflow').setup({
-                -- Config goes here; leave blank for defaults
+  {
+    "jakewvincent/mkdnflow.nvim",
+    config = function()
+      require("mkdnflow").setup({
+        -- Config goes here; leave blank for defaults
         mappings = {
-        MkdnCreateLinkFromClipboard = {{'n', 'v'}, '<leader>P'}, -- see MkdnEnter
-        }
-            })
-        end
-    }
- -- {
- --        "lukas-reineke/headlines.nvim",
- --        dependencies = "nvim-treesitter/nvim-treesitter",
- --        config = true, -- or `opts = {}`
- --    },
+          MkdnCreateLinkFromClipboard = { { "n", "v" }, "<leader>p" }, -- see MkdnEnter
+        },
+      })
+    end,
+  },
+  -- {
+  --        "lukas-reineke/headlines.nvim",
+  --        dependencies = "nvim-treesitter/nvim-treesitter",
+  --        config = true, -- or `opts = {}`
+  --    },
 }
