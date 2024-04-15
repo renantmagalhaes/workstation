@@ -22,12 +22,19 @@ wsl_leap_check=`env |grep WSL |grep -ioh "openSUSE-Leap"| awk '{print tolower($0
 
 
 if check_cmd wsl.exe; then
-    alias folder="explorer.exe"
     alias pdf="evince"
     alias wsl-update="wsl.exe --update"
     alias wsl-shutdown="wsl.exe --shutdown"
     alias wsl-delete="wsl.exe --unregister"
     alias wsl-list="wsl.exe --list"
+    if check_cmd files.exe; then
+      # current_path=$(pwd)
+      # FilesAppPath=$(echo $current_path | sed -e 's|^/|\\\\wsl.localhost\\openSUSE-Tumbleweed\\|' -e 's|/|\\|g')
+      # alias folder="files.exe '$FilesAppPath'"
+      alias folder="explorer.exe"
+    else
+          alias folder="explorer.exe"
+    fi
         if [[ $wsl_debian_check == "debian" ]]; then
                 alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y"
                 alias sudo="sudo "
