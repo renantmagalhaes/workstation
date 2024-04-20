@@ -32,7 +32,7 @@ elif check_cmd zypper; then # FOR OPENSUSE SYSTEMS
 	if [[ $gnome_check == "gnome" ]]; then
 		bash ./OperatingSystem/2-opensuse-gnome-system.sh
 	elif [[ $kde_check == "kde" ]]; then
-		bash ./OperatingSystem/2-opensuse-kde-system.sh
+		echo "KDE not supported"
 	else
 		echo "Not able to identify desktop environment"
 	fi

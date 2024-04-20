@@ -4,7 +4,7 @@
 
 # terminal emulator
 ctrl + alt + t
-	alacritty
+	kitty
 
 ~button3
 	xqp 0 $(xdo id -N Bspwm -n root) && jgmenu_run
