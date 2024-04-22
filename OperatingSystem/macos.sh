@@ -55,6 +55,9 @@ brew install --cask obs
 # AltTab
 brew install --cask alt-tab
 
+# Itsycal
+brew install itsycal
+
 # System settings
 ## MacOS use dimmed icons for hidden applications
 defaults write com.apple.Dock showhidden -boolean yes
