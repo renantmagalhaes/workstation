@@ -16,7 +16,7 @@ fi
 bash ./scripts/brew.sh
 
 # Default packages
-brew install wget \tree \htop \iterm2 \tmux \go \neofetch \rectangle \coreutils \warp \stats \lsd \telnet \ncdu
+brew install wget \tree \htop \iterm2 \tmux \go \neofetch \rectangle \coreutils \warp \stats \lsd \telnet \ncdu \jq
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
@@ -57,6 +57,9 @@ brew install --cask alt-tab
 
 # Itsycal
 brew install itsycal
+
+# kitty
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
 # System settings
 ## MacOS use dimmed icons for hidden applications
