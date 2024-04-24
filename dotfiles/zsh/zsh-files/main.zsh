@@ -133,8 +133,8 @@ zstyle ':completion:*:descriptions' format
 
 # Additional paths
 if [[ $macos_check == "darwin" ]]; then
-    eval $(/usr/local/bin/brew shellenv)
-    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+    eval $(/opt/homebrew/bin/brew shellenv)
+    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/opt/homebrew/bin"
 elif [[ $linux_check == "linux" ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     export PATH="$HOME/.local/bin:/usr/sbin:/usr/share/code/bin:$HOME/.cargo/bin/:$PATH"
