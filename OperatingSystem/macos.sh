@@ -58,6 +58,9 @@ brew install --cask alt-tab
 # Itsycal
 brew install itsycal
 
+# Flameshot
+brew install --cask flameshot
+
 # kitty
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
