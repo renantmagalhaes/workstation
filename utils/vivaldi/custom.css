@@ -569,9 +569,15 @@ button.button-startpage:active { background: none !important; }
   min-width: 38px;
 }
 
-.button-toolbar.newtab {
+/* FIX: Autoclose not working */
+
+/* .button-toolbar.newtab {
   left: 0px !important;
   width: 220px;
+} */
+
+.toolbar-tabbar.sync-and-trash-container {
+  flex-direction: column;
 }
 
 /* Add gap in the boarder when hover */
