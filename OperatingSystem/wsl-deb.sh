@@ -101,15 +101,15 @@ localhostForwarding=true # Boolean specifying if ports bound to wildcard or loca
 EOF'
 
 # Fix WSL2 for debian(temporary solution)
-sudo bash -c 'cat << EOF > /usr/lib/binfmt.d/WSLInterop.conf
-:WSLInterop:M::MZ::/init:PF
-EOF'
+# sudo bash -c 'cat << EOF > /usr/lib/binfmt.d/WSLInterop.conf
+# :WSLInterop:M::MZ::/init:PF
+# EOF'
 
 # Fix ping
 sudo setcap 'cap_net_raw+p' /bin/ping
 
 # Set WSL default distro
-wsl.exe --setdefault Debian
+wsl.exe --setdefault Ubuntu-24.04
 
 # Powertoys windows modifier
 pip3.exe install keyboard
