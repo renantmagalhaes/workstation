@@ -12,9 +12,9 @@ check_cmd() {
 
 if check_cmd explorer.exe; then # FOR WSL SYSTEMS
 	if check_cmd apt-get; then
-		bash ./OperatingSystem/wsl-debian.sh
+		bash ./OperatingSystem/wsl-deb.sh
 	elif check_cmd zypper; then
-		bash ./OperatingSystem/wsl-opensuse.sh
+		bash ./OperatingSystem/wsl-zypper.sh
 	else
 		echo "Not able to identify desktop environment"
 	fi
