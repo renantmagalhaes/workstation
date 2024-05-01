@@ -29,6 +29,9 @@ vim.cmd([[highlight Visual ctermbg=grey ctermfg=NONE guibg=#634d81 guifg=NONE]])
 -- Search with telescope
 vim.keymap.set("n", "<leader>f", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-f>", "<Esc><cmd>Telescope current_buffer_fuzzy_find<CR>", { silent = true })
+vim.keymap.set("n", "<leader><leader>", function()
+  require("telescope").extensions.smart_open.smart_open()
+end, { noremap = true, silent = true })
 
 -- surround
 -- -- add surrounding pairs normal mode
