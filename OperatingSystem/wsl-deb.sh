@@ -101,21 +101,31 @@ localhostForwarding=true # Boolean specifying if ports bound to wildcard or loca
 EOF'
 
 # Fix WSL2 for debian(temporary solution)
-# sudo bash -c 'cat << EOF > /usr/lib/binfmt.d/WSLInterop.conf
-# :WSLInterop:M::MZ::/init:PF
-# EOF'
+sudo bash -c 'cat << EOF > /usr/lib/binfmt.d/WSLInterop.conf
+:WSLInterop:M::MZ::/init:PF
+EOF'
 
 # Fix ping
 sudo setcap 'cap_net_raw+p' /bin/ping
 
 # Set WSL default distro
-wsl.exe --setdefault Ubuntu-24.04
+wsl.exe --setdefault Debian
 
 # Powertoys windows modifier
 pip3.exe install keyboard
 
-# Docker
-sudo apt-get -y install docker.io docker-compose
+# Docker Latest
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+echo \
+	"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
+	sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo systemctl enable docker
 sudo systemctl restart docker
 sudo usermod -aG docker $USER
