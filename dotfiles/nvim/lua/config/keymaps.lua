@@ -32,6 +32,12 @@ vim.keymap.set("i", "<C-f>", "<Esc><cmd>Telescope current_buffer_fuzzy_find<CR>"
 vim.keymap.set("n", "<leader><leader>", function()
   require("telescope").extensions.smart_open.smart_open()
 end, { noremap = true, silent = true })
+-- -- Bind command
+-- vim.keymap.set("n", "<leader><leader>", "<Cmd>Telescope frecency<CR>")
+-- -- Bind Lua function directly
+-- vim.keymap.set("n", "<leader><leader>", function()
+--   require("telescope").extensions.frecency.frecency {}
+-- end)
 
 -- surround
 -- -- add surrounding pairs normal mode
