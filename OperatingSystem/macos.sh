@@ -16,7 +16,7 @@ fi
 bash ./scripts/brew.sh
 
 # Default packages
-brew install wget \tree \htop \iterm2 \tmux \go \neofetch \rectangle \coreutils \warp \stats \lsd \telnet \ncdu \jq \nodejs
+brew install wget \tree \htop \iterm2 \tmux \go \neofetch \rectangle \coreutils \warp \stats \lsd \telnet \ncdu \jq \nodej \sqlite
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
