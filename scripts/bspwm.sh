@@ -38,11 +38,12 @@ elif check_cmd zypper; then # FOR RPM SYSTEMS
 	sudo pip3 install pywal --break-system-packages
 
 	# Picom
-	sudo zypper install -y dbus-1-devel gcc git libconfig-devel libdrm-devel libev-devel libX11-devel libX11-xcb1 libXext-devel libxcb-devel Mesa-libGL-devel meson pcre-devel libpixman-1-0-devel uthash-devel xcb-util-image-devel xcb-util-renderutil-devel xorgproto-devel
+	sudo zypper install -y dbus-1-devel gcc git libconfig-devel libdrm-devel libev-devel libX11-devel libX11-xcb1 libXext-devel libxcb-devel Mesa-libGL-devel meson pcre-devel libpixman-1-0-devel uthash-devel xcb-util-image-devel xcb-util-renderutil-devel xorgproto-devel libepoxy-devel Mesa-libEGL-devel xcb-util-devel
 	# git clone https://github.com/yshui/picom.git ~/GIT-REPOS/CORE/picom
-	git clone https://github.com/jonaburg/picom.git ~/GIT-REPOS/CORE/picom
+	# git clone https://github.com/jonaburg/picom.git ~/GIT-REPOS/CORE/picom
+	git clone https://github.com/FT-Labs/picom.git ~/GIT-REPOS/CORE/picom
 	cd ~/GIT-REPOS/CORE/picom
-	git submodule update --init --recursive
+	# git submodule update --init --recursive
 	meson --buildtype=release . build
 	ninja -C build
 	sudo ninja -C build install
