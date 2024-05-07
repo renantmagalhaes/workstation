@@ -616,9 +616,129 @@ span.favicon.jstest-favicon-image {
 /* #browser .tab-position .tab.active {background-color: #7740f7; color: rgb(255, 255, 255) !important;} */
 
 /* popup page zoom control */
-#browser > footer .page-zoom-controls input[type=range] {position: absolute; background-image: linear-gradient(90deg, #0000 0 calc(22% - 2px), var(--colorBg) 0 22%, #0000 0 calc(40% - 2px), var(--colorBg) 0 40%, #0000 0 calc(58% - 2px), var(--colorBg) 0 58%, #0000 0 calc(77% - 2px), var(--colorBg) 0 77%, #0000 0 100%); box-shadow: 0 0 0 7px var(--colorBg), 0 0 0 8px var(--colorBorder), 0 2px 12px hsl(0deg 0% 0% / 25%); visibility: hidden; opacity:0; transform: translate(-25px, -20px); transition: visibility .6s, opacity .2s ease-out .4s, transform .25s ease-in .35s !important;}
-#browser > footer .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {visibility: visible; opacity: 1; transform: translate(-25px, -25px); transition: opacity: .1s ease-out .12s, transform .1s ease .1s !important;}
-#browser > footer .page-zoom-controls input[type=range]::before {content: ''; position: absolute; pointer-events: none; border: 6px solid hsl(0deg 0% 0% / 0%); z-index: inherit; filter: drop-shadow(0 1px var(--colorBorder)); bottom: -19px; left: 50%; margin-left: -6px; border-top-color: var(--colorBgLight);}
-#browser > footer .page-zoom-controls:has(input[type=range]) .zoom-percent {order:-1;} /* move % to left */
-#browser > footer .page-zoom-controls .button-toolbar > button .button-title {min-width: 1ch; max-width: 1ch;} /* reduced Reset to R button */
+/* popup page zoom control */
+.toolbar-mainbar .page-zoom-controls input[type=range] {
+	position: absolute;
+	width: 142px;
+	transform: translate(-7px, 0);
+	visibility: hidden;
+	opacity: 0;
+	z-index: 9;
+	background-image: repeating-linear-gradient(-50deg, #0000 0 20%, var(--colorBg) 0 21%, #fff6 0 40%, var(--colorBg) 0 41%);
+	box-shadow: 0 0 0 7px var(--colorBg), 0 0 0 8px var(--colorBorder), 0 2px 12px hsl(0deg 0% 0% / 25%);
+	transition: visibility .6s, opacity .2s ease-out .4s, transform .25s ease-in .35s !important;
+}
+
+.toolbar-mainbar .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
+	visibility: visible;
+	opacity: 1;
+	transform: translate(-7px, 29px);
+	transition: opacity .1s ease-out .2s, transform .2s ease-out .1s !important;
+}
+
+.toolbar-mainbar .page-zoom-controls input[type=range]::after {
+	content: '';
+	position: absolute;
+	top: -19px;
+	left: 13.5%;
+	border: 6px solid hsl(0deg 0% 0% / 0%);
+	border-bottom-color: var(--colorBgLight);
+	filter: drop-shadow(0 -1px var(--colorBorder));
+	pointer-events: none;
+}
+
+.toolbar-mainbar .page-zoom-controls > input[type=range]::before {
+	content: '';
+	position: absolute;
+	inset: -14px 0 100% 0;
+}
+
+.toolbar-mainbar .page-zoom-controls:has(input[type=range]) .button-toolbar[title="Reset Zoom"]:has(button:disabled) {
+	display: none;
+}
+
+.toolbar-mainbar .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
+	position: absolute;
+	align-self: unset;
+	transform: translate(14px, 18.5px);
+	z-index: 19;
+	width: 0;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity .2s ease-in .25s, visibility .5s !important;
+}
+
+.toolbar-mainbar .page-zoom-controls:has(input[type=range]):is(:hover, :focus-within) .button-toolbar:has(button[title="Reset Zoom"]) {
+	opacity: 1;
+	visibility: visible;
+	transition: opacity .2s ease-in .13s !important;
+}
+
+.toolbar-mainbar .page-zoom-controls:has(input[type=range]) button[title="Reset Zoom"] {
+	border: 0;
+	height: 13px;
+}
+
+.toolbar-mainbar .page-zoom-controls:has(input[type=range]) button[title="Reset Zoom"] .button-title {
+	min-width: 1ch;
+	max-width: 1ch;
+	font-size: 13px;
+	font-weight: bold;
+	text-shadow: -1px 0 var(--colorBg), 1px 0 var(--colorBg), -2px 0 var(--colorBg), 2px 0 var(--colorBg);
+}
+
+.toolbar-mainbar .page-zoom-controls:has(input[type=range]) button[title="Reset Zoom"]:hover .button-title {
+	font-size: 17px;
+	color: var(--colorHighlightBg);
+}
+
+/* leftside 1st button */
+.toolbar-mainbar > div:first-child > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
+	transform: translate(3px, 29px);
+}
+
+.toolbar-mainbar > div:first-child > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
+	transform: translate(24px, 18.5px);
+}
+
+/* rightside button */
+.toolbar-mainbar > div:nth-last-child(4) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
+	transform: translate(-10px, 29px);
+}
+
+.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
+	transform: translate(-44px, 29px);
+}
+
+.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls input[type=range]::after {
+	left: 40%;
+}
+
+.toolbar-mainbar > div:nth-last-child(3) > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
+	transform: translate(-24px, 18.5px);
+}
+
+.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
+	transform: translate(-78px, 29px);
+}
+
+.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls input[type=range]::after {
+	left: 64%;
+}
+
+.toolbar-mainbar > div:nth-last-child(2) > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
+	transform: translate(-58px, 18.5px);
+}
+
+.toolbar-mainbar > div:last-child > .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {
+	transform: translate(-112px, 29px);
+}
+
+.toolbar-mainbar > div:last-child > .page-zoom-controls input[type=range]::after {
+	left: 88%;
+}
+
+.toolbar-mainbar > div:last-child > .page-zoom-controls:has(input[type=range]) .button-toolbar:has(button[title="Reset Zoom"]) {
+	transform: translate(-92px, 18.5px);
+}
 
