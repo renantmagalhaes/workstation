@@ -26,7 +26,6 @@ super + Escape
 ctrl + Return
   tdrop -ma -w -4 -y "45" -h 80% -s dropdown kitty
 
-
 # Open file manager
 super + e
 	nautilus
