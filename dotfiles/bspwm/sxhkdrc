@@ -28,7 +28,7 @@ ctrl + Return
 
 # Open file manager
 super + e
-	nautilus
+	nemo
 
 # Screenshot
 Print
