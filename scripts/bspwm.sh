@@ -10,7 +10,7 @@ check_cmd() {
 
 # Add the repository key with either wget or curl
 if check_cmd apt-get; then # FOR DEB SYSTEMS
-	sudo apt-get install -y bspwm sxhkd feh lxappearance playerctl blueman x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit mate-polkit-bin libnotify-bin qt5ct kdeconnect nautilus-kdeconnect
+	sudo apt-get install -y bspwm sxhkd feh lxappearance playerctl blueman x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit mate-polkit-bin libnotify-bin qt5ct kdeconnect nautilus-kdeconnect xprop xwininfo
 	sudo pip3 install pywal --break-system-packages
 
 	# Dunst
@@ -34,7 +34,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
 elif check_cmd zypper; then # FOR RPM SYSTEMS
 
 	# Install dependencies
-	sudo zypper install -y bspwm sxhkd feh lxappearance playerctl blueman xsetroot dunst nitrogen scrot xdotool NetworkManager-applet pcp-pmda-lmsensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit libnotify4 libnotify-devel libnotify-tools
+	sudo zypper install -y bspwm sxhkd feh lxappearance playerctl blueman xsetroot dunst nitrogen scrot xdotool NetworkManager-applet pcp-pmda-lmsensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit libnotify4 libnotify-devel libnotify-tools xprop xwininfo
 	sudo pip3 install pywal --break-system-packages
 
 	# Picom
@@ -62,6 +62,11 @@ mkdir -p ~/.config/sxhkd/
 git clone https://github.com/baskerville/xqp.git ~/GIT-REPOS/CORE/xqp
 cd ~/GIT-REPOS/CORE/xqp
 make
+sudo make install
+
+# tddrop
+git clone https://github.com/noctuid/tdrop.git ~/GIT-REPOS/CORE/tdrop
+cd ~/GIT-REPOS/CORE/tdrop
 sudo make install
 
 ## BSPWM
