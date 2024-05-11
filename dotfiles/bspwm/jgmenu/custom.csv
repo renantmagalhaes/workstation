@@ -1,6 +1,6 @@
 Menu,~/.config/rofi/scripts/rofi-menu.sh,appimagekit-archipelago
-Terminal,alacritty,Alacritty
-File Explorer,nautilus,stock_folder
+Terminal,kitty,Terminal
+File Explorer,nemo,stock_folder
 Browser,/usr/bin/vivaldi,abrowser
 Browser (Incognito),/usr/bin/vivaldi --incognito,abrowser
 ^sep()
