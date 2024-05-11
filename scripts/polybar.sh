@@ -23,7 +23,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
 
 elif check_cmd zypper; then # FOR OpenSuse SYSTEMS
 	# pkg
-	sudo zypper install -y polybar mpd wmctrl playerctl yad xsel
+	sudo zypper install -y polybar mpd wmctrl playerctl xsel
 	wget https://download-ib01.fedoraproject.org/pub/fedora/linux/releases/36/Everything/x86_64/os/Packages/m/material-design-dark-1.6.2-3.fc36.noarch.rpm -O /tmp/material-design-dark.rpm
 	sudo rpm -i /tmp/material-design-dark.rpm
 	wget https://download-ib01.fedoraproject.org/pub/fedora/linux/updates/36/Everything/aarch64/Packages/m/material-design-light-1.6.2-6.fc36.noarch.rpm -O /tmp/material-design-light.rpm
@@ -49,4 +49,3 @@ rm -rf ~/.config/polybar
 # Polybar config
 cd $FOLDER_LOCATION
 ln -s -f $PWD/dotfiles/polybar ~/.config/polybar
-
