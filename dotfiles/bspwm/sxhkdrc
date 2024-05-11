@@ -49,13 +49,17 @@ super + b
 super + n
 gnome-control-center wifi
 
-# Browser favorites shortcut
-ctrl + space
-	$HOME/GIT-REPOS/workstation/utils/autokey/favorites.sh
+# # Browser favorites shortcut
+# ctrl + space
+# 	$HOME/GIT-REPOS/workstation/utils/autokey/favorites.sh
+#
+# # Browser search shortcut
+# F2
+# 	$HOME/GIT-REPOS/workstation/utils/autokey/search.sh
 
-# Browser search shortcut
-F2
-	$HOME/GIT-REPOS/workstation/utils/autokey/search.sh
+# Dead keys layout
+super + Insert
+	$HOME/.config/bspwm/scripts/dead-keys/dead-keys.sh
 
 # Lock screen
 super + l
