@@ -30,6 +30,10 @@ ctrl + Return
 super + e
 	nemo
 
+# Clip board manager
+super + v
+  xfce4-clipman-history
+
 # Screenshot
 Print
 	flameshot gui
