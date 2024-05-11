@@ -83,6 +83,7 @@ insync start --no-daemon &
 nitrogen --restore &
 /usr/bin/1password --silent &
 streamdeck -n &
+xfce4-clipman &
 xsetroot -cursor_name left_ptr & # Fix mouse with X
 $HOME/.dotfiles/xcape/xcape.sh &
 sleep 3

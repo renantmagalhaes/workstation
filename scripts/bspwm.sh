@@ -10,7 +10,7 @@ check_cmd() {
 
 # Add the repository key with either wget or curl
 if check_cmd apt-get; then # FOR DEB SYSTEMS
-	sudo apt-get install -y bspwm sxhkd feh lxappearance playerctl blueman x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit mate-polkit-bin libnotify-bin qt5ct kdeconnect nautilus-kdeconnect xprop xwininfo
+	sudo apt-get install -y bspwm sxhkd feh lxappearance playerctl blueman x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit mate-polkit-bin libnotify-bin qt5ct kdeconnect nautilus-kdeconnect xprop xwininfo xfce4-clipman-plugin
 	sudo pip3 install pywal --break-system-packages
 
 	# Dunst
@@ -34,7 +34,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
 elif check_cmd zypper; then # FOR RPM SYSTEMS
 
 	# Install dependencies
-	sudo zypper install -y bspwm sxhkd feh lxappearance playerctl blueman xsetroot dunst nitrogen scrot xdotool NetworkManager-applet pcp-pmda-lmsensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit libnotify4 libnotify-devel libnotify-tools xprop xwininfo
+	sudo zypper install -y bspwm sxhkd feh lxappearance playerctl blueman xsetroot dunst nitrogen scrot xdotool NetworkManager-applet pcp-pmda-lmsensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit libnotify4 libnotify-devel libnotify-tools xprop xwininfo xfce4-clipman-plugin
 	sudo pip3 install pywal --break-system-packages
 
 	# Picom
