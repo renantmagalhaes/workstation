@@ -61,6 +61,9 @@ elif check_cmd zypper; then  # FOR ZYPPER TW SYSTEMS
     if [[ $gnome_check == "gnome" ]]; then
         alias folder="nemo"
         alias pdf="evince"
+    elif [[ $bspwm_check == "bspwm" ]]; then
+        alias folder="nemo"
+        alias pdf="evince"
     fi
 fi
 
