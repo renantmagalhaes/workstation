@@ -47,6 +47,23 @@ elif check_cmd zypper; then # FOR RPM SYSTEMS
 	meson --buildtype=release . build
 	ninja -C build
 	sudo ninja -C build install
+	# YAD
+	echo "Updating system and installing necessary build tools..."
+	sudo zypper install -y git autoconf automake gtk3-devel intltool pkg-config
+	echo "Cloning YAD repository..."
+	git clone https://github.com/v1cont/yad.git ~/GIT-REPOS/CORE/yad
+	cd ~/GIT-REPOS/CORE/yad
+	# Generate configuration scripts using autogen.sh
+	echo "Generating configuration scripts..."
+	autoreconf -ivf && intltoolize
+	# Configure the build
+	echo "Configuring the build environment..."
+	./configure
+	echo "Compiling YAD..."
+	make
+	echo "Installing YAD..."
+	sudo make install
+
 else
 	echo "Not able to identify the system"
 	exit 0
