@@ -259,7 +259,7 @@ tmux_conf_theme_right_separator_sub=''
 #     - #{uptime_s}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_status_left='  '
+tmux_conf_theme_status_left='  #{circled_session_name}'
 tmux_conf_theme_status_right='#{prefix_highlight} #{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},}, #[fg=#AF87FF]#[fg=black]#[bg=#AF87FF] ,#[bg=#313243] #(~/.tmux/plugins/tmux/sys-stats/cpu.sh),#[bg=#313243] #(~/.tmux/plugins/tmux/sys-stats/mem.sh),#[bg=#313243] #(~/.tmux/plugins/tmux/sys-stats/disk.sh),#[bg=#313243] #[fg=#B7FF08]#[fg=black]#[bg=#B7FF08]󰀂 ,#[bg=#313243] #{online_status}#[fg=grey]#(echo " [")#{network_bandwidth}#[fg=grey]#(echo "]"),#[bg=#313243] #[fg=#87AFFF]#[fg=black]#[bg=#87AFFF] ,#[bg=#313243]#[fg=white] #{circled_session_name},#[bg=#313243] #[fg=#ff0069]#[fg=black]#[bg=#ff0069] #[bg=#313243],#[bg=#313243] [#{username}#{root}#[bg=#313243]'@'#{hostname}]'
 
 # status left style
