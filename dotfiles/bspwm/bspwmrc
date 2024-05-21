@@ -77,7 +77,6 @@ bspc rule -a gnome-calendar state=floating
 # picom --experimental-backend &
 picom --animations -b
 pgrep -x sxhkd >/dev/null || sxhkd &
-guake &
 kdeconnect-indicator &
 insync start --no-daemon &
 # feh --bg-scale ~/Pictures/background &
