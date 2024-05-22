@@ -132,7 +132,8 @@ alias disk-manager='ncdu'
 alias git-sync='git add -A && git commit -m sync && git push'
 
 ### System ###
-alias pip='python -m pip'
+alias pip='pipx'
+alias pip3='python -m pip'
 alias vinotes='vi ~/notes.md'
 alias lg='lazygit'
 alias killvi='pidof nvim |xargs kill -9'
