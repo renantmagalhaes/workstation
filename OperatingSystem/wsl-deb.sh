@@ -24,7 +24,7 @@ sudo ntpdate pool.ntp.org
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install zsh fonts-powerline vim wget tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat xclip unrar-free unzip python3 python3-pip net-tools ncdu whois flatpak xournal evince jq bpytop virtualenv virtualenvwrapper pylint dnsutils nala sassc gawk telnet bc fd-find neofetch python3-venv sqlite3
+sudo apt-get -y install zsh fonts-powerline vim wget tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat xclip unrar-free unzip python3 python3-pip net-tools ncdu whois flatpak xournal evince jq dnsutils nala sassc gawk telnet bc fd-find neofetch python3-venv sqlite3 pipx
 
 # Latest Go
 bash ./scripts/latest-go.sh
@@ -73,6 +73,12 @@ curl https://sh.rustup.rs -sSf | sh -s -- -y
 # Colorls
 sudo apt install -y ruby-dev
 sudo gem install colorls
+
+# Install pip packages
+pipx install virtualenv
+pipx install virtualenvwrapper
+pipx install pylint
+pipx install bpytop
 
 # Enable Systemd
 sudo bash -c 'cat << EOF > /etc/wsl.conf
