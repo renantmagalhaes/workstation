@@ -15,6 +15,7 @@
 ```
 
 ## List Wacom devices
+
 ```
 xsetwacom --list devices
 
@@ -29,14 +30,12 @@ xrandr --listactivemonitors
 Monitors: 2
 
  0: +*DP-1 2560/697x1440/393+0+0  DP-1
- 1: +HDMI-1 1920/598x1080/336+2560+0  HDMI-1
+ 1: +DP-2 1920/598x1080/336+2560+0  DP-2
 ```
 
-## Map wacom to monitor 
+## Map wacom to monitor
 
 ```
 xsetwacom --set "16" MapToOutput DP-1
 xsetwacom --set "15" MapToOutput DP-1
 ```
-
-
