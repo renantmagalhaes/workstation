@@ -131,6 +131,9 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':completion:*:descriptions' format
 
+# Utils
+## remove mail/postfix check
+unset MAILCHECK
 # Additional paths
 if [[ $macos_check == "darwin" ]]; then
     eval $(/opt/homebrew/bin/brew shellenv)
