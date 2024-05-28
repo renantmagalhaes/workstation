@@ -151,15 +151,14 @@ super + Return
 
 # Move windows between workspaces
 super + ctrl + shift + Right
-	bspc node -d next --follow && mon=`bspc query -D -d focused --names | cut -c1` && bspc desktop --focus $mon && bspc desktop --focus $mon$mon && bspc desktop --focus $mon
+  bspc node -d next --follow && mon=`bspc query -D -d focused --names`
+  if [[ "$mon" =~ ^[0-9]$ ]]; then mon="$mon$mon"; fi
+  bspc desktop --focus $mon
 
 super + ctrl + shift + Left
-	bspc node -d prev --follow && mon=`bspc query -D -d focused --names | cut -c1` && bspc desktop --focus $mon && bspc desktop --focus $mon$mon && bspc desktop --focus $mon
-# super + ctrl + shift + Right
-# 	~/.config/bspwm/scripts/bspwm-movewindow.sh next
-#
-# super + ctrl + shift + Left
-# 	~/.config/bspwm/scripts/bspwm-movewindow.sh prev
+  bspc node -d prev --follow && mon=`bspc query -D -d focused --names`
+  if [[ "$mon" =~ ^[0-9]$ ]]; then mon="$mon$mon"; fi
+  bspc desktop --focus $mon
 
 alt + Tab
 	$HOME/.config/bspwm/scripts/system/alttab.sh
