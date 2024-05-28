@@ -155,7 +155,11 @@ super + ctrl + shift + Right
 
 super + ctrl + shift + Left
 	bspc node -d prev --follow && mon=`bspc query -D -d focused --names | cut -c1` && bspc desktop --focus $mon && bspc desktop --focus $mon$mon && bspc desktop --focus $mon
-
+# super + ctrl + shift + Right
+# 	~/.config/bspwm/scripts/bspwm-movewindow.sh next
+#
+# super + ctrl + shift + Left
+# 	~/.config/bspwm/scripts/bspwm-movewindow.sh prev
 
 alt + Tab
 	$HOME/.config/bspwm/scripts/system/alttab.sh
