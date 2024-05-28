@@ -22,11 +22,9 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
 	sudo make WAYLAND=0 install
 
 	# Picom
-	sudo apt-get install -y libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev meson
-	# git clone https://github.com/yshui/picom.git ~/GIT-REPOS/CORE/picom
-	git clone https://github.com/jonaburg/picom.git ~/GIT-REPOS/CORE/picom
+  sudo apt-get install -y libconfig-dev libdbus-1-dev libegl-dev libev-dev libgl-dev libepoxy-dev libpcre2-dev libpixman-1-dev libx11-xcb-dev libxcb1-dev libxcb-composite0-dev libxcb-damage0-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-image0-dev libxcb-present-dev libxcb-randr0-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-shape0-dev libxcb-util-dev libxcb-xfixes0-dev libxext-dev meson ninja-build uthash-dev
+	git clone https://github.com/FT-Labs/picom.git ~/GIT-REPOS/CORE/picom
 	cd ~/GIT-REPOS/CORE/picom
-	git submodule update --init --recursive
 	meson --buildtype=release . build
 	ninja -C build
 	sudo ninja -C build install
@@ -39,11 +37,8 @@ elif check_cmd zypper; then # FOR RPM SYSTEMS
 
 	# Picom
 	sudo zypper install -y dbus-1-devel gcc git libconfig-devel libdrm-devel libev-devel libX11-devel libX11-xcb1 libXext-devel libxcb-devel Mesa-libGL-devel meson pcre-devel libpixman-1-0-devel uthash-devel xcb-util-image-devel xcb-util-renderutil-devel xorgproto-devel libepoxy-devel Mesa-libEGL-devel xcb-util-devel
-	# git clone https://github.com/yshui/picom.git ~/GIT-REPOS/CORE/picom
-	# git clone https://github.com/jonaburg/picom.git ~/GIT-REPOS/CORE/picom
 	git clone https://github.com/FT-Labs/picom.git ~/GIT-REPOS/CORE/picom
 	cd ~/GIT-REPOS/CORE/picom
-	# git submodule update --init --recursive
 	meson --buildtype=release . build
 	ninja -C build
 	sudo ninja -C build install
