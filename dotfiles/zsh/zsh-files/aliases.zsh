@@ -131,6 +131,10 @@ alias vi='nvim'
 alias disk-manager='ncdu'
 alias git-sync='git add -A && git commit -m sync && git push'
 
+### NIX ###
+alias nix-install='nix-env -i'
+alias nix-remove='nix-env --uninstall'
+
 ### System ###
 alias pip='pipx'
 alias pip3='python -m pip'
