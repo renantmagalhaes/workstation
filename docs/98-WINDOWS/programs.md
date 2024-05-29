@@ -17,8 +17,6 @@ Or Download via Microsoft Store (recommended)
 3. [Visual Studio Code](https://apps.microsoft.com/store/detail/visual-studio-code/XP9KHM4BK9FZ7Q?hl=en-us&gl=us)
 4. [oh-my-posh](https://apps.microsoft.com/store/detail/ohmyposh/XP8K0HKJFRXGCK)
 
-
-
 # Customization
 
 1. [FancyWM](https://github.com/FancyWM/fancywm)
@@ -37,6 +35,7 @@ Or Download via Microsoft Store (recommended)
 Run `irm christitus.com/win | iex` from Administrator Terminal (Powershell)
 
 Full documentation can be hound [**here**](https://christitus.com/windows-11-perfect-install/).
+
 # Programs
 
 1. [Python3](https://www.python.org/downloads/)
@@ -71,6 +70,7 @@ Full documentation can be hound [**here**](https://christitus.com/windows-11-per
 30. [Xmind](https://xmind.app/download/)
 
 ## Ninite
+
 [Ninite](https://ninite.com)
 
 - Chrome
@@ -94,7 +94,6 @@ Full documentation can be hound [**here**](https://christitus.com/windows-11-per
 3. [AWS CLI](https://awscli.amazonaws.com/AWSCLIV2.msi)
 4. [Git for Windows](https://gitforwindows.org)
 
-
 ## Choco
 
 1. choco install -y openssh
@@ -104,10 +103,10 @@ Full documentation can be hound [**here**](https://christitus.com/windows-11-per
 
 1. kubectl
    1. Create new folder under **C:\bin**
-   2. Download binary inside the folder 
-      1. curl -o kubectl.exe https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/windows/amd64/kubectl.exe
+   2. Download binary inside the folder
+      1. curl -o kubectl.exe <https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/windows/amd64/kubectl.exe>
    3. Add **C:\bin** on Windows PATH
-      1.  System > Advanced system settings > Advanced > Environment Variables > Path > Edit > New > C:\bin > > Ok
+      1. System > Advanced system settings > Advanced > Environment Variables > Path > Edit > New > C:\bin > > Ok
 
 ## Sandbox
 
@@ -118,10 +117,14 @@ Add windows sandbox environment
    1. Turn Windows features on or off
    2. Enable sandbox and restart computer
 
-![picture 1](../../assets/65067858b45866139a2ef25b3c10aea2a9b10509965acc7f8bb8816964fe9072.png)
+![[picture](2024-05-29_picture.md) 1](../../assets/65067858b45866139a2ef25b3c10aea2a9b10509965acc7f8bb8816964fe9072.png)
 
 ## Windows11
 
 1. [Start11](https://www.stardock.com/products/start11/)
 2. [vivetool](https://github.com/thebookisclosed/ViVe/releases)
    1. `./vivetool /disable /id:42354458`
+
+- Disable animations
+
+![remove-animations](assets/animations-off.png)
