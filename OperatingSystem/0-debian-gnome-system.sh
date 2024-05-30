@@ -150,11 +150,11 @@ bash ./scripts/tmux.sh
 ## ZSH
 bash ./scripts/zsh.sh
 
-## Alacritty
-bash ./scripts/alacritty.sh
+## Kitty
+bash ./scripts/kitty.sh
 
 ## Guake
-guake --restore-preferences ./utils/guake/rtm-guake-setting
+# guake --restore-preferences ./utils/guake/rtm-guake-setting
 
 ## Neofetch
 bash ./scripts/neofetch.sh
