@@ -81,7 +81,7 @@ case $n in
 33) bash ./scripts/polybar.sh ;;
 34) bash ./scripts/hyprland.sh ;;
 	# ===================================================================================
-41) sh <(curl -L https://nixos.org/nix/install) --daemon ;;
+41) bash ./scripts/nix-install.sh ;;
 42) bash ./OperatingSystem/nix-packages.sh ;;
 	# ===================================================================================
 91) sudo bash utils/grub2-customizer/custom-grub2.sh ;;
