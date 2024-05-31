@@ -130,6 +130,7 @@ alias vi='nvim'
 ### UTILS ###
 alias disk-manager='ncdu'
 alias git-sync='git add -A && git commit -m sync && git push'
+alias webserver-python='python -m http.server 8000'
 
 ### NIX ###
 alias nix-install='nix-env -i'
