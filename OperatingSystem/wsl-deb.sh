@@ -24,7 +24,7 @@ sudo ntpdate pool.ntp.org
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install zsh fonts-powerline vim wget tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat xclip unrar-free unzip python3 python3-pip net-tools ncdu whois flatpak xournal evince jq dnsutils nala sassc gawk telnet bc fd-find neofetch python3-venv sqlite3 pipx
+sudo apt-get -y install zsh fonts-powerline vim wget tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat xclip unrar-free unzip python3 python3-pip net-tools ncdu whois flatpak xournal evince jq dnsutils nala sassc gawk telnet bc neofetch python3-venv sqlite3 pipx
 
 # Latest Go
 bash ./scripts/latest-go.sh
@@ -36,14 +36,24 @@ bash ./scripts/latest-node.sh
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 #Utils
-## FD path
-mkdir -p ~/.local/bin
-ln -s $(which fdfind) ~/.local/bin/fd
-
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
 
 # SCRIPTS
+## Install Nix
+bash ./scripts/nix-install.sh
+
+if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+elif [ -f "/etc/profile.d/nix.sh" ]; then
+	. "/etc/profile.d/nix.sh"
+else
+	echo "Nix environment script not found."
+	exit 1
+fi
+
+## Nix packages
+bash ./OperatingSystem/nix-packages.sh
 
 ## Brew
 bash ./scripts/brew.sh
@@ -65,14 +75,6 @@ bash ./scripts/neofetch.sh
 
 ## GIT
 bash ./utils/git-config/git-config.sh
-
-# Install LSD
-curl https://sh.rustup.rs -sSf | sh -s -- -y
-~/.cargo/bin/cargo install lsd
-
-# Colorls
-sudo apt install -y ruby-dev
-sudo gem install colorls
 
 # Install pip packages
 pipx install virtualenv

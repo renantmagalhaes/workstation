@@ -64,17 +64,13 @@ sudo apt-get update && sudo apt-get -y upgrade
 ln -s -f $PWD/dotfiles/ ~/.dotfiles
 
 # Install the packages from repo
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wget zsh clementine breeze-cursor-theme dia vim vim-gui-common nmap vlc blender fonts-powerline fonts-cantarell brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle3 fonts-hack-ttf htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome gnome-terminal guake guake-indicator gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload chrome-gnome-shell gnome-menus gir1.2-gmenu-3.0 chrome-gnome-shell gnome-menus pwgen sysstat alacarte ffmpeg neofetch xclip flameshot python3-pip gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors cheese ncdu whois piper libratbag-tools timeshift adb fastboot materia-gtk-theme gnome-screenshot jp2a unrar-free dnsutils imagemagick alacritty scrot x11-utils wmctrl xdotool software-properties-common apt-transport-https ca-certificates curl flatpak xournal evince jq pulseaudio-utils sassc gcc make nala fd-find python3.11-venv kitty sqlite3 nemo pipx
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wget zsh clementine breeze-cursor-theme dia vim vim-gui-common nmap vlc blender fonts-powerline fonts-cantarell brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle3 fonts-hack-ttf htop meld dconf-cli openvpn network-manager-openvpn network-manager-openvpn-gnome gnome-terminal guake guake-indicator gnome-tweaks nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload chrome-gnome-shell gnome-menus gir1.2-gmenu-3.0 chrome-gnome-shell gnome-menus pwgen sysstat alacarte ffmpeg neofetch xclip flameshot python3-pip gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors cheese ncdu whois piper libratbag-tools timeshift adb fastboot materia-gtk-theme gnome-screenshot jp2a unrar-free dnsutils imagemagick alacritty scrot x11-utils wmctrl xdotool software-properties-common apt-transport-https ca-certificates curl flatpak xournal evince jq pulseaudio-utils sassc gcc make nala python3.11-venv kitty sqlite3 nemo pipx ruby-dev
 
 # Latest Go
 bash ./scripts/latest-go.sh
 
 # Latest Node
 bash ./scripts/latest-node.sh
-
-## FD path
-mkdir -p ~/.local/bin
-ln -s $(which fdfind) ~/.local/bin/fd
 
 # Virtualization using KVM + QEMU + libvirt
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install qemu-system-x86 libvirt-clients libvirt-daemon libvirt-daemon-system virtinst virt-manager bridge-utils
@@ -127,6 +123,20 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 mkdir -p ~/GIT-REPOS/CORE
 
 # SCRIPTS
+## Install Nix
+bash ./scripts/nix-install.sh
+
+if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+elif [ -f "/etc/profile.d/nix.sh" ]; then
+	. "/etc/profile.d/nix.sh"
+else
+	echo "Nix environment script not found."
+	exit 1
+fi
+
+## Nix packages
+bash ./OperatingSystem/nix-packages.sh
 
 ## Brew
 bash ./scripts/brew.sh
@@ -161,14 +171,6 @@ bash ./scripts/neofetch.sh
 
 ## GIT
 bash ./utils/git-config/git-config.sh
-
-# LSD
-curl https://sh.rustup.rs -sSf | sh -s -- -y
-~/.cargo/bin/cargo install lsd
-
-# Colorls
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y install ruby-dev
-sudo gem install colorls
 
 # Enable BT FastConnectable
 sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
