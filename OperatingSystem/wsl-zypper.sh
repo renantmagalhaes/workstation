@@ -13,6 +13,34 @@ if [ “$(id -u)” = “0” ]; then
 	exit 1
 fi
 
+# Check if the file /etc/wsl.conf exists and systemd is configured
+if [ ! -f /etc/wsl.conf ]; then
+	# # Enable Systemd
+	sudo zypper -n in --auto-agree-with-licenses -t pattern wsl_systemd
+	sudo zypper in -t pattern wsl_gui
+
+	sudo bash -c 'cat << EOF > /etc/wsl.conf
+# Set a command to run when a new WSL instance launches.
+[boot]
+systemd=true
+
+# Set whether WSL supports interop process like launching Windows apps and adding path variables. Setting these to false will block the launch of Windows processes and block adding $PATH environment variables.
+[interop]
+appendWindowsPath=true
+
+# Automatically mount Windows drive when the distribution is launched
+[automount]
+
+# Set to true will automount fixed drives (C:/ or D:/) with DrvFs under the root directory set above. Set to false means drives wont be mounted automatically, but need to be mounted manually or with fstab.
+enabled = true
+EOF'
+	echo "/etc/wsl.conf file created successfully."
+	echo "Shutting down WSL"
+	wsl.exe --shutdown
+else
+	echo "systemd configured. Proceeding."
+fi
+
 # refresh repos and upgrade system
 sudo zypper ref && sudo zypper up
 
@@ -102,11 +130,6 @@ sudo setcap 'cap_net_raw+p' /bin/ping
 
 # Fix systemd init
 #sudo ln -s /usr/lib/systemd/systemd /sbin/init
-
-# # Enable Systemd
-sudo rm -rf /etc/wsl.conf
-sudo zypper -n in --auto-agree-with-licenses -t pattern wsl_systemd
-sudo zypper in -t pattern wsl_gui
 
 # WSL config
 sudo bash -c 'cat << EOF > /mnt/c/Users/renan/.wslconfig
