@@ -45,16 +45,20 @@ wget https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/Icomo
 wget https://www.fontsquirrel.com/fonts/download/droid-sans -O ~/.local/share/fonts/droid-sans.zip
 unzip -o ~/.local/share/fonts/droid-sans.zip -d ~/.local/share/fonts/
 
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/2.2.0-RC/Iosevka.zip -O ~/.local/share/fonts/Iosevka.zip -O ~/.local/share/fonts/Iosevka.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/2.2.0-RC/Iosevka.zip -O ~/.local/share/fonts/Iosevka.zip
 unzip -o ~/.local/share/fonts/Iosevka.zip -d ~/.local/share/fonts/
 
-#SFMono-Nerd-Font-Ligaturized
+# SFMono-Nerd-Font-Ligaturized
 git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git /tmp/SFMono-Nerd-Font-Ligaturized
 cp /tmp/SFMono-Nerd-Font-Ligaturized/*.otf ~/.local/share/fonts
 
-#SFMono-Nerd-Font
+# SFMono-Nerd-Font
 git clone https://github.com/securitybydesign/SF-Mono-Nerd-Font.git /tmp/SFMono-Nerd-Font
 cp /tmp/SFMono-Nerd-Font/*.otf ~/.local/share/fontsfonts
+
+# Maple font
+wget https://github.com/subframe7536/maple-font/releases/download/v7.0-beta19/MapleMono-NF.zip -O ~/.local/share/fonts/MapleMono-NF.zip
+unzip -o ~/.local/share/fonts/MapleMono-NF.zip -d ~/.local/share/fonts/
 
 fc-cache -vf ~/.local/share/fonts/
 
