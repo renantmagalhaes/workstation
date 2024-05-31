@@ -131,6 +131,9 @@ sudo systemctl enable docker
 sudo usermod -G docker -a $USER
 sudo systemctl restart docker
 
+# Make tmux default shell
+sudo usermod --shell /usr/bin/tmux $USER
+
 # Change to ZSH
 zsh
 
