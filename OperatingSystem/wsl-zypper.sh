@@ -18,24 +18,6 @@ if [ ! -f /etc/wsl.conf ]; then
 	# # Enable Systemd
 	sudo zypper -n in --auto-agree-with-licenses -t pattern wsl_systemd
 	sudo zypper in -t pattern wsl_gui
-
-	sudo bash -c 'cat << EOF > /etc/wsl.conf
-# Set a command to run when a new WSL instance launches.
-[boot]
-systemd=true
-
-# Set whether WSL supports interop process like launching Windows apps and adding path variables. Setting these to false will block the launch of Windows processes and block adding $PATH environment variables.
-[interop]
-appendWindowsPath=true
-
-# Automatically mount Windows drive when the distribution is launched
-[automount]
-
-# Set to true will automount fixed drives (C:/ or D:/) with DrvFs under the root directory set above. Set to false means drives wont be mounted automatically, but need to be mounted manually or with fstab.
-enabled = true
-EOF'
-	echo "/etc/wsl.conf file created successfully."
-	echo "Shutting down WSL"
 	wsl.exe --shutdown
 else
 	echo "systemd configured. Proceeding."
