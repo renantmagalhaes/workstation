@@ -21,7 +21,7 @@ sudo zypper install -y ntp
 sudo ntpdate pool.ntp.org
 
 # Install the packages from repo
-sudo zypper install -y zsh vim curl net-tools net-tools-deprecated iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox bind-utils gcc-c++ rsync sassc gawk bc cron golang npm fd libcap-progs sqlite3 python312-pipx
+sudo zypper install -y zsh vim curl net-tools net-tools-deprecated iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox bind-utils gcc-c++ rsync sassc gawk bc cron golang npm libcap-progs sqlite3 python312-pipx
 
 # # Install SNAP
 # wsl_thumbleweed_check=$(env | grep WSL | grep -ioh "openSUSE-Tumbleweed" | awk '{print tolower($0)}')
@@ -40,6 +40,20 @@ sudo zypper install -y zsh vim curl net-tools net-tools-deprecated iproute2 git 
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 # SCRIPTS
+## Install Nix
+bash ./scripts/nix-install.sh
+
+if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+elif [ -f "/etc/profile.d/nix.sh" ]; then
+	. "/etc/profile.d/nix.sh"
+else
+	echo "Nix environment script not found."
+	exit 1
+fi
+
+## Nix packages
+bash ./OperatingSystem/nix-packages.sh
 
 ## Brew
 bash ./scripts/brew.sh
@@ -70,14 +84,6 @@ bash ./utils/git-config/git-config.sh
 sudo ln -s -f /home/linuxbrew/.linuxbrew/bin/tmux /usr/bin/tmux
 
 #Utils
-
-# Colorls
-sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel
-sudo gem install colorls
-
-# Install LSD
-curl https://sh.rustup.rs -sSf | sh -s -- -y
-~/.cargo/bin/cargo install lsd
 
 ## Fix python default path
 sudo ln -s /usr/bin/python3 /usr/bin/python

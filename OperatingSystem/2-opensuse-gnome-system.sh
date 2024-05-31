@@ -54,9 +54,11 @@ ln -s -f $PWD/dotfiles/ ~/.dotfiles
 sudo zypper install -y opi
 
 # Install the packages from suse repo
-sudo zypper --non-interactive install -y zsh vlc clementine breeze5-cursors vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar gawk net-tools coreutils ncdu whois piper openssl gnome-keyring chrome-gnome-shell telnet openssh materia-gtk-theme alacritty scrot libstdc++-devel glibc-static net-tools-deprecated xprop wmctrl xdotool gcc-c++ lsd sassc virtualbox golang npm bc fd scrcpy kitty sqlite3 nemo python312-pipx
+sudo zypper --non-interactive install -y zsh vlc clementine breeze5-cursors vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar gawk net-tools coreutils ncdu whois piper openssl gnome-keyring chrome-gnome-shell telnet openssh materia-gtk-theme alacritty scrot libstdc++-devel glibc-static net-tools-deprecated xprop wmctrl xdotool gcc-c++ sassc virtualbox golang npm bc scrcpy kitty sqlite3 nemo python312-pipx ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel
+
 # virtualbox user
 sudo usermod -aG vboxusers $USER
+
 # Brew
 bash desktop/source/any/brew.sh
 
@@ -110,6 +112,20 @@ sudo zypper install -y code
 mkdir -p ~/GIT-REPOS/CORE
 
 # SCRIPTS
+## Install Nix
+bash ./scripts/nix-install.sh
+
+if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+elif [ -f "/etc/profile.d/nix.sh" ]; then
+	. "/etc/profile.d/nix.sh"
+else
+	echo "Nix environment script not found."
+	exit 1
+fi
+
+## Nix packages
+bash ./OperatingSystem/nix-packages.sh
 
 ## Brew
 bash ./scripts/brew.sh
@@ -145,8 +161,8 @@ bash ./scripts/neofetch.sh
 ## GIT
 bash ./utils/git-config/git-config.sh
 
-# Colorls
-sudo zypper install -y ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel
+#
+sudo zypper install -y
 sudo gem install colorls
 
 # Install ClamAV

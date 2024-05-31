@@ -36,16 +36,16 @@ if check_cmd wsl.exe; then
           alias folder="explorer.exe"
     fi
         if [[ $wsl_debian_check == "debian" ]]; then
-                alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y"
+                alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
                 alias sudo="sudo "
                 alias apt="nala"
         elif [[ $wsl_thumbleweed_check == "opensuse-tumbleweed" ]]; then
-            alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y"
+            alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
         elif [[ $wsl_leap_check == "opensuse-leap" ]]; then
-            alias update-all="sudo zypper ref && sudo zypper up && brew update && brew upgrade && sudo flatpak update -y"
+            alias update-all="sudo zypper ref && sudo zypper up && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
         fi
 elif check_cmd apt-get; then # FOR DEB SYSTEMS
-    alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y"
+    alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
     alias sudo="sudo "
     alias apt="nala"
     if [[ $gnome_check == "gnome" ]]; then
@@ -57,7 +57,7 @@ elif check_cmd apt-get; then # FOR DEB SYSTEMS
     fi
 
 elif check_cmd zypper; then  # FOR ZYPPER TW SYSTEMS
-    alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y"
+    alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
     if [[ $gnome_check == "gnome" ]]; then
         alias folder="nemo"
         alias pdf="evince"
@@ -134,6 +134,7 @@ alias git-sync='git add -A && git commit -m sync && git push'
 ### NIX ###
 alias nix-install='nix-env -i'
 alias nix-remove='nix-env --uninstall'
+alias nix-search='echo "Go to https://search.nixos.org/packages"'
 
 ### System ###
 alias pip='pipx'
