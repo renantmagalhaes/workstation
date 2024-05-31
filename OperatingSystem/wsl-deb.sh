@@ -151,6 +151,9 @@ sudo ln -s -f /mnt/c/Program\ Files/Genymobile/Genymotion/tools/adb.exe /usr/loc
 # Make sure all package are installed
 sudo apt-get -f install -y
 
+# Make tmux default shell
+sudo usermod --shell /usr/bin/tmux $USER
+
 # Change to zsh
 zsh
 
