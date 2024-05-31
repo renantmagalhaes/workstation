@@ -50,7 +50,8 @@ echo " 34) Hyprland"
 echo ""
 echo " ==== NIX ===="
 echo " 41) Nix package manager"
-echo " 42) Install NIX base OS packages"
+echo " 42) Install NIX BASE packages"
+echo " 43) Install NIX extra packages"
 echo ""
 echo " ==== EXTRA ===="
 echo " 91) Custom grub2 screen"
@@ -82,7 +83,8 @@ case $n in
 34) bash ./scripts/hyprland.sh ;;
 	# ===================================================================================
 41) bash ./scripts/nix-install.sh ;;
-42) bash ./OperatingSystem/nix-packages.sh ;;
+42) bash ./OperatingSystem/nix-basesystem.sh ;;
+43) bash ./OperatingSystem/nix-packages.sh ;;
 	# ===================================================================================
 91) sudo bash utils/grub2-customizer/custom-grub2.sh ;;
 	# ===================================================================================
