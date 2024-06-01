@@ -6,8 +6,8 @@
 
 For:
 
-- Debian 12
-- openSUSE Tumbleweed (GNOME version)
+- Debian 12 (Gnome)
+- openSUSE Tumbleweed (Gnome)
 
 ### Disclaimer
 
@@ -15,13 +15,9 @@ Use the script ``install.sh``. Running the scripts directly may result in system
 
 # TODO
 
-- [x] Make step 1~7 non-interactive
-- [x] New BSPWM desktop showcase
 - [ ] Hyprland setup
-- [x] Organize dotfiles folder
-  - [x] Modify all scripts and syslinks
 
-# BSPWM
+# BSPWM - Current version
 
 ### Menu
 
@@ -45,20 +41,20 @@ Use the script ``install.sh``. Running the scripts directly may result in system
 
 ![tmux-bar](assets/tmux-bar.png)
 
-# KDE Plasma 5.2X
-
-![1-general_layout-kde.png](./assets/workstation/1-general_layout-kde.png)
-
-![2-terminal_and_file-manager-kde.png](./assets/workstation/2-terminal_and_file-manager-kde.png)
-
-![3-Tiling_window-kde.png](./assets/workstation/3-Tiling_window-kde.png)
-
-# GNOME Version 41.X
+# GNOME Version 4X.X
 
 ![1-general_layout-gnome.png](./assets/workstation/1-general_layout-gnome.png)
 
 ![2-terminal_and_file-manager-gnome.png](./assets/workstation/2-terminal_and_file-manager-gnome.png)
 
 ![3-Tiling_window-gnome.png](./assets/workstation/3-Tiling_window-gnome.png)
+
+# KDE Plasma 5.2X - Retired
+
+![1-general_layout-kde.png](./assets/workstation/1-general_layout-kde.png)
+
+![2-terminal_and_file-manager-kde.png](./assets/workstation/2-terminal_and_file-manager-kde.png)
+
+![3-Tiling_window-kde.png](./assets/workstation/3-Tiling_window-kde.png)
 
 # RTM
