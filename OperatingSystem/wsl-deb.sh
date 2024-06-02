@@ -40,6 +40,9 @@ fi
 # refresh repos
 sudo apt-get update
 
+# Dotfiles syslink
+ln -s -f $PWD/dotfiles/ ~/.dotfiles
+
 # Set tz
 sudo apt install -y ntpdate
 sudo ntpdate pool.ntp.org

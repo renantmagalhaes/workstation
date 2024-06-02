@@ -26,6 +26,9 @@ fi
 # refresh repos and upgrade system
 sudo zypper ref && sudo zypper up
 
+# Dotfiles syslink
+ln -s -f $PWD/dotfiles/ ~/.dotfiles
+
 # Set tz
 sudo zypper install -y ntp
 sudo ntpdate pool.ntp.org
