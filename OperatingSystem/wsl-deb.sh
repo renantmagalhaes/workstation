@@ -127,7 +127,7 @@ EOF'
 sudo setcap 'cap_net_raw+p' /bin/ping
 
 # Set WSL default distro
-# wsl.exe --setdefault Debian
+wsl.exe --setdefault Debian
 
 # Powertoys windows modifier
 pip3.exe install keyboard
