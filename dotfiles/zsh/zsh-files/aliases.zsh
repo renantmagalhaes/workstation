@@ -131,6 +131,7 @@ alias vi='nvim'
 alias disk-manager='ncdu'
 alias git-sync='git add -A && git commit -m sync && git push'
 alias webserver-python='python -m http.server 8000'
+alias vim-clean-swap='rm -rf /home/rtm/.local/state/nvim/swap/*'
 
 ### NIX ###
 alias nix-install='nix-env -i'
@@ -149,7 +150,6 @@ alias ip-info='curl https://wtfismyip.com/json | jq .'
 
 ### chmod alias
 alias 755d="find . -type d -exec chmod 755 {} \;"
-
 alias 644f="find . -type f -exec chmod 644 {} \;"
 
 ### Security Tools ###
