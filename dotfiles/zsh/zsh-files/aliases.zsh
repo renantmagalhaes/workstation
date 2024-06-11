@@ -132,6 +132,7 @@ alias disk-manager='ncdu'
 alias git-sync='git add -A && git commit -m sync && git push'
 alias webserver-python='python -m http.server 8000'
 alias vim-clean-swap='rm -rf /home/rtm/.local/state/nvim/swap/*'
+alias nvim-clean-swap='rm -rf /home/rtm/.local/state/nvim/swap/*'
 
 ### NIX ###
 alias nix-install='nix-env -i'
