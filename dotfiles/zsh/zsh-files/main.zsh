@@ -60,7 +60,7 @@ fi
 source $ZSH/custom/plugins/zsh-autopair/autopair.zsh
 
 ## FZF
-source ~/.fzf.zsh
+source <(fzf --zsh)
 
 # Python virtualenv and Virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
