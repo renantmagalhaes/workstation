@@ -4,9 +4,8 @@ Theme > Dark Bloon
 Taskbar > Disable Show my taskbar on all displays
 
 # Power Toys
+
 ## Keyboard Manager
-
-
 
 # Windows SO
 
@@ -25,9 +24,10 @@ Taskbar > Disable Show my taskbar on all displays
 - Activation key -> Alt + Space
 - Number of results shown before scrolling -> 5
 - Window Walker
-  -  Score modifier -> 1000
+  - Score modifier -> 1000
 
 [Copy scripts from this folder](./scripts/) to `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup` or `shell:startup`
+
 ### Quick Accent
 
 - Enable IT!!
@@ -36,7 +36,6 @@ Taskbar > Disable Show my taskbar on all displays
 
 ![picture 3](../../assets/20f09a24c72b356598d589a9403515ebc415f4c1c29440bc3545fccdf02ccbc4.png)  
 
-
 # Windows Terminal
 
 ## Startup
@@ -44,7 +43,6 @@ Taskbar > Disable Show my taskbar on all displays
 - Create a shortcut and send to `shell:startup` with Minimized option selected
 
 ![picture 1](../../assets/a44c9c526cc6f73d3998c7697b807de8bebc3a3a8f6cf8ec97a6e38a400f6f1e.png)  
-
 
 Default profile -> Ubuntu
 Default Terminal application -> Windows Terminal
@@ -61,9 +59,10 @@ Theme -> Dark
 
 ## Actions
 
-1. + Add New
+-. + Add New
 2. Summon Quake window
 3. Set ctrl+enter
+
 ## **Profiles**
 
 ### Azure
@@ -99,6 +98,7 @@ System -> Multitasking -> Show Microsoft Edge tabs when snapping or pressing Alt
 # Fix dead keys (" and `)
 
 Select English US as language (not international)
+
 # Start11
 
 ## Start Menu
@@ -132,11 +132,21 @@ Set all to Windows Menu
 ```bash
 sudo usermod --shell /usr/bin/tmux $USER
 ```
+
+# Mount WSL as network folder
+
+```
+\\wsl.localhost\openSUSE-Tumbleweed
+```
+
+![wsl-map](../../assets/wsl-map.png)
+
 # Rounded TB
 
 ![picture 1](../../assets/5bcd0ad5cb5d3cbd5413f160c6ed1e4ba48db5e6684016b77c5a1ac783ef5ba4.png)  
 
 # Snipping tool
+
 Microsoft is testing changes to how the print screen button works in Windows 11, causing it to open the Windows Snipping Tool rather than copying a screenshot to the clipboard.
 
 To be able to use flameshot as default again:
