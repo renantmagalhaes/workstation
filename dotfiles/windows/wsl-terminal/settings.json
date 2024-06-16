@@ -50,7 +50,7 @@
   "alwaysShowNotificationIcon": true,
   "copyFormatting": "none",
   "copyOnSelect": true,
-  "defaultProfile": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
+  "defaultProfile": "{879e2800-c857-467a-8669-078c73bab33e}",
   "launchMode": "default",
   "minimizeToNotificationArea": true,
   "newTabMenu": [
@@ -76,9 +76,8 @@
         "icon": "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.png",
         "name": "openSUSE-Tumbleweed",
         "opacity": 85,
-        "padding": "100",
+        "padding": "12",
         "startingDirectory": "~",
-        "tabColor": "#91DF6D",
         "useAcrylic": true
       },
       {
@@ -116,6 +115,7 @@
         "opacity": 85,
         "padding": "12",
         "source": "Windows.Terminal.Wsl",
+        "tabColor": "#EC1858",
         "useAcrylic": true
       }
     ]
