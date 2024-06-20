@@ -136,7 +136,7 @@ sudo usermod --shell /usr/bin/tmux $USER
 # Mount WSL as network folder
 
 ```
-\\wsl.localhost\openSUSE-Tumbleweed
+\\wsl.localhost\Debian
 ```
 
 ![wsl-map](../../assets/wsl-map.png)
