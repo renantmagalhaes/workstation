@@ -614,11 +614,6 @@ span.favicon.jstest-favicon-image {
 /* #browser .tab-position .tab.active {background-color: #7740f7; color: rgb(255, 255, 255) !important;} */
 
 /* popup page zoom control */
-/* #browser > footer .page-zoom-controls input[type=range] {position: absolute; background-image: linear-gradient(90deg, #0000 0 calc(22% - 2px), var(--colorBg) 0 22%, #0000 0 calc(40% - 2px), var(--colorBg) 0 40%, #0000 0 calc(58% - 2px), var(--colorBg) 0 58%, #0000 0 calc(77% - 2px), var(--colorBg) 0 77%, #0000 0 100%); box-shadow: 0 0 0 7px var(--colorBg), 0 0 0 8px var(--colorBorder), 0 2px 12px hsl(0deg 0% 0% / 25%); visibility: hidden; opacity:0; transform: translate(-25px, -20px); transition: visibility .6s, opacity .2s ease-out .4s, transform .25s ease-in .35s !important;} */
-/* #browser > footer .page-zoom-controls:is(:hover, :focus-within) > input[type=range] {visibility: visible; opacity: 1; transform: translate(-25px, -25px); transition: opacity: .1s ease-out .12s, transform .1s ease .1s !important;} */
-/* #browser > footer .page-zoom-controls input[type=range]::before {content: ''; position: absolute; pointer-events: none; border: 6px solid hsl(0deg 0% 0% / 0%); z-index: inherit; filter: drop-shadow(0 1px var(--colorBorder)); bottom: -19px; left: 50%; margin-left: -6px; border-top-color: var(--colorBgLight);} */
-/* #browser > footer .page-zoom-controls:has(input[type=range]) .zoom-percent {order:-1;} /* move % to left */ */
-/* #browser > footer .page-zoom-controls .button-toolbar > button .button-title {min-width: 1ch; max-width: 1ch;} /* reduced Reset to R button */ */
 .toolbar-mainbar .page-zoom-controls input[type=range] {
 	position: absolute;
 	width: 142px;
