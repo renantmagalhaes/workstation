@@ -126,7 +126,7 @@ localhostForwarding=true # Boolean specifying if ports bound to wildcard or loca
 EOF'
 
 # Set WSL default distro
-#wsl.exe --setdefault openSUSE-Tumbleweed
+wsl.exe --setdefault openSUSE-Tumbleweed
 
 # Docker
 sudo zypper install -y docker docker-compose docker-compose-switch
