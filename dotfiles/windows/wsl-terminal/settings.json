@@ -114,8 +114,8 @@
         "name": "Debian",
         "opacity": 85,
         "padding": "12",
-        "tabColor": "#ff2655",
         "source": "Windows.Terminal.Wsl",
+        "tabColor": "#FF2655",
         "useAcrylic": true
       }
     ]
@@ -559,7 +559,7 @@
       "yellow": "#808000"
     }
   ],
-  "startOnUserLogin": false,
+  "startOnUserLogin": true,
   "theme": "system",
   "themes": [],
   "useAcrylicInTabRow": true
