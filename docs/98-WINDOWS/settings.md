@@ -155,6 +155,55 @@ To be able to use flameshot as default again:
 Settings > Accessibility > Keyboard > Turn off "Use the Print Screen key to open Snipping Tool"
 ```
 
+# Google drive load priority
+
+Ensure Google Drive is set to start at boot:
+
+```
+a. Open the Task Manager (Ctrl + Shift + Esc).
+
+b. Go to the "Startup" tab.
+
+c. Ensure that Google Drive is enabled. If it isn't, right-click and select "Enable".
+```
+
+Adjust Google Drive startup priority using Task Scheduler:
+
+```
+a. Press Win + S and type "Task Scheduler", then press Enter.
+
+b. In the Task Scheduler, click on "Create Task..." on the right-hand side.
+
+c. In the "General" tab, name your task (e.g., "Google Drive Priority Load").
+
+d. In the "Triggers" tab, click "New...", and select "At startup" from the "Begin the task" dropdown menu. Click "OK".
+
+e. In the "Actions" tab, click "New...", and select "Start a program" from the "Action" dropdown menu.
+
+f. In the "Program/script" field, enter the path to the Google Drive executable. Typically, it is located at: C:\Program Files\Google\Drive\googledrivesync.exe or C:\Program Files\Google\Drive File Stream\launch.bat, depending on your installation.
+
+g. In the "Conditions" tab, uncheck "Start the task only if the computer is on AC power".
+
+h. In the "Settings" tab, check "Allow task to be run on demand" and "Run task as soon as possible after a scheduled start is missed".
+
+i. Click "OK" to create the task.
+```
+
+Ensure High Priority for Google Drive:
+
+```
+a. Open Task Manager again (Ctrl + Shift + Esc).
+
+b. Go to the "Details" tab.
+
+c. Find the process for Google Drive (googledrivesync.exe or equivalent).
+
+d. Right-click on it, and select "Set priority" -> "High".
+
+```
+
+Restart your computer to ensure that the changes take effect and see if the wallpaper loads faster.
+
 # Clipboard Sync
 
 First, Enable Clipboard Sync on Windows 10
