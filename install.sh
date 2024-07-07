@@ -55,6 +55,7 @@ echo " 43) Install NIX extra packages"
 echo ""
 echo " ==== EXTRA ===="
 echo " 91) Custom grub2 screen"
+echo " 92) OpenSUSE - Enable Slowroll"
 echo " 99) Post-Installation Instructions"
 echo " ==============="
 echo ""
@@ -86,7 +87,8 @@ case $n in
 42) bash ./OperatingSystem/nix-basesystem.sh ;;
 43) bash ./OperatingSystem/nix-packages.sh ;;
 	# ===================================================================================
-91) sudo bash utils/grub2-customizer/custom-grub2.sh ;;
+91) sudo bash ./utils/grub2-customizer/custom-grub2.sh ;;
+92) sudo bash ./scripts/slowroll.sh ;;
 	# ===================================================================================
 99) bash utils/post-install/env-detector.sh ;;
 	# ==================================================================================
