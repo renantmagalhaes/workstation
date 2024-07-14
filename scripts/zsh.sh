@@ -23,6 +23,9 @@ sed -i 's/exec\ zsh\ \-l//g' /tmp/zsh.sh
 chmod +x /tmp/zsh.sh
 sh -c '/tmp/zsh.sh'
 
+# Install startship
+curl -sS https://starship.rs/install.sh | sh
+
 #zsh config
 ln -s -f $PWD/dotfiles/zsh/zshrc ~/.zshrc
 ln -s -f $PWD/dotfiles/zsh/zsh-files ~/.zsh
