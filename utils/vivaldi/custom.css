@@ -551,8 +551,8 @@ button.button-startpage:active { background: none !important; }
 /* Mouse hover -> expand */
 #tabs-container.left, #tabs-subcontainer.left,
 #tabs-container.right, #tabs-subcontainer.right {
-  min-width: 38px;
-  transition: min-width 250ms ease-out 225ms !important; /* added 225ms delay */q
+  min-width: 220px; /* 38px */
+  transition: min-width 250ms ease-out 225ms !important; /* added 225ms delay */
 }
 
 #tabs-container.left:hover, #tabs-subcontainer.left:hover,
@@ -566,7 +566,7 @@ button.button-startpage:active { background: none !important; }
 
 #tabs-tabbar-container.left, #tabs-tabbar-container.right {
   width: auto !important;
-  min-width: 38px;
+  min-width: 220px; /* 38px */
 }
 
 /* .button-toolbar.newtab {
