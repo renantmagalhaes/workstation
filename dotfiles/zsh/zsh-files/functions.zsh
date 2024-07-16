@@ -48,3 +48,25 @@ function docker-remove-all () {
 function copydir {
   pwd | tr -d "\r\n" | xclip
 }
+
+function url_redirect() {
+    local URL=$1
+    local REDIRECTS=0
+
+    while true; do
+        local OUTPUT=$(curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" "$URL")
+        local HTTP_CODE=$(echo "$OUTPUT" | cut -d' ' -f1)
+        local NEW_URL=$(echo "$OUTPUT" | cut -d' ' -f2)
+
+        if [[ "$HTTP_CODE" == "301" ]] || [[ "$HTTP_CODE" == "302" ]] || [[ "$HTTP_CODE" == "303" ]] || [[ "$HTTP_CODE" == "307" ]] || [[ "$HTTP_CODE" == "308" ]]; then
+            echo "$URL -> $NEW_URL"
+            URL=$NEW_URL
+            REDIRECTS=$((REDIRECTS + 1))
+        else
+            echo "Final URL: $URL"
+            echo "Total redirects: $REDIRECTS"
+            break
+        fi
+    done
+}
+
