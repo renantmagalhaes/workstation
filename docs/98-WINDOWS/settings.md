@@ -155,6 +155,17 @@ To be able to use flameshot as default again:
 Settings > Accessibility > Keyboard > Turn off "Use the Print Screen key to open Snipping Tool"
 ```
 
+# PowerToys Clipboard
+
+[Clipboard plugin link](https://github.com/CoreyHayward/PowerToys-Run-ClipboardManager)
+
+```
+Download the latest release by selecting the architecture that matches your machine: x64 (more common) or ARM64
+Close PowerToys
+Extract the archive to %LOCALAPPDATA%\Microsoft\PowerToys\PowerToys Run\Plugins
+Open PowerToys
+```
+
 # Google drive load priority
 
 Ensure Google Drive is set to start at boot:
