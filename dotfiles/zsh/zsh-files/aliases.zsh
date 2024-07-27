@@ -26,6 +26,7 @@ if check_cmd wsl.exe; then
     alias wsl-update="wsl.exe --update"
     alias wsl-shutdown="wsl.exe --shutdown"
     alias wsl-delete="wsl.exe --unregister"
+    alias wsl-rm-zone-file="ls -lR |grep Zone.Identifier |awk '{print $11}' |xargs rm -rf"
     alias wsl-list="wsl.exe --list"
     if check_cmd files.exe; then
       # current_path=$(pwd)
