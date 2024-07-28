@@ -13,7 +13,7 @@ WheelUp::
         if (mouseX >= MonitorLeft and mouseX <= MonitorRight and mouseY >= MonitorTop and mouseY <= MonitorBottom) {
             if (mouseY <= MonitorTop + 10 or mouseY >= MonitorBottom - 10) { ; Check if the mouse is near the top or bottom edge
                 Send, ^#{Left} ; Send Ctrl+Win+Left
-                Sleep, 30 ; Wait for 30 ms
+                ; Sleep, 30 ; Wait for 30 ms
                 return
             }
         }
@@ -30,7 +30,7 @@ WheelDown::
         if (mouseX >= MonitorLeft and mouseX <= MonitorRight and mouseY >= MonitorTop and mouseY <= MonitorBottom) {
             if (mouseY <= MonitorTop + 10 or mouseY >= MonitorBottom - 10) { ; Check if the mouse is near the top or bottom edge
                 Send, ^#{Right} ; Send Ctrl+Win+Right
-                Sleep, 30 ; Wait for 30 ms
+                ; Sleep, 30 ; Wait for 30 ms
                 return
             }
         }
