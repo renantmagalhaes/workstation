@@ -135,6 +135,8 @@ alias webserver-python='python -m http.server 8000'
 alias vim-clean-swap='rm -rf /home/rtm/.local/state/nvim/swap/*'
 alias nvim-clean-swap='rm -rf /home/rtm/.local/state/nvim/swap/*'
 alias python-activate-venv='python -m venv venv && source ./venv/bin/activate'
+alias systemctl-list-services='sudo systemctl list-unit-files'
+alias systemctl-running-services='sudo systemctl |grep running'
 
 ### NIX ###
 alias nix-install='nix-env -i'
