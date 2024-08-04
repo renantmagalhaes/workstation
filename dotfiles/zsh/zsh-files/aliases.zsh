@@ -154,6 +154,9 @@ alias killvi='pidof nvim |xargs kill -9'
 ### IP Info tools
 alias ip-info='curl https://wtfismyip.com/json | jq .'
 
+### Zypper UTILS
+alias zypper-reinstall='sudo zypper install --force'
+
 ### chmod alias
 alias 755d="find . -type d -exec chmod 755 {} \;"
 alias 644f="find . -type f -exec chmod 644 {} \;"
