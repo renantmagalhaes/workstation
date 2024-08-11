@@ -41,10 +41,6 @@ dunst --config ~/.config/dunst/dunstrc &
 bspc config top_padding 30
 
 # Monitor setup
-# bspc monitor DP-1 -d 1 2 3 4 5
-# bspc monitor DP-2 -d 6 7 8 9 10
-
-# Monitor setup
 bspc monitor DP-1 -d 1 2 3 4 5
 bspc monitor DP-2 -d 11 22 33 44 55
 
@@ -79,7 +75,7 @@ bspc rule -a gnome-calendar state=floating
 picom --animations -b
 pgrep -x sxhkd >/dev/null || sxhkd &
 kdeconnect-indicator &
-insync start --no-daemon &
+#insync start --no-daemon &
 # feh --bg-scale ~/Pictures/background &
 nitrogen --restore &
 /usr/bin/1password --silent &
