@@ -9,6 +9,16 @@ ctrl + alt + t
 ~button3
 	xqp 0 $(xdo id -N Bspwm -n root) && jgmenu_run
 
+#Logitech MX 3 mouse actions
+## side scroll
+~button6
+    xdotool key Ctrl+equal
+~button7
+    xdotool key Ctrl+minus
+## thumb button
+~button10
+      $HOME/.dotfiles/rofi/scripts/rofi-menu.sh
+
 # program launcher
 super + Pause
   $HOME/.dotfiles/rofi/scripts/rofi-menu.sh
