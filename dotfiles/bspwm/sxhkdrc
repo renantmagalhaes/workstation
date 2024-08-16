@@ -6,10 +6,11 @@
 ctrl + alt + t
 	kitty
 
-~button3
-	xqp 0 $(xdo id -N Bspwm -n root) && jgmenu_run
 
 #Logitech MX 3 mouse actions
+## left click
+~button3
+	xqp 0 $(xdo id -N Bspwm -n root) && jgmenu_run
 ## side scroll
 ~button6
     xdotool key Ctrl+equal
