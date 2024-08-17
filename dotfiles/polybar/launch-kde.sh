@@ -7,9 +7,10 @@ pidof polybar | xargs kill -9
 while pgrep -x polybar >/dev/null; do sleep 1; done
 
 # Launch bars
+sleep 1
 polybar main-scroll >>~/polybar-scroll.log 2>&1 &
 polybar main-scroll-bottom >>~/polybar-scroll.log 2>&1 &
-sleep 2
+sleep 1
 polybar secondary-scroll >>~/polybar-scroll.log 2>&1 &
 polybar secondary-scroll-bottom >>~/polybar-scroll.log 2>&1 &
 
