@@ -5,6 +5,22 @@ check_cmd() {
 	command -v "$1" 2>/dev/null
 }
 
+if check_cmd apt-get; then # FOR DEB SYSTEMS
+	# polkit
+	mate-polkit &
+
+elif check_cmd dnf; then # FOR RPM SYSTEMS
+	# polkit
+	lxpolkit &
+
+elif check_cmd zypper; then # FOR OpenSuse SYSTEMS
+	# polkit
+	# mate-polkit &
+  /usr/libexec/polkit-mate-authentication-agent-1 &
+
+else
+	echo "Not able to identify the system" >~/bspwm.log
+fi
 
 # # Audio widget
 # pasystray &
@@ -45,6 +61,7 @@ bspc rule -a Guake state=floating
 bspc rule -a Yad state=floating
 bspc rule -a yad-calendar state=floating
 bspc rule -a gnome-calendar state=floating
+bspc rule -a krunner state=floating
 
 # Startups
 # picom --experimental-backend &
@@ -54,5 +71,7 @@ kdeconnect-indicator &
 /usr/bin/1password --silent &
 streamdeck -n &
 $HOME/.dotfiles/xcape/xcape.sh &
-sleep 3
+# Launch hidden bars
+$HOME/.config/polybar/launch-kde.sh &
+
 # $HOME/.config/bspwm/scripts/rtm-startup-session.sh &
