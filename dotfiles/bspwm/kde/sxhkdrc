@@ -42,8 +42,8 @@ super + e
 	nemo
 
 # Clip board manager
-super + v
-  xfce4-clipman-history
+# super + v
+#   xfce4-clipman-history
 
 # Screenshot
 Print
@@ -171,8 +171,8 @@ super + ctrl + shift + Left
   if [[ "$mon" =~ ^[0-9]$ ]]; then mon="$mon$mon"; fi
   bspc desktop --focus $mon
 
-alt + Tab
-	$HOME/.config/bspwm/scripts/system/alttab.sh
+# alt + Tab
+# 	$HOME/.config/bspwm/scripts/system/alttab.sh
 
 # focus desktop / send window to desktop
 # super + {_,shift + }{JJJJ
