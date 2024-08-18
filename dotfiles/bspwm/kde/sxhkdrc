@@ -74,7 +74,7 @@ super + Insert
 
 # Lock screen
 super + l
-	$HOME/.config/bspwm/scripts/blur-lock
+	qdbus6 org.freedesktop.ScreenSaver /ScreenSaver Lock
 
 # Startup script
 super + F12
