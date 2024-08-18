@@ -17,6 +17,7 @@ elif check_cmd zypper; then # FOR OpenSuse SYSTEMS
 	# polkit
 	# mate-polkit &
   /usr/libexec/polkit-mate-authentication-agent-1 &
+  #/usr/libexec/polkit-kde-authentication-agent-1 &
 
 else
 	echo "Not able to identify the system" >~/bspwm.log
