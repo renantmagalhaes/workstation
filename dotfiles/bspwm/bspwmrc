@@ -73,7 +73,7 @@ bspc rule -a gnome-calendar state=floating
 
 # Startups
 # picom --experimental-backend &
-picom --animations -b
+picom -b
 pgrep -x sxhkd >/dev/null || sxhkd &
 kdeconnect-indicator &
 #insync start --no-daemon &
