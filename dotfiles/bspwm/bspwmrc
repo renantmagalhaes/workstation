@@ -42,9 +42,9 @@ dunst --config ~/.config/dunst/dunstrc &
 bspc config top_padding 30
 
 # Monitor setup
+xrandr --output DP-1 --right-of DP-2
 bspc monitor DP-1 -d 1 2 3 4 5
 bspc monitor DP-2 -d 11 22 33 44 55
-
 # Focus on first screen on boot
 bspc desktop --focus 11 && bspc desktop --focus 1 &
 
