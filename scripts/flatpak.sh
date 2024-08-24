@@ -37,3 +37,6 @@ sudo flatpak install -y flathub md.obsidian.Obsidian
 
 ## Plex media player
 sudo flatpak install -y flathub tv.plex.PlexDesktop
+
+## CopyQ - Clipboard manager
+sudo flatpak install flathub com.github.hluk.copyq

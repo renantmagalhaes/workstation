@@ -70,6 +70,7 @@ bspc rule -a Guake state=floating
 bspc rule -a Yad state=floating
 bspc rule -a yad-calendar state=floating
 bspc rule -a gnome-calendar state=floating
+bspc rule -a copyq state=floating center=on rectangle=800x600+0+0
 
 # Startups
 # picom --experimental-backend &
@@ -81,7 +82,7 @@ kdeconnect-indicator &
 nitrogen --restore &
 /usr/bin/1password --silent &
 streamdeck -n &
-xfce4-clipman &
+flatpak run com.github.hluk.copyq &
 xsetroot -cursor_name left_ptr & # Fix mouse with X
 $HOME/.dotfiles/xcape/xcape.sh &
 sleep 3

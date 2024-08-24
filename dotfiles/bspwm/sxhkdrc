@@ -43,7 +43,7 @@ super + e
 
 # Clip board manager
 super + v
-  xfce4-clipman-history
+  flatpak run com.github.hluk.copyq toggle
 
 # Screenshot
 Print
