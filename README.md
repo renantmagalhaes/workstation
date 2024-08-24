@@ -6,8 +6,8 @@
 
 For:
 
-- Debian 12 (Gnome)
-- openSUSE Tumbleweed (Gnome)
+- Debian 12 (BSPWM/Gnome)
+- openSUSE Tumbleweed (BSPWM/Gnome)
 
 ### Disclaimer
 
