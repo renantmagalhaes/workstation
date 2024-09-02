@@ -89,8 +89,8 @@ elif [[ $linux_check == "linux" ]]; then
     alias mouse-battery='upower --dump |grep -A 5 mouse | egrep -oh '"'"'[0-9]*%'"'"''
     alias ascii-image='jp2a --output=ascii.txt --colors $1'
     alias pdf-signature='xournal'
-    alias nordvpn-c='nordvpn connect && nordvpn set tpl on && nordvpn set killswitch on && nordvpn set autoconnect on'
-    alias nordvpn-d='nordvpn set autoconnect off && nordvpn set killswitch off && nordvpn set tpl off && nordvpn disconnect'
+    alias nordvpn-c='nordvpn connect && nordvpn set tpl on && nordvpn set killswitch on && nordvpn set autoconnect on && nordvpn set lan-discovery enable'
+    alias nordvpn-d='nordvpn set autoconnect off && nordvpn set killswitch off && nordvpn set tpl off && nordvpn disconnect && nordvpn set lan-discovery enable'
 
 else
     echo "error on SO check"
