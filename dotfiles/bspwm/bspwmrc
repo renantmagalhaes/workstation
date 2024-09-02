@@ -77,6 +77,7 @@ bspc rule -a copyq state=floating center=on rectangle=800x600+0+0
 # picom --experimental-backend &
 picom -b
 pgrep -x sxhkd >/dev/null || sxhkd &
+kdeconnectd &
 kdeconnect-indicator &
 #insync start --no-daemon &
 # feh --bg-scale ~/Pictures/background &
