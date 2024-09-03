@@ -133,3 +133,6 @@ gtk-application-prefer-dark-theme=0
 gtk-theme-name=Graphite-Dark
 gtk-icon-theme-name=Reversal-purple-dark
 EOF'
+
+echo "export GTK_THEME=Graphite-Dark" >> ~/.profile
+echo "export GTK_THEME=Graphite-Dark" >> ~/.zprofile
