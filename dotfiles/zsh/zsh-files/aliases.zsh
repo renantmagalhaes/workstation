@@ -162,6 +162,7 @@ alias 755d="find . -type d -exec chmod 755 {} \;"
 alias 644f="find . -type f -exec chmod 644 {} \;"
 
 ### Security Tools ###
+alias openssl-check='docker run -it --rm drwetter/testssl.sh'
 alias sherlock='docker run -i theyahya/sherlock'
 alias legion='docker run -it carlospolop/legion:latest sh -c "/legion/legion.py"'
 alias waymore='python3 ~/GIT-REPOS/CORE/waymore/waymore.py'
