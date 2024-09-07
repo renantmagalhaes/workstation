@@ -39,10 +39,11 @@ ctrl + Return
 
 # Open file manager
 super + e
-	nemo
+	nautilus
 
 # Clip board manager
-# super + v
+super + v
+  flatpak run com.github.hluk.copyq toggle
 #   xfce4-clipman-history
 
 # Screenshot
