@@ -40,3 +40,6 @@ sudo flatpak install -y flathub tv.plex.PlexDesktop
 
 ## CopyQ - Clipboard manager
 sudo flatpak install flathub com.github.hluk.copyq
+
+## Save desktop1
+sudo flatpak install flathub io.github.vikdevelop.SaveDesktop
