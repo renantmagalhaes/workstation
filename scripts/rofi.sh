@@ -82,6 +82,36 @@ Type=Application
 Categories=System;
 EOF
 
+cat <<EOF > ~/.local/share/applications/power-menu-shutdown.desktop
+[Desktop Entry]
+Name=Shutdown
+Exec=sh -c 'echo -e "Yes\nNo" | rofi -dmenu -i -p "Shutdown?" | grep -q Yes && systemctl poweroff'
+Icon=system-shutdown
+Terminal=false
+Type=Application
+Categories=System;
+EOF
+
+cat <<EOF > ~/.local/share/applications/power-menu-restart.desktop
+[Desktop Entry]
+Name=Restart
+Exec=sh -c 'echo -e "Yes\nNo" | rofi -dmenu -i -p "Restart?" | grep -q Yes && systemctl reboot'
+Icon=system-reboot
+Terminal=false
+Type=Application
+Categories=System;
+EOF
+
+cat <<EOF > ~/.local/share/applications/power-menu-logout.desktop
+[Desktop Entry]
+Name=Logout
+Exec=sh -c 'echo -e "Yes\nNo" | rofi -dmenu -i -p "Logout?" | grep -q Yes && bspc quit'
+Icon=system-log-out
+Terminal=false
+Type=Application
+Categories=System;
+EOF
+
 # Refresh the desktop database to pick up the new entries
 update-desktop-database ~/.local/share/applications
 
