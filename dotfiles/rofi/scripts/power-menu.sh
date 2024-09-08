@@ -1,23 +1,24 @@
 #!/bin/bash
 
-# If no argument is provided, show options
-if [ -z "$1" ]; then
-    # This output will show in the Rofi combi search as a valid mode
-    echo -e "Shutdown\nRestart\nCancel"
-else
-    case $1 in
-        Shutdown)
-            systemctl poweroff
-            ;;
-        Restart)
-            systemctl reboot
-            ;;
-        Cancel)
-            exit 0
-            ;;
-        *)
-            exit 1
-            ;;
-    esac
-fi
+# Options for the power menu
+OPTIONS="Shutdown\nRestart\nCancel"
+
+# Show options in Rofi and capture the selection
+SELECTED_OPTION=$(echo -e "$OPTIONS" | rofi -dmenu -p "Power Menu" -i)
+
+# Execute the selected option
+case $SELECTED_OPTION in
+    Shutdown)
+        systemctl poweroff
+        ;;
+    Restart)
+        systemctl reboot
+        ;;
+    Cancel)
+        exit 0
+        ;;
+    *)
+        exit 1
+        ;;
+esac
 

@@ -58,3 +58,33 @@ sudo make install
 # XCAPE syslink to autostart
 mkdir -p ~/.config/autostart/
 # ln -s -f ~/.config/rofi/scripts/xcape.desktop ~/.config/autostart/xcape.desktop
+
+# Desktop files to system operations
+# Create the kill.desktop file
+cat <<EOF > ~/.local/share/applications/kill.desktop
+[Desktop Entry]
+Name=Kill Process
+Exec=/home/rtm/.config/rofi/scripts/kill.sh
+Icon=utilities-terminal
+Terminal=false
+Type=Application
+Categories=System;
+EOF
+
+# Create the power-menu.desktop file
+cat <<EOF > ~/.local/share/applications/power-menu.desktop
+[Desktop Entry]
+Name=Power Menu
+Exec=/home/rtm/.config/rofi/scripts/power-menu.sh
+Icon=system-shutdown
+Terminal=false
+Type=Application
+Categories=System;
+EOF
+
+# Refresh the desktop database to pick up the new entries
+update-desktop-database ~/.local/share/applications
+
+# Notify user
+echo "Desktop entry files created and desktop database updated."
+
