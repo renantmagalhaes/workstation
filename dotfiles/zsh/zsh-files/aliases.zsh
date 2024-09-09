@@ -51,20 +51,20 @@ elif check_cmd apt-get; then # FOR DEB SYSTEMS
     alias sudo="sudo "
     alias apt="nala"
     if [[ $gnome_check == "gnome" ]]; then
-        alias folder="nemo"
+        alias folder="nautilus"
         alias pdf="evince"
     elif [[ $bspwm_check == "bspwm" ]]; then
-        alias folder="nemo"
+        alias folder="nautilus"
         alias pdf="evince"
     fi
 
 elif check_cmd zypper; then  # FOR ZYPPER TW SYSTEMS
     alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
     if [[ $gnome_check == "gnome" ]]; then
-        alias folder="nemo"
+        alias folder="nautilus"
         alias pdf="evince"
     elif [[ $bspwm_check == "bspwm" ]]; then
-        alias folder="nemo"
+        alias folder="nautilus"
         alias pdf="evince"
     fi
 fi
