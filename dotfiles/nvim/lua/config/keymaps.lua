@@ -51,3 +51,18 @@ vim.keymap.set("n", "<leader>[", "ysiw[", { remap = true })
 --vim.keymap.set('n', "<leader>Del", "dsq",{ remap = true })
 -- -- add surrounding pairs inset mode
 --TBD
+--
+-- COPY and PASTE insert and visual mode
+-- Insert mode mappings
+-- Map Ctrl+C to copy the current line in insert mode
+vim.api.nvim_set_keymap("i", "<C-c>", '"+yy', { noremap = true, silent = true })
+
+-- Map Ctrl+V to paste in insert mode
+vim.api.nvim_set_keymap("i", "<C-v>", "<C-r>+", { noremap = true, silent = true })
+
+-- Visual mode mappings
+-- Map Ctrl+C to copy the selected text in visual mode
+vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
+
+-- Map Ctrl+V to paste in visual mode (replace selection with clipboard content)
+vim.api.nvim_set_keymap("v", "<C-v>", '"_dP', { noremap = true, silent = true })
