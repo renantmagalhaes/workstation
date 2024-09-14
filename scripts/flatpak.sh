@@ -3,13 +3,12 @@
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-
 # Flathub Packages
 ## Slack
 #sudo flatpak install -y flathub com.slack.Slack
 #sudo flatpak override --filesystem=home:ro com.slack.Slack
 
-## Skype 
+## Skype
 #sudo flatpak install -y flathub com.skype.Client
 
 ## Zoom
@@ -43,3 +42,6 @@ sudo flatpak install flathub com.github.hluk.copyq
 
 ## Save desktop1
 sudo flatpak install flathub io.github.vikdevelop.SaveDesktop
+
+## StreamDeck - StreamController
+sudo flatpak install flathub com.core447.StreamController

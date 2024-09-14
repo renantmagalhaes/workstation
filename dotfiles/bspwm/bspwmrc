@@ -16,8 +16,7 @@ elif check_cmd dnf; then # FOR RPM SYSTEMS
 elif check_cmd zypper; then # FOR OpenSuse SYSTEMS
 	# polkit
 	# mate-polkit &
-  /usr/libexec/polkit-mate-authentication-agent-1 &
-
+	/usr/libexec/polkit-mate-authentication-agent-1 &
 
 else
 	echo "Not able to identify the system" >~/bspwm.log
@@ -83,7 +82,7 @@ kdeconnect-indicator &
 # feh --bg-scale ~/Pictures/background &
 nitrogen --restore &
 /usr/bin/1password --silent &
-streamdeck -n &
+flatpak run com.core447.StreamController &
 flatpak run com.github.hluk.copyq &
 xsetroot -cursor_name left_ptr & # Fix mouse with X
 $HOME/.dotfiles/xcape/xcape.sh &
