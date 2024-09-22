@@ -267,7 +267,36 @@ return {
 
       ins_left({
         function()
-          return ""
+          -- Define the icon in one place
+          local mode_icon = ""
+          -- local mode_icon = ""
+
+          -- Define the mode names
+          local mode_map = {
+            n = mode_icon .. " NORMAL",
+            i = mode_icon .. " INSERT",
+            v = mode_icon .. " VISUAL",
+            [""] = mode_icon .. " VISUAL BLOCK",
+            V = mode_icon .. " VISUAL LINE",
+            c = mode_icon .. " COMMAND",
+            no = mode_icon .. " NORMAL",
+            s = mode_icon .. " SELECT",
+            S = mode_icon .. " SELECT LINE",
+            [""] = mode_icon .. " SELECT BLOCK",
+            ic = mode_icon .. " INSERT COMPLETION",
+            R = mode_icon .. " REPLACE",
+            Rv = mode_icon .. " VISUAL REPLACE",
+            cv = mode_icon .. " VIM EX",
+            ce = mode_icon .. " NORMAL EX",
+            r = mode_icon .. " HIT-ENTER",
+            rm = mode_icon .. " MORE",
+            ["r?"] = mode_icon .. " CONFIRM",
+            ["!"] = mode_icon .. " SHELL",
+            t = mode_icon .. " TERMINAL",
+          }
+
+          -- Return the corresponding mode name with the icon
+          return mode_map[vim.fn.mode()] or (mode_icon .. " UNKNOWN")
         end,
         color = function()
           local mode_color = {
