@@ -192,25 +192,20 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     config = function()
-      -- Eviline config for lualine
-      -- Author: shadmansaleh
-      -- Credit: glepnir
       local lualine = require("lualine")
-
-      -- Color table for highlights
-      -- stylua: ignore
       local colors = {
-        bg       = '#202328',
-        fg       = '#bbc2cf',
-        yellow   = '#ECBE7B',
-        cyan     = '#008080',
-        darkblue = '#081633',
-        green    = '#98be65',
-        orange   = '#FF8800',
-        violet   = '#a9a1e1',
-        magenta  = '#c678dd',
-        blue     = '#51afef',
-        red      = '#ec5f67',
+        bg = "#202328",
+        fg = "#bbc2cf",
+        yellow = "#ECBE7B",
+        cyan = "#008080",
+        darkblue = "#081633",
+        green = "#98be65",
+        orange = "#FF8800",
+        violet = "#a9a1e1",
+        magenta = "#c678dd",
+        blue = "#51afef",
+        red = "#ec5f67",
+        white = "#ffffff",
       }
 
       local conditions = {
@@ -227,10 +222,8 @@ return {
         end,
       }
 
-      -- Config
       local config = {
         options = {
-          -- Disable sections and component separators
           component_separators = "",
           section_separators = "",
           theme = {
@@ -256,12 +249,10 @@ return {
         },
       }
 
-      -- Inserts a component in lualine_c at left section
       local function ins_left(component)
         table.insert(config.sections.lualine_c, component)
       end
 
-      -- Inserts a component in lualine_x at right section
       local function ins_right(component)
         table.insert(config.sections.lualine_x, component)
       end
@@ -311,10 +302,12 @@ return {
         cond = conditions.buffer_not_empty,
       })
 
+      -- Update the filename component to show the full path
       ins_left({
         "filename",
         cond = conditions.buffer_not_empty,
-        color = { fg = colors.magenta, gui = "bold" },
+        path = 3, -- Show the relative filepath
+        color = { fg = colors.white, gui = "bold" },
       })
 
       ins_left({ "location" })
@@ -331,14 +324,14 @@ return {
         },
       })
 
-      -- Insert mid section
       ins_left({
         function()
           return "%="
         end,
       })
 
-      ins_left({
+      -- Move the LSP section to the right
+      ins_right({
         function()
           local msg = "No Active Lsp"
           local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
@@ -355,21 +348,27 @@ return {
           return msg
         end,
         icon = " LSP:",
-        color = { fg = "#ffffff", gui = "bold" },
+        color = { fg = colors.blue, gui = "bold" },
       })
 
-      -- Right section components
-      ins_right({
-        "o:encoding",
-        fmt = string.upper,
-        cond = conditions.hide_in_width,
-        color = { fg = colors.green, gui = "bold" },
-      })
+      -- ins_right({
+      --   "o:encoding",
+      --   fmt = string.upper,
+      --   cond = conditions.hide_in_width,
+      --   color = { fg = colors.green, gui = "bold" },
+      -- })
+      --
+      -- ins_right({
+      --   "fileformat",
+      --   fmt = string.upper,
+      --   icons_enabled = false,
+      --   color = { fg = colors.green, gui = "bold" },
+      -- })
 
       ins_right({
-        "fileformat",
+        "filetype",
         fmt = string.upper,
-        icons_enabled = false,
+        icons_enabled = true,
         color = { fg = colors.green, gui = "bold" },
       })
 
@@ -398,7 +397,6 @@ return {
         padding = { left = 1 },
       })
 
-      -- Initialize lualine
       lualine.setup(config)
     end,
   },
