@@ -355,23 +355,27 @@ return {
 
       -- Center section (filename centered and inside bubble separators)
       config.sections.lualine_c = {
-        { "%=" },
+        {
+          function()
+            return " "
+          end, -- This dummy component creates a gap
+          color = { bg = colors.bg }, -- Ensures the gap blends with the background
+          padding = { left = 1, right = 1 }, -- Adjusts the gap size
+        },
         {
           "filetype",
           fmt = string.upper,
           icons_enabled = true,
           color = { fg = colors.green, bg = colors.grey, gui = "bold" },
-          separator = { left = "", right = "" },
+          separator = { left = "", right = "" },
         },
-
         {
           "filename",
           cond = conditions.buffer_not_empty,
           path = 3, -- Show the relative filepath
           color = { fg = colors.black, bg = colors.truewhite, gui = "bold" },
-          separator = { left = "", right = "" },
+          separator = { left = "", right = "" },
         },
-        { "%=" },
       }
 
       -- Right section (LSP, filetype, progress)
