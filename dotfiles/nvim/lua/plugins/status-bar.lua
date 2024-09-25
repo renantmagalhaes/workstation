@@ -196,15 +196,15 @@ return {
 
       -- Merge colors from both configurations
       local colors = {
-        bg = "#202328",
+        bg = nil,
         fg = "#bbc2cf",
         yellow = "#ECBE7B",
-        cyan = "#008080",
+        cyan = "#00ffff",
         darkblue = "#081633",
         green = "#98be65",
         orange = "#FF8800",
         violet = "#a9a1e1",
-        magenta = "#c678dd",
+        magenta = "#ff00ff",
         blue = "#51afef",
         red = "#ec5f67",
         white = "#ffffff",
@@ -339,7 +339,7 @@ return {
         {
           "branch",
           icon = "",
-          color = { fg = colors.blue, gui = "bold" },
+          color = { fg = colors.magenta, gui = "bold" },
         },
         {
           "diff",
