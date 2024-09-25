@@ -406,7 +406,7 @@ return {
         {
           "location",
           separator = { right = "" },
-          color = { fg = colors.white, bg = colors.black },
+          color = { fg = colors.white },
           left_padding = 2,
         },
       }
