@@ -199,15 +199,15 @@ return {
         bg = "#202328",
         fg = "#bbc2cf",
         yellow = "#ECBE7B",
-        cyan = "#79dac8", -- From bubble theme
+        cyan = "#008080",
         darkblue = "#081633",
         green = "#98be65",
         orange = "#FF8800",
-        violet = "#d183e8", -- From bubble theme
+        violet = "#a9a1e1",
         magenta = "#c678dd",
-        blue = "#80a0ff", -- From bubble theme
-        red = "#ff5189", -- From bubble theme
-        white = "#c6c6c6", -- From bubble theme
+        blue = "#51afef",
+        red = "#ec5f67",
+        white = "#ffffff",
         truewhite = "#ffffff", -- From bubble theme
         black = "#080808", -- From bubble theme
         grey = "#303030", -- From bubble theme
@@ -339,7 +339,7 @@ return {
         {
           "branch",
           icon = "",
-          color = { fg = colors.violet, gui = "bold" },
+          color = { fg = colors.blue, gui = "bold" },
         },
         {
           "diff",
@@ -393,7 +393,7 @@ return {
             return msg
           end,
           icon = " LSP:",
-          color = { fg = colors.blue, gui = "bold" },
+          color = { fg = colors.cyan, gui = "bold" },
         },
         {
           "progress",
@@ -406,6 +406,7 @@ return {
         {
           "location",
           separator = { right = "" },
+          color = { fg = colors.white, bg = colors.black },
           left_padding = 2,
         },
       }
