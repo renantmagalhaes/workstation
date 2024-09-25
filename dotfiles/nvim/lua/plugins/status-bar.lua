@@ -329,7 +329,7 @@ return {
             }
             return { fg = mode_color[vim.fn.mode()], bg = colors.black }
           end,
-          separator = { left = "" },
+          separator = { left = "", right = "" },
           right_padding = 2,
         },
       }
@@ -409,7 +409,7 @@ return {
       config.sections.lualine_z = {
         {
           "location",
-          separator = { right = "" },
+          separator = { left = "", right = "" },
           color = { fg = colors.white },
           left_padding = 2,
         },
