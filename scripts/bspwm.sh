@@ -108,7 +108,7 @@ rm -rf ~/.config/nitrogen
 ln -s -f $PWD/dotfiles/bspwm/nitrogen ~/.config/
 
 # jgmenu config
-rm -rf ~/.config/jgmenu/
+#rm -rf ~/.config/jgmenu/
 ln -s -f $PWD/dotfiles/bspwm/jgmenu ~/.config/
 
 # Themes GTK
