@@ -20,9 +20,9 @@ if check_cmd explorer.exe; then # FOR WSL SYSTEMS
 	fi
 elif check_cmd apt-get; then # FOR DEB SYSTEMS
 	if [[ $gnome_check == "gnome" ]]; then
-		bash ./OperatingSystem/0-debian-gnome-system.sh
+		bash ./OperatingSystem/0-debian-system.sh
 	elif [[ $kde_check == "kde" ]]; then
-		echo "KDE not supported"
+		bash ./OperatingSystem/0-debian-system.sh
 	else
 		echo "Not able to identify desktop environment"
 	fi
@@ -30,9 +30,9 @@ elif check_cmd dnf; then # FOR RPM SYSTEMS
 	echo "System not supported"
 elif check_cmd zypper; then # FOR OPENSUSE SYSTEMS
 	if [[ $gnome_check == "gnome" ]]; then
-		bash ./OperatingSystem/2-opensuse-gnome-system.sh
+		bash ./OperatingSystem/2-opensuse-system.sh
 	elif [[ $kde_check == "kde" ]]; then
-		echo "KDE not supported"
+		bash ./OperatingSystem/2-opensuse-system.sh
 	else
 		echo "Not able to identify desktop environment"
 	fi
