@@ -16,8 +16,8 @@ elif check_cmd dnf; then # FOR RPM SYSTEMS
 elif check_cmd zypper; then # FOR OpenSuse SYSTEMS
 	# polkit
 	# mate-polkit &
-  /usr/libexec/polkit-mate-authentication-agent-1 &
-  #/usr/libexec/polkit-kde-authentication-agent-1 &
+	/usr/libexec/polkit-mate-authentication-agent-1 &
+	#/usr/libexec/polkit-kde-authentication-agent-1 &
 
 else
 	echo "Not able to identify the system" >~/bspwm.log
@@ -28,7 +28,6 @@ fi
 
 # Enable num lock
 xdotool key --clearmodifiers Num_Lock &
-
 
 # Top padding
 bspc config top_padding 30
@@ -68,13 +67,11 @@ bspc rule -a krunner state=floating
 bspc rule -a copyq state=floating center=en rectangle=800x600+0+0
 
 # Startups
-# picom --experimental-backend &
 picom -b
 pgrep -x sxhkd >/dev/null || sxhkd &
 kdeconnect-indicator &
 /usr/bin/1password --silent &
 flatpak run com.github.hluk.copyq &
-streamdeck -n &
 $HOME/.dotfiles/xcape/xcape.sh &
 # Launch hidden bars
 $HOME/.config/polybar/launch-kde.sh &
