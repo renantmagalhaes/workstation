@@ -61,7 +61,7 @@ mkdir -p ~/.config/autostart/
 
 # Desktop files to system operations
 # Create the kill.desktop file
-cat <<EOF > ~/.local/share/applications/kill.desktop
+cat <<EOF >~/.local/share/applications/kill.desktop
 [Desktop Entry]
 Name=Kill Process
 Exec=/home/rtm/.config/rofi/scripts/kill.sh
@@ -72,7 +72,7 @@ Categories=System;
 EOF
 
 # Create the power-menu.desktop file
-cat <<EOF > ~/.local/share/applications/power-menu.desktop
+cat <<EOF >~/.local/share/applications/power-menu.desktop
 [Desktop Entry]
 Name=Power Menu
 Exec=/home/rtm/.config/rofi/scripts/power-menu.sh
@@ -82,7 +82,7 @@ Type=Application
 Categories=System;
 EOF
 
-cat <<EOF > ~/.local/share/applications/power-menu-shutdown.desktop
+cat <<EOF >~/.local/share/applications/power-menu-shutdown.desktop
 [Desktop Entry]
 Name=Shutdown
 Exec=sh -c 'echo -e "Yes\nNo" | rofi -dmenu -i -p "Shutdown?" | grep -q Yes && systemctl poweroff'
@@ -92,7 +92,7 @@ Type=Application
 Categories=System;
 EOF
 
-cat <<EOF > ~/.local/share/applications/power-menu-restart.desktop
+cat <<EOF >~/.local/share/applications/power-menu-restart.desktop
 [Desktop Entry]
 Name=Restart
 Exec=sh -c 'echo -e "Yes\nNo" | rofi -dmenu -i -p "Restart?" | grep -q Yes && systemctl reboot'
@@ -102,7 +102,7 @@ Type=Application
 Categories=System;
 EOF
 
-cat <<EOF > ~/.local/share/applications/power-menu-logout.desktop
+cat <<EOF >~/.local/share/applications/power-menu-logout.desktop
 [Desktop Entry]
 Name=Logout
 Exec=sh -c 'echo -e "Yes\nNo" | rofi -dmenu -i -p "Logout?" | grep -q Yes && bspc quit'
@@ -117,4 +117,3 @@ update-desktop-database ~/.local/share/applications
 
 # Notify user
 echo "Desktop entry files created and desktop database updated."
-

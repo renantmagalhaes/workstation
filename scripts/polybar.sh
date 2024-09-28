@@ -17,7 +17,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
 	sudo apt-get install -y cmake cmake-data libcairo2-dev libxcb1-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-randr0-dev libxcb-util0-dev libxcb-xkb-dev pkg-config python3-xcbgen xcb-proto libxcb-xrm-dev i3-wm libasound2-dev libmpdclient-dev libiw-dev libcurl4-openssl-dev libpulse-dev libxcb-composite0-dev libxcb-composite0-dev libjsoncpp-dev python3-sphinx libuv1-dev unifont
 	sudo ln -s /usr/include/jsoncpp/json/ /usr/include/json
 
-	POLYBAR_RELEASE=3.7.1
+	POLYBAR_RELEASE=3.7.2
 	wget https://github.com/polybar/polybar/releases/download/$POLYBAR_RELEASE/polybar-$POLYBAR_RELEASE.tar.gz -O ~/GIT-REPOS/CORE/polybar.tar.gz
 	cd ~/GIT-REPOS/CORE/ && tar -xvf polybar.tar.gz && cd polybar-$POLYBAR_RELEASE && echo "Y" | ./build.sh
 
