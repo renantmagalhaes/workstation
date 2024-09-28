@@ -10,7 +10,7 @@ check_cmd() {
 
 # Add the repository key with either wget or curl
 if check_cmd apt-get; then # FOR DEB SYSTEMS
-	sudo apt-get install -y bspwm sxhkd feh lxappearance playerctl blueman x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit mate-polkit-bin libnotify-bin qt5ct kdeconnect nautilus-kdeconnect xprop xwininfo xfce4-clipman-plugin gnome-calendar
+	sudo apt-get install -y bspwm sxhkd feh lxappearance playerctl blueman x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit mate-polkit-bin libnotify-bin qt5ct kdeconnect nautilus-kdeconnect x11-utils gnome-calendar
 	sudo pip3 install pywal --break-system-packages
 
 	# Dunst
@@ -22,7 +22,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
 	sudo make WAYLAND=0 install
 
 	# Picom
-  sudo apt-get install -y libconfig-dev libdbus-1-dev libegl-dev libev-dev libgl-dev libepoxy-dev libpcre2-dev libpixman-1-dev libx11-xcb-dev libxcb1-dev libxcb-composite0-dev libxcb-damage0-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-image0-dev libxcb-present-dev libxcb-randr0-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-shape0-dev libxcb-util-dev libxcb-xfixes0-dev libxext-dev meson ninja-build uthash-dev
+	sudo apt-get install -y libconfig-dev libdbus-1-dev libegl-dev libev-dev libgl-dev libepoxy-dev libpcre2-dev libpixman-1-dev libx11-xcb-dev libxcb1-dev libxcb-composite0-dev libxcb-damage0-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-image0-dev libxcb-present-dev libxcb-randr0-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-shape0-dev libxcb-util-dev libxcb-xfixes0-dev libxext-dev meson ninja-build uthash-dev
 	git clone https://github.com/yshui/picom.git ~/GIT-REPOS/CORE/picom
 	cd ~/GIT-REPOS/CORE/picom
 	meson --buildtype=release . build
@@ -32,7 +32,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
 elif check_cmd zypper; then # FOR RPM SYSTEMS
 
 	# Install dependencies
-	sudo zypper install -y bspwm sxhkd feh lxappearance playerctl blueman xsetroot dunst nitrogen scrot xdotool NetworkManager-applet pcp-pmda-lmsensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit libnotify4 libnotify-devel libnotify-tools xprop xwininfo xfce4-clipman-plugin gnome-calendar
+	sudo zypper install -y bspwm sxhkd feh lxappearance playerctl blueman xsetroot dunst nitrogen scrot xdotool NetworkManager-applet pcp-pmda-lmsensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit libnotify4 libnotify-devel libnotify-tools xprop xwininfo gnome-calendar
 	sudo pip3 install pywal --break-system-packages
 
 	# Picom
@@ -134,5 +134,5 @@ gtk-theme-name=Graphite-Dark
 gtk-icon-theme-name=Reversal-purple-dark
 EOF'
 
-echo "export GTK_THEME=Graphite-Dark" >> ~/.profile
-echo "export GTK_THEME=Graphite-Dark" >> ~/.zprofile
+echo "export GTK_THEME=Graphite-Dark" >>~/.profile
+echo "export GTK_THEME=Graphite-Dark" >>~/.zprofile
