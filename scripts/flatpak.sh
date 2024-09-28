@@ -45,3 +45,6 @@ sudo flatpak install flathub io.github.vikdevelop.SaveDesktop
 
 ## StreamDeck - StreamController
 sudo flatpak install flathub com.core447.StreamController
+
+## Stremio
+sudo flatpak install flathub com.stremio.Stremio
