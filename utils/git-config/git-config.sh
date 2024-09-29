@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Delta setup
-cat << EOF > ~/.gitconfig
+cat <<EOF >~/.gitconfig
 [core]
     pager = delta
 
@@ -23,8 +23,8 @@ cat << EOF > ~/.gitconfig
 EOF
 
 #GIT CONFIG
-git config --global user.email "renantmagalhaes@gmail.com"
-git config --global user.name "Renan Toesqui Magalhaes"
+git config --global user.email "rtm@insecure.codes"
+git config --global user.name "RTM"
 git config --global pull.rebase false
 
 # show file
