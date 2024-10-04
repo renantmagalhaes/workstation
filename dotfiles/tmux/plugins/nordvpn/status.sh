@@ -6,11 +6,11 @@ nordStatus=$(nordvpn status | sed -n -e 's/Status: \(.*\)/\1/p')
 nordCountry=$(nordvpn status | sed -n -e 's/Country: \(.*\)/\1/p')
 
 if [[ $nordStatus == *"Disconnected"* ]]; then
-	echo "#[fg=red]󰒄 Disconnected #[fg=white]"
+	echo "#[fg=#ff4237]󰒄 Disconnected #[fg=white]"
 elif [[ $nordStatus == *"Connected"* ]]; then
-	echo "#[fg=green]󰒄 Connected [$nordCountry] #[fg=white]"
+	echo "#[fg=#7feaac]󰒄 Connected [$nordCountry] #[fg=white]"
 elif [[ $nordStatus == *"Connecting"* ]]; then
-	echo "#[fg=yellow]󰒄 Connecting"
+	echo "#[fg=#fef65b]󰒄 Connecting"
 else
-	echo "#[fg=red]󰒃 #[fg=white]"
+	echo "#[fg=#000000]󰒃 #[fg=white]"
 fi
