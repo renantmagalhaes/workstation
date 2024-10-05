@@ -1,7 +1,7 @@
-Menu,~/.config/rofi/scripts/rofi-menu.sh,appimagekit-archipelago
+Menu,~/.config/rofi/scripts/launchers/type-7/launcher.sh,appimagekit-archipelago
 Terminal,kitty,Terminal
 File Explorer,nautilus,stock_folder
-Browser,/usr/bin/vivaldi,abrowser
+Browser,/usr/bin/vivaldi,vivaldi
 Browser (Incognito),/usr/bin/vivaldi --incognito,abrowser
 ^sep()
 
