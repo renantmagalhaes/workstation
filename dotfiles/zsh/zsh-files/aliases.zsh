@@ -89,7 +89,7 @@ elif [[ $linux_check == "linux" ]]; then
     alias mouse-battery='upower --dump |grep -A 5 mouse | egrep -oh '"'"'[0-9]*%'"'"''
     alias ascii-image='jp2a --output=ascii.txt --colors $1'
     alias pdf-signature='xournal'
-    alias nordvpn-c='sudo nordvpn connect && sudo nordvpn set lan-discovery on && sudo nordvpn set tpl on && sudo nordvpn set killswitch on && sudo nordvpn set autoconnect on'
+    alias nordvpn-c='sudo nordvpn connect && sudo nordvpn set tpl on && sudo nordvpn set killswitch on && sudo nordvpn set autoconnect on && sudo nordvpn set lan-discovery on'
     alias nordvpn-d='sudo nordvpn set autoconnect off && sudo nordvpn set killswitch off && sudo nordvpn set tpl off && sudo nordvpn disconnect'
 
 else
