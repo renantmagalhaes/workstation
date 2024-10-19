@@ -1,3 +1,11 @@
+# Options
+
+If executing BIN files from a NAS.
+
+![execute-from-nas](../../assets/execute-from-nas.png)
+
+Maybe will be necessary to change some GPO policies to edit those Options
+
 # Windows
 
 Theme > Dark Bloon
