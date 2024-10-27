@@ -563,44 +563,44 @@ button.button-startpage { box-shadow: none !important; }
 button.button-startpage:after { background-image: none !important; }
 button.button-startpage:active { background: none !important; }
 
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END THEME~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ /* 
+/* ~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END THEME~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ /* 
 
 /* Mouse hover -> expand */
-/* #tabs-container.left, #tabs-subcontainer.left, */
-/* #tabs-container.right, #tabs-subcontainer.right { */
-/*   min-width: 35px; /* 38px */ */
-/*   transition: min-width 250ms ease-out 225ms !important; /* added 225ms delay */ */
-/* } */
-/**/
-/* #tabs-container.left:hover, #tabs-subcontainer.left:hover, */
-/* #tabs-container.right:hover, #tabs-subcontainer.right:hover { */
-/*   min-width: 200px !important; /* 220px */ */
-/* } */
-/**/
-/* .tabbar-workspace-button { */
-/*   width: 100% !important; */
-/* } */
-/**/
-/* #tabs-tabbar-container.left, #tabs-tabbar-container.right { */
-/*   width: auto !important; */
-/*   min-width: 35px; /* 38px */ */
-/* } */
-/**/
-/* /* .button-toolbar.newtab { */
-/*   left: 0px !important; */
-/*   width: 220px; */
-/* } */ */
-/**/
-/* .toolbar-tabbar.sync-and-trash-container { */
-/*   flex-direction: column; */
-/* } */
-/**/
-/* /* Add gap in the boarder when hover */ */
-/* #tabs-tabbar-container.left:hover .tab-position, */
-/* #tabs-tabbar-container.right:hover .tab-position { */
-/*   padding-left: 5px; */
-/*   padding-right: 5px; */
-/* } */
+#tabs-container.left, #tabs-subcontainer.left,
+#tabs-container.right, #tabs-subcontainer.right {
+min-width: 38px;
+  transition: min-width 250ms ease-out 225ms !important; /* added 225ms delay */
+}
+
+#tabs-container.left:hover, #tabs-subcontainer.left:hover,
+#tabs-container.right:hover, #tabs-subcontainer.right:hover {
+  min-width: 200px !important; /* 220px */
+}
+
+.tabbar-workspace-button {
+  width: 100% !important;
+}
+
+#tabs-tabbar-container.left, #tabs-tabbar-container.right {
+  width: auto !important;
+  min-width: 35px; /* 38px */
+}
+
+.button-toolbar.newtab {
+  left: 0px !important;
+  width: 220px;
+}
+
+.toolbar-tabbar.sync-and-trash-container {
+  flex-direction: column;
+}
+
+/* Add gap in the boarder when hover */
+#tabs-tabbar-container.left:hover .tab-position,
+#tabs-tabbar-container.right:hover .tab-position {
+  padding-left: 5px;
+  padding-right: 5px;
+}
 /**/
 /* Increase tab height */
 /* Alternative -> UI Zoom on Vivaldi settings */
