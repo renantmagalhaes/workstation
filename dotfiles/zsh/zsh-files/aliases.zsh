@@ -90,7 +90,7 @@ elif [[ $linux_check == "linux" ]]; then
     alias ascii-image='jp2a --output=ascii.txt --colors $1'
     alias pdf-signature='xournal'
     alias nordvpn-c='sudo nordvpn connect && sudo nordvpn set tpl on && sudo nordvpn set killswitch on && sudo nordvpn set autoconnect on && sudo nordvpn set lan-discovery on'
-    alias nordvpn-d='sudo nordvpn set lan-discovery off && sudo nordvpn set autoconnect off && sudo nordvpn set killswitch off && sudo nordvpn set tpl off && sudo nordvpn disconnect'
+    alias nordvpn-d='sudo nordvpn set autoconnect off && sudo nordvpn set killswitch off && sudo nordvpn set tpl off && sudo nordvpn disconnect'
 
 else
     echo "error on SO check"
