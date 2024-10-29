@@ -45,6 +45,15 @@ function docker-remove-all () {
     sudo docker network rm $(sudo docker network ls -q)
 }
 
+## docker remove all
+
+function docker-compose-update-images () {
+    docker compose pull
+    docker compose up -d --force-recreate
+    docker image prune
+}
+
+
 function copydir {
   pwd | tr -d "\r\n" | xclip
 }
