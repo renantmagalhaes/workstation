@@ -627,7 +627,7 @@ span.favicon.jstest-favicon-image {
   margin-right: 4px; /* Adjust this value to increase or decrease the gap */
 }
 /* Set tab active color scheme  */
-#browser .tab-position .tab.active {background-color: #fef6f4; color: #2e2d2c !important;}
+#browser .tab-position .tab.active {background-color: #2e323b; color: #fffff0 !important;}
 /* #browser .tab-position .tab.active {background-color: #7740f7; color: rgb(255, 255, 255) !important;} */
 
 /* popup page zoom control */
