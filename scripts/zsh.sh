@@ -27,7 +27,7 @@ sh -c '/tmp/zsh.sh'
 #curl -sS https://starship.rs/install.sh | sh
 
 # Install OMP - Oh my Posh
-sudo curl -s https://ohmyposh.dev/install.sh | sudo bash -s -- -d /usr/local/bin/
+curl -s https://ohmyposh.dev/install.sh | bash -s
 
 # zsh config
 ln -s -f $PWD/dotfiles/zsh/zshrc ~/.zshrc
