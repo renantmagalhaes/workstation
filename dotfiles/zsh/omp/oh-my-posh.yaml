@@ -119,7 +119,7 @@ blocks:
         leading_diamond: " \ue0b6"
         trailing_diamond: 
         template: " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} "
-        foreground: "#B388FF"
+        foreground: "#d9fc86"
         background: "#29315A"
         type: git
         style: diamond
