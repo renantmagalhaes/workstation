@@ -26,12 +26,18 @@ sh -c '/tmp/zsh.sh'
 # Install startship
 #curl -sS https://starship.rs/install.sh | sh
 
-#zsh config
+# Install OMP - Oh my Posh
+sudo curl -s https://ohmyposh.dev/install.sh | sudo bash -s -- -d /usr/local/bin/
+
+# zsh config
 ln -s -f $PWD/dotfiles/zsh/zshrc ~/.zshrc
 ln -s -f $PWD/dotfiles/zsh/zsh-files ~/.zsh
 
-#p10k config
+# p10k config
 ln -s -f $PWD/dotfiles/zsh/p10k.zsh ~/.p10k.zsh
+
+# omp config
+ln -s -f $PWD/dotfiles/zsh/omp ~/.config/
 
 #lsd config
 mkdir -p ~/.config/lsd/
