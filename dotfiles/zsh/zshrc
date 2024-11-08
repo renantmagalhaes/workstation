@@ -55,7 +55,7 @@ source $ZSH/oh-my-zsh.sh
 # P10K External config file
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-eval "$(oh-my-posh init zsh --config $HOME/.config/omp/bubblesExtra.json)"
+eval "$(oh-my-posh init zsh --config $HOME/.config/omp/oh-my-posh.yaml)"
 
 
 # Startship Config
