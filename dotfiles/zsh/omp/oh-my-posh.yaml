@@ -4,15 +4,6 @@ blocks:
   - type: prompt
     alignment: right
     segments:
-      # - properties:
-      #     style: folder
-      #   leading_diamond: 
-      #   trailing_diamond: 
-      #   template:  {{ .Path }}
-      #   foreground: "#3EC669"
-      #   background: "#29315A"
-      #   type: path
-      #   style: diamond
       - properties:
           fetch_version: false
         leading_diamond: " \ue0b6"
@@ -101,26 +92,24 @@ blocks:
         background: "#29315A"
         type: executiontime
         style: diamond
-
   - type: prompt
     alignment: left
     segments:
       - leading_diamond: 
         trailing_diamond: 
-        template: "{{ .UserName }} ❯"
-        foreground: "#E64747"
+        template: 
+        foreground: "#ffffff"
         background: "#29315A"
         type: text
         style: diamond
       - properties:
-          style: agnoster_short
+          style: letter
         leading_diamond: 
         trailing_diamond: 
         template:  {{ .Path }}
         foreground: "#3EC669"
         background: "#29315A"
         type: path
-        max_depth: 5
         style: diamond
       - properties:
           branch_max_length: 25.0
@@ -139,8 +128,4 @@ blocks:
           - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#ff4500{{ end }}"
           - "{{ if gt .Ahead 0 }}#B388FF{{ end }}"
           - "{{ if gt .Behind 0 }}#B388FF{{ end }}"
-
-    newline: true
-
 version: 3
-final_space: true
