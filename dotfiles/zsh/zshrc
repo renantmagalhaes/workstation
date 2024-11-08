@@ -1,11 +1,6 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
-
 # Purpose:       config file for zsh)
 #
 #Site        :https://renantmagalhaes.net
@@ -37,8 +32,11 @@ linux_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set theme
-POWERLEVEL9K_MODE='nerdfont-complete'
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+# POWERLEVEL9K_MODE='nerdfont-complete'
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 
 
@@ -54,8 +52,8 @@ source $ZSH/oh-my-zsh.sh
 
 # P10K External config file
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# eval "$(oh-my-posh init zsh --config $HOME/.config/omp/oh-my-posh.yaml)"
+#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+eval "$(oh-my-posh init zsh --config $HOME/.config/omp/oh-my-posh.yaml)"
 
 
 # Startship Config
