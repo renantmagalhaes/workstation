@@ -1,0 +1,108 @@
+---
+"$schema": https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+blocks:
+- alignment: left
+  newline: true
+  segments:
+  - foreground: "#ffbebc"
+    leading_diamond: "<#ff70a6>  </>"
+    properties:
+      display_host: true
+    style: diamond
+    template: "{{ .UserName }} <#ffffff>on</>"
+    type: session
+  - foreground: "#bc93ff"
+    properties:
+      time_format: Monday <#ffffff>at</> 3:04 PM
+    style: diamond
+    template: " {{ .CurrentDate | date .Format }} "
+    type: time
+  - foreground: "#ee79d1"
+    properties:
+      branch_icon: " "
+      fetch_stash_count: true
+      fetch_status: true
+      fetch_upstream_icon: true
+      fetch_worktree_count: true
+    style: diamond
+    template: " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus
+      }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and
+      (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}
+       {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{
+      end }} "
+    type: git
+  type: prompt
+- alignment: right
+  segments:
+  - foreground: "#a9ffb4"
+    style: plain
+    type: text
+  - foreground: "#a9ffb4"
+    properties:
+      style: dallas
+      threshold: 0
+    style: diamond
+    template: " {{ .FormattedMs }}s <#ffffff></>"
+    type: executiontime
+  - properties:
+      root_icon: " "
+    style: diamond
+    template: "  "
+    type: root
+  - foreground: "#94ffa2"
+    style: diamond
+    template: " <#ffffff>MEM:</> {{ round .PhysicalPercentUsed .Precision }}% ({{
+      (div ((sub .PhysicalTotalMemory .PhysicalFreeMemory)|float64) 1073741824.0)
+      }}/{{ (div .PhysicalTotalMemory 1073741824.0) }}GB)"
+    type: sysinfo
+  type: prompt
+- alignment: left
+  newline: true
+  segments:
+  - foreground: "#ffafd2"
+    leading_diamond: "<#00c7fc>  </><#ffafd2>{</>"
+    properties:
+      folder_icon: ""
+      folder_separator_icon: "  "
+      home_icon: home
+      style: agnoster_full
+    style: diamond
+    template: "  {{ .Path }} "
+    trailing_diamond: "<#ffafd2>}</>"
+    type: path
+  - foreground: "#A9FFB4"
+    foreground_templates:
+    - "{{ if gt .Code 0 }}#ef5350{{ end }}"
+    properties:
+      always_enabled: true
+    style: plain
+    template: "  "
+    type: status
+  type: prompt
+console_title_template: "{{ .Folder }}"
+transient_prompt:
+  background: transparent
+  foreground: "#FEF5ED"
+  template: " "
+version: 3
+    trailing_diamond: 
+    template: " \ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} "
+    foreground: p:white
+    background: p:orange
+    type: aws
+    style: diamond
+    tips:
+      - aws
+  - properties:
+      display_default: true
+    leading_diamond: 
+    trailing_diamond: 
+    template: " \uebd8 {{ .Name }} "
+    foreground: p:white
+    background: p:blue
+    type: az
+    style: diamond
+    tips:
+      - az
+version: 3
+final_space: true
