@@ -130,7 +130,7 @@ blocks:
           - "{{ if gt .Behind 0 }}#B388FF{{ end }}"
 transient_prompt:
   background: transparent
-  foreground: "#ffffff"
-  template: "{{ .Shell }}> "
+  foreground: "#9B6BDF"
+  template: " "
 auto_upgrade: false
 version: 3
