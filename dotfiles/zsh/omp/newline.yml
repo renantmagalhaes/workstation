@@ -1,0 +1,71 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+blocks:
+- type: prompt
+  alignment: left
+  segments:
+  - template: "{{ .Icon }}"
+    foreground: cyan
+    type: os
+    style: powerline
+  - properties:
+      style: full
+    template: " {{ .Path }} "
+    foreground: cyan
+    type: path
+    style: plain
+  - template: ":: <lightBlue>git(</>{{ .HEAD }}<lightBlue>)</>"
+    foreground: lightYellow
+    type: git
+    style: plain
+- type: prompt
+  alignment: right
+  segments:
+  - properties:
+      display_mode: files
+      fetch_package_manager: true
+      fetch_version: true
+      npm_icon: /npm
+      yarn_icon: /yarn
+    template: " {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}"
+    foreground: "#68a063"
+    type: node
+    style: plain
+  - properties:
+      display_mode: files
+      fetch_version: true
+    template: " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+    foreground: "#4063D8"
+    type: crystal
+    style: plain
+  - properties:
+      display_mode: files
+      fetch_version: true
+    template: " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+    foreground: "#DE3F24"
+    type: ruby
+    style: plain
+  - properties:
+      display_mode: context
+      fetch_virtual_env: false
+    template: " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+    foreground: "#FED142"
+    type: python
+    style: plain
+  - template: " {{ .CurrentDate | date .Format }} "
+    foreground: lightGreen
+    type: time
+    style: plain
+- type: prompt
+  alignment: left
+  segments:
+  - properties:
+      always_enabled: true
+    template: "➜ "
+    foreground: lightGreen
+    type: status
+    style: powerline
+    foreground_templates:
+    - "{{ if gt .Code 0 }}red{{ end }}"
+  newline: true
+version: 3

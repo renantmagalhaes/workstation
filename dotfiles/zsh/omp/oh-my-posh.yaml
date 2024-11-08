@@ -128,4 +128,9 @@ blocks:
           - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#ff4500{{ end }}"
           - "{{ if gt .Ahead 0 }}#B388FF{{ end }}"
           - "{{ if gt .Behind 0 }}#B388FF{{ end }}"
+transient_prompt:
+  background: transparent
+  foreground: "#ffffff"
+  template: "{{ .Shell }}> "
+auto_upgrade: false
 version: 3
