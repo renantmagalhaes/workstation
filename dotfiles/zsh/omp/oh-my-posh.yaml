@@ -101,7 +101,7 @@ blocks:
         type: text
         style: diamond
       - properties:
-          style: letter
+          style: full
         leading_diamond: 
         trailing_diamond: 
         template:  {{ .Path }}
