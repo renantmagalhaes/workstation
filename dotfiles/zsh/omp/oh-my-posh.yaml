@@ -1,8 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
 
 blocks:
+  # Top line with all the segments
   - type: prompt
-    alignment: right
+    alignment: left
     segments:
       - properties:
           fetch_version: false
@@ -92,9 +93,6 @@ blocks:
         background: "#29315A"
         type: executiontime
         style: diamond
-  - type: prompt
-    alignment: left
-    segments:
       - leading_diamond: 
         trailing_diamond: 
         template: 
@@ -128,6 +126,19 @@ blocks:
           - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#ff4500{{ end }}"
           - "{{ if gt .Ahead 0 }}#B388FF{{ end }}"
           - "{{ if gt .Behind 0 }}#B388FF{{ end }}"
+
+  # Bottom line with shell prompt symbol
+  - type: prompt
+    alignment: left
+    newline: true
+    segments:
+      - properties:
+          always_enabled: true
+        template: "➜ "
+        foreground: lightGreen
+        type: status
+        style: plain
+
 transient_prompt:
   background: transparent
   foreground: "#9B6BDF"
