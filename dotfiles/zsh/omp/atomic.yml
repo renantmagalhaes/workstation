@@ -1,216 +1,216 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
 
 blocks:
-- type: prompt
-  alignment: left
-  segments:
-  - leading_diamond: ╭─
-    template: "\uf120 {{ .Name }} "
-    foreground: "#ffffff"
-    background: "#0077c2"
-    type: shell
-    style: diamond
-  - template: "<parentBackground>\ue0b0</> \uf292 "
-    foreground: "#FFFB38"
-    background: "#ef5350"
-    type: root
-    style: diamond
-  - properties:
-      folder_icon: " \uf07b "
-      home_icon: 
-      style: folder
-    template: " \uf07b\uea9c {{ .Path }} "
-    foreground: "#2d3436"
-    powerline_symbol: 
-    background: "#FF9248"
-    type: path
-    style: powerline
-  - properties:
-      branch_icon: "\ue725 "
-      fetch_status: true
-      fetch_upstream_icon: true
-    template: " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<#ef5350> \uf046 {{ .Staging.String }}</>{{ end }} "
-    foreground: "#011627"
-    powerline_symbol: 
-    background: "#FFFB38"
-    type: git
-    style: powerline
-    background_templates:
-    - "{{ if or (.Working.Changed) (.Staging.Changed) }}#ffeb95{{ end }}"
-    - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#c5e478{{ end }}"
-    - "{{ if gt .Ahead 0 }}#C792EA{{ end }}"
-    - "{{ if gt .Behind 0 }}#C792EA{{ end }}"
-  - properties:
-      style: roundrock
-      threshold: 0.0
-    trailing_diamond: 
-    template: " \ueba2 {{ .FormattedMs }}⠀"
-    foreground: "#ffffff"
-    background: "#83769c"
-    type: executiontime
-    style: diamond
-- type: prompt
-  alignment: right
-  segments:
-  - properties:
-      fetch_package_manager: true
-      npm_icon: " <#cc3a3a>\ue5fa</> "
-      yarn_icon: " <#348cba>\ue6a7</>"
-    leading_diamond: 
-    trailing_diamond: "\ue0b4 "
-    template:  {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}
-    foreground: "#3C873A"
-    background: "#303030"
-    type: node
-    style: diamond
-  - leading_diamond: 
-    trailing_diamond: "\ue0b4 "
-    template:  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}
-    foreground: "#FFE873"
-    background: "#306998"
-    type: python
-    style: diamond
-  - leading_diamond: 
-    trailing_diamond: "\ue0b4 "
-    template:  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}
-    foreground: "#ffffff"
-    background: "#0e8ac8"
-    type: java
-    style: diamond
-  - leading_diamond: 
-    trailing_diamond: "\ue0b4 "
-    template:  {{ if .Unsupported }}{{ else }}{{ .Full }}{{ end }}
-    foreground: "#0d6da8"
-    background: "#0e0e0e"
-    type: dotnet
-    style: diamond
-  - leading_diamond: 
-    trailing_diamond: "\ue0b4 "
-    template:  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}
-    foreground: "#06aad5"
-    background: "#ffffff"
-    type: go
-    style: diamond
-  - leading_diamond: 
-    trailing_diamond: "\ue0b4 "
-    template:  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}
-    foreground: "#925837"
-    background: "#f3f0ec"
-    type: rust
-    style: diamond
-  - leading_diamond: " \ue0b6"
-    trailing_diamond: "\ue0b4 "
-    template:  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}
-    foreground: "#055b9c"
-    background: "#e1e8e9"
-    type: dart
-    style: diamond
-  - leading_diamond: " \ue0b6"
-    trailing_diamond: "\ue0b4 "
-    template:  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}
-    foreground: "#ce092f"
-    background: "#ffffff"
-    type: angular
-    style: diamond
-  - leading_diamond: " \ue0b6"
-    trailing_diamond: "\ue0b4 "
-    template: α {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}
-    foreground: "#de1f84"
-    background: "#ffffff"
-    type: aurelia
-    style: diamond
-  - leading_diamond: " \ue0b6"
-    trailing_diamond: "\ue0b4 "
-    template: "{{ if .Error }}{{ .Error }}{{ else }}Nx {{ .Full }}{{ end }}"
-    foreground: "#ffffff"
-    background: "#1e293b"
-    type: nx
-    style: diamond
-  - leading_diamond: " \ue0b6"
-    trailing_diamond: "\ue0b4 "
-    template: "<#ca3c34>\ue624</> {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
-    foreground: "#359a25"
-    background: "#945bb3"
-    type: julia
-    style: diamond
-  - leading_diamond: 
-    trailing_diamond: "\ue0b4 "
-    template:  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}
-    foreground: "#9c1006"
-    background: "#ffffff"
-    type: ruby
-    style: diamond
-  - leading_diamond: 
-    trailing_diamond: "\ue0b4 "
-    template: "\uf104<#f5bf45>\uf0e7</>\uf105 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
-    foreground: "#5398c2"
-    background: "#ffffff"
-    type: azfunc
-    style: diamond
-  - leading_diamond: 
-    trailing_diamond: "\ue0b4 "
-    template:  {{.Profile}}{{if .Region}}@{{.Region}}{{end}}
-    foreground: "#faa029"
-    background: "#565656"
-    type: aws
-    style: diamond
-  - leading_diamond: 
-    trailing_diamond: 
-    template: "\uf308 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}}"
-    foreground: "#ffffff"
-    background: "#316ce4"
-    type: kubectl
-    style: diamond
-  - properties:
-      linux: 
-      macos: 
-      windows: 
-    leading_diamond: 
-    trailing_diamond: <transparent,background></>
-    template: " {{ if .WSL }}WSL at {{ end }}{{.Icon}} "
-    foreground: "#222222"
-    background: "#b2bec3"
-    type: os
-    style: diamond
-  - properties:
-      charged_icon: "\uf240 "
-      charging_icon: "\uf1e6 "
-      discharging_icon: "\ue234 "
-    template: " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}\uf295 "
-    foreground: "#262626"
-    powerline_symbol: 
-    background: "#f36943"
-    type: battery
-    style: powerline
-    background_templates:
-    - "{{if eq \"Charging\" .State.String}}#b8e994{{end}}"
-    - "{{if eq \"Discharging\" .State.String}}#fff34e{{end}}"
-    - "{{if eq \"Full\" .State.String}}#33DD2D{{end}}"
-    invert_powerline: true
-  - properties:
-      time_format: _2,15:04
-    leading_diamond: 
-    trailing_diamond: 
-    template: " \uf073 {{ .CurrentDate | date .Format }} "
-    foreground: "#ffffff"
-    background: "#40c4ff"
-    type: time
-    style: diamond
-    invert_powerline: true
-- type: prompt
-  alignment: left
-  segments:
-  - template: ╰─
-    foreground: "#21c7c7"
-    type: text
-    style: plain
-  - properties:
-      always_enabled: true
-    template: "\ue285\ueab6 "
-    foreground: "#e0f8ff"
-    type: status
-    style: plain
-    foreground_templates:
-    - "{{ if gt .Code 0 }}#ef5350{{ end }}"
-  newline: true
+  - type: prompt
+    alignment: left
+    segments:
+      - leading_diamond: ╭─
+        template: "\uf120 {{ .Name }} "
+        foreground: "#ffffff"
+        background: "#0077c2"
+        type: shell
+        style: diamond
+      - template: "<parentBackground>\ue0b0</> \uf292 "
+        foreground: "#FFFB38"
+        background: "#ef5350"
+        type: root
+        style: diamond
+      - properties:
+          folder_icon: " \uf07b "
+          home_icon: 
+          style: folder
+        template: " \uf07b\uea9c {{ .Path }} "
+        foreground: "#2d3436"
+        powerline_symbol: 
+        background: "#FF9248"
+        type: path
+        style: powerline
+      - properties:
+          branch_icon: "\ue725 "
+          fetch_status: true
+          fetch_upstream_icon: true
+        template: " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<#ef5350> \uf046 {{ .Staging.String }}</>{{ end }} "
+        foreground: "#011627"
+        powerline_symbol: 
+        background: "#FFFB38"
+        type: git
+        style: powerline
+        background_templates:
+          - "{{ if or (.Working.Changed) (.Staging.Changed) }}#ffeb95{{ end }}"
+          - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#c5e478{{ end }}"
+          - "{{ if gt .Ahead 0 }}#C792EA{{ end }}"
+          - "{{ if gt .Behind 0 }}#C792EA{{ end }}"
+      - properties:
+          style: roundrock
+          threshold: 0.0
+        trailing_diamond: 
+        template: " \ueba2 {{ .FormattedMs }}⠀"
+        foreground: "#ffffff"
+        background: "#83769c"
+        type: executiontime
+        style: diamond
+  - type: prompt
+    alignment: right
+    segments:
+      - properties:
+          fetch_package_manager: true
+          npm_icon: " <#cc3a3a>\ue5fa</> "
+          yarn_icon: " <#348cba>\ue6a7</>"
+        leading_diamond: 
+        trailing_diamond: "\ue0b4 "
+        template:  {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}
+        foreground: "#3C873A"
+        background: "#303030"
+        type: node
+        style: diamond
+      - leading_diamond: 
+        trailing_diamond: "\ue0b4 "
+        template:  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}
+        foreground: "#FFE873"
+        background: "#306998"
+        type: python
+        style: diamond
+      - leading_diamond: 
+        trailing_diamond: "\ue0b4 "
+        template:  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}
+        foreground: "#ffffff"
+        background: "#0e8ac8"
+        type: java
+        style: diamond
+      - leading_diamond: 
+        trailing_diamond: "\ue0b4 "
+        template:  {{ if .Unsupported }}{{ else }}{{ .Full }}{{ end }}
+        foreground: "#0d6da8"
+        background: "#0e0e0e"
+        type: dotnet
+        style: diamond
+      - leading_diamond: 
+        trailing_diamond: "\ue0b4 "
+        template:  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}
+        foreground: "#06aad5"
+        background: "#ffffff"
+        type: go
+        style: diamond
+      - leading_diamond: 
+        trailing_diamond: "\ue0b4 "
+        template:  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}
+        foreground: "#925837"
+        background: "#f3f0ec"
+        type: rust
+        style: diamond
+      - leading_diamond: " \ue0b6"
+        trailing_diamond: "\ue0b4 "
+        template:  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}
+        foreground: "#055b9c"
+        background: "#e1e8e9"
+        type: dart
+        style: diamond
+      - leading_diamond: " \ue0b6"
+        trailing_diamond: "\ue0b4 "
+        template:  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}
+        foreground: "#ce092f"
+        background: "#ffffff"
+        type: angular
+        style: diamond
+      - leading_diamond: " \ue0b6"
+        trailing_diamond: "\ue0b4 "
+        template: α {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}
+        foreground: "#de1f84"
+        background: "#ffffff"
+        type: aurelia
+        style: diamond
+      - leading_diamond: " \ue0b6"
+        trailing_diamond: "\ue0b4 "
+        template: "{{ if .Error }}{{ .Error }}{{ else }}Nx {{ .Full }}{{ end }}"
+        foreground: "#ffffff"
+        background: "#1e293b"
+        type: nx
+        style: diamond
+      - leading_diamond: " \ue0b6"
+        trailing_diamond: "\ue0b4 "
+        template: "<#ca3c34>\ue624</> {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+        foreground: "#359a25"
+        background: "#945bb3"
+        type: julia
+        style: diamond
+      - leading_diamond: 
+        trailing_diamond: "\ue0b4 "
+        template:  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}
+        foreground: "#9c1006"
+        background: "#ffffff"
+        type: ruby
+        style: diamond
+      - leading_diamond: 
+        trailing_diamond: "\ue0b4 "
+        template: "\uf104<#f5bf45>\uf0e7</>\uf105 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+        foreground: "#5398c2"
+        background: "#ffffff"
+        type: azfunc
+        style: diamond
+      - leading_diamond: 
+        trailing_diamond: "\ue0b4 "
+        template:  {{.Profile}}{{if .Region}}@{{.Region}}{{end}}
+        foreground: "#faa029"
+        background: "#565656"
+        type: aws
+        style: diamond
+      - leading_diamond: 
+        trailing_diamond: 
+        template: "\uf308 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}}"
+        foreground: "#ffffff"
+        background: "#316ce4"
+        type: kubectl
+        style: diamond
+      - properties:
+          linux: 
+          macos: 
+          windows: 
+        leading_diamond: 
+        trailing_diamond: <transparent,background></>
+        template: " {{ if .WSL }}WSL at {{ end }}{{.Icon}} "
+        foreground: "#222222"
+        background: "#b2bec3"
+        type: os
+        style: diamond
+      - properties:
+          charged_icon: "\uf240 "
+          charging_icon: "\uf1e6 "
+          discharging_icon: "\ue234 "
+        template: " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}\uf295 "
+        foreground: "#262626"
+        powerline_symbol: 
+        background: "#f36943"
+        type: battery
+        style: powerline
+        background_templates:
+          - '{{if eq "Charging" .State.String}}#b8e994{{end}}'
+          - '{{if eq "Discharging" .State.String}}#fff34e{{end}}'
+          - '{{if eq "Full" .State.String}}#33DD2D{{end}}'
+        invert_powerline: true
+      - properties:
+          time_format: _2,15:04
+        leading_diamond: 
+        trailing_diamond: 
+        template: " \uf073 {{ .CurrentDate | date .Format }} "
+        foreground: "#ffffff"
+        background: "#40c4ff"
+        type: time
+        style: diamond
+        invert_powerline: true
+  - type: prompt
+    alignment: left
+    segments:
+      - template: ╰─
+        foreground: "#21c7c7"
+        type: text
+        style: plain
+      - properties:
+          always_enabled: true
+        template: "\ue285\ueab6 "
+        foreground: "#e0f8ff"
+        type: status
+        style: plain
+        foreground_templates:
+          - "{{ if gt .Code 0 }}#ef5350{{ end }}"
+    newline: true
 version: 3
