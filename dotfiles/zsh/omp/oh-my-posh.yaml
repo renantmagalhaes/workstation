@@ -6,7 +6,8 @@ blocks:
     segments:
       - properties:
           always_enabled: true
-        template: "╭─ "
+        # template: "╭─ "
+        template: "\u250c "
         foreground: "#696E8B"
         type: status
         style: plain
@@ -139,14 +140,16 @@ blocks:
     segments:
       - properties:
           always_enabled: true
-        template: "╰─"
+        # template: "╰─"
+        template: "\u2514"
         foreground: "#696E8B"
         type: status
         style: plain
       - properties:
           always_enabled: true
-        template: " "
-        foreground: "#696E8B"
+        # template: " "
+        template: " $ "
+        foreground: "#fffff0"
         type: status
         style: plain
     newline: true
