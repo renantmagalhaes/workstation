@@ -155,7 +155,7 @@ blocks:
     newline: true
 transient_prompt:
   background: transparent
-  foreground: "#10B6BDF"
+  foreground: "#8b7cfc"
   template: " "
 auto_upgrade: false
 version: 4
