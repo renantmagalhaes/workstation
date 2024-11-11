@@ -8,7 +8,7 @@ blocks:
           always_enabled: true
         # template: "╭─ "
         template: "\u250c "
-        foreground: "#696E8B"
+        foreground: "#ffce7b"
         type: status
         style: plain
       - leading_diamond: 
@@ -142,20 +142,20 @@ blocks:
           always_enabled: true
         # template: "╰─"
         template: "\u2514"
-        foreground: "#696E8B"
+        foreground: "#ffce7b"
         type: status
         style: plain
       - properties:
           always_enabled: true
         # template: " "
         template: " $ "
-        foreground: "#fffff0"
+        foreground: "#fffff1"
         type: status
         style: plain
     newline: true
 transient_prompt:
   background: transparent
-  foreground: "#9B6BDF"
+  foreground: "#10B6BDF"
   template: " "
 auto_upgrade: false
-version: 3
+version: 4
