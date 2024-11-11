@@ -44,6 +44,97 @@ blocks:
           - "{{ if gt .Ahead 0 }}#B388FF{{ end }}"
           - "{{ if gt .Behind 0 }}#B388FF{{ end }}"
   - type: prompt
+    alignment: right
+    segments:
+      - properties:
+          fetch_version: false
+        leading_diamond: " \ue0b6"
+        trailing_diamond: 
+        template:  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}
+        foreground: "#E4F34A"
+        background: "#29315A"
+        type: python
+        style: diamond
+      - properties:
+          fetch_version: false
+        leading_diamond: " \ue0b6"
+        trailing_diamond: 
+        template: {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}
+        foreground: "#7FD5EA"
+        background: "#29315A"
+        type: go
+        style: diamond
+      - properties:
+          fetch_version: false
+        leading_diamond: " \ue0b6"
+        trailing_diamond: 
+        template: {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}
+        foreground: "#42E66C"
+        background: "#29315A"
+        type: node
+        style: diamond
+      - properties:
+          fetch_version: false
+        leading_diamond: " \ue0b6"
+        trailing_diamond: 
+        template: {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}
+        foreground: "#E64747"
+        background: "#29315A"
+        type: ruby
+        style: diamond
+      - properties:
+          fetch_version: false
+        leading_diamond: " \ue0b6"
+        trailing_diamond: 
+        template: {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}
+        foreground: "#E64747"
+        background: "#29315A"
+        type: java
+        style: diamond
+      - properties:
+          fetch_version: false
+        leading_diamond: " \ue0b6"
+        trailing_diamond: 
+        template: "\ue624{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
+        foreground: "#9B6BDF"
+        background: "#29315A"
+        type: julia
+        style: diamond
+      - properties:
+          fetch_version: false
+        leading_diamond: " \ue0b6"
+        trailing_diamond: 
+        template: "\ue73d {{ .Full }} "
+        foreground: "#ffffff"
+        background: "#4063D8"
+        type: php
+        style: diamond
+      - properties:
+          charged_icon: "\u0095 "
+          charging_icon: "⇡ "
+          discharging_icon: "⇣ "
+        leading_diamond: " \ue0b6"
+        trailing_diamond: 
+        template: "{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}"
+        foreground: "#9B6BDF"
+        background: "#29315A"
+        type: battery
+        style: diamond
+        foreground_templates:
+          - '{{if eq "Charging" .State.String}}#40c4ff{{end}}'
+          - '{{if eq "Discharging" .State.String}}#ff5722{{end}}'
+          - '{{if eq "Full" .State.String}}#4caf50{{end}}'
+      - properties:
+          style: austin
+          threshold: 150.0
+        leading_diamond: 
+        trailing_diamond: "\ue0b4 "
+        template: " {{ .FormattedMs }}"
+        foreground: "#AEA4BF"
+        background: "#29315A"
+        type: executiontime
+        style: diamond
+  - type: prompt
     alignment: left
     segments:
       - properties:
