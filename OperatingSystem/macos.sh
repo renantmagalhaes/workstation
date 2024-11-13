@@ -16,7 +16,10 @@ fi
 bash ./scripts/brew.sh
 
 # Default packages
-brew install wget \tree \htop \iterm2 \tmux \go \neofetch \rectangle \coreutils \warp \stats \lsd \telnet \ncdu \jq \node \sqlite
+brew install wget \tree \htop \iterm2 \tmux \go \neofetch \rectangle \coreutils \warp \stats \lsd \telnet \ncdu \jq \node \sqlite \kitty
+
+# Oh my posh setup
+brew install jandedobbeleer/oh-my-posh/oh-my-posh
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
