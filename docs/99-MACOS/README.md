@@ -44,9 +44,27 @@
 
 ## System
 
+### Remove the Date from the Top Bar
+You can adjust the date settings in System Settings to hide the date from the top menu bar:
+
+Go to System Settings > Control Center.
+Find Clock settings, where you can choose what details to display.
+Select Digital and uncheck options to remove the date display.
+This will leave only the time without showing the date in the menu bar.
+Also disable show day of the week
+
+### Prevent Maximized Apps from Opening in a New Desktop
+To prevent macOS from creating a new Space (desktop) when you maximize an app (put it in full screen):
+
+Open System Settings > Desktop & Dock.
+Scroll down to the Mission Control section.
+Turn off the option "Displays have separate Spaces" if it’s enabled. This will make maximized apps stay within the same desktop rather than creating a new one.
+
 ![picture 2](../../assets/448bce10dd89705da74d2857b6d5f075634a8e555d0cf52423e3a9002827d41e.png)  
 
-![picture 3](../../assets/160ecc4c5e80e64d915e4e6d7048eb1fc5cf27773bbe96e1a4d5ae8d0ab96dbe.png)  
+![picture 3](../../assets/160ecc4c5e80e64d915e4e6d7048eb1fc5cf27773bbe96e1a4d5ae8d0ab96dbe.png) 
+
+![picture 0](../../images/a82909ed17f496c06126b114e176ca7ff67a24b72aa28832f38ef162b868400d.png)  
 
 ## Karabiner
 
