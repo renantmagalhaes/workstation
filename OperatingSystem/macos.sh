@@ -84,6 +84,9 @@ defaults write com.apple.Dock autohide-delay -float 0.05
 ## Restart dock
 killall Dock
 
+## Fix scroll direction
+defaults write -g com.apple.swipescrolldirection -bool false
+
 ## Disabling Time Machine Use New Drive Setup Requests in Mac OS X
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 ## Revert
