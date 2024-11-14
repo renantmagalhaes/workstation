@@ -111,21 +111,6 @@ blocks:
         type: php
         style: diamond
       - properties:
-          charged_icon: "\u0095 "
-          charging_icon: "⇡ "
-          discharging_icon: "⇣ "
-        leading_diamond: " \ue0b6"
-        trailing_diamond: 
-        template: "{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}"
-        foreground: "#9B6BDF"
-        background: "#29315A"
-        type: battery
-        style: diamond
-        foreground_templates:
-          - '{{if eq "Charging" .State.String}}#40c4ff{{end}}'
-          - '{{if eq "Discharging" .State.String}}#ff5722{{end}}'
-          - '{{if eq "Full" .State.String}}#4caf50{{end}}'
-      - properties:
           style: austin
           threshold: 150.0
         leading_diamond: 
