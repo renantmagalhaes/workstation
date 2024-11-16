@@ -48,6 +48,7 @@ function docker-remove-all () {
 ## docker update compose
 
 function docker-compose-update-images () {
+    { echo "~~ $(date) ~~"; docker images; } >> ~/dockerImages.log
     docker compose pull
     docker compose up -d --force-recreate
     docker image prune
