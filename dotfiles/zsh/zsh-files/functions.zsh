@@ -45,7 +45,7 @@ function docker-remove-all () {
     sudo docker network rm $(sudo docker network ls -q)
 }
 
-## docker remove all
+## docker update compose
 
 function docker-compose-update-images () {
     docker compose pull
