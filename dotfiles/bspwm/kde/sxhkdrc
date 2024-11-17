@@ -7,24 +7,18 @@ ctrl + alt + t
 	kitty
 
 
-#Logitech MX mouse actions
+#Logitech MX 3 mouse actions
 ## left click
 ~button3
 	xqp 0 $(xdo id -N Bspwm -n root) && jgmenu_run
 ## side scroll
 ~button6
-    xdotool key Ctrl+equal
+  xdotool key Ctrl+equal
 ~button7
-    xdotool key Ctrl+minus
+  xdotool key Ctrl+minus
 ## thumb button
 ~button10
-      $HOME/.dotfiles/rofi/scripts/rofi-menu.sh
-
-# program launcher
-super + Pause
-  $HOME/.dotfiles/rofi/scripts/rofi-menu.sh
-super + z
-  $HOME/.dotfiles/rofi/scripts/rofi-menu.sh
+	HOME/.config/rofi/scripts/rofi-mouse-menu.sh
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -37,245 +31,22 @@ super + Escape
 ctrl + Return
   tdrop -ma -w -4 -y "45" -h 80% -s dropdown kitty
 
-# Open file manager
-super + e
-	nautilus
+
 
 # Clip board manager
 super + v
   flatpak run com.github.hluk.copyq toggle
-#   xfce4-clipman-history
 
 # Screenshot
 Print
 	flameshot gui
-ctrl + Print
-	gnome-screenshot -i
-alt + Print
-	flameshot screen
 
-super + a 
-	pavucontrol
-super + b
-	blueman-manager
-super + n
-gnome-control-center wifi
-
-# # Browser favorites shortcut
-# ctrl + space
-# 	$HOME/GIT-REPOS/workstation/utils/autokey/favorites.sh
-#
-# # Browser search shortcut
-# F2
-# 	$HOME/GIT-REPOS/workstation/utils/autokey/search.sh
 
 # Dead keys layout
 super + Insert
 	$HOME/.config/bspwm/scripts/dead-keys/dead-keys.sh
 
-# Lock screen
-super + l
-	qdbus6 org.freedesktop.ScreenSaver /ScreenSaver Lock
-
-# Startup script
-super + F12
-	~/.config/bspwm/scripts/rtm-startup-session.sh
-
-# quit/restart bspwm
-super + alt + r
-	bspc wm -r && dunstify -i window_list "Successfully restarted BSPWM"
 
 # close and kill
 super + q
-	bspc node -c
-	# bspc node -{c,k}
-
-# alternate between the tiled and monocle layout
-super + m
-	bspc desktop -l next
-
-# send the newest marked node to the newest preselected node
-super + y
-	bspc node newest.marked.local -n newest.!automatic.local
-
-# swap the current node and the biggest window
-super + g
-	bspc node -s biggest.window
-
-#
-# state/flags
-#
-
-# set the window state
-# super + {t,shift + t,s,f}
-# 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
-
-super + f
-	bspc node -t floating
-
-ctrl + shift + F12
-	bspc node -t floating
-
-super + t
-	bspc node -t tiled
-
-
-
-
-# # set the node flags
-# super + ctrl + {m,x,y,z}
-# 	bspc node -g {marked,locked,sticky,private}
-
-#
-# focus/swap
-#
-
-# focus the node in the given direction
-super + {_,shift + }{Left,Down,Up,Right}
-	bspc node -{f,s} {west,south,north,east}
-
-# focus the node for the given path jump
-# super + {p,b,comma,period}
-# 	bspc node -f @{parent,brother,first,second}
-
-# # focus the next/previous window in the current desktop
-# super + {_,shift + }c
-# 	bspc node -f {next,prev}.local.!hidden.window
-
-# focus the next/previous desktop in the current monitor
-# super + bracket{left,right}
-# 	bspc desktop -f {prev,next}.local
-
-# super + ctrl + {Left,Right}
-# 	bspc desktop -f {prev,next}.local
-
-# Navigate between workspaces
-super + ctrl + Left
-	mon=`bspc query -D -d focused --names | cut -c1` && bspc desktop --focus $((mon)) && bspc desktop --focus $((mon - 1))$((mon - 1)) && bspc desktop --focus $((mon - 1))
-
-super + ctrl + Right
-	mon=`bspc query -D -d focused --names | cut -c1` && bspc desktop --focus $((mon)) && bspc desktop --focus $((mon + 1))$((mon + 1)) && bspc desktop --focus $((mon + 1))
-
-# Send window to next monitor
-super + Return
-    bspc node -m last --follow
-    #bspc node -m next
-
-# Move windows between workspaces
-super + ctrl + shift + Right
-  bspc node -d next --follow && mon=`bspc query -D -d focused --names`
-  if [[ "$mon" =~ ^[0-9]$ ]]; then mon="$mon$mon"; fi
-  bspc desktop --focus $mon
-
-super + ctrl + shift + Left
-  bspc node -d prev --follow && mon=`bspc query -D -d focused --names`
-  if [[ "$mon" =~ ^[0-9]$ ]]; then mon="$mon$mon"; fi
-  bspc desktop --focus $mon
-
-# alt + Tab
-# 	$HOME/.config/bspwm/scripts/system/alttab.sh
-
-# focus desktop / send window to desktop
-# super + {_,shift + }{JJJJ
-#     bspc {desktop -f,node -d} ^{1-9,10}
-
-# focus the last node/desktop
-super + {grave,Tab}
-	bspc {node,desktop} -f last
-
-# focus the older or newer node in the focus history
-super + {o,i}
-	bspc wm -h off; \
-	bspc node {older,newer} -f; \
-	bspc wm -h on
-
-# # focus or send to the given desktop
-# super + {_,shift + }{1-9,0}
-# 	bspc {desktop -f,node -d} '^{1-9,10}'
-
-#
-# preselect
-#
-
-# preselect the direction
-super + ctrl + {h,j,k,l}HJH
-	bspc node -p {west,south,north,east}
-
-# # preselect the ratio
-# super + ctrl + {1-9}
-# 	bspc node -o 0.{1-9}
-
-# # cancel the preselection for the focused node
-# super + ctrl + space
-# 	bspc node -p cancel
-
-# # cancel the preselection for the focused desktop
-# super + ctrl + shift + space
-# 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-
-# # Send window to another workspace
-super + {_,ctrl + }{1-9,0}
-  bspc {desktop -f, node -d} '^{1-9,10}' --follow
-
-#
-# move/resize
-#
-# Expand/contract a window by moving one of its side outward/inward
-super + alt + {Left,Down,Up,Right}
-    STEP=20; SELECTION={1,2,3,4}; \
-    bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
-    bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
-
-# super + alt + {Right,Up,Down,Left}
-# 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
-
-# move a floating window
-super + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
-
-# Media keys
-XF86AudioMute
-	pactl set-source-mute @DEFAULT_SOURCE@ toggle
-
-XF86AudioRaiseVolume
-	$HOME/.config/dunst/volume/volume.sh up
-	# pactl set-sink-volume @DEFAULT_SINK@ +5%
-
-XF86AudioLowerVolume
-	$HOME/.config/dunst/volume/volume.sh down
-	# pactl set-sink-volume @DEFAULT_SINK@ -5%
-
-shift + super + XF86AudioLowerVolume
-	$HOME/.config/dunst/volume/volume.sh down
-	# pactl set-sink-volume @DEFAULT_SINK@ -5%
-
-XF86AudioPlay
-	playerctl play-pause
-super + c
-	playerctl play-pause
-XF86AudioNext
-	playerctl next
-XF86AudioPrev
-	playerctl previous
-
-# Logout
-super + alt + Escape
-  bspc quit
-
-# Focus sync
-super + 1
- bspc desktop --focus '1' && bspc desktop --focus '11'
-super + 2
- bspc desktop --focus '2' && bspc desktop --focus '22'
-super + 3
- bspc desktop --focus '3' && bspc desktop --focus '33'
-super + 4
- bspc desktop --focus '4' && bspc desktop --focus '44'
-super + 5
- bspc desktop --focus '5' && bspc desktop --focus '55'
-
-
-
-
-# super + bracket{left,right}
-#     bspc node -d 11 --follow
+	qdbus org.kde.kglobalaccel /component/kwin org.kde.kglobalaccel.Component.invokeShortcut "Window Close"
