@@ -9,7 +9,8 @@ import time
 window_id = int(subprocess.getoutput("xdotool getactivewindow"))
 
 # Get the position of the window using xwininfo
-window_position = subprocess.getoutput(f"xwininfo -id {window_id} | grep 'Absolute upper-left X:'")
+window_position = subprocess.getoutput(
+    f"xwininfo -id {window_id} | grep 'Absolute upper-left X:'")
 
 # Extract the window's X coordinate
 window_x = int(window_position.split()[3])
@@ -25,7 +26,8 @@ action = ""
 for line in monitor_info.split('\n'):
     match = re.search(r'(\d+)x(\d+)\+(\d+)\+(\d+)', line)
     if match:
-        monitor_width, monitor_height, monitor_x, monitor_y = map(int, match.groups())
+        monitor_width, monitor_height, monitor_x, monitor_y = map(
+            int, match.groups())
         if monitor_x <= window_x < monitor_x + monitor_width:
             selected_monitor_width = monitor_width
             break
@@ -33,7 +35,7 @@ for line in monitor_info.split('\n'):
 # Perform actions based on selected monitor width
 if selected_monitor_width == 2560:
     subprocess.run(["xdotool", "key", "super+shift+Right"])
-    
+
     action = "Shift+Super+Right"
 elif selected_monitor_width == 1920:
     subprocess.run(["xdotool", "key", "super+shift+Left"])
@@ -41,7 +43,8 @@ elif selected_monitor_width == 1920:
 
 # Print monitor information and action
 if selected_monitor_width:
-    print(f"Current window is on Monitor: {monitor_width} x {monitor_height} at {monitor_x},{monitor_y}")
+    print(
+        f"Current window is on Monitor: {monitor_width} x {monitor_height} at {monitor_x},{monitor_y}")
     print(f"Performing action: {action}")
 else:
     print("Could not determine current monitor.")
