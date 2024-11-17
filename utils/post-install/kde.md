@@ -17,13 +17,12 @@
     - Animation 170ms
   <!-- - Enable Wobby Windows -->
     <!-- - Uncheck Wobbly when resizing. -->
-  - Desktop Grid
-    - Layout mode: Pager
   - Disable Screen Edge (highlight)
 - Task Switcher
   - Thumbnail Grid
 - Virtual Desktops
-  - Add 4 rows
+  - Let only 1 row
+    - add 5 desktops
   - Disable Navigation Wraps Around
 - Screen Edges
   - Disable all
@@ -120,6 +119,7 @@ Configs
 ```
 kwriteconfig5 --file kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.krunner,/App,,toggleDisplay"
 qdbus-qt5 org.kde.KWin /KWin reconfigure
+qdbus org.kde.KWin /KWin reconfigure
 ```
 
 - Disable desktop search

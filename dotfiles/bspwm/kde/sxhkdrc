@@ -13,12 +13,12 @@ ctrl + alt + t
 	xqp 0 $(xdo id -N Bspwm -n root) && jgmenu_run
 ## side scroll
 ~button6
-  xdotool key Ctrl+equal
+    xdotool key Ctrl+equal
 ~button7
-  xdotool key Ctrl+minus
+    xdotool key Ctrl+minus
 ## thumb button
 ~button10
-	HOME/.config/rofi/scripts/rofi-mouse-menu.sh
+	qdbus org.kde.kglobalaccel /component/kwin org.kde.kglobalaccel.Component.invokeShortcut "Overview"
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -29,17 +29,17 @@ super + Escape
 #
 
 ctrl + Return
-  tdrop -ma -w -4 -y "45" -h 80% -s dropdown kitty
+    tdrop -ma -w -4 -y "45" -h 80% -s dropdown kitty
 
 
 
 # Clip board manager
 super + v
-  flatpak run com.github.hluk.copyq toggle
+    flatpak run com.github.hluk.copyq toggle
 
 # Screenshot
 Print
-	flameshot gui
+    flameshot gui
 
 
 # Dead keys layout
