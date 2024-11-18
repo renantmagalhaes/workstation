@@ -42,8 +42,12 @@
     - https://www.pexels.com/videos/
     - https://pixabay.com/videos/search/live%20wallpaper/
 
-
 ## KDE Taskbar
+- Kwin Scripts
+  - Force Blur
+  - Window Gaps
+- AutoStart
+![alt text](../../assets/autostartkde.png)
 
 ### Widgets
 
