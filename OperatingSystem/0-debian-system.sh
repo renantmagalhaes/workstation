@@ -54,6 +54,9 @@ fi
 # Get current folder
 FOLDER_LOCATION=$(pwd)
 
+## Create git-folder
+mkdir -p ~/GIT-REPOS/CORE
+
 ## Disable cdrom
 sudo sed -i 's/deb\ cdrom/\#deb\ cdrom/g' /etc/apt/sources.list
 
@@ -73,7 +76,7 @@ if [[ $gnome_check == "gnome" ]]; then
 	sudo DEBIAN_FRONTEND=noninteractive apt-get -y network-manager-openvpn-gnome gnome-tweaks chrome-gnome-shell gnome-menus
 	bash ./scripts/gnome-themes.sh
 elif [[ $kde_check == "kde" ]]; then
-	sudo DEBIAN_FRONTEND=noninteractive apt-get -y qt5-style-kvantum qt5-style-kvantum-themes kwin-bismuth
+	sudo DEBIAN_FRONTEND=noninteractive apt-get -y qt5-style-kvantum qt5-style-kvantum-themes kwin-bismuth extra-cmake-modules
 else
 	echo "Not able to identify desktop environment"
 fi
@@ -139,9 +142,6 @@ sudo dpkg -i /tmp/teamviewer_amd64.deb
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-## Create git-folder
-mkdir -p ~/GIT-REPOS/CORE
 
 # SCRIPTS
 ## Install Nix
