@@ -4,22 +4,21 @@ check_cmd() {
 }
 
 #RTM
-macos_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
-linux_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
+macos_check=$(uname -a | awk '{print $1}' | awk '{print tolower($0)}')
+linux_check=$(uname -a | awk '{print $1}' | awk '{print tolower($0)}')
 
-# alias with preview files on 
+# alias with preview files on
 alias pf="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
 # crontab editor
 export VISUAL=vim
 
 #Aliases
-gnome_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "GNOME" | awk '{print tolower($0)}'`
-kde_check=`env |grep XDG_CURRENT_DESKTOP |grep -ioh "KDE" | awk '{print tolower($0)}'`
-bspwm_check=`env |grep DESKTOP_SESSION |grep -ioh "bspwm" | awk '{print tolower($0)}'`
-wsl_debian_check=`env |grep WSL |grep -ioh "debian"| awk '{print tolower($0)}'`
-wsl_thumbleweed_check=`env |grep WSL |grep -ioh "openSUSE-Tumbleweed"| awk '{print tolower($0)}'`
-wsl_leap_check=`env |grep WSL |grep -ioh "openSUSE-Leap"| awk '{print tolower($0)}'`
-
+gnome_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "GNOME" | awk '{print tolower($0)}')
+kde_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "KDE" | awk '{print tolower($0)}')
+bspwm_check=$(env | grep DESKTOP_SESSION | grep -ioh "bspwm" | awk '{print tolower($0)}')
+wsl_debian_check=$(env | grep WSL | grep -ioh "debian" | awk '{print tolower($0)}')
+wsl_thumbleweed_check=$(env | grep WSL | grep -ioh "openSUSE-Tumbleweed" | awk '{print tolower($0)}')
+wsl_leap_check=$(env | grep WSL | grep -ioh "openSUSE-Leap" | awk '{print tolower($0)}')
 
 if check_cmd wsl.exe; then
     alias pdf="evince"
@@ -30,22 +29,22 @@ if check_cmd wsl.exe; then
     alias wsl-rm-zone-file="find . -maxdepth 1 -type f -name '*Zone.Identifier*' -exec rm -rf {} +"
     alias wsl-list="wsl.exe --list"
     if check_cmd files.exe; then
-      # current_path=$(pwd)
-      # FilesAppPath=$(echo $current_path | sed -e 's|^/|\\\\wsl.localhost\\openSUSE-Tumbleweed\\|' -e 's|/|\\|g')
-      # alias folder="files.exe '$FilesAppPath'"
-      alias folder="explorer.exe"
+        # current_path=$(pwd)
+        # FilesAppPath=$(echo $current_path | sed -e 's|^/|\\\\wsl.localhost\\openSUSE-Tumbleweed\\|' -e 's|/|\\|g')
+        # alias folder="files.exe '$FilesAppPath'"
+        alias folder="explorer.exe"
     else
-          alias folder="explorer.exe"
+        alias folder="explorer.exe"
     fi
-        if [[ $wsl_debian_check == "debian" ]]; then
-                alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
-                alias sudo="sudo "
-                alias apt="nala"
-        elif [[ $wsl_thumbleweed_check == "opensuse-tumbleweed" ]]; then
-            alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
-        elif [[ $wsl_leap_check == "opensuse-leap" ]]; then
-            alias update-all="sudo zypper ref && sudo zypper up && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
-        fi
+    if [[ $wsl_debian_check == "debian" ]]; then
+        alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
+        alias sudo="sudo "
+        alias apt="nala"
+    elif [[ $wsl_thumbleweed_check == "opensuse-tumbleweed" ]]; then
+        alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
+    elif [[ $wsl_leap_check == "opensuse-leap" ]]; then
+        alias update-all="sudo zypper ref && sudo zypper up && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
+    fi
 elif check_cmd apt-get; then # FOR DEB SYSTEMS
     alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
     alias sudo="sudo "
@@ -56,9 +55,12 @@ elif check_cmd apt-get; then # FOR DEB SYSTEMS
     elif [[ $bspwm_check == "bspwm" ]]; then
         alias folder="nautilus"
         alias pdf="evince"
+    elif [[ $kde_check == "kde" ]]; then
+        alias folder="dolphin"
+        alias pdf="evince"
     fi
 
-elif check_cmd zypper; then  # FOR ZYPPER TW SYSTEMS
+elif check_cmd zypper; then # FOR ZYPPER TW SYSTEMS
     alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
     if [[ $gnome_check == "gnome" ]]; then
         alias folder="nautilus"
@@ -98,15 +100,13 @@ else
     echo "error on SO check"
 fi
 
-
 alias cp='cp -iv'
 alias rm='rm -ir'
 alias mv='mv -iv'
 alias ln='ln -sriv'
 alias xclip='xclip -selection c'
 alias files='fzf'
-command -v vim > /dev/null && alias vi='vim'
-
+command -v vim >/dev/null && alias vi='vim'
 
 #eval $(thefuck --alias)
 
@@ -152,9 +152,6 @@ alias pip3='python -m pip'
 alias vinotes='vi ~/notes.md'
 alias lg='lazygit'
 alias killvi='pidof nvim |xargs kill -9'
-
-### IP Info tools
-alias ip-info='curl https://wtfismyip.com/json | jq .'
 
 ### Zypper UTILS
 alias zypper-reinstall='sudo zypper install --force'
