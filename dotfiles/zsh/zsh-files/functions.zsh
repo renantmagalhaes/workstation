@@ -12,6 +12,7 @@ function colormap() {
   for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
 }
 
+
 ### pw generator
 function pw () {
     pwgen -sync "${1:-48}" -1 | if command -v pbcopy > /dev/null 2>&1; then pbcopy; else xclip; fi
@@ -54,12 +55,13 @@ function docker-compose-update-images () {
     docker image prune
 }
 
-
+## Copy direcory to clipboard
 function copydir {
   pwd | tr -d "\r\n" | xclip
 }
 
-function url_redirect() {
+## Check the number of redirects a URL have
+function url-redirect() {
     local URL=$1
     local REDIRECTS=0
 
@@ -80,3 +82,20 @@ function url_redirect() {
     done
 }
 
+## Launch Strem.IO companion app for web
+function stremio-web-companion-app(){
+    # Check if ffmpeg is installed
+    if ! command -v ffmpeg >/dev/null 2>&1; then
+        echo "ffmpeg not found."
+        return 1
+    fi
+
+    # Check if docker is installed
+    if ! command -v docker >/dev/null 2>&1; then
+        echo "docker not found."
+        return 1
+    fi
+
+    # Run the Docker command
+    docker run --rm -d --name stremio-web -p 11470:11470 -p 12470:12470 stremio/server:latest
+}
