@@ -76,7 +76,7 @@ if [[ $gnome_check == "gnome" ]]; then
 	sudo DEBIAN_FRONTEND=noninteractive apt-get -y network-manager-openvpn-gnome gnome-tweaks chrome-gnome-shell gnome-menus
 	bash ./scripts/gnome-themes.sh
 elif [[ $kde_check == "kde" ]]; then
-	sudo DEBIAN_FRONTEND=noninteractive apt-get -y qt5-style-kvantum qt5-style-kvantum-themes kwin-bismuth extra-cmake-modules
+	sudo DEBIAN_FRONTEND=noninteractive apt-get install -y qt5-style-kvantum qt5-style-kvantum-themes kwin-bismuth extra-cmake-modules
 else
 	echo "Not able to identify desktop environment"
 fi
