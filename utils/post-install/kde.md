@@ -4,8 +4,6 @@
 
 # System Settings
 
-- Compositor
-  - Rendering backend (OpenGL 3.1)
 - Application Style
   - Configure GNOME/GTK
 - Desktop effects
@@ -17,7 +15,6 @@
     - Animation 170ms
   <!-- - Enable Wobby Windows -->
     <!-- - Uncheck Wobbly when resizing. -->
-  - Disable Screen Edge (highlight)
 - Task Switcher
   - Thumbnail Grid
 - Virtual Desktops
@@ -43,15 +40,20 @@
 ## KWin Scripts
 
 - Force Blur
-- Window Gaps
-- Hide all title bars
+- Window Gaps (bismuth)
+- Hide all title bars (window rules)
   ![alt text](../../assets/hide-all-titleBars.png)
 
 ## Extra 
 - AutoStart
-  
+
 ![alt text](../../assets/autostartkde.png)
 
+```
+flatpak run com.core447.StreamController
+
+flatpak run com.github.hluk.copyq
+```
 
 
 ### Widgets
@@ -63,15 +65,15 @@
 
 
 
-### KDE top scroll bar
-1. Add commond empty panel
+### KDE top scroll bar (replaces by pixel perfect polybar)
+<!-- 1. Add commond empty panel
 2. Edit ~/.config/plasma-org.kde.plasma.desktop-appletsrc
    1. add under [ActionPlugins][1]
       1. wheel:Vertical;NoModifier=org.kde.switchdesktop
 3. Keyboard and shortcut for menu -> Alt + F1
 4. Disable notification system tray (top panel)
 5. Change ~/.config/plasmashellrc
-   1. thickness=5 to thickness=3 -->
+   1. thickness=5 to thickness=3 --> -->
 
 
 # Set KRunner shortcut to meta key and config
