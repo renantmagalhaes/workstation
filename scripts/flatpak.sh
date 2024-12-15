@@ -54,3 +54,6 @@ sudo flatpak install flathub com.usebottles.bottles
 
 ## Play on Linux - Game on Linux
 sudo flatpak install flathub com.playonlinux.PlayOnLinux4
+
+## moonshine
+sudo flatpak install flathub com.moonlight_stream.Moonlight
