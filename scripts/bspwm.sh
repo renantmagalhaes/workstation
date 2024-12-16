@@ -10,17 +10,17 @@ check_cmd() {
 
 # Add the repository key with either wget or curl
 if check_cmd apt-get; then # FOR DEB SYSTEMS
-	sudo apt-get install -y bspwm sxhkd feh lxappearance playerctl x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme  pavucontrol jgmenu mate-polkit mate-polkit-bin libnotify-bin qt5ct kdeconnect nautilus-kdeconnect x11-utils gnome-calendar
+	sudo apt-get install -y bspwm sxhkd feh lxappearance playerctl x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pavucontrol jgmenu mate-polkit mate-polkit-bin libnotify-bin qt5ct kdeconnect nautilus-kdeconnect x11-utils gnome-calendar
 	sudo apt-get install -y blueman pasystray
 	sudo pip3 install pywal --break-system-packages
 
-	# # Dunst
-	# sudo apt install -y libdbus-1-dev libx11-dev libxinerama-dev libxrandr-dev libxss-dev libglib2.0-dev libpango1.0-dev libgtk2.0-dev libxdg-basedir-dev libnotify-dev xdg-utils libwayland-client0
-	# git clone https://github.com/dunst-project/dunst.git ~/GIT-REPOS/CORE/dunst
-	# cd ~/GIT-REPOS/CORE/dunst
-	# sudo it config --global --add safe.directory ~/GIT-REPOS/CORE/dunst
-	# make -j5 WAYLAND=0
-	# sudo make WAYLAND=0 install
+	# Dunst
+	sudo apt install -y libdbus-1-dev libx11-dev libxinerama-dev libxrandr-dev libxss-dev libglib2.0-dev libpango1.0-dev libgtk2.0-dev libxdg-basedir-dev libnotify-dev xdg-utils libwayland-client0
+	git clone https://github.com/dunst-project/dunst.git ~/GIT-REPOS/CORE/dunst
+	cd ~/GIT-REPOS/CORE/dunst
+	sudo it config --global --add safe.directory ~/GIT-REPOS/CORE/dunst
+	make -j5 WAYLAND=0
+	sudo make WAYLAND=0 install
 
 	# Picom
 	sudo apt-get install -y libconfig-dev libdbus-1-dev libegl-dev libev-dev libgl-dev libepoxy-dev libpcre2-dev libpixman-1-dev libx11-xcb-dev libxcb1-dev libxcb-composite0-dev libxcb-damage0-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-image0-dev libxcb-present-dev libxcb-randr0-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-shape0-dev libxcb-util-dev libxcb-xfixes0-dev libxext-dev meson ninja-build uthash-dev cmake
