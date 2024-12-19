@@ -161,10 +161,6 @@ bash ./scripts/neofetch.sh
 ## GIT
 bash ./utils/git-config/git-config.sh
 
-#
-sudo zypper install -y
-sudo gem install colorls
-
 # Install ClamAV
 sudo zypper install -y clamav clamtk
 

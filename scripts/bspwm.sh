@@ -30,6 +30,11 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
 	ninja -C build
 	sudo ninja -C build install
 
+	# Auto-update repo
+	sudo cp ./dotfiles/bspwm/systemd-service/apt-update.service /etc/systemd/system/apt-update.service
+	sudo cp ./dotfiles/bspwm/systemd-service/apt-update.timer /etc/systemd/system/apt-update.timer
+	sudo systemctl enable --now apt-update.timer
+
 elif check_cmd zypper; then # FOR RPM SYSTEMS
 
 	# Install dependencies
@@ -88,11 +93,6 @@ ln -s -f $PWD/dotfiles/bspwm/bspwmrc ~/.config/bspwm/bspwmrc
 chmod +x ~/.config/bspwm/bspwmrc
 ln -s -f $PWD/dotfiles/bspwm/sxhkdrc ~/.config/sxhkd/sxhkdrc
 chmod +x ~/.config/sxhkd/sxhkdrc
-
-# Auto-update repo
-sudo cp ./dotfiles/bspwm/systemd-service/apt-update.service /etc/systemd/system/apt-update.service
-sudo cp ./dotfiles/bspwm/systemd-service/apt-update.timer /etc/systemd/system/apt-update.timer
-sudo systemctl enable --now apt-update.timer
 
 # scripts
 ln -s -f $PWD/dotfiles/bspwm/scripts ~/.config/bspwm/
