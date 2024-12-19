@@ -26,6 +26,10 @@ super + Pause
 super + z
   $HOME/.dotfiles/rofi/scripts/rofi-menu.sh
 
+# show running programs
+super + {grave,Tab}
+	$HOME/.config/rofi/scripts/rofi-mouse-menu.sh
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
@@ -177,10 +181,6 @@ alt + Tab
 # focus desktop / send window to desktop
 # super + {_,shift + }{JJJJ
 #     bspc {desktop -f,node -d} ^{1-9,10}
-
-# focus the last node/desktop
-super + {grave,Tab}
-	bspc {node,desktop} -f last
 
 # focus the older or newer node in the focus history
 super + {o,i}
