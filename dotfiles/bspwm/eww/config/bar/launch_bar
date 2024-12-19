@@ -5,22 +5,22 @@ FILE="$HOME/.cache/eww_launch.xyz"
 EWW="eww -c $HOME/.config/eww/bar"
 
 ## Run eww daemon if not running already
-if [[ ! `pidof eww` ]]; then
+if [[ ! $(pidof eww) ]]; then
 	${EWW} daemon
 	sleep 1
 fi
 
-## Open widgets 
+## Open widgets
 run_eww() {
 	${EWW} open-many \
-         bar
-        
+		bar
+
 }
 
 ## Launch or close widgets accordingly
 if [[ ! -f "$FILE" ]]; then
 	touch "$FILE"
-	run_eww && bspc config -m DisplayPort-2 top_padding 49
+	run_eww && bspc config -m DP-3 top_padding 49
 else
 	${EWW} close-all && killall eww
 	rm "$FILE"

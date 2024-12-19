@@ -10,10 +10,10 @@ MONITORS=$(xrandr | grep ' connected' | awk '{ print $1 }')
 # Loop through connected monitors and categorize them
 for MONITOR in $MONITORS; do
 	case $MONITOR in
-	DisplayPort-0 | DisplayPort-2)
+	DP-1 | DP-3)
 		PRIMARY_MONITORS+=("$MONITOR")
 		;;
-	DisplayPort-2 | DP-0)
+	DP-3 | DP-0)
 		SECONDARY_MONITORS+=("$MONITOR")
 		;;
 	esac
