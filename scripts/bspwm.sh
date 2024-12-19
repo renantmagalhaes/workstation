@@ -38,7 +38,7 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
 elif check_cmd zypper; then # FOR RPM SYSTEMS
 
 	# Install dependencies
-	sudo zypper install -y bspwm sxhkd feh lxappearance playerctl blueman xsetroot dunst nitrogen scrot xdotool NetworkManager-applet pcp-pmda-lmsensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit libnotify4 libnotify-devel libnotify-tools xprop xwininfo gnome-calendar
+	sudo zypper install -y bspwm sxhkd feh lxappearance playerctl blueman xsetroot dunst nitrogen scrot xdotool NetworkManager-applet pcp-pmda-lmsensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit libnotify4 libnotify-devel libnotify-tools xprop xwininfo gnome-calendar xdpyinfo
 	sudo pip3 install pywal --break-system-packages
 
 	# Picom
