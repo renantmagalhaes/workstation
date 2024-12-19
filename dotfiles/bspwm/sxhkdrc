@@ -18,7 +18,7 @@ ctrl + alt + t
   xdotool key Ctrl+minus
 ## thumb button
 ~button10
-	HOME/.config/rofi/scripts/rofi-mouse-menu.sh
+  $HOME/.config/rofi/scripts/rofi-mouse-menu.sh
 
 # program launcher
 super + Pause
