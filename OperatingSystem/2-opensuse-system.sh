@@ -88,7 +88,7 @@ pipx install wheel
 pipx install virtualenv virtualenvwrapper pylint
 pipx install bpytop
 
-# Install Vivaldi
+# Install Vivaldi Browser
 sudo rpm --import https://repo.vivaldi.com/stable/linux_signing_key.pub
 sudo zypper --no-gpg-checks ar https://repo.vivaldi.com/stable/rpm/x86_64/ Vivaldi
 sudo zypper --no-gpg-checks refresh
@@ -101,6 +101,9 @@ wget https://dl.google.com/linux/linux_signing_key.pub -O /tmp/linux_signing_key
 sudo rpm --import /tmp/linux_signing_key.pub
 sudo zypper ref
 sudo zypper install -y google-chrome-stable
+
+# Install Brave Browser
+curl -fsS https://dl.brave.com/install.sh | sh
 
 ## Install Visual Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc

@@ -121,12 +121,12 @@ sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
 sudo apt-get update
 sudo apt-get install -y vivaldi-stable
 
-## Floorp Browser
-echo 1 | bash <(curl https://updates.zen-browser.app/appimage.sh)
-
 ## Install Google Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
 sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
+
+# Install Brave Browser
+curl -fsS https://dl.brave.com/install.sh | sh
 
 ## Install Visual Code
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
