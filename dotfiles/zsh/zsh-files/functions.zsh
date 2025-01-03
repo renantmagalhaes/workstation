@@ -99,3 +99,19 @@ function stremio-web-companion-app(){
     # Run the Docker command
     docker run --rm -d --name stremio-web -p 11470:11470 -p 12470:12470 stremio/server:latest
 }
+
+
+# Function to generate a random MAC address
+random_mac() {
+  local separator="${1:-:}"  # Default separator is ':'
+  
+  if [[ "$separator" != ":" && "$separator" != "-" ]]; then
+    echo "Invalid separator. Use ':' or '-'."
+    return 1
+  fi
+
+  # Generate a MAC address
+  printf "%02X${separator}%02X${separator}%02X${separator}%02X${separator}%02X${separator}%02X\n" \
+    $((RANDOM % 256)) $((RANDOM % 256)) $((RANDOM % 256)) \
+    $((RANDOM % 256)) $((RANDOM % 256)) $((RANDOM % 256))
+}
