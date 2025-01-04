@@ -11,6 +11,9 @@ Streaming,^checkout(streaming-menu),camera-video
 WM Options,^checkout(restart-menu),xfce4-systray
 
 ^sep()
+Extra Options,^checkout(extra-menu),list-add
+
+^sep()
 Find Window Class,dunstify -i window_list "Find Window Class" "$(xprop WM_CLASS | tr -d '\n' | xclip -selection 'clipboard' -f)",window_list
 Change Wallpaper,nitrogen,nitrogen
 Appearance,lxappearance,mtpaint
@@ -31,3 +34,5 @@ Restart KWIN,kwin_x11 --replace,windows95
 Strem.IO,flatpak run com.stremio.Stremio,stremio
 Plex,flatpak run tv.plex.PlexDesktop,plex
 
+^tag(extra-menu)
+Mouse Battery Level,~/.dotfiles/bspwm/scripts/mouse-battery.sh,input-mouse
