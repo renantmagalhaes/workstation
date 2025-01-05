@@ -115,3 +115,19 @@ random_mac() {
     $((RANDOM % 256)) $((RANDOM % 256)) $((RANDOM % 256)) \
     $((RANDOM % 256)) $((RANDOM % 256)) $((RANDOM % 256))
 }
+
+# Generates a random SMBIOS UUID
+function random_smbios() {
+  # Use openssl to get 16 random bytes as a hex string (32 hex characters total)
+  local random_hex=$(openssl rand -hex 16)
+  
+  # Split into 5 parts: 8-4-4-4-12
+  local part1=${random_hex:0:8}
+  local part2=${random_hex:8:4}
+  local part3=${random_hex:12:4}
+  local part4=${random_hex:16:4}
+  local part5=${random_hex:20:12}
+  
+  # Print in SMBIOS (UUIDv4) format
+  echo "${part1}-${part2}-${part3}-${part4}-${part5}"
+}
