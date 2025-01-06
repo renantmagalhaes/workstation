@@ -44,7 +44,7 @@
 #
 # WhiteSur-gtk-theme
 # git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/GIT-REPOS/CORE/WhiteSur-gtk-theme
-# sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/install.sh -i void -N mojave -c dark -c light -t all 
+# sudo ~/GIT-REPOS/CORE/WhiteSur-gtk-theme/install.sh -i void -N mojave -c dark -c light -t all
 
 # Fluent Theme
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git ~/GIT-REPOS/CORE/Fluent-gtk-theme
@@ -64,7 +64,6 @@ mv ~/.themes/Dracula/gtk-master/* ~/.themes/Dracula
 # git clone https://github.com/vinceliuice/Matcha-gtk-theme.git ~/GIT-REPOS/CORE/Matcha-gtk-theme
 # sh -c "~/GIT-REPOS/CORE/Matcha-gtk-theme/install.sh"
 
-
 # Graphite-gtk-theme
 git clone https://github.com/vinceliuice/Graphite-gtk-theme.git ~/GIT-REPOS/CORE/Graphite-gtk-theme
 sh -c "~/GIT-REPOS/CORE/Graphite-gtk-theme/install.sh --tweaks black normal rimless"
@@ -83,19 +82,11 @@ sh -c "~/GIT-REPOS/CORE/Graphite-gtk-theme/install.sh --tweaks black normal riml
 # sh -c "~/GIT-REPOS/CORE/Jasper-gtk-theme/install.sh -t grey --tweaks dracula"
 
 ##############################################
-# ICONS
 
+# ICONS
 # Tela-circle-icon-theme
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git ~/GIT-REPOS/CORE/Tela-circle-icon-theme
-sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh blue -c nord"
-sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh dracula"
-sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh purple"
-
-# Tela-icon-theme
-git clone https://github.com/vinceliuice/Tela-icon-theme.git ~/GIT-REPOS/CORE/Tela-icon-theme
-sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh blue"
-sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh black"
-sh -c "~/GIT-REPOS/CORE/Tela-icon-theme/install.sh purple"
+sh -c "~/GIT-REPOS/CORE/Tela-circle-icon-theme/install.sh -c -a"
 
 # Reversal
 git clone https://github.com/yeyushengfan258/Reversal-icon-theme.git ~/GIT-REPOS/CORE/Reversal-icon-theme
@@ -108,8 +99,6 @@ ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-
 
 # Catppuccin
 # wget `curl --silent "https://api.github.com/repos/catppuccin/gtk/releases/latest" |grep browser_download_url | grep Macchiato.zip |grep -Po '"browser_download_url": "\K.*?(?=")'` -O ~/.themes/Catppuccin-blue.zip
-# unzip -d ~/.themes/ ~/.themes/Catppuccin-blue.zip 
+# unzip -d ~/.themes/ ~/.themes/Catppuccin-blue.zip
 # wget `curl --silent "https://api.github.com/repos/catppuccin/gtk/releases/latest" |grep browser_download_url | grep Catppuccin-purple.zip |grep -Po '"browser_download_url": "\K.*?(?=")'` -O ~/.themes/Catppuccin-purple.zip
 # unzip -d ~/.themes/ ~/.themes/Catppuccin-purple.zip
-
-
