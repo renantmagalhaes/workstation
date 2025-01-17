@@ -35,7 +35,9 @@ if check_cmd nix-env; then # FOR NIX PKG MANAGER
 		nixpkgs.cantarell-fonts \
 		nixpkgs.lsd \
 		nixpkgs.fd \
-		nixpkgs.colorls
+		nixpkgs.colorls \
+		nixpkgs.mpv \
+		nixpkgs.xwinwrap
 
 else
 	echo "Nix package manager not installed, go to https://nixos.org/download"
