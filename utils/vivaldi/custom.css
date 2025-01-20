@@ -1,14 +1,15 @@
 /* 
 version: 1.0.5
+variant: Auto Hide Tabbar
 update: 2024.11.03
-vivaldi version: v6.6 - v7.0
+vivaldi version: v7.0
 */
 
 :root{
     --window-border:6px; /* window border, recommend 4px~16px */
-    --mac-header:calc(var(--window-border) + 18px); /* title bar extra height */
-    --win-header:calc(var(--window-border) + 18px); /* title bar extra height */
-    --linux-header:calc(var(--window-border) + 18px); /* title bar extra height */
+    --mac-header:calc(var(--window-border) + 20px); /* title bar extra height */
+    --win-header:calc(var(--window-border) + 20px); /* title bar extra height */
+    --linux-header:calc(var(--window-border) + 20px); /* title bar extra height */
     --addressbar-height:36px;
     --window-button-scale:0.8;
     --window-button-opacity:0.3;
@@ -69,7 +70,7 @@ vivaldi version: v6.6 - v7.0
 #browser.mac:not(.is-settingspage):not(.address-top).tabs-left.tabs-right > #header,
 #browser.mac:not(.is-settingspage):not(.tabs-top):not(.tabs-bottom) #header,
 #browser.mac.color-behind-tabs-off:not(.is-settingspage)#browser.tabs-left.tabs-right #header{
-    background:transparent;
+    background:var(--colorTabBar);
     min-height:var(--mac-header) !important;
     height:var(--mac-header) !important;
 }
@@ -574,6 +575,74 @@ vivaldi version: v6.6 - v7.0
 button.button-startpage { box-shadow: none !important; }
 button.button-startpage:after { background-image: none !important; }
 button.button-startpage:active { background: none !important; }
+
+
+/* AutoHide Tabbar by @Zettry*/
+/* AutoHide Tabbar by @Zettry*/
+/* AutoHide Tabbar by @Zettry*/
+:root{
+    --tabbar-size: 32px;
+}
+
+/* tabbar workspace */
+.inner > .tabbar-wrapper:not(:hover) .button-toolbar.workspace-popup.tabbar-workspace-button.button-menu{
+    width: calc(var(--tabbar-size) + var(--densityGap))!important;
+    transition: unset;
+}
+
+.inner > .tabbar-wrapper:not(:hover) .button-toolbar.workspace-popup.tabbar-workspace-button.button-menu .button-title,
+.inner > .tabbar-wrapper:not(:hover) .button-toolbar.workspace-popup.tabbar-workspace-button.button-menu .button-toolbar-menu-indicator{
+    display: none;
+}
+
+.inner .button-toolbar.workspace-popup.tabbar-workspace-button.button-menu .button-icon{
+    position: absolute;
+    left: 5px;
+}
+
+.inner .button-toolbar.workspace-popup.tabbar-workspace-button.button-menu .button-title{
+    position: absolute;
+    left: calc(var(--tabbar-size) + var(--densityGap)) !important;
+}
+
+.inner .button-toolbar.workspace-popup.tabbar-workspace-button.button-menu .button-toolbar-menu-indicator{
+    position: absolute;
+    right: 5px;
+}
+
+/* tabbar container */
+.inner > .tabbar-wrapper:not(:hover) #tabs-tabbar-container,
+.inner > .tabbar-wrapper:not(:hover) #tabs-tabbar-container .resize{
+    width: calc(var(--tabbar-size) + var(--densityGap)) !important;
+    transition: unset;
+}
+
+/* tab stacking - accordion toggle arrow position */
+/* #tabs-container.left .tab-position.accordion-toggle-arrow{
+    --PositionX: 4px!important;
+} */
+
+.inner > .tabbar-wrapper{
+    position: relative;
+    width: calc(var(--tabbar-size) + var(--densityGap));
+}
+
+.inner > .tabbar-wrapper > .tabbar-wrapper{
+    position: absolute;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.inner > .tabbar-wrapper > .tabbar-wrapper:hover{
+    position: absolute;
+    background:var(--colorImageLeftBg, var(--colorBgLight)) ;
+
+}
+
+.inner #tabs-tabbar-container,
+.inner .button-toolbar.workspace-popup.tabbar-workspace-button.button-menu {
+    transition: width 0.250s;
+}
 
 /* ~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END THEME~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ /* 
 
