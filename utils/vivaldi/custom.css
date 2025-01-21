@@ -581,7 +581,7 @@ button.button-startpage:active { background: none !important; }
 /* AutoHide Tabbar by @Zettry*/
 /* AutoHide Tabbar by @Zettry*/
 :root{
-    --tabbar-size: 32px;
+    --tabbar-size: 36px;
 }
 
 /* tabbar workspace */
@@ -636,12 +636,14 @@ button.button-startpage:active { background: none !important; }
 .inner > .tabbar-wrapper > .tabbar-wrapper:hover{
     position: absolute;
     background:var(--colorImageLeftBg, var(--colorBgLight)) ;
+    transition-delay: 0.250s;
 
 }
 
 .inner #tabs-tabbar-container,
 .inner .button-toolbar.workspace-popup.tabbar-workspace-button.button-menu {
-    transition: width 0.250s;
+    transition: width 0.350s;
+    transition-delay: 0.250s;
 }
 
 /* ~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END THEME~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ /* 
