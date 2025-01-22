@@ -581,7 +581,7 @@ button.button-startpage:active { background: none !important; }
 /* AutoHide Tabbar by @Zettry*/
 /* AutoHide Tabbar by @Zettry*/
 :root{
-    --tabbar-size: 36px;
+    --tabbar-size: 85px;
 }
 
 /* tabbar workspace */
