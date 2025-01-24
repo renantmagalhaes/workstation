@@ -175,7 +175,7 @@ sudo zypper install -y clamav clamtk
 
 # Cleanup system
 ## Define max number of snapshots https://en.opensuse.org/SDB:Cleanup_system
-sudo snapper set-config SPACE_LIMIT=0.2 NUMBER_LIMIT=2-6 NUMBER_LIMIT_IMPORTANT=4
+# sudo snapper set-config SPACE_LIMIT=0.2 NUMBER_LIMIT=2-6 NUMBER_LIMIT_IMPORTANT=4
 
 ##Isolate Alt-Tab workspaces
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
