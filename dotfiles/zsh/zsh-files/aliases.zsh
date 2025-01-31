@@ -165,3 +165,6 @@ alias openssl-check='docker run -it --rm drwetter/testssl.sh'
 alias sherlock='docker run -i theyahya/sherlock'
 alias legion='docker run -it carlospolop/legion:latest sh -c "/legion/legion.py"'
 alias waymore='python3 ~/GIT-REPOS/CORE/waymore/waymore.py'
+
+### ControlD ###
+alias disable-ttl-controlD='python3 ~/.dotfiles/os/controlD/disable_ttl.py'
