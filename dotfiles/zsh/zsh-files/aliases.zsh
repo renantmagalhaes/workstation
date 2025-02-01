@@ -167,4 +167,5 @@ alias legion='docker run -it carlospolop/legion:latest sh -c "/legion/legion.py"
 alias waymore='python3 ~/GIT-REPOS/CORE/waymore/waymore.py'
 
 ### ControlD ###
-alias disable-ttl-controlD='python3 ~/.dotfiles/os/controlD/disable_ttl.py'
+alias ControlD-disable-ttl='python3 ~/.dotfiles/os/controlD/disable_ttl.py'
+alias ControlD-allow-website='python3 ~/.dotfiles/os/controlD/allowWebsite.py'
