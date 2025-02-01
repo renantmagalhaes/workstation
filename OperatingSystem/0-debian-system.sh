@@ -125,8 +125,8 @@ sudo apt-get install -y vivaldi-stable
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb
 sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
 
-# Install Brave Browser
-curl -fsS https://dl.brave.com/install.sh | sh
+## Zen Browser
+bash <(curl -s https://updates.zen-browser.app/install.sh)
 
 ## Install Visual Code
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
