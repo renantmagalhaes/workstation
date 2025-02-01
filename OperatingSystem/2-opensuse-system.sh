@@ -102,8 +102,8 @@ sudo rpm --import /tmp/linux_signing_key.pub
 sudo zypper ref
 sudo zypper install -y google-chrome-stable
 
-# Install Brave Browser
-curl -fsS https://dl.brave.com/install.sh | sh
+## Zen Browser
+bash <(curl -s https://updates.zen-browser.app/install.sh)
 
 ## Install Visual Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
