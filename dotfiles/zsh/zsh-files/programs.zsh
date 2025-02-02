@@ -20,7 +20,7 @@ export NIXPKGS_ALLOW_UNFREE=1
 
 # enhancd
 source $ZSH/custom/plugins/enhancd/init.sh
-ENHANCD_FILTER=fzf
+#ENHANCD_FILTER=fzf --height 40%:fzy
 export ENHANCD_FILTER
 
 # command -v exa > /dev/null && alias ls='exa --icons --group-directories-first -g -b -h' && \
