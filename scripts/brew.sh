@@ -54,5 +54,8 @@ brew install ripgrep
 # Lazygit
 brew install lazygit
 
+# LazyDocker
+brew install jesseduffield/lazydocker/lazydocker
+
 # Fish shell
 brew install fish
