@@ -57,3 +57,6 @@ sudo flatpak install flathub com.playonlinux.PlayOnLinux4
 
 ## moonshine
 sudo flatpak install flathub com.moonlight_stream.Moonlight
+
+## rustDesk
+sudo flatpak install flathub com.rustdesk.RustDesk
