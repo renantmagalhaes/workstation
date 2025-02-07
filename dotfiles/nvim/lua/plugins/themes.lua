@@ -119,7 +119,7 @@ return {
         transparent = true,
         italic_comments = true,
         hide_fillchars = true,
-        borderless_telescope = true,
+        borderless_pickers = true,
         terminal_colors = true,
       })
     end,
