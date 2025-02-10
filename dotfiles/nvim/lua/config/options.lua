@@ -4,3 +4,4 @@
 config = function()
   require("barbecue.ui").toggle(true)
 end
+vim.g.lazyvim_picker = "telescope"
