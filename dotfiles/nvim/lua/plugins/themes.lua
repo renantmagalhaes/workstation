@@ -116,7 +116,7 @@ return {
     config = function()
       require("cyberdream").setup({
         -- Recommended - see "Configuring" below for more config options
-        transparent = true,
+        -- transparent = true,
         italic_comments = true,
         hide_fillchars = true,
         borderless_pickers = true,
