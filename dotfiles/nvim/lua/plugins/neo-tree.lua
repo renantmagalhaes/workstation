@@ -1,4 +1,14 @@
 return {
+  -- Remove Snacks Explorer keybindings
+  {
+    "folke/snacks.nvim",
+    opts = {
+      explorer = {
+        replace_netrw = false, -- Disable snacks explorer from replacing netrw
+      },
+    },
+  },
+
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
   dependencies = {
