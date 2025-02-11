@@ -1,10 +1,6 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
-local builtin = require("telescope.builtin")
--- vim.keymap.set("n", "<C-p>", builtin.find_files, {})
--- vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-
 -- Select all text
 vim.keymap.set("n", "<C-a>", "ggVG", { silent = true })
 vim.keymap.set("i", "<C-a>", "<Esc>ggVG", { silent = true })
@@ -26,14 +22,56 @@ vim.api.nvim_set_keymap("n", "U", "<C-r>", { noremap = true })
 -- Background color for tokyodark theme
 vim.cmd([[highlight Visual ctermbg=grey ctermfg=NONE guibg=#634d81 guifg=NONE]])
 
--- Search with telescope
-vim.keymap.set("n", "<leader>f", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { noremap = true, silent = true })
-vim.keymap.set("i", "<C-f>", "<Esc><cmd>Telescope current_buffer_fuzzy_find<CR>", { silent = true })
-vim.keymap.set("n", "<C-f>", "<Esc><cmd>Telescope current_buffer_fuzzy_find<CR>", { silent = true })
-vim.keymap.set("n", "<leader><leader>", function()
-  require("telescope").extensions.smart_open.smart_open()
-end, { noremap = true, silent = true })
--- -- Bind command
+-- === Snacks-based mappings ===
+
+-- 1) Current-buffer fuzzy find
+--    Replaces: Telescope current_buffer_fuzzy_find
+vim.keymap.set("n", "<leader>f", function()
+    Snacks.picker.lines({
+        layout = "default", -- same idea as above
+      })
+  end, { noremap = true, silent = true })
+  
+  -- Optionally, replicate the <C-f> in normal/insert:
+  vim.keymap.set("n", "<C-f>", function()
+    Snacks.picker.lines({
+        layout = "default", -- same idea as above
+      })
+  end, { noremap = true, silent = true })
+  
+  vim.keymap.set("i", "<C-f>", function()
+    -- If you want to exit Insert mode first:
+    vim.cmd("stopinsert")
+    Snacks.picker.lines({
+        layout = "default", -- same idea as above
+      })
+  end, { noremap = true, silent = true })
+  
+  
+  -- 2) "Smart open"-like behavior (replaces: telescope.extensions.smart_open.smart_open)
+  --    Here we bind <leader><leader>. You can change the key if needed.
+  vim.keymap.set("n", "<leader><leader>", function()
+    Snacks.picker.smart()
+  end, { noremap = true, silent = true })
+  
+  
+  -- 3) "Frecency"-like (replaces: telescope.extensions.frecency.frecency)
+  --    In Snacks, there's no direct frecency plugin, but "recent()" works similarly.
+  --    *NOTE*: This also uses <leader><leader>; if you keep both, the last one overrides the first.
+  --    Change the key if you want both side-by-side.
+  vim.keymap.set("n", "<leader><leader>", function()
+    Snacks.picker.recent()
+  end, { noremap = true, silent = true })
+
+-- -- Search with telescope
+-- local builtin = require("telescope.builtin")
+-- vim.keymap.set("n", "<leader>f", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { noremap = true, silent = true })
+-- vim.keymap.set("i", "<C-f>", "<Esc><cmd>Telescope current_buffer_fuzzy_find<CR>", { silent = true })
+-- vim.keymap.set("n", "<C-f>", "<Esc><cmd>Telescope current_buffer_fuzzy_find<CR>", { silent = true })
+-- vim.keymap.set("n", "<leader><leader>", function()
+--   require("telescope").extensions.smart_open.smart_open()
+-- end, { noremap = true, silent = true })
+-- -- -- Bind command
 -- vim.keymap.set("n", "<leader><leader>", "<Cmd>Telescope frecency<CR>")
 -- -- Bind Lua function directly
 -- vim.keymap.set("n", "<leader><leader>", function()
@@ -67,8 +105,3 @@ vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
 
 -- Map Ctrl+V to paste in visual mode (replace selection with clipboard content)
 vim.api.nvim_set_keymap("v", "<C-v>", '"_dP', { noremap = true, silent = true })
-
--- Remove Snacks Explorer keybindings
-local map = vim.keymap.del
-map("n", "<leader>e") -- If Snacks was mapped to open with <leader>e
-map("n", "<leader>n") -- If Snacks was mapped for notifications
