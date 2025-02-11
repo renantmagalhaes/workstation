@@ -27,41 +27,44 @@ vim.cmd([[highlight Visual ctermbg=grey ctermfg=NONE guibg=#634d81 guifg=NONE]])
 -- 1) Current-buffer fuzzy find
 --    Replaces: Telescope current_buffer_fuzzy_find
 vim.keymap.set("n", "<leader>f", function()
-    Snacks.picker.lines({
-        layout = "default", -- same idea as above
-      })
-  end, { noremap = true, silent = true })
-  
-  -- Optionally, replicate the <C-f> in normal/insert:
-  vim.keymap.set("n", "<C-f>", function()
-    Snacks.picker.lines({
-        layout = "default", -- same idea as above
-      })
-  end, { noremap = true, silent = true })
-  
-  vim.keymap.set("i", "<C-f>", function()
-    -- If you want to exit Insert mode first:
-    vim.cmd("stopinsert")
-    Snacks.picker.lines({
-        layout = "default", -- same idea as above
-      })
-  end, { noremap = true, silent = true })
-  
-  
-  -- 2) "Smart open"-like behavior (replaces: telescope.extensions.smart_open.smart_open)
-  --    Here we bind <leader><leader>. You can change the key if needed.
-  vim.keymap.set("n", "<leader><leader>", function()
-    Snacks.picker.smart()
-  end, { noremap = true, silent = true })
-  
-  
-  -- 3) "Frecency"-like (replaces: telescope.extensions.frecency.frecency)
-  --    In Snacks, there's no direct frecency plugin, but "recent()" works similarly.
-  --    *NOTE*: This also uses <leader><leader>; if you keep both, the last one overrides the first.
-  --    Change the key if you want both side-by-side.
-  vim.keymap.set("n", "<leader><leader>", function()
-    Snacks.picker.recent()
-  end, { noremap = true, silent = true })
+  Snacks.picker.lines({
+    layout = "default", -- same idea as above
+  })
+end, { noremap = true, silent = true })
+
+-- Optionally, replicate the <C-f> in normal/insert:
+vim.keymap.set("n", "<C-f>", function()
+  Snacks.picker.lines({
+    layout = "default", -- same idea as above
+  })
+end, { noremap = true, silent = true })
+
+vim.keymap.set("i", "<C-f>", function()
+  -- If you want to exit Insert mode first:
+  vim.cmd("stopinsert")
+  Snacks.picker.lines({
+    layout = "default", -- same idea as above
+  })
+end, { noremap = true, silent = true })
+
+-- 2) "Smart open"-like behavior (replaces: telescope.extensions.smart_open.smart_open)
+--    Here we bind <leader><leader>. You can change the key if needed.
+vim.keymap.set("n", "<leader><leader>", function()
+  Snacks.picker.pick({
+    -- Combine multiple sources into one
+    multi = { "recent", "files" },
+    format = "file",
+    -- The matcher.frecency = true will push your recently opened files up top
+    matcher = {
+      frecency = true,
+      cwd_bonus = true,
+      sort_empty = true,
+    },
+    transform = "unique_file",
+    -- Optional: force a floating center layout
+    layout = "default",
+  })
+end, { noremap = true, silent = true })
 
 -- -- Search with telescope
 -- local builtin = require("telescope.builtin")
