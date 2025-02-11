@@ -67,3 +67,8 @@ vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
 
 -- Map Ctrl+V to paste in visual mode (replace selection with clipboard content)
 vim.api.nvim_set_keymap("v", "<C-v>", '"_dP', { noremap = true, silent = true })
+
+-- Remove Snacks Explorer keybindings
+local map = vim.keymap.del
+map("n", "<leader>e") -- If Snacks was mapped to open with <leader>e
+map("n", "<leader>n") -- If Snacks was mapped for notifications
