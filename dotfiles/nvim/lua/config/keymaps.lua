@@ -52,13 +52,14 @@ end, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader><leader>", function()
   Snacks.picker.pick({
     -- Combine multiple sources into one
-    multi = { "recent", "files" },
+    multi = { "buffers", "recent", "files" },
     format = "file",
     -- The matcher.frecency = true will push your recently opened files up top
     matcher = {
       frecency = true,
-      cwd_bonus = true,
-      sort_empty = true,
+      cwd_bonus = false,
+      sort_empty = false,
+      history_bonus = true,
     },
     transform = "unique_file",
     -- Optional: force a floating center layout
