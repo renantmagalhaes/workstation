@@ -130,6 +130,7 @@ alias ssh-keygen-ed25519='ssh-keygen -t ed25519'
 
 # VIM
 alias vi='nvim'
+alias visearch='nvim $(fzf --preview="bat --style=plain --color=always {}")'
 
 ### UTILS ###
 alias disk-manager='ncdu'
