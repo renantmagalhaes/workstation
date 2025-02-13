@@ -57,7 +57,7 @@ vim.keymap.set("n", "<leader><leader>", function()
     -- The matcher.frecency = true will push your recently opened files up top
     matcher = {
       frecency = true,
-      cwd_bonus = false,
+      cwd_bonus = true,
       sort_empty = false,
       history_bonus = true,
     },
