@@ -56,11 +56,12 @@ vim.keymap.set("n", "<leader><leader>", function()
     format = "file",
     -- The matcher.frecency = true will push your recently opened files up top
     matcher = {
-      frecency = true,
       cwd_bonus = true,
+      frecency = true,
       sort_empty = false,
       history_bonus = true,
     },
+    filter = { cwd = true },
     transform = "unique_file",
     -- Optional: force a floating center layout
     layout = "default",
