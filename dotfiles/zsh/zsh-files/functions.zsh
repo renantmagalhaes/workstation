@@ -32,9 +32,18 @@ function find-folder () {
 find $1 -type d -iname $2 -exec bat {} +
 }
 
+function find-folder-root () {
+sudo find $1 -type d -iname $2 -exec bat {} +
+}
+
 function find-file () {
 find $1 -type f -iname $2 -exec bat {} +
 }
+
+function find-file-root () {
+sudo find $1 -type f -iname $2 -exec bat {} +
+}
+
 
 ## docker remove all
 
