@@ -88,7 +88,7 @@ bash ./scripts/latest-go.sh
 bash ./scripts/latest-node.sh
 
 # Virtualization using KVM + QEMU + libvirt
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y install qemu-system-x86 libvirt-clients libvirt-daemon libvirt-daemon-system virtinst virt-manager bridge-utils
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install qemu-system-x86 libvirt-clients libvirt-daemon libvirt-daemon-system virtinst virt-manager bridge-utils ovmf
 
 # Virtualbox
 wget -O- -q https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmour -o /usr/share/keyrings/oracle_vbox_2016.gpg
