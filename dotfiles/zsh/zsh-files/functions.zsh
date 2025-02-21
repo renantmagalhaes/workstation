@@ -131,3 +131,23 @@ function random_smbios() {
   # Print in SMBIOS (UUIDv4) format
   echo "${part1}-${part2}-${part3}-${part4}-${part5}"
 }
+
+# VI erase config
+function vim-delete-config() {
+  echo "This will delete the following directories:"
+  echo "  - ~/.local/share/nvim"
+  echo "  - ~/.local/state/nvim"
+  echo "  - ~/.cache/nvim"
+  echo
+  echo "Type 'DELETE' to confirm:"
+  read -r user_input
+
+  if [[ $user_input == "DELETE" ]]; then
+    rm -rf ~/.local/share/nvim \
+           ~/.local/state/nvim \
+           ~/.cache/nvim
+    echo "Neovim directories removed."
+  else
+    echo "Operation canceled."
+  fi
+}
