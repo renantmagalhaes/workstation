@@ -56,7 +56,7 @@
   "alwaysShowNotificationIcon": true,
   "copyFormatting": "none",
   "copyOnSelect": true,
-  "defaultProfile": "{879e2800-c857-467a-8669-078c73bab33e}",
+  "defaultProfile": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
   "launchMode": "default",
   "minimizeToNotificationArea": true,
   "newTabMenu": [
@@ -84,7 +84,6 @@
         "opacity": 90,
         "padding": "12",
         "source": "Windows.Terminal.Wsl",
-        "tabColor": "#D70A53",
         "useAcrylic": true
       },
       {
@@ -110,6 +109,7 @@
       {
         "colorScheme": "RTM-Purple-World",
         "commandline": "C:\\WINDOWS\\system32\\wsl.exe -d openSUSE-Tumbleweed",
+        "tabColor": "#8cf74b",
         "font": {
           "face": "Maple Mono NF",
           "size": 14,
