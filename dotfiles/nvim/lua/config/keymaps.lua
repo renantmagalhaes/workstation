@@ -10,8 +10,8 @@ vim.keymap.set("n", "<C-s>", "<cmd>write<CR>", { silent = true })
 vim.keymap.set("i", "<C-s>", "<cmd>write<CR>", { silent = true })
 
 -- Exit file
-vim.keymap.set("n", "<C-d>", "<cmd>q<CR>", { silent = true })
-vim.keymap.set("i", "<C-d>", "<Esc><cmd>q<CR>", { silent = true })
+vim.keymap.set("n", "<C-d>", "<cmd>qa<CR>", { silent = true })
+vim.keymap.set("i", "<C-d>", "<Esc><cmd>qa<CR>", { silent = true })
 
 -- Muren Regex
 vim.keymap.set("n", "<leader>R", "<cmd>MurenToggle<CR>", { silent = true })
