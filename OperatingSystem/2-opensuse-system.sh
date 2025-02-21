@@ -56,6 +56,12 @@ sudo zypper install -y opi
 # Install the packages from suse repo
 sudo zypper --non-interactive install -y zsh vlc clementine breeze5-cursors vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar gawk net-tools coreutils ncdu whois piper openssl gnome-keyring chrome-gnome-shell telnet openssh materia-gtk-theme alacritty scrot libstdc++-devel glibc-static net-tools-deprecated xprop wmctrl xdotool gcc-c++ sassc virtualbox golang npm bc kitty sqlite3 python312-pipx ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel cifs-utils cron kdeconnect-kde solaar android-tools
 
+# Virtualization using KVM + QEMU + libvirt
+sudo zypper install -y qemu libvirt virt-manager virt-install libvirt-daemon-config-network bridge-utils
+sudo zypper -n install --type pattern kvm_server kvm_tools
+sudo systemctl enable libvirtd --now
+sudo usermod -aG libvirt $USER
+
 # Patterns
 sudo zypper -n install --type pattern devel_basis
 

@@ -5,8 +5,8 @@ map_workspace_to_pair() {
 	local workspace=$1
 
 	# Query the names of workspaces on each monitor
-	local workspaces_monitor1=($(bspc query -D -m HDMI-1 --names))
-	local workspaces_monitor2=($(bspc query -D -m DP-1 --names))
+	local workspaces_monitor1=($(bspc query -D -m HDMI-A-0 --names))
+	local workspaces_monitor2=($(bspc query -D -m DisplayPort-0 --names))
 
 	# Determine the index of the workspace in its monitor's list
 	local index=-1
