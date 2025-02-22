@@ -1,0 +1,143 @@
+@import "macchiato.css";
+
+* {
+  font-family: "JetBrainsMono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 18px;
+}
+
+window#waybar {
+  background: rgba(0, 0, 0, 0);
+  border-radius: 130px;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+button {
+  /* Use box-shadow instead of border so the text isn't offset */
+  box-shadow: inset 0 -3px transparent;
+  /* Avoid rounded borders under each button name */
+  border: none;
+  border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+  background: inherit;
+  box-shadow: inset 0 -3px #4c00fd;
+}
+
+/* you can set a style on hover for any module like this */
+#pulseaudio:hover {
+  background-color: @surface2;
+}
+
+#workspaces button {
+  padding: 0 5px;
+  background-color: transparent;
+  color: #ffffff;
+}
+
+#workspaces button:hover {
+  background: rgba(0, 0, 0, 0.349);
+}
+
+#workspaces button.focused {
+  background-color: @lavender;
+  box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces button.urgent {
+  background-color: #000000;
+}
+
+#mode {
+  background-color: #000000;
+  box-shadow: inset 0 -3px #aa0000;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#network,
+#pulseaudio {
+  padding: 0 10px;
+}
+
+#pulseaudio {
+  color: #ffffff;
+}
+
+#network {
+  color: #ffffff;
+}
+
+#temperature {
+  color: #ffffff;
+}
+
+#battery {
+  color: #ffffff;
+}
+
+#clock {
+  color: #ffffff;
+}
+
+#window {
+  color: #e7e7e7;
+}
+
+.modules-right,
+.modules-left,
+.modules-center {
+  background-color: #242424;
+  border-radius: 15px;
+
+  border-style:groove;
+  border-color: rgb(0, 0, 0);
+  border-width: 1px;
+margin-bottom: 4px;
+margin-top: 2px;
+}
+.modules-right {
+  padding: 0 10px;
+}
+
+.modules-left {
+  padding: 0 20px;
+}
+
+.modules-center {
+  padding: 0 10px;
+}
+#battery.charging,
+#battery.plugged {
+  color: #ffffff;
+}
+
+@keyframes blink {
+  to {
+    color: #000000;
+  }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+  background-color: #fffffc;
+  color: #ffffff;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+label:focus {
+  background-color: #000000;
+}
+
+#pulseaudio.muted {
+  color: #ffffff;
+}

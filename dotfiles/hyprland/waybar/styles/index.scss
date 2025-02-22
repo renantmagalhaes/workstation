@@ -1,0 +1,21 @@
+@use "colours";
+@use "bar";
+@use "dock";
+
+// Press META + SHIFT + R to update the styles.
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 8.5pt;
+  font-weight: 800;
+  transition-property: background;
+  transition-duration: 0.5s;
+}
+
+tooltip {
+  background: colours.$mocha-crust;
+  color: colours.$mocha-text;
+  border-radius: 5pt;
+}

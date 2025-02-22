@@ -1,0 +1,397 @@
+[2024-09-29 20:26:22.483] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-09-29 20:26:22.486] [info] Discovered appearance 'dark'
+[2024-09-29 20:26:22.486] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-09-29 20:26:22.490] [info] Hyprland IPC starting
+[2024-09-29 20:26:22.491] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-09-29 20:26:22.511] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-09-29 20:26:22.860] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-09-29 20:26:22.860] [info] Bar configured (width: 2540, height: 35) for output: DP-1
+Gdk-Message: 20:36:31.239: Error reading events from display: Broken pipe
+[2024-10-09 00:03:32.175] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:03:32.178] [info] Discovered appearance 'dark'
+[2024-10-09 00:03:32.178] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:03:32.283] [info] Hyprland IPC starting
+[2024-10-09 00:03:32.364] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:03:32.404] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:03:32.761] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:03:32.762] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:03:39.240] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:03:39.242] [info] Discovered appearance 'dark'
+[2024-10-09 00:03:39.242] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:03:39.345] [info] Hyprland IPC starting
+[2024-10-09 00:03:39.384] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:03:39.547] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:03:39.919] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:03:39.919] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:03:54.515] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:03:54.520] [info] Discovered appearance 'dark'
+[2024-10-09 00:03:54.520] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:03:54.615] [info] Hyprland IPC starting
+[2024-10-09 00:03:54.686] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:03:54.790] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:03:55.148] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:03:55.149] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:04:00.862] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:04:00.864] [info] Discovered appearance 'dark'
+[2024-10-09 00:04:00.864] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:04:00.975] [info] Hyprland IPC starting
+[2024-10-09 00:04:01.049] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:04:01.186] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:04:01.587] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:04:01.587] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:04:13.896] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:04:13.899] [info] Discovered appearance 'dark'
+[2024-10-09 00:04:13.899] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:04:13.992] [info] Hyprland IPC starting
+[2024-10-09 00:04:14.024] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:04:14.194] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:04:14.628] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:04:14.628] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:05:39.390] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:05:39.393] [info] Discovered appearance 'dark'
+[2024-10-09 00:05:39.393] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:05:39.502] [info] Hyprland IPC starting
+[2024-10-09 00:05:39.568] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:05:39.705] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:05:40.158] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:05:40.158] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+Gdk-Message: 00:05:44.693: Unable to load arrow from the cursor theme
+Gdk-Message: 00:05:44.747: Unable to load arrow from the cursor theme
+Gdk-Message: 00:05:44.958: Unable to load arrow from the cursor theme
+Gdk-Message: 00:05:45.037: Unable to load arrow from the cursor theme
+Gdk-Message: 00:05:45.444: Unable to load arrow from the cursor theme
+Gdk-Message: 00:05:45.807: Unable to load arrow from the cursor theme
+Gdk-Message: 00:05:45.859: Unable to load arrow from the cursor theme
+Gdk-Message: 00:05:46.666: Unable to load arrow from the cursor theme
+Gdk-Message: 00:05:46.709: Unable to load arrow from the cursor theme
+Gdk-Message: 00:05:46.901: Unable to load arrow from the cursor theme
+Gdk-Message: 00:05:47.232: Unable to load arrow from the cursor theme
+Gdk-Message: 00:05:48.047: Unable to load arrow from the cursor theme
+Gdk-Message: 00:05:49.116: Unable to load arrow from the cursor theme
+Gdk-Message: 00:05:59.472: Unable to load arrow from the cursor theme
+Gdk-Message: 00:06:00.186: Unable to load arrow from the cursor theme
+[2024-10-09 00:06:23.602] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:06:23.605] [info] Discovered appearance 'dark'
+[2024-10-09 00:06:23.606] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:06:23.683] [info] Hyprland IPC starting
+[2024-10-09 00:06:23.749] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:06:23.852] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:06:24.282] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:06:24.282] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+Gdk-Message: 00:06:26.341: Unable to load arrow from the cursor theme
+Gdk-Message: 00:06:27.584: Unable to load arrow from the cursor theme
+Gdk-Message: 00:06:27.781: Unable to load arrow from the cursor theme
+Gdk-Message: 00:06:28.046: Unable to load arrow from the cursor theme
+Gdk-Message: 00:06:28.607: Unable to load arrow from the cursor theme
+[2024-10-09 00:06:37.918] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:06:37.921] [info] Discovered appearance 'dark'
+[2024-10-09 00:06:37.921] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:06:38.025] [info] Hyprland IPC starting
+[2024-10-09 00:06:38.111] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:06:38.234] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:06:38.715] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:06:38.716] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+Gdk-Message: 00:06:40.177: Unable to load arrow from the cursor theme
+Gdk-Message: 00:06:40.778: Unable to load arrow from the cursor theme
+Gdk-Message: 00:06:43.995: Unable to load arrow from the cursor theme
+Gdk-Message: 00:06:45.504: Unable to load arrow from the cursor theme
+[2024-10-09 00:08:22.404] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:08:22.409] [info] Discovered appearance 'dark'
+[2024-10-09 00:08:22.409] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:08:22.508] [info] Hyprland IPC starting
+[2024-10-09 00:08:22.579] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:08:22.786] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:08:23.226] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:08:23.226] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:09:23.721] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:09:23.724] [info] Discovered appearance 'dark'
+[2024-10-09 00:09:23.724] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:09:23.816] [info] Hyprland IPC starting
+[2024-10-09 00:09:23.886] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:09:24.097] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:09:24.671] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:09:24.671] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:09:43.042] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:09:43.044] [info] Discovered appearance 'dark'
+[2024-10-09 00:09:43.044] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:09:43.132] [info] Hyprland IPC starting
+[2024-10-09 00:09:43.201] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:09:43.419] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:09:43.884] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:09:43.884] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:10:01.322] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:10:01.324] [info] Discovered appearance 'dark'
+[2024-10-09 00:10:01.324] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:10:01.413] [info] Hyprland IPC starting
+[2024-10-09 00:10:01.483] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:10:01.619] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:10:02.046] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:10:02.046] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:10:08.083] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:10:08.086] [info] Discovered appearance 'dark'
+[2024-10-09 00:10:08.086] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:10:08.172] [info] Hyprland IPC starting
+[2024-10-09 00:10:08.241] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:10:08.451] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:10:08.912] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:10:08.912] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:10:22.222] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:10:22.225] [info] Discovered appearance 'dark'
+[2024-10-09 00:10:22.225] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:10:22.313] [info] Hyprland IPC starting
+[2024-10-09 00:10:22.386] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:10:22.535] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:10:23.103] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:10:23.103] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:10:33.791] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:10:33.793] [info] Discovered appearance 'dark'
+[2024-10-09 00:10:33.793] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:10:33.893] [info] Hyprland IPC starting
+[2024-10-09 00:10:33.965] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:10:34.104] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:10:34.549] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:10:34.549] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+Gdk-Message: 00:10:36.522: Unable to load arrow from the cursor theme
+Gdk-Message: 00:10:38.552: Unable to load arrow from the cursor theme
+Gdk-Message: 00:10:38.603: Unable to load arrow from the cursor theme
+Gdk-Message: 00:10:39.346: Unable to load arrow from the cursor theme
+Gdk-Message: 00:10:39.835: Unable to load arrow from the cursor theme
+Gdk-Message: 00:10:40.027: Unable to load arrow from the cursor theme
+Gdk-Message: 00:10:40.681: Unable to load arrow from the cursor theme
+Gdk-Message: 00:10:41.545: Unable to load arrow from the cursor theme
+Gdk-Message: 00:10:42.916: Unable to load arrow from the cursor theme
+[2024-10-09 00:10:48.716] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:10:48.718] [info] Discovered appearance 'dark'
+[2024-10-09 00:10:48.718] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:10:48.809] [info] Hyprland IPC starting
+[2024-10-09 00:10:48.878] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:10:49.014] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:10:49.473] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:10:49.473] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:10:58.393] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:10:58.395] [info] Discovered appearance 'dark'
+[2024-10-09 00:10:58.396] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:10:58.489] [info] Hyprland IPC starting
+[2024-10-09 00:10:58.558] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:10:58.730] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:10:59.209] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:10:59.209] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:11:40.564] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:11:40.567] [info] Discovered appearance 'dark'
+[2024-10-09 00:11:40.567] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:11:40.672] [info] Hyprland IPC starting
+[2024-10-09 00:11:40.743] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:11:40.882] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:11:41.355] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:11:41.355] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:12:21.264] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:12:21.266] [info] Discovered appearance 'dark'
+[2024-10-09 00:12:21.266] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:12:21.353] [info] Hyprland IPC starting
+[2024-10-09 00:12:21.423] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:12:21.560] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:12:21.993] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:12:21.993] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:12:50.993] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:12:50.995] [info] Discovered appearance 'dark'
+[2024-10-09 00:12:50.996] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:12:51.086] [info] Hyprland IPC starting
+[2024-10-09 00:12:51.118] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:12:51.257] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:12:51.734] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:12:51.734] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:12:59.979] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:12:59.981] [info] Discovered appearance 'dark'
+[2024-10-09 00:12:59.981] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:13:00.068] [info] Hyprland IPC starting
+[2024-10-09 00:13:00.137] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:13:00.275] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:13:00.749] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:13:00.749] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:13:37.614] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:13:37.616] [info] Discovered appearance 'dark'
+[2024-10-09 00:13:37.616] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:13:37.707] [info] Hyprland IPC starting
+[2024-10-09 00:13:37.779] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:13:37.920] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:13:38.386] [warning] Requested height: 35 is less than the minimum height: 225 required by the modules
+[2024-10-09 00:13:38.386] [info] Bar configured (width: 1900, height: 225) for output: eDP-2
+[2024-10-09 00:13:38.386] [warning] Requested height: 35 is less than the minimum height: 225 required by the modules
+[2024-10-09 00:13:38.386] [info] Bar configured (width: 2540, height: 225) for output: DP-2
+[2024-10-09 00:13:47.097] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:13:47.101] [info] Discovered appearance 'dark'
+[2024-10-09 00:13:47.101] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:13:47.189] [info] Hyprland IPC starting
+[2024-10-09 00:13:47.259] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:13:47.432] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:13:47.932] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:13:47.932] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:14:19.807] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:14:19.811] [info] Discovered appearance 'dark'
+[2024-10-09 00:14:19.812] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:14:19.895] [info] Hyprland IPC starting
+[2024-10-09 00:14:19.967] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:14:20.178] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:14:20.636] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:14:20.636] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:14:32.126] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:14:32.129] [info] Discovered appearance 'dark'
+[2024-10-09 00:14:32.129] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:14:32.211] [info] Hyprland IPC starting
+[2024-10-09 00:14:32.280] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:14:32.453] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:14:32.912] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:14:32.912] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:14:38.569] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:14:38.575] [info] Discovered appearance 'dark'
+[2024-10-09 00:14:38.575] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:14:38.660] [info] Hyprland IPC starting
+[2024-10-09 00:14:38.728] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:14:38.901] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:14:39.339] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:14:39.339] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:15:31.523] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:15:31.526] [info] Discovered appearance 'dark'
+[2024-10-09 00:15:31.527] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:15:31.597] [info] Hyprland IPC starting
+[2024-10-09 00:15:31.620] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:15:31.644] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:15:31.957] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:15:31.957] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+Gdk-Message: 00:15:44.233: Unable to load arrow from the cursor theme
+Gdk-Message: 00:15:44.413: Unable to load arrow from the cursor theme
+Gdk-Message: 00:15:44.444: Unable to load arrow from the cursor theme
+Gdk-Message: 00:15:46.079: Unable to load arrow from the cursor theme
+Gdk-Message: 00:15:47.729: Unable to load arrow from the cursor theme
+Gdk-Message: 00:15:49.460: Unable to load arrow from the cursor theme
+Gdk-Message: 00:15:49.460: Unable to load arrow from the cursor theme
+Gdk-Message: 00:15:49.646: Unable to load arrow from the cursor theme
+Gdk-Message: 00:15:50.835: Unable to load arrow from the cursor theme
+[2024-10-09 00:18:00.150] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:18:00.151] [info] Discovered appearance 'dark'
+[2024-10-09 00:18:00.152] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:18:00.267] [info] Hyprland IPC starting
+[2024-10-09 00:18:00.343] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:18:00.520] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:18:00.955] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:18:00.955] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:18:16.770] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:18:16.772] [info] Discovered appearance 'dark'
+[2024-10-09 00:18:16.772] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:18:16.860] [info] Hyprland IPC starting
+[2024-10-09 00:18:16.929] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:18:17.064] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:18:17.475] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:18:17.475] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:18:26.725] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:18:26.727] [info] Discovered appearance 'dark'
+[2024-10-09 00:18:26.727] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:18:26.831] [info] Hyprland IPC starting
+[2024-10-09 00:18:26.903] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:18:27.077] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:18:27.559] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:18:27.559] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:18:34.044] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:18:34.046] [info] Discovered appearance 'dark'
+[2024-10-09 00:18:34.046] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:18:34.132] [info] Hyprland IPC starting
+[2024-10-09 00:18:34.201] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:18:34.341] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:18:34.802] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:18:34.802] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:18:39.190] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:18:39.192] [info] Discovered appearance 'dark'
+[2024-10-09 00:18:39.192] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:18:39.279] [info] Hyprland IPC starting
+[2024-10-09 00:18:39.352] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:18:39.489] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:18:39.964] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:18:39.964] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:19:13.435] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:19:13.440] [info] Discovered appearance 'dark'
+[2024-10-09 00:19:13.441] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:19:13.520] [info] Hyprland IPC starting
+[2024-10-09 00:19:13.590] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:19:13.727] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:19:14.132] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:19:14.132] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:19:22.829] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:19:22.832] [info] Discovered appearance 'dark'
+[2024-10-09 00:19:22.832] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:19:22.922] [info] Hyprland IPC starting
+[2024-10-09 00:19:22.993] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:19:23.129] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:19:23.575] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:19:23.575] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:19:44.351] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:19:44.356] [info] Discovered appearance 'dark'
+[2024-10-09 00:19:44.356] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:19:44.443] [info] Hyprland IPC starting
+[2024-10-09 00:19:44.513] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:19:44.723] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:19:45.159] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:19:45.159] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:19:52.672] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:19:52.677] [info] Discovered appearance 'dark'
+[2024-10-09 00:19:52.677] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:19:52.768] [info] Hyprland IPC starting
+[2024-10-09 00:19:52.837] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:19:52.941] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:19:53.376] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:19:53.377] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:20:09.799] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:20:09.801] [info] Discovered appearance 'dark'
+[2024-10-09 00:20:09.801] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:20:09.895] [info] Hyprland IPC starting
+[2024-10-09 00:20:09.960] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:20:10.133] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:20:10.581] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:20:10.581] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:20:20.273] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:20:20.276] [info] Discovered appearance 'dark'
+[2024-10-09 00:20:20.276] [info] Using CSS file /home/ada/.config/waybar/style.css
+
+(waybar:20848): Gtk-WARNING **: 00:20:20.276: Theme parsing error: style.css:101:20: Not using units is deprecated. Assuming 'px'.
+[2024-10-09 00:20:20.276] [error] style.css:101:20Junk at end of value for padding-bottom
+[2024-10-09 00:20:25.149] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:20:25.154] [info] Discovered appearance 'dark'
+[2024-10-09 00:20:25.154] [info] Using CSS file /home/ada/.config/waybar/style.css
+
+(waybar:20869): Gtk-WARNING **: 00:20:25.155: Theme parsing error: style.css:101:20: Not using units is deprecated. Assuming 'px'.
+[2024-10-09 00:20:25.155] [error] style.css:101:20Junk at end of value for padding-bottom
+[2024-10-09 00:21:04.229] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:21:04.236] [info] Discovered appearance 'dark'
+[2024-10-09 00:21:04.236] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:21:04.251] [info] Hyprland IPC starting
+[2024-10-09 00:21:04.252] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:21:04.322] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:21:04.725] [warning] Requested height: 35 is less than the minimum height: 77 required by the modules
+[2024-10-09 00:21:04.725] [info] Bar configured (width: 1900, height: 77) for output: eDP-2
+[2024-10-09 00:21:04.725] [warning] Requested height: 35 is less than the minimum height: 77 required by the modules
+[2024-10-09 00:21:04.725] [info] Bar configured (width: 2540, height: 77) for output: DP-2
+[2024-10-09 00:21:21.359] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:21:21.361] [info] Discovered appearance 'dark'
+[2024-10-09 00:21:21.361] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:21:21.464] [info] Hyprland IPC starting
+[2024-10-09 00:21:21.534] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:21:21.672] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:21:22.032] [warning] Requested height: 35 is less than the minimum height: 37 required by the modules
+[2024-10-09 00:21:22.032] [info] Bar configured (width: 1900, height: 37) for output: eDP-2
+[2024-10-09 00:21:22.032] [warning] Requested height: 35 is less than the minimum height: 37 required by the modules
+[2024-10-09 00:21:22.032] [info] Bar configured (width: 2540, height: 37) for output: DP-2
+[2024-10-09 00:21:39.378] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:21:39.381] [info] Discovered appearance 'dark'
+[2024-10-09 00:21:39.381] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:21:39.470] [info] Hyprland IPC starting
+[2024-10-09 00:21:39.539] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:21:39.675] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:21:40.107] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:21:40.107] [info] Bar configured (width: 2540, height: 35) for output: DP-2
+[2024-10-09 00:21:48.410] [info] Using configuration file /home/ada/.config/waybar/config
+[2024-10-09 00:21:48.413] [info] Discovered appearance 'dark'
+[2024-10-09 00:21:48.413] [info] Using CSS file /home/ada/.config/waybar/style.css
+[2024-10-09 00:21:48.494] [info] Hyprland IPC starting
+[2024-10-09 00:21:48.563] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:21:48.701] [info] Loading persistent workspaces from Hyprland workspace rules
+[2024-10-09 00:21:49.196] [info] Bar configured (width: 1900, height: 35) for output: eDP-2
+[2024-10-09 00:21:49.196] [info] Bar configured (width: 2540, height: 35) for output: DP-2
