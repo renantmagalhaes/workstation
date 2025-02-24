@@ -54,6 +54,7 @@ vim.keymap.set("n", "<leader><leader>", function()
     -- Combine multiple sources into one
     multi = { "buffers", "recent", "files" },
     format = "file",
+    hidden = true,
     -- The matcher.frecency = true will push your recently opened files up top
     matcher = {
       cwd_bonus = true,
