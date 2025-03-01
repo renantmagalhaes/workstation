@@ -38,16 +38,6 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.dap.core" },
     -- import/override with your plugins
     { import = "plugins" },
-    -- Fix MarkdownPreview plugins from build
-    {
-      "iamcco/markdown-preview.nvim",
-      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-      ft = { "markdown" },
-      build = function()
-        vim.cmd([[Lazy load markdown-preview.nvim]])
-        vim.fn["mkdp#util#install"]()
-      end,
-    },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
