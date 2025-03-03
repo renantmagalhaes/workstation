@@ -234,7 +234,8 @@ super + {Left,Down,Up,Right}
 
 # Media keys
 XF86AudioMute
-	pactl set-source-mute @DEFAULT_SOURCE@ toggle
+	playerctl play-pause
+	# pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 XF86AudioRaiseVolume
 	$HOME/.config/dunst/volume/volume.sh up
