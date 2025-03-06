@@ -44,6 +44,10 @@ fi
 # 	exit 1
 # fi
 
+# Disable packagekit
+sudo systemctl stop packagekit
+sudo systemctl mask packagekit
+
 # Update / upgrade
 sudo zypper refresh && sudo zypper update
 
