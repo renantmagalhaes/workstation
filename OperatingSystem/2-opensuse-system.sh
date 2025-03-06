@@ -51,7 +51,7 @@ sudo zypper refresh && sudo zypper update
 ln -s -f $PWD/dotfiles/ ~/.dotfiles
 
 # Install OPI
-#sudo zypper install -y opi
+sudo zypper install -y opi
 
 # Install the packages from suse repo
 sudo zypper --non-interactive install -y zsh vlc clementine breeze5-cursors vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar gawk net-tools coreutils ncdu whois piper openssl gnome-keyring chrome-gnome-shell telnet openssh materia-gtk-theme alacritty scrot libstdc++-devel glibc-static net-tools-deprecated xprop wmctrl xdotool gcc-c++ sassc virtualbox golang npm bc kitty sqlite3 python312-pipx ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel cifs-utils cron kdeconnect-kde solaar android-tools
@@ -90,7 +90,7 @@ sudo firewall-cmd --permanent --add-service=ssh
 sudo firewall-cmd --reload
 
 ## multimedia codecs
-yes | sudo opi codecs
+#yes | sudo opi codecs
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
