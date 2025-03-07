@@ -29,13 +29,13 @@ Wacom Intuos BT S Pen stylus            id: 15  type: STYLUS
 xrandr --listactivemonitors
 Monitors: 2
 
- 0: +*HDMI-A-1 2560/697x1440/393+0+0  HDMI-A-1
- 1: +DisplayPort-1 1920/598x1080/336+2560+0  DisplayPort-1
+ 0: +*HDMI-2 2560/697x1440/393+0+0  HDMI-2
+ 1: +DP-2 1920/598x1080/336+2560+0  DP-2
 ```
 
 ## Map wacom to monitor
 
 ```
-xsetwacom --set "16" MapToOutput HDMI-A-1
-xsetwacom --set "15" MapToOutput HDMI-A-1
+xsetwacom --set "16" MapToOutput HDMI-2
+xsetwacom --set "15" MapToOutput HDMI-2
 ```
