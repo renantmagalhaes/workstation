@@ -11,6 +11,15 @@ Maybe will be necessary to change some GPO policies to edit those Options
 Theme > Dark Bloon
 Taskbar > Disable Show my taskbar on all displays
 
+# Improvements
+
+### Disable Caps Lock notification
+
+1. Logi+ Software
+2. Settings
+3. Toggle off -> Caps Lock, Num Lock, Scroll Lock and Fn Lock notification
+![disable notifications](../../assets/disable%20logi%20notifications.png)
+
 # Power Toys
 
 ## Keyboard Manager
