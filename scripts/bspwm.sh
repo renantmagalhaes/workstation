@@ -41,6 +41,14 @@ elif check_cmd zypper; then # FOR RPM SYSTEMS
 	sudo zypper install -y bspwm sxhkd feh lxappearance playerctl blueman xsetroot dunst nitrogen scrot xdotool NetworkManager-applet pcp-pmda-lmsensors playerctl i3lock papirus-icon-theme pasystray pavucontrol jgmenu mate-polkit libnotify4 libnotify-devel libnotify-tools xprop xwininfo gnome-calendar xdpyinfo
 	sudo pip3 install pywal --break-system-packages
 
+	# # Dunst
+	# sudo zypper in -y libxdg-basedir-devel libX11-devel libXinerama-devel libXrandr-devel libXScrnSaver-devel glib2-devel pango-devel dbus-1-devel libnotify-devel gcc make
+	# git clone https://github.com/dunst-project/dunst.git ~/GIT-REPOS/CORE/dunst
+	# cd ~/GIT-REPOS/CORE/dunst
+	# sudo it config --global --add safe.directory ~/GIT-REPOS/CORE/dunst
+	# make -j5 WAYLAND=0
+	# sudo make WAYLAND=0 install
+
 	# Picom
 	sudo zypper install -y dbus-1-devel gcc git libconfig-devel libdrm-devel libev-devel libX11-devel libX11-xcb1 libXext-devel libxcb-devel Mesa-libGL-devel meson pcre-devel libpixman-1-0-devel uthash-devel xcb-util-image-devel xcb-util-renderutil-devel xorgproto-devel libepoxy-devel Mesa-libEGL-devel xcb-util-devel
 	git clone https://github.com/yshui/picom.git ~/GIT-REPOS/CORE/picom
