@@ -24,7 +24,7 @@ else
 fi
 
 # refresh repos and upgrade system
-sudo zypper ref && sudo zypper up
+sudo zypper ref && sudo zypper dup
 
 # Dotfiles syslink
 ln -s -f $PWD/dotfiles/ ~/.dotfiles
@@ -34,7 +34,7 @@ sudo zypper install -y ntp
 sudo ntpdate pool.ntp.org
 
 # Install the packages from repo
-sudo zypper install -y zsh vim curl net-tools net-tools-deprecated iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox bind-utils gcc-c++ rsync sassc gawk bc cron golang npm libcap-progs sqlite3 python312-pipx cifs-utilsq ffmpeg
+sudo zypper install -y zsh vim curl net-tools net-tools-deprecated iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox bind-utils gcc-c++ rsync sassc gawk bc cron golang npm libcap-progs sqlite3 python312-pipx cifs-utils ffmpeg
 
 # Install yarn
 sudo npm install --global yarn
