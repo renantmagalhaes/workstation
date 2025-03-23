@@ -678,6 +678,11 @@ button.button-startpage:active { background: none !important; }
 /*   flex-direction: column; */
 /* } */
 
+/* remove overlay messages like "Press Escape key to exit fullscreen" */
+.overlayinfobubble {
+display: none;
+}
+
 /* Add gap in the boarder when hover */
 #tabs-tabbar-container.left:hover .tab-position,
 #tabs-tabbar-container.right:hover .tab-position {
