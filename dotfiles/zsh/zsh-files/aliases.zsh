@@ -154,6 +154,12 @@ alias vinotes='vi ~/notes.md'
 alias lg='lazygit'
 alias killvi='pidof nvim |xargs kill -9'
 
+#Hex color get
+for name in hex-color color-hex; do
+  alias $name='xcolor'
+done
+
+
 ### Zypper UTILS
 alias zypper-reinstall='sudo zypper install --force'
 
