@@ -37,6 +37,7 @@ if check_cmd nix-env; then # FOR NIX PKG MANAGER
 		nixpkgs.fd \
 		nixpkgs.colorls \
 		nixpkgs.mpv \
+		nixpkgs.xcolor \
 		nixpkgs.xwinwrap
 
 else
