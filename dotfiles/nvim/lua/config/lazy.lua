@@ -34,6 +34,8 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.linting.eslint" },
     { import = "lazyvim.plugins.extras.lsp.none-ls" },
     { import = "lazyvim.plugins.extras.ui.mini-animate" },
+    -- AI - copilot
+    { import = "lazyvim.plugins.extras.ai.copilot" },
     -- DAP
     { import = "lazyvim.plugins.extras.dap.core" },
     -- import/override with your plugins
