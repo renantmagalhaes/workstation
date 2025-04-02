@@ -9,4 +9,9 @@ linux_check=$(uname -a | awk '{print $1}' | awk '{print tolower($0)}')
 
 # Aliases
 
-alias sdm="sdm.exe"
+
+
+if check_cmd wsl.exe; then
+  alias sdm="sdm.exe"
+fi
+
