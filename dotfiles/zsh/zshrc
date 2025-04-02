@@ -41,6 +41,7 @@ export ZSH="$HOME/.oh-my-zsh"
 [[ -f ~/.zsh/main.zsh ]] && source ~/.zsh/main.zsh
 [[ -f ~/.zsh/programs.zsh ]] && source ~/.zsh/programs.zsh
 [[ -f ~/.zsh/functions.zsh ]] && source ~/.zsh/functions.zsh
+[[ -f ~/.zsh/extra.zsh ]] && source ~/.zsh/extra.zsh
 
 #source
 source $ZSH/oh-my-zsh.sh
