@@ -678,6 +678,26 @@ button.button-startpage:active { background: none !important; }
 /*   flex-direction: column; */
 /* } */
 
+/* Completely hide the audio icon so it’s invisible and unclickable */
+/* Force zero-size on the canvas. Also hide it visually. 
+   And disable pointer events. 
+   This is as “extreme” as you can get with CSS alone. */
+.tab-audio .audioicon {
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  display: inline-block !important; /* or block, but forced hidden or 0-size anyway */
+}
+
+/* You can also do the same for the parent span, if needed */
+.tab-audio {
+  pointer-events: none !important;
+  width: auto !important; /* or 0 if you prefer */
+  /* display: inline-block !important;  <-- if needed, but not mandatory */
+}
+
 /* remove overlay messages like "Press Escape key to exit fullscreen" */
 .overlayinfobubble {
 display: none;
