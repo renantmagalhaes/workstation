@@ -30,7 +30,7 @@ xrandr --listactivemonitors
 Monitors: 2
 
  0: +*HDMI-1 2560/697x1440/393+0+0  HDMI-1
- 1: +DP-2 1920/598x1080/336+2560+0  DP-2
+ 1: +DP-1 1920/598x1080/336+2560+0  DP-1
 ```
 
 ## Map wacom to monitor
