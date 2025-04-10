@@ -1,15 +1,18 @@
-# check cmd function
+# =====================
+# Check if command exists
+# =====================
 check_cmd() {
-    command -v "$1" >/dev/null 2>&1
+  command -v "$1" >/dev/null 2>&1
 }
 
-#RTM
-macos_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
-linux_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
+# =====================
+# OS Detection
+# =====================
+os_check=$(uname -s | tr '[:upper:]' '[:lower:]')
 
-
-# #Plugins
-
+# =====================
+# Oh My Zsh Plugins
+# =====================
 plugins=(
   git
   kubectl
@@ -35,112 +38,104 @@ plugins=(
   fzf-tab
 )
 
+# Load OMZ core
+export ZSH="$HOME/.oh-my-zsh"
+source "$ZSH/oh-my-zsh.sh"
 
+# =====================
+# Custom Plugins
+# =====================
+ZSH_CUSTOM="${ZSH_CUSTOM:-$ZSH/custom}"
 
-# ######################### General Setup ########################
-
-#Custom plugins
-##zsh-syntax-highlighting
-if [[ ! -d $ZSH/custom/plugins/zsh-syntax-highlighting ]]; then
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH/custom/plugins/zsh-syntax-highlighting
+# zsh-autopair (not part of OMZ)
+if [[ -r $ZSH_CUSTOM/plugins/zsh-autopair/autopair.zsh ]]; then
+  source $ZSH_CUSTOM/plugins/zsh-autopair/autopair.zsh
 fi
-source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-##zsh-autosuggestions.zsh
-if [[ ! -d $ZSH/custom/plugins/zsh-autosuggestions ]]; then
-  git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH/custom/plugins/zsh-autosuggestions
-fi
-source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# fzf integration (optional)
+check_cmd fzf && source <(fzf --zsh)
 
+# =====================
+# Python virtualenv
+# =====================
+export WORKON_HOME="$HOME/.virtualenvs"
+export VIRTUALENVWRAPPER_PYTHON="/usr/bin/python3"
 
-##Autopair
-if [[ ! -d $ZSH/custom/plugins/zsh-autopair ]]; then
-  git clone https://github.com/hlissner/zsh-autopair $ZSH/custom/plugins/zsh-autopair
-fi
-source $ZSH/custom/plugins/zsh-autopair/autopair.zsh
-
-## FZF
-source <(fzf --zsh)
-
-# Python virtualenv and Virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-
-# git-auto-fetch
+# =====================
+# Git Auto Fetch
+# =====================
 GIT_AUTO_FETCH_INTERVAL=60
 
-# History 
+# =====================
+# History settings
+# =====================
 HISTFILE="$HOME/.zsh_history"
-## Number of events loaded into memory
 HISTSIZE=1000000
-## Number of events stored in the zsh history file
 SAVEHIST=1000000
-## Do not save duplicate commands to history
 setopt HIST_IGNORE_ALL_DUPS
-## Do not find duplicate command when searching
 setopt HIST_FIND_NO_DUPS
 
-# suse tmux fix
-export TMUX_TMPDIR='/tmp'
+# =====================
+# WSL2 RAM cleanup alias
+# =====================
+alias drop_cache="sudo sh -c \"echo 3 > /proc/sys/vm/drop_caches && swapoff -a && swapon -a && echo 'Ram-cache and Swap Cleared'\""
 
-# This is specific to WSL 2. If the WSL 2 VM goes rogue and decides not to free
-# up memory, this command will free your memory after about 20-30 seconds.
-#   Details: https://github.com/microsoft/WSL/issues/4166#issuecomment-628493643
-alias drop_cache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
+# =====================
+# Use best available top
+# =====================
+if check_cmd bpytop; then
+  alias top='bpytop'
+elif check_cmd htop; then
+  alias top='htop'
+fi
 
-### TOP ###
-command -v htop > /dev/null && alias top='htop'
-command -v bpytop > /dev/null && alias top='bpytop'
+# =====================
+# Completion system with cache
+# =====================
+ZSH_CACHE_DIR="${ZDOTDIR:-$HOME}/.zsh_cache"
+mkdir -p "$ZSH_CACHE_DIR"
 
-# Completion.
-autoload -U compinit && compinit
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
-zstyle ':completion:*' rehash true                              # automatically find new executables in path 
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
+autoload -Uz compinit
+compinit -d "${ZSH_CACHE_DIR}/zcompdump"
+
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' rehash true
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' menu select=2
-zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
 zstyle ':completion:*:descriptions' format '%U%F{cyan}%d%f%u'
-
-
-# Speed up completions
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.cache/zcache
+zstyle ':completion:*' cache-path "${ZSH_CACHE_DIR}/zcache"
 
-# automatically load bash completion functions
 autoload -U +X bashcompinit && bashcompinit
 
-
-# fzf-tab
-# For tmux 
+# =====================
+# fzf-tab config
+# =====================
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':fzf-tab:*' prefix '·'
-## disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
-## set descriptions format to enable group support
-## NOTE: don't use escape sequences here, fzf-tab will ignore them
 zstyle ':completion:*:descriptions' format '[%d]'
-## set list-colors to enable filename colorizing
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-## force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
-zstyle ':completion:*' menu no
-## preview directory's content with eza when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-## switch group using `<` and `>`
 zstyle ':fzf-tab:*' switch-group '<' '>'
-zstyle ':completion:*:descriptions' format
 
-# Utils
-## remove mail/postfix check
+# =====================
+# General tweaks
+# =====================
 unset MAILCHECK
-# Additional paths
-if [[ $macos_check == "darwin" ]]; then
-    eval $(/opt/homebrew/bin/brew shellenv)
-    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/opt/homebrew/bin"
-elif [[ $linux_check == "linux" ]]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    export PATH="$HOME/.local/bin:/usr/sbin:/usr/share/code/bin:$HOME/.cargo/bin/:$PATH"
+export TMUX_TMPDIR='/tmp'
+
+# =====================
+# Add paths depending on OS
+# =====================
+if [[ $os_check == "darwin" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/opt/homebrew/bin"
+elif [[ $os_check == "linux" ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  export PATH="$HOME/.local/bin:/usr/sbin:/usr/share/code/bin:$HOME/.cargo/bin:$PATH"
 else
-    echo "error on SO check"
+  echo "⚠️ OS check failed"
 fi
+
