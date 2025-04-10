@@ -1,5 +1,5 @@
 format = """
-$directory\
+${custom.diricon}${directory}\
 $git_branch\
 $git_status\
 $fill\
@@ -26,11 +26,10 @@ command_timeout = 3600000
 
 [directory]
 style = 'fg:dark_purple'
-# fddormat = '[$path]($style)'
 truncation_length = 3
 truncation_symbol = '…/'
 truncate_to_repo = false
-home_symbol = '󰉋 ~'
+home_symbol = ''
 read_only_style = '197'
 read_only = '  '
 format = '[$path]($style)[$read_only]($read_only_style) '
@@ -41,7 +40,8 @@ format = '[$path]($style)[$read_only]($read_only_style) '
 'Music' = ' '
 'Pictures' = ' '
 'Images' = ' '
-'.*'          = '󰉋 $directory'
+
+
 
 [git_branch]
 style = 'fg:green'
@@ -110,6 +110,25 @@ format = '[$symbol]($style)'
 min_time = 500
 style = 'fg:gray'
 format = '[$duration]($style)'
+
+########### CUSTOM COMMANDS ###########
+
+[custom.diricon]
+command = '''
+if [ "$PWD" = "$HOME" ]; then
+  echo "󰋜 ~"
+else
+  echo "󰉋 "
+fi
+'''
+when = "true"
+shell = ["bash"]
+style = "fg:dark_purple"
+format = '[$output]($style) '
+
+
+########### CUSTOM THEMES ###########
+
 
 [palettes.nord]
 dark_blue = '#5E81AC'
