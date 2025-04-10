@@ -20,19 +20,28 @@ $character"""
 
 add_newline = true
 palette = 'onedark'
+# Timeout for commands executed by starship (in milliseconds).
+command_timeout = 3600000
+
 
 [directory]
-style = 'bold fg:dark_blue'
-format = '[$path ]($style)'
+style = 'fg:dark_purple'
+# fddormat = '[$path]($style)'
 truncation_length = 3
 truncation_symbol = '…/'
 truncate_to_repo = false
+home_symbol = '󰉋 ~'
+read_only_style = '197'
+read_only = '  '
+format = '[$path]($style)[$read_only]($read_only_style) '
 
 [directory.substitutions]
 'Documents' = '󰈙'
 'Downloads' = ' '
 'Music' = ' '
 'Pictures' = ' '
+'Images' = ' '
+'.*'          = '󰉋 $directory'
 
 [git_branch]
 style = 'fg:green'
@@ -46,19 +55,23 @@ format = '([$all_status$ahead_behind]($style) )'
 [fill]
 symbol = ' '
 
+
 [python]
-style = 'teal'
-symbol = ' '
-format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
-pyenv_version_name = true
-pyenv_prefix = ''
+symbol = " "
+#pyenv_version_name = true
+format = '[${symbol}python (\($virtualenv\) )]($style)'
+style = "bold yellow"
+pyenv_prefix = " "
+detect_extensions = ["py"]
+version_format = "v${raw}"
 
 [lua]
 symbol = ' '
 
 [nodejs]
-style = 'blue'
-symbol = ' '
+format = "[ Node.js $version](bold green) "
+detect_files = ["package.json", ".node-version"]
+detect_folders = ["node_modules"]
 
 [golang]
 style = 'blue'
@@ -81,15 +94,11 @@ symbol = '󰏗 '
 
 [aws]
 symbol = ' '
-style = 'yellow'
+style = 'orange'
 format = '[$symbol($profile )(\[$duration\] )]($style)'
 
 [docker_context]
-symbol = ' '
-style = 'fg:#06969A'
-format = '[$symbol]($style) $path'
-detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
-detect_extensions = ['Dockerfile']
+format = 'via [🐋 $context](blue bold)'
 
 [jobs]
 symbol = ' '
@@ -114,6 +123,7 @@ purple = '#B48EAD'
 gray = '#434C5E'
 black = '#2E3440'
 white='#D8DEE9'
+dark_purple='#905AFF'
 
 [palettes.onedark]
 dark_blue='#61afef'
@@ -127,3 +137,4 @@ yellow='#e5c07b'
 gray='#828997'
 white ='#abb2bf'
 black='#2c323c'
+dark_purple='#905AFF'
