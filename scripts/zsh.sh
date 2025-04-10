@@ -24,10 +24,10 @@ chmod +x /tmp/zsh.sh
 sh -c '/tmp/zsh.sh'
 
 # Install startship
-curl -sS https://starship.rs/install.sh | sh -s -- -y
+#curl -sS https://starship.rs/install.sh | sh -s -- -y
 
 # Install OMP - Oh my Posh
-#curl -s https://ohmyposh.dev/install.sh | bash -s
+curl -s https://ohmyposh.dev/install.sh | bash -s
 
 # zsh config
 ln -s -f $PWD/dotfiles/zsh/zshrc ~/.zshrc
