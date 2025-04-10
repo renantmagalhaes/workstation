@@ -51,6 +51,33 @@ blocks:
           fetch_version: false
         leading_diamond: " \ue0b6"
         trailing_diamond: 
+        template: " {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }}"
+        foreground: "#FF9900"
+        background: "#29315A"
+        type: aws
+        style: diamond
+      - properties:
+          fetch_version: false
+        leading_diamond: " \ue0b6"
+        trailing_diamond: 
+        template: "\ue620 {{ .Full }}"
+        foreground: "#00AEEF"
+        background: "#29315A"
+        type: lua
+        style: diamond
+      - properties:
+          fetch_version: false
+        leading_diamond: " \ue0b6"
+        trailing_diamond: 
+        template: {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}
+        foreground: "#42E66C"
+        background: "#29315A"
+        type: node
+        style: diamond
+      - properties:
+          fetch_version: false
+        leading_diamond: " \ue0b6"
+        trailing_diamond: 
         template:  {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}
         foreground: "#E4F34A"
         background: "#29315A"
