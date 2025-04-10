@@ -50,8 +50,8 @@ source $ZSH/oh-my-zsh.sh
 # P10K External config file
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-eval "$(oh-my-posh init zsh --config $HOME/.config/omp/oh-my-posh.yaml)"
+# eval "$(oh-my-posh init zsh --config $HOME/.config/omp/oh-my-posh.yaml)"
 
 # Startship Config
-#export STARSHIP_CONFIG=~/.zsh/starship.toml
-#eval "$(starship init zsh)"
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+eval "$(starship init zsh)"

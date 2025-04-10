@@ -24,10 +24,10 @@ chmod +x /tmp/zsh.sh
 sh -c '/tmp/zsh.sh'
 
 # Install startship
-#curl -sS https://starship.rs/install.sh | sh
+curl -sS https://starship.rs/install.sh | sh -s -- -y
 
 # Install OMP - Oh my Posh
-curl -s https://ohmyposh.dev/install.sh | bash -s
+#curl -s https://ohmyposh.dev/install.sh | bash -s
 
 # zsh config
 ln -s -f $PWD/dotfiles/zsh/zshrc ~/.zshrc
@@ -38,6 +38,9 @@ ln -s -f $PWD/dotfiles/zsh/p10k.zsh ~/.p10k.zsh
 
 # omp config
 ln -s -f $PWD/dotfiles/zsh/omp ~/.config/
+
+# starship config
+ln -s -f $PWD/dotfiles/zsh/starship/ ~/.config/
 
 #lsd config
 mkdir -p ~/.config/lsd/
