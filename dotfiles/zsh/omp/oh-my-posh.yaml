@@ -81,7 +81,7 @@ blocks:
       # --------------------------------------------------------------------------
       - properties:
           branch_max_length: 25.0
-          branch_icon: " "
+          branch_icon: " "
           fetch_stash_count: true
           fetch_status: true
           fetch_upstream_icon: false
@@ -299,9 +299,9 @@ blocks:
         leading_diamond: " \ue0b6"
         trailing_diamond: ""
         # You can swap "terraform:" for a TF icon if you have a Nerd Fonts symbol
-        template: "terraform: {{ .Full }}"
+        template: " {{.WorkspaceName}}"
         foreground: "#5C4EE5" # a purple color for TF
-        background: "#29315A"
+        background: "#ffffff"
         type: terraform
         style: diamond
 
