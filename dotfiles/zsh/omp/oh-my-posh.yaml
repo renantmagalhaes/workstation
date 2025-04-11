@@ -81,12 +81,13 @@ blocks:
       # --------------------------------------------------------------------------
       - properties:
           branch_max_length: 25.0
+          branch_icon: " "
           fetch_stash_count: true
           fetch_status: true
-          fetch_upstream_icon: true
-        leading_diamond: " \ue0b6"
+          fetch_upstream_icon: false
+        leading_diamond: "\ue0b6"
         trailing_diamond: ""
-        template: " {{ .UpstreamIcon }}{{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} "
+        template: "{{ .UpstreamIcon }} {{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}"
         foreground: "#90b8fc"
         background: "#29315A"
         type: git
@@ -155,7 +156,7 @@ blocks:
           fetch_version: false
         leading_diamond: " \ue0b6"
         trailing_diamond: ""
-        template: " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}"
+        template: " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }}{{ end }}{{ .Full }}{{ end }}"
         foreground: "#E4F34A"
         background: "#29315A"
         type: python
