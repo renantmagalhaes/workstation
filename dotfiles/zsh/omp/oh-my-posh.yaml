@@ -243,11 +243,11 @@ blocks:
 
       # --------------------------------------------------------------------------
       # 11) Execution Time segment: Shows how long the previous command took
-      #     if it's above the "threshold" (2000 ms by default).
+      #     if it's above the "threshold" (5000 ms by default).
       # --------------------------------------------------------------------------
       - properties:
           style: austin
-          threshold: 2000.0
+          threshold: 5000.0
         leading_diamond: ""
         trailing_diamond: "\ue0b4 "
         template: " {{ .FormattedMs }}"
