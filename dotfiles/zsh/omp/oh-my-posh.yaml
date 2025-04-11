@@ -38,8 +38,8 @@ blocks:
       - leading_diamond: ""
         trailing_diamond: " "
         template: ""
-        foreground: "#ffffff"
-        background: "#29315A"
+        foreground: "#29315A"
+        background: "#ffffff"
         type: text
         style: diamond
 
@@ -48,10 +48,23 @@ blocks:
       #    - properties.style: full  => full path is shown (vs. folder name only).
       # --------------------------------------------------------------------------
       - properties:
+          # style: full => shows the entire path or ~ if it's your home directory
           style: full
         leading_diamond: ""
         trailing_diamond: ""
-        template: "  {{ .Path }}"
+        # The template uses an 'if' statement:
+        #   - if .Path == "~" or starts with "~/", show a home icon + .Path
+        #   - else, show the normal folder icon + .Path
+        template: >-
+          {{ if eq .Path "~" }}󰟒 ~
+          {{ else if or (eq .Path "~/Documents") (hasPrefix .Path "~/Documents/") }}󰈙 {{ .Path }}
+          {{ else if or (eq .Path "~/Downloads") (hasPrefix .Path "~/Downloads/") }} {{ .Path }}
+          {{ else if or (eq .Path "~/Music") (hasPrefix .Path "~/Music/") }} {{ .Path }}
+          {{ else if or (eq .Path "~/Pictures") (hasPrefix .Path "~/Pictures/") 
+                         (eq .Path "~/Images")   (hasPrefix .Path "~/Images/") }} {{ .Path }}
+          {{ else if hasPrefix .Path "~/" }}󰟒 {{ .Path }}
+          {{ else }}  {{ .Path }}
+          {{ end }}
         foreground: "#3EC669"
         background: "#29315A"
         type: path
