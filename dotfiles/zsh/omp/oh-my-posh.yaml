@@ -226,17 +226,58 @@ blocks:
 
       # --------------------------------------------------------------------------
       # 11) Execution Time segment: Shows how long the previous command took
-      #     if it's above the "threshold" (150 ms by default).
+      #     if it's above the "threshold" (2000 ms by default).
       # --------------------------------------------------------------------------
       - properties:
           style: austin
-          threshold: 150.0
+          threshold: 2000.0
         leading_diamond: ""
         trailing_diamond: "\ue0b4 "
         template: " {{ .FormattedMs }}"
         foreground: "#AEA4BF"
         background: "#29315A"
         type: executiontime
+        style: diamond
+      # --------------------------------------------------------------------------
+      # 12) Kubernetes segment: shows the current kube context (and namespace)
+      # --------------------------------------------------------------------------
+      - properties:
+          fetch_version: false
+        leading_diamond: " \ue0b6"
+        trailing_diamond: ""
+        # icon: "" is just an example glyph. You can replace it with a K8S icon you prefer.
+        template: " {{ .Context }}{{ if .Namespace }} | {{ .Namespace }}{{ end }}"
+        foreground: "#326CE5" # a typical K8S-blue color
+        background: "#29315A"
+        type: kubernetes
+        style: diamond
+
+      # --------------------------------------------------------------------------
+      # 13) NPM segment: shows the npm version if installed
+      # --------------------------------------------------------------------------
+      - properties:
+          fetch_version: false
+        leading_diamond: " \ue0b6"
+        trailing_diamond: ""
+        # icon: "" is the popular Nerd Fonts icon for NPM
+        template: " {{ .Full }}"
+        foreground: "#CB3837" # typical npm red color
+        background: "#29315A"
+        type: npm
+        style: diamond
+
+      # --------------------------------------------------------------------------
+      # 14) Terraform segment: shows Terraform version if installed
+      # --------------------------------------------------------------------------
+      - properties:
+          fetch_version: false
+        leading_diamond: " \ue0b6"
+        trailing_diamond: ""
+        # You can swap "terraform:" for a TF icon if you have a Nerd Fonts symbol
+        template: "terraform: {{ .Full }}"
+        foreground: "#5C4EE5" # a purple color for TF
+        background: "#29315A"
+        type: terraform
         style: diamond
 
   # ==============================================================================
