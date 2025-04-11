@@ -51,7 +51,7 @@ blocks:
           style: full
         leading_diamond: ""
         trailing_diamond: ""
-        template: " {{ .Path }}"
+        template: "  {{ .Path }}"
         foreground: "#3EC669"
         background: "#29315A"
         type: path
