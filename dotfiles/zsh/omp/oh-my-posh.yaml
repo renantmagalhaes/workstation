@@ -142,7 +142,7 @@ blocks:
         trailing_diamond: ""
         template: "{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}"
         foreground: "#42E66C"
-        background: "#29315A"
+        background: "#ffffff"
         type: node
         style: diamond
 
@@ -285,7 +285,7 @@ blocks:
         leading_diamond: " \ue0b6"
         trailing_diamond: ""
         # icon: "" is the popular Nerd Fonts icon for NPM
-        template: " {{ .Full }}"
+        template: " {{ .Full }}"
         foreground: "#CB3837" # typical npm red color
         background: "#29315A"
         type: npm
