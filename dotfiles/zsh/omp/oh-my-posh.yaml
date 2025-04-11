@@ -51,7 +51,7 @@ blocks:
           # style: full => shows the entire path or ~ if it's your home directory
           style: full
         leading_diamond: ""
-        trailing_diamond: ""
+        trailing_diamond: " "
         # The template uses an 'if' statement:
         #   - if .Path == "~" or starts with "~/", show a home icon + .Path
         #   - else, show the normal folder icon + .Path
