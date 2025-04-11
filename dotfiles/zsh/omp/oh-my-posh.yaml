@@ -69,6 +69,9 @@ blocks:
         background: "#29315A"
         type: path
         style: diamond
+        # If the user *cannot* write in the current directory, override color with red.
+        foreground_templates:
+          - '{{ if not .Writable }}#FF0000{{ end }}'
 
       # --------------------------------------------------------------------------
       # 4) "git" segment: shows Git branch name, upstream icon, stash count, etc.
