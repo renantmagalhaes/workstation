@@ -65,7 +65,7 @@ blocks:
           {{ else if hasPrefix .Path "~/" }}󰟒 {{ .Path }}
           {{ else }}  {{ .Path }}
           {{ end }}
-        foreground: "#3EC669"
+        foreground: "#ffffff"
         background: "#29315A"
         type: path
         style: diamond
