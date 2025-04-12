@@ -38,8 +38,8 @@ blocks:
       - leading_diamond: ""
         trailing_diamond: " "
         template: ""
-        foreground: "#29315A"
-        background: "#ffffff"
+        background: "#29315A"
+        foreground: "#ffffff"
         type: text
         style: diamond
 
