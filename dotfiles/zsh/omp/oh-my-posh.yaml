@@ -65,8 +65,8 @@ blocks:
           {{ else if hasPrefix .Path "~/" }}󰟒 {{ .Path }}
           {{ else }}  {{ .Path }}
           {{ end }}
-        foreground: "#ffffff"
-        background: "#29315A"
+        foreground: "#000000"
+        background: "#ffffff"
         type: path
         style: diamond
         # If the user *cannot* write in the current directory, override color with red.
