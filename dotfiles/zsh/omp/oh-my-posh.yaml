@@ -333,7 +333,7 @@ blocks:
       - properties:
           always_enabled: true
         # template: " "
-        template: " $ "
+        template: "  "
         foreground: "#fffff1"
         type: status
         style: plain
@@ -351,7 +351,8 @@ blocks:
 transient_prompt:
   background: transparent
   foreground: "#8b7cfc"
-  template: " "
+  # template: " "
+  template: "$ "
 
 # --------------------------------------------------------------------------------
 # MISCELLANEOUS SETTINGS
