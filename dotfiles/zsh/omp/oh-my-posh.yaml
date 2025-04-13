@@ -52,10 +52,10 @@ blocks:
           {{ else if or (eq .Path "~/Downloads") (hasPrefix .Path "~/Downloads/") }} {{ .Path }}
           {{ else if or (eq .Path "~/Music") (hasPrefix .Path "~/Music/") }} {{ .Path }}
           {{ else if or (eq .Path "~/Pictures") (hasPrefix .Path "~/Pictures/") 
-                         (eq .Path "~/Images")   (hasPrefix .Path "~/Images/") }} {{ .Path }}
+                     (eq .Path "~/Images")   (hasPrefix .Path "~/Images/") }} {{ .Path }}
           {{ else if hasPrefix .Path "~/" }}󰟒 {{ .Path }}
           {{ else }}  {{ .Path }}
-          {{ end }}
+          {{ end }}{{ if not .Writable }}{{ end }}
         foreground: "#000000"
         background: "#ffffff"
         type: path
