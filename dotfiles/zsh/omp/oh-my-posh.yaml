@@ -309,6 +309,23 @@ blocks:
         type: terraform
         style: diamond
 
+      # --------------------------------------------------------------------------
+      # 15) Command Status segment:
+      # Displays a checkmark if the last command returned 0 (success),
+      # or a cross if it did not execute correctly.
+      # --------------------------------------------------------------------------
+      - type: status
+        style: diamond
+        foreground: "#ffffff"
+        background: "#00897b"
+        leading_diamond: ""
+        background_templates:
+          - "{{ if .Error }}#e91e63{{ end }}"
+        trailing_diamond: 
+        template: "<#193549></>"
+        properties:
+          always_enabled: false
+
   # ==============================================================================
   # BLOCK 3: LEFT Prompt (SECOND LINE)
   # ==============================================================================
