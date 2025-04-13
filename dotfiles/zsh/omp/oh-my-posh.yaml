@@ -383,7 +383,8 @@ transient_prompt:
   background: transparent
   foreground: "#8b7cfc"
   # template: " "
-  template: "$ "
+  template: " "
+  # newline: true
 
 # --------------------------------------------------------------------------------
 # MISCELLANEOUS SETTINGS
