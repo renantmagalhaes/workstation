@@ -51,8 +51,8 @@ blocks:
           {{ else if or (eq .Path "~/Documents") (hasPrefix .Path "~/Documents/") }}󰈙 {{ .Path }}
           {{ else if or (eq .Path "~/Downloads") (hasPrefix .Path "~/Downloads/") }} {{ .Path }}
           {{ else if or (eq .Path "~/Music") (hasPrefix .Path "~/Music/") }} {{ .Path }}
-          {{ else if or (eq .Path "~/Pictures") (hasPrefix .Path "~/Pictures/") 
-                     (eq .Path "~/Images")   (hasPrefix .Path "~/Images/") }} {{ .Path }}
+          {{ else if or (eq .Path "~/Pictures") (hasPrefix .Path "~/Pictures/") }}  {{ .Path }}
+          {{ else if or (eq .Path "~/Images") (hasPrefix .Path "~/Images/") }}  {{ .Path }}
           {{ else if hasPrefix .Path "~/" }}󰟒 {{ .Path }}
           {{ else }}  {{ .Path }}
           {{ end }}{{ if not .Writable }}{{ end }}
