@@ -20,7 +20,7 @@ blocks:
     alignment: left
     segments:
       # --------------------------------------------------------------------------
-      # 1) Upper-left status segment: prints the "┌" character.
+      # Upper-left status segment: prints the "┌" character.
       # --------------------------------------------------------------------------
       - properties:
           always_enabled: true
@@ -30,7 +30,7 @@ blocks:
         style: plain
 
       # --------------------------------------------------------------------------
-      # 2) Icon segment: Prints the diamond icon "" with its own styling.
+      # Icon segment: Prints the diamond icon "" with its own styling.
       # --------------------------------------------------------------------------
       - leading_diamond: ""
         trailing_diamond: " "
@@ -41,7 +41,7 @@ blocks:
         style: diamond
 
       # --------------------------------------------------------------------------
-      # 3) Path segment: Displays your current working directory.
+      # Path segment: Displays your current working directory.
       # --------------------------------------------------------------------------
       - properties:
           style: full
@@ -64,7 +64,7 @@ blocks:
           - "{{ if not .Writable }}#FF0000{{ end }}"
 
       # --------------------------------------------------------------------------
-      # 4) Extra Trailing Diamond segment: Only displays when not inside a Git folder.
+      #  Extra Trailing Diamond segment: Only displays when not inside a Git folder.
       #     Its background is explicitly set to transparent (or "default") so that it
       #     looks like part of the path.
       # --------------------------------------------------------------------------
@@ -75,7 +75,7 @@ blocks:
         style: plain
 
       # --------------------------------------------------------------------------
-      # 5) Git segment: Displays Git info (branch, changes, etc.),
+      # Git segment: Displays Git info (branch, changes, etc.),
       #     and is assigned an alias ("git") for cross‑segment reference.
       # --------------------------------------------------------------------------
       - properties:
@@ -109,7 +109,24 @@ blocks:
     alignment: right
     segments:
       # --------------------------------------------------------------------------
-      # 1) AWS segment: Displays AWS profile and region (if set).
+      # Command Status segment:
+      # Displays a checkmark if the last command returned 0 (success),
+      # or a cross if it did not execute correctly.
+      # --------------------------------------------------------------------------
+      - type: status
+        style: diamond
+        foreground: "#ffffff"
+        background: "#00897b"
+        leading_diamond: ""
+        background_templates:
+          - "{{ if .Error }}#e91e63{{ end }}"
+        trailing_diamond: 
+        template: "<#193549></>"
+        properties:
+          always_enabled: false
+
+      # --------------------------------------------------------------------------
+      # AWS segment: Displays AWS profile and region (if set).
       #    - fetch_version: false => doesn't fetch AWS CLI version info, only profile.
       # --------------------------------------------------------------------------
       - properties:
@@ -123,7 +140,7 @@ blocks:
         style: diamond
 
       # --------------------------------------------------------------------------
-      # 2) Lua segment: Shows Lua version (disabled here with fetch_version: false).
+      # Lua segment: Shows Lua version (disabled here with fetch_version: false).
       #    It will only appear if you have Lua installed, but won't display version.
       # --------------------------------------------------------------------------
       - properties:
@@ -137,7 +154,7 @@ blocks:
         style: diamond
 
       # --------------------------------------------------------------------------
-      # 3) Node.js segment: Shows Node version (fetch_version=false => uses fallback).
+      # Node.js segment: Shows Node version (fetch_version=false => uses fallback).
       #    The placeholder can also show if there's a recognized package manager.
       # --------------------------------------------------------------------------
       - properties:
@@ -151,7 +168,7 @@ blocks:
         style: diamond
 
       # --------------------------------------------------------------------------
-      # 4) Python segment: Shows active Python version or virtual environment name.
+      # Python segment: Shows active Python version or virtual environment name.
       #    - {{ .Venv }} => name of your active venv, if any
       #    - {{ .Full }} => Python version string
       #    - Displays an error if Python can't be found.
@@ -167,7 +184,7 @@ blocks:
         style: diamond
 
       # --------------------------------------------------------------------------
-      # 5) Go segment: Shows Go version if Go is installed.
+      # Go segment: Shows Go version if Go is installed.
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
@@ -180,7 +197,7 @@ blocks:
         style: diamond
 
       # --------------------------------------------------------------------------
-      # 6) Node segment again. This is a duplicate of segment #3. If you don't
+      # Node segment again. This is a duplicate of segment #3. If you don't
       #    need two Node segments, you can remove one of them.
       # --------------------------------------------------------------------------
       - properties:
@@ -194,7 +211,7 @@ blocks:
         style: diamond
 
       # --------------------------------------------------------------------------
-      # 7) Ruby segment: Shows Ruby version, or an error if Ruby not found.
+      # Ruby segment: Shows Ruby version, or an error if Ruby not found.
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
@@ -207,7 +224,7 @@ blocks:
         style: diamond
 
       # --------------------------------------------------------------------------
-      # 8) Java segment: Shows Java version, or an error if not found.
+      # Java segment: Shows Java version, or an error if not found.
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
@@ -220,7 +237,7 @@ blocks:
         style: diamond
 
       # --------------------------------------------------------------------------
-      # 9) Julia segment: Shows Julia version, or an error if not found.
+      # Julia segment: Shows Julia version, or an error if not found.
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
@@ -233,7 +250,7 @@ blocks:
         style: diamond
 
       # --------------------------------------------------------------------------
-      # 10) PHP segment: Shows PHP version.
+      # PHP segment: Shows PHP version.
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
@@ -246,7 +263,7 @@ blocks:
         style: diamond
 
       # --------------------------------------------------------------------------
-      # 11) Execution Time segment: Shows how long the previous command took
+      # Execution Time segment: Shows how long the previous command took
       #     if it's above the "threshold" (5000 ms by default).
       # --------------------------------------------------------------------------
       - properties:
@@ -260,7 +277,7 @@ blocks:
         type: executiontime
         style: diamond
       # --------------------------------------------------------------------------
-      # 12) Kubernetes segment: shows the current kube context (and namespace)
+      # Kubernetes segment: shows the current kube context (and namespace)
       # --------------------------------------------------------------------------
 
       - type: kubectl
@@ -282,7 +299,7 @@ blocks:
           #   arn:aws:eks:eu-west-1:1234567890:cluster/posh: posh
 
       # --------------------------------------------------------------------------
-      # 13) NPM segment: shows the npm version if installed
+      # NPM segment: shows the npm version if installed
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
@@ -296,7 +313,7 @@ blocks:
         style: diamond
 
       # --------------------------------------------------------------------------
-      # 14) Terraform segment: shows Terraform version if installed
+      # Terraform segment: shows Terraform version if installed
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
@@ -309,23 +326,6 @@ blocks:
         type: terraform
         style: diamond
 
-      # --------------------------------------------------------------------------
-      # 15) Command Status segment:
-      # Displays a checkmark if the last command returned 0 (success),
-      # or a cross if it did not execute correctly.
-      # --------------------------------------------------------------------------
-      - type: status
-        style: diamond
-        foreground: "#ffffff"
-        background: "#00897b"
-        leading_diamond: ""
-        background_templates:
-          - "{{ if .Error }}#e91e63{{ end }}"
-        trailing_diamond: 
-        template: "<#193549></>"
-        properties:
-          always_enabled: false
-
   # ==============================================================================
   # BLOCK 3: LEFT Prompt (SECOND LINE)
   # ==============================================================================
@@ -333,7 +333,7 @@ blocks:
     alignment: left
     segments:
       # --------------------------------------------------------------------------
-      # 1) Another "status" segment printing the lower-left corner (└).
+      # Another "status" segment printing the lower-left corner (└).
       # --------------------------------------------------------------------------
       - properties:
           always_enabled: true
@@ -344,7 +344,7 @@ blocks:
         style: plain
 
       # --------------------------------------------------------------------------
-      # 2) Another "status" segment displaying the actual prompt symbol "$".
+      # Another "status" segment displaying the actual prompt symbol "$".
       # --------------------------------------------------------------------------
       - properties:
           always_enabled: true
