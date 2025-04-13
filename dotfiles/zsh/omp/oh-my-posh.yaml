@@ -102,6 +102,21 @@ blocks:
           - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#000000{{ end }}"
           - "{{ if gt .Ahead 0 }}#000000{{ end }}"
           - "{{ if gt .Behind 0 }}#000000{{ end }}"
+
+      # --------------------------------------------------------------------------
+      # Check if user has root credentials cached. if not show username else show wizard
+      # --------------------------------------------------------------------------
+
+      - type: command
+        # style: diamond
+        style: plain
+        # foreground: "#ffffff"
+        # background: "#6D70E2"
+        # leading_diamond: ""
+        # trailing_diamond: ""
+        properties:
+          shell: bash
+          command: sudo -n true 2>/dev/null && echo "as 🧙" || echo -n $'\u200B'
   # ==============================================================================
   # BLOCK 2: RIGHT Prompt
   # ==============================================================================
@@ -116,12 +131,12 @@ blocks:
       - type: status
         style: diamond
         foreground: "#ffffff"
-        background: "#00897b"
+        background: "#B388FF"
         leading_diamond: ""
         background_templates:
           - "{{ if .Error }}#e91e63{{ end }}"
-        trailing_diamond: 
-        template: "<#193549></>"
+        trailing_diamond: ""
+        template: "{{ if eq .Code 0 }}<#FFFFFF></>{{ else }}\uf071 {{ reason .Code }}{{ end }}"
         properties:
           always_enabled: false
 
