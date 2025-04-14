@@ -111,3 +111,11 @@ vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
 
 -- Map Ctrl+V to paste in visual mode (replace selection with clipboard content)
 vim.api.nvim_set_keymap("v", "<C-v>", '"_dP', { noremap = true, silent = true })
+
+-- Move selected block one line down in visual mode
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection down" })
+-- Move selected block one line up in visual mode
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection up" })
+-- Indent files, similar to vscode
+vim.keymap.set("v", "<Tab>", ">gv", { noremap = true, silent = true, desc = "Indent selected block" })
+vim.keymap.set("v", "<S-Tab>", "<gv", { noremap = true, silent = true, desc = "Outdent selected block" })
