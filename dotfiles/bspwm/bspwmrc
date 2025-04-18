@@ -45,7 +45,7 @@ xrandr --output HDMI-1 --right-of DP-1
 xrandr --output DP-1 --primary
 bspc monitor DP-1 -d 1 2 3 4 5
 bspc monitor HDMI-1 -d 11 22 33 44 55
-# Focus on first screen on bootvi 
+# Focus on first screen on bootvi
 bspc desktop --focus 11 && bspc desktop --focus 1 &
 
 # Setup resolution
@@ -67,6 +67,8 @@ bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a guake state=floating
 bspc rule -a Guake state=floating
+bspc rule -a Windscribe state=floating
+bspc rule -a Windscribe2 state=floating
 bspc rule -a dev.warp.Warp state=floating
 bspc rule -a Yad state=floating
 bspc rule -a yad-calendar state=floating
