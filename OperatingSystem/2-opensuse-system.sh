@@ -63,6 +63,18 @@ sudo zypper --non-interactive install -y zsh vlc clementine breeze5-cursors vim 
 # Install yarn 
 sudo npm install --global yarn
 
+# Based on DE
+gnome_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "GNOME" | awk '{print tolower($0)}')
+kde_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "KDE" | awk '{print tolower($0)}')
+if [[ $gnome_check == "gnome" ]]; then
+	## Themes
+	bash ./scripts/gnome-themes.sh
+elif [[ $kde_check == "kde" ]]; then
+	sudo zypper --non-interactive install -y kvantum-qt6 kvantum-manager kvantum-themes
+else
+	echo "Not able to identify desktop environment"
+fi
+
 # Virtualization using KVM + QEMU + libvirt
 sudo zypper install -y qemu libvirt virt-manager virt-install libvirt-daemon-config-network bridge-utils ovmf
 sudo zypper -n install --type pattern kvm_server kvm_tools
@@ -158,9 +170,6 @@ bash ./scripts/vim.sh
 
 ## Fonts
 bash ./scripts/fonts.sh
-
-## Themes
-bash ./scripts/gnome-themes.sh
 
 ## TMUX
 bash ./scripts/tmux.sh
