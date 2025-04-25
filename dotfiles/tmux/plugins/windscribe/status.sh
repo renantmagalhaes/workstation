@@ -18,7 +18,8 @@ if [[ $connectState == Connected:* ]]; then
 elif [[ -n $wgInterface ]]; then
 	# If Windscribe itself isn’t connected but a WireGuard iface exists
 	echo "#[fg=#7feaac]󰒄 VPN Connected [WireGuard: $wgInterface] #[fg=white]"
-elif [[ $connectState == Disconnected ]]; then
+elif [[ $connectState == Disconnected ]] || ! command -v windscribe-cli &>/dev/null; then
+	# Treat as disconnected if either Windscribe reports disconnected or the CLI isn’t installed
 	echo "#[fg=#ff4237]󰒄 VPN Disconnected #[fg=white]"
 else
 	# Anything else (e.g. in‑between states) treat as “connecting”
