@@ -1,0 +1,12 @@
+
+#Logitech MX 3 mouse actions
+## side scroll
+~button6
+  xdotool key Ctrl+equal
+~button7
+  xdotool key Ctrl+minus
+## thumb button
+~button10
+  qdbus6 org.kde.kglobalaccel /component/kwin org.kde.kglobalaccel.Component.invokeShortcut "Overview"
+
+
