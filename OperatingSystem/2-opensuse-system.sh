@@ -60,6 +60,7 @@ if [[ $gnome_check == "gnome" ]]; then
 	bash ./scripts/gnome-themes.sh
 elif [[ $kde_check == "kde" ]]; then
 	sudo zypper --non-interactive install -y kvantum-qt6 kvantum-manager kvantum-themes
+  bash ./scripts/kde-themes.sh
 else
 	echo "Not able to identify desktop environment"
 fi
