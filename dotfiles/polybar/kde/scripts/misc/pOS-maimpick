@@ -1,0 +1,22 @@
+#!/bin/sh
+
+case "$(printf "麗 Select Area\\n閭 Current Window\\n Full Screen\\n麗 Select Area (copy)\\n閭 Current Window (copy)\\n Full Screen (copy)" | rofi -dmenu -l 6 -i -p "Screenshot which area?")" in
+	"麗 Select Area")
+        name=pic-selected-"$(date '+%y%m%d-%H%M-%S')"
+        name=$(echo $name | rofi -dmenu -p "Rename file? (Enter for default)")
+        maim -s "$HOME/Pictures/$name".png
+        ;;
+	"閭 Current Window")
+        name=pic-window-"$(date '+%y%m%d-%H%M-%S')"
+        name=$(echo $name | rofi -dmenu -p "Rename file? (Enter for default)")
+        maim -i "$(xdotool getactivewindow)" "$HOME/Pictures/$name".png
+        ;;
+	" Full Screen")
+        name=pic-full-"$(date '+%y%m%d-%H%M-%S')"
+        name=$(echo $name | rofi -dmenu -p "Rename file? (Enter for default)")
+        sleep 0.3 && maim "$HOME/Pictures/$name".png
+        ;;
+	"麗 Select Area (copy)") maim -s | xclip -selection clipboard -t image/png ;;
+	"閭 Current Window (copy)") maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png ;;
+	" Full Screen (copy)") sleep 0.3 && maim | xclip -selection clipboard -t image/png ;;
+esac

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+	1) setsid -f "$TERMINAL" -e gotop ;;
+	2) setsid -f "$TERMINAL" -e htop ;;
+esac
+
+temp=$(sensors | awk '/Tctl/{print $2}' | tr -d "+°C")
+
+if [ -z $temp ]; then
+    temp=$(sensors | awk '/Core/ {print $3}' | tr -d "+C°" | awk '{ sum += $1 } END { if (NR > 0) print sum / NR }')
+fi
+
+temp="${temp%.*}"
+
+case 1 in
+    $(( $temp <= 35 ))) status="" ;;
+    $(( $temp <= 55 ))) status="" ;;
+    $(( $temp <= 75 ))) status="" ;;
+    $(( $temp <= 90 ))) status="" ;;
+                          *) status="" ;;
+ esac
+
+ echo "$status$temp°C"

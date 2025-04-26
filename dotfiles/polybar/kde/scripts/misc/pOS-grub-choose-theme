@@ -1,0 +1,19 @@
+#!/bin/bash
+
+vals=( $(ls /boot/grub/themes ) )
+declare vals
+
+tput setaf 165
+echo "### This will change your GRUB theme. ###"
+echo
+tput setaf 63
+echo "Please choose a number:"
+echo
+tput setaf 46
+for ((i=0; i<${#vals[@]}; i++)); do
+    echo "$i:${vals[i]}"
+done
+
+read choice
+
+(( $choice >= 0)) && (( $choice < ${#vals[@]} )) && sudo sed -i '/GRUB_THEME/d' /etc/default/grub; echo -e "GRUB_THEME=/boot/grub/themes/${vals[choice]}/theme.txt" | sudo tee -a /etc/default/grub && sudo grub-mkconfig -o /boot/grub/grub.cfg && echo "GRUB theme: ${vals[choice]} changed succesfully." || "Please choose a valid choice."

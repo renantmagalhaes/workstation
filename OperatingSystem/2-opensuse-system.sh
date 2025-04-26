@@ -184,6 +184,10 @@ bash ./scripts/gems.sh
 ## GIT
 bash ./utils/git-config/git-config.sh
 
+## Polybar
+sudo zypper install -y polybar mpd wmctrl playerctl xsel
+ln -s -f ~/.dotfiles/polybar/kde/ ~/.config/polybar
+
 # Install ClamAV
 sudo zypper install -y clamav clamtk
 
