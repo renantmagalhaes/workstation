@@ -26,16 +26,16 @@
 - Desktop Session
   - Start with an empty session
 - General Behaviour (double click)
-  - Clicking files or folders: 
+  - Clicking files or folders:
     - Selects them
 - Left Click on desktop -> Configure Desktop and Wallpaper
   - Wallpaper Type -> GetNEw Plugins -> Inactive Blur
     - Blur by 40% over 400ms
 - Left Click on desktop -> Configure Desktop and Wallpaper
   - Wallpaper Type -> GetNEw Plugins -> Smart Video Wallpaper
-    - https://mylivewallpapers.com
-    - https://www.pexels.com/videos/
-    - https://pixabay.com/videos/search/live%20wallpaper/
+    - <https://mylivewallpapers.com>
+    - <https://www.pexels.com/videos/>
+    - <https://pixabay.com/videos/search/live%20wallpaper/>
 
 ## KWin Scripts
 
@@ -44,7 +44,8 @@
 - Hide all title bars (window rules)
   ![alt text](../../assets/hide-all-titleBars.png)
 
-## Extra 
+## Extra
+
 - AutoStart
 
 ![alt text](../../assets/autostartkde.png)
@@ -55,15 +56,11 @@ flatpak run com.core447.StreamController
 flatpak run com.github.hluk.copyq
 ```
 
-
 ### Widgets
 
 - Actove Window Control
 - Menu11
-- Virtual Desktop Bar(https://github.com/wsdfhjxc/virtual-desktop-bar)
-
-
-
+- Virtual Desktop Bar(<https://github.com/wsdfhjxc/virtual-desktop-bar>)
 
 ### KDE top scroll bar (replaces by pixel perfect polybar)
 <!-- 1. Add commond empty panel
@@ -75,7 +72,6 @@ flatpak run com.github.hluk.copyq
 5. Change ~/.config/plasmashellrc
    1. thickness=5 to thickness=3 --> -->
 
-
 # Set KRunner shortcut to meta key and config
 
 ```
@@ -85,3 +81,4 @@ qdbus org.kde.KWin /KWin reconfigure
 ```
 
 - Disable desktop search
+

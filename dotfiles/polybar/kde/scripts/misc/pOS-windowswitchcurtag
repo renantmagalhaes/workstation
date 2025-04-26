@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+path="$pOS_CONFIG_DIR/rofi/windowcd-switcher/box.rasi"
+options="\
+       -kb-cancel "Super+Escape,Escape" \
+       -kb-accept-entry "!Super-Tab,Return,!Super-l,!Super-h"\
+       -kb-row-down "Super+Tab,Super+l,Super+ISO_Left_Tab" \
+       -kb-row-up "Super+Shift+Tab,Super+h,Super+n""
+
+ rofi -no-lazy-grab -show windowcd -theme $path $options &
