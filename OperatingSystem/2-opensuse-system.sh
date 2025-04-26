@@ -50,33 +50,33 @@ sudo systemctl mask packagekit
 
 set -euo pipefail
 
-# Disable SELinux
-  CONFIG="/etc/selinux/config"
-
-  # 1) Immediate runtime: set to permissive
-  if command -v selinuxenabled &>/dev/null && selinuxenabled; then
-      echo "→ Setting SELinux to permissive mode now"
-      if command -v setenforce &>/dev/null; then
-          setenforce 0
-      else
-          echo "⚠️ setenforce command not found; skipping runtime change"
-      fi
-  else
-      echo "→ SELinux is already disabled or not present"
-  fi
-
-  # 2) Permanent on-next-boot: disable in config file
-  if [ -f "$CONFIG" ]; then
-      echo "→ Backing up $CONFIG to ${CONFIG}.bak"
-      cp -p "$CONFIG" "${CONFIG}.bak"
-
-      # Replace any existing SELINUX= lines
-      echo "→ Writing SELINUX=disabled to $CONFIG"
-      sed -ri 's/^SELINUX=.*/SELINUX=disabled/' "$CONFIG"
-  else
-      echo "⚠️ Config file $CONFIG not found; cannot disable SELinux permanently"
-      exit 1
-  fi
+# # Disable SELinux
+#   CONFIG="/etc/selinux/config"
+#
+#   # 1) Immediate runtime: set to permissive
+#   if command -v selinuxenabled &>/dev/null && selinuxenabled; then
+#       echo "→ Setting SELinux to permissive mode now"
+#       if command -v setenforce &>/dev/null; then
+#           setenforce 0
+#       else
+#           echo "⚠️ setenforce command not found; skipping runtime change"
+#       fi
+#   else
+#       echo "→ SELinux is already disabled or not present"
+#   fi
+#
+#   # 2) Permanent on-next-boot: disable in config file
+#   if [ -f "$CONFIG" ]; then
+#       echo "→ Backing up $CONFIG to ${CONFIG}.bak"
+#       cp -p "$CONFIG" "${CONFIG}.bak"
+#
+#       # Replace any existing SELINUX= lines
+#       echo "→ Writing SELINUX=disabled to $CONFIG"
+#       sed -ri 's/^SELINUX=.*/SELINUX=disabled/' "$CONFIG"
+#   else
+#       echo "⚠️ Config file $CONFIG not found; cannot disable SELinux permanently"
+#       exit 1
+#   fi
 
 # Update / upgrade
 sudo zypper refresh && sudo zypper update
@@ -88,7 +88,7 @@ ln -s -f $PWD/dotfiles/ ~/.dotfiles
 sudo zypper install -y opi
 
 # Install the packages from suse repo
-sudo zypper --non-interactive install -y zsh vlc clementine breeze5-cursors vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar gawk net-tools coreutils ncdu whois piper openssl gnome-keyring chrome-gnome-shell telnet openssh materia-gtk-theme alacritty scrot libstdc++-devel glibc-static net-tools-deprecated xprop wmctrl xdotool gcc-c++ sassc virtualbox golang npm bc kitty sqlite3 python312-pipx ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel cifs-utils cron kdeconnect-kde solaar android-tools
+sudo zypper --non-interactive install -y zsh vlc clementine breeze5-cursors vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg neofetch xclip flameshot unrar gawk net-tools coreutils ncdu whois piper openssl gnome-keyring chrome-gnome-shell telnet openssh materia-gtk-theme alacritty scrot libstdc++-devel glibc-static net-tools-deprecated xprop wmctrl xdotool gcc-c++ sassc virtualbox golang npm bc kitty sqlite3 python312-pipx ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel cifs-utils cron kdeconnect-kde solaar android-tools lsd fd mpv
 
 # Install yarn 
 sudo npm install --global yarn
@@ -173,20 +173,20 @@ sudo zypper install -y code
 mkdir -p ~/GIT-REPOS/CORE
 
 # SCRIPTS
-## Install Nix
-bash ./scripts/nix-install.sh
-
-if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
-elif [ -f "/etc/profile.d/nix.sh" ]; then
-	. "/etc/profile.d/nix.sh"
-else
-	echo "Nix environment script not found."
-	exit 1
-fi
-
-## Nix packages
-bash ./OperatingSystem/nix-packages.sh
+# ## Install Nix
+# bash ./scripts/nix-install.sh
+#
+# if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+# 	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+# elif [ -f "/etc/profile.d/nix.sh" ]; then
+# 	. "/etc/profile.d/nix.sh"
+# else
+# 	echo "Nix environment script not found."
+# 	exit 1
+# fi
+#
+# ## Nix packages
+# bash ./OperatingSystem/nix-packages.sh
 
 ## Brew
 bash ./scripts/brew.sh
@@ -215,6 +215,9 @@ bash ./scripts/kitty.sh
 
 ## Neofetch
 bash ./scripts/neofetch.sh
+
+## Gems
+bash ./scripts/gems.sh
 
 ## GIT
 bash ./utils/git-config/git-config.sh

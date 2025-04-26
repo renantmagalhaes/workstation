@@ -138,4 +138,8 @@ elif [[ $os_check == "linux" ]]; then
 else
   echo "⚠️ OS check failed"
 fi
-
+# # =====================
+# # NIX load
+# # =====================
+# if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+#
