@@ -33,50 +33,9 @@ if [ “$(id -u)” = “0” ]; then
 	exit 1
 fi
 
-# # Check Window System
-# if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
-# 	echo "Wayland detected. Please change to x11 before running this script"
-# 	exit 1
-# elif [[ $XDG_SESSION_TYPE == "x11" ]]; then
-# 	echo "x11 detect."
-# else
-# 	echo "Not able to identify the system"
-# 	exit 1
-# fi
-
 # Disable packagekit
 sudo systemctl stop packagekit
 sudo systemctl mask packagekit
-
-set -euo pipefail
-
-# # Disable SELinux
-#   CONFIG="/etc/selinux/config"
-#
-#   # 1) Immediate runtime: set to permissive
-#   if command -v selinuxenabled &>/dev/null && selinuxenabled; then
-#       echo "→ Setting SELinux to permissive mode now"
-#       if command -v setenforce &>/dev/null; then
-#           setenforce 0
-#       else
-#           echo "⚠️ setenforce command not found; skipping runtime change"
-#       fi
-#   else
-#       echo "→ SELinux is already disabled or not present"
-#   fi
-#
-#   # 2) Permanent on-next-boot: disable in config file
-#   if [ -f "$CONFIG" ]; then
-#       echo "→ Backing up $CONFIG to ${CONFIG}.bak"
-#       cp -p "$CONFIG" "${CONFIG}.bak"
-#
-#       # Replace any existing SELINUX= lines
-#       echo "→ Writing SELINUX=disabled to $CONFIG"
-#       sed -ri 's/^SELINUX=.*/SELINUX=disabled/' "$CONFIG"
-#   else
-#       echo "⚠️ Config file $CONFIG not found; cannot disable SELinux permanently"
-#       exit 1
-#   fi
 
 # Update / upgrade
 sudo zypper refresh && sudo zypper update
