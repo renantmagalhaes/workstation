@@ -8,15 +8,6 @@
 #                                     <https://github.com/renantmagalhaes>
 #
 # ---------------------------------------------------------------
-#
-# Changelog
-#
-#   V0.1 2019-01-30 RTM:
-#       - Initial release
-#
-#   V0.2 2023-10-26 RTM:
-#       - Change folder structure
-#
 
 # check cmd function
 check_cmd() {
