@@ -68,6 +68,8 @@ elif check_cmd zypper; then # FOR ZYPPER TW SYSTEMS
     elif [[ $bspwm_check == "bspwm" ]]; then
         alias folder="nautilus"
         alias pdf="evince"
+    elif [[ $kde_check == "kde" ]]; then
+        alias folder="dolphin"
     fi
 fi
 
