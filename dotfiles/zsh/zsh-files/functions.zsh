@@ -160,3 +160,80 @@ function vim-delete-config() {
     echo "Operation canceled."
   fi
 }
+
+# Wipes all history, rebuilding only the repo's default branch
+git_nuke_history() {
+  echo "⚠️  THIS WILL IRREVERSIBLY DELETE your .git folder and all history."
+  echo "Type RESET to continue:"
+  read -r CONFIRM
+  if [[ "$CONFIRM" != "RESET" ]]; then
+    echo "Aborted: did not type RESET."
+    return 1
+  fi
+
+  # ensure we’re in a Git repo and go to its root
+  local root
+  root=$(git rev-parse --show-toplevel 2>/dev/null) || {
+    echo "✖ Not inside a Git repo."
+    return 1
+  }
+  cd "$root" || return 1
+
+  # grab remote URL
+  local origin_url
+  origin_url=$(git config --get remote.origin.url)
+  if [[ -z "$origin_url" ]]; then
+    echo "✖ No 'origin' remote found. Aborting."
+    return 1
+  fi
+
+  # detect default branch from origin HEAD
+  local default_branch
+  default_branch=$(git remote show origin \
+    | sed -n 's/.*HEAD branch: //p')
+  # fall back if detection fails
+  if [[ -z "$default_branch" ]]; then
+    default_branch="main"
+    echo "→ Could not detect default; assuming 'main'."
+  else
+    echo "→ Detected default branch: '$default_branch'."
+  fi
+
+  local msg="${1:-Initial commit}"
+
+  echo "→ Deleting old .git directory…"
+  rm -rf .git
+
+  echo "→ Re-initializing repo…"
+  # for older Git, you may need to do 'git init' then 'git checkout -b'
+  git init --initial-branch="$default_branch"
+  git remote add origin "$origin_url"
+
+  echo "→ Creating and committing on '$default_branch'…"
+  git add -A
+  git commit -m "$msg"
+
+  echo "→ Force-pushing '$default_branch' and setting upstream…"
+  if ! git push -u -f origin "$default_branch"; then
+    echo "✖ Failed to push $default_branch. Check your credentials or remote URL."
+    return 1
+  fi
+
+  # determine the other branch name to delete on remote
+  local other_branch
+  if [[ "$default_branch" = "main" ]]; then
+    other_branch="master"
+  else
+    other_branch="main"
+  fi
+
+  echo "→ Deleting remote '$other_branch' (if it exists)…"
+  git push origin --delete "$other_branch" 2>/dev/null || true
+
+  echo "→ Running final garbage-collection…"
+  git reflog expire --expire-unreachable=now --all
+  git gc --prune=now --aggressive
+
+  echo "🎉 Done! Only '$default_branch' exists locally and on origin."
+}
+
