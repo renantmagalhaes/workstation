@@ -38,10 +38,6 @@ plugins=(
   fzf-tab
 )
 
-# Load OMZ core
-export ZSH="$HOME/.oh-my-zsh"
-source "$ZSH/oh-my-zsh.sh"
-
 # =====================
 # Custom Plugins
 # =====================
@@ -64,7 +60,7 @@ export VIRTUALENVWRAPPER_PYTHON="/usr/bin/python3"
 # =====================
 # Git Auto Fetch
 # =====================
-GIT_AUTO_FETCH_INTERVAL=60
+GIT_AUTO_FETCH_INTERVAL=10
 
 # =====================
 # History settings
