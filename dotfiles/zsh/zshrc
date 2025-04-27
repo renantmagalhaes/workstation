@@ -38,12 +38,12 @@ export ZSH="$HOME/.oh-my-zsh"
 # ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Load configs
-source $ZSH/oh-my-zsh.sh
 [[ -f ~/.zsh/main.zsh ]] && source ~/.zsh/main.zsh
 [[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
 [[ -f ~/.zsh/programs.zsh ]] && source ~/.zsh/programs.zsh
 [[ -f ~/.zsh/functions.zsh ]] && source ~/.zsh/functions.zsh
 [[ -f ~/.zsh/extras.zsh ]] && source ~/.zsh/extras.zsh
+source $ZSH/oh-my-zsh.sh
 
 # P10K External config file
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
