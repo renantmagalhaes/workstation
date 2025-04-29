@@ -85,7 +85,7 @@ blocks:
           fetch_status: true
           fetch_upstream_icon: false
         alias: git
-        leading_diamond: "\ue0b6"
+        leading_diamond: ""
         trailing_diamond: ""
         template: "{{ .UpstreamIcon }} {{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}"
         foreground: "#ffffff"
@@ -135,7 +135,7 @@ blocks:
         leading_diamond: ""
         background_templates:
           - "{{ if .Error }}#e91e63{{ end }}"
-        trailing_diamond: ""
+        trailing_diamond: " "
         template: "{{ if eq .Code 0 }}<#FFFFFF></>{{ else }}\uf071 {{ reason .Code }}{{ end }}"
         properties:
           always_enabled: false
@@ -146,8 +146,8 @@ blocks:
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
-        leading_diamond: " \ue0b6"
-        trailing_diamond: ""
+        leading_diamond: ""
+        trailing_diamond: " "
         template: " {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }}"
         foreground: "#FF9900"
         background: "#29315A"
@@ -160,8 +160,8 @@ blocks:
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
-        leading_diamond: " \ue0b6"
-        trailing_diamond: ""
+        leading_diamond: ""
+        trailing_diamond: " "
         template: "\ue620 {{ .Full }}"
         foreground: "#00AEEF"
         background: "#29315A"
@@ -174,8 +174,8 @@ blocks:
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
-        leading_diamond: " \ue0b6"
-        trailing_diamond: ""
+        leading_diamond: ""
+        trailing_diamond: " "
         template: "{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}"
         foreground: "#42E66C"
         background: "#ffffff"
@@ -190,8 +190,8 @@ blocks:
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
-        leading_diamond: " \ue0b6"
-        trailing_diamond: ""
+        leading_diamond: ""
+        trailing_diamond: " "
         template: " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }}{{ end }}{{ .Full }}{{ end }}"
         foreground: "#E4F34A"
         background: "#29315A"
@@ -203,8 +203,8 @@ blocks:
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
-        leading_diamond: " \ue0b6"
-        trailing_diamond: ""
+        leading_diamond: ""
+        trailing_diamond: " "
         template: "{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
         foreground: "#7FD5EA"
         background: "#29315A"
@@ -217,8 +217,8 @@ blocks:
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
-        leading_diamond: " \ue0b6"
-        trailing_diamond: ""
+        leading_diamond: ""
+        trailing_diamond: " "
         template: "{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}"
         foreground: "#42E66C"
         background: "#29315A"
@@ -230,8 +230,8 @@ blocks:
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
-        leading_diamond: " \ue0b6"
-        trailing_diamond: ""
+        leading_diamond: ""
+        trailing_diamond: " "
         template: "{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
         foreground: "#E64747"
         background: "#29315A"
@@ -243,8 +243,8 @@ blocks:
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
-        leading_diamond: " \ue0b6"
-        trailing_diamond: ""
+        leading_diamond: ""
+        trailing_diamond: " "
         template: "{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
         foreground: "#E64747"
         background: "#29315A"
@@ -256,8 +256,8 @@ blocks:
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
-        leading_diamond: " \ue0b6"
-        trailing_diamond: ""
+        leading_diamond: ""
+        trailing_diamond: " "
         template: "\ue624{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
         foreground: "#9B6BDF"
         background: "#29315A"
@@ -269,8 +269,8 @@ blocks:
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
-        leading_diamond: " \ue0b6"
-        trailing_diamond: ""
+        leading_diamond: ""
+        trailing_diamond: " "
         template: "\ue73d {{ .Full }} "
         foreground: "#ffffff"
         background: "#4063D8"
@@ -285,7 +285,7 @@ blocks:
           style: austin
           threshold: 5000.0
         leading_diamond: ""
-        trailing_diamond: "\ue0b4 "
+        trailing_diamond: " "
         template: " {{ .FormattedMs }}"
         foreground: "#AEA4BF"
         background: "#29315A"
@@ -297,8 +297,8 @@ blocks:
 
       - type: kubectl
         style: diamond
-        leading_diamond: " \ue0b6"
-        trailing_diamond: ""
+        leading_diamond: ""
+        trailing_diamond: " "
         foreground: "#0072ce"
         background: "#fffff1"
         template: "󱃾 {{ .Context }}{{ if .Namespace }} | {{ .Namespace }}{{ end }}"
@@ -318,8 +318,8 @@ blocks:
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
-        leading_diamond: " \ue0b6"
-        trailing_diamond: ""
+        leading_diamond: ""
+        trailing_diamond: " "
         # icon: "" is the popular Nerd Fonts icon for NPM
         template: " {{ .Full }}"
         foreground: "#CB3837" # typical npm red color
@@ -332,8 +332,8 @@ blocks:
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: false
-        leading_diamond: " \ue0b6"
-        trailing_diamond: ""
+        leading_diamond: ""
+        trailing_diamond: " "
         # You can swap "terraform:" for a TF icon if you have a Nerd Fonts symbol
         template: " {{.WorkspaceName}}"
         foreground: "#5C4EE5" # a purple color for TF
