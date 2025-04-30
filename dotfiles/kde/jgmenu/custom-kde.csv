@@ -1,0 +1,26 @@
+Menu,~/.config/rofi/scripts/launchers/type-7/launcher.sh,appimagekit-archipelago
+Terminal,kitty,Terminal
+File Explorer,dolphin,stock_folder
+Browser,/usr/bin/vivaldi,vivaldi
+Browser (Incognito),/usr/bin/vivaldi --incognito,abrowser
+
+^sep()
+Streaming,^checkout(streaming-menu),camera-video
+
+^sep()
+WM Options,^checkout(restart-menu),xfce4-systray
+
+^sep()
+Lock,qdbus6 org.kde.ksmserver /ScreenSaver org.freedesktop.ScreenSaver.Lock,system-lock-screen
+Logout,qdbus6 org.kde.Shutdown /Shutdown logout,system-log-out
+Exit,qdbus6 org.kde.Shutdown /Shutdown logoutAndShutdown,system-shutdown
+
+^tag(restart-menu)
+Restart Polybar,~/.config/polybar/launch-kde.sh,xfce4-systray
+Restart SXHKD,pkill -USR1 -x sxhkd,input-keyboard
+Restart KWIN,kwin_x11 --replace,windows95
+
+^tag(streaming-menu)
+Strem.IO,flatpak run com.stremio.Stremio,stremio
+Plex,flatpak run tv.plex.PlexDesktop,plex
+
