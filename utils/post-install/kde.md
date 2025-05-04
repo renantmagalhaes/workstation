@@ -58,27 +58,6 @@ flatpak run com.github.hluk.copyq
 
 ### Widgets
 
-- Actove Window Control
-- Menu11
-- Virtual Desktop Bar(<https://github.com/wsdfhjxc/virtual-desktop-bar>)
-
-### KDE top scroll bar (replaces by pixel perfect polybar)
-<!-- 1. Add commond empty panel
-2. Edit ~/.config/plasma-org.kde.plasma.desktop-appletsrc
-   1. add under [ActionPlugins][1]
-      1. wheel:Vertical;NoModifier=org.kde.switchdesktop
-3. Keyboard and shortcut for menu -> Alt + F1
-4. Disable notification system tray (top panel)
-5. Change ~/.config/plasmashellrc
-   1. thickness=5 to thickness=3 --> -->
-
-# Set KRunner shortcut to meta key and config
-
-```
-kwriteconfig5 --file kwinrc --group ModifierOnlyShortcuts --key Meta "org.kde.krunner,/App,,toggleDisplay"
-qdbus-qt5 org.kde.KWin /KWin reconfigure
-qdbus org.kde.KWin /KWin reconfigure
-```
-
-- Disable desktop search
-
+- Command Output
+  - ~/.dotfiles/kde/widgets/workspace.sh
+  - ~/.dotfiles/kde/widgets/active_window_icon.sh
