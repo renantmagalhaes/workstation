@@ -335,7 +335,7 @@ blocks:
         leading_diamond: ""
         trailing_diamond: " "
         # You can swap "terraform:" for a TF icon if you have a Nerd Fonts symbol
-        template: " {{.WorkspaceName}}"
+        template: "󱁢 {{.WorkspaceName}}"
         foreground: "#5C4EE5" # a purple color for TF
         background: "#ffffff"
         type: terraform
