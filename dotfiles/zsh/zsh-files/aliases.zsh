@@ -136,6 +136,7 @@ alias visearch='nvim $(fzf --preview="bat --style=plain --color=always {}")'
 
 ### UTILS ###
 alias disk-manager='ncdu'
+alias system-monitor='nmon'
 alias git-sync='git add -A && git commit -m sync && git push'
 alias webserver-python='python -m http.server 8888'
 alias vim-clean-swap='rm -rf /home/rtm/.local/state/nvim/swap/*'
