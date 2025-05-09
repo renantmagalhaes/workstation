@@ -8,7 +8,7 @@ return {
   {
     "HiPhish/rainbow-delimiters.nvim",
     config = function()
-      require("rainbow-delimiters.setup").setup({})
+      submodules = false, require("rainbow-delimiters.setup").setup({})
     end,
   },
 }
