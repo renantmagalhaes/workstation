@@ -61,3 +61,22 @@ flatpak run com.github.hluk.copyq
 - Command Output
   - ~/.dotfiles/kde/widgets/workspace.sh
   - ~/.dotfiles/kde/widgets/active_window_icon.sh
+  
+### Window tilling setup
+
+#### Krohnkite
+Kwin Scripts -> Enable Krohnkite
+
+Window rules
+```
+krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml,org.kde.plasmashell,org.kde.polkit-kde-authentication-agent-1,org.kde.kruler,kruler,kwin_wayland,ksmserver-logout-greeter,Guake,guake
+```
+Geometry
+```
+15px across all 5 zones
+```
+
+#### Klassy
+Window Decorations -> Klassy
+
+Klassy settings -> Adjust as needed 
