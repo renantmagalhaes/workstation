@@ -195,6 +195,8 @@ ln -s -f ~/.dotfiles/polybar/kde/ ~/.config/polybar
 #rm -rf ~/.config/jgmenu/
 ln -s -f $PWD/dotfiles/kde/jgmenu ~/.config/
 
+## KDE Tilling window setup
+bash ./scripts/kde-DE-transformation.sh
 
 # Install ClamAV
 sudo zypper install -y clamav clamtk
