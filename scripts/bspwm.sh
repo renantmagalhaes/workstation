@@ -10,7 +10,7 @@ check_cmd() {
 
 # Add the repository key with either wget or curl
 if check_cmd apt-get; then # FOR DEB SYSTEMS
-	sudo apt-get install -y bspwm sxhkd feh lxappearance playerctl x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pavucontrol jgmenu mate-polkit mate-polkit-bin libnotify-bin qt5ct kdeconnect nautilus-kdeconnect x11-utils gnome-calendar
+	sudo apt-get install -y bspwm sxhkd feh lxappearance playerctl x11-xserver-utils nitrogen scrot xdotool network-manager lm-sensors playerctl i3lock papirus-icon-theme pavucontrol jgmenu mate-polkit mate-polkit-bin libnotify-bin qt5ct kdeconnect nautilus-kdeconnect x11-utils gnome-calendar nautilus
 	sudo apt-get install -y blueman pasystray
 	sudo pip3 install pywal --break-system-packages
 
@@ -50,7 +50,7 @@ elif check_cmd zypper; then # FOR RPM SYSTEMS
 	# sudo make WAYLAND=0 install
 
 	# Picom
-	sudo zypper install -y dbus-1-devel gcc git libconfig-devel libdrm-devel libev-devel libX11-devel libX11-xcb1 libXext-devel libxcb-devel Mesa-libGL-devel meson pcre-devel libpixman-1-0-devel uthash-devel xcb-util-image-devel xcb-util-renderutil-devel xorgproto-devel libepoxy-devel Mesa-libEGL-devel xcb-util-devel
+	sudo zypper install -y dbus-1-devel gcc git libconfig-devel libdrm-devel libev-devel libX11-devel libX11-xcb1 libXext-devel libxcb-devel Mesa-libGL-devel meson pcre-devel libpixman-1-0-devel uthash-devel xcb-util-image-devel xcb-util-renderutil-devel xorgproto-devel libepoxy-devel Mesa-libEGL-devel xcb-util-devel nautilus
 	git clone https://github.com/yshui/picom.git ~/GIT-REPOS/CORE/picom
 	cd ~/GIT-REPOS/CORE/picom
 	meson --buildtype=release . build
@@ -97,7 +97,9 @@ sudo make install
 
 ## BSPWM
 cd $FOLDER_LOCATION
-ln -s -f $PWD/dotfiles/bspwm/bspwmrc ~/.config/bspwm/bspwmrc
+rm -rf ~/.config/bspwm ~/.config/sxhkd/
+mkdir -p ~/.config/sxhkd/
+ln -s -f $PWD/dotfiles/bspwm ~/.config/
 chmod +x ~/.config/bspwm/bspwmrc
 ln -s -f $PWD/dotfiles/bspwm/sxhkdrc ~/.config/sxhkd/sxhkdrc
 chmod +x ~/.config/sxhkd/sxhkdrc

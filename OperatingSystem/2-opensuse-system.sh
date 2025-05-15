@@ -42,7 +42,8 @@ sudo zypper refresh && sudo zypper update
 
 # Dotfiles syslink
 ln -s -f $PWD/dotfiles/ ~/.dotfiles
-ln -s -f $PWD/dotfiles/kde/sxhkd/ ~/.config/
+mkdir -p ~/.config/sxhkd/sxhkdrc
+ln -s -f $PWD/dotfiles/kde/sxhkd/sxhkdrc ~/.config/sxhkd/sxhkdrc
 
 # Install OPI
 sudo zypper install -y opi
