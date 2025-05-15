@@ -254,17 +254,17 @@ _scp() {
 
   command scp "$@"
 }
-# Smart CP function
-alias cp='noglob _cp'
+# # Smart CP function
+# alias cp='noglob _cp'
 
-_cp() {
-  for arg in "$@"; do
-    if [[ "$arg" == *[\~\*]* ]]; then
-      echo "⚠️  Warning: Argument '$arg' contains unquoted '~' or '*'"
-      echo "👉  Use quotes like: cp '~/folder/*' ./backup/"
-      break
-    fi
-  done
+# _cp() {
+#   for arg in "$@"; do
+#     if [[ "$arg" == *[\~\*]* ]]; then
+#       echo "⚠️  Warning: Argument '$arg' contains unquoted '~' or '*'"
+#       echo "👉  Use quotes like: cp '~/folder/*' ./backup/"
+#       break
+#     fi
+#   done
 
-  command cp "$@"
-}
+#   command cp "$@"
+# }
