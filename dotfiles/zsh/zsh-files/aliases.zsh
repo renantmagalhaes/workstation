@@ -93,10 +93,10 @@ elif [[ $linux_check == "linux" ]]; then
     alias mouse-battery='upower --dump |grep -A 5 mouse | egrep -oh '"'"'[0-9]*%'"'"''
     alias ascii-image='jp2a --output=ascii.txt --colors $1'
     alias pdf-signature='xournal'
-    alias nordvpn-c='sudo nordvpn connect && sudo nordvpn set killswitch on && sudo nordvpn set autoconnect on && sudo nordvpn set lan-discovery on'
-    alias nordvpn-d='sudo nordvpn set autoconnect off && sudo nordvpn set killswitch off && sudo nordvpn disconnect'
-    alias wireguard-c='sudo wg-quick up wireguard'
-    alias wireguard-d='sudo wg-quick down wireguard'
+    # alias nordvpn-c='sudo nordvpn connect && sudo nordvpn set killswitch on && sudo nordvpn set autoconnect on'
+    # alias nordvpn-d='sudo nordvpn set autoconnect off && sudo nordvpn set killswitch off && sudo nordvpn disconnect'
+    # alias wireguard-c='sudo wg-quick up wireguard'
+    # alias wireguard-d='sudo wg-quick down wireguard'
 
 else
     echo "error on SO check"
@@ -159,9 +159,8 @@ alias killvi='pidof nvim |xargs kill -9'
 
 #Hex color get
 for name in hex-color color-hex; do
-  alias $name='xcolor'
+    alias $name='xcolor'
 done
-
 
 ### Zypper UTILS
 alias zypper-reinstall='sudo zypper install --force'
