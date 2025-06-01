@@ -65,23 +65,27 @@ flatpak run com.github.hluk.copyq
 ### Window tilling setup
 
 #### Krohnkite
+
 Kwin Scripts -> Enable Krohnkite
 
 Window rules
+
 ```
 krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml,org.kde.plasmashell,org.kde.polkit-kde-authentication-agent-1,org.kde.kruler,kruler,kwin_wayland,ksmserver-logout-greeter,Guake,guake,copyq
 ```
+
 Geometry
+
 ```
 15px across all 5 zones
 Bottom 20px
 ```
 
 #### Klassy
+
 Window Decorations -> Klassy
 
-Klassy settings -> Adjust as needed 
-
+Klassy settings -> Adjust as needed
 
 #### KDE BAR (botton configuration)
 
@@ -89,7 +93,7 @@ Klassy settings -> Adjust as needed
 
 - Left panel
   - Command output (change $CITYNAME)
-    - `curl -s 'wttr.in/CITYNAME?format=3' | cut -d':' -f2-`
+    - `curl -s 'wttr.in/CITYNAME?format=3&M' | cut -d':' -f2-`
     - Run every: 900000 ms
   - Media player
   - [Kara](https://github.com/dhruv8sh/kara/)
@@ -102,3 +106,4 @@ Klassy settings -> Adjust as needed
   - System tray
   - Digital clock
     - Roboto Bold font
+
