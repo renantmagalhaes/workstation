@@ -69,14 +69,36 @@ Kwin Scripts -> Enable Krohnkite
 
 Window rules
 ```
-krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml,org.kde.plasmashell,org.kde.polkit-kde-authentication-agent-1,org.kde.kruler,kruler,kwin_wayland,ksmserver-logout-greeter,Guake,guake
+krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml,org.kde.plasmashell,org.kde.polkit-kde-authentication-agent-1,org.kde.kruler,kruler,kwin_wayland,ksmserver-logout-greeter,Guake,guake,copyq
 ```
 Geometry
 ```
 15px across all 5 zones
+Bottom 20px
 ```
 
 #### Klassy
 Window Decorations -> Klassy
 
 Klassy settings -> Adjust as needed 
+
+
+#### KDE BAR (botton configuration)
+
+![picture 0](../../images/e310456c98fb11e992d577616d0c6ab6978883afed5f4f208c51c19c285110ea.png)  
+
+- Left panel
+  - Command output (change $CITYNAME)
+    - `curl -s 'wttr.in/CITYNAME?format=3' | cut -d':' -f2-`
+    - Run every: 900000 ms
+  - Media player
+  - [Kara](https://github.com/dhruv8sh/kara/)
+
+- Central panel
+  - [Andromeda Launcher](https://github.com/EliverLara/AndromedaLauncher)
+  - Icon-only task manager
+
+- Right panel
+  - System tray
+  - Digital clock
+    - Roboto Bold font
