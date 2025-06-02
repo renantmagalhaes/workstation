@@ -92,6 +92,8 @@ Klassy settings -> Adjust as needed
 ![picture 0](../../images/e310456c98fb11e992d577616d0c6ab6978883afed5f4f208c51c19c285110ea.png)  
 
 - Left panel
+  - [Chaac Weather](https://github.com/zayronxio/Chaac-Complete-Weather)
+    - Visit [Open-Meteo](https://open-meteo.com/en/docs?latitude=40.2183) docs to find coordinates
   - Command output (change $CITYNAME)
     - `curl -s 'wttr.in/CITYNAME?format=3&M' | cut -d':' -f2-`
     - Run every: 900000 ms
