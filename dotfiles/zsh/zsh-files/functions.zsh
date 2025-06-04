@@ -238,22 +238,22 @@ git_nuke_history() {
 }
 # Ensure noglob is applied *before* Zsh expands arguments
 # Force Zsh to disable globbing before anything reaches _scp
-alias scp='noglob _scp'
+# alias scp='noglob _scp'
 
 # Smart SCP wrapper
-alias scp='noglob _scp'
+# alias scp='noglob _scp'
 
-_scp() {
-  for arg in "$@"; do
-    if [[ "$arg" == *:* && "$arg" == *[\~\*]* ]]; then
-      echo "⚠️  Warning: Remote path '$arg' contains unquoted '~' or '*'"
-      echo "👉  Use quotes like: scp 'user@host:~/path/*' ."
-      break
-    fi
-  done
-
-  command scp "$@"
-}
+# _scp() {
+#   for arg in "$@"; do
+#     if [[ "$arg" == *:* && "$arg" == *[\~\*]* ]]; then
+#       echo "⚠️  Warning: Remote path '$arg' contains unquoted '~' or '*'"
+#       echo "👉  Use quotes like: scp 'user@host:~/path/*' ."
+#       break
+#     fi
+#   done
+#
+#   command scp "$@"
+# }
 # # Smart CP function
 # alias cp='noglob _cp'
 
