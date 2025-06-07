@@ -70,7 +70,7 @@ vivaldi version: v7.0
 #browser.mac:not(.is-settingspage):not(.address-top).tabs-left.tabs-right > #header,
 #browser.mac:not(.is-settingspage):not(.tabs-top):not(.tabs-bottom) #header,
 #browser.mac.color-behind-tabs-off:not(.is-settingspage)#browser.tabs-left.tabs-right #header{
-    background:var(--colorTabBar);
+    background:transparent;
     min-height:var(--mac-header) !important;
     height:var(--mac-header) !important;
 }
@@ -116,7 +116,7 @@ vivaldi version: v7.0
 #browser.mac #titlebar #pagetitle{
     font-size:11px;
     color:var(--colorFg);
-    opacity:0.5;
+    opacity:0;
 }
 
 .win #titlebar #pagetitle > span, 
@@ -137,9 +137,9 @@ vivaldi version: v7.0
 #browser.linux:not(.tabs-top) #titlebar .vivaldi,
 #browser.win:not(.is-settingspage):not(.tabs-top) #titlebar .vivaldi{
     color:var(--colorFgAlpha);
-    scale: calc(0.8 / var(--uiZoomLevel));
-    margin-left: -2px;
-    margin-top: 0px;
+    scale: calc(0.7 / var(--uiZoomLevel));
+    margin-left: -6px;
+    margin-top: -4px;
 }
 
 #browser.linux:not(.tabs-top) #titlebar .vivaldi:hover,
@@ -576,107 +576,8 @@ button.button-startpage { box-shadow: none !important; }
 button.button-startpage:after { background-image: none !important; }
 button.button-startpage:active { background: none !important; }
 
-
-/* AutoHide Tabbar by @Zettry*/
-/* AutoHide Tabbar by @Zettry*/
-/* AutoHide Tabbar by @Zettry*/
-:root{
-    --tabbar-size: 85px;
-}
-
-/* tabbar workspace */
-.inner > .tabbar-wrapper:not(:hover) .button-toolbar.workspace-popup.tabbar-workspace-button.button-menu{
-    width: calc(var(--tabbar-size) + var(--densityGap))!important;
-    transition: unset;
-}
-
-.inner > .tabbar-wrapper:not(:hover) .button-toolbar.workspace-popup.tabbar-workspace-button.button-menu .button-title,
-.inner > .tabbar-wrapper:not(:hover) .button-toolbar.workspace-popup.tabbar-workspace-button.button-menu .button-toolbar-menu-indicator{
-    display: none;
-}
-
-.inner .button-toolbar.workspace-popup.tabbar-workspace-button.button-menu .button-icon{
-    position: absolute;
-    left: 5px;
-}
-
-.inner .button-toolbar.workspace-popup.tabbar-workspace-button.button-menu .button-title{
-    position: absolute;
-    left: calc(var(--tabbar-size) + var(--densityGap)) !important;
-}
-
-.inner .button-toolbar.workspace-popup.tabbar-workspace-button.button-menu .button-toolbar-menu-indicator{
-    position: absolute;
-    right: 5px;
-}
-
-/* tabbar container */
-.inner > .tabbar-wrapper:not(:hover) #tabs-tabbar-container,
-.inner > .tabbar-wrapper:not(:hover) #tabs-tabbar-container .resize{
-    width: calc(var(--tabbar-size) + var(--densityGap)) !important;
-    transition: unset;
-}
-
-/* tab stacking - accordion toggle arrow position */
-/* #tabs-container.left .tab-position.accordion-toggle-arrow{
-    --PositionX: 4px!important;
-} */
-
-.inner > .tabbar-wrapper{
-    position: relative;
-    width: calc(var(--tabbar-size) + var(--densityGap));
-}
-
-.inner > .tabbar-wrapper > .tabbar-wrapper{
-    position: absolute;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.inner > .tabbar-wrapper > .tabbar-wrapper:hover{
-    position: absolute;
-    background:var(--colorImageLeftBg, var(--colorBgLight)) ;
-    transition-delay: 0.250s;
-
-}
-
-.inner #tabs-tabbar-container,
-.inner .button-toolbar.workspace-popup.tabbar-workspace-button.button-menu {
-    transition: width 0.350s;
-    transition-delay: 0.250s;
-}
-
 /* ~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END THEME~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ /* 
 
-/* /* Mouse hover -> expand */ */
-/* #tabs-container.left, #tabs-subcontainer.left, */
-/* #tabs-container.right, #tabs-subcontainer.right { */
-/* min-width: 38px; */
-/*   transition: min-width 250ms ease-out 225ms !important; /* added 225ms delay */ */
-/* } */
-/**/
-/* #tabs-container.left:hover, #tabs-subcontainer.left:hover, */
-/* #tabs-container.right:hover, #tabs-subcontainer.right:hover { */
-/*   min-width: 200px !important; /* 220px */ */
-/* } */
-/**/
-/* .tabbar-workspace-button { */
-/*   width: 100% !important; */
-/* } */
-/**/
-/* #tabs-tabbar-container.left, #tabs-tabbar-container.right { */
-/*   width: auto !important; */
-/*   min-width: 35px; /* 38px */ */
-/* } */
-/**/
-/* .button-toolbar.newtab { */
-/*   left: 0px !important; */
-/*   width: 220px; */
-/* } */
-/**/
-/* .toolbar-tabbar.sync-and-trash-container { */
-/*   flex-direction: column; */
-/* } */
 
 /* Completely hide the audio icon so it’s invisible and unclickable */
 /* Force zero-size on the canvas. Also hide it visually. 
@@ -704,12 +605,12 @@ display: none;
 }
 
 /* Add gap in the boarder when hover */
-#tabs-tabbar-container.left:hover .tab-position,
+/* #tabs-tabbar-container.left:hover .tab-position,
 #tabs-tabbar-container.right:hover .tab-position {
   padding-left: 5px;
   padding-right: 5px;
-}
-/**/
+} */
+
 /* Increase tab height */
 /* Alternative -> UI Zoom on Vivaldi settings */
 .tab-strip > span {
