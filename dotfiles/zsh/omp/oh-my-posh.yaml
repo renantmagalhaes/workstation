@@ -168,19 +168,6 @@ blocks:
         type: lua
         style: diamond
 
-      # --------------------------------------------------------------------------
-      # Node.js segment: Shows Node version (fetch_version=false => uses fallback).
-      #    The placeholder can also show if there's a recognized package manager.
-      # --------------------------------------------------------------------------
-      - properties:
-          fetch_version: false
-        leading_diamond: ""
-        trailing_diamond: " "
-        template: "{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}"
-        foreground: "#42E66C"
-        background: "#ffffff"
-        type: node
-        style: diamond
 
       # --------------------------------------------------------------------------
       # Python segment: Shows active Python version or virtual environment name.
@@ -216,10 +203,10 @@ blocks:
       #    need two Node segments, you can remove one of them.
       # --------------------------------------------------------------------------
       - properties:
-          fetch_version: false
+          fetch_version: true
         leading_diamond: ""
         trailing_diamond: " "
-        template: "{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}"
+        template: " {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}"
         foreground: "#42E66C"
         background: "#29315A"
         type: node
