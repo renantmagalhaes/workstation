@@ -89,7 +89,7 @@ blocks:
         trailing_diamond: ""
         template: "{{ .UpstreamIcon }} {{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}"
         foreground: "#ffffff"
-        background: "#0b5394"
+        background: "#6C7A89"
         type: git
         style: diamond
         background_templates:
@@ -167,7 +167,6 @@ blocks:
         background: "#29315A"
         type: lua
         style: diamond
-
 
       # --------------------------------------------------------------------------
       # Python segment: Shows active Python version or virtual environment name.
