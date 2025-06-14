@@ -97,6 +97,10 @@ git clone https://github.com/cbrnix/Flatery.git ~/GIT-REPOS/CORE/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery ~/.local/share/icons/Flatery
 ln -s ~/GIT-REPOS/CORE/Flatery/Flatery-Indigo-Dark ~/.local/share/icons/Flatery-Indigo-Dark
 
+# Colloid icon theme
+git clone https://github.com/vinceliuice/Colloid-icon-theme.git ~/GIT-REPOS/CORE/Colloid
+sh -c "~/GIT-REPOS/CORE/Colloid/install.sh -s all -t all"
+
 # Catppuccin
 # wget `curl --silent "https://api.github.com/repos/catppuccin/gtk/releases/latest" |grep browser_download_url | grep Macchiato.zip |grep -Po '"browser_download_url": "\K.*?(?=")'` -O ~/.themes/Catppuccin-blue.zip
 # unzip -d ~/.themes/ ~/.themes/Catppuccin-blue.zip
