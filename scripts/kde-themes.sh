@@ -35,6 +35,9 @@ git clone https://github.com/vinceliuice/MacSequoia-kde.git ~/GIT-REPOS/CORE/Mac
 sh -c "~/GIT-REPOS/CORE/MacSequoia-kde/install.sh --round"
 sh -c "~/GIT-REPOS/CORE/MacSequoia-kde/sddm/install.sh"
 
+# Colloid icon theme
+git clone https://github.com/vinceliuice/Colloid-icon-theme.git ~/GIT-REPOS/CORE/Colloid
+sh -c "~/GIT-REPOS/CORE/Colloid/install.sh -s all -t all -notint"
 # SDDM
 # ##
 # wget https://github.com/renantmagalhaes/workstation/raw/static-files/sddm/sugar-candy.tar.gz -O /tmp/sugar-candy.tar.gz
