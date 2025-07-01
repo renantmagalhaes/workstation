@@ -1270,6 +1270,16 @@ button.button-startpage:active {
 /*   transition: width 0.5s; */
 /* } */
 /**/
+
+/* /* Add gap in the boarder when hover */ */
+/*   #tabs-tabbar-container.left:hover */
+/*     .tab-position, */
+/*     #tabs-tabbar-container.right:hover */
+/*       .tab-position { */
+/*           padding-left: 5px; */
+/*             padding-right: 5px; */
+/*           } */
+/**/
 /* ~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Auto HIDE Tab bar~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ /* 
   
   /* Completely hide the audio icon so it’s invisible and unclickable */
@@ -1297,14 +1307,6 @@ button.button-startpage:active {
   display: none;
 }
 
-/* Add gap in the boarder when hover */
-#tabs-tabbar-container.left:hover
-  .tab-position,
-#tabs-tabbar-container.right:hover
-  .tab-position {
-  padding-left: 5px;
-  padding-right: 5px;
-}
 
 /* Increase tab height */
 /* Alternative -> UI Zoom on Vivaldi settings */
