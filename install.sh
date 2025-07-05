@@ -69,7 +69,7 @@ case $n in
 	# ===================================================================================
 21) bash utils/virtualization/virtualbox/virtualbox-ext-pack.sh ;;
 22) bash utils/1password/install-1password.sh ;;
-23) sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh) && sudo usermod -aG nordvpn $USER && sudo systemctl enable --now nordvpnd.service && clear && echo "~~~~~~~~~~~~~\nIf NordVPN is slow, try to change the protocol from Nordlynx to OpenVPN \nnordvpn set technology OpenVPN\n~~~~~~~~~~~~~" ;;
+23) bash ./scripts/vpn-client.sh ;;
 24) bash utils/git-config/git-config.sh ;;
 25) bash utils/wallpapers/wallpapers.sh ;;
 	# ===================================================================================
