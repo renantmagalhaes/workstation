@@ -14,13 +14,13 @@ wgInterface=$(ls /sys/class/net | grep -E '^wireguard' | head -n1)
 if [[ $connectState == Connected:* ]]; then
 	# Strip the leading “Connected: ” to get just the location
 	location=${connectState#Connected: }
-	echo "#[fg=#7feaac]󰒄 VPN Connected #[fg=white]"
+	echo "- #[fg=#7feaac][󰒄 VPN Connected] #[fg=white]"
 elif [[ -n $wgInterface ]]; then
 	# If Windscribe itself isn’t connected but a WireGuard iface exists
-	echo "#[fg=#7feaac]󰒄 VPN Connected [WireGuard: $wgInterface] #[fg=white]"
+	echo "- #[fg=#7feaac][󰒄 VPN Connected] [WireGuard: $wgInterface] #[fg=white]"
 elif [[ $connectState == Disconnected ]] || ! command -v windscribe-cli &>/dev/null; then
 	# Treat as disconnected if either Windscribe reports disconnected or the CLI isn’t installed
-	echo "#[fg=#ff4237]󰒄 VPN Disconnected #[fg=white]"
+	echo "- #[fg=#ff4237][󰒄 VPN Disconnected] #[fg=white]"
 else
 	# Anything else (e.g. in‑between states) treat as “connecting”
 	echo "#[fg=#fef65b]󰒄 VPN Connecting #[fg=white]"
