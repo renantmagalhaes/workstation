@@ -102,7 +102,7 @@ else
     echo "error on SO check"
 fi
 
-alias cp='cp -iv'
+alias cp='cp -v'
 alias rm='rm -ir'
 alias mv='mv -iv'
 alias ln='ln -sriv'
