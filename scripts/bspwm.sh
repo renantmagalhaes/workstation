@@ -50,7 +50,7 @@ elif check_cmd zypper; then # FOR RPM SYSTEMS
 	# sudo make WAYLAND=0 install
 
 	# Picom
-	sudo zypper install -y dbus-1-devel gcc git libconfig-devel libdrm-devel libev-devel libX11-devel libX11-xcb1 libXext-devel libxcb-devel Mesa-libGL-devel meson pcre-devel libpixman-1-0-devel uthash-devel xcb-util-image-devel xcb-util-renderutil-devel xorgproto-devel libepoxy-devel Mesa-libEGL-devel xcb-util-devel nautilus
+	sudo zypper install -y dbus-1-devel gcc git libconfig-devel libdrm-devel libev-devel libX11-devel libX11-xcb1 libXext-devel libxcb-devel Mesa-libGL-devel meson pcre2-devel libpixman-1-0-devel uthash-devel xcb-util-image-devel xcb-util-renderutil-devel xorgproto-devel libepoxy-devel Mesa-libEGL-devel xcb-util-devel nautilus
 	git clone https://github.com/yshui/picom.git ~/GIT-REPOS/CORE/picom
 	cd ~/GIT-REPOS/CORE/picom
 	meson --buildtype=release . build
