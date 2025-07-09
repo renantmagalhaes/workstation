@@ -30,10 +30,10 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
 	ninja -C build
 	sudo ninja -C build install
 
-	# Auto-update repo
-	sudo cp ./dotfiles/bspwm/systemd-service/apt-update.service /etc/systemd/system/apt-update.service
-	sudo cp ./dotfiles/bspwm/systemd-service/apt-update.timer /etc/systemd/system/apt-update.timer
-	sudo systemctl enable --now apt-update.timer
+	# # Auto-update repo
+	# sudo cp ./dotfiles/bspwm/systemd-service/apt-update.service /etc/systemd/system/apt-update.service
+	# sudo cp ./dotfiles/bspwm/systemd-service/apt-update.timer /etc/systemd/system/apt-update.timer
+	# sudo systemctl enable --now apt-update.timer
 
 elif check_cmd zypper; then # FOR RPM SYSTEMS
 

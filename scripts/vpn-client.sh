@@ -27,8 +27,8 @@ case $choice in
 		sudo apt install -y nordvpn-gui
 		sudo usermod -aG nordvpn $USER
 		sudo systemctl enable --now nordvpnd.service
-		nordvpn set lan-discovery enabled
-		nordvpn whitelist add port 53
+		sudo nordvpn set lan-discovery enabled
+		sudo nordvpn whitelist add port 53
 
 	elif check_cmd zypper; then
 		echo "openSUSE-based system detected."
