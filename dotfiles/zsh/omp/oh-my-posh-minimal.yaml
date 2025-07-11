@@ -45,7 +45,8 @@ blocks:
       # --------------------------------------------------------------------------
       - properties:
           style: full
-        leading_diamond: ""
+        leading_diamond: " "
+        trailing_diamond: " "
         template: >-
           {{ if eq .Path "~" }}󰟒 ~
           {{ else if or (eq .Path "~/Documents") (hasPrefix .Path "~/Documents/") }}󰈙 {{ .Path }}
@@ -56,8 +57,8 @@ blocks:
           {{ else if hasPrefix .Path "~/" }}󰟒 {{ .Path }}
           {{ else }}  {{ .Path }}
           {{ end }}{{ if not .Writable }}{{ end }}
-        foreground: "#000000"
-        background: "#ffffff"
+        foreground: "#ffffff"
+        # background: "#ffffff"
         type: path
         style: diamond
         foreground_templates:
@@ -68,11 +69,11 @@ blocks:
       #     Its background is explicitly set to transparent (or "default") so that it
       #     looks like part of the path.
       # --------------------------------------------------------------------------
-      - type: text
-        template: "{{ if not .Segments.git }}{{ end }}"
-        background: default # Try "transparent" if your terminal supports it.
-        foreground: "#ffffff" # Use the same as your path text, or adjust as needed.
-        style: plain
+      # - type: text
+      #   template: "{{ if not .Segments.git }}{{ end }}"
+      #   background: default # Try "transparent" if your terminal supports it.
+      #   foreground: "#ffffff" # Use the same as your path text, or adjust as needed.
+      #   style: plain
 
       # --------------------------------------------------------------------------
       # Git segment: Displays Git info (branch, changes, etc.),
@@ -85,7 +86,7 @@ blocks:
           fetch_status: true
           fetch_upstream_icon: false
         alias: git
-        leading_diamond: ""
+        leading_diamond: "on "
         trailing_diamond: ""
         template: "{{ .UpstreamIcon }} {{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}"
         foreground: "#ffffff"
