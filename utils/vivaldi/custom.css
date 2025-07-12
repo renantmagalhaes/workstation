@@ -1167,7 +1167,8 @@ button.button-startpage:active {
 /* ~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END THEME~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ /* 
   /* ~~~~~~~~~~~-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Auto HIDE Tab bar~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ /* 
   
-/*   /* AutoHide Tabbar by @Zettry*/ */
+/*   /* AutoHide Tabbar by @Zettry*/
+*/
 /* :root { */
 /*   --tabbar-size: 35px; */
 /* } */
@@ -1307,10 +1308,9 @@ button.button-startpage:active {
   display: none;
 }
 
-
 /* Increase tab height */
 /* Alternative -> UI Zoom on Vivaldi settings */
-.tab-strip > span {
+/* .tab-strip > span {
   display: flex;
   margin-bottom: 12px !important;
 }
@@ -1331,7 +1331,7 @@ button.button-startpage:active {
   -webkit-transform: scale(
     1
   ) !important;
-}
+} */
 
 /* Gap between favicon and text */
 span.favicon.jstest-favicon-image {
