@@ -81,11 +81,12 @@ blocks:
       # --------------------------------------------------------------------------
       - leading_diamond: ""
         trailing_diamond: ""
-        template: "on"
+        template: "{{ if .Segments.git }}on{{ end }}"
         background: "#29315A"
         foreground: "#ffffff"
         type: text
         style: diamond
+        condition: git
 
       - properties:
           branch_max_length: 25.0
