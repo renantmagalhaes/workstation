@@ -236,6 +236,146 @@ git_nuke_history() {
 
   echo "🎉 Done! Only '$default_branch' exists locally and on origin."
 }
+
+# ==============================================================================
+#
+# git_optimize_repo
+#
+# A comprehensive, interactive Zsh function to clean, optimize, and diagnose
+# the local Git repository.
+#
+# USAGE:
+#   1. Add this function to your Zsh configuration (e.g., ~/.zsh/functions.zsh).
+#   2. Source the file in your .zshrc: `source ~/.zsh/functions.zsh`
+#   3. Restart your shell or run `source ~/.zshrc`.
+#   4. Navigate to a Git repository and run the command: `git_optimize_repo`
+#
+# ==============================================================================
+git_optimize_repo() {
+  # --- Safety Check: Ensure we are in a Git repository ---
+  if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    echo "\e[31mError: Not inside a Git repository.\e[0m"
+    return 1
+  fi
+
+  # --- Helper function for user confirmation ---
+  _ask_for_confirmation() {
+    local prompt="$1"
+    while true; do
+      read -q "REPLY?$prompt (y/n): "
+      echo # Move to the next line after user input
+      case "$REPLY" in
+        [Yy]) return 0 ;; # Success (yes)
+        [Nn]) return 1 ;; # Failure (no)
+        *) echo "\e[33mPlease answer y or n.\e[0m" ;;
+      esac
+    done
+  }
+
+  # --- Start of Optimization Steps ---
+  echo "\e[1;36mStarting Git Repository Optimization...\e[0m"
+  echo "You will be prompted to confirm each step."
+  echo "---------------------------------------------------"
+
+
+  # --- Step 1: Clean Untracked Files ---
+  echo "\n\e[1;34mStep 1: Clean untracked files with 'git clean'\e[0m"
+  echo "\e[39mThis step removes files and directories that are not tracked by Git.\e[0m"
+  echo "\e[33mWarning: This is useful for removing build artifacts or logs, but it is a destructive operation. A backup is always a good idea.\e[0m\n"
+
+  # Perform a dry run first to show what would be deleted.
+  local untracked_files
+  untracked_files=$(git clean -ndx)
+
+  if [[ -z "$untracked_files" ]]; then
+    echo "\e[32m✔ No untracked files to clean.\e[0m"
+  else
+    echo "The following files and directories would be DELETED:"
+    echo "\e[33m$untracked_files\e[0m"
+    if _ask_for_confirmation "Do you want to permanently delete these files?"; then
+      echo "Cleaning repository..."
+      git clean -fdx
+      echo "\e[32m✔ Untracked files have been deleted.\e[0m"
+    else
+      echo "\e[37mSkipped cleaning untracked files.\e[0m"
+    fi
+  fi
+  echo "---------------------------------------------------"
+
+
+  # --- Step 2: Garbage Collection ---
+  echo "\n\e[1;34mStep 2: Run Garbage Collection with 'git gc'\e[0m"
+  echo "\e[39mThis command optimizes the repository's internal structure. It cleans up unnecessary files, compresses file revisions, and improves performance.\e[0m\n"
+
+  if _ask_for_confirmation "Do you want to run garbage collection?"; then
+    echo "Running aggressive garbage collection..."
+    git gc --prune=now --aggressive
+    echo "\e[32m✔ Repository garbage collection complete.\e[0m"
+  else
+    echo "\e[37mSkipped garbage collection.\e[0m"
+  fi
+  echo "---------------------------------------------------"
+
+
+  # --- Step 3: Repack Objects ---
+  echo "\n\e[1;34mStep 3: Repack loose objects with 'git repack'\e[0m"
+  echo "\e[39mThis command combines many small Git objects into fewer, larger 'packfiles'. This can significantly speed up operations in repositories with a long history.\e[0m\n"
+
+  if _ask_for_confirmation "Do you want to repack repository objects?"; then
+    echo "Repacking objects..."
+    # -a: pack all reachable objects
+    # -d: delete redundant loose objects after packing
+    git repack -ad
+    echo "\e[32m✔ Repository objects have been repacked.\e[0m"
+  else
+    echo "\e[37mSkipped repacking.\e[0m"
+  fi
+  echo "---------------------------------------------------"
+
+
+  # --- Step 4: Check for Large Files (Informational) ---
+  echo "\n\e[1;34mStep 4: Identify large files in history (Informational)\e[0m"
+  echo "\e[39mThis will scan the entire repository history to find the 10 largest files ever committed. This does NOT delete anything.\e[0m"
+  echo "\e[33mNote: If your repo is slow due to large binary files, you may need advanced tools like 'git filter-repo' to remove them from history.\e[0m\n"
+
+  if _ask_for_confirmation "Do you want to check for large files?"; then
+    echo "Searching for the 10 largest objects in history..."
+    # This command chain finds all objects, gets their sizes, sorts them, and shows the top 10.
+    git rev-list --objects --all | \
+    git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | \
+    sed -n 's/^blob //p' | \
+    sort --numeric-sort --key=2 | \
+    tail -n 10 | \
+    awk '{
+      size=$2/1024;
+      if (size > 1024) {
+        printf "%.2f MB\t%s\n", size/1024, $3
+      } else {
+        printf "%.2f KB\t%s\n", size, $3
+      }
+    }'
+    echo "\e[32m✔ Large file check complete.\e[0m"
+  else
+    echo "\e[37mSkipped large file check.\e[0m"
+  fi
+  echo "---------------------------------------------------"
+
+
+  # --- Step 5: Display Repository Statistics (Informational) ---
+  echo "\n\e[1;34mStep 5: Display repository statistics with 'git count-objects'\e[0m"
+  echo "\e[39mThis provides a 'health report' of the repository, showing the number of objects and the disk space they consume.\e[0m\n"
+
+  if _ask_for_confirmation "Do you want to display the repository health report?"; then
+    git count-objects -vH
+    echo "\e[32m✔ Health report complete.\e[0m"
+  else
+    echo "\e[37mSkipped health report.\e[0m"
+  fi
+  echo "---------------------------------------------------"
+
+  echo "\n\e[1;32mOptimization and analysis process finished!\e[0m"
+}
+
 # Ensure noglob is applied *before* Zsh expands arguments
 # Force Zsh to disable globbing before anything reaches _scp
 # alias scp='noglob _scp'
