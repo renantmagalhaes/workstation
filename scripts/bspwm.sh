@@ -136,13 +136,13 @@ bash -c 'cat << EOF > ~/.config/gtk-3.0/settings.ini
 [Settings]
 gtk-application-prefer-dark-theme=0
 gtk-theme-name=Graphite-Dark
-gtk-icon-theme-name=Reversal-purple-dark
+gtk-icon-theme-name=Tela-circle-blue
 EOF'
 bash -c 'cat << EOF > ~/.config/gtk-4.0/settings.ini
 [Settings]
 gtk-application-prefer-dark-theme=0
 gtk-theme-name=Graphite-Dark
-gtk-icon-theme-name=Reversal-purple-dark
+gtk-icon-theme-name=Tela-circle-blue
 EOF'
 
 echo "export GTK_THEME=Graphite-Dark" >>~/.profile
