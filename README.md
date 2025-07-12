@@ -1,6 +1,6 @@
 # workstation
 
-```My full desktop environment.```
+`My full desktop environment.`
 
 ![workstation](assets/setup.png)
 
@@ -11,7 +11,7 @@ For:
 
 ### Disclaimer
 
-Use the script ``install.sh``. Running the scripts directly may result in system malfunction.
+Use the script `install.sh`. Running the scripts directly may result in system malfunction.
 
 # TODO
 
@@ -48,6 +48,10 @@ Use the script ``install.sh``. Running the scripts directly may result in system
 ![2-terminal_and_file-manager-gnome.png](./assets/workstation/2-terminal_and_file-manager-gnome.png)
 
 ![3-Tiling_window-gnome.png](./assets/workstation/3-Tiling_window-gnome.png)
+
+# KDE Plasma 6
+
+![alt text](./assets/workstation/kde6.png)
 
 # KDE Plasma 5.2X - Retired
 
