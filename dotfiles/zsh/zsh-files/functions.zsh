@@ -162,7 +162,7 @@ function vim-delete-config() {
 }
 
 # Wipes all history, rebuilding only the repo's default branch
-git_nuke_history() {
+git-nuke-history() {
   echo "⚠️  THIS WILL IRREVERSIBLY DELETE your .git folder and all history."
   echo "Type RESET to continue:"
   read -r CONFIRM
@@ -251,7 +251,7 @@ git_nuke_history() {
 #   4. Navigate to a Git repository and run the command: `git_optimize_repo`
 #
 # ==============================================================================
-git_optimize_repo() {
+git-optimize-repo() {
   # --- Safety Check: Ensure we are in a Git repository ---
   if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
     echo "\e[31mError: Not inside a Git repository.\e[0m"
