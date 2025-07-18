@@ -1,14 +1,17 @@
 { config, pkgs, ... }:
 
 {
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.openssh.settings.PasswordAuthentication = true;
+  # We will group all OpenSSH settings together for clarity.
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = true;
+      # This allows the 'root' user to log in with a password.
+      # Use with extreme caution.
+      #PermitRootLogin = "yes";
+    };
+  };
 
   # Enable the Docker daemon.
   virtualisation.docker.enable = true;
-
-  # Add other services here, e.g.:
-  # services.clamav.daemon.enable = true;
-  # services.clamav.updater.enable = true;
 }

@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  # Top-level settings that apply to your entire Home Manager config
+  # Top-level settings that apply to entire Home Manager config
   home.stateVersion = "25.05";
   home.enableNixpkgsReleaseCheck = false;
 
@@ -10,5 +10,6 @@
     ./home-manager/zsh.nix
     ./home-manager/dotfiles.nix
     ./home-manager/packages.nix
+    ./home-manager/tmux.nix 
   ];
 }
