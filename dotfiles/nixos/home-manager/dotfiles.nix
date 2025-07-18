@@ -1,4 +1,3 @@
-# We also add `inputs` to the function arguments here
 { config, pkgs, inputs, ... }:
 
 {
