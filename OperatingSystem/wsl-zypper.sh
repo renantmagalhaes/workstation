@@ -59,6 +59,9 @@ sudo zypper -n install --type pattern devel_basis
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 # SCRIPTS
+# Disable SELINUX
+bash ./scripts/selinux.sh
+
 ## Install Nix
 bash ./scripts/nix-install.sh
 

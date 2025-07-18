@@ -80,6 +80,21 @@ sudo zypper -n install --type pattern devel_basis
 # virtualbox user
 sudo usermod -aG vboxusers $USER
 
+# Disable SELINUX
+bash ./scripts/selinux.sh
+
+## Install Nix
+bash ./scripts/nix-install.sh
+
+if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+elif [ -f "/etc/profile.d/nix.sh" ]; then
+	. "/etc/profile.d/nix.sh"
+else
+	echo "Nix environment script not found."
+	exit 1
+fi
+
 # Brew
 bash desktop/source/any/brew.sh
 
