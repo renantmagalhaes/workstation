@@ -164,6 +164,20 @@ blocks:
         type: aws
         style: diamond
 
+      # - type: command
+      #   style: diamond
+      #   foreground: "#FF9900"
+      #   background: "#29315A"
+      #   leading_diamond: "" # Left empty to connect from the previous segment.
+      # trailing_diamond: " " # The final closing diamond for the block.
+      #   template: "| {{ .Output }}" # A separator and the Account ID fetched from the command.
+      #   properties:
+      #     # This command fetches the AWS Account ID.
+      #     # Make sure the AWS CLI is installed and configured.
+      #     command: "aws sts get-caller-identity --query Account --output text"
+      #     # You can set a timeout in milliseconds in case the command is slow
+      #     # timeout: 2000
+
       # --------------------------------------------------------------------------
       # Lua segment: Shows Lua version (disabled here with fetch_version: false).
       #    It will only appear if you have Lua installed, but won't display version.
