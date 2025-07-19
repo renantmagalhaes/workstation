@@ -151,6 +151,9 @@ sudo usermod -aG docker $USER
 # ADB setup
 #sudo ln -s -f /mnt/c/Program\ Files/Genymobile/Genymotion/tools/adb.exe /usr/local/bin/adb
 
+# fd - ignore NFS
+bash ./scripts/fd-ignore.sh
+
 # Make sure all package are installed
 sudo apt-get -f install -y
 

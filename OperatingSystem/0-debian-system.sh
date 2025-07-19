@@ -179,7 +179,7 @@ bash ./scripts/zsh.sh
 bash ./scripts/kitty.sh
 
 ## Guake
-# guake --restore-preferences ./utils/guake/rtm-guake-setting
+guake --restore-preferences ./utils/guake/rtm-guake-setting
 
 ## Neofetch
 bash ./scripts/neofetch.sh
@@ -199,6 +199,9 @@ pipx install virtualenv
 pipx install virtualenvwrapper
 pipx install pylint
 pipx install bpytop
+
+# fd - ignore NFS
+bash ./scripts/fd-ignore.sh
 
 # ## Droidcam
 # bash ./scripts/droidcam.sh
