@@ -143,6 +143,10 @@ sudo systemctl enable docker
 sudo usermod -G docker -a $USER
 sudo systemctl restart docker
 
+# fd - ignore NFS
+bash ./scripts/fd-ignore.sh
+
+
 # Make tmux default shell
 sudo usermod --shell /usr/bin/tmux $USER
 

@@ -205,7 +205,7 @@ bash ./utils/git-config/git-config.sh
 
 ## Polybar
 sudo zypper install -y polybar mpd wmctrl playerctl xsel
-ln -s -f ~/.dotfiles/polybar/kde/ ~/.config/polybar
+ln -s -f $PWD/.dotfiles/kde/polybar/ ~/.config/
 
 ## jgmenu config
 #rm -rf ~/.config/jgmenu/
@@ -213,6 +213,9 @@ ln -s -f $PWD/dotfiles/kde/jgmenu ~/.config/
 
 ## KDE Tilling window setup
 bash ./scripts/kde-DE-transformation.sh
+
+# fd - ignore NFS
+bash ./scripts/fd-ignore.sh
 
 # Install ClamAV
 sudo zypper install -y clamav clamtk
