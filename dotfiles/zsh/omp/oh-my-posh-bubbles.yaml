@@ -1,0 +1,390 @@
+# --------------------------------------------------------------------------------
+# SCHEMA DECLARATION
+# --------------------------------------------------------------------------------
+# This line helps your editor or language server recognize valid configuration keys.
+# It doesn't affect how Oh My Posh itself parses the file.
+# --------------------------------------------------------------------------------
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+# --------------------------------------------------------------------------------
+# MAIN CONFIGURATION
+# --------------------------------------------------------------------------------
+# "blocks" is the root list of prompt blocks. Each block has a "type", alignment,
+# and one or more segments that define what shows up in your prompt.
+# --------------------------------------------------------------------------------
+# ==============================================================================
+# BLOCK 1: LEFT Prompt (TOP LINE)
+# ==============================================================================
+blocks:
+  - type: prompt
+    alignment: left
+    segments:
+      # --------------------------------------------------------------------------
+      # Upper-left status segment: prints the "┌" character.
+      # --------------------------------------------------------------------------
+      - properties:
+          always_enabled: true
+        template: "\u250c "
+        foreground: "#ffce7b"
+        type: status
+        style: plain
+
+      # --------------------------------------------------------------------------
+      # Icon segment: Prints the diamond icon "" with its own styling.
+      # --------------------------------------------------------------------------
+      - leading_diamond: ""
+        trailing_diamond: ""
+        template: ""
+        background: "#29315A"
+        foreground: "#ffffff"
+        type: text
+        style: diamond
+
+      # --------------------------------------------------------------------------
+      # Path segment: Displays your current working directory.
+      # --------------------------------------------------------------------------
+      - properties:
+          style: full
+        leading_diamond: " "
+        trailing_diamond: " "
+        template: >-
+          {{ if eq .Path "~" }}󰟒 ~
+          {{ else if or (eq .Path "~/Documents") (hasPrefix .Path "~/Documents/") }}󰈙 {{ .Path }}
+          {{ else if or (eq .Path "~/Downloads") (hasPrefix .Path "~/Downloads/") }} {{ .Path }}
+          {{ else if or (eq .Path "~/Music") (hasPrefix .Path "~/Music/") }} {{ .Path }}
+          {{ else if or (eq .Path "~/Pictures") (hasPrefix .Path "~/Pictures/") }}  {{ .Path }}
+          {{ else if or (eq .Path "~/Images") (hasPrefix .Path "~/Images/") }}  {{ .Path }}
+          {{ else if hasPrefix .Path "~/" }}󰟒 {{ .Path }}
+          {{ else }}  {{ .Path }}
+          {{ end }}{{ if not .Writable }}{{ end }}
+        foreground: "#000000"
+        background: "#ffffff"
+        type: path
+        style: diamond
+        foreground_templates:
+          - "{{ if not .Writable }}#FF0000{{ end }}"
+
+      # --------------------------------------------------------------------------
+      #  Extra Trailing Diamond segment: Only displays when not inside a Git folder.
+      #     Its background is explicitly set to transparent (or "default") so that it
+      #     looks like part of the path.
+      # --------------------------------------------------------------------------
+      # - type: text
+      #   template: "{{ if not .Segments.git }}{{ end }}"
+      #   background: default # Try "transparent" if your terminal supports it.
+      #   foreground: "#ffffff" # Use the same as your path text, or adjust as needed.
+      #   style: plain
+
+      # --------------------------------------------------------------------------
+      # Git segment: Displays Git info (branch, changes, etc.),
+      #     and is assigned an alias ("git") for cross‑segment reference.
+      # --------------------------------------------------------------------------
+      - leading_diamond: ""
+        trailing_diamond: ""
+        template: "{{ if .Segments.git }}on{{ end }}"
+        background: "#29315A"
+        foreground: "#ffffff"
+        type: text
+        style: diamond
+        condition: git
+
+      - properties:
+          branch_max_length: 25.0
+          branch_icon: " "
+          fetch_stash_count: true
+          fetch_status: true
+          fetch_upstream_icon: false
+        alias: git
+        leading_diamond: " "
+        trailing_diamond: " "
+        template: "{{ .UpstreamIcon }} {{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}"
+        foreground: "#32174D"
+        background: "#80EF80"
+        type: git
+        style: diamond
+        background_templates:
+          - "{{ if or (.Working.Changed) (.Staging.Changed) }}#FF9248{{ end }}"
+          - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#ff4500{{ end }}"
+          - "{{ if gt .Ahead 0 }}#594fed{{ end }}"
+          - "{{ if gt .Behind 0 }}#594fed{{ end }}"
+        foreground_templates:
+          - "{{ if or (.Working.Changed) (.Staging.Changed) }}#000000{{ end }}"
+          - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#000000{{ end }}"
+          - "{{ if gt .Ahead 0 }}#ffffff{{ end }}"
+          - "{{ if gt .Behind 0 }}#ffffff{{ end }}"
+
+      # --------------------------------------------------------------------------
+      # Check if user has root credentials cached. if not show username else show wizard
+      # --------------------------------------------------------------------------
+
+      - type: command
+        # style: diamond
+        style: plain
+        # foreground: "#ffffff"
+        # background: "#6D70E2"
+        # leading_diamond: ""
+        # trailing_diamond: ""
+        properties:
+          shell: bash
+          command: sudo -n true 2>/dev/null && echo "as 🧙" || echo -n $'\u200B'
+  # ==============================================================================
+  # BLOCK 2: RIGHT Prompt
+  # ==============================================================================
+  - type: prompt
+    alignment: right
+    segments:
+      # --------------------------------------------------------------------------
+      # Command Status segment:
+      # Displays a checkmark if the last command returned 0 (success),
+      # or a cross if it did not execute correctly.
+      # --------------------------------------------------------------------------
+      - type: status
+        style: diamond
+        foreground: "#ffffff"
+        background: "#B388FF"
+        leading_diamond: ""
+        background_templates:
+          - "{{ if .Error }}#e91e63{{ end }}"
+        trailing_diamond: " "
+        template: "{{ if eq .Code 0 }}<#FFFFFF></>{{ else }}\uf071 {{ reason .Code }}{{ end }}"
+        properties:
+          always_enabled: false
+
+      # --------------------------------------------------------------------------
+      # AWS segment: Displays AWS profile and region (if set).
+      #    - fetch_version: false => doesn't fetch AWS CLI version info, only profile.
+      # --------------------------------------------------------------------------
+      - properties:
+          fetch_version: false
+        leading_diamond: ""
+        trailing_diamond: " "
+        template: " {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }}"
+        foreground: "#FF9900"
+        background: "#29315A"
+        type: aws
+        style: diamond
+
+      # --------------------------------------------------------------------------
+      # Lua segment: Shows Lua version (disabled here with fetch_version: false).
+      #    It will only appear if you have Lua installed, but won't display version.
+      # --------------------------------------------------------------------------
+      - properties:
+          fetch_version: false
+        leading_diamond: ""
+        trailing_diamond: " "
+        template: "\ue620 {{ .Full }}"
+        foreground: "#00AEEF"
+        background: "#29315A"
+        type: lua
+        style: diamond
+
+      # --------------------------------------------------------------------------
+      # Python segment: Shows active Python version or virtual environment name.
+      #    - {{ .Venv }} => name of your active venv, if any
+      #    - {{ .Full }} => Python version string
+      #    - Displays an error if Python can't be found.
+      # --------------------------------------------------------------------------
+      - properties:
+          fetch_version: false
+        leading_diamond: ""
+        trailing_diamond: " "
+        template: " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }}{{ end }}{{ .Full }}{{ end }}"
+        foreground: "#E4F34A"
+        background: "#29315A"
+        type: python
+        style: diamond
+
+      # --------------------------------------------------------------------------
+      # Go segment: Shows Go version if Go is installed.
+      # --------------------------------------------------------------------------
+      - properties:
+          fetch_version: false
+        leading_diamond: ""
+        trailing_diamond: " "
+        template: "{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+        foreground: "#7FD5EA"
+        background: "#29315A"
+        type: go
+        style: diamond
+
+      # --------------------------------------------------------------------------
+      # Node segment again. This is a duplicate of segment #3. If you don't
+      #    need two Node segments, you can remove one of them.
+      # --------------------------------------------------------------------------
+      - properties:
+          fetch_version: true
+        leading_diamond: ""
+        trailing_diamond: " "
+        template: " {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}"
+        foreground: "#42E66C"
+        background: "#29315A"
+        type: node
+        style: diamond
+
+      # --------------------------------------------------------------------------
+      # Ruby segment: Shows Ruby version, or an error if Ruby not found.
+      # --------------------------------------------------------------------------
+      - properties:
+          fetch_version: false
+        leading_diamond: ""
+        trailing_diamond: " "
+        template: "{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+        foreground: "#E64747"
+        background: "#29315A"
+        type: ruby
+        style: diamond
+
+      # --------------------------------------------------------------------------
+      # Java segment: Shows Java version, or an error if not found.
+      # --------------------------------------------------------------------------
+      - properties:
+          fetch_version: false
+        leading_diamond: ""
+        trailing_diamond: " "
+        template: "{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+        foreground: "#E64747"
+        background: "#29315A"
+        type: java
+        style: diamond
+
+      # --------------------------------------------------------------------------
+      # Julia segment: Shows Julia version, or an error if not found.
+      # --------------------------------------------------------------------------
+      - properties:
+          fetch_version: false
+        leading_diamond: ""
+        trailing_diamond: " "
+        template: "\ue624{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
+        foreground: "#9B6BDF"
+        background: "#29315A"
+        type: julia
+        style: diamond
+
+      # --------------------------------------------------------------------------
+      # PHP segment: Shows PHP version.
+      # --------------------------------------------------------------------------
+      - properties:
+          fetch_version: false
+        leading_diamond: ""
+        trailing_diamond: " "
+        template: "\ue73d {{ .Full }} "
+        foreground: "#ffffff"
+        background: "#4063D8"
+        type: php
+        style: diamond
+
+      # --------------------------------------------------------------------------
+      # Execution Time segment: Shows how long the previous command took
+      #     if it's above the "threshold" (5000 ms by default).
+      # --------------------------------------------------------------------------
+      - properties:
+          style: austin
+          threshold: 5000.0
+        leading_diamond: ""
+        trailing_diamond: " "
+        template: " {{ .FormattedMs }}"
+        foreground: "#AEA4BF"
+        background: "#29315A"
+        type: executiontime
+        style: diamond
+      # --------------------------------------------------------------------------
+      # Kubernetes segment: shows the current kube context (and namespace)
+      # --------------------------------------------------------------------------
+
+      - type: kubectl
+        style: diamond
+        leading_diamond: ""
+        trailing_diamond: " "
+        foreground: "#0072ce"
+        background: "#fffff1"
+        template: "󱃾 {{ .Context }}{{ if .Namespace }} | {{ .Namespace }}{{ end }}"
+        properties:
+          # optional:
+          parse_kubeconfig: true
+          display_error: false
+          # fetch_version is not a typical property for the built-in 'kubernetes' segment,
+          # but if it works in your version, no harm. If not, remove it.
+          # fetch_version: false
+          # optional for custom names:
+          # context_aliases:
+          #   arn:aws:eks:eu-west-1:1234567890:cluster/posh: posh
+
+      # --------------------------------------------------------------------------
+      # NPM segment: shows the npm version if installed
+      # --------------------------------------------------------------------------
+      - properties:
+          fetch_version: false
+        leading_diamond: ""
+        trailing_diamond: " "
+        # icon: "" is the popular Nerd Fonts icon for NPM
+        template: " {{ .Full }}"
+        foreground: "#CB3837" # typical npm red color
+        background: "#29315A"
+        type: npm
+        style: diamond
+
+      # --------------------------------------------------------------------------
+      # Terraform segment: shows Terraform version if installed
+      # --------------------------------------------------------------------------
+      - properties:
+          fetch_version: false
+        leading_diamond: ""
+        trailing_diamond: " "
+        # You can swap "terraform:" for a TF icon if you have a Nerd Fonts symbol
+        template: "󱁢 {{.WorkspaceName}}"
+        foreground: "#5C4EE5" # a purple color for TF
+        background: "#ffffff"
+        type: terraform
+        style: diamond
+
+  # ==============================================================================
+  # BLOCK 3: LEFT Prompt (SECOND LINE)
+  # ==============================================================================
+  - type: prompt
+    alignment: left
+    segments:
+      # --------------------------------------------------------------------------
+      # Another "status" segment printing the lower-left corner (└).
+      # --------------------------------------------------------------------------
+      - properties:
+          always_enabled: true
+        # template: "╰─"
+        template: "\u2514"
+        foreground: "#ffce7b"
+        type: status
+        style: plain
+
+      # --------------------------------------------------------------------------
+      # Another "status" segment displaying the actual prompt symbol "$".
+      # --------------------------------------------------------------------------
+      - properties:
+          always_enabled: true
+        # template: " "
+        template: "  "
+        foreground: "#fffff1"
+        type: status
+        style: plain
+
+    # newline: true => After these segments, Oh My Posh will break the line
+    # and place the cursor for you to start typing your command.
+    newline: true
+
+# --------------------------------------------------------------------------------
+# TRANSIENT PROMPT
+# --------------------------------------------------------------------------------
+# After you run a command, some shells let the old prompt line be "collapsed"
+# into a simpler prompt. That's what transient_prompt does here.
+# --------------------------------------------------------------------------------
+transient_prompt:
+  background: transparent
+  foreground: "#8b7cfc"
+  # template: " "
+  template: " "
+  # newline: true
+
+# --------------------------------------------------------------------------------
+# MISCELLANEOUS SETTINGS
+# --------------------------------------------------------------------------------
+auto_upgrade: false # if true, oh-my-posh updates itself automatically
+version: 3 # using oh-my-posh v4 schema
+
