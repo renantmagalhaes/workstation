@@ -106,16 +106,21 @@ zstyle ':completion:*' cache-path "${ZSH_CACHE_DIR}/zcache"
 
 autoload -U +X bashcompinit && bashcompinit
 
-# =====================
-# fzf-tab config
-# =====================
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+# ==========================================
+# fzf-tab config (Reliable Full-Width Layout)
+# ==========================================
+
+# We DO NOT set 'fzf-command'. This forces fzf-tab to use its default, stable layout.
+#zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+
+# Set the preview command for the 'cd' completion.
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd -a --tree --depth=1 $realpath || ls -la $realpath'
+
+# --- Your other working settings ---
 zstyle ':fzf-tab:*' prefix '·'
 zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':completion:*:descriptions' format '[%d]'
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group '<' '>'
-
 # =====================
 # General tweaks
 # =====================
