@@ -34,8 +34,3 @@ eval "$(zoxide init zsh)"
 
 # Oh my posh
 eval "$(oh-my-posh init zsh --config $HOME/.config/omp/oh-my-posh-bubbles.yaml)"
-
-# Startship Config
-# export STARSHIP_CONFIG=~/.config/starship/starship.toml
-# eval "$(starship init zsh)"
-
