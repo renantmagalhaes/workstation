@@ -408,47 +408,83 @@ git-optimize-repo() {
 
 #   command cp "$@"
 # }
+# A multi-purpose cd command with a powerful fzf-based menu.
+# This definitive version automatically includes subdirectories from your zoxide history,
+# AND allows for a deep filesystem search with Ctrl+F.
+cd() {
+    # --- Case 1: `cd .` to interactively climb up the directory tree ---
+    if [[ "$1" == "." ]]; then
+        local up_target_dir
+        up_target_dir=$(
+            local current_path="$PWD"
+            local parent_path
+            while [ "$current_path" != "/" ]; do
+                parent_path=$(dirname "$current_path")
+                echo "$parent_path"
+                current_path="$parent_path"
+            done | fzf --height 25% --reverse --header "Jump up to which parent directory?"
+        )
+        if [[ -n "$up_target_dir" ]]; then
+            builtin cd "$up_target_dir"
+        fi
+        return
+    fi
 
-cdi() {
-  # If an argument is given AND it's a valid directory (like /etc, .., ~),
-  # then use the normal cd command immediately.
-  # This preserves standard, non-interactive behavior.
-  if [ -d "$1" ]; then
-    builtin cd "$1"
-    return
-  fi
+    # --- Case 2: Standard cd behavior for any existing directory ---
+    if [ -d "$1" ]; then
+        builtin cd "$1"
+        return
+    fi
 
-  # --- Interactive Search ---
-  # This part runs if:
-  #  a) No arguments are given (just 'cd' + enter).
-  #  b) The argument is not a directory (e.g., 'cd workst').
-  local target_dir
-  target_dir=$(fd --type d --hidden --absolute-path . "/" \
-      --exclude '/home/rtm/Data' \
-      | fzf --query="$@" --preview 'ls -la {}' --height 40% --reverse)
+    # --- Case 3: The main interactive fzf menu ---
+    local target_dir
+    # This is the core logic: It creates a "super-list" by combining zoxide's history
+    # with the immediate subdirectories of every entry in that history.
+    target_dir=$(
+        (
+            # First, list the zoxide history itself.
+            zoxide query -l;
+            # Then, for each directory in the history, find its immediate children.
+            zoxide query -l | xargs -I {} fd --max-depth 1 --type d . "{}"
+        ) | awk '!seen[$0]++ && $0' | fzf --height 40% --reverse \
+            --query="$@" \
+            --header "SMART LIST (Ctrl+F for deep search)" \
+            --preview 'lsd -a --tree --depth=1 {} || exa -a --tree --level=2 {} || ls -la {}' \
+            --bind "ctrl-f:reload(fd --type d --hidden . \"$HOME\" \
+                --exclude /home/rtm/Data \
+            )+change-header(FULL FILESYSTEM SEARCH)"
+    )
 
-  # If a directory was selected in fzf, change to it.
-  # Otherwise, stay in the current directory.
-  if [ -n "$target_dir" ]; then
-    builtin cd "$target_dir"
-  fi
+    # If fzf returned a selection, cd to it.
+    if [[ -n "$target_dir" ]]; then
+        builtin cd "$target_dir"
+    fi
 }
 
-j() {
-  local selected_dir
-  # Let fzf choose between zoxide's smart list and fd's full list
-  selected_dir=$(
-    zoxide query -l | fzf --height 40% --reverse \
-      --preview 'ls -la {}' \
-      --query="$@" \
-      --header "HISTORY (Ctrl+F for filesystem search)" \
-      --bind "ctrl-f:reload(fd --type d --hidden . / \
-          --exclude /home/rtm/Data \
-        )+change-header(FILESYSTEM SEARCH)"
-  )
+# Function to safely clean the zoxide database with confirmation.
+# This version uses the most robust, basic form of `read` to avoid shell issues.
+zoxide_cd_clean() {
+    local zoxide_db_path="$HOME/.local/share/zoxide/db.zo"
 
-  # If a directory was selected, cd into it
-  if [[ -n "$selected_dir" ]]; then
-    cd "$selected_dir"
-  fi
+    # First, check if there is even a database to delete.
+    if [[ ! -f "$zoxide_db_path" ]]; then
+        echo "Zoxide database already clean (file not found)."
+        return
+    fi
+
+    # Ask for user confirmation using the most compatible method.
+    # 1. Print the prompt without a newline using 'echo -n'.
+    echo -n "Are you sure you want to permanently delete the zoxide database? [y/N] "
+    # 2. Read the user's input into the REPLY variable.
+    read REPLY
+
+    # Check the user's reply.
+    if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+        # If 'y' or 'Y' was pressed, remove the file.
+        rm "$zoxide_db_path"
+        echo "✅ Zoxide database has been reset. It will be rebuilt as you navigate."
+    else
+        # If any other key was pressed (including just Enter), abort.
+        echo "🚫 Clean operation aborted."
+    fi
 }

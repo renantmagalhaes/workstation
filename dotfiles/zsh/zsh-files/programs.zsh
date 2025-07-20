@@ -18,10 +18,10 @@ export FZF_DEFAULT_OPTS='--height 50% --inline-info --border --color=fg:#f8f8f2,
 #NIX
 export NIXPKGS_ALLOW_UNFREE=1
 
-# enhancd
-source $ZSH/custom/plugins/enhancd/init.sh
-#ENHANCD_FILTER=fzf --height 40%:fzy
-export ENHANCD_FILTER
+## enhancd
+#source $ZSH/custom/plugins/enhancd/init.sh
+##ENHANCD_FILTER=fzf --height 40%:fzy
+#export ENHANCD_FILTER
 
 # command -v exa > /dev/null && alias ls='exa --icons --group-directories-first -g -b -h' && \
 #alias tree='exa --tree'
