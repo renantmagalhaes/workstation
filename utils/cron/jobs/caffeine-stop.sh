@@ -1,1 +1,0 @@
-/usr/bin/gnome-extensions disable caffeine@patapon.info

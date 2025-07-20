@@ -1,1 +1,0 @@
-/usr/bin/gnome-extensions enable caffeine@patapon.info
