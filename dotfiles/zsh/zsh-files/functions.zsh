@@ -411,6 +411,8 @@ git-optimize-repo() {
 # A multi-purpose cd command with a powerful fzf-based menu.
 # This definitive version automatically includes subdirectories from your zoxide history,
 # AND allows for a deep filesystem search with Ctrl+F.
+# A multi-purpose cd command with a powerful fzf-based menu.
+# This version removes the invalid --width flag to prevent errors.
 cd() {
     # --- Case 1: `cd .` to interactively climb up the directory tree ---
     if [[ "$1" == "." ]]; then
@@ -438,15 +440,11 @@ cd() {
 
     # --- Case 3: The main interactive fzf menu ---
     local target_dir
-    # This is the core logic: It creates a "super-list" by combining zoxide's history
-    # with the immediate subdirectories of every entry in that history.
     target_dir=$(
         (
-            # First, list the zoxide history itself.
             zoxide query -l;
-            # Then, for each directory in the history, find its immediate children.
             zoxide query -l | xargs -I {} fd --max-depth 1 --type d . "{}"
-        ) | awk '!seen[$0]++ && $0' | fzf --height 40% --reverse \
+        ) | awk '!seen[$0]++ && $0' | fzf --height 50% --reverse \
             --query="$@" \
             --header "SMART LIST (Ctrl+F for deep search)" \
             --preview 'lsd -a --tree --depth=1 {} || exa -a --tree --level=2 {} || ls -la {}' \
@@ -454,8 +452,6 @@ cd() {
                 --exclude /home/rtm/Data \
             )+change-header(FULL FILESYSTEM SEARCH)"
     )
-
-    # If fzf returned a selection, cd to it.
     if [[ -n "$target_dir" ]]; then
         builtin cd "$target_dir"
     fi
