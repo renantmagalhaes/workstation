@@ -39,7 +39,8 @@ if check_cmd nix-env; then # FOR NIX PKG MANAGER
 		nixpkgs.mpv \
 		nixpkgs.xcolor \
 		nixpkgs.imagemagick \
-		nixpkgs.xwinwrap
+		nixpkgs.xwinwrap \
+		nixpkgs.zoxide
 
 else
 	echo "Nix package manager not installed, go to https://nixos.org/download"

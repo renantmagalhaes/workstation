@@ -34,7 +34,7 @@ sudo zypper install -y ntp
 sudo ntpdate pool.ntp.org
 
 # Install the packages from repo
-sudo zypper install -y zsh vim curl net-tools net-tools-deprecated iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox bind-utils gcc-c++ rsync sassc gawk bc cron golang npm libcap-progs sqlite3 python312-pipx cifs-utils ffmpeg python3-requests nmon
+sudo zypper install -y zsh vim curl net-tools net-tools-deprecated iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox bind-utils gcc-c++ rsync sassc gawk bc cron golang npm libcap-progs sqlite3 python312-pipx cifs-utils ffmpeg python3-requests nmon zoxide
 
 # Install yarn
 sudo npm install --global yarn
@@ -145,7 +145,6 @@ sudo systemctl restart docker
 
 # fd - ignore NFS
 bash ./scripts/fd-ignore.sh
-
 
 # Make tmux default shell
 sudo usermod --shell /usr/bin/tmux $USER

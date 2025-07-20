@@ -408,3 +408,47 @@ git-optimize-repo() {
 
 #   command cp "$@"
 # }
+
+cdi() {
+  # If an argument is given AND it's a valid directory (like /etc, .., ~),
+  # then use the normal cd command immediately.
+  # This preserves standard, non-interactive behavior.
+  if [ -d "$1" ]; then
+    builtin cd "$1"
+    return
+  fi
+
+  # --- Interactive Search ---
+  # This part runs if:
+  #  a) No arguments are given (just 'cd' + enter).
+  #  b) The argument is not a directory (e.g., 'cd workst').
+  local target_dir
+  target_dir=$(fd --type d --hidden --absolute-path . "/" \
+      --exclude '/home/rtm/Data' \
+      | fzf --query="$@" --preview 'ls -la {}' --height 40% --reverse)
+
+  # If a directory was selected in fzf, change to it.
+  # Otherwise, stay in the current directory.
+  if [ -n "$target_dir" ]; then
+    builtin cd "$target_dir"
+  fi
+}
+
+j() {
+  local selected_dir
+  # Let fzf choose between zoxide's smart list and fd's full list
+  selected_dir=$(
+    zoxide query -l | fzf --height 40% --reverse \
+      --preview 'ls -la {}' \
+      --query="$@" \
+      --header "HISTORY (Ctrl+F for filesystem search)" \
+      --bind "ctrl-f:reload(fd --type d --hidden . / \
+          --exclude /home/rtm/Data \
+        )+change-header(FILESYSTEM SEARCH)"
+  )
+
+  # If a directory was selected, cd into it
+  if [[ -n "$selected_dir" ]]; then
+    cd "$selected_dir"
+  fi
+}
