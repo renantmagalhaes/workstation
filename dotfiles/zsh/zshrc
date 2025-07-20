@@ -29,6 +29,8 @@ export ZSH="$HOME/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
 [[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
 
+# zoxide
+eval "$(zoxide init zsh)"
 
 # Oh my posh
 eval "$(oh-my-posh init zsh --config $HOME/.config/omp/oh-my-posh-bubbles.yaml)"
