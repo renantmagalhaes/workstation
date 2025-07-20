@@ -412,7 +412,6 @@ git-optimize-repo() {
 # This definitive version automatically includes subdirectories from your zoxide history,
 # AND allows for a deep filesystem search with Ctrl+F.
 # A multi-purpose cd command with a powerful fzf-based menu.
-# This version removes the invalid --width flag to prevent errors.
 cd() {
     # --- Case 1: `cd .` to interactively climb up the directory tree ---
     if [[ "$1" == "." ]]; then
@@ -432,13 +431,26 @@ cd() {
         return
     fi
 
-    # --- Case 2: Standard cd behavior for any existing directory ---
+    # --- Case 2: `cd -` to show a list of the last 5 chronological directories ---
+    if [[ "$1" == "-" ]]; then
+        local recent_target_dir
+        # Use `dirs -pl` to print full, absolute paths and avoid tilde expansion errors.
+        recent_target_dir=$(
+            dirs -pl | tail -n +2 | head -n 5 | fzf --height 25% --reverse --header "Recent Directories (Chronological)"
+        )
+        if [[ -n "$recent_target_dir" ]]; then
+            builtin cd "$recent_target_dir"
+        fi
+        return
+    fi
+
+    # --- Case 3: Standard cd behavior for any existing directory ---
     if [ -d "$1" ]; then
         builtin cd "$1"
         return
     fi
 
-    # --- Case 3: The main interactive fzf menu ---
+    # --- Case 4: The main interactive fzf menu ---
     local target_dir
     target_dir=$(
         (
