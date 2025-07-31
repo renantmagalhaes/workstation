@@ -9,4 +9,6 @@
 ~button10
   qdbus6 org.kde.kglobalaccel /component/kwin org.kde.kglobalaccel.Component.invokeShortcut "Overview"
 
+# ctrl + Return
+#     tdrop -ma -w -4 -y "45" -h 80% -s dropdown kitty --title kitty-tdrop
 
