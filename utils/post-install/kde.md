@@ -68,10 +68,18 @@ flatpak run com.github.hluk.copyq
 
 Kwin Scripts -> Enable Krohnkite
 
-Window rules
+##### Window rules
+
+- Ignore Windows "By Class"
 
 ```
-krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml,org.kde.plasmashell,org.kde.polkit-kde-authentication-agent-1,org.kde.kruler,kruler,kwin_wayland,ksmserver-logout-greeter,Guake,guake,copyq,kitty
+krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml,org.kde.plasmashell,org.kde.polkit-kde-authentication-agent-1,org.kde.kruler,kruler,kwin_wayland,ksmserver-logout-greeter,Guake,guake,copyq
+```
+
+- Float Windows "By title"
+
+```
+kitty-tdrop
 ```
 
 Geometry
