@@ -13,8 +13,8 @@
   - Slide Back
   - Enable Magic Lamp
     - Animation 170ms
-  <!-- - Enable Wobby Windows -->
-    <!-- - Uncheck Wobbly when resizing. -->
+      <!-- - Enable Wobby Windows -->
+        <!-- - Uncheck Wobbly when resizing. -->
 - Task Switcher
   - Thumbnail Grid
 - Virtual Desktops
@@ -54,6 +54,8 @@
 flatpak run com.core447.StreamController
 
 flatpak run com.github.hluk.copyq
+
+/home/rtm/.dotfiles/kde/forceblur.sh
 ```
 
 ### Widgets
@@ -61,7 +63,7 @@ flatpak run com.github.hluk.copyq
 - Command Output
   - ~/.dotfiles/kde/widgets/workspace.sh
   - ~/.dotfiles/kde/widgets/active_window_icon.sh
-  
+
 ### Window tilling setup
 
 #### Krohnkite
@@ -97,9 +99,10 @@ Klassy settings -> Adjust as needed
 
 #### KDE BAR (botton configuration)
 
-![picture 0](../../images/e310456c98fb11e992d577616d0c6ab6978883afed5f4f208c51c19c285110ea.png)  
+![picture 0](../../images/e310456c98fb11e992d577616d0c6ab6978883afed5f4f208c51c19c285110ea.png)
 
 - Left panel
+
   - [Chaac Weather](https://github.com/zayronxio/Chaac-Complete-Weather)
     - Visit [Open-Meteo](https://open-meteo.com/en/docs?latitude=40.2183) docs to find coordinates
   - Command output (change $CITYNAME)
@@ -109,6 +112,7 @@ Klassy settings -> Adjust as needed
   - [Kara](https://github.com/dhruv8sh/kara/)
 
 - Central panel
+
   - [Andromeda Launcher](https://github.com/EliverLara/AndromedaLauncher)
   - Icon-only task manager
 
