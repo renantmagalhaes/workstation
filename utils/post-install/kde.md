@@ -55,7 +55,7 @@ flatpak run com.core447.StreamController
 
 flatpak run com.github.hluk.copyq
 
-/home/rtm/.dotfiles/kde/forceblur.sh
+/home/rtm/GIT-REPOS/workstation/dotfiles/kde/blur/kittyBlur.sh
 ```
 
 ### Widgets
