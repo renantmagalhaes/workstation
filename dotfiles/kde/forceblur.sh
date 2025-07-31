@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# FROM
+# https://github.com/P-rth/x-forceblur/tree/main
+
 # Define the classes you want to exclude
 excluded_classes=("plasmashell" "Thorium-browser" "kwin" "dolphin" "kate" "systemsettings" "")
 
