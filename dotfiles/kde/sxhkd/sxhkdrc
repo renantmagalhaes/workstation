@@ -10,5 +10,5 @@
   qdbus6 org.kde.kglobalaccel /component/kwin org.kde.kglobalaccel.Component.invokeShortcut "Overview"
 
 # ctrl + Return
-#     tdrop -ma -w 2508 -x 26 -y 45 -h 80% -s dropdown kitty --title kitty-tdrop
+#     tdrop -ma -w 2508 -x 26 -y 14 -h 80%% -s dropdown kitty --title kitty-tdrop
 
