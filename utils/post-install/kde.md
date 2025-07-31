@@ -71,7 +71,7 @@ Kwin Scripts -> Enable Krohnkite
 Window rules
 
 ```
-krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml,org.kde.plasmashell,org.kde.polkit-kde-authentication-agent-1,org.kde.kruler,kruler,kwin_wayland,ksmserver-logout-greeter,Guake,guake,copyq
+krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml,org.kde.plasmashell,org.kde.polkit-kde-authentication-agent-1,org.kde.kruler,kruler,kwin_wayland,ksmserver-logout-greeter,Guake,guake,copyq,kitty
 ```
 
 Geometry
@@ -108,4 +108,3 @@ Klassy settings -> Adjust as needed
   - System tray
   - Digital clock
     - Roboto Bold font
-
