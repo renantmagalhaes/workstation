@@ -41,16 +41,16 @@ dunst --config ~/.config/dunst/dunstrc &
 bspc config top_padding 30
 
 # Monitor setup
-xrandr --output HDMI-1 --right-of DP-1
-xrandr --output DP-1 --primary
-bspc monitor DP-1 -d 1 2 3 4 5
-bspc monitor HDMI-1 -d 11 22 33 44 55
+xrandr --output HDMI-A-0 --right-of DisplayPort-0
+xrandr --output DisplayPort-0 --primary
+bspc monitor DisplayPort-0 -d 1 2 3 4 5
+bspc monitor HDMI-A-0 -d 11 22 33 44 55
 # Focus on first screen on bootvi
 bspc desktop --focus 11 && bspc desktop --focus 1 &
 
 # Setup resolution
-xrandr --output HDMI-1 --mode 2560x1440 -r 143.91 &
-xrandr --output DP-1 --mode 2560x1440 -r 143.91 &
+xrandr --output HDMI-A-0 --mode 2560x1440 -r 143.91 &
+xrandr --output DisplayPort-0 --mode 2560x1440 -r 143.91 &
 
 bspc config border_width 2
 bspc config window_gap 12
