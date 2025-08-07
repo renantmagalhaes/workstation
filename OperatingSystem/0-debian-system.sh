@@ -94,7 +94,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y install qemu-system-x86 libvirt-c
 wget -O- -q https://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc | sudo gpg --dearmour -o /usr/share/keyrings/oracle_vbox_2016.gpg
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] http://download.virtualbox.org/virtualbox/debian bookworm contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 sudo apt-get update
-sudo apt-get install -y virtualbox-7.0
+sudo apt-get install -y virtualbox-7.1
 
 # virtualbox user
 sudo usermod -aG vboxusers $USER
