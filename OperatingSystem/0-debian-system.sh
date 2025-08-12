@@ -184,6 +184,9 @@ guake --restore-preferences ./utils/guake/rtm-guake-setting
 ## Neofetch
 bash ./scripts/neofetch.sh
 
+## Wine
+bash ./scripts/wine.sh
+
 ## GIT
 bash ./utils/git-config/git-config.sh
 

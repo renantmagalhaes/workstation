@@ -159,7 +159,7 @@ alias killvi='pidof nvim |xargs kill -9'
 
 #Hex color get
 for name in hex-color color-hex; do
-    alias $name='xcolor'
+    alias $name='xcolor |xclip && xclip -o'
 done
 
 ### Zypper UTILS
