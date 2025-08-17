@@ -86,6 +86,19 @@ kdeconnect-indicator &
 nitrogen --restore &
 /usr/bin/1password --silent &
 #flatpak run com.core447.StreamController -b &
+command -v opendeck >/dev/null && (
+	opendeck &
+	sleep 1 &
+	for i in {1..100}; do
+		sleep 0.1
+		wid=$(xdotool search --class Opendeck 2>/dev/null | head -n1)
+		if [ -n "$wid" ]; then
+			bspc node "$wid" -c
+			break
+		fi
+	done
+) &
+
 flatpak run com.github.hluk.copyq &
 xsetroot -cursor_name left_ptr & # Fix mouse with X
 $HOME/.dotfiles/xcape/xcape.sh &
