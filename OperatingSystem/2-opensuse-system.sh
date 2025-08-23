@@ -81,7 +81,7 @@ sudo zypper -n install --type pattern devel_basis
 sudo usermod -aG vboxusers $USER
 
 # Disable SELINUX
-bash ./scripts/selinux.sh
+sudo bash ./scripts/selinux.sh
 
 ## Install Nix
 bash ./scripts/nix-install.sh
