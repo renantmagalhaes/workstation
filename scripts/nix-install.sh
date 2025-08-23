@@ -15,3 +15,6 @@ else
 	echo "Nix environment script not found."
 	exit 1
 fi
+
+# If ssl error
+#echo "ssl-cert-file = /etc/ssl/ca-bundle.pem" | sudo tee -a /etc/nix/nix.conf
