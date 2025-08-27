@@ -1,274 +1,461 @@
 /* TODO
-Suggestions?
+v6.0+ updates:
 https://github.com/MohamedxSalah/Vivaldi-Air/tree/main
 */
 
 :root {
-    --lessTransparent: rgba(0,0,0,0.4); /* fallback */
-    --customRadius: 8px; /* NOT USING NOW */
+  --lessTransparent: rgba(
+    0,
+    0,
+    0,
+    0.4
+  ); /* fallback */
+  --customRadius: 8px; /* NOT USING NOW */
 
-    /* New adaptive overlay system */
-    --overlayDark: rgba(0, 0, 0, 0.4);
-    --overlayLight: rgba(255, 255, 255, 0.4);
+  /* New adaptive overlay system */
+  --overlayDark: rgba(0, 0, 0, 0.4);
+  --overlayLight: rgba(
+    255,
+    255,
+    255,
+    0.4
+  );
 }
 
 /* set theme-aware overlay */
 .theme-dark {
-    --overlayColor: var(--overlayDark);
+  --overlayColor: var(--overlayDark);
 }
 .theme-light {
-    --overlayColor: var(--overlayLight);
+  --overlayColor: var(--overlayLight);
 }
 
 /* MAINBAR */
 
-#browser.win.address-top .toolbar-mainbar:has(.window-buttongroup.on-mainbar),
-#browser.linux.address-top .toolbar-mainbar:has(.window-buttongroup.on-mainbar) {
-    min-height: calc(44px / var(--uiZoomLevel));
+#browser.win.address-top
+  .toolbar-mainbar:has(
+    .window-buttongroup.on-mainbar
+  ),
+#browser.linux.address-top
+  .toolbar-mainbar:has(
+    .window-buttongroup.on-mainbar
+  ) {
+  min-height: calc(
+    44px / var(--uiZoomLevel)
+  );
 }
 
-.density-on .UrlBar-SearchField, 
+.density-on .UrlBar-SearchField,
 .density-on .UrlBar-AddressField {
-    height: 34px;
+  height: 34px;
 }
 
-.disable-titlebar#browser.win .window-buttongroup {
-    height: 44px;
+.disable-titlebar#browser.win
+  .window-buttongroup {
+  height: 44px;
 }
 
-#browser.win .window-buttongroup button.window-close {
-    border-top-right-radius: var(--radius);
-    border-bottom-right-radius: var(--radius); 
+#browser.win
+  .window-buttongroup
+  button.window-close {
+  border-top-right-radius: var(
+    --radius
+  );
+  border-bottom-right-radius: var(
+    --radius
+  );
 }
 
 .mainbar {
-    background-color: var(--overlayColor);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    margin: 5px;
-    border-radius: var(--radius);
+  background-color: var(--overlayColor);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin: 5px;
+  border-radius: var(--radius);
 }
 
-.SearchField, .UrlBar-AddressField {
-    border: none !important;
-    background-color: transparent;
+.SearchField,
+.UrlBar-AddressField {
+  border: none !important;
+  background-color: transparent;
 }
 
-.SearchField:hover, .UrlBar-AddressField:hover,
-.color-behind-tabs-on .SearchField:focus-within, 
-.color-behind-tabs-on .MailSearchField-Inner:focus-within, 
-.color-behind-tabs-on .UrlBar-AddressField:focus-within {
-    background-color: var(--overlayColor);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+.SearchField:hover,
+.UrlBar-AddressField:hover,
+.color-behind-tabs-on
+  .SearchField:focus-within,
+.color-behind-tabs-on
+  .MailSearchField-Inner:focus-within,
+.color-behind-tabs-on
+  .UrlBar-AddressField:focus-within {
+  background-color: var(--overlayColor);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .UrlFragment-Wrapper--ShouldHighlight {
-    --HighlightColor: var(--colorFg);
-    --LowlightColor: var(--colorFg);
+  --HighlightColor: var(--colorFg);
+  --LowlightColor: var(--colorFg);
 }
 
-.address-top .mainbar { border-bottom: none; }
+.address-top .mainbar {
+  border-bottom: none;
+}
 
 .mainbar button:hover,
-#browser:not(.tabs-top) .vivaldi:hover, 
-#browser:not(.tabs-top) .vivaldi:focus-visible,
-.theme-dark#browser.win .window-buttongroup button:hover {
-    background-color: var(--overlayColor);
-    backdrop-filter: blur(6px);
+#browser:not(.tabs-top) .vivaldi:hover,
+#browser:not(.tabs-top)
+  .vivaldi:focus-visible,
+.theme-dark#browser.win
+  .window-buttongroup
+  button:hover {
+  background-color: var(--overlayColor);
+  backdrop-filter: blur(6px);
 }
 
-.disable-titlebar.address-top#browser:not(.tabs-top) .vivaldi {
-    margin: 0 5px;
+.disable-titlebar.address-top#browser:not(
+    .tabs-top
+  )
+  .vivaldi {
+  margin: 0 5px;
 }
 
 /* SIDEBAR */
 
-#switch { padding-top: 5px; }
+#switch {
+  padding-top: 5px;
+}
 
 div#main.right #panels-container {
-    padding-bottom: 5px;
+  padding-bottom: 5px;
 }
 
 .density-on #switch {
-    background-color: var(--overlayColor);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: var(--radius);
-    padding-bottom: 5px;
-    padding-right: 4px;
-    min-width: 44px;
+  background-color: var(--overlayColor);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius);
+  padding-bottom: 5px;
+  padding-right: 4px;
+  min-width: 44px;
 }
 
-#panels-container { background-color: transparent; }
-
-#panels .webpanel-stack .webpanel .webpanel-content {
-    margin-right: 7px;
-    border-bottom-right-radius: var(--radius);
-    border-top-right-radius: var(--radius);
+#panels-container {
+  background-color: transparent;
 }
 
-#panels-container.right:not(.icons) .panel-group, 
-#panels-container.right.icons:not(:has(.SlideBar)) { border-left: none; }
+#panels
+  .webpanel-stack
+  .webpanel
+  .webpanel-content {
+  margin-right: 7px;
+  border-bottom-right-radius: var(
+    --radius
+  );
+  border-top-right-radius: var(
+    --radius
+  );
+}
+
+#panels-container.right:not(.icons)
+  .panel-group,
+#panels-container.right.icons:not(
+    :has(.SlideBar)
+  ) {
+  border-left: none;
+}
 
 #panels-container.overlay .panel-group,
 .ExtensionToggleIcon.ExtensionToggleIcon--Expanded,
-.ExtensionIcon--Hidden { background-color: transparent; }
+.ExtensionIcon--Hidden {
+  background-color: transparent;
+}
 
 #panels-container button:hover,
-.ExtensionIcon--Hidden:hover, 
+.ExtensionIcon--Hidden:hover,
 .ExtensionIcon--Hidden:active,
-.toolbar-panel > .button-toolbar > button.button-pressed, 
-.toolbar-panel .toolbar-extensions .button-toolbar > button.button-pressed, 
-.toolbar-panel .page-zoom-controls .button-toolbar > button.button-pressed,
-.density-on #switch .addwebpanel-wrapper > button.active button, 
-.density-on #switch > .button-toolbar.active button, 
-.density-on #switch > * > .button-toolbar.active button, 
-.density-on #switch > button.active button {
-    background-color: var(--overlayColor);
-    backdrop-filter: blur(6px);
+.toolbar-panel
+  > .button-toolbar
+  > button.button-pressed,
+.toolbar-panel
+  .toolbar-extensions
+  .button-toolbar
+  > button.button-pressed,
+.toolbar-panel
+  .page-zoom-controls
+  .button-toolbar
+  > button.button-pressed,
+.density-on
+  #switch
+  .addwebpanel-wrapper
+  > button.active
+  button,
+.density-on
+  #switch
+  > .button-toolbar.active
+  button,
+.density-on
+  #switch
+  > *
+  > .button-toolbar.active
+  button,
+.density-on
+  #switch
+  > button.active
+  button {
+  background-color: var(--overlayColor);
+  backdrop-filter: blur(6px);
 }
 
 /* WORKSPACES */
 
-.color-behind-tabs-on #tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar,
-.color-behind-tabs-on #tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar {
-    color: var(--colorFg);
-    margin-top: 5px;
+.color-behind-tabs-on
+  #tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > .button-toolbar,
+.color-behind-tabs-on
+  #tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > div
+  > .button-toolbar {
+  color: var(--colorFg);
 }
 
-#tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar > button:active,
-#tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar > button:active,
-#tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible) > button:not([disabled]):hover,
-#tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible) > button:not([disabled]):hover {
-    background-color: var(--overlayColor);
-    backdrop-filter: blur(6px);
+#tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > .button-toolbar
+  > button:active,
+#tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > div
+  > .button-toolbar
+  > button:active,
+#tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > .button-toolbar:not(
+    .toolbar-spacer,
+    .toolbar-spacer-flexible
+  )
+  > button:not([disabled]):hover,
+#tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > div
+  > .button-toolbar:not(
+    .toolbar-spacer,
+    .toolbar-spacer-flexible
+  )
+  > button:not([disabled]):hover {
+  background-color: var(--overlayColor);
+  backdrop-filter: blur(6px);
 }
 
 /* TABS */
 
-#browser .tabbar-wrapper, #browser.tabs-top #header { background-color: transparent; }
-
-#browser:not(.transparent-tabbar) #tabs-tabbar-container {
-    background-color: var(--overlayColor);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    margin: 2px 5px 0 5px;
-    border-radius: var(--radius);
+#browser .tabbar-wrapper,
+#browser.tabs-top #header {
+  background-color: transparent;
 }
 
-#browser.color-behind-tabs-on .tab.active.active,
-#browser .tab-position.colored .tab.active,
-#browser .tab-position.colored .tab:not(.active),
-#browser .tab-position.colored.accordion-toggle-arrow {
-    background-color: var(--overlayColor);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+#browser:not(.transparent-tabbar)
+  #tabs-tabbar-container {
+  background-color: var(--overlayColor);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin: 5px 5px 0 5px;
+  border-radius: var(--radius);
+}
+
+#titlebar {
+  position: absolute;
+  width: 100%;
+  left: 5px;
+  top: 5px;
+  right: 0px;
+  pointer-events: none;
+}
+
+#browser.win .window-buttongroup {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  overflow: hidden;
+  line-height: initial;
+}
+
+#browser.color-behind-tabs-on
+  .tab.active.active,
+#browser
+  .tab-position.colored
+  .tab.active,
+#browser
+  .tab-position.colored
+  .tab:not(.active),
+#browser
+  .tab-position.colored.accordion-toggle-arrow {
+  background-color: var(--overlayColor);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* hover states */
-#tabs-container .tab:not(.tab-group,.tab.active):hover,
-#browser .tab-position.colored.accordion-toggle-arrow:hover, 
-#browser .tab-position.colored .tab:not(.active):hover {
-    background-color: var(--overlayColor);
-    backdrop-filter: blur(6px);
+#tabs-container
+  .tab:not(
+    .tab-group,
+    .tab.active
+  ):hover,
+#browser
+  .tab-position.colored.accordion-toggle-arrow:hover,
+#browser
+  .tab-position.colored
+  .tab:not(.active):hover {
+  background-color: var(--overlayColor);
+  backdrop-filter: blur(6px);
 }
 
-.tab.active .favicon { filter: none !important; }
+.tab.active .favicon {
+  filter: none !important;
+}
 
-#browser .tab-position.colored .stack-counter {
-    background-color: var(--colorHighlightBg);
+#browser
+  .tab-position.colored
+  .stack-counter {
+  background-color: var(
+    --colorHighlightBg
+  );
 }
 
 /* INNER ROUND BORDERS */
 
-#browser:not(.fullscreen) #webpage-stack {
-    border-radius: var(--radius);
-    margin: 0 5px 5px 5px;
+#browser:not(.fullscreen)
+  #webpage-stack {
+  border-radius: var(--radius);
+  margin: 0 5px 5px 5px;
 }
 
 /* SPEED DIAL */
 .SpeedDial--Thumbnail {
-    background-color: var(--overlayColor);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: none;
+  background-color: var(--overlayColor);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: none;
 }
 
 /* CTRL+F */
 .find-in-page-wrapper {
-    background-color: var(--overlayColor);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+  background-color: var(--overlayColor);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* Transparent active tab background */
 .tab.active {
-    background-color: var(--overlayColor) !important;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition: background-color 0.2s ease;
+  background-color: var(
+    --overlayColor
+  ) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background-color 0.2s ease;
 }
-.tab.active::after { background: transparent !important; }
+.tab.active::after {
+  background: transparent !important;
+}
 
 /* BOOKMARK BAR */
 .bookmark-bar {
-    background-color: var(--overlayColor) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border-radius: var(--radius);
-    margin: 4px;
-    padding: 4px 8px;
-    min-height: 30px !important;
-    display: flex !important;
-    align-items: center !important;
+  background-color: var(
+    --overlayColor
+  ) !important;
+  backdrop-filter: blur(
+    12px
+  ) !important;
+  -webkit-backdrop-filter: blur(
+    12px
+  ) !important;
+  border-radius: var(--radius);
+  margin: 4px;
+  padding: 4px 8px;
+  min-height: 30px !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
-.bookmark-bar .observer { background: transparent !important; }
+.bookmark-bar .observer {
+  background: transparent !important;
+}
 
 .bookmark-bar button,
 .bookmark-bar .button-toolbar > button,
 .bookmark-bar .bookmark-item,
 .bookmark-bar .bookmarkbar-item,
-.bookmark-bar .toolbar > .button-toolbar > button {
-    background-color: transparent !important;
-    color: var(--colorFg) !important;
-    border: none !important;
-    border-radius: var(--radius);
-    height: 30px !important;
-    line-height: 30px !important;
-    padding: 0 8px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    transition: background-color 0.2s ease, backdrop-filter 0.2s ease, color 0.2s ease;
+.bookmark-bar
+  .toolbar
+  > .button-toolbar
+  > button {
+  background-color: transparent !important;
+  color: var(--colorFg) !important;
+  border: none !important;
+  border-radius: var(--radius);
+  height: 30px !important;
+  line-height: 30px !important;
+  padding: 0 8px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  transition: background-color 0.2s ease,
+    backdrop-filter 0.2s ease,
+    color 0.2s ease;
 }
 
 .bookmark-bar .button-title,
 .bookmark-bar .title,
-.bookmark-bar .bookmark-label { color: var(--colorFg) !important; }
+.bookmark-bar .bookmark-label {
+  color: var(--colorFg) !important;
+}
 
 .bookmark-bar button:hover,
-.bookmark-bar .button-toolbar > button:hover,
+.bookmark-bar
+  .button-toolbar
+  > button:hover,
 .bookmark-bar .bookmark-item:hover,
 .bookmark-bar .bookmarkbar-item:hover {
-    background-color: var(--overlayColor) !important;
-    backdrop-filter: blur(calc(var(--blurStrength) * 0.5));
-    -webkit-backdrop-filter: blur(calc(var(--blurStrength) * 0.5));
+  background-color: var(
+    --overlayColor
+  ) !important;
+  backdrop-filter: blur(
+    calc(var(--blurStrength) * 0.5)
+  );
+  -webkit-backdrop-filter: blur(
+    calc(var(--blurStrength) * 0.5)
+  );
 }
 
 .bookmark-bar button:active,
-.bookmark-bar .button-toolbar > button:active,
+.bookmark-bar
+  .button-toolbar
+  > button:active,
 .bookmark-bar .bookmark-item:active,
 .bookmark-bar .bookmarkbar-item:active,
-.bookmark-bar .button-toolbar > button[aria-pressed="true"] {
-    background-color: var(--overlayColor) !important;
-    backdrop-filter: blur(calc(var(--blurStrength) * 0.7));
-    -webkit-backdrop-filter: blur(calc(var(--blurStrength) * 0.7));
+.bookmark-bar
+  .button-toolbar
+  > button[aria-pressed="true"] {
+  background-color: var(
+    --overlayColor
+  ) !important;
+  backdrop-filter: blur(
+    calc(var(--blurStrength) * 0.7)
+  );
+  -webkit-backdrop-filter: blur(
+    calc(var(--blurStrength) * 0.7)
+  );
 }
 
 .bookmark-bar .separator {
-    opacity: 0.5;
-    border-right: 1px solid color-mix(in srgb, var(--colorFg), transparent 60%) !important;
+  opacity: 0.5;
+  border-right: 1px solid
+    color-mix(
+      in srgb,
+      var(--colorFg),
+      transparent 60%
+    ) !important;
 }
 
 /* ========================================================= */
@@ -276,16 +463,36 @@ div#main.right #panels-container {
 /* ========================================================= */
 
 /* Idle blurred */
-.startpage .SearchField:not(:hover):not(:focus-within),
-.StartPage .SearchField:not(:hover):not(:focus-within),
-.SpeedDial .SearchField:not(:hover):not(:focus-within),
-.SpeedDialView .SearchField:not(:hover):not(:focus-within) {
-    background-color: var(--overlayColor) !important;
-    backdrop-filter: blur(6px) !important;
-    -webkit-backdrop-filter: blur(6px) !important;
-    border-radius: var(--radius) !important;
-    box-shadow: none !important;
-    transition: background-color 0.18s ease, backdrop-filter 0.18s ease;
+.startpage
+  .SearchField:not(:hover):not(
+    :focus-within
+  ),
+.StartPage
+  .SearchField:not(:hover):not(
+    :focus-within
+  ),
+.SpeedDial
+  .SearchField:not(:hover):not(
+    :focus-within
+  ),
+.SpeedDialView
+  .SearchField:not(:hover):not(
+    :focus-within
+  ) {
+  background-color: var(
+    --overlayColor
+  ) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(
+    6px
+  ) !important;
+  border-radius: var(
+    --radius
+  ) !important;
+  box-shadow: none !important;
+  transition: background-color 0.18s
+      ease,
+    backdrop-filter 0.18s ease;
 }
 
 /* Stronger blur when hovered/focused */
@@ -296,11 +503,20 @@ div#main.right #panels-container {
 .SpeedDial .SearchField:hover,
 .SpeedDial .SearchField:focus-within,
 .SpeedDialView .SearchField:hover,
-.SpeedDialView .SearchField:focus-within {
-    background-color: var(--overlayColor) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border-radius: var(--radius) !important; /* keep corners consistent */
+.SpeedDialView
+  .SearchField:focus-within {
+  background-color: var(
+    --overlayColor
+  ) !important;
+  backdrop-filter: blur(
+    12px
+  ) !important;
+  -webkit-backdrop-filter: blur(
+    12px
+  ) !important;
+  border-radius: var(
+    --radius
+  ) !important; /* keep corners consistent */
 }
 
 /* Inner input transparency */
@@ -308,13 +524,15 @@ div#main.right #panels-container {
 .StartPage .SearchField input,
 .SpeedDial .SearchField input,
 .SpeedDialView .SearchField input {
-    background: transparent !important;
-    color: inherit !important;
-    border-radius: var(--radius) !important;
+  background: transparent !important;
+  color: inherit !important;
+  border-radius: var(
+    --radius
+  ) !important;
 }
 .mainbar,
 .bookmark-bar {
-    z-index: 10; /* keep reasonable */
+  z-index: 10; /* keep reasonable */
 }
 
 /* ========================================================= */
@@ -323,163 +541,544 @@ div#main.right #panels-container {
 
 /* Config variables */
 :root {
-    --startpageNavBtnPrimary: var(--colorFg);
-    --startpageNavBtnSecondary: var(--colorFg);
-    --startpageNavBtnInactive: transparent;
-    --startpageNavBtnRounding: 14px;
-    --startpageNavBtnHeight: 23px;
-    --startpageNavBtnMargin: 10px;
-    --startpageNavPaddingOnTop: 10px;       /* Vertical spacing */
-    --startpageNavPaddingOnBottom: 10px;    /* Vertical spacing */
-    --startpageNavTextShadow: 0 0 2px var(--startpageNavBtnSecondary), 0 0 3px var(--startpageNavBtnSecondary), 0 0 5px var(--startpageNavBtnSecondary);
-    --startpageNavIconShadow: drop-shadow(0 0 4px var(--startpageNavBtnSecondary));
+  --startpageNavBtnPrimary: var(
+    --colorFg
+  );
+  --startpageNavBtnSecondary: var(
+    --colorFg
+  );
+  --startpageNavBtnInactive: transparent;
+  --startpageNavBtnRounding: 14px;
+  --startpageNavBtnHeight: 23px;
+  --startpageNavBtnMargin: 10px;
+  --startpageNavPaddingOnTop: 10px; /* Vertical spacing */
+  --startpageNavPaddingOnBottom: 10px; /* Vertical spacing */
+  --startpageNavTextShadow: 0 0 2px
+      var(--startpageNavBtnSecondary),
+    0 0 3px
+      var(--startpageNavBtnSecondary),
+    0 0 5px
+      var(--startpageNavBtnSecondary);
+  --startpageNavIconShadow: drop-shadow(
+    0 0 4px
+      var(--startpageNavBtnSecondary)
+  );
 
-    /* Adaptive blur strength */
-    --startpageNavBlur: 6px;        /* default blur for nav bar */
-    --startpageNavBlurStrong: 12px; /* blur for active/hover buttons */
+  /* Adaptive blur strength */
+  --startpageNavBlur: 6px; /* default blur for nav bar */
+  --startpageNavBlurStrong: 12px; /* blur for active/hover buttons */
 }
 
 /* Startpage Nav Bar container */
 .startpage .startpage-navigation {
-    background-color: var(--overlayColor);
-    backdrop-filter: blur(var(--startpageNavBlur));
-    -webkit-backdrop-filter: blur(var(--startpageNavBlur));
-    box-shadow: unset;
-    padding-top: var(--startpageNavPaddingOnTop);
-    padding-bottom: calc(var(--startpageNavPaddingOnBottom) - 2px);
-    min-height: unset;
-    display: flex;
-    justify-content: center;
-    border-radius: var(--customRadius);
+  background-color: var(--overlayColor);
+  backdrop-filter: blur(
+    var(--startpageNavBlur)
+  );
+  -webkit-backdrop-filter: blur(
+    var(--startpageNavBlur)
+  );
+  box-shadow: unset;
+  padding-top: var(
+    --startpageNavPaddingOnTop
+  );
+  padding-bottom: calc(
+    var(--startpageNavPaddingOnBottom) -
+      2px
+  );
+  min-height: unset;
+  display: flex;
+  justify-content: center;
+  border-radius: var(--customRadius);
 }
 
 /* Folder nav buttons background */
-.startpage .startpage-folder-navigation button {
-    background-color: unset;
+.startpage
+  .startpage-folder-navigation
+  button {
+  background-color: unset;
 }
 
 /* Startpage Nav Bar buttons */
-.startpage .startpage-navigation .button-startpage,
-.startpage .startpage-folder-navigation .button-startpage {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: var(--startpageNavBtnHeight);
-    border-radius: var(--startpageNavBtnRounding) !important;
-    border: 1.2px solid var(--startpageNavBtnPrimary);
-    background-color: var(--startpageNavBtnInactive);
-    color: var(--startpageNavBtnPrimary);
-    margin: 0 var(--startpageNavBtnMargin) !important;
-    text-shadow: var(--startpageNavTextShadow);
-    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-    transition: 0.2s ease;
-    font-size: 11px;
-    font-weight: 500;
+.startpage
+  .startpage-navigation
+  .button-startpage,
+.startpage
+  .startpage-folder-navigation
+  .button-startpage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--startpageNavBtnHeight);
+  border-radius: var(
+    --startpageNavBtnRounding
+  ) !important;
+  border: 1.2px solid
+    var(--startpageNavBtnPrimary);
+  background-color: var(
+    --startpageNavBtnInactive
+  );
+  color: var(--startpageNavBtnPrimary);
+  margin: 0 var(--startpageNavBtnMargin) !important;
+  text-shadow: var(
+    --startpageNavTextShadow
+  );
+  box-shadow: 0 0 2px 1px
+    rgba(0, 0, 0, 0.2);
+  transition: 0.2s ease;
+  font-size: 11px;
+  font-weight: 500;
 }
 
 /* Hover / active states with stronger blur */
-.startpage .startpage-navigation .button-startpage.active,
-.startpage .startpage-navigation .button-startpage:hover,
-.startpage .startpage-folder-navigation .button-startpage:hover {
-    color: var(--startpageNavBtnSecondary);
-    background-color: var(--startpageNavBtnPrimary);
-    text-shadow: 0 0 0.5px var(--startpageNavBtnSecondary);
-    backdrop-filter: blur(var(--startpageNavBlurStrong));
-    -webkit-backdrop-filter: blur(var(--startpageNavBlurStrong));
+.startpage
+  .startpage-navigation
+  .button-startpage.active,
+.startpage
+  .startpage-navigation
+  .button-startpage:hover,
+.startpage
+  .startpage-folder-navigation
+  .button-startpage:hover {
+  color: var(
+    --startpageNavBtnSecondary
+  );
+  background-color: var(
+    --startpageNavBtnPrimary
+  );
+  text-shadow: 0 0 0.5px
+    var(--startpageNavBtnSecondary);
+  backdrop-filter: blur(
+    var(--startpageNavBlurStrong)
+  );
+  -webkit-backdrop-filter: blur(
+    var(--startpageNavBlurStrong)
+  );
 }
 
 /* Icons styling */
-.startpage .startpage-navigation .button-startpage svg,
-.startpage .startpage-folder-navigation .button-startpage svg {
-    color: var(--startpageNavBtnPrimary);
-    filter: var(--startpageNavIconShadow);
-    width: auto;
-    height: 2.1em;
+.startpage
+  .startpage-navigation
+  .button-startpage
+  svg,
+.startpage
+  .startpage-folder-navigation
+  .button-startpage
+  svg {
+  color: var(--startpageNavBtnPrimary);
+  filter: var(--startpageNavIconShadow);
+  width: auto;
+  height: 2.1em;
 }
 
 /* Hover / active icons */
-.startpage .startpage-navigation .button-startpage.active svg,
-.startpage .startpage-navigation .button-startpage:hover svg,
-.startpage .startpage-folder-navigation .button-startpage:hover svg {
-    color: var(--startpageNavBtnSecondary);
-    filter: unset;
+.startpage
+  .startpage-navigation
+  .button-startpage.active
+  svg,
+.startpage
+  .startpage-navigation
+  .button-startpage:hover
+  svg,
+.startpage
+  .startpage-folder-navigation
+  .button-startpage:hover
+  svg {
+  color: var(
+    --startpageNavBtnSecondary
+  );
+  filter: unset;
 }
 
 /* Folder back button adjustments */
 button.button-startpage.up-level svg {
-    position: unset;
-    margin: 0 4px;
+  position: unset;
+  margin: 0 4px;
 }
-button.button-startpage.up-level span { display: flex; }
-.button-startpage.up-level { padding: 0 14px 0 6px; }
+button.button-startpage.up-level span {
+  display: flex;
+}
+.button-startpage.up-level {
+  padding: 0 14px 0 6px;
+}
 
 /* Center folder navigation */
-.startpage .startpage-folder-navigation {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.startpage
+  .startpage-folder-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Remove borders & extra styling */
-.startpage .startpage-navigation .startpage-navigation-group:last-of-type { border: unset; }
-button.button-startpage:after { content: unset; }
+.startpage
+  .startpage-navigation
+  .startpage-navigation-group:last-of-type {
+  border: unset;
+}
+button.button-startpage:after {
+  content: unset;
+}
 
 /* ========================================================= */
 /* ADD / PLUS BUTTON FIXES */
 /* ========================================================= */
-.startpage .startpage-navigation .button-startpage.add-set {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 !important;                  /* remove extra padding */
-    min-width: 27px;                         /* small width */
-    height: var(--startpageNavBtnHeight);    /* match other buttons */
-    border-radius: var(--startpageNavBtnRounding) !important;
-    background-color: var(--startpageNavBtnInactive);
-    border: 1.2px solid var(--startpageNavBtnPrimary);
-    margin: 0 var(--startpageNavBtnMargin) !important;
-    text-shadow: var(--startpageNavTextShadow);
-    box-shadow: 0 0 2px 1px rgba(0,0,0,0.2);
-    transition: 0.2s ease;
+.startpage
+  .startpage-navigation
+  .button-startpage.add-set {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important; /* remove extra padding */
+  min-width: 27px; /* small width */
+  height: var(
+    --startpageNavBtnHeight
+  ); /* match other buttons */
+  border-radius: var(
+    --startpageNavBtnRounding
+  ) !important;
+  background-color: var(
+    --startpageNavBtnInactive
+  );
+  border: 1.2px solid
+    var(--startpageNavBtnPrimary);
+  margin: 0 var(--startpageNavBtnMargin) !important;
+  text-shadow: var(
+    --startpageNavTextShadow
+  );
+  box-shadow: 0 0 2px 1px
+    rgba(0, 0, 0, 0.2);
+  transition: 0.2s ease;
 }
 
 /* Center the SVG inside the add button */
-.startpage .startpage-navigation .button-startpage.add-set svg {
-    height: 16px;
-    width: 16px;
-    margin: 0;
-    display: block;
+.startpage
+  .startpage-navigation
+  .button-startpage.add-set
+  svg {
+  height: 16px;
+  width: 16px;
+  margin: 0;
+  display: block;
 }
 
 /* Hover / active for add button */
-.startpage .startpage-navigation .button-startpage.add-set:hover,
-.startpage .startpage-navigation .button-startpage.add-set.active {
-    background-color: var(--startpageNavBtnPrimary);
-    color: var(--startpageNavBtnSecondary);
-    backdrop-filter: blur(var(--startpageNavBlurStrong));
-    -webkit-backdrop-filter: blur(var(--startpageNavBlurStrong));
+.startpage
+  .startpage-navigation
+  .button-startpage.add-set:hover,
+.startpage
+  .startpage-navigation
+  .button-startpage.add-set.active {
+  background-color: var(
+    --startpageNavBtnPrimary
+  );
+  color: var(
+    --startpageNavBtnSecondary
+  );
+  backdrop-filter: blur(
+    var(--startpageNavBlurStrong)
+  );
+  -webkit-backdrop-filter: blur(
+    var(--startpageNavBlurStrong)
+  );
 }
 
-.startpage .startpage-navigation .button-startpage.add-set:hover svg path,
-.startpage .startpage-navigation .button-startpage.add-set.active svg path {
-    fill: var(--startpageNavBtnSecondary);
+.startpage
+  .startpage-navigation
+  .button-startpage.add-set:hover
+  svg
+  path,
+.startpage
+  .startpage-navigation
+  .button-startpage.add-set.active
+  svg
+  path {
+  fill: var(--startpageNavBtnSecondary);
 }
 
 /* Add folder button tweaks (keep min width for alignment) */
-.startpage .startpage-navigation .button-startpage.add-set {
-    padding-left: 1px;
-    padding-right: 1px;
+.startpage
+  .startpage-navigation
+  .button-startpage.add-set {
+  padding-left: 1px;
+  padding-right: 1px;
 }
 
 /* Speed dial items spacing fix */
-.speeddial { margin-top: 0; padding-top: 2px; }
+.speeddial {
+  margin-top: 0;
+  padding-top: 2px;
+}
 
 /* Search bar spacing fix */
-.sdwrapper .iconmenu-container.searchfield { margin: 0px auto 25px; }
+.sdwrapper
+  .iconmenu-container.searchfield {
+  margin: 0px auto 25px;
+}
 
 /* Notes icon scale */
-.startpage .startpage-navigation .button-startpage[data-id="notes"] svg { transform: scale(1.45); }
+.startpage
+  .startpage-navigation
+  .button-startpage[data-id="notes"]
+  svg {
+  transform: scale(1.45);
+}
 
 /* ========================================================= */
 /* END STARTPAGE NAVIGATION */
 /* ========================================================= */
+
+/* popup page zoom control */
+.toolbar-mainbar
+  .page-zoom-controls
+  input[type="range"] {
+  position: absolute;
+  width: 142px;
+  transform: translate(-7px, 0);
+  visibility: hidden;
+  opacity: 0;
+  z-index: 9;
+  background-image: repeating-linear-gradient(
+    -50deg,
+    #0000 0 20%,
+    var(--colorBg) 0 21%,
+    #fff6 0 40%,
+    var(--colorBg) 0 41%
+  );
+  box-shadow: 0 0 0 7px var(--colorBg),
+    0 0 0 8px var(--colorBorder),
+    0 2px 12px hsl(0deg 0% 0% / 25%);
+  transition: visibility 0.6s,
+    opacity 0.2s ease-out 0.4s,
+    transform 0.25s ease-in 0.35s !important;
+}
+
+.toolbar-mainbar
+  .page-zoom-controls:is(
+    :hover,
+    :focus-within
+  )
+  > input[type="range"] {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-7px, 29px);
+  transition: opacity 0.1s ease-out 0.2s,
+    transform 0.2s ease-out 0.1s !important;
+}
+
+.toolbar-mainbar
+  .page-zoom-controls
+  input[type="range"]::after {
+  content: "";
+  position: absolute;
+  top: -19px;
+  left: 13.5%;
+  border: 6px solid hsl(0deg 0% 0% / 0%);
+  border-bottom-color: var(
+    --colorBgLight
+  );
+  filter: drop-shadow(
+    0 -1px var(--colorBorder)
+  );
+  pointer-events: none;
+}
+
+.toolbar-mainbar
+  .page-zoom-controls
+  > input[type="range"]::before {
+  content: "";
+  position: absolute;
+  inset: -14px 0 100% 0;
+}
+
+.toolbar-mainbar
+  .page-zoom-controls:has(
+    input[type="range"]
+  )
+  .button-toolbar[title="Reset Zoom"]:has(
+    button:disabled
+  ) {
+  display: none;
+}
+
+.toolbar-mainbar
+  .page-zoom-controls:has(
+    input[type="range"]
+  )
+  .button-toolbar:has(
+    button[title="Reset Zoom"]
+  ) {
+  position: absolute;
+  align-self: unset;
+  transform: translate(14px, 18.5px);
+  z-index: 19;
+  width: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in 0.25s,
+    visibility 0.5s !important;
+}
+
+.toolbar-mainbar
+  .page-zoom-controls:has(
+    input[type="range"]
+  ):is(:hover, :focus-within)
+  .button-toolbar:has(
+    button[title="Reset Zoom"]
+  ) {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s ease-in 0.13s !important;
+}
+
+.toolbar-mainbar
+  .page-zoom-controls:has(
+    input[type="range"]
+  )
+  button[title="Reset Zoom"] {
+  border: 0;
+  height: 13px;
+}
+
+.toolbar-mainbar
+  .page-zoom-controls:has(
+    input[type="range"]
+  )
+  button[title="Reset Zoom"]
+  .button-title {
+  min-width: 1ch;
+  max-width: 1ch;
+  font-size: 13px;
+  font-weight: bold;
+  text-shadow: -1px 0 var(--colorBg),
+    1px 0 var(--colorBg),
+    -2px 0 var(--colorBg),
+    2px 0 var(--colorBg);
+}
+
+.toolbar-mainbar
+  .page-zoom-controls:has(
+    input[type="range"]
+  )
+  button[title="Reset Zoom"]:hover
+  .button-title {
+  font-size: 17px;
+  color: var(--colorHighlightBg);
+}
+
+/* leftside 1st button */
+.toolbar-mainbar
+  > div:first-child
+  > .page-zoom-controls:is(
+    :hover,
+    :focus-within
+  )
+  > input[type="range"] {
+  transform: translate(3px, 29px);
+}
+
+.toolbar-mainbar
+  > div:first-child
+  > .page-zoom-controls:has(
+    input[type="range"]
+  )
+  .button-toolbar:has(
+    button[title="Reset Zoom"]
+  ) {
+  transform: translate(24px, 18.5px);
+}
+
+/* rightside button */
+.toolbar-mainbar
+  > div:nth-last-child(4)
+  > .page-zoom-controls:is(
+    :hover,
+    :focus-within
+  )
+  > input[type="range"] {
+  transform: translate(-10px, 29px);
+}
+
+.toolbar-mainbar
+  > div:nth-last-child(3)
+  > .page-zoom-controls:is(
+    :hover,
+    :focus-within
+  )
+  > input[type="range"] {
+  transform: translate(-44px, 29px);
+}
+
+.toolbar-mainbar
+  > div:nth-last-child(3)
+  > .page-zoom-controls
+  input[type="range"]::after {
+  left: 40%;
+}
+
+.toolbar-mainbar
+  > div:nth-last-child(3)
+  > .page-zoom-controls:has(
+    input[type="range"]
+  )
+  .button-toolbar:has(
+    button[title="Reset Zoom"]
+  ) {
+  transform: translate(-24px, 18.5px);
+}
+
+.toolbar-mainbar
+  > div:nth-last-child(2)
+  > .page-zoom-controls:is(
+    :hover,
+    :focus-within
+  )
+  > input[type="range"] {
+  transform: translate(-78px, 29px);
+}
+
+.toolbar-mainbar
+  > div:nth-last-child(2)
+  > .page-zoom-controls
+  input[type="range"]::after {
+  left: 64%;
+}
+
+.toolbar-mainbar
+  > div:nth-last-child(2)
+  > .page-zoom-controls:has(
+    input[type="range"]
+  )
+  .button-toolbar:has(
+    button[title="Reset Zoom"]
+  ) {
+  transform: translate(-58px, 18.5px);
+}
+
+.toolbar-mainbar
+  > div:last-child
+  > .page-zoom-controls:is(
+    :hover,
+    :focus-within
+  )
+  > input[type="range"] {
+  transform: translate(-112px, 29px);
+}
+
+.toolbar-mainbar
+  > div:last-child
+  > .page-zoom-controls
+  input[type="range"]::after {
+  left: 88%;
+}
+
+.toolbar-mainbar
+  > div:last-child
+  > .page-zoom-controls:has(
+    input[type="range"]
+  )
+  .button-toolbar:has(
+    button[title="Reset Zoom"]
+  ) {
+  transform: translate(-92px, 18.5px);
+}
