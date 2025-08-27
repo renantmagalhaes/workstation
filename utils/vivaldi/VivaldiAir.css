@@ -828,6 +828,14 @@ button.button-startpage:after {
 /* END STARTPAGE NAVIGATION */
 /* ========================================================= */
 
+/* Extra bottom gap like Vivaldi-Arc */
+#browser:not(.tabs-top):not(
+    .tabs-bottom
+  ):not(.fullscreen)
+  #webview-container {
+  margin: 6px 6px 6px 0px; /* left/right = 5px, bottom = 15px */
+}
+
 /* popup page zoom control */
 .toolbar-mainbar
   .page-zoom-controls
