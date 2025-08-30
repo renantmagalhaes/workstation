@@ -128,7 +128,8 @@ TODO: Suggestions?
   padding-top: 5px;
 }
 
-div#main.right #panels-container {
+div#main.right #panels-container,
+div#main.left #panels-container {
   padding-bottom: 5px;
 }
 
@@ -159,9 +160,15 @@ div#main.right #panels-container {
   );
 }
 
+/* Apply for both left & right */
 #panels-container.right:not(.icons)
   .panel-group,
+#panels-container.left:not(.icons)
+  .panel-group,
 #panels-container.right.icons:not(
+    :has(.SlideBar)
+  ),
+#panels-container.left.icons:not(
     :has(.SlideBar)
   ) {
   border-left: none;
@@ -928,25 +935,30 @@ button.button-startpage:after {
 /*         WEBPANELS         */
 /* ========================= */
 
-#panels-container.right .panel {
-  padding: 5px 13px 5px 5px; /* keep spacing */
-}
-
 #panels-container.left .panel {
   padding: 5px 5px 5px 13px; /* flipped: left-side panels -> left inset */
 }
 
-/* Panel group container with blur + overlay */
+/* panel group container with blur / Base: no horizontal margins by default */
 .panel-group {
   background-color: var(--overlayColor);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: var(--radius);
-  margin-right: 5px;
-  margin-left: 5px;
-  box-shadow: none; /* keep clean like the rest of UI */
+  margin: 0;
+  box-shadow: none;
   transition: background-color 0.2s ease,
     backdrop-filter 0.2s ease;
+}
+
+/* Apply outer margin only to the side that owns the panels */
+#panels-container.left .panel-group {
+  margin-left: 5px;
+  margin-right: 0;
+}
+#panels-container.right .panel-group {
+  margin-right: 5px;
+  margin-left: 0;
 }
 
 /* Remove panel header titles */
@@ -1033,6 +1045,79 @@ button.button-startpage:after {
 #browser #panels-container.left,
 #browser #panels-container.right {
   margin-bottom: 5px !important;
+}
+
+/* ======================================================== */
+/* Collapse header/titlebar completely when tabs are hidden */
+/* ======================================================== */
+
+#browser.tabs-off #header,
+#browser.tabs-off #titlebar {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+/* ======================= */
+/* Horizontal Menu Styling */
+/* ======================= */
+
+/* Make sure header/titlebar don't override */
+#browser #header,
+#browser #titlebar {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.menubar {
+  background-color: var(
+    --overlayColor
+  ) !important;
+  backdrop-filter: blur(
+    12px
+  ) !important;
+  -webkit-backdrop-filter: blur(
+    12px
+  ) !important;
+  border-radius: var(
+    --radius
+  ) !important;
+  margin: 4px;
+  height: 28px !important;
+  display: flex;
+  align-items: center;
+}
+
+/* Menu items */
+.menubar > .menuitem {
+  color: var(--colorFg) !important;
+  background: transparent !important;
+  border-radius: var(--radius);
+  padding: 0 10px !important;
+  transition: background-color 0.2s ease,
+    backdrop-filter 0.2s ease;
+}
+
+/* Hover */
+.menubar > .menuitem:hover {
+  background-color: var(
+    --overlayColor
+  ) !important;
+  backdrop-filter: blur(6px) !important;
+}
+
+/* Active / pressed state */
+.menubar > .menuitem:active,
+.menubar > .menuitem[open] {
+  background-color: var(
+    --overlayColor
+  ) !important;
+  backdrop-filter: blur(8px) !important;
 }
 /* ========================================================= */
 /* END STARTPAGE NAVIGATION */
