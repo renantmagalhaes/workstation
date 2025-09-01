@@ -30,7 +30,7 @@ fi
 xdotool key --clearmodifiers Num_Lock &
 
 # Top padding
-bspc config top_padding 30
+bspc config top_padding 5
 
 # Monitor setup
 xrandr --output HDMI-1 --right-of DP-1
