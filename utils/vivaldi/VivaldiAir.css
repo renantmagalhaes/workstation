@@ -1402,6 +1402,14 @@ button.button-startpage:after {
   margin: 3px 3px 8px 3px; /* top right bottom left */
 }
 
+/* Extra gaps for the panels container on all sides */
+#browser:not(.tabs-top):not(
+    .tabs-bottom
+  ):not(.fullscreen)
+  #panels-container {
+  margin: 6px 10px 10px 0 !important; /* top right bottom left */
+}
+
 /* popup page zoom control */
 .toolbar-mainbar
   .page-zoom-controls
