@@ -1,320 +1,589 @@
-/* Vivaldi Air v.19.2
-
- * https://raw.githubusercontent.com/MohamedxSalah/Vivaldi-Air/refs/heads/main/VivaldiAir.css
+/* Vivaldi Air v.22
+https://raw.githubusercontent.com/MohamedxSalah/Vivaldi-Air/refs/heads/main/VivaldiAir.css
 TODO: Suggestions?
-
+Fix sorting in panels
+Fix checkboxes
+Do translate menu
 */
 
 :root {
-    --customRadius: 8px; /* NOT USING NOW */
+  --customRadius: 8px; /* NOT USING NOW */
 
-    --bgDark: rgba(0, 0, 0, 0.4);
-    --bgLight: rgba(255, 255, 255, 0.4);
-    
-    --bgDisabledDark: rgba(0, 0, 0, 0.2);
-    --bgDisabledLight: rgba(255, 255, 255, 0.2);
+  --bgDark: rgba(0, 0, 0, 0.4);
+  --bgLight: rgba(255, 255, 255, 0.4);
 
-    --blurLow: blur(4px);
-    --blurMed: blur(6px);
-    --blurMedHigh: blur(8px);
-    --blurHigh: blur(12px);
+  --bgDisabledDark: rgba(0, 0, 0, 0.2);
+  --bgDisabledLight: rgba(
+    255,
+    255,
+    255,
+    0.2
+  );
 
-    --hoverBlur: var(--blurMed);
+  --blurLow: blur(4px);
+  --blurMed: blur(6px);
+  --blurMedHigh: blur(8px);
+  --blurHigh: blur(12px);
 
-    --anim-duration: 128ms;
+  --hoverBlur: var(--blurMed);
 
-    --space: 5px;
+  --anim-duration: 128ms;
 
+  --space: 5px;
 }
 
 /* set theme-aware overlay */
 .theme-dark {
-    --bg: var(--bgDark);
-    --bgDisabled: var(--bgDisabledDark);
+  --bg: var(--bgDark);
+  --bgDisabled: var(--bgDisabledDark);
 }
 .theme-light {
-    --bg: var(--bgLight);
-    --bgDisabled: var(--bgDisabledLight);
+  --bg: var(--bgLight);
+  --bgDisabled: var(--bgDisabledLight);
 }
 
 /* MAINBAR */
 
-#browser.win.address-top .toolbar-mainbar:has(.window-buttongroup.on-mainbar),
-#browser.linux.address-top .toolbar-mainbar:has(.window-buttongroup.on-mainbar) {
-    min-height: calc(42px / var(--uiZoomLevel));
+#browser.win.address-top
+  .toolbar-mainbar:has(
+    .window-buttongroup.on-mainbar
+  ),
+#browser.linux.address-top
+  .toolbar-mainbar:has(
+    .window-buttongroup.on-mainbar
+  ) {
+  min-height: calc(
+    42px / var(--uiZoomLevel)
+  );
 }
 
-.density-on .UrlBar-SearchField, 
+.density-on .UrlBar-SearchField,
 .density-on .UrlBar-AddressField {
-    height: 34px;
+  height: 34px;
 }
 
-.disable-titlebar#browser.win .window-buttongroup {
-    height: 44px;
+.disable-titlebar#browser.win
+  .window-buttongroup {
+  height: 44px;
 }
 
-#browser.win .window-buttongroup button.window-close {
-    border-top-right-radius: var(--radius);
-    border-bottom-right-radius: var(--radius); 
+#browser.win
+  .window-buttongroup
+  button.window-close {
+  border-top-right-radius: var(
+    --radius
+  );
+  border-bottom-right-radius: var(
+    --radius
+  );
 }
 
 .mainbar {
-    background-color: var(--bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    margin: 5px;
-    border-radius: var(--radius);
+  background-color: var(--bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin: 5px;
+  border-radius: var(--radius);
 }
 
-.SearchField, .UrlBar-AddressField {
-    border: none !important;
-    background-color: transparent;
+.SearchField,
+.UrlBar-AddressField {
+  border: none !important;
+  background-color: transparent;
 }
 
-.SearchField:hover, .UrlBar-AddressField:hover,
-.color-behind-tabs-on .SearchField:focus-within, 
-.color-behind-tabs-on .MailSearchField-Inner:focus-within, 
-.color-behind-tabs-on .UrlBar-AddressField:focus-within {
-    background-color: var(--bg);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+.SearchField:hover,
+.UrlBar-AddressField:hover,
+.color-behind-tabs-on
+  .SearchField:focus-within,
+.color-behind-tabs-on
+  .MailSearchField-Inner:focus-within,
+.color-behind-tabs-on
+  .UrlBar-AddressField:focus-within {
+  background-color: var(--bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .UrlFragment-Wrapper--ShouldHighlight {
-    --HighlightColor: var(--colorFg);
-    --LowlightColor: var(--colorFg);
+  --HighlightColor: var(--colorFg);
+  --LowlightColor: var(--colorFg);
 }
 
-.address-top .mainbar { border-bottom: none; }
+.address-top .mainbar {
+  border-bottom: none;
+}
 
 .mainbar button:hover,
-#browser:not(.tabs-top) .vivaldi:hover, 
-#browser:not(.tabs-top) .vivaldi:focus-visible,
-.theme-dark#browser.win .window-buttongroup button:hover {
-    background-color: var(--bg);
-    backdrop-filter: var(--blurMed);
+#browser:not(.tabs-top) .vivaldi:hover,
+#browser:not(.tabs-top)
+  .vivaldi:focus-visible,
+.theme-dark#browser.win
+  .window-buttongroup
+  button:hover {
+  background-color: var(--bg);
+  backdrop-filter: var(--blurMed);
 }
 
-.disable-titlebar.address-top#browser:not(.tabs-top) .vivaldi {
-    margin: 0 5px;
+.disable-titlebar.address-top#browser:not(
+    .tabs-top
+  )
+  .vivaldi {
+  margin: 0 5px;
 }
-
 
 /* SIDEBAR */
 
-#panels-container.overlay:not(.icons) .panel-group {
-    background-color: var(--bg) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: var(--radius);
+#panels-container {
+  margin-bottom: 5px;
+  background-color: var(--bg);
+  border-radius: var(--radius);
+  min-width: 44px;
+  position: relative;
+  transition: width var(--anim-duration),
+    margin-left var(--anim-duration)
+      ease-out,
+    min-width var(--anim-duration) !important;
 }
 
-#panels-container.left { margin-left: 5px; }  
-#panels-container.right { margin-right: 5px; }  
+/* Create backdrop blur with pseudo-element */
+#panels-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius);
+  pointer-events: none;
+  z-index: -1;
+}
 
-#panels-container #switch { padding-bottom: 5px; min-width: 44px; }
+#panels-container.overlay:not(.icons)
+  .panel-group {
+  background-color: var(
+    --bg
+  ) !important;
+  backdrop-filter: blur(
+    12px
+  ) !important;
+  -webkit-backdrop-filter: blur(
+    12px
+  ) !important;
+  border-radius: var(--radius);
+  margin-left: 5px;
+  margin-right: 5px;
+}
 
-#panels-container {
-    margin-bottom: 5px;
-    background-color: var(--bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: var(--radius);
-    min-width: 44px;
-    transition: 
-        width var(--anim-duration), 
-        margin-left var(--anim-duration) ease-out, 
-        min-width var(--anim-duration) !important;
+#panels-container.left {
+  margin-left: 5px;
+}
+#panels-container.right {
+  margin-right: 5px;
+}
 
+#panels-container #switch {
+  padding-bottom: 5px;
+  min-width: 44px;
 }
 
 #panels-container.switcher {
-    width: 0;
-    min-width: 0;
-    margin-left: 0;
-    margin-right: 0;
-    overflow: hidden;
+  width: 0;
+  min-width: 0;
+  margin-left: 0;
+  margin-right: 0;
+  overflow: hidden;
 }
 
 /* doesnt disappear on collapse transition */
 #panels-container.switcher #switch {
-    visibility: none !important; 
+  visibility: none !important;
 }
 
 #panels {
-    padding-bottom: 5px;
+  padding-bottom: 5px;
 }
 
-#panels .webpanel-stack .webpanel .webpanel-content {
-    margin: 5px;
-    margin-bottom: 0;
-    border-radius: var(--radius);
+#panels
+  .webpanel-stack
+  .webpanel
+  .webpanel-content {
+  margin: 5px;
+  margin-bottom: 0;
+  border-radius: var(--radius);
 }
 
-#panels .webpanel-stack .webpanel .webpanel-header {
-    box-shadow: none !important;
-    padding-bottom: 0;
+#panels
+  .webpanel-stack
+  .webpanel
+  .webpanel-header {
+  box-shadow: none !important;
+  padding-bottom: 0;
 }
 
 /* basic components */
 #panels input,
-#panels label:not(div.tree-row > label):not(.disabled),
+#panels
+  label:not(div.tree-row > label):not(
+    .disabled
+  ),
 #panels textarea {
-    background-color: var(--bg);
-    border-radius: var(--radius);
-    border: none;
-    box-shadow: none;
+  background-color: var(--bg);
+  border-radius: var(--radius);
+  border: none;
+  box-shadow: none;
 }
 
 #panels .sortselector {
-    border: none !important;
-    background-color: var(--bg);
+  border: none !important;
+  background-color: var(--bg);
 }
 
 #panels .sortselector-button {
-    background-color: none !important;
-    height: calc(var(--treeViewRowHeight) - 2px);
+  background-color: none !important;
+  height: calc(
+    var(--treeViewRowHeight) - 2px
+  );
 }
 
-#panels #window-panel .vivaldi-tree .tree-row {
-    background-color: var(--bg) !important;
+#panels
+  #window-panel
+  .vivaldi-tree
+  .tree-row {
+  background-color: var(
+    --bg
+  ) !important;
 }
 
 .panel-group .button-toolbar > button {
-    background-color: var(--bg) !important;
-    background-image: none !important;
-    border: none !important;
+  background-color: var(
+    --bg
+  ) !important;
+  background-image: none !important;
+  border: none !important;
 }
-.panel-group .button-toolbar > button:disabled {
-    background-color: var(--bgDisabled) !important;
+.panel-group
+  .button-toolbar
+  > button:disabled {
+  background-color: var(
+    --bgDisabled
+  ) !important;
 }
 
 /* New note textbox */
-.NotesEditor-Editor-Background:after { visibility: hidden; }
+.NotesEditor-Editor-Background:after {
+  visibility: hidden;
+}
 .NotesEditor-EmptyPlaceholder:hover {
-    background-color: var(--bg);
-    outline: none;
-    border-radius: var(--radius);
+  background-color: var(--bg);
+  outline: none;
+  border-radius: var(--radius);
 }
 
 #panels-container.overlay .panel-group,
 .ExtensionToggleIcon.ExtensionToggleIcon--Expanded,
-.ExtensionIcon--Hidden { background-color: transparent; }
+.ExtensionIcon--Hidden {
+  background-color: transparent;
+}
 
 #panels-container button:hover,
-.ExtensionIcon--Hidden:hover, 
+.ExtensionIcon--Hidden:hover,
 .ExtensionIcon--Hidden:active,
-.toolbar-panel > .button-toolbar > button.button-pressed, 
-.toolbar-panel .toolbar-extensions .button-toolbar > button.button-pressed, 
-.toolbar-panel .page-zoom-controls .button-toolbar > button.button-pressed,
-.density-on #switch .addwebpanel-wrapper > button.active button, 
-.density-on #switch > .button-toolbar.active button, 
-.density-on #switch > * > .button-toolbar.active button, 
-.density-on #switch > button.active button {
-    background-color: var(--bg);
-    backdrop-filter: var(--blurMed);
+.toolbar-panel
+  > .button-toolbar
+  > button.button-pressed,
+.toolbar-panel
+  .toolbar-extensions
+  .button-toolbar
+  > button.button-pressed,
+.toolbar-panel
+  .page-zoom-controls
+  .button-toolbar
+  > button.button-pressed,
+.density-on
+  #switch
+  .addwebpanel-wrapper
+  > button.active
+  button,
+.density-on
+  #switch
+  > .button-toolbar.active
+  button,
+.density-on
+  #switch
+  > *
+  > .button-toolbar.active
+  button,
+.density-on
+  #switch
+  > button.active
+  button {
+  background-color: var(--bg);
+  backdrop-filter: var(--blurMed);
 }
 
 /* STATUS BAR */
 footer#footer {
-    background: none !important;
-    border-top: none !important;
+  background: none !important;
+  border-top: none !important;
 }
 
 footer .toolbar-statusbar {
-    background-color: var(--bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    background-color: var(--bg);
-    border-radius: var(--radius);
-    margin: 0 5px 5px 5px;
+  background-color: var(--bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: var(--bg);
+  border-radius: var(--radius);
+  margin: 0 5px 5px 5px;
 }
 
-.inner > .StatusInfo > .StatusInfo-Content {
-    background-color: var(--bg) !important;
-    backdrop-filter: var(--blurLow) !important;
-    -webkit-backdrop-filter: var(--blurLow) !important;
-    border-radius: var(--radius) !important;
-    padding-bottom: 5px !important;
-    background-color: var(--bg);
-    margin: 0 0 5px 13px !important;
-    border: none !important;
+.inner
+  > .StatusInfo
+  > .StatusInfo-Content {
+  background-color: var(
+    --bg
+  ) !important;
+  backdrop-filter: var(
+    --blurLow
+  ) !important;
+  -webkit-backdrop-filter: var(
+    --blurLow
+  ) !important;
+  border-radius: var(
+    --radius
+  ) !important;
+  padding-bottom: 5px !important;
+  background-color: var(--bg);
+  margin: 0 0 5px 13px !important;
+  border: none !important;
 }
 
-/* WORKSPACES */
+/* ====================== */
+/* UNIVERSAL WORKSPACES   */
+/* ====================== */
 
-.color-behind-tabs-on #tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar,
-.color-behind-tabs-on #tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar {
-    color: var(--colorFg);
+/* Workspace buttons on tabbar (all positions) */
+#tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > .button-toolbar,
+#tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > div
+  > .button-toolbar {
+  color: var(--colorFg) !important;
+  background: transparent !important;
 }
 
-#tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar > button:active,
-#tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar > button:active,
-#tabs-tabbar-container .toolbar:not(.toolbar-small) > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible) > button:not([disabled]):hover,
-#tabs-tabbar-container .toolbar:not(.toolbar-small) > div > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible) > button:not([disabled]):hover {
-    background-color: var(--bg);
-    backdrop-filter: var(--blurMed);
+/* Hover / active workspace button */
+#tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > .button-toolbar
+  > button:active,
+#tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > div
+  > .button-toolbar
+  > button:active,
+#tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > .button-toolbar:not(
+    .toolbar-spacer,
+    .toolbar-spacer-flexible
+  )
+  > button:not([disabled]):hover,
+#tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > div
+  > .button-toolbar:not(
+    .toolbar-spacer,
+    .toolbar-spacer-flexible
+  )
+  > button:not([disabled]):hover {
+  background-color: var(
+    --bg
+  ) !important;
+  backdrop-filter: var(
+    --blurMed
+  ) !important;
+  -webkit-backdrop-filter: var(
+    --blurMed
+  ) !important;
+  border-radius: var(--radius);
+}
+
+/* Workspace popup container */
+.button-popup.WorkspacePopup {
+  background-color: var(
+    --bg
+  ) !important;
+  backdrop-filter: var(
+    --blurHigh
+  ) !important;
+  -webkit-backdrop-filter: var(
+    --blurHigh
+  ) !important;
+  border-radius: var(--radius);
+  width: 194px;
+  box-shadow: 0 2px 8px
+    rgba(0, 0, 0, 0.3);
+}
+
+/* Workspace list items */
+.WorkspacePopup-Items
+  .workspace-item-wrapper,
+.WorkspacePopup-Items .this-window {
+  background-color: transparent !important;
+  border-radius: var(--radius);
+  margin-bottom: 3px;
+  transition: background-color
+    var(--anim-duration) ease;
+}
+
+/* Hover effect */
+.WorkspacePopup-Items
+  .workspace-item-wrapper:hover,
+.WorkspacePopup-Items
+  .this-window:hover {
+  background-color: var(
+    --bg
+  ) !important;
+  backdrop-filter: var(
+    --blurLow
+  ) !important;
+  -webkit-backdrop-filter: var(
+    --blurLow
+  ) !important;
+}
+
+/* Tab counter */
+.WorkspacePopup-Items
+  .workspace-item-wrapper
+  .title
+  .tab-count,
+.WorkspacePopup-Items
+  .this-window
+  .title
+  .tab-count {
+  color: var(--colorFg) !important;
+  font-weight: 500;
+}
+
+/* Popup padding adjustments */
+.WorkspacePopup-Items {
+  padding: 5px 5px 0 !important;
+}
+.WorkspacePopup .actions {
+  padding: 0px 5px 5px !important;
+}
+.WorkspacePopup-Items hr {
+  margin: 5px 0 1px !important;
+}
+
+/* Remove default arrow from popup */
+.button-popup-right.button-popup-arrow-dark:before,
+.button-popup-arrow-light:before {
+  border-bottom-color: transparent !important;
+}
+
+/* Page tiling popup (consistent style) */
+.button-popup.ToolbarButtonPopup-DefaultStyles {
+  background-color: var(
+    --bg
+  ) !important;
+  backdrop-filter: var(
+    --blurMed
+  ) !important;
+  -webkit-backdrop-filter: var(
+    --blurMed
+  ) !important;
+  border-radius: var(--radius);
+}
+.button-popup.ToolbarButtonPopup-DefaultStyles
+  h2 {
+  background: transparent !important;
+  border-bottom: none !important;
 }
 
 /* TABS */
 
-#browser .tabbar-wrapper, #browser.tabs-top #header { background-color: transparent; }
+#browser .tabbar-wrapper,
+#browser.tabs-top #header {
+  background-color: transparent;
+}
 
-#browser:not(.transparent-tabbar) #tabs-tabbar-container {
-    background-color: var(--bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    margin: 5px 5px 0 5px;
-    border-radius: var(--radius);
+#browser:not(.transparent-tabbar)
+  #tabs-tabbar-container {
+  background-color: var(--bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin: 5px 5px 0 5px;
+  border-radius: var(--radius);
 }
 
 #titlebar {
-    position: absolute;
-    width: 100%;
-    left: 5px;
-    top: 5px;
-    right: 0px;
-    pointer-events: none;
+  position: absolute;
+  width: 100%;
+  left: 5px;
+  top: 5px;
+  right: 0px;
+  pointer-events: none;
 }
 
 #browser.win .window-buttongroup {
-    position: absolute;
-    right: 10px;
-    top: 0;
-    overflow: hidden;
-    line-height: initial;
+  position: absolute;
+  right: 10px;
+  top: 0;
+  overflow: hidden;
+  line-height: initial;
 }
 
-
-
-#browser.color-behind-tabs-on .tab.active.active,
-#browser .tab-position.colored .tab.active,
-#browser .tab-position.colored .tab:not(.active),
-#browser .tab-position.colored.accordion-toggle-arrow {
-    background-color: var(--bg);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+#browser.color-behind-tabs-on
+  .tab.active.active,
+#browser
+  .tab-position.colored
+  .tab.active,
+#browser
+  .tab-position.colored
+  .tab:not(.active),
+#browser
+  .tab-position.colored.accordion-toggle-arrow {
+  background-color: var(--bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* hover states */
-#tabs-container .tab:not(.tab-group,.tab.active):hover,
-#browser .tab-position.colored.accordion-toggle-arrow:hover, 
-#browser .tab-position.colored .tab:not(.active):hover {
-    background-color: var(--bg);
-    backdrop-filter:  var(--blurMed);
+#tabs-container
+  .tab:not(
+    .tab-group,
+    .tab.active
+  ):hover,
+#browser
+  .tab-position.colored.accordion-toggle-arrow:hover,
+#browser
+  .tab-position.colored
+  .tab:not(.active):hover {
+  background-color: var(--bg);
+  backdrop-filter: var(--blurMed);
 }
 
-.tab.active .favicon { filter: none !important; }
+.tab.active .favicon {
+  filter: none !important;
+}
 
-#browser .tab-position.colored .stack-counter {
-    background-color: var(--colorHighlightBg);
+#browser
+  .tab-position.colored
+  .stack-counter {
+  background-color: var(
+    --colorHighlightBg
+  );
 }
 
 /* INNER ROUND BORDERS */
 
-#browser:not(.fullscreen) #webpage-stack {
-    border-radius: var(--radius);
-    margin: 0 5px 5px 5px;
+#browser:not(.fullscreen)
+  #webpage-stack {
+  border-radius: var(--radius);
+  margin: 0 5px 5px 5px;
 }
 
 /* ======================= */
@@ -325,101 +594,143 @@ footer .toolbar-statusbar {
 #browser.fullscreen #header,
 #browser.fullscreen #titlebar,
 #browser.fullscreen #tabs-container,
-#browser.fullscreen #tabs-tabbar-container,
+#browser.fullscreen
+  #tabs-tabbar-container,
 #browser.fullscreen .mainbar,
 #browser.fullscreen .bookmark-bar,
 #browser.fullscreen #webpage-stack {
-    margin: 0 !important;
-    padding: 0 !important;
-    top: 0 !important;
-    min-height: 0 !important;
-    height: auto !important;
-    border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  top: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  border: none !important;
 }
-
 
 /* SPEED DIAL */
 .SpeedDial--Thumbnail {
-    background-color: var(--bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: none;
+  background-color: var(--bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: none;
 }
 
 /* CTRL+F */
 .find-in-page-wrapper {
-    background-color: var(--bg);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+  background-color: var(--bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* Transparent active tab background */
 .tab.active {
-    background-color: var(--bg) !important;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition: background-color 0.2s ease;
+  background-color: var(
+    --bg
+  ) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background-color 0.2s ease;
 }
-.tab.active::after { background: transparent !important; }
+.tab.active::after {
+  background: transparent !important;
+}
 
 /* BOOKMARK BAR */
 .bookmark-bar {
-    background-color: var(--bg) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border-radius: var(--radius);
-    margin: 4px;
-    padding: 4px 8px;
-    min-height: 30px !important;
-    display: flex !important;
-    align-items: center !important;
+  background-color: var(
+    --bg
+  ) !important;
+  backdrop-filter: blur(
+    12px
+  ) !important;
+  -webkit-backdrop-filter: blur(
+    12px
+  ) !important;
+  border-radius: var(--radius);
+  margin: 4px;
+  padding: 4px 8px;
+  min-height: 30px !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
-.bookmark-bar .observer { background: transparent !important; }
+.bookmark-bar .observer {
+  background: transparent !important;
+}
 
 .bookmark-bar button,
 .bookmark-bar .button-toolbar > button,
 .bookmark-bar .bookmark-item,
 .bookmark-bar .bookmarkbar-item,
-.bookmark-bar .toolbar > .button-toolbar > button {
-    background-color: transparent !important;
-    color: var(--colorFg) !important;
-    border: none !important;
-    border-radius: var(--radius);
-    height: 30px !important;
-    line-height: 30px !important;
-    padding: 0 8px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    transition: background-color 0.2s ease, backdrop-filter 0.2s ease, color 0.2s ease;
+.bookmark-bar
+  .toolbar
+  > .button-toolbar
+  > button {
+  background-color: transparent !important;
+  color: var(--colorFg) !important;
+  border: none !important;
+  border-radius: var(--radius);
+  height: 30px !important;
+  line-height: 30px !important;
+  padding: 0 8px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  transition: background-color 0.2s ease,
+    backdrop-filter 0.2s ease,
+    color 0.2s ease;
 }
 
 .bookmark-bar .button-title,
 .bookmark-bar .title,
-.bookmark-bar .bookmark-label { color: var(--colorFg) !important; }
+.bookmark-bar .bookmark-label {
+  color: var(--colorFg) !important;
+}
 
 .bookmark-bar button:hover,
-.bookmark-bar .button-toolbar > button:hover,
+.bookmark-bar
+  .button-toolbar
+  > button:hover,
 .bookmark-bar .bookmark-item:hover,
 .bookmark-bar .bookmarkbar-item:hover {
-    background-color: var(--bg) !important;
-    backdrop-filter: blur(calc(var(--blurStrength) * 0.5));
-    -webkit-backdrop-filter: blur(calc(var(--blurStrength) * 0.5));
+  background-color: var(
+    --bg
+  ) !important;
+  backdrop-filter: blur(
+    calc(var(--blurStrength) * 0.5)
+  );
+  -webkit-backdrop-filter: blur(
+    calc(var(--blurStrength) * 0.5)
+  );
 }
 
 .bookmark-bar button:active,
-.bookmark-bar .button-toolbar > button:active,
+.bookmark-bar
+  .button-toolbar
+  > button:active,
 .bookmark-bar .bookmark-item:active,
 .bookmark-bar .bookmarkbar-item:active,
-.bookmark-bar .button-toolbar > button[aria-pressed="true"] {
-    background-color: var(--bg) !important;
-    backdrop-filter: blur(calc(var(--blurStrength) * 0.7));
-    -webkit-backdrop-filter: blur(calc(var(--blurStrength) * 0.7));
+.bookmark-bar
+  .button-toolbar
+  > button[aria-pressed="true"] {
+  background-color: var(
+    --bg
+  ) !important;
+  backdrop-filter: blur(
+    calc(var(--blurStrength) * 0.7)
+  );
+  -webkit-backdrop-filter: blur(
+    calc(var(--blurStrength) * 0.7)
+  );
 }
 
 .bookmark-bar .separator {
-    opacity: 0.5;
-    border-right: 1px solid color-mix(in srgb, var(--colorFg), transparent 60%) !important;
+  opacity: 0.5;
+  border-right: 1px solid
+    color-mix(
+      in srgb,
+      var(--colorFg),
+      transparent 60%
+    ) !important;
 }
 
 /* ========================================================= */
@@ -427,16 +738,38 @@ footer .toolbar-statusbar {
 /* ========================================================= */
 
 /* Idle blurred */
-.startpage .SearchField:not(:hover):not(:focus-within),
-.StartPage .SearchField:not(:hover):not(:focus-within),
-.SpeedDial .SearchField:not(:hover):not(:focus-within),
-.SpeedDialView .SearchField:not(:hover):not(:focus-within) {
-    background-color: var(--bg) !important;
-    backdrop-filter: var(--blurMed) !important;
-    -webkit-backdrop-filter: var(--blurMed) !important;
-    border-radius: var(--radius) !important;
-    box-shadow: none !important;
-    transition: background-color 0.18s ease, backdrop-filter 0.18s ease;
+.startpage
+  .SearchField:not(:hover):not(
+    :focus-within
+  ),
+.StartPage
+  .SearchField:not(:hover):not(
+    :focus-within
+  ),
+.SpeedDial
+  .SearchField:not(:hover):not(
+    :focus-within
+  ),
+.SpeedDialView
+  .SearchField:not(:hover):not(
+    :focus-within
+  ) {
+  background-color: var(
+    --bg
+  ) !important;
+  backdrop-filter: var(
+    --blurMed
+  ) !important;
+  -webkit-backdrop-filter: var(
+    --blurMed
+  ) !important;
+  border-radius: var(
+    --radius
+  ) !important;
+  box-shadow: none !important;
+  transition: background-color 0.18s
+      ease,
+    backdrop-filter 0.18s ease;
 }
 
 /* Stronger blur when hovered/focused */
@@ -447,11 +780,20 @@ footer .toolbar-statusbar {
 .SpeedDial .SearchField:hover,
 .SpeedDial .SearchField:focus-within,
 .SpeedDialView .SearchField:hover,
-.SpeedDialView .SearchField:focus-within {
-    background-color: var(--bg) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border-radius: var(--radius) !important; /* keep corners consistent */
+.SpeedDialView
+  .SearchField:focus-within {
+  background-color: var(
+    --bg
+  ) !important;
+  backdrop-filter: blur(
+    12px
+  ) !important;
+  -webkit-backdrop-filter: blur(
+    12px
+  ) !important;
+  border-radius: var(
+    --radius
+  ) !important; /* keep corners consistent */
 }
 
 /* Inner input transparency */
@@ -459,13 +801,15 @@ footer .toolbar-statusbar {
 .StartPage .SearchField input,
 .SpeedDial .SearchField input,
 .SpeedDialView .SearchField input {
-    background: transparent !important;
-    color: inherit !important;
-    border-radius: var(--radius) !important;
+  background: transparent !important;
+  color: inherit !important;
+  border-radius: var(
+    --radius
+  ) !important;
 }
 .mainbar,
 .bookmark-bar {
-    z-index: 10; /* keep reasonable */
+  z-index: 10; /* keep reasonable */
 }
 
 /* ========================================================= */
@@ -474,168 +818,296 @@ footer .toolbar-statusbar {
 
 /* Config variables */
 :root {
-    --startpageNavBtnPrimary: var(--colorFg);
-    --startpageNavBtnSecondary: var(--colorFg);
-    --startpageNavBtnInactive: transparent;
-    --startpageNavBtnRounding: 14px;
-    --startpageNavBtnHeight: 23px;
-    --startpageNavBtnMargin: 10px;
-    --startpageNavPaddingOnTop: 10px;       /* Vertical spacing */
-    --startpageNavPaddingOnBottom: 10px;    /* Vertical spacing */
-    --startpageNavTextShadow: 0 0 2px var(--startpageNavBtnSecondary), 0 0 3px var(--startpageNavBtnSecondary), 0 0 5px var(--startpageNavBtnSecondary);
-    --startpageNavIconShadow: drop-shadow(0 0 4px var(--startpageNavBtnSecondary));
+  --startpageNavBtnPrimary: var(
+    --colorFg
+  );
+  --startpageNavBtnSecondary: var(
+    --colorFg
+  );
+  --startpageNavBtnInactive: transparent;
+  --startpageNavBtnRounding: 14px;
+  --startpageNavBtnHeight: 23px;
+  --startpageNavBtnMargin: 10px;
+  --startpageNavPaddingOnTop: 10px; /* Vertical spacing */
+  --startpageNavPaddingOnBottom: 10px; /* Vertical spacing */
+  --startpageNavTextShadow: 0 0 2px
+      var(--startpageNavBtnSecondary),
+    0 0 3px
+      var(--startpageNavBtnSecondary),
+    0 0 5px
+      var(--startpageNavBtnSecondary);
+  --startpageNavIconShadow: drop-shadow(
+    0 0 4px
+      var(--startpageNavBtnSecondary)
+  );
 
-    /* Adaptive blur strength */
-    --startpageNavBlur: 6px;        /* default blur for nav bar */
-    --startpageNavBlurStrong: 12px; /* blur for active/hover buttons */
+  /* Adaptive blur strength */
+  --startpageNavBlur: 6px; /* default blur for nav bar */
+  --startpageNavBlurStrong: 12px; /* blur for active/hover buttons */
 }
 
 /* Startpage Nav Bar container */
 .startpage .startpage-navigation {
-    background-color: var(--bg);
-    backdrop-filter: blur(var(--startpageNavBlur));
-    -webkit-backdrop-filter: blur(var(--startpageNavBlur));
-    box-shadow: unset;
-    padding-top: var(--startpageNavPaddingOnTop);
-    padding-bottom: calc(var(--startpageNavPaddingOnBottom) - 2px);
-    min-height: unset;
-    display: flex;
-    justify-content: center;
-    border-radius: var(--customRadius);
+  background-color: var(--bg);
+  backdrop-filter: blur(
+    var(--startpageNavBlur)
+  );
+  -webkit-backdrop-filter: blur(
+    var(--startpageNavBlur)
+  );
+  box-shadow: unset;
+  padding-top: var(
+    --startpageNavPaddingOnTop
+  );
+  padding-bottom: calc(
+    var(--startpageNavPaddingOnBottom) -
+      2px
+  );
+  min-height: unset;
+  display: flex;
+  justify-content: center;
+  border-radius: var(--customRadius);
 }
 
 /* Folder nav buttons background */
-.startpage .startpage-folder-navigation button {
-    background-color: unset;
+.startpage
+  .startpage-folder-navigation
+  button {
+  background-color: unset;
 }
 
 /* Startpage Nav Bar buttons */
-.startpage .startpage-navigation .button-startpage,
-.startpage .startpage-folder-navigation .button-startpage {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: var(--startpageNavBtnHeight);
-    border-radius: var(--startpageNavBtnRounding) !important;
-    border: 1.2px solid var(--startpageNavBtnPrimary);
-    background-color: var(--startpageNavBtnInactive);
-    color: var(--startpageNavBtnPrimary);
-    margin: 0 var(--startpageNavBtnMargin) !important;
-    text-shadow: var(--startpageNavTextShadow);
-    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-    transition: 0.2s ease;
-    font-size: 11px;
-    font-weight: 500;
+.startpage
+  .startpage-navigation
+  .button-startpage,
+.startpage
+  .startpage-folder-navigation
+  .button-startpage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--startpageNavBtnHeight);
+  border-radius: var(
+    --startpageNavBtnRounding
+  ) !important;
+  border: 1.2px solid
+    var(--startpageNavBtnPrimary);
+  background-color: var(
+    --startpageNavBtnInactive
+  );
+  color: var(--startpageNavBtnPrimary);
+  margin: 0 var(--startpageNavBtnMargin) !important;
+  text-shadow: var(
+    --startpageNavTextShadow
+  );
+  box-shadow: 0 0 2px 1px
+    rgba(0, 0, 0, 0.2);
+  transition: 0.2s ease;
+  font-size: 11px;
+  font-weight: 500;
 }
 
 /* Hover / active states with stronger blur */
-.startpage .startpage-navigation .button-startpage.active,
-.startpage .startpage-navigation .button-startpage:hover,
-.startpage .startpage-folder-navigation .button-startpage:hover {
-    color: var(--startpageNavBtnSecondary);
-    background-color: var(--startpageNavBtnPrimary);
-    text-shadow: 0 0 0.5px var(--startpageNavBtnSecondary);
-    backdrop-filter: blur(var(--startpageNavBlurStrong));
-    -webkit-backdrop-filter: blur(var(--startpageNavBlurStrong));
+.startpage
+  .startpage-navigation
+  .button-startpage.active,
+.startpage
+  .startpage-navigation
+  .button-startpage:hover,
+.startpage
+  .startpage-folder-navigation
+  .button-startpage:hover {
+  color: var(
+    --startpageNavBtnSecondary
+  );
+  background-color: var(
+    --startpageNavBtnPrimary
+  );
+  text-shadow: 0 0 0.5px
+    var(--startpageNavBtnSecondary);
+  backdrop-filter: blur(
+    var(--startpageNavBlurStrong)
+  );
+  -webkit-backdrop-filter: blur(
+    var(--startpageNavBlurStrong)
+  );
 }
 
 /* Icons styling */
-.startpage .startpage-navigation .button-startpage svg,
-.startpage .startpage-folder-navigation .button-startpage svg {
-    color: var(--startpageNavBtnPrimary);
-    filter: var(--startpageNavIconShadow);
-    width: auto;
-    height: 2.1em;
+.startpage
+  .startpage-navigation
+  .button-startpage
+  svg,
+.startpage
+  .startpage-folder-navigation
+  .button-startpage
+  svg {
+  color: var(--startpageNavBtnPrimary);
+  filter: var(--startpageNavIconShadow);
+  width: auto;
+  height: 2.1em;
 }
 
 /* Hover / active icons */
-.startpage .startpage-navigation .button-startpage.active svg,
-.startpage .startpage-navigation .button-startpage:hover svg,
-.startpage .startpage-folder-navigation .button-startpage:hover svg {
-    color: var(--startpageNavBtnSecondary);
-    filter: unset;
+.startpage
+  .startpage-navigation
+  .button-startpage.active
+  svg,
+.startpage
+  .startpage-navigation
+  .button-startpage:hover
+  svg,
+.startpage
+  .startpage-folder-navigation
+  .button-startpage:hover
+  svg {
+  color: var(
+    --startpageNavBtnSecondary
+  );
+  filter: unset;
 }
 
 /* Folder back button adjustments */
 button.button-startpage.up-level svg {
-    position: unset;
-    margin: 0 4px;
+  position: unset;
+  margin: 0 4px;
 }
-button.button-startpage.up-level span { display: flex; }
-.button-startpage.up-level { padding: 0 14px 0 6px; }
+button.button-startpage.up-level span {
+  display: flex;
+}
+.button-startpage.up-level {
+  padding: 0 14px 0 6px;
+}
 
 /* Center folder navigation */
-.startpage .startpage-folder-navigation {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.startpage
+  .startpage-folder-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Startpage widgets */
 .Dashboard-Widgets .dashboard-widget {
-    background-color: var(--bg);
-    backdrop-filter: blur(12px) !important;
+  background-color: var(--bg);
+  backdrop-filter: blur(
+    12px
+  ) !important;
 }
 
 /* Remove borders & extra styling */
-.startpage .startpage-navigation .startpage-navigation-group:last-of-type { border: unset; }
-button.button-startpage:after { content: unset; }
+.startpage
+  .startpage-navigation
+  .startpage-navigation-group:last-of-type {
+  border: unset;
+}
+button.button-startpage:after {
+  content: unset;
+}
 
 /* ========================================================= */
 /* ADD / PLUS BUTTON FIXES */
 /* ========================================================= */
-.startpage .startpage-navigation .button-startpage.add-set {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 !important;                  /* remove extra padding */
-    min-width: 27px;                         /* small width */
-    height: var(--startpageNavBtnHeight);    /* match other buttons */
-    border-radius: var(--startpageNavBtnRounding) !important;
-    background-color: var(--startpageNavBtnInactive);
-    border: 1.2px solid var(--startpageNavBtnPrimary);
-    margin: 0 var(--startpageNavBtnMargin) !important;
-    text-shadow: var(--startpageNavTextShadow);
-    box-shadow: 0 0 2px 1px rgba(0,0,0,0.2);
-    transition: 0.2s ease;
+.startpage
+  .startpage-navigation
+  .button-startpage.add-set {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important; /* remove extra padding */
+  min-width: 27px; /* small width */
+  height: var(
+    --startpageNavBtnHeight
+  ); /* match other buttons */
+  border-radius: var(
+    --startpageNavBtnRounding
+  ) !important;
+  background-color: var(
+    --startpageNavBtnInactive
+  );
+  border: 1.2px solid
+    var(--startpageNavBtnPrimary);
+  margin: 0 var(--startpageNavBtnMargin) !important;
+  text-shadow: var(
+    --startpageNavTextShadow
+  );
+  box-shadow: 0 0 2px 1px
+    rgba(0, 0, 0, 0.2);
+  transition: 0.2s ease;
 }
 
 /* Center the SVG inside the add button */
-.startpage .startpage-navigation .button-startpage.add-set svg {
-    height: 16px;
-    width: 16px;
-    margin: 0;
-    display: block;
+.startpage
+  .startpage-navigation
+  .button-startpage.add-set
+  svg {
+  height: 16px;
+  width: 16px;
+  margin: 0;
+  display: block;
 }
 
 /* Hover / active for add button */
-.startpage .startpage-navigation .button-startpage.add-set:hover,
-.startpage .startpage-navigation .button-startpage.add-set.active {
-    background-color: var(--startpageNavBtnPrimary);
-    color: var(--startpageNavBtnSecondary);
-    backdrop-filter: blur(var(--startpageNavBlurStrong));
-    -webkit-backdrop-filter: blur(var(--startpageNavBlurStrong));
+.startpage
+  .startpage-navigation
+  .button-startpage.add-set:hover,
+.startpage
+  .startpage-navigation
+  .button-startpage.add-set.active {
+  background-color: var(
+    --startpageNavBtnPrimary
+  );
+  color: var(
+    --startpageNavBtnSecondary
+  );
+  backdrop-filter: blur(
+    var(--startpageNavBlurStrong)
+  );
+  -webkit-backdrop-filter: blur(
+    var(--startpageNavBlurStrong)
+  );
 }
 
-.startpage .startpage-navigation .button-startpage.add-set:hover svg path,
-.startpage .startpage-navigation .button-startpage.add-set.active svg path {
-    fill: var(--startpageNavBtnSecondary);
+.startpage
+  .startpage-navigation
+  .button-startpage.add-set:hover
+  svg
+  path,
+.startpage
+  .startpage-navigation
+  .button-startpage.add-set.active
+  svg
+  path {
+  fill: var(--startpageNavBtnSecondary);
 }
 
 /* Add folder button tweaks (keep min width for alignment) */
-.startpage .startpage-navigation .button-startpage.add-set {
-    padding-left: 1px;
-    padding-right: 1px;
+.startpage
+  .startpage-navigation
+  .button-startpage.add-set {
+  padding-left: 1px;
+  padding-right: 1px;
 }
 
 /* Speed dial items spacing fix */
-.speeddial { margin-top: 0; padding-top: 2px; }
+.speeddial {
+  margin-top: 0;
+  padding-top: 2px;
+}
 
 /* Search bar spacing fix */
-.sdwrapper .iconmenu-container.searchfield { margin: 0px auto 25px; }
+.sdwrapper
+  .iconmenu-container.searchfield {
+  margin: 0px auto 25px;
+}
 
 /* Notes icon scale */
-.startpage .startpage-navigation .button-startpage[data-id="notes"] svg { transform: scale(1.45); }
+.startpage
+  .startpage-navigation
+  .button-startpage[data-id="notes"]
+  svg {
+  transform: scale(1.45);
+}
 
 /* ========================================================= */
 /* END STARTPAGE NAVIGATION */
@@ -650,56 +1122,87 @@ button.button-startpage:after { content: unset; }
 #tabs-tabbar-container [aria-label="Tab Stack Toolbar"],      /* ARIA label on newer builds */
 #tabs-tabbar-container .tabbar-wrapper + .tabbar-wrapper,     /* sub-row is injected as next wrapper */
 #tabs-tabbar-container .tabbar-wrapper:has(.tab.is-sub),      /* fallback via :has */
-#tabs-tabbar-container .tabbar-subcontainer {                 /* some snapshots used this class */
-    background: var(--bg) !important;
-    background-image: none !important;       /* defeat Colored Tab Stacks paint */
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border-radius: var(--radius);
-    margin: 3px 5px 3px 5px;                    /* matches outer tab bar rounding */
+#tabs-tabbar-container .tabbar-subcontainer {
+  /* some snapshots used this class */
+  background: var(--bg) !important;
+  background-image: none !important; /* defeat Colored Tab Stacks paint */
+  backdrop-filter: blur(
+    12px
+  ) !important;
+  -webkit-backdrop-filter: blur(
+    12px
+  ) !important;
+  border-radius: var(--radius);
+  margin: 3px 5px 3px 5px; /* matches outer tab bar rounding */
 }
 
 /* Make tabs inside the sub-row look like normal tabs */
 #tabs-subcontainer .tab,
-#tabs-tabbar-container [aria-label="Tab Stack Toolbar"] .tab,
-#tabs-tabbar-container .tabbar-wrapper + .tabbar-wrapper .tab,
-#tabs-tabbar-container .tabbar-subcontainer .tab {
-    background: transparent !important;      /* let row’s blur show through */
+#tabs-tabbar-container
+  [aria-label="Tab Stack Toolbar"]
+  .tab,
+#tabs-tabbar-container
+  .tabbar-wrapper
+  + .tabbar-wrapper
+  .tab,
+#tabs-tabbar-container
+  .tabbar-subcontainer
+  .tab {
+  background: transparent !important; /* let row’s blur show through */
 }
 
-#tabs-subcontainer .tab:not(.active):hover,
-#tabs-tabbar-container [aria-label="Tab Stack Toolbar"] .tab:not(.active):hover,
-#tabs-tabbar-container .tabbar-wrapper + .tabbar-wrapper .tab:not(.active):hover,
-#tabs-tabbar-container .tabbar-subcontainer .tab:not(.active):hover {
-    background: var(--bg) !important;
-    backdrop-filter: var(--blurMed) !important;
-    -webkit-backdrop-filter: var(--blurMed) !important;
+#tabs-subcontainer
+  .tab:not(.active):hover,
+#tabs-tabbar-container
+  [aria-label="Tab Stack Toolbar"]
+  .tab:not(.active):hover,
+#tabs-tabbar-container
+  .tabbar-wrapper
+  + .tabbar-wrapper
+  .tab:not(.active):hover,
+#tabs-tabbar-container
+  .tabbar-subcontainer
+  .tab:not(.active):hover {
+  background: var(--bg) !important;
+  backdrop-filter: var(
+    --blurMed
+  ) !important;
+  -webkit-backdrop-filter: var(
+    --blurMed
+  ) !important;
 }
 
 /* Add padding inside parent tabbar */
 #tabs-tabbar-container {
-    padding-bottom: 6px !important;
+  padding-bottom: 6px !important;
 }
 
 /* Apply padding to the outer tabbar container when tabs are bottom */
-#browser.tabs-bottom #tabs-tabbar-container {
-    padding-top: 6px !important;
+#browser.tabs-bottom
+  #tabs-tabbar-container {
+  padding-top: 6px !important;
 }
 
 /* Bottom tabbar styling */
-#browser.tabs-bottom:not(.transparent-tabbar) #tabs-tabbar-container {
-    margin: 0 5px 5px 5px !important; /* adjust spacing for bottom */
-    border-radius: var(--radius) !important;
+#browser.tabs-bottom:not(
+    .transparent-tabbar
+  )
+  #tabs-tabbar-container {
+  margin: 0 5px 5px 5px !important; /* adjust spacing for bottom */
+  border-radius: var(
+    --radius
+  ) !important;
 }
 
 /* Remove the solid background behind the bottom bar */
 #browser.tabs-bottom #footer {
-    background: transparent !important;
+  background: transparent !important;
 }
 
 /* add padding to bottom tabs when using tab stack */
-#browser.tabs-bottom #tabs-tabbar-container {
-    padding-bottom: 10px !important; /* default 5px + 5px extra gap */
+#browser.tabs-bottom
+  #tabs-tabbar-container {
+  padding-bottom: 10px !important; /* default 5px + 5px extra gap */
 }
 
 /* ======================== */
@@ -708,16 +1211,16 @@ button.button-startpage:after { content: unset; }
 
 /* Left side */
 .tabs-left #tabs-tabbar-container {
-    margin-bottom: 5px !important;
-	margin-right: 0px !important;
-    margin-top: 0px !important;
+  margin-bottom: 5px !important;
+  margin-right: 0px !important;
+  margin-top: 0px !important;
 }
 
 /* Right side: use container instead */
 .tabs-right #tabs-tabbar-container {
-    margin-bottom: 5px !important;
-	margin-left: 0px !important;
-	margin-top: 0px !important;
+  margin-bottom: 5px !important;
+  margin-left: 0px !important;
+  margin-top: 0px !important;
 }
 
 /* ============================================= */
@@ -726,22 +1229,17 @@ button.button-startpage:after { content: unset; }
 
 #browser #panels-container.left,
 #browser #panels-container.right {
-    margin-bottom: 5px !important;
+  margin-bottom: 5px !important;
 }
 
 /* Collapse header/titlebar completely when tabs are hidden
    BUT keep it in popup/settings windows */
-   
-#browser.tabs-off:not(.popup):not(.settings):not(.is-settingspage) #header,
-#browser.tabs-off:not(.popup):not(.settings):not(.is-settingspage) #titlebar {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    height: 0 !important;
-    min-height: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow: hidden !important;
+
+#browser.tabs-off
+  #tabs-tabbar-container,
+#browser.tabs-off #header {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 /* ======================= */
@@ -751,41 +1249,58 @@ button.button-startpage:after { content: unset; }
 /* Make sure header/titlebar don't override */
 #browser #header,
 #browser #titlebar {
-    background: transparent !important;
-    box-shadow: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 .menubar {
-    background-color: var(--bg) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border-radius: var(--radius) !important;
-    margin: 4px;
-    height: 28px !important; 
-    display: flex;
-    align-items: center;
+  background-color: var(
+    --bg
+  ) !important;
+  backdrop-filter: blur(
+    12px
+  ) !important;
+  -webkit-backdrop-filter: blur(
+    12px
+  ) !important;
+  border-radius: var(
+    --radius
+  ) !important;
+  margin: 4px;
+  height: 28px !important;
+  display: flex;
+  align-items: center;
 }
 
 /* Menu items */
 .menubar > .menuitem {
-    color: var(--colorFg) !important;
-    background: transparent !important;
-    border-radius: var(--radius);
-    padding: 0 10px !important;
-    transition: background-color 0.2s ease, backdrop-filter 0.2s ease;
+  color: var(--colorFg) !important;
+  background: transparent !important;
+  border-radius: var(--radius);
+  padding: 0 10px !important;
+  transition: background-color 0.2s ease,
+    backdrop-filter 0.2s ease;
 }
 
 /* Hover */
 .menubar > .menuitem:hover {
-    background-color: var(--bg) !important;
-    backdrop-filter: var(--blurMed) !important;
+  background-color: var(
+    --bg
+  ) !important;
+  backdrop-filter: var(
+    --blurMed
+  ) !important;
 }
 
 /* Active / pressed state */
 .menubar > .menuitem:active,
 .menubar > .menuitem[open] {
-    background-color: var(--bg) !important;
-    backdrop-filter: var(--blurMedHigh) !important;
+  background-color: var(
+    --bg
+  ) !important;
+  backdrop-filter: var(
+    --blurMedHigh
+  ) !important;
 }
 
 /* ============================ */
@@ -793,28 +1308,98 @@ button.button-startpage:after { content: unset; }
 /* ============================ */
 
 #history-panel .vivaldi-tree .tree-row {
-    background-color: transparent !important; /* Semi-transparent bg */
-    backdrop-filter: var(--blurMed) !important; /* Apply blur for glass effect */
-    -webkit-backdrop-filter: var(--blurMed) !important;
-    transition: backdrop-filter var(--anim-duration) ease, background-color var(--anim-duration) ease;
+  background-color: transparent !important; /* Semi-transparent bg */
+  backdrop-filter: var(
+    --blurMed
+  ) !important; /* Apply blur for glass effect */
+  -webkit-backdrop-filter: var(
+    --blurMed
+  ) !important;
+  transition: backdrop-filter
+      var(--anim-duration) ease,
+    background-color
+      var(--anim-duration) ease;
 }
 
 /* === Fix: Bookmark bar to appear below the suggestions === */
 .bookmark-bar {
-    z-index: 5 !important;
+  z-index: 5 !important;
 }
 
+/* =============================*/
+/* Fix window buttons alignment */
+/* ===========================]*/
+#browser.win.tabs-left
+  .window-buttongroup,
+#browser.win.tabs-right
+  .window-buttongroup,
+#browser.win.tabs-off
+  .window-buttongroup {
+  right: 0px !important;
+  margin-right: 0px !important;
 }
+
+/* ========================= */
+/* FIX: Colored Tab Groups   */
+/* ========================= */
+
+/* Group title / text color */
+#browser
+  .tab-position.colored
+  .tab-group-indicator,
+#browser
+  .tab-position.colored
+  .tabbar-group-title {
+  color: var(--colorFg) !important;
+}
+
+/* === Stack counter fix for both light & dark themes === */
+#browser
+  .tab-position.colored
+  .stack-counter {
+  background-color: var(
+    --colorHighlightBg
+  ) !important;
+  color: var(
+    --colorHighlightFg
+  ) !important;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0 6px;
+  min-width: 16px;
+  text-align: center;
+}
+
+/* Ensure inactive tab group text stays theme-aware */
+#browser
+  .tab-position.colored
+  .tab:not(.active)
+  .tab-header {
+  color: var(--colorFg) !important;
+}
+
 /* ========================================================= */
 /* END STARTPAGE NAVIGATION */
 /* ========================================================= */
 
-/* Extra bottom gap like Vivaldi-Arc */
+/* ========================================================= */
+/* RTM */
+/* ========================================================= */
+
+/* Extra bottom gap like Vivaldi-Arc (for the page area) */
 #browser:not(.tabs-top):not(
     .tabs-bottom
   ):not(.fullscreen)
   #webview-container {
-  margin: 6px 6px 6px 0px; /* left/right = 5px, bottom = 15px */
+  margin: 6px 6px 6px 0; /* top right bottom left */
+}
+
+/* Extra bottom gap for the vertical tabs bar (left side) */
+#browser:not(.tabs-top):not(
+    .tabs-bottom
+  ):not(.fullscreen)
+  .tabbar-wrapper {
+  margin: 3px 3px 8px 3px; /* top right bottom left */
 }
 
 /* popup page zoom control */
@@ -1077,20 +1662,35 @@ button.button-startpage:after { content: unset; }
    --------------------------------------------- */
 
 /* Change : Karakeep */
-:is(.toolbar-extensions, .extensionIconPopupMenu .toolbar)
-  .button-toolbar button[title*="Karakeep" i] img {
+:is(
+    .toolbar-extensions,
+    .extensionIconPopupMenu .toolbar
+  )
+  .button-toolbar
+  button[title*="Karakeep" i]
+  img {
   content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAsQAAALEBxi1JjQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAHHSURBVEiJpZWxalVBEIa/2XvIBas0SZNY2MQiJtEHSHtT+SAWQRSi2NkZUUIQxc7CCyJp8wQpbyMGvFjoC9gJgiI5e8biJt6d3bPnrHFgmzNz/n/+mdlZIbb3kzWGzXMq3abSRSrFnEFD8q3iB1Uzwckeq6OPIZwY8KMPS+jZJwa6PAOLgRSqFoJ53E9EbnJ19OUC0hmCX/UuZ7JMLVAL+OjU8NcXnnnMFZT7IWRlCGq3ARrrsoIFexLTzQ4CGcZ4FizDbOMW8gReJJ9ZqQJrkYILhP9Q4LSDwDuH2IAEqTd7OzdxD+a/JdlrO2pPydp7UJJ9Qf1TgrAHl5ugHgLvZFaKDFKRgq4m106gyQAVKAC6m+xxeaCSCUp9hQr+YYK08x5EFy1EKp0gsc72e3Dp+qex3asizKq0/rbHLWMqWqYgW7LSVWHABITfiDxFGoCHwDCNo7cHLjNBJ9Dc4fHGZwCeTMc4/wrfjKyCdNr6dtE3xD1gf21MuGYfrX8Fdnh2eht4DawESo3Zgnkn52+r4mVM49c5uP6W3A7f2zpG9Qa1vKAWP3ujbUhcoimIorLLm2uTVtDY7t36Dtzl8PQdoi+RwTR0/wE9YJOcDyuhxAAAAABJRU5ErkJggg==);
 }
 
 /* Change : Ublock */
 /* ON */
-:is(.toolbar-extensions, .extensionIconPopupMenu .toolbar)
-  .button-toolbar button[title*="ublock origin" i] img {
+:is(
+    .toolbar-extensions,
+    .extensionIconPopupMenu .toolbar
+  )
+  .button-toolbar
+  button[title*="ublock origin" i]
+  img {
   content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADzsAAA87AUV+OSYAAATHSURBVFhHxZdpbFRVFMfPOW+WpkzKYm1K6bCUNhAaU0QMEVEwqX4gIZiYmqiJ4IoQq4mo0aSxjBsRYjAuiTVaPpiYlOoXNfpFo8IH0aiJNsXQFkohRahQu02n7cy7x/97PMYu09epTNJf8mbuvHvuOf+7nXuHVZXmElcAM3s/x6HKNUSy5jyFQ3GdZ1Oy1ISs9ZTkjcJaqaLL0DRCSmG0/gtOOkjkWIDouzGhkxTgvsoSGr2XyKAuYy/d2JMF1BxRq/pWCveMJq43EiznlG5SkrtguRZ2+dDsWWYG/uL4/B1OvxbLOp4y1DE8opfzL3AidgenPDOXCQLwzQcuaWR4gFYwmypUbEKw22FWxiwhr03WqJokqZzGAPykzD/Dxy8jSmdeL+MexHNHZIKA2jYTXkT2ZgnKw6i5CfVRJg47hteEE4DoIoK0oHQ8EuT9e5dK4mqVOAWHRfM5yMI34u3dCFyek+AOTu+Yi1G6Ex3fPWBP9JsWkN+rLCKhnAXOCBfmycRFlBYwV+RUABYeZlV7UPgVTxeeCas+EzkTgAXlrKlzZPgjbN0XjNJhrP6zjirPJCO5EYDQ2Mh/s0pTMMSNBWwdg+OTakwcI+KbamclYDpXhnTIMH1uwvxBeZQ7e3k0arNuEaYlWNS+MXwroX4UMT8U5q1YwYeJzaBXlQYjnMJO+0HVOngCwVtPJ5ZYHHrEIt4GwQvdbeiDrwC0bEfQr8L9F4/azM9gozYhoJtEroKc1mbGrOeojDvWnNLrmAIPKJn7IX4x9rV/3gb+I6BUitktHZpfHIwtp/7Fl+Vp5K5mzG3SNTB6wQ5YNbHVOHzaNWKJQRKTh9DrKFLvjMEd/EeAeYGQPmuxVr95TvN2redhTchjRuVTMqYbub46tlxO1LZpyArYWyB2D9pU4MkquIOvgCvIUrLtQ3HbbK+/ZAr2VVKypFx2iG1teKlCWutVA8VB2ojtV4ewVV6jrMlCAGApRY55hwbNo6+1DZd800ymbpV013dqXuiUbrZts5+Eb/asZ0V2AgDmtFCM1tmBUO3aW7TyldbhZUGhbSk2BxB8g2c2a7IW4AARC/G1OzVmYiYvvM+27Zcx3euu1P4/JglA1vRPXI6IAqyw7UzmQSSZ1d7rrHBy9WTSAmQBNhXTIEymJJspOKscm9z7lTUQ0NWXcnr5H2knBcU8hqzSAgG/OdnNe51DzAAyakPJCh3xXrikBTxOlAqMWX+g2IxTrB1qfU+x2QBfceSMRkzfJ08xOjqOtACMqlZUcK/F8iUOgY/RrBMtr1kEXAzB+fvOk+ribieOV+Uy5Vp+BKdK6xmKijE70XonqqIwmPV8O8D3P/DdQEFutEu5M8Y+1/Lx1EBEVZcWIcHcB727cCqthJHlVWcF/HZhUb8HV010ls5P/k/gMK0Al3qVd/fgrhq3tyILvggRN2AgZhbhOqQW3A/eioSsLwZLqBc9zziV/gI8GlSDFzqT69TIq5i+2yBi2lsz5juJ/fkjiXUoHNFvny/kIfieNrFkJcAFo/HGkzpvdNA8gdHYC/ui8Y3gw6EPLz5jst62V/Kfk+c7E2iTpYBxHOwwRQkxO3DpvEdUV6F76LV8z2oaU/2BozEc2Z7pjKQFzB1E/wImbUHcrGYyeQAAAABJRU5ErkJggg==);
 }
 
 /* OFF */
-:is(.toolbar-extensions, .extensionIconPopupMenu .toolbar)
-  .button-toolbar button[title*="ublock origin" i][title*="off" i] img {
+:is(
+    .toolbar-extensions,
+    .extensionIconPopupMenu .toolbar
+  )
+  .button-toolbar
+  button[title*="ublock origin" i][title*="off" i]
+  img {
   content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADwcAAA8HAUU1hw8AAAYTSURBVFhHvVd9TJVlFD/nebncC4TXhkItRERETWtN5yqnm6tIc25+zWq6bG5l/dGmUxlsopdXIhWdSbI1NXVlzaZWFlurLM1p/NEoqU1Jg3sxxQ/8CDUF7n3f5/R77weBCFyy9dvgfZ9zzvOe3znPeZ7nXKbeIMJbiRJuXJTE1jbK0paexMxPQJPLSnLwTCchlxBdw/sZEj7OJN/aWh0jF1+hbAqazNr5VE+4K4G9IsaJs+I1mIZISE9loTlwMs7RYcItPNpEKIhByJFBquDYLUwp0KfA9hKLVMFmv3Ybp8jiK2Y2tRPjS3egC4GtIq7menmAEmiMkDyH6GYhC+mwakZ0TUK6nol/ga6RtJxnTrgSnqgoWTRlEutHMJoARyORvixHBZfV8PqFJl1DynUaRK53JtJBwPebDDJcMk2U5IP9M2DvhfJ3Ya7B+IitjGNI6R99pbSgTqcme3g8i85XICMiY/GdwXB6El6rlKjvrRw6FPtOBwGzQU9GBPvBLRmGvyrmI2SoQ1a7/Gjm8c1wLP3A4hpxDR0gI2xDT0QQT0I0GdnMQQ2d8lo8bkmeanfs/iHgx1qTfIXXw0K83tNO1YWjFRzfO95s1A/alp6JpSrHEqbarJLMYdzm6JClrgCjMwlCtf+VcwfF2eoCk/oBzoNRUQe6Efi/EReB0kBomlkf2l3qDz3rO3w4ISruhrKGmxlmg7Ws1G+tXhuQ7Ki4V8RFADUxHsUzHc931bBJU30i3eYVnbyeZnHSq8xUiPLOD4pkRFW9Ii4CitVOVMdRvGaSze8pvzUb26ujgAvqLqcmeVIWgekyDG18dK++zSci2t4RF4HioXzRIH5NEx9EhINAZntpwJ7n6BbX1Lju89y/wDFDBVug9Y5lqffNsfyXo+8LcRFwTq6Vw7m5LZFfxjJ8g9C9OKh2rAlYL2amPTaPNG2ElXauDp1sVJp56kZkYt+Ij0AYLOsy1VW3qPlOJiBIEZt24QjeEdYS7xKPWmtmxBd5DP0gEEHRcL6eksxz8VqLK8iDJXHh/eAQVivNh/h22Kgf6DcBB62tei6Wwbl4ADbwb0KTLU9Hxv1Dvwg4t6Wv3nodr9siEtqHWjgAMhmadbnpD011rvKoLi7ETWBdg3gvBOyluPg3IeqgKN6BS+UlT5AXYrwHJtkkan1dQGb4AuKJzOobcRHw1ev0IOlliNSHNb+JgqscGOIlzo3m3BmqnQtx4+1BneL0k9WGbU33NUlydHqviIuAoXgWPvwGHF/FYVM+wCIzdp06KH6YL6pgsAxNy8cgmU1KvYKeKTeq7hVxERBtXcb+r0KEptdWlZ2dR8CyapSnUWveiJrYgr8a7I24dkQnAjY8iWg0JEHFSVFhGAO18aVy8yo72/igu/MYwC6XG7RSm11urhgzhANRRRhscBoeCi66NDbIWASmP/g4kr0b7ZehmUqEjX2xpuFegXoYZLTrzQhwHk7Vn+xhagpasnBv0JGBVsN1mrXsxlmepoiXuLTkV5zW7qj6X8Nxrlqt1WhkZ2B4DTn24WmFlUAHgbVZ1OJyGR8hKZ8gS6Owr0taFD2FqzcxatJvOLvHaNUIlhego7SZVZFWCUc7N7YdBGAkw7PoDCq9HIPPsFIjIdrEAfuF5bU6JWoWN9b49UjFsgGlMR9D1opWJKbSp3cua0cNxBBuNpok1whKCdZsJkS3QWgbGskNmNwSseoZTp/wVqNMsUVW4n0iRH8i+gJ3SFUVjnYuqq7ddTcCDsIkGindsHUBcrQIIqcWvnMZamlRFgWcbIUN74BzAhokc+C4CMU8GvVUizOhqOX8ueq3J2a1Rs264K4EwkAkuxrJfVbshViOEpyAg/G8pBSVNYfUzi2dtyNsSwOShUJbgcF82HmRtc8TxDJH5CSeeJ4Ze/zu6JlAFM7lUucPIZWqAsNHQQRHBeEnmtMLqGoQMrSWadG1zoT8FjK0HSVXUZzL53rKVgx9EggDEVY2U8q1W/ZyHMVLIfE6UsyOfRwZD78fh79Sr2V83fOB1RXxEeiEsgadoZVeBIez4TIPIrRi9DO8f+hh44DTsEQs4wHR3/Qal32qZ3YIAAAAAElFTkSuQmCC);
 }
