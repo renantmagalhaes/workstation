@@ -1,9 +1,5 @@
-/* Vivaldi Air v.22
+/* Vivaldi Air
 https://raw.githubusercontent.com/MohamedxSalah/Vivaldi-Air/refs/heads/main/VivaldiAir.css
-TODO: Suggestions?
-Fix sorting in panels
-Fix checkboxes
-Do translate menu
 */
 
 :root {
@@ -807,9 +803,8 @@ footer .toolbar-statusbar {
     --radius
   ) !important;
 }
-.mainbar,
-.bookmark-bar {
-  z-index: 10; /* keep reasonable */
+.mainbar {
+  z-index: 1; /* keep reasonable */
 }
 
 /* ========================================================= */
@@ -1323,7 +1318,7 @@ button.button-startpage:after {
 
 /* === Fix: Bookmark bar to appear below the suggestions === */
 .bookmark-bar {
-  z-index: 5 !important;
+  z-index: 0 !important;
 }
 
 /* =============================*/
@@ -1378,6 +1373,53 @@ button.button-startpage:after {
   color: var(--colorFg) !important;
 }
 
+/* ---------------------------
+   Fix: Address Bar inside Tab Bar (Vivaldi 7.6)
+   --------------------------- */
+
+/* Address & Search fields inside tab bar */
+#tabs-tabbar-container
+  .UrlBar
+  .UrlBar-AddressField,
+#tabs-tabbar-container
+  .UrlBar
+  .SearchField,
+#tabs-tabbar-container
+  .toolbar-mainbar
+  .UrlBar-AddressField,
+#tabs-tabbar-container
+  .toolbar-mainbar
+  .SearchField,
+.tabbar-wrapper .UrlBar-AddressField,
+.tabbar-wrapper .SearchField {
+  background-color: var(
+    --bg
+  ) !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: var(
+    --radius
+  ) !important;
+}
+
+/* Ensure tab bar has proper stacking */
+#tabs-tabbar-container {
+  z-index: 1 !important;
+  position: relative !important;
+}
+
+/* Force window controls to appear above tab bar */
+.window-buttongroup {
+  z-index: 1000 !important;
+}
+
+/* Force settings button to appear above tab bar */
+.vivaldi,
+.sidebar .button-toolbar.settings,
+.button-settings {
+  z-index: 1001 !important;
+}
+
 /* ========================================================= */
 /* END STARTPAGE NAVIGATION */
 /* ========================================================= */
@@ -1424,40 +1466,71 @@ button.button-startpage:after {
 /* ========================================================= */
 /* Toolbar height adjustment */
 /* ========================================================= */
-/* Slim down the main toolbar */
+/* Slim mainbar */
 .toolbar.toolbar-mainbar {
-  min-height: 30px !important; /* default is ~38px */
+  min-height: 30px !important;
   height: 30px !important;
   padding: 0 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
 }
 
-/* Adjust buttons inside toolbar */
+/* Send window buttons to the right and keep them clickable */
 .toolbar.toolbar-mainbar
-  .button-toolbar
-  button,
+  > .window-buttongroup.on-mainbar {
+  margin-left: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  -webkit-app-region: no-drag !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 5 !important;
+}
+/* force window controls to the far right */
+.toolbar.toolbar-mainbar {
+  display: flex !important;
+}
+
 .toolbar.toolbar-mainbar
-  .window-buttongroup
-  button,
-.toolbar.toolbar-mainbar .vivaldi,
-.toolbar.toolbar-mainbar
-  .ToolbarButton-Button {
-  min-height: 24px !important;
+  > .window-buttongroup.on-mainbar {
+  margin-left: auto !important; /* eat all free space to the left */
+  order: 9999 !important; /* be last in the row, regardless of theme order */
+}
+
+/* Normalize button size */
+.window-buttongroup.on-mainbar button {
+  width: 32px !important;
   height: 24px !important;
-  padding: 2px 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 1px !important;
+  padding: 0 !important;
 }
 
-/* Fix SVG alignment so icons stay centered */
-/* .toolbar.toolbar-mainbar svg {
-  height: 14px !important;
-  width: 14px !important;
-  vertical-align: middle;
-} */
+/* Icons */
+.window-buttongroup.on-mainbar svg {
+  width: 8px !important;
+  height: 8px !important;
+}
 
-/* Optional: reduce address bar height */
-/* .UrlBar-AddressField.urlfield-anchor {
-  min-height: 26px !important;
-  height: 26px !important;
-} */
+/* --- Custom vertical offset (nudge up/down) --- */
+.window-buttongroup.on-mainbar {
+  transform: translateY(
+    -3px
+  ); /* change -5px to move up, +5px to move down */
+}
+
+/* ---------------------------------------------
+    Hide supporter badge
+   --------------------------------------------- */
+#panels-container .Supporter-Badge,
+.toolbar .Supporter-Badge,
+img.Supporter-Badge {
+  display: none !important;
+  visibility: hidden !important; /* belt and suspenders */
+}
 
 /* ---------------------------------------------
     Change extensions Icons
