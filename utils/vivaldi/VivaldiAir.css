@@ -1437,7 +1437,7 @@ button.button-startpage:after {
     .tabs-bottom
   ):not(.fullscreen)
   #webview-container {
-  margin: 6px 6px 6px 0;
+  margin: 6px 3px 3px -3px;
 }
 
 /* Extra bottom gap for the vertical tabs bar (left side) */
@@ -1445,7 +1445,7 @@ button.button-startpage:after {
     .tabs-bottom
   ):not(.fullscreen)
   .tabbar-wrapper {
-  margin: 3px 3px 8px 3px;
+  margin: 3px 3px 6px 2px;
 }
 
 /* Extra gaps for the panels container on all sides */
@@ -1453,7 +1453,7 @@ button.button-startpage:after {
     .tabs-bottom
   ):not(.fullscreen)
   #panels-container {
-  margin: 6px 10px 10px 0 !important;
+  margin: 6px 8px 7px 0 !important;
 }
 
 /* Float the whole mainbar block with the same side gaps */
@@ -1461,7 +1461,7 @@ button.button-startpage:after {
     .tabs-bottom
   ):not(.fullscreen)
   .mainbar {
-  margin: 8px 10px 0 10px !important;
+  margin: 8px 8px 0 8px !important;
 }
 /* ========================================================= */
 /* Toolbar height adjustment */
