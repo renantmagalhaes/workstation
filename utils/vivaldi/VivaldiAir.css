@@ -1420,6 +1420,18 @@ button.button-startpage:after {
   z-index: 1001 !important;
 }
 
+/* Ensure inner panel content respects sidebar radius */
+#panels-container .panel-group,
+#panels
+  .webpanel-stack
+  .webpanel
+  .webpanel-content {
+  border-radius: var(
+    --radius
+  ) !important;
+  overflow: hidden;
+}
+
 /* ========================================================= */
 /* END STARTPAGE NAVIGATION */
 /* ========================================================= */
@@ -1592,6 +1604,47 @@ button.vivaldi .vivaldi-v {
 button.vivaldi .expand-arrow {
   display: none !important;
 }
+
+/* ========================================================= */
+/* Panels */
+/* ========================================================= */
+/* =========================
+   Lock the panels rail to 34 px
+   ========================= */
+/* #panels-container {
+  width: 34px !important;
+  min-width: 34px !important;
+  max-width: 34px !important;
+  flex: 0 0 34px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  box-sizing: border-box !important;
+  --panelCollapsed: 34px;
+  --duration: 0ms !important; 
+  transition: none !important;
+}
+
+
+#panels-container.left,
+#panels-container.right,
+#panels-container.overlay,
+#panels-container.icons,
+#panels-container.minimized {
+  width: 34px !important;
+  min-width: 34px !important;
+  max-width: 34px !important;
+  flex-basis: 34px !important;
+}
+
+#panels-container[style*="width: 34px"],
+#panels-container.icons,
+#panels-container.minimized {
+
+  .ToolbarButton-Button .button-icon,
+  .ToolbarButton-Button .button-icon svg,
+  .ToolbarButton-Button .button-icon img {
+    transform: translateX(2px) !important;
+  } */
 
 /* ========================================================= */
 /* page zoom */
