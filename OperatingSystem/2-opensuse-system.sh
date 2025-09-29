@@ -126,9 +126,9 @@ pipx install bpytop
 
 # Install Vivaldi Browser
 sudo rpm --import https://repo.vivaldi.com/stable/linux_signing_key.pub
-sudo zypper --no-gpg-checks ar https://repo.vivaldi.com/stable/rpm/x86_64/ Vivaldi
-sudo zypper --no-gpg-checks refresh
-sudo zypper install -y vivaldi-stable
+sudo zypper ar -cf https://repo.vivaldi.com/stable/rpm/x86_64/ Vivaldi
+sudo zypper ref Vivaldi
+sudo zypper in -y vivaldi-stable
 sudo zypper refresh
 
 # Install Google Chrome
