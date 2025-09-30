@@ -1479,17 +1479,17 @@ button.button-startpage:after {
 /* Toolbar height adjustment */
 /* ========================================================= */
 /* Slim mainbar */
-/* .toolbar.toolbar-mainbar {
+.toolbar.toolbar-mainbar {
   min-height: 30px !important;
   height: 30px !important;
   padding: 0 4px !important;
   display: flex !important;
   align-items: center !important;
   box-sizing: border-box !important;
-} */
+}
 
 /* Send window buttons to the right and keep them clickable */
-/* .toolbar.toolbar-mainbar
+.toolbar.toolbar-mainbar
   > .window-buttongroup.on-mainbar {
   margin-left: auto !important;
   display: flex !important;
@@ -1498,20 +1498,20 @@ button.button-startpage:after {
   pointer-events: auto !important;
   position: relative !important;
   z-index: 5 !important;
-} */
+}
 /* force window controls to the far right */
-/* .toolbar.toolbar-mainbar {
+.toolbar.toolbar-mainbar {
   display: flex !important;
 }
 
 .toolbar.toolbar-mainbar
   > .window-buttongroup.on-mainbar {
-  margin-left: auto !important; 
-  order: 9999 !important; 
-} */
+  margin-left: auto !important;
+  order: 9999 !important;
+}
 
 /* Normalize button size */
-/* .window-buttongroup.on-mainbar button {
+.window-buttongroup.on-mainbar button {
   width: 32px !important;
   height: 24px !important;
   display: flex !important;
@@ -1519,20 +1519,30 @@ button.button-startpage:after {
   justify-content: center !important;
   margin: 0 1px !important;
   padding: 0 !important;
-} */
+}
 
 /* Icons */
-/* .window-buttongroup.on-mainbar svg {
+.window-buttongroup.on-mainbar svg {
   width: 8px !important;
   height: 8px !important;
-} */
+}
 
 /* --- Custom vertical offset (nudge up/down) --- */
-/* .window-buttongroup.on-mainbar {
-  transform: translateY(
-    -3px
-  );
-} */
+.window-buttongroup.on-mainbar {
+  transform: translateY(-3px);
+}
+
+/* Always hide the Vivaldi 7.6 update toolbar */
+#browser
+  .toolbar.toolbar-mainbar.update {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
 
 /* ---------------------------------------------
     Hide supporter badge
