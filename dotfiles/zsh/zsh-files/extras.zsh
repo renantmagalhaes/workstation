@@ -12,6 +12,6 @@ linux_check=$(uname -a | awk '{print $1}' | awk '{print tolower($0)}')
 
 
 if check_cmd wsl.exe; then
-  #alias sdm="sdm.exe"
+  alias sdm="sdm.exe"
 fi
 
