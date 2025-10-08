@@ -26,35 +26,21 @@ fi
 echo "🔄 Updating system packages..."
 sudo zypper refresh && sudo zypper update
 
-# Install Hyprland and core packages
+# Install Hyprland and core packages (only Hyprland-specific)
 echo "📦 Installing Hyprland and core packages..."
-sudo zypper install -y hyprland waybar wofi rofi flameshot playerctl pavucontrol hyprlock jgmenu flatpak blueman
+sudo zypper install -y hyprland waybar wofi rofi playerctl pavucontrol hyprlock blueman
 
-# Install additional useful packages
-echo "📦 Installing additional packages..."
-sudo zypper install -y hyprshot hyprpicker swww dunst kitty alacritty
+# Install Hyprland-specific packages (not in system script)
+echo "📦 Installing Hyprland-specific packages..."
+sudo zypper install -y hyprshot hyprpicker swww dunst kitty
 
-# Install development tools (if needed)
-echo "📦 Installing development tools..."
-sudo zypper install -y git curl wget vim neovim
+# Note: Flatpak applications should be installed via 2-opensuse-system.sh
 
-# Install flatpak applications
-echo "📦 Installing flatpak applications..."
-flatpak install -y flathub com.github.hluk.copyq
-
-# Install media and graphics packages
-echo "📦 Installing media packages..."
-sudo zypper install -y mpv vlc clementine
-
-# Install system utilities
-echo "📦 Installing system utilities..."
-sudo zypper install -y htop neofetch tree fd ripgrep bat exa
-
-# Install Wayland-specific packages
+# Install Wayland-specific packages (not in system script)
 echo "📦 Installing Wayland packages..."
 sudo zypper install -y wl-clipboard grim slurp
 
-# Install optional packages
+# Install optional Hyprland packages
 echo "📦 Installing optional packages..."
 sudo zypper install -y obs-studio discord telegram-desktop
 
@@ -98,16 +84,23 @@ update-desktop-database ~/.local/share/applications/
 echo ""
 echo "🎉 Hyprland installation completed successfully!"
 echo ""
-echo "📋 Installed packages:"
+echo "📋 Installed Hyprland-specific packages:"
 echo "✅ Hyprland - Wayland compositor"
 echo "✅ Waybar - Status bar"
 echo "✅ Rofi - Application launcher"
-echo "✅ Flameshot - Screenshot tool"
 echo "✅ Playerctl - Media controls"
 echo "✅ Pavucontrol - Audio control"
 echo "✅ Blueman - Bluetooth manager"
 echo "✅ Dunst - Notification daemon"
-echo "✅ Kitty/Alacritty - Terminal emulators"
+echo "✅ Kitty - Terminal emulator"
+echo "✅ Hyprshot/Hyprpicker - Screenshot tools"
+echo "✅ swww - Wallpaper manager"
+echo "✅ wl-clipboard - Clipboard tools"
+echo ""
+echo "📋 System packages (from 2-opensuse-system.sh):"
+echo "✅ flameshot, alacritty, jgmenu, git, curl, wget"
+echo "✅ vim, neovim, mpv, vlc, htop, neofetch, tree"
+echo "✅ fd, ripgrep, bat, exa"
 echo ""
 echo "🚀 Next steps:"
 echo "1. Run the setup script: ./hyprland-setup.sh"
