@@ -56,7 +56,7 @@ fi
 #clear
 echo "###########################"
 echo "#                         #"
-echo "#      rtm.codes          #"
+echo "#      insecure.codes          #"
 echo "#       DONE              #"
 echo "#                         #"
 echo "###########################"

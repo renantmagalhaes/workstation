@@ -4,7 +4,7 @@
 # This script installs Hyprland and all required packages
 #
 # Author: Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
-# Site: https://rtm.codes
+# Site: https://insecure.codes
 #
 
 set -e
@@ -12,7 +12,7 @@ set -e
 echo "#################################"
 echo "#   Hyprland Installation      #"
 echo "#      for OpenSUSE            #"
-echo "#         rtm.codes             #"
+echo "#         insecure.codes             #"
 echo "#################################"
 echo ""
 
@@ -111,5 +111,5 @@ echo "📖 Check the MIGRATION_GUIDE.md for detailed instructions"
 echo ""
 echo "#################################"
 echo "#   Installation Complete!     #"
-echo "#         rtm.codes             #"
+echo "#         insecure.codes             #"
 echo "#################################"

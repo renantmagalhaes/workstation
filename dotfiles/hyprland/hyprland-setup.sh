@@ -4,14 +4,14 @@
 # This script sets up a complete Hyprland environment
 #
 # Author: Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
-# Site: https://rtm.codes
+# Site: https://insecure.codes
 #
 
 set -e
 
 echo "#################################"
 echo "#      Hyprland Setup           #"
-echo "#         rtm.codes             #"
+echo "#         insecure.codes             #"
 echo "#################################"
 echo ""
 
@@ -238,5 +238,5 @@ echo "📖 Check ~/.config/hypr/SETUP_SUMMARY.md for details"
 echo ""
 echo "#################################"
 echo "#     Setup Complete!          #"
-echo "#         rtm.codes             #"
+echo "#         insecure.codes             #"
 echo "#################################"
