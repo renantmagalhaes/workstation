@@ -115,76 +115,8 @@ fi
 
 # Note: Startup applications are handled by startup.conf (native Hyprland way)
 
-# Create session file
-echo "📝 Creating Hyprland session file..."
-cat > ~/.config/hypr/hyprland-session.desktop << 'EOF'
-[Desktop Entry]
-Name=Hyprland
-Comment=An intelligent dynamic tiling Wayland compositor
-Exec=Hyprland
-Type=Application
-EOF
+# Note: Desktop session file not required - Hyprland is auto-detected by display managers
 
-# Create setup summary
-echo "📋 Creating setup summary..."
-cat > ~/.config/hypr/SETUP_SUMMARY.md << 'EOF'
-# Hyprland Setup Summary
-
-## What was configured:
-
-### ✅ Hyprland Configuration
-- Complete window manager setup with productivity keybindings
-- Dual monitor workspace navigation
-- Media keys and system controls
-- Mouse bindings and gestures
-
-### ✅ Visual Effects
-- Built-in compositor with blur effects
-- Rounded corners and shadows
-- Smooth animations and transitions
-- Window transparency rules
-
-### ✅ Waybar Status Bar
-- Modern status bar replacing Polybar
-- System information display
-- Workspace indicators
-- Media controls and notifications
-
-### ✅ Applications
-- Rofi launcher and menus
-- Screenshot tools (flameshot)
-- Audio controls (pavucontrol)
-- Network management
-- All essential system tools
-
-## Key Features:
-
-### 🎯 Productivity Workflow
-- **Terminal**: `Super + T` → Opens kitty
-- **File Manager**: `Super + E` → Opens nautilus
-- **Launcher**: `Super + P` or `Super + Z` → Opens rofi
-- **Screenshots**: `Print`, `Ctrl + Print`, `Alt + Print` → flameshot
-- **Window Management**: Complete window management
-- **Workspace Navigation**: Dual monitor setup
-- **Media Keys**: Volume, brightness, media controls
-
-### 🖥️ Dual Monitor Setup
-- **DP-1**: Workspaces 1, 2, 3, 4, 5
-- **HDMI-1**: Workspaces 11, 22, 33, 44, 55
-- Seamless workspace switching between monitors
-
-## Usage:
-
-1. **Start Hyprland**: Select Hyprland from your display manager
-2. **Reload config**: `hyprctl reload`
-3. **Restart waybar**: `killall waybar && waybar &`
-
-## Troubleshooting:
-
-- Check logs: `journalctl -u hyprland`
-- Reload config: `hyprctl reload`
-- Restart waybar: `killall waybar && waybar &`
-EOF
 
 echo ""
 echo "🎉 Hyprland setup completed successfully!"
