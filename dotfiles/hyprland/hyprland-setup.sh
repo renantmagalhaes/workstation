@@ -85,7 +85,7 @@ fi
 
 # Install required packages
 echo "📦 Installing required packages..."
-sudo zypper install -y waybar wofi rofi flameshot playerctl pavucontrol blueman-manager hyprlock tdrop jgmenu xdotool flatpak
+sudo zypper install -y waybar wofi rofi flameshot playerctl pavucontrol hyprlock jgmenu xdotool flatpak
 
 # Install optional packages
 echo "📦 Installing optional packages..."
