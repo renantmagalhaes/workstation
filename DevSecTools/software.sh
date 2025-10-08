@@ -51,7 +51,7 @@ sudo flatpak install -y flathub net.sourceforge.jpdftweak.jPdfTweak
 #clear
 echo "###########################"
 echo "#                         #"
-echo "#      rtm.codes          #"
+echo "#      insecure.codes          #"
 echo "#       DONE              #"
 echo "#                         #"
 echo "###########################"

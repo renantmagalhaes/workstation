@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 #
-#?Site        :https://rtm.codes
+#?Site        :https://insecure.codes
 #?Author      :Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
 #?                                     <https://github.com/renantmagalhaes>
 #

@@ -60,5 +60,5 @@ hyprland/
 
 ---
 
-**Setup by rtm.codes**  
+**Setup by insecure.codes**  
 _Productive workflow, powered by Hyprland!_

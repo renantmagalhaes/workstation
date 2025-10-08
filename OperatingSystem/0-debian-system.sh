@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 #
-#?Site        :https://rtm.codes
+#?Site        :https://insecure.codes
 #?Author      :Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
 #?                                     <https://github.com/renantmagalhaes>
 #
@@ -241,7 +241,7 @@ zsh
 #clear
 echo "#################################"
 echo "#                               #"
-echo "#         rtm.codes             #"
+echo "#         insecure.codes             #"
 echo "#     Please reboot your pc     #"
 echo "#                               #"
 echo "#################################"
