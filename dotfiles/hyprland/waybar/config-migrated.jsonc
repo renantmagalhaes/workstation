@@ -1,0 +1,199 @@
+// Waybar Configuration - Migrated from Polybar
+// Enhanced configuration with BSPWM-style functionality
+
+[
+  {
+    "layer": "top",
+    "position": "top",
+    "margin-top": 0,
+    "margin-bottom": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    "modules-left": [
+      "hyprland/workspaces",
+      "hyprland/window",
+      "custom/launcher"
+    ],
+    "modules-center": [
+      "clock",
+      "mpris"
+    ],
+    "modules-right": [
+      "tray",
+      "pulseaudio",
+      "network",
+      "battery",
+      "cpu",
+      "memory",
+      "custom/screenshot",
+      "custom/power"
+    ],
+
+    // Workspaces (matching BSPWM style)
+    "hyprland/workspaces": {
+      "all-outputs": true,
+      "format": "{name}",
+      "on-scroll-up": "hyprctl dispatch workspace e+1",
+      "on-scroll-down": "hyprctl dispatch workspace e-1",
+      "sort-by-number": true,
+      "active-only": false,
+      "format-icons": {
+        "1": "󰈹",
+        "2": "󰈹",
+        "3": "󰈹",
+        "4": "󰈹",
+        "5": "󰈹",
+        "11": "󰈹",
+        "22": "󰈹",
+        "33": "󰈹",
+        "44": "󰈹",
+        "55": "󰈹"
+      }
+    },
+
+    // Window title
+    "hyprland/window": {
+      "format": "{title}",
+      "separate-outputs": true,
+      "max-length": 50,
+      "rewrite": {
+        "(.*) — Mozilla Firefox": "󰈹  $1",
+        "(.*) — Zen Browser": "󰈹  Zen - $1",
+        "(.*) - Google Chrome": "󰈹  $1",
+        "(.*) - Visual Studio Code": "󰨞  $1",
+        "(.*) - nvim": "󰈹  $1",
+        "(.*) - Obsidian(.*)": "󱓧  $1",
+        "(.*) - fish": "󰈹  $1",
+        "yazi: (.*)": "󰈹  $1"
+      }
+    },
+
+    // Launcher (replacing rofi menu)
+    "custom/launcher": {
+      "format": "󰈹",
+      "on-click": "rofi -show drun",
+      "on-click-middle": "pkill -9 rofi",
+      "tooltip-format": "Application Launcher"
+    },
+
+    // Clock
+    "clock": {
+      "format": "󰥔 {:%a %e %b %H:%M}",
+      "tooltip-format": "<tt>{calendar}</tt>",
+      "calendar": {
+        "mode": "month",
+        "format": {
+          "months": "<span color='#cdd6f4'><b>{}</b></span>",
+          "days": "<span color='#cdd6f4'><b>{}</b></span>",
+          "weeks": "<span color='#cdd6f4'><b>W{}</b></span>",
+          "weekdays": "<span color='#cdd6f4'><b>{}</b></span>",
+          "today": "<span color='#f38ba8'><b>{}</b></span>"
+        }
+      }
+    },
+
+    // Media player (matching your BSPWM setup)
+    "mpris": {
+      "format": "{player_icon} {artist} - {title}",
+      "format-paused": "{status_icon} {artist} - {title}",
+      "tooltip-format": "{player} ({status})\r{artist} - {title}\r\rLeft-Click:   Play / Pause\rMiddle-Click: Previous Track\rRight-Click:  Next Track",
+      "title-len": 20,
+      "player-icons": {
+        "default": "󰈹",
+        "mpv": "󰈹",
+        "spotify": "󰈹",
+        "clementine": "󰈹"
+      },
+      "status-icons": {
+        "paused": "󰈹",
+        "stopped": "󰈹"
+      }
+    },
+
+    // System tray
+    "tray": {
+      "icon-size": 15,
+      "spacing": 10
+    },
+
+    // Audio (matching your BSPWM volume controls)
+    "pulseaudio": {
+      "format": "{icon} <b>{volume}%</b>",
+      "format-muted": "󰈹",
+      "format-bluetooth": "{icon} 󰈹 <b>{volume}%</b>",
+      "format-bluetooth-muted": "󰈹 󰈹",
+      "format-icons": {
+        "headset": "󰈹",
+        "default": ["󰈹", "󰈹", "󰈹"]
+      },
+      "tooltip": true,
+      "on-click": "pavucontrol",
+      "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    },
+
+    // Network (matching your BSPWM setup)
+    "network": {
+      "format": "{ifname}",
+      "format-wifi": "󰈹 {signalStrength}%",
+      "format-ethernet": "󰈹 {ipaddr}",
+      "format-linked": "󰈹 {ifname} (No IP)",
+      "format-disconnected": "󰈹 Disconnected",
+      "format-alt": "{ifname}: {ipaddr}",
+      "tooltip-format": "{ifname}: {ipaddr}",
+      "on-click": "gnome-control-center wifi",
+      "on-click-right": "nm-connection-editor"
+    },
+
+    // Battery
+    "battery": {
+      "format": "{icon} {capacity}%",
+      "format-plugged": "󰈹 {capacity}%",
+      "format-icons": [
+        "󰈹",
+        "󰈹",
+        "󰈹",
+        "󰈹",
+        "󰈹"
+      ],
+      "max-length": 25,
+      "tooltip": true,
+      "interval": 5,
+      "states": {
+        "good": 70,
+        "warning": 30,
+        "critical": 15
+      }
+    },
+
+    // CPU usage
+    "cpu": {
+      "format": "󰈹 {usage}%",
+      "tooltip": false,
+      "interval": 5
+    },
+
+    // Memory usage
+    "memory": {
+      "interval": 30,
+      "format": "󰈹 {used}GiB",
+      "max-length": 13,
+      "tooltip": false
+    },
+
+    // Screenshot (matching your BSPWM setup)
+    "custom/screenshot": {
+      "format": "󰈹",
+      "on-click": "flameshot gui",
+      "on-click-right": "flameshot screen",
+      "tooltip-format": "Left-click:  Area Screenshot\nRight-click: Full Screen Screenshot"
+    },
+
+    // Power menu
+    "custom/power": {
+      "format": "󰈹",
+      "tooltip": false,
+      "on-click": "~/.config/rofi/powermenu.sh"
+    }
+  }
+]
+
