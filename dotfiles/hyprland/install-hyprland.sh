@@ -28,7 +28,7 @@ sudo zypper refresh && sudo zypper update
 
 # Install Hyprland and core packages
 echo "📦 Installing Hyprland and core packages..."
-sudo zypper install -y hyprland waybar wofi rofi flameshot playerctl pavucontrol hyprlock jgmenu xdotool flatpak
+sudo zypper install -y hyprland waybar wofi rofi flameshot playerctl pavucontrol hyprlock jgmenu flatpak blueman
 
 # Install additional useful packages
 echo "📦 Installing additional packages..."

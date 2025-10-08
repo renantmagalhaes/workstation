@@ -85,7 +85,16 @@ fi
 
 # Install required packages
 echo "📦 Installing required packages..."
-sudo zypper install -y waybar wofi rofi flameshot playerctl pavucontrol hyprlock jgmenu xdotool flatpak
+sudo zypper install -y waybar wofi rofi flameshot playerctl pavucontrol hyprlock jgmenu flatpak blueman
+
+# Test hyprlock installation
+echo "🔍 Testing hyprlock installation..."
+if command -v hyprlock &> /dev/null; then
+    echo "✅ hyprlock is installed"
+else
+    echo "❌ hyprlock installation failed"
+    exit 1
+fi
 
 # Install optional packages
 echo "📦 Installing optional packages..."
@@ -98,16 +107,58 @@ flatpak install -y flathub com.github.hluk.copyq
 # Create symlinks for shared scripts
 echo "🔗 Setting up shared configurations..."
 
+# Check for and fix nested folder issues
+echo "🔍 Checking for nested folder issues..."
+if [ -d ~/.config/rofi/rofi ]; then
+    echo "⚠️  Found nested rofi folder, fixing..."
+    mv ~/.config/rofi/rofi/* ~/.config/rofi/ 2>/dev/null || true
+    rmdir ~/.config/rofi/rofi 2>/dev/null || true
+fi
+
+if [ -d ~/.config/dunst/dunst ]; then
+    echo "⚠️  Found nested dunst folder, fixing..."
+    mv ~/.config/dunst/dunst/* ~/.config/dunst/ 2>/dev/null || true
+    rmdir ~/.config/dunst/dunst 2>/dev/null || true
+fi
+
 # Rofi scripts (if they exist)
 if [ -d "$PWD/../rofi" ]; then
+    # Remove existing symlink or directory if it exists
+    if [ -L ~/.config/rofi ] || [ -d ~/.config/rofi ]; then
+        rm -rf ~/.config/rofi
+    fi
     ln -sf "$PWD/../rofi" ~/.config/rofi
     echo "✅ Rofi configuration linked"
 fi
 
 # Dunst configuration (if it exists)
 if [ -d "$PWD/../bspwm/dunst" ]; then
+    # Remove existing symlink or directory if it exists
+    if [ -L ~/.config/dunst ] || [ -d ~/.config/dunst ]; then
+        rm -rf ~/.config/dunst
+    fi
     ln -sf "$PWD/../bspwm/dunst" ~/.config/dunst
     echo "✅ Dunst configuration linked"
+fi
+
+# Setup hyprlock configuration
+echo "🔒 Setting up hyprlock configuration..."
+if [ -f "$PWD/hypr/hyprlock-minimal.conf" ]; then
+    ln -sf "$PWD/hypr/hyprlock-minimal.conf" ~/.config/hypr/hyprlock.conf
+    echo "✅ hyprlock configuration linked (minimal)"
+elif [ -f "$PWD/hypr/hyprlock.conf" ]; then
+    ln -sf "$PWD/hypr/hyprlock.conf" ~/.config/hypr/hyprlock.conf
+    echo "✅ hyprlock configuration linked"
+else
+    echo "⚠️  No hyprlock configuration found"
+fi
+
+# Test hyprlock configuration
+echo "🔍 Testing hyprlock configuration..."
+if hyprlock --help &> /dev/null; then
+    echo "✅ hyprlock is working"
+else
+    echo "❌ hyprlock has issues - check configuration"
 fi
 
 # Create startup script

@@ -97,3 +97,5 @@ Your lock screen is now **completely native to Hyprland**:
 - ✅ **Standalone configuration**
 
 The lock screen now uses Hyprland's native `hyprlock` with a custom configuration that doesn't depend on any external color schemes or BSPWM-specific scripts!
+
+

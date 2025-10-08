@@ -121,3 +121,5 @@ Your Hyprland setup is now **100% ready for production use**! All configurations
 **Usage**: Log out and select "Hyprland" from your display manager
 
 **Everything will work as expected!** 🎉
+
+

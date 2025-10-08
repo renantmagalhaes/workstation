@@ -107,3 +107,5 @@ Your Hyprland configuration is now **completely standalone** and **BSPWM-free**:
 - ✅ **Ready for production use**
 
 The configuration is now **future-proof** and **migration-complete**!
+
+
