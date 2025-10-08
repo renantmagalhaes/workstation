@@ -40,10 +40,6 @@ sudo zypper install -y hyprshot hyprpicker swww dunst kitty
 echo "📦 Installing Wayland packages..."
 sudo zypper install -y wl-clipboard grim slurp
 
-# Install optional Hyprland packages
-echo "📦 Installing optional packages..."
-sudo zypper install -y obs-studio discord telegram-desktop
-
 # Create user directories
 echo "📁 Creating user directories..."
 mkdir -p ~/.config/hypr
@@ -51,19 +47,7 @@ mkdir -p ~/.config/waybar
 mkdir -p ~/.config/rofi
 mkdir -p ~/.config/dunst
 
-# Set up environment variables
-echo "🔧 Setting up environment variables..."
-cat >> ~/.bashrc << 'EOF'
-
-# Hyprland environment variables
-export XDG_CURRENT_DESKTOP=Hyprland
-export XDG_SESSION_DESKTOP=Hyprland
-export XDG_SESSION_TYPE=wayland
-export QT_QPA_PLATFORM=wayland
-export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-export GDK_BACKEND=wayland
-export MOZ_ENABLE_WAYLAND=1
-EOF
+# Note: Environment variables are set in hyprland.conf using 'env' keyword
 
 # Create desktop entry for Hyprland
 echo "📝 Creating desktop entry..."
