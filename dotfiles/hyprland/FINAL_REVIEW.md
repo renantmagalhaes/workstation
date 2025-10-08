@@ -140,3 +140,5 @@ bind = $mainMod, V, exec, wl-paste
 3. **Remove problematic keybindings**
 
 **Current status: Configuration will have broken keybindings without these fixes!**
+
+
