@@ -28,7 +28,7 @@ sudo zypper refresh && sudo zypper update
 
 # Install Hyprland and core packages (only Hyprland-specific)
 echo "📦 Installing Hyprland and core packages..."
-sudo zypper install -y hyprland waybar wofi rofi playerctl pavucontrol hyprlock blueman hyprland-qtutils
+sudo zypper install -y hyprland waybar wofi rofi playerctl pavucontrol hyprlock blueman hyprland-qtutils nwg-displays
 
 # Install Hyprland-specific packages (not in system script)
 echo "📦 Installing Hyprland-specific packages..."
