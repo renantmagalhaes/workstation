@@ -38,49 +38,36 @@ if [ -d ~/.config/hypr ]; then
     echo "✅ Backup created"
 fi
 
-# Create Hyprland config directory
-mkdir -p ~/.config/hypr
-mkdir -p ~/.config/waybar
+echo "📁 Setting up configuration symlinks..."
 
-echo "📁 Created configuration directories"
-
-# Copy Hyprland configuration
+# Create symlink for Hyprland configuration
 echo "📋 Setting up Hyprland configuration..."
-if [ -f "$PWD/hypr/hyprland-migrated.conf" ]; then
-    cp "$PWD/hypr/hyprland-migrated.conf" ~/.config/hypr/hyprland.conf
-    echo "✅ Hyprland configuration copied"
+if [ -d "$PWD/hypr" ]; then
+    # Remove existing directory if it exists
+    if [ -d ~/.config/hypr ]; then
+        rm -rf ~/.config/hypr
+    fi
+    # Create symlink
+    ln -sf "$PWD/hypr" ~/.config/hypr
+    echo "✅ Hyprland configuration linked"
 else
-    echo "❌ Hyprland configuration file not found!"
+    echo "❌ Hyprland configuration directory not found!"
     exit 1
 fi
 
-# Copy Waybar configuration
+# Create symlink for Waybar configuration
 echo "📋 Setting up Waybar configuration..."
-if [ -f "$PWD/waybar/config-migrated.jsonc" ]; then
-    cp "$PWD/waybar/config-migrated.jsonc" ~/.config/waybar/config
-    echo "✅ Waybar configuration copied"
+if [ -d "$PWD/waybar" ]; then
+    # Remove existing directory if it exists
+    if [ -d ~/.config/waybar ]; then
+        rm -rf ~/.config/waybar
+    fi
+    # Create symlink
+    ln -sf "$PWD/waybar" ~/.config/waybar
+    echo "✅ Waybar configuration linked"
 else
-    echo "❌ Waybar configuration file not found!"
+    echo "❌ Waybar configuration directory not found!"
     exit 1
-fi
-
-# Copy Waybar style
-if [ -f "$PWD/waybar/style.css" ]; then
-    cp "$PWD/waybar/style.css" ~/.config/waybar/
-    echo "✅ Waybar style copied"
-fi
-
-# Copy Waybar scripts
-if [ -d "$PWD/waybar/scripts" ]; then
-    cp -r "$PWD/waybar/scripts" ~/.config/waybar/
-    chmod +x ~/.config/waybar/scripts/*.sh
-    echo "✅ Waybar scripts copied"
-fi
-
-# Copy Waybar icons
-if [ -d "$PWD/waybar/icons" ]; then
-    cp -r "$PWD/waybar/icons" ~/.config/waybar/
-    echo "✅ Waybar icons copied"
 fi
 
 # Install required packages
@@ -100,9 +87,7 @@ fi
 echo "📦 Installing optional packages..."
 sudo zypper install -y hyprshot hyprpicker swww
 
-# Install flatpak applications
-echo "📦 Installing flatpak applications..."
-flatpak install -y flathub com.github.hluk.copyq
+# Note: Flatpak applications should be installed via 2-opensuse-system.sh
 
 # Create symlinks for shared scripts
 echo "🔗 Setting up shared configurations..."
@@ -161,35 +146,7 @@ else
     echo "❌ hyprlock has issues - check configuration"
 fi
 
-# Create startup script
-echo "🚀 Creating Hyprland startup script..."
-cat > ~/.config/hypr/startup.sh << 'EOF'
-#!/bin/bash
-# Hyprland startup script
-
-# Start essential services
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-nm-applet &
-dunst &
-kdeconnectd &
-kdeconnect-indicator &
-flatpak run com.github.hluk.copyq &
-/usr/bin/1password --silent &
-# swww-daemon is already started above
-
-# swww-daemon is already started above
-
-# Start waybar
-waybar &
-
-# Set up monitors
-hyprctl keyword monitor "DP-1,2560x1440@143.91,0x0,1"
-hyprctl keyword monitor "HDMI-1,2560x1440@143.91,2560x0,1"
-
-echo "Hyprland startup complete!"
-EOF
-
-chmod +x ~/.config/hypr/startup.sh
+# Note: Startup applications are handled by startup.conf (native Hyprland way)
 
 # Create session file
 echo "📝 Creating Hyprland session file..."
