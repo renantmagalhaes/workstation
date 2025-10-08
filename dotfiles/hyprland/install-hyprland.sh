@@ -18,8 +18,8 @@ echo ""
 
 # Check if running as root
 if [ "$(id -u)" = "0" ]; then
-    echo "Don't run this script as root" 2>&1
-    exit 1
+	echo "Don't run this script as root" 2>&1
+	exit 1
 fi
 
 # Update system
@@ -28,7 +28,7 @@ sudo zypper refresh && sudo zypper update
 
 # Install Hyprland and core packages (only Hyprland-specific)
 echo "📦 Installing Hyprland and core packages..."
-sudo zypper install -y hyprland waybar wofi rofi playerctl pavucontrol hyprlock blueman
+sudo zypper install -y hyprland waybar wofi rofi playerctl pavucontrol hyprlock blueman hyprland-qtutils
 
 # Install Hyprland-specific packages (not in system script)
 echo "📦 Installing Hyprland-specific packages..."
@@ -51,7 +51,7 @@ mkdir -p ~/.config/dunst
 
 # Create desktop entry for Hyprland
 echo "📝 Creating desktop entry..."
-cat > ~/.local/share/applications/hyprland.desktop << 'EOF'
+cat >~/.local/share/applications/hyprland.desktop <<'EOF'
 [Desktop Entry]
 Name=Hyprland
 Comment=An intelligent dynamic tiling Wayland compositor
