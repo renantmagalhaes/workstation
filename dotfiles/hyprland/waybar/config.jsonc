@@ -14,7 +14,9 @@
       "mpris",
       "hyprland/window"
     ],
-    "modules-center": ["clock"],
+    "modules-center": [
+      "clock"
+    ],
     "modules-right": [
       "memory",
       "tray",
@@ -108,7 +110,11 @@
     },
     "backlight": {
       "format": "{icon} <b>{percent}%</b>",
-      "format-icons": ["󰃞", "󰃟", "󰃠"],
+      "format-icons": [
+        "󰃞",
+        "󰃟",
+        "󰃠"
+      ],
       "tooltip": false
     },
     "pulseaudio": {
@@ -118,7 +124,11 @@
       "format-bluetooth-muted": "󰝟 ",
       "format-icons": {
         "headset": "",
-        "default": ["󰕿", "󰖀", "󰕾"]
+        "default": [
+          "󰕿",
+          "󰖀",
+          "󰕾"
+        ]
       },
       "tooltip": true,
       "on-click": "pavucontrol",
@@ -168,7 +178,7 @@
     "custom/power": {
       "format": "",
       "tooltip": false,
-      "on-click": "~/.config/rofi/powermenu.sh"
+      "on-click": "jgmenu_run"
     }
   }
 ]
