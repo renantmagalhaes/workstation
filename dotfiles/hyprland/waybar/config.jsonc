@@ -42,9 +42,12 @@
       "sort-by-number": true,
       "active-only": false,
       "show-special": true,
-      "persistent-workspaces": {
-        "DP-1": [1, 2, 3, 4, 5],
-        "HDMI-1": [11, 22, 33, 44, 55]
+      "format-icons": {
+        "1": "󰎤",
+        "2": "󰎧",
+        "3": "󰎪",
+        "4": "󰎭",
+        "5": "󰎰"
       }
     },
     "mpris": {
