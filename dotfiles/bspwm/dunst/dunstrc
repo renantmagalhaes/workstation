@@ -4,7 +4,8 @@
     ### Display ###
 
     # Which monitor should the notifications be displayed on.
-    monitor = 0
+    monitor = 1 # For Hyprland
+    # monitor = 0 # For BSPWM
 
     # Display notification on focused monitor.  Possible modes are:
     #   mouse: follow mouse pointer
@@ -34,7 +35,7 @@
     origin = top-right
 
     # Offset from the origin
-    offset = 20x40
+    offset = (20, 40)
     # offset = 30x40
 
     # Scale factor. It is auto-detected if value is 0.
