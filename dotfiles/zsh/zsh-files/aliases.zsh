@@ -16,6 +16,7 @@ export VISUAL=vim
 gnome_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "GNOME" | awk '{print tolower($0)}')
 kde_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "KDE" | awk '{print tolower($0)}')
 bspwm_check=$(env | grep DESKTOP_SESSION | grep -ioh "bspwm" | awk '{print tolower($0)}')
+hyprland_check=$(env | grep DESKTOP_SESSION | grep -ioh "hyprland" | awk '{print tolower($0)}')
 wsl_debian_check=$(env | grep WSL | grep -ioh "debian" | awk '{print tolower($0)}')
 wsl_thumbleweed_check=$(env | grep WSL | grep -ioh "openSUSE-Tumbleweed" | awk '{print tolower($0)}')
 wsl_leap_check=$(env | grep WSL | grep -ioh "openSUSE-Leap" | awk '{print tolower($0)}')
@@ -55,6 +56,9 @@ elif check_cmd apt-get; then # FOR DEB SYSTEMS
     elif [[ $bspwm_check == "bspwm" ]]; then
         alias folder="nautilus"
         alias pdf="evince"
+    elif [[ $hyprland_check == "hyprland" ]]; then
+        alias folder="nautilus"
+        alias pdf="evince"
     elif [[ $kde_check == "kde" ]]; then
         alias folder="dolphin"
         alias pdf="evince"
@@ -66,6 +70,9 @@ elif check_cmd zypper; then # FOR ZYPPER TW SYSTEMS
         alias folder="nautilus"
         alias pdf="evince"
     elif [[ $bspwm_check == "bspwm" ]]; then
+        alias folder="nautilus"
+        alias pdf="evince"
+    elif [[ $hyprland_check == "hyprland" ]]; then
         alias folder="nautilus"
         alias pdf="evince"
     elif [[ $kde_check == "kde" ]]; then
