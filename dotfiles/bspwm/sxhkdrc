@@ -39,7 +39,7 @@ super + Escape
 #
 
 ctrl + Return
-  tdrop -ma -w -4 -y "45" -h 80% -s dropdown kitty
+  tdrop -ma -x 10 -w -25 -y 45 -h 80% -s dropdown kitty
 
 # Open file manager
 super + e
