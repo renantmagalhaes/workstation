@@ -7,14 +7,14 @@
 $mainMod = SUPER # Sets "Windows" key as main modifier
 
 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
+bind = $mainMod, T, exec, $terminal
 bind = CTRL ALT, T, exec, $terminal
 bind = CTRL SHIFT, SPACE, exec, 1password --quick-access &
-bind = $mainMod, V, exec, flatpak run com.github.hluk.copyq toggle
 bind = $mainMod, Q, killactive,
 bind = $mainMod, M, fullscreen,
 bind = $mainMod|ALT, escape, exit
 bind = $mainMod, E, exec, $fileManager
-bind = $mainMod, T, togglefloating,
+bind = $mainMod, V, togglefloating,
 bind = $mainMod, Z, exec, $menu
 bind = $mainMod, J, togglesplit, # dwindle
 bind = $mainMod,G, exec, firefox
@@ -63,13 +63,10 @@ bind = $mainMod SHIFT, 2, movetoworkspace, 2
 bind = $mainMod SHIFT, 3, movetoworkspace, 3
 bind = $mainMod SHIFT, 4, movetoworkspace, 4
 bind = $mainMod SHIFT, 5, movetoworkspace, 5
-bind = $mainMod SHIFT, 6, movetoworkspace, 6
-bind = $mainMod SHIFT, 7, movetoworkspace, 7
-bind = $mainMod SHIFT, 8, movetoworkspace, 8
-bind = $mainMod SHIFT, 9, movetoworkspace, 9
-bind = $mainMod SHIFT, 10, movetoworkspace, 10
-
-
+bind = $mainMod SHIFT, 6, movetoworkspace, 5
+bind = $mainMod SHIFT, 5, movetoworkspace, 5
+bind = $mainMod SHIFT, 5, movetoworkspace, 5
+bind = $mainMod SHIFT, 5, movetoworkspace, 5
 
 # Magic workspace (kitty terminal)
 bind = $mainMod, S, togglespecialworkspace, kitty
