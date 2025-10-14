@@ -28,7 +28,7 @@ sudo zypper refresh && sudo zypper update
 
 # Install Hyprland and core packages (only Hyprland-specific)
 echo "📦 Installing Hyprland and core packages..."
-sudo zypper install -y hyprland waybar wofi rofi playerctl pavucontrol hyprlock blueman hyprland-qtutils nwg-displays hypridle libevdev-devel evtest
+sudo zypper install -y hyprland waybar wofi rofi playerctl pavucontrol hyprlock blueman hyprland-qtutils nwg-displays hypridle libevdev-devel evtest swappy grim slurp wl-clipboard mako
 
 # Install Hyprland-specific packages (not in system script)
 echo "📦 Installing Hyprland-specific packages..."
@@ -46,6 +46,8 @@ mkdir -p ~/.config/hypr
 mkdir -p ~/.config/waybar
 mkdir -p ~/.config/rofi
 mkdir -p ~/.config/dunst
+mkdir -p ~/.config/mako
+
 
 # Note: Environment variables are set in hyprland.conf using 'env' keyword
 
