@@ -134,15 +134,38 @@ cp ~/.config/gtk-4.0/settings.ini ~/.config/gtk-4.0/settings.ini.bkp
 ## dump config
 bash -c 'cat << EOF > ~/.config/gtk-3.0/settings.ini
 [Settings]
-gtk-application-prefer-dark-theme=0
 gtk-theme-name=Graphite-Dark
-gtk-icon-theme-name=Tela-circle-blue
+gtk-icon-theme-name=Tela-circle-purple-light
+gtk-font-name=Noto Sans,  10
+gtk-cursor-theme-name=Fluent-dark-cursors
+gtk-cursor-theme-size=24
+gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
+gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-button-images=1
+gtk-menu-images=1
+gtk-enable-event-sounds=1
+gtk-enable-input-feedback-sounds=0
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle=hintslight
+gtk-xft-rgba=rgb
+gtk-application-prefer-dark-theme=1
+gtk-cursor-blink=true
+gtk-cursor-blink-time=1000
+gtk-decoration-layout=icon:minimize,maximize,close
+gtk-enable-animations=true
+gtk-primary-button-warps-slider=true
+gtk-sound-theme-name=ocean
+gtk-xft-dpi=98304
 EOF'
 bash -c 'cat << EOF > ~/.config/gtk-4.0/settings.ini
 [Settings]
-gtk-application-prefer-dark-theme=0
 gtk-theme-name=Graphite-Dark
-gtk-icon-theme-name=Tela-circle-blue
+gtk-icon-theme-name=Tela-circle-purple-light
+gtk-font-name=Noto Sans,  10
+gtk-cursor-theme-name=Fluent-dark-cursors
+gtk-cursor-theme-size=24
+gtk-application-prefer-dark-theme=1e
 EOF'
 
 echo "export GTK_THEME=Graphite-Dark" >>~/.profile
