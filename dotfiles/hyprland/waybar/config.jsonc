@@ -1,16 +1,18 @@
-// Written by Nicholas Oliver Bahary
-// on 14 September 2024
 [
+  // ==== BAR ON DP-1 ====
   {
+    "name": "dp1",
+    "output": "DP-1",
     "layer": "top",
     "position": "top",
     "margin-top": 0,
     "margin-bottom": 0,
     "margin-left": 250,
     "margin-right": 250,
+
     "modules-left": [
       "custom/rofi",
-      "hyprland/workspaces",
+      "hyprland/workspaces#dp1",
       "mpris",
       "hyprland/window"
     ],
@@ -26,6 +28,7 @@
       "custom/wallpaper",
       "custom/power"
     ],
+
     "custom/rofi": {
       "format": "\udb82\udcc7",
       "on-click": "rofi -show drun",
@@ -34,11 +37,13 @@
       "exec": "~/.config/waybar/scripts/cheatsheet.py",
       "interval": "once"
     },
-    "hyprland/workspaces": {
-      "all-outputs": true,
+
+    "hyprland/workspaces#dp1": {
+      "all-outputs": false,
       "active-only": false,
       "show-special": true,
-      "sort-by-number": true,
+      "sort-by": "number",
+      "move-to-monitor": true,
 
       "format": "{name}",
       "on-click": "hyprctl dispatch workspace {name}",
@@ -46,8 +51,7 @@
       "on-scroll-down": "hyprctl dispatch workspace e-1 1>/dev/null",
 
       "persistent-workspaces": {
-        "DP-1": [1, 2, 3, 4, 5],
-        "HDMI-A-1": [6, 7, 8, 9, 10]
+        "DP-1": [1, 2, 3, 4, 5]
       },
 
       "format-icons": {
@@ -55,18 +59,14 @@
         "2": "󰎧",
         "3": "󰎪",
         "4": "󰎭",
-        "5": "󰎰",
-        "6": "󰎤",
-        "7": "󰎧",
-        "8": "󰎪",
-        "9": "󰎭",
-        "10": "󰎰"
+        "5": "󰎰"
       }
     },
+
     "mpris": {
       "format": "{player_icon} {artist} - {title}",
       "format-paused": "{status_icon} {artist} - {title}",
-      "tooltip-format": "{player} ({status})\r{artist} - {title}\r\rLeft-Click:   Play / Pause\rMiddle-Click: Previous Track\rRight-Click:  Next Track",
+      "tooltip-format": "{player} ({status})\n{artist} - {title}\n\nLeft-Click:   Play / Pause\nMiddle-Click: Previous Track\nRight-Click:  Next Track",
       "title-len": 20,
       "player-icons": {
         "default": "▶",
@@ -78,6 +78,7 @@
         "stopped": ""
       }
     },
+
     "hyprland/window": {
       "format": "{title}",
       "separate-outputs": true,
@@ -95,6 +96,7 @@
         "blueman-manager": "Bluetooth Settings"
       }
     },
+
     "clock": {
       "format": "  {:%a %e %b %H:%M}",
       "tooltip-format": "<tt>{calendar}</tt>",
@@ -109,6 +111,7 @@
         }
       }
     },
+
     "memory": {
       "interval": 30,
       "format": " Mem {used}GiB",
@@ -163,14 +166,14 @@
     },
     "custom/color-picker": {
       "format": "",
-      "on-click": "hyprpicker -an && notify-send 'Colour copied to clipboard'", // Show the colour in the notification with wl-paste.
+      "on-click": "hyprpicker -an && notify-send 'Colour copied to clipboard'",
       "tooltip-format": "Color Picker"
     },
     "custom/screenshot": {
       "format": "",
-      "on-click": "flameshot full",
-      "on-click-right": "flameshot gui",
-      "tooltip-format": "Left-click:  Full Screen Screenshot\nRight-click: Area Screenshot"
+      "on-click": "grim -g \"$(slurp)\" - | swappy -f -",
+      "on-click-right": "hyprshot -m window",
+      "tooltip-format": "Right-click:  Full Screen Screenshot\nLeft-click: Area Screenshot"
     },
     "custom/wallpaper": {
       "format": "󰸉",
@@ -182,6 +185,54 @@
       "format": "",
       "tooltip": false,
       "on-click": "jgmenu_run"
+    }
+  },
+
+  // ==== BAR ON HDMI-A-1 ====
+  {
+    "name": "hdmi1",
+    "output": "HDMI-A-1",
+    "layer": "top",
+    "position": "top",
+    "margin-top": 0,
+    "margin-bottom": 0,
+    "margin-left": 250,
+    "margin-right": 250,
+
+    "modules-left": [
+      "hyprland/workspaces#hdmi1",
+      "hyprland/window"
+    ],
+    "modules-center": ["clock"],
+    "modules-right": [
+      "pulseaudio",
+      "battery",
+      "tray"
+    ],
+
+    "hyprland/workspaces#hdmi1": {
+      "all-outputs": false,
+      "active-only": false,
+      "show-special": true,
+      "sort-by": "number",
+      "move-to-monitor": true,
+
+      "format": "{name}",
+      "on-click": "hyprctl dispatch workspace {name}",
+      "on-scroll-up": "hyprctl dispatch workspace e+1 1>/dev/null",
+      "on-scroll-down": "hyprctl dispatch workspace e-1 1>/dev/null",
+
+      "persistent-workspaces": {
+        "HDMI-A-1": [6, 7, 8, 9, 10]
+      },
+
+      "format-icons": {
+        "6": "󰎤",
+        "7": "󰎧",
+        "8": "󰎪",
+        "9": "󰎭",
+        "10": "󰎰"
+      }
     }
   }
 ]

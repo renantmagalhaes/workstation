@@ -70,6 +70,22 @@ else
     exit 1
 fi
 
+# MAKO
+echo "📋 Setting up Waybar configuration..."
+if [ -d ../mako/ ]; then
+    # Remove existing directory if it exists
+    if [ -d ~/.config/mako ]; then
+        rm -rf ~/.config/mako
+    fi
+    # Create symlink
+    ln -sf "$HOME/.dotfiles/mako" ~/.config/mako
+    echo "✅ Mako configuration linked"
+else
+    echo "❌ Waybar configuration directory not found!"
+    exit 1
+fi
+
+
 # Note: Package installation is handled by install-hyprland.sh
 
 # Note: Flatpak applications should be installed via 2-opensuse-system.sh
@@ -85,12 +101,6 @@ if [ -d ~/.config/rofi/rofi ]; then
     rmdir ~/.config/rofi/rofi 2>/dev/null || true
 fi
 
-if [ -d ~/.config/dunst/dunst ]; then
-    echo "⚠️  Found nested dunst folder, fixing..."
-    mv ~/.config/dunst/dunst/* ~/.config/dunst/ 2>/dev/null || true
-    rmdir ~/.config/dunst/dunst 2>/dev/null || true
-fi
-
 # Rofi scripts (if they exist)
 if [ -d "$PWD/../rofi" ]; then
     # Remove existing symlink or directory if it exists
@@ -99,16 +109,6 @@ if [ -d "$PWD/../rofi" ]; then
     fi
     ln -sf "$PWD/../rofi" ~/.config/rofi
     echo "✅ Rofi configuration linked"
-fi
-
-# Dunst configuration (if it exists)
-if [ -d "$PWD/../bspwm/dunst" ]; then
-    # Remove existing symlink or directory if it exists
-    if [ -L ~/.config/dunst ] || [ -d ~/.config/dunst ]; then
-        rm -rf ~/.config/dunst
-    fi
-    ln -sf "$PWD/../bspwm/dunst" ~/.config/dunst
-    echo "✅ Dunst configuration linked"
 fi
 
 # Note: hyprlock configuration is handled by the hypr/ symlink
