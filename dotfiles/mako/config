@@ -18,3 +18,7 @@ background-color=#1a1b26cc
 text-color=#000000
 progress-color=#fffff0
 border-color=#1a1b26
+[urgency=critical]
+border-color=#ff4d4d
+background-color=#2a0000CC
+text-color=#ffffff
