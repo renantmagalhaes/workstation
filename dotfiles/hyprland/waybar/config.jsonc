@@ -72,6 +72,10 @@
         "DP-1": [1, 2, 3, 4, 5]
       },
 
+      "ignore-workspaces": [
+        "special:kitty"
+      ],
+
       "format-icons": {
         "1": "󰎤",
         "2": "󰎧",
@@ -282,6 +286,10 @@
       "on-click": "hyprctl dispatch workspace {name}",
       "on-scroll-up": "hyprctl dispatch workspace e+1 1>/dev/null",
       "on-scroll-down": "hyprctl dispatch workspace e-1 1>/dev/null",
+
+      "ignore-workspaces": [
+        "special:kitty"
+      ],
 
       "persistent-workspaces": {
         "HDMI-A-1": [6, 7, 8, 9, 10]
