@@ -1,5 +1,14 @@
 [
-  // ==== BAR ON DP-1 ====
+  // ===========================================
+  // === WAYBAR CONFIGURATION ===
+  // ===========================================
+  // Waybar configuration for dual monitor setup
+  // DP-1: Primary monitor with full feature set
+  // HDMI-A-1: Secondary monitor with essential modules
+
+  // ===========================================
+  // === PRIMARY BAR (DP-1) ===
+  // ===========================================
   {
     "name": "dp1",
     "output": "DP-1",
@@ -10,6 +19,9 @@
     "margin-left": 250,
     "margin-right": 250,
 
+    // ===========================================
+    // === MODULE LAYOUT ===
+    // ===========================================
     "modules-left": [
       "custom/rofi",
       "hyprland/workspaces#dp1",
@@ -29,6 +41,11 @@
       "custom/power"
     ],
 
+    // ===========================================
+    // === LEFT MODULES ===
+    // ===========================================
+
+    // Application launcher with cheatsheet
     "custom/rofi": {
       "format": "\udb82\udcc7",
       "on-click": "rofi -show drun",
@@ -38,6 +55,7 @@
       "interval": "once"
     },
 
+    // Workspace switcher for primary monitor (workspaces 1-5)
     "hyprland/workspaces#dp1": {
       "all-outputs": false,
       "active-only": false,
@@ -63,6 +81,7 @@
       }
     },
 
+    // Media player information
     "mpris": {
       "format": "{player_icon} {artist} - {title}",
       "format-paused": "{status_icon} {artist} - {title}",
@@ -79,6 +98,7 @@
       }
     },
 
+    // Active window title with application icons
     "hyprland/window": {
       "format": "{title}",
       "separate-outputs": true,
@@ -97,6 +117,11 @@
       }
     },
 
+    // ===========================================
+    // === CENTER MODULES ===
+    // ===========================================
+
+    // Clock with calendar tooltip
     "clock": {
       "format": "  {:%a %e %b %H:%M}",
       "tooltip-format": "<tt>{calendar}</tt>",
@@ -112,21 +137,32 @@
       }
     },
 
+    // ===========================================
+    // === RIGHT MODULES ===
+    // ===========================================
+
+    // System resource monitoring
     "memory": {
       "interval": 30,
       "format": " Mem {used}GiB",
       "max-length": 13,
       "tooltip": false
     },
+
+    // System tray for background applications
     "tray": {
       "icon-size": 15,
       "spacing": 10
     },
+
+    // Display brightness control
     "backlight": {
       "format": "{icon} <b>{percent}%</b>",
       "format-icons": ["󰃞", "󰃟", "󰃠"],
       "tooltip": false
     },
+
+    // Audio control with Bluetooth support
     "pulseaudio": {
       "format": "{icon} <b>{volume}%</b>",
       "format-muted": " 󰝟 ",
@@ -144,6 +180,8 @@
         "HDA NVidia Digital Stereo (HDMI)"
       ]
     },
+
+    // Battery status and power management
     "battery": {
       "format": "{icon} {capacity}%",
       "format-plugged": " {capacity}%",
@@ -164,23 +202,35 @@
       },
       "on-click": "rog-control-center"
     },
+
+    // ===========================================
+    // === CUSTOM UTILITY MODULES ===
+    // ===========================================
+
+    // Color picker tool
     "custom/color-picker": {
       "format": "",
       "on-click": "hyprpicker -an && notify-send 'Colour copied to clipboard'",
       "tooltip-format": "Color Picker"
     },
+
+    // Screenshot tool
     "custom/screenshot": {
       "format": "",
       "on-click": "grim -g \"$(slurp)\" - | swappy -f -",
       "on-click-right": "hyprshot -m window",
       "tooltip-format": "Right-click:  Full Screen Screenshot\nLeft-click: Area Screenshot"
     },
+
+    // Wallpaper changer
     "custom/wallpaper": {
       "format": "󰸉",
       "on-click": "waypaper --random",
       "on-click-right": "waypaper",
       "tooltip-format": "Left-click:  Change Wallpaper\nRight-click: Open Wallpaper Picker"
     },
+
+    // Power menu
     "custom/power": {
       "format": "",
       "tooltip": false,
@@ -188,7 +238,10 @@
     }
   },
 
-  // ==== BAR ON HDMI-A-1 ====
+  // ===========================================
+  // === SECONDARY BAR (HDMI-A-1) ===
+  // ===========================================
+  // Secondary monitor with essential modules only
   {
     "name": "hdmi1",
     "output": "HDMI-A-1",
@@ -199,6 +252,9 @@
     "margin-left": 250,
     "margin-right": 250,
 
+    // ===========================================
+    // === MODULE LAYOUT ===
+    // ===========================================
     "modules-left": [
       "hyprland/workspaces#hdmi1",
       "hyprland/window"
@@ -210,6 +266,11 @@
       "tray"
     ],
 
+    // ===========================================
+    // === SECONDARY BAR MODULES ===
+    // ===========================================
+
+    // Workspace switcher for secondary monitor (workspaces 6-10)
     "hyprland/workspaces#hdmi1": {
       "all-outputs": false,
       "active-only": false,
