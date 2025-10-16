@@ -51,7 +51,6 @@ def make_uinput(use_shift_for_plus=False):
 
 
 def press_combo(ui, codes):
-    # press then release in reverse
     for c in codes:
         ui.write(EC.EV_KEY, c, 1)
     ui.syn()
@@ -62,11 +61,19 @@ def press_combo(ui, codes):
 
 async def main():
     ap = argparse.ArgumentParser(
-        description="Edge scroll (top/bottom) + side scroll => Ctrl±")
+        description="Edge scroll (top/bottom) + side scroll => Ctrl± with separate debounces")
     ap.add_argument("--device", default="/dev/input/event8")
     ap.add_argument("--margin-top", type=int, default=12)
     ap.add_argument("--margin-bottom", type=int, default=12)
-    ap.add_argument("--debounce-ms", type=int, default=120)
+
+    # Vertical (edge actions) debounce
+    ap.add_argument("--debounce-ms", type=int, default=80,
+                    help="vertical wheel debounce for edge actions (ms)")
+    # Horizontal (zoom) debounce
+    ap.add_argument("--horiz-debounce-ms", type=int, default=20,
+                    help="horizontal wheel debounce for Ctrl± (ms)")
+
+    # Edge commands
     ap.add_argument(
         "--top-cmd-up",   default=os.path.expanduser("~/.config/hypr/scripts/wpairswitch.sh next"))
     ap.add_argument(
@@ -75,43 +82,57 @@ async def main():
                     default=os.path.expanduser("~/.config/hypr/scripts/wpairswitch.sh next"))
     ap.add_argument("--bottom-cmd-down",
                     default=os.path.expanduser("~/.config/hypr/scripts/wpairswitch.sh prev"))
-    ap.add_argument("--enable-top", action="store_true", default=True)
-    ap.add_argument("--enable-bottom", action="store_true", default=True)
+
+    # Edges enabled by default; disable with --no-top or --no-bottom
+    ap.add_argument("--top", dest="enable_top",
+                    action="store_true", default=True)
+    ap.add_argument("--no-top", dest="enable_top", action="store_false")
+    ap.add_argument("--bottom", dest="enable_bottom",
+                    action="store_true", default=True)
+    ap.add_argument("--no-bottom", dest="enable_bottom", action="store_false")
+
+    # Side scroll options
     ap.add_argument("--invert-hwheel", action="store_true",
-                    help="swap left/right meanings")
+                    help="swap left and right meanings")
     ap.add_argument("--use-shift-for-plus", action="store_true",
-                    help="send Ctrl+Shift+= instead of Ctrl+= for '+' on non-US layouts")
+                    help="send Ctrl+Shift+= instead of Ctrl+= if your layout needs Shift for '+'")
+
     ap.add_argument("--debug", action="store_true")
     args = ap.parse_args()
 
+    # Open devices
     try:
         dev = InputDevice(args.device)
     except Exception as err:
         print(f"Failed to open {args.device}: {err}", file=sys.stderr)
-        print("Fix permissions (group input) or run once with sudo.", file=sys.stderr)
+        print("Fix permissions for /dev/input/event*, or run once with sudo, then add user to 'input' group.", file=sys.stderr)
         sys.exit(1)
 
     try:
         ui = make_uinput(args.use_shift_for_plus)
     except Exception as err:
         print(f"Failed to open /dev/uinput: {err}", file=sys.stderr)
-        print(
-            "Add your user to group input or add a udev rule for uinput.", file=sys.stderr)
+        print("Ensure /dev/uinput is group 'input' and you are in that group, or create a udev rule.", file=sys.stderr)
         sys.exit(1)
 
     monmap = MonitorMap()
-    last_ts = 0.0
-    debounce = args.debounce_ms / 1000.0
+
+    # Separate clocks for debouncing
+    last_vert_ts = 0.0
+    last_horiz_ts = 0.0
+    debounce_vert = args.debounce_ms / 1000.0
+    debounce_horiz = args.horiz_debounce_ms / 1000.0
 
     REL_WHEEL_HI_RES = getattr(EC, "REL_WHEEL_HI_RES", 11)
     REL_HWHEEL_HI_RES = getattr(EC, "REL_HWHEEL_HI_RES", 12)
 
     if args.debug:
-        print(
-            f"[edge] device={args.device} margins T={args.margin_top} B={args.margin_bottom} debounce={args.debounce_ms}ms", file=sys.stderr)
+        print(f"[edge] device={args.device} Tmargin={args.margin_top} Bmargin={args.margin_bottom} "
+              f"vert_debounce={debounce_vert}s horiz_debounce={debounce_horiz}s "
+              f"top_enabled={args.enable_top} bottom_enabled={args.enable_bottom}", file=sys.stderr)
 
     async for ev in dev.async_read_loop():
-        # Side scroll -> Ctrl±
+        # ---------- Horizontal wheel => Ctrl± with its own debounce ----------
         if ev.type == EC.EV_REL and ev.code in (EC.REL_HWHEEL, REL_HWHEEL_HI_RES):
             v = ev.value
             if ev.code == REL_HWHEEL_HI_RES:
@@ -119,26 +140,31 @@ async def main():
             if args.invert_hwheel:
                 v = -v
 
+            now = time.monotonic()
+            if now - last_horiz_ts < debounce_horiz:
+                if args.debug:
+                    print("[edge] horiz debounced", file=sys.stderr)
+                continue
+            last_horiz_ts = now
+
             if v < 0:
-                # left  -> Ctrl + '+'
                 seq = [EC.KEY_LEFTCTRL]
                 if args.use_shift_for_plus:
                     seq.append(EC.KEY_LEFTSHIFT)
-                seq.append(EC.KEY_EQUAL)
+                seq.append(EC.KEY_EQUAL)    # '+' with shift on many layouts
                 press_combo(ui, seq)
                 if args.debug:
                     print("[edge] hwheel left  -> Ctrl++", file=sys.stderr)
-
             elif v > 0:
-                # right -> Ctrl + '-'
                 press_combo(ui, [EC.KEY_LEFTCTRL, EC.KEY_MINUS])
                 if args.debug:
                     print("[edge] hwheel right -> Ctrl+-", file=sys.stderr)
             continue
 
-        # Vertical wheel -> edge actions
+        # ---------- Vertical wheel => edge actions with its debounce ----------
         if ev.type != EC.EV_REL or ev.code not in (EC.REL_WHEEL, REL_WHEEL_HI_RES):
             continue
+
         v = ev.value
         if ev.code == REL_WHEEL_HI_RES:
             v = -1 if v < 0 else (1 if v > 0 else 0)
@@ -146,9 +172,11 @@ async def main():
             continue
 
         now = time.monotonic()
-        if now - last_ts < debounce:
+        if now - last_vert_ts < debounce_vert:
+            if args.debug:
+                print("[edge] vert debounced", file=sys.stderr)
             continue
-        last_ts = now
+        last_vert_ts = now
 
         try:
             x, y = cursor_xy()
@@ -161,12 +189,13 @@ async def main():
             x, y, args.margin_top, args.margin_bottom, args.enable_top, args.enable_bottom)
         if args.debug:
             print(
-                f"[edge] wheel={v} at x={x} y={y} edge={which}", file=sys.stderr)
+                f"[edge] vert wheel={v} at x={x} y={y} edge={which}", file=sys.stderr)
         if not which:
             continue
 
         cmd = (args.top_cmd_up if v < 0 else args.top_cmd_down) if which == "top" \
             else (args.bottom_cmd_up if v < 0 else args.bottom_cmd_down)
+
         if args.debug:
             print(f"[edge] run: {cmd}", file=sys.stderr)
         subprocess.Popen(["bash", "-lc", cmd])
