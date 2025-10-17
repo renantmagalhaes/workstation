@@ -37,6 +37,10 @@ xdotool key --clearmodifiers Num_Lock &
 # Notifications
 dunst --config ~/.config/dunst/dunstrc &
 
+# moves keyboard focus as you move your mouse over windows.
+bspc config focus_follows_pointer true
+
+
 # Top padding
 bspc config top_padding 30
 
