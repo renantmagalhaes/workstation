@@ -103,6 +103,7 @@ command -v opendeck >/dev/null && (
 	done
 ) &
 
+nitrogen --restore &
 flatpak run com.github.hluk.copyq &
 xsetroot -cursor_name left_ptr & # Fix mouse with X
 $HOME/.dotfiles/xcape/xcape.sh &
