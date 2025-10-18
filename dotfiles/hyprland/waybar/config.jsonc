@@ -26,10 +26,12 @@
       "custom/rofi",
       "hyprland/workspaces#dp1",
       "mpris",
-      "hyprland/window"
+      "custom/active-icon-window"
+      // "hyprland/window"
     ],
     "modules-center": ["clock"],
     "modules-right": [
+      "cpu",
       "memory",
       "tray",
       "backlight",
@@ -47,12 +49,10 @@
 
     // Application launcher with cheatsheet
     "custom/rofi": {
-      "format": "\udb82\udcc7",
-      "on-click": "rofi -show drun",
-      "on-click-middle": "pkill -9 rofi",
-      "tooltip-format": "{}",
-      "exec": "~/.config/waybar/scripts/cheatsheet.py",
-      "interval": "once"
+      "format": "",
+      "tooltip": false,
+      "on-click": "~/.config/rofi/scripts/launchers/type-7/launcher.sh &",
+      "on-click-right": "jgmenu_run"
     },
 
     // Workspace switcher for primary monitor (workspaces 1-5)
@@ -105,20 +105,28 @@
     // Active window title with application icons
     "hyprland/window": {
       "format": "{title}",
-      "separate-outputs": true,
-      "rewrite": {
-        "(.*) — Mozilla Firefox": "󰈹  $1",
-        "(.*) — Zen Browser": "󰈹  Zen - $1",
-        "(.*) - Google Chrome": "  $1",
-        "(.*) - Visual Studio Code": "󰨞  $1",
-        "(.*) - nvim": "  $1",
-        "(.*) - Obsidian(.*)": "󱓧  $1",
-        "(.*) - fish": "  $1",
-        "yazi: (.*)": "  $1",
-        "nwg-look": "  GTK Settings",
-        "Qt6 Configuration Tool": "  QT Settings",
-        "blueman-manager": "Bluetooth Settings"
-      }
+      "separate-outputs": true
+      // "rewrite": {
+      //   "(.*) — Mozilla Firefox": "󰈹  $1",
+      //   "(.*) — Zen Browser": "󰈹  Zen - $1",
+      //   "(.*) - Google Chrome": "  $1",
+      //   "(.*) - Visual Studio Code": "󰨞  $1",
+      //   "(.*) - nvim": "  $1",
+      //   "(.*) - Obsidian(.*)": "󱓧  $1",
+      //   "(.*) - fish": "  $1",
+      //   "yazi: (.*)": "  $1",
+      //   "nwg-look": "  GTK Settings",
+      //   "Qt6 Configuration Tool": "  QT Settings",
+      //   "blueman-manager": "Bluetooth Settings"
+      // }
+    },
+
+    "custom/active-icon-window": {
+      "interval": 1,
+      "exec": "~/.config/waybar/scripts/active_icon_window.sh",
+      // "return-type": "json",
+      "format": "{}",
+      "tooltip": false
     },
 
     // ===========================================
@@ -146,10 +154,17 @@
     // ===========================================
 
     // System resource monitoring
+    "cpu": {
+      "interval": 5,
+      "format": " {usage}%",
+      "max-length": 10,
+      "tooltip": false
+    },
+
     "memory": {
-      "interval": 30,
-      "format": " Mem {used}GiB",
-      "max-length": 13,
+      "interval": 10,
+      "format": " Mem {used}G",
+      "max-length": 20,
       "tooltip": false
     },
 
@@ -211,6 +226,15 @@
     // === CUSTOM UTILITY MODULES ===
     // ===========================================
 
+    // System load average
+    "custom/loadavg": {
+      "interval": 10,
+      "format": "󰍛 {output}",
+      "exec": "/home/rtm/.config/waybar/scripts/loadavg.sh",
+      "tooltip": false,
+      "max-length": 10
+    },
+
     // Color picker tool
     "custom/color-picker": {
       "format": "",
@@ -238,7 +262,8 @@
     "custom/power": {
       "format": "",
       "tooltip": false,
-      "on-click": "jgmenu_run"
+      "on-click": "~/.config/rofi/scripts/powermenu/type-5/powermenu.sh &",
+      "on-click-right": "jgmenu_run"
     }
   },
 
@@ -260,15 +285,23 @@
     // === MODULE LAYOUT ===
     // ===========================================
     "modules-left": [
+      // "custom/rofi",
       "hyprland/workspaces#hdmi1",
       "hyprland/window"
     ],
     "modules-center": ["clock"],
-    "modules-right": [
-      "pulseaudio",
-      "battery",
-      "tray"
-    ],
+    // "modules-right": [
+    // "cpu",
+    // "memory",
+    // "tray"
+    //   "backlight",
+    //   "pulseaudio",
+    //   "battery",
+    //   "custom/color-picker",
+    //   "custom/screenshot",
+    //   "custom/wallpaper",
+    // "custom/power"
+    // ],
 
     // ===========================================
     // === SECONDARY BAR MODULES ===
