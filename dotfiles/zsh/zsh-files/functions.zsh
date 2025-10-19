@@ -496,3 +496,40 @@ zoxide_cd_clean() {
         echo "🚫 Clean operation aborted."
     fi
 }
+
+# WireGuard connect/disconnect helper
+vpn() {
+  local confpath confname
+
+  # Optional second arg lets you choose a config by name, e.g. `vpn c mainframe28`
+  if [[ -n "$2" ]]; then
+    confname="${2%.conf}"
+  else
+    # Find the first .conf as root to avoid zsh glob errors
+    confpath=$(sudo sh -c 'ls -1 /etc/wireguard/*.conf 2>/dev/null | head -n1')
+    if [[ -z "$confpath" ]]; then
+      echo "No WireGuard config found in /etc/wireguard"
+      return 1
+    fi
+    confname="${confpath##*/}"
+    confname="${confname%.conf}"
+  fi
+
+  case "$1" in
+    c)
+      echo "Connecting to $confname..."
+      sudo wg-quick up "$confname"
+      ;;
+    d)
+      echo "Disconnecting from $confname..."
+      sudo wg-quick down "$confname"
+      ;;
+    s)
+      # status helper
+      sudo wg show
+      ;;
+    *)
+      echo "Usage: vpn c|d|s [config_name_without_.conf]"
+      ;;
+  esac
+}
