@@ -1441,6 +1441,29 @@ button.button-startpage:after {
 /* ========================================================= */
 
 /* ========================================================= */
+/* Tab Color */
+/* ========================================================= */
+.tab.active {
+  background-color: rgb(
+    215,
+    215,
+    215
+  ) !important;
+  color: black !important;
+}
+
+/* Optional: adjust favicon and close button contrast */
+.tab.active .favicon,
+.tab.active .close {
+  filter: none !important;
+}
+
+/* Optional: make sure title stays black even in hover states */
+.tab.active .title {
+  color: black !important;
+}
+
+/* ========================================================= */
 /* Gaps */
 /* ========================================================= */
 
