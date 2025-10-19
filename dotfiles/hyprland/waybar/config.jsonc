@@ -40,6 +40,7 @@
       "custom/color-picker",
       "custom/screenshot",
       "custom/wallpaper",
+      "custom/notification",
       "custom/power"
     ],
 
@@ -225,6 +226,14 @@
     // ===========================================
     // === CUSTOM UTILITY MODULES ===
     // ===========================================
+
+    // System load average
+    "custom/notification": {
+      "format": "  ",
+      "on-click": "makoctl restore",
+      "on-click-right": "makoctl restore",
+      "tooltip-format": "Notifications"
+    },
 
     // System load average
     "custom/loadavg": {
