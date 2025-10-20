@@ -274,11 +274,11 @@ label:focus {
 }
 
 #pulseaudio {
-  color: #fab387;
+  color: #7272ff;
 }
 
 #pulseaudio.muted {
-  color: #fab387;
+  color: #ff6d6d;
 }
 
 #wireplumber {
@@ -501,7 +501,7 @@ label:focus {
   background: rgb(30, 30, 46);
   padding: 1px 16px 1px 10px;
   margin-top: 5px;
-  color: #a6e3a1;
+  color: #ffffff;
 }
 
 #network:hover {
