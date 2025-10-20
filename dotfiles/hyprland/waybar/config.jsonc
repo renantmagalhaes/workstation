@@ -13,21 +13,21 @@
   "modules-left": [
     "hyprland/workspaces",
     "hyprland/window",
-    "custom/weather",
     "battery",
     "battery#bat2"
   ],
   "modules-center": ["clock"],
   "modules-right": [
     "mpris",
-    "pulseaudio",
-    "custom/swaync",
-    "sway/language",
-    "backlight",
+    "custom/weather",
+    // "custom/swaync",
+    // "sway/language",
+    // "backlight",
     "network",
     "bluetooth",
     "temperature",
     "custom/notification",
+    "pulseaudio",
     "tray",
     "custom/power"
   ],
