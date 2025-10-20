@@ -5,7 +5,6 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 
 # Flathub Packages
 
-
 ## Kdenlive
 sudo flatpak install -y flathub org.kde.kdenlive
 
@@ -14,7 +13,6 @@ sudo flatpak install -y flathub com.obsproject.Studio
 
 ## Obsidian
 sudo flatpak install -y flathub md.obsidian.Obsidian
-
 
 ## Telegram
 # sudo flatpak install -y flathub org.telegram.desktop
@@ -46,3 +44,6 @@ sudo flatpak install flathub com.stremio.Stremio
 
 ## rustDesk
 # sudo flatpak install flathub com.rustdesk.RustDesk
+
+## Mousam (weather)
+sudo flatpak install flathub io.github.amit9838.mousam
