@@ -186,7 +186,7 @@ if (( ${#title} >= maxlen )); then
 fi
 
 #Print the icon and title
-printf " %s %s\n" "$icon" "$title"
+# printf " %s %s\n" "$icon" "$title"
 
 #Print the icon ONLY
-printf " %s\n" "$icon"
+printf "%s\n" "$icon"

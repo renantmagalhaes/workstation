@@ -440,7 +440,7 @@ label:focus {
 
 #custom-notification {
   background: rgb(30, 30, 46);
-  padding: 1px 10px 1px 10px;
+  padding: 1px 13px 1px 10px;
   margin-top: 5px;
   color: #ffffff;
 }
@@ -499,7 +499,7 @@ label:focus {
 
 #network {
   background: rgb(30, 30, 46);
-  padding: 1px 10px 1px 10px;
+  padding: 1px 16px 1px 10px;
   margin-top: 5px;
   color: #a6e3a1;
 }
@@ -510,9 +510,9 @@ label:focus {
 
 #custom-active-icon-window {
   background: rgb(30, 30, 46);
-  padding: 1px 10px 1px 10px;
+  padding: 1px 12px 1px 10px;
   margin-top: 5px;
-  color: #cdd6f4;
+  color: #ffffff;
 }
 
 #custom-active-icon-window:hover {
