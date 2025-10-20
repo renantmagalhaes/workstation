@@ -65,7 +65,7 @@
   },
   "custom/weather": {
     "exec": "~/.config/waybar/scripts/waybar-weather.sh",
-    "on-click": "mousam",
+    "on-click": "flatpak run io.github.amit9838.mousam",
     "interval": 3,
     "tooltip": false,
     "format": "{}"
