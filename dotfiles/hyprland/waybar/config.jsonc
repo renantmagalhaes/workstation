@@ -25,6 +25,9 @@
     "modules-left": [
       "custom/rofi",
       "hyprland/workspaces#dp1",
+      "memory",
+      "custom/gpt",
+      "custom/weather",
       "mpris",
       "custom/active-icon-window"
       // "hyprland/window"
@@ -32,10 +35,11 @@
     "modules-center": ["clock"],
     "modules-right": [
       "cpu",
-      "memory",
       "tray",
       "backlight",
       "pulseaudio",
+      "idle_inhibitor",
+      "custom/swaync",
       "battery",
       "custom/color-picker",
       "custom/screenshot",
@@ -54,6 +58,22 @@
       "tooltip": false,
       "on-click": "~/.config/rofi/scripts/launchers/type-7/launcher.sh &",
       "on-click-right": "jgmenu_run"
+    },
+
+    // Quick-launch ChatGPT (Catppuccin)
+    "custom/gpt": {
+      "format": " ",
+      "tooltip": false,
+      "on-click": "firefox -P ai --new-window https://chatgpt.com/"
+    },
+
+    // Weather (Catppuccin)
+    "custom/weather": {
+      "exec": "bash ~/.config/scripts/waybar-weather.sh",
+      "on-click": "mousam",
+      "interval": 3,
+      "tooltip": false,
+      "format": "{}"
     },
 
     // Workspace switcher for primary monitor (workspaces 1-5)
@@ -84,6 +104,24 @@
         "4": "󰎭",
         "5": "󰎰"
       }
+    },
+
+    // Idle inhibitor (Catppuccin)
+    "idle_inhibitor": {
+      "format": "{icon}",
+      "format-icons": {
+        "activated": "",
+        "deactivated": ""
+      }
+    },
+
+    // SwayNC indicator (Catppuccin)
+    "custom/swaync": {
+      "exec": "bash ~/.config/scripts/waybar-swaync.sh",
+      "interval": 1,
+      "tooltip": false,
+      "format": "{} ",
+      "on-click": "swaync-client -t"
     },
 
     // Media player information

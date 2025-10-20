@@ -1,3 +1,4 @@
+@import "themes/catppuccin.css";
 #waybar.top {
   background: none;
 }
