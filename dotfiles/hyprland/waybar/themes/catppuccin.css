@@ -442,9 +442,35 @@ label:focus {
   background: rgb(30, 30, 46);
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
-  color: #f9e2af;
+  color: #ffffff;
 }
 
 #custom-notification:hover {
+  background-color: #181825;
+}
+
+#bluetooth {
+  background: rgb(30, 30, 46);
+  padding: 1px 10px 1px 10px;
+  margin-top: 5px;
+  color: #89b4fa;
+}
+
+#bluetooth:hover {
+  background-color: #181825;
+}
+
+#temperature {
+  background: rgb(30, 30, 46);
+  padding: 1px 10px 1px 10px;
+  margin-top: 5px;
+  color: #fab387;
+}
+
+#temperature.critical {
+  color: #f38ba8;
+}
+
+#temperature:hover {
   background-color: #181825;
 }

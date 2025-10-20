@@ -13,13 +13,10 @@
   "modules-left": [
     "hyprland/workspaces",
     "memory",
-    "custom/gpt",
     "custom/weather",
     "mpris",
     "battery",
-    "battery#bat2",
-    "sway/mode",
-    "sway/scratchpad"
+    "battery#bat2"
   ],
   "modules-center": ["clock"],
   "modules-right": [
