@@ -437,3 +437,14 @@ label:focus {
 #privacy-item.audio-out {
   background-color: #0069d4;
 }
+
+#custom-notification {
+  background: rgb(30, 30, 46);
+  padding: 1px 10px 1px 10px;
+  margin-top: 5px;
+  color: #f9e2af;
+}
+
+#custom-notification:hover {
+  background-color: #181825;
+}
