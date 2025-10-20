@@ -12,7 +12,7 @@
   // Choose the order of the modules
   "modules-left": [
     "hyprland/workspaces",
-    "hyprland/window",
+    "custom/active-icon-window",
     "battery",
     "battery#bat2"
   ],
@@ -171,8 +171,35 @@
       "(.*) - Postman": "󰨞  $1",
       "(.*) - Insomnia": "󰨞  $1",
       "(.*) - Docker": "󰨞  $1",
-      "(.*) - Remmina": "󰨞  $1"
+      "(.*) - Remmina": "󰨞  $1",
+
+      // Case variations for common applications
+      "(.*) - firefox": "󰈹  $1",
+      "(.*) - FIREFOX": "󰈹  $1",
+      "(.*) - chromium": "󰨞  $1",
+      "(.*) - CHROMIUM": "󰨞  $1",
+      "(.*) - brave": "󰨞  $1",
+      "(.*) - BRAVE": "󰨞  $1",
+      "(.*) - kitty": "󰨞  $1",
+      "(.*) - KITTY": "󰨞  $1",
+      "(.*) - alacritty": "󰨞  $1",
+      "(.*) - ALACRITTY": "󰨞  $1",
+      "(.*) - discord": "󰙯  $1",
+      "(.*) - DISCORD": "󰙯  $1",
+      "(.*) - spotify": "󰓇  $1",
+      "(.*) - SPOTIFY": "󰓇  $1",
+      "(.*) - steam": "󰨞  $1",
+      "(.*) - STEAM": "󰨞  $1",
+      "(.*) - code": "󰨞  $1",
+      "(.*) - CODE": "󰨞  $1",
+      "(.*) - cursor": "󰨞  $1",
+      "(.*) - CURSOR": "󰨞  $1"
     }
+  },
+  "custom/active-icon-window": {
+    "exec": "~/.config/waybar/scripts/active_icon_window.sh",
+    "format": "{}",
+    "tooltip": false
   },
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>"
