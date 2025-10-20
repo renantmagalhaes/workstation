@@ -1,1 +1,7 @@
 @import "themes/catppuccin.css";
+
+#waybar.top > box.horizontal {
+  border-radius: 12pt;
+  margin: 6pt;
+  padding: 2pt;
+}
