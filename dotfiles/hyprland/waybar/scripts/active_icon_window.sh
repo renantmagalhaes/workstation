@@ -185,4 +185,8 @@ if (( ${#title} >= maxlen )); then
   title="${title}…"                    # add ellipsis if truncated
 fi
 
+#Print the icon and title
 printf " %s %s\n" "$icon" "$title"
+
+#Print the icon ONLY
+printf " %s\n" "$icon"

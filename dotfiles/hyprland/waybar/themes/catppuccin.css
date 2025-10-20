@@ -274,11 +274,11 @@ label:focus {
 }
 
 #pulseaudio {
-  color: #8d87fa;
+  color: #fab387;
 }
 
 #pulseaudio.muted {
-  color: #8d87fa;
+  color: #fab387;
 }
 
 #wireplumber {
@@ -440,7 +440,7 @@ label:focus {
 
 #custom-notification {
   background: rgb(30, 30, 46);
-  padding: 1px 13px 1px 10px;
+  padding: 1px 10px 1px 10px;
   margin-top: 5px;
   color: #ffffff;
 }
@@ -464,11 +464,11 @@ label:focus {
   background: rgb(30, 30, 46);
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
-  color: #9dcef9;
+  color: #88d2ff;
 }
 
 #temperature.critical {
-  color: #ff3f76;
+  color: #ff6262;
 }
 
 #temperature:hover {
@@ -499,11 +499,22 @@ label:focus {
 
 #network {
   background: rgb(30, 30, 46);
-  padding: 1px 17px 1px 10px;
+  padding: 1px 10px 1px 10px;
   margin-top: 5px;
-  color: #ffffff;
+  color: #a6e3a1;
 }
 
 #network:hover {
+  background-color: #181825;
+}
+
+#custom-active-icon-window {
+  background: rgb(30, 30, 46);
+  padding: 1px 10px 1px 10px;
+  margin-top: 5px;
+  color: #cdd6f4;
+}
+
+#custom-active-icon-window:hover {
   background-color: #181825;
 }

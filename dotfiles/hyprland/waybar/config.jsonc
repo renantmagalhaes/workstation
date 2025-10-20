@@ -13,6 +13,7 @@
   "modules-left": [
     "hyprland/workspaces",
     "custom/active-icon-window",
+    "window",
     "battery",
     "battery#bat2"
   ],
@@ -198,6 +199,7 @@
   },
   "custom/active-icon-window": {
     "exec": "~/.config/waybar/scripts/active_icon_window.sh",
+    "interval": 1,
     "format": "{}",
     "tooltip": false
   },
@@ -229,7 +231,7 @@
   "custom/weather": {
     "exec": "~/.config/waybar/scripts/waybar-weather.sh",
     "on-click": "flatpak run io.github.amit9838.mousam",
-    "interval": 3,
+    "interval": 60,
     "tooltip": false,
     "format": "{}"
   },
