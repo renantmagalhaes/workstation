@@ -496,3 +496,14 @@ label:focus {
 #hyprland-window:hover {
   background-color: #181825;
 }
+
+#network {
+  background: rgb(30, 30, 46);
+  padding: 1px 10px 1px 10px;
+  margin-top: 5px;
+  color: #a6e3a1;
+}
+
+#network:hover {
+  background-color: #181825;
+}
