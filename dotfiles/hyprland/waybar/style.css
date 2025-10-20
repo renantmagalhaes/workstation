@@ -2,6 +2,7 @@
 
 #waybar.top > box.horizontal {
   border-radius: 12pt;
-  margin: 6pt;
+  margin-top: 6pt;
+  /* margin: 1pt; */
   padding: 2pt;
 }
