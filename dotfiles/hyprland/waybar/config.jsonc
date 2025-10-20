@@ -11,8 +11,8 @@
   "modules-left": [
     "hyprland/workspaces",
     "memory",
-    "custom/gpt",
     "custom/weather",
+    "mpris",
     "battery",
     "battery#bat2",
     "sway/mode",
@@ -24,6 +24,9 @@
     "custom/swaync",
     "sway/language",
     "backlight",
+    "network",
+    "bluetooth",
+    "temperature",
     "idle_inhibitor",
     "custom/power"
   ],
@@ -107,6 +110,24 @@
       ""
     ]
   },
+  "network": {
+    "format-wifi": "{signalStrength}% ",
+    "format-ethernet": "",
+    "format-disconnected": "󰤭",
+    "tooltip": true
+  },
+  "bluetooth": {
+    "format": "{status} ",
+    "format-connected": "{num_connections} ",
+    "format-disabled": "",
+    "tooltip": true
+  },
+  "temperature": {
+    "format": "{temperatureC}°C ",
+    "critical-threshold": 80,
+    "hwmon-path": "/sys/class/thermal/thermal_zone0/temp",
+    "tooltip": true
+  },
   "battery": {
     "states": {
       // "good": 95,
@@ -162,6 +183,21 @@
       "default": ["", "", " "]
     },
     "on-click": "pavucontrol"
+  },
+  "mpris": {
+    "format": "{player_icon} {artist} - {title}",
+    "format-paused": "{status_icon} {artist} - {title}",
+    "tooltip-format": "{player} ({status})\n{artist} - {title}\n\nLeft-Click:   Play / Pause\nMiddle-Click: Previous Track\nRight-Click:  Next Track",
+    "title-len": 20,
+    "player-icons": {
+      "default": "▶",
+      "mpv": "",
+      "spotify": "󰓇"
+    },
+    "status-icons": {
+      "paused": "",
+      "stopped": ""
+    }
   },
   "custom/media": {
     "format": "{icon} {text}",
