@@ -63,7 +63,7 @@
     "tooltip-format": "{app}: {title}"
   },
   "custom/weather": {
-    "exec": "bash ~/.config/scripts/waybar-weather.sh",
+    "exec": "~/.config/waybar/scripts/waybar-weather.sh",
     "on-click": "mousam",
     "interval": 3,
     "tooltip": false,
@@ -89,7 +89,7 @@
     "format": "{}% "
   },
   "custom/swaync": {
-    "exec": "bash ~/.config/scripts/waybar-swaync.sh",
+    "exec": "~/.config/waybar/scripts/waybar-swaync.sh",
     "interval": 1,
     "tooltip": false,
     "format": "{} ",
