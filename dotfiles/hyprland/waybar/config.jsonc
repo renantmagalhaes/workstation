@@ -24,7 +24,7 @@
     // "sway/language",
     // "backlight",
     "network",
-    "bluetooth",
+    // "bluetooth",
     "temperature",
     "custom/notification",
     "pulseaudio",
@@ -73,7 +73,7 @@
   },
   // System load average
   "custom/notification": {
-    "format": "  ",
+    "format": "",
     "on-click": "makoctl restore",
     "on-click-right": "makoctl restore",
     "tooltip-format": "Notifications"
