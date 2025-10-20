@@ -30,7 +30,7 @@
     "network",
     "bluetooth",
     "temperature",
-    "idle_inhibitor",
+    "custom/notification",
     "custom/power"
   ],
   // Modules configuration
@@ -72,12 +72,12 @@
     "tooltip": false,
     "format": "{}"
   },
-  "idle_inhibitor": {
-    "format": "{icon}",
-    "format-icons": {
-      "activated": "",
-      "deactivated": ""
-    }
+  // System load average
+  "custom/notification": {
+    "format": "  ",
+    "on-click": "makoctl restore",
+    "on-click-right": "makoctl restore",
+    "tooltip-format": "Notifications"
   },
   "tray": {
     // "icon-size": 21,
