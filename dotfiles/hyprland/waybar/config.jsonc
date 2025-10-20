@@ -12,14 +12,14 @@
   // Choose the order of the modules
   "modules-left": [
     "hyprland/workspaces",
-    "memory",
+    "hyprland/window",
     "custom/weather",
-    "mpris",
     "battery",
     "battery#bat2"
   ],
   "modules-center": ["clock"],
   "modules-right": [
+    "mpris",
     "pulseaudio",
     "custom/swaync",
     "sway/language",
@@ -35,7 +35,8 @@
   "hyprland/workspaces": {
     "format": "{name}",
     "persistent-workspaces": {
-      "*": [1, 2, 3, 4, 5]
+      "DP-1": [1, 2, 3, 4, 5],
+      "HDMI-A-1": [6, 7, 8, 9, 10]
     }
   },
   "sway/mode": {

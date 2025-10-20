@@ -485,3 +485,14 @@ label:focus {
 #tray:hover {
   background-color: #181825;
 }
+
+#hyprland-window {
+  background: rgb(30, 30, 46);
+  padding: 1px 10px 1px 10px;
+  margin-top: 5px;
+  color: #cdd6f4;
+}
+
+#hyprland-window:hover {
+  background-color: #181825;
+}
