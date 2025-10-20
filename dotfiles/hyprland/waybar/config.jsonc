@@ -39,6 +39,141 @@
       "HDMI-A-1": [6, 7, 8, 9, 10]
     }
   },
+  "hyprland/window": {
+    "format": " 󰨞 {title} ",
+    "rewrite": {
+      // WebApps / Chromium-based Apps
+      "(.*) — Mozilla Firefox": "󰈹  $1",
+      "(.*) — Zen Browser": "󰈹  Zen - $1",
+      "(.*) - Google Chrome": "  $1",
+      "(.*) - Visual Studio Code": "󰨞  $1",
+      "(.*) - nvim": "󰨞  $1",
+      "(.*) - Obsidian(.*)": "󱓧  $1",
+      "(.*) - fish": "󰨞  $1",
+      "yazi: (.*)": "󰨞  $1",
+      "nwg-look": "󰨞  GTK Settings",
+      "Qt6 Configuration Tool": "󰨞  QT Settings",
+      "blueman-manager": "󰨞  Bluetooth Settings",
+
+      // Browsers
+      "(.*) - Firefox": "󰈹  $1",
+      "(.*) - Vivaldi": "󰇩  $1",
+      "(.*) - Chromium": "  $1",
+      "(.*) - Brave": "  $1",
+      "(.*) - Edge": "󰇩  $1",
+      "(.*) - Tor Browser": "󰇩  $1",
+      "(.*) - Epiphany": "󰇩  $1",
+
+      // Terminals
+      "(.*) - kitty": "󰨞  $1",
+      "(.*) - alacritty": "󰨞  $1",
+      "(.*) - konsole": "󰨞  $1",
+      "(.*) - gnome-terminal": "󰨞  $1",
+      "(.*) - xfce4-terminal": "󰨞  $1",
+      "(.*) - tilix": "󰨞  $1",
+      "(.*) - wezterm": "󰨞  $1",
+      "(.*) - xterm": "󰨞  $1",
+
+      // Editors / IDEs
+      "(.*) - Cursor": "󰨞  $1",
+      "(.*) - Sublime Text": "󰨞  $1",
+      "(.*) - Atom": "󰨞  $1",
+      "(.*) - Notepadqq": "󰨞  $1",
+      "(.*) - IntelliJ": "󰨞  $1",
+      "(.*) - PyCharm": "󰨞  $1",
+      "(.*) - WebStorm": "󰨞  $1",
+      "(.*) - CLion": "󰨞  $1",
+      "(.*) - Android Studio": "󰨞  $1",
+      "(.*) - Qt Creator": "󰨞  $1",
+      "(.*) - gedit": "󰨞  $1",
+      "(.*) - Kate": "󰨞  $1",
+      "(.*) - vim": "󰨞  $1",
+      "(.*) - nvim": "󰨞  $1",
+
+      // File Managers
+      "(.*) - Nautilus": "󰨞  $1",
+      "(.*) - Dolphin": "󰨞  $1",
+      "(.*) - Nemo": "󰨞  $1",
+      "(.*) - Thunar": "󰨞  $1",
+      "(.*) - PCManFM": "󰨞  $1",
+      "(.*) - Double Commander": "󰨞  $1",
+
+      // Chat / Communication
+      "(.*) - Discord": "󰙯  $1",
+      "(.*) - Slack": "󰒱  $1",
+      "(.*) - Telegram": "󰨞  $1",
+      "(.*) - Signal": "󰨞  $1",
+      "(.*) - Skype": "󰨞  $1",
+      "(.*) - Teams": "󰨞  $1",
+      "(.*) - Zoom": "󰨞  $1",
+      "(.*) - Element": "󰨞  $1",
+      "(.*) - HexChat": "󰨞  $1",
+
+      // Media Players
+      "(.*) - Spotify": "󰓇  $1",
+      "(.*) - VLC": "󰨞  $1",
+      "(.*) - MPV": "󰨞  $1",
+      "(.*) - Rhythmbox": "󰨞  $1",
+      "(.*) - Audacious": "󰨞  $1",
+      "(.*) - Clementine": "󰨞  $1",
+
+      // Office / Productivity
+      "(.*) - LibreOffice": "󰨞  $1",
+      "(.*) - Writer": "󰨞  $1",
+      "(.*) - Calc": "󰨞  $1",
+      "(.*) - Impress": "󰨞  $1",
+      "(.*) - Evince": "󰨞  $1",
+      "(.*) - Okular": "󰨞  $1",
+      "(.*) - Zathura": "󰨞  $1",
+      "(.*) - GIMP": "󰨞  $1",
+      "(.*) - Inkscape": "󰨞  $1",
+      "(.*) - Krita": "󰨞  $1",
+      "(.*) - Draw.io": "󰨞  $1",
+      "(.*) - Notion": "󰨞  $1",
+      "(.*) - Obsidian": "󰨞  $1",
+
+      // System Tools / Settings
+      "(.*) - Settings": "󰨞  $1",
+      "(.*) - Disks": "󰨞  $1",
+      "(.*) - GParted": "󰨞  $1",
+      "(.*) - htop": "󰨞  $1",
+      "(.*) - btop": "󰨞  $1",
+      "(.*) - VirtualBox": "󰨞  $1",
+      "(.*) - VMware": "󰨞  $1",
+      "(.*) - QEMU": "󰨞  $1",
+      "(.*) - pavucontrol": "󰨞  $1",
+      "(.*) - Blueman": "󰨞  $1",
+      "(.*) - Network": "󰨞  $1",
+      "(.*) - System Monitor": "󰨞  $1",
+      "(.*) - Timeshift": "󰨞  $1",
+      "(.*) - Synology": "󰨞  $1",
+      "(.*) - Nextcloud": "󰨞  $1",
+
+      // Browsing / Misc Tools
+      "(.*) - Steam": "󰨞  $1",
+      "(.*) - Lutris": "󰨞  $1",
+      "(.*) - Heroic": "󰨞  $1",
+      "(.*) - Bottles": "󰨞  $1",
+      "(.*) - OBS": "󰨞  $1",
+      "(.*) - FileZilla": "󰨞  $1",
+      "(.*) - Transmission": "󰨞  $1",
+      "(.*) - Deluge": "󰨞  $1",
+      "(.*) - qBittorrent": "󰨞  $1",
+      "(.*) - Ark": "󰨞  $1",
+      "(.*) - Baobab": "󰨞  $1",
+      "(.*) - Image Viewer": "󰨞  $1",
+      "(.*) - Flameshot": "󰨞  $1",
+      "(.*) - Spectacle": "󰨞  $1",
+      "(.*) - Calendar": "󰨞  $1",
+      "(.*) - KeePassXC": "󰨞  $1",
+      "(.*) - Bitwarden": "󰨞  $1",
+      "(.*) - Wireshark": "󰨞  $1",
+      "(.*) - Postman": "󰨞  $1",
+      "(.*) - Insomnia": "󰨞  $1",
+      "(.*) - Docker": "󰨞  $1",
+      "(.*) - Remmina": "󰨞  $1"
+    }
+  },
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>"
   },
