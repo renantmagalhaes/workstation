@@ -1,387 +1,183 @@
-[
-  // ===========================================
-  // === WAYBAR CONFIGURATION ===
-  // ===========================================
-  // Waybar configuration for dual monitor setup
-  // DP-1: Primary monitor with full feature set
-  // HDMI-A-1: Secondary monitor with essential modules
-
-  // ===========================================
-  // === PRIMARY BAR (DP-1) ===
-  // ===========================================
-  {
-    "name": "dp1",
-    "output": "DP-1",
-    "layer": "top",
-    "position": "top",
-    "margin-top": 0,
-    "margin-bottom": 0,
-    "margin-left": 250,
-    "margin-right": 250,
-
-    // ===========================================
-    // === MODULE LAYOUT ===
-    // ===========================================
-    "modules-left": [
-      "custom/rofi",
-      "hyprland/workspaces#dp1",
-      "memory",
-      "custom/gpt",
-      "custom/weather",
-      "mpris",
-      "custom/active-icon-window"
-      // "hyprland/window"
-    ],
-    "modules-center": ["clock"],
-    "modules-right": [
-      "cpu",
-      "tray",
-      "backlight",
-      "pulseaudio",
-      "idle_inhibitor",
-      "custom/swaync",
-      "battery",
-      "custom/color-picker",
-      "custom/screenshot",
-      "custom/wallpaper",
-      "custom/notification",
-      "custom/power"
-    ],
-
-    // ===========================================
-    // === LEFT MODULES ===
-    // ===========================================
-
-    // Application launcher with cheatsheet
-    "custom/rofi": {
-      "format": "",
-      "tooltip": false,
-      "on-click": "~/.config/rofi/scripts/launchers/type-7/launcher.sh &",
-      "on-click-right": "jgmenu_run"
+// -*- mode: jsonc -*-
+//
+// Adopted from dot/catppuccin Waybar
+{
+  "layer": "top", // Waybar at top layer
+  // "position": "bottom", // Waybar position (top|bottom|left|right)
+  "height": 30, // Waybar height (to be removed for auto height)
+  // "width": 1280, // Waybar width
+  "spacing": 4, // Gaps between modules (4px)
+  // Choose the order of the modules
+  "modules-left": [
+    "hyprland/workspaces",
+    "memory",
+    "custom/gpt",
+    "custom/weather",
+    "battery",
+    "battery#bat2",
+    "sway/mode",
+    "sway/scratchpad"
+  ],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "pulseaudio",
+    "custom/swaync",
+    "sway/language",
+    "backlight",
+    "idle_inhibitor",
+    "custom/power"
+  ],
+  // Modules configuration
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "persistent-workspaces": {
+      "*": [1, 2, 3, 4, 5]
+    }
+  },
+  "sway/mode": {
+    "format": "<span style=\"italic\">{}</span>"
+  },
+  "custom/cava": {
+    "format": " ",
+    "tooltip": false,
+    "on-click": "kitty -e cava"
+  },
+  "custom/waypaper": {
+    "format": " ",
+    "tooltip": false,
+    "on-click": "waypaper"
+  },
+  "custom/gpt": {
+    "format": " ",
+    "tooltip": false,
+    "on-click": "firefox -P ai --new-window https://chatgpt.com/"
+  },
+  "sway/scratchpad": {
+    "format": "{icon} {count}",
+    "show-empty": false,
+    "format-icons": ["", ""],
+    "tooltip": true,
+    "tooltip-format": "{app}: {title}"
+  },
+  "custom/weather": {
+    "exec": "bash ~/.config/scripts/waybar-weather.sh",
+    "on-click": "mousam",
+    "interval": 3,
+    "tooltip": false,
+    "format": "{}"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    }
+  },
+  "tray": {
+    // "icon-size": 21,
+    "spacing": 10
+  },
+  "clock": {
+    // "timezone": "America/New_York",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%Y-%m-%d}"
+  },
+  "memory": {
+    "format": "{}% "
+  },
+  "custom/swaync": {
+    "exec": "bash ~/.config/scripts/waybar-swaync.sh",
+    "interval": 1,
+    "tooltip": false,
+    "format": "{} ",
+    "on-click": "swaync-client -t"
+  },
+  "backlight": {
+    // "device": "acpi_video1",
+    "format": "{percent}% {icon}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "battery": {
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15
     },
-
-    // Quick-launch ChatGPT (Catppuccin)
-    "custom/gpt": {
-      "format": " ",
-      "tooltip": false,
-      "on-click": "firefox -P ai --new-window https://chatgpt.com/"
-    },
-
-    // Weather (Catppuccin)
-    "custom/weather": {
-      "exec": "bash ~/.config/scripts/waybar-weather.sh",
-      "on-click": "mousam",
-      "interval": 3,
-      "tooltip": false,
-      "format": "{}"
-    },
-
-    // Workspace switcher for primary monitor (workspaces 1-5)
-    "hyprland/workspaces#dp1": {
-      "all-outputs": false,
-      "active-only": false,
-      "show-special": true,
-      "sort-by": "number",
-      "move-to-monitor": true,
-
-      "format": "{name}",
-      "on-click": "hyprctl dispatch workspace {name}",
-      "on-scroll-up": "hyprctl dispatch workspace e+1 1>/dev/null",
-      "on-scroll-down": "hyprctl dispatch workspace e-1 1>/dev/null",
-
-      "persistent-workspaces": {
-        "DP-1": [1, 2, 3, 4, 5]
-      },
-
-      "ignore-workspaces": [
-        "special:kitty"
-      ],
-
-      "format-icons": {
-        "1": "󰎤",
-        "2": "󰎧",
-        "3": "󰎪",
-        "4": "󰎭",
-        "5": "󰎰"
-      }
-    },
-
-    // Idle inhibitor (Catppuccin)
-    "idle_inhibitor": {
-      "format": "{icon}",
-      "format-icons": {
-        "activated": "",
-        "deactivated": ""
-      }
-    },
-
-    // SwayNC indicator (Catppuccin)
-    "custom/swaync": {
-      "exec": "bash ~/.config/scripts/waybar-swaync.sh",
-      "interval": 1,
-      "tooltip": false,
-      "format": "{} ",
-      "on-click": "swaync-client -t"
-    },
-
-    // Media player information
-    "mpris": {
-      "format": "{player_icon} {artist} - {title}",
-      "format-paused": "{status_icon} {artist} - {title}",
-      "tooltip-format": "{player} ({status})\n{artist} - {title}\n\nLeft-Click:   Play / Pause\nMiddle-Click: Previous Track\nRight-Click:  Next Track",
-      "title-len": 20,
-      "player-icons": {
-        "default": "▶",
-        "mpv": "",
-        "spotify": "󰓇"
-      },
-      "status-icons": {
-        "paused": "",
-        "stopped": ""
-      }
-    },
-
-    // Active window title with application icons
-    "hyprland/window": {
-      "format": "{title}",
-      "separate-outputs": true
-      // "rewrite": {
-      //   "(.*) — Mozilla Firefox": "󰈹  $1",
-      //   "(.*) — Zen Browser": "󰈹  Zen - $1",
-      //   "(.*) - Google Chrome": "  $1",
-      //   "(.*) - Visual Studio Code": "󰨞  $1",
-      //   "(.*) - nvim": "  $1",
-      //   "(.*) - Obsidian(.*)": "󱓧  $1",
-      //   "(.*) - fish": "  $1",
-      //   "yazi: (.*)": "  $1",
-      //   "nwg-look": "  GTK Settings",
-      //   "Qt6 Configuration Tool": "  QT Settings",
-      //   "blueman-manager": "Bluetooth Settings"
-      // }
-    },
-
-    "custom/active-icon-window": {
-      "interval": 1,
-      "exec": "~/.config/waybar/scripts/active_icon_window.sh",
-      // "return-type": "json",
-      "format": "{}",
-      "tooltip": false
-    },
-
-    // ===========================================
-    // === CENTER MODULES ===
-    // ===========================================
-
-    // Clock with calendar tooltip
-    "clock": {
-      "format": "  {:%a %e %b %H:%M}",
-      "tooltip-format": "<tt>{calendar}</tt>",
-      "calendar": {
-        "mode": "month",
-        "format": {
-          "months": "<span color='#cdd6f4'><b>{}</b></span>",
-          "days": "<span color='#cdd6f4'><b>{}</b></span>",
-          "weeks": "<span color='#cdd6f4'><b>W{}</b></span>",
-          "weekdays": "<span color='#cdd6f4'><b>{}</b></span>",
-          "today": "<span color='#f38ba8'><b>{}</b></span>"
-        }
-      }
-    },
-
-    // ===========================================
-    // === RIGHT MODULES ===
-    // ===========================================
-
-    // System resource monitoring
-    "cpu": {
-      "interval": 5,
-      "format": " {usage}%",
-      "max-length": 10,
-      "tooltip": false
-    },
-
-    "memory": {
-      "interval": 10,
-      "format": " Mem {used}G",
-      "max-length": 20,
-      "tooltip": false
-    },
-
-    // System tray for background applications
-    "tray": {
-      "icon-size": 15,
-      "spacing": 10
-    },
-
-    // Display brightness control
-    "backlight": {
-      "format": "{icon} <b>{percent}%</b>",
-      "format-icons": ["󰃞", "󰃟", "󰃠"],
-      "tooltip": false
-    },
-
-    // Audio control with Bluetooth support
-    "pulseaudio": {
-      "format": "{icon} <b>{volume}%</b>",
-      "format-muted": " 󰝟 ",
-      "format-bluetooth": "{icon}  <b>{volume}%</b>",
-      "format-bluetooth-muted": "󰝟 ",
-      "format-icons": {
-        "headset": "",
-        "default": ["󰕿", "󰖀", "󰕾"]
-      },
-      "tooltip": true,
-      "on-click": "pavucontrol",
-      "ignored-sinks": [
-        "JamesDSP Sink",
-        "Easy Effects Sink",
-        "HDA NVidia Digital Stereo (HDMI)"
-      ]
-    },
-
-    // Battery status and power management
-    "battery": {
-      "format": "{icon} {capacity}%",
-      "format-plugged": " {capacity}%",
-      "format-icons": [
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "max-length": 25,
-      "tooltip": true,
-      "interval": 5,
-      "states": {
-        "good": 70,
-        "warning": 30,
-        "critical": 15
-      },
-      "on-click": "rog-control-center"
-    },
-
-    // ===========================================
-    // === CUSTOM UTILITY MODULES ===
-    // ===========================================
-
-    // System load average
-    "custom/notification": {
-      "format": "  ",
-      "on-click": "makoctl restore",
-      "on-click-right": "makoctl restore",
-      "tooltip-format": "Notifications"
-    },
-
-    // System load average
-    "custom/loadavg": {
-      "interval": 10,
-      "format": "󰍛 {output}",
-      "exec": "/home/rtm/.config/waybar/scripts/loadavg.sh",
-      "tooltip": false,
-      "max-length": 10
-    },
-
-    // Color picker tool
-    "custom/color-picker": {
-      "format": "",
-      "on-click": "hyprpicker -an && notify-send 'Colour copied to clipboard'",
-      "tooltip-format": "Color Picker"
-    },
-
-    // Screenshot tool
-    "custom/screenshot": {
-      "format": "",
-      "on-click": "grim -g \"$(slurp)\" - | swappy -f -",
-      "on-click-right": "hyprshot -m window",
-      "tooltip-format": "Right-click:  Full Screen Screenshot\nLeft-click: Area Screenshot"
-    },
-
-    // Wallpaper changer
-    "custom/wallpaper": {
-      "format": "󰸉",
-      "on-click": "waypaper --random",
-      "on-click-right": "waypaper",
-      "tooltip-format": "Left-click:  Change Wallpaper\nRight-click: Open Wallpaper Picker"
-    },
-
-    // Power menu
-    "custom/power": {
-      "format": "",
-      "tooltip": false,
-      "on-click": "~/.config/rofi/scripts/powermenu/type-5/powermenu.sh &",
-      "on-click-right": "jgmenu_run"
+    "format": "{capacity}% {icon}",
+    "format-full": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    "interval": 3,
+    // "format-good": "", // An empty format will hide the module
+    // "format-full": "",
+    "format-icons": [
+      " ",
+      " ",
+      " ",
+      " ",
+      " "
+    ]
+  },
+  "battery#bat2": {
+    "bat": "BAT2"
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
     }
   },
 
-  // ===========================================
-  // === SECONDARY BAR (HDMI-A-1) ===
-  // ===========================================
-  // Secondary monitor with essential modules only
-  {
-    "name": "hdmi1",
-    "output": "HDMI-A-1",
-    "layer": "top",
-    "position": "top",
-    "margin-top": 0,
-    "margin-bottom": 0,
-    "margin-left": 250,
-    "margin-right": 250,
-
-    // ===========================================
-    // === MODULE LAYOUT ===
-    // ===========================================
-    "modules-left": [
-      // "custom/rofi",
-      "hyprland/workspaces#hdmi1",
-      "hyprland/window"
-    ],
-    "modules-center": ["clock"],
-    // "modules-right": [
-    // "cpu",
-    // "memory",
-    // "tray"
-    //   "backlight",
-    //   "pulseaudio",
-    //   "battery",
-    //   "custom/color-picker",
-    //   "custom/screenshot",
-    //   "custom/wallpaper",
-    // "custom/power"
-    // ],
-
-    // ===========================================
-    // === SECONDARY BAR MODULES ===
-    // ===========================================
-
-    // Workspace switcher for secondary monitor (workspaces 6-10)
-    "hyprland/workspaces#hdmi1": {
-      "all-outputs": false,
-      "active-only": false,
-      "show-special": true,
-      "sort-by": "number",
-      "move-to-monitor": true,
-
-      "format": "{name}",
-      "on-click": "hyprctl dispatch workspace {name}",
-      "on-scroll-up": "hyprctl dispatch workspace e+1 1>/dev/null",
-      "on-scroll-down": "hyprctl dispatch workspace e-1 1>/dev/null",
-
-      "ignore-workspaces": [
-        "special:kitty"
-      ],
-
-      "persistent-workspaces": {
-        "HDMI-A-1": [6, 7, 8, 9, 10]
-      },
-
-      "format-icons": {
-        "6": "󰎤",
-        "7": "󰎧",
-        "8": "󰎪",
-        "9": "󰎭",
-        "10": "󰎰"
-      }
-    }
+  "pulseaudio": {
+    // "scroll-step": 1, // %, can be a float
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon} ",
+    "format-bluetooth-muted": "  {icon} ",
+    "format-muted": " ",
+    "format-source": " {volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", " "]
+    },
+    "on-click": "pavucontrol"
+  },
+  "custom/media": {
+    "format": "{icon} {text}",
+    "return-type": "json",
+    "max-length": 40,
+    "format-icons": {
+      "spotify": "",
+      "default": "🎜"
+    },
+    "escape": true,
+    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+    // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+  },
+  "custom/power": {
+    "format": " ⏻ ",
+    "tooltip": false,
+    "on-click": "wlogout -b 4"
   }
-]
+}
