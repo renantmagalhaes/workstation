@@ -68,7 +68,7 @@ elif match "notepadqq"; then
 	icon=""
 elif match "intellij"; then
 	icon=""
-elif matchc "pycharm"; then
+elif match "pycharm"; then
 	icon=""
 elif match "webstorm"; then
 	icon=""
