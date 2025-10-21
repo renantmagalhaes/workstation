@@ -523,7 +523,7 @@ label:focus {
   background: rgb(30, 30, 46);
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
-  color: #f38ba8;
+  color: #a6e3a1;
 }
 
 #custom-fullscreen:hover {
@@ -534,7 +534,7 @@ label:focus {
   background: rgb(30, 30, 46);
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
-  color: #a6e3a1;
+  color: #d3ff6c;
 }
 
 #custom-move_window_next_monitor:hover {
@@ -550,4 +550,21 @@ label:focus {
 
 #custom-kill_active:hover {
   background-color: #181825;
+}
+
+/* Group the three window control modules visually */
+#custom-fullscreen {
+  margin-right: -4px;
+  border-radius: 7px 0 0 7px;
+}
+
+#custom-move_window_next_monitor {
+  margin-left: -4px;
+  margin-right: -4px;
+  border-radius: 0;
+}
+
+#custom-kill_active {
+  margin-left: -4px;
+  border-radius: 0 7px 7px 0;
 }
