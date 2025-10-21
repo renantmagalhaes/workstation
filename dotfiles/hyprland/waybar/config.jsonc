@@ -17,9 +17,7 @@
     "battery",
     "battery#bat2"
   ],
-  "modules-center": [
-    "clock"
-  ],
+  "modules-center": ["clock"],
   "modules-right": [
     "mpris",
     "custom/weather",
@@ -32,26 +30,17 @@
     "custom/notification",
     "pulseaudio",
     "tray",
+    "custom/fullscreen",
+    "custom/move_window_next_monitor",
+    "custom/kill_active",
     "custom/power"
   ],
   // Modules configuration
   "hyprland/workspaces": {
     "format": "{name}",
     "persistent-workspaces": {
-      "DP-1": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ],
-      "HDMI-A-1": [
-        6,
-        7,
-        8,
-        9,
-        10
-      ]
+      "DP-1": [1, 2, 3, 4, 5],
+      "HDMI-A-1": [6, 7, 8, 9, 10]
     }
   },
   "hyprland/window": {
@@ -84,10 +73,7 @@
   "sway/scratchpad": {
     "format": "{icon} {count}",
     "show-empty": false,
-    "format-icons": [
-      "",
-      ""
-    ],
+    "format-icons": ["", ""],
     "tooltip": true,
     "tooltip-format": "{app}: {title}"
   },
@@ -222,6 +208,7 @@
     "format-muted": " ",
     "format-source": " {volume}% ",
     "format-source-muted": "",
+
     "format-icons": {
       "headphone": "",
       "hands-free": "",
@@ -229,19 +216,17 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": [
-        "",
-        "",
-        " "
-      ]
+      "default": ["", "", " "]
     },
-    "on-click": "pavucontrol"
+    "on-click": "pavucontrol",
+    "on-scroll-up": "~/.dotfiles/hyprland/hypr/scripts/volnotify.sh +1",
+    "on-scroll-down": "~/.dotfiles/hyprland/hypr/scripts/volnotify.sh -1"
   },
   "mpris": {
     "format": "{player_icon} {artist} - {title}",
     "format-paused": "{status_icon} {artist} - {title}",
     "tooltip-format": "{player} ({status})\n{artist} - {title}\n\nLeft-Click:   Play / Pause\nMiddle-Click: Previous Track\nRight-Click:  Next Track",
-    "title-len": 20,
+    "title-len": 25,
     "player-icons": {
       "default": "▶",
       "mpv": "",
@@ -256,5 +241,20 @@
     "format": " ⏻ ",
     "tooltip": false,
     "on-click": "wlogout -b 4"
+  },
+  "custom/fullscreen": {
+    "format": "󰊓",
+    "tooltip": "Fullscreen current window (force on)",
+    "on-click": "hyprctl dispatch fullscreen 1"
+  },
+  "custom/move_window_next_monitor": {
+    "format": "󰍹",
+    "tooltip": "Move window to next monitor",
+    "on-click": "hyprctl dispatch movewindow mon:+1"
+  },
+  "custom/kill_active": {
+    "format": "󰅙",
+    "tooltip": "Kill active window",
+    "on-click": "hyprctl dispatch killactive"
   }
 }

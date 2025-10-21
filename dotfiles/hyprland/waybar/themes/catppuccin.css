@@ -137,7 +137,7 @@ button:hover {
 .modules-left
   > widget:first-child
   > #workspaces {
-  margin-left: 5;
+  margin-left: 5px;
 }
 
 /* If workspaces is the rightmost module, omit right margin */
@@ -516,5 +516,38 @@ label:focus {
 }
 
 #custom-active-icon-window:hover {
+  background-color: #181825;
+}
+
+#custom-fullscreen {
+  background: rgb(30, 30, 46);
+  padding: 1px 10px 1px 10px;
+  margin-top: 5px;
+  color: #f38ba8;
+}
+
+#custom-fullscreen:hover {
+  background-color: #181825;
+}
+
+#custom-move_window_next_monitor {
+  background: rgb(30, 30, 46);
+  padding: 1px 10px 1px 10px;
+  margin-top: 5px;
+  color: #a6e3a1;
+}
+
+#custom-move_window_next_monitor:hover {
+  background-color: #181825;
+}
+
+#custom-kill_active {
+  background: rgb(30, 30, 46);
+  padding: 1px 10px 1px 10px;
+  margin-top: 5px;
+  color: #f38ba8;
+}
+
+#custom-kill_active:hover {
   background-color: #181825;
 }
