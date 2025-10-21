@@ -243,18 +243,20 @@
     "on-click": "wlogout -b 4"
   },
   "custom/fullscreen": {
-    "format": "󰊓",
-    "tooltip": "Fullscreen current window (force on)",
+    "exec": "~/.config/waybar/scripts/fullscreen_status.sh",
+    "interval": 1,
+    "format": "{}",
+    "tooltip-format": "Toggle fullscreen",
     "on-click": "hyprctl dispatch fullscreen 1"
   },
   "custom/move_window_next_monitor": {
-    "format": "󰍹",
-    "tooltip": "Move window to next monitor",
-    "on-click": "hyprctl dispatch movewindow mon:+1"
+    "format": "",
+    "tooltip-format": "Move window to next monitor (cycles through all monitors)",
+    "on-click": "~/.config/waybar/scripts/move_window_next_monitor.sh"
   },
   "custom/kill_active": {
     "format": "󰅙",
-    "tooltip": "Kill active window",
+    "tooltip-format": "Kill active window",
     "on-click": "hyprctl dispatch killactive"
   }
 }
