@@ -1,0 +1,38 @@
+Menu,~/.config/rofi/scripts/launchers/type-7/launcher.sh,appimagekit-archipelago
+Terminal,kitty,Terminal
+File Explorer,nautilus,stock_folder
+Browser,/usr/bin/vivaldi,vivaldi
+Browser (Incognito),/usr/bin/vivaldi --incognito,abrowser
+
+^sep()
+Streaming,^checkout(streaming-menu),camera-video
+
+^sep()
+WM Options,^checkout(restart-menu),xfce4-systray
+
+^sep()
+Extra Options,^checkout(extra-menu),list-add
+
+^sep()
+Find Window Class,dunstify -i window_list "Find Window Class" "$(xprop WM_CLASS | tr -d '\n' | xclip -selection 'clipboard' -f)",window_list
+Change Wallpaper,nitrogen,nitrogen
+Appearance,lxappearance,mtpaint
+Randomize Wallpaper,feh --no-fehbg --bg-fill --randomize "$HOME/Pictures/wallpapers",phototonic
+
+^sep()
+Lock,~/.config/bspwm/scripts/blur-lock,system-lock-screen
+Logout,pkill -KILL -u "$USER" &,system-log-out
+Exit,~/.config/rofi/scripts/powermenu/type-5/powermenu.sh &,system-shutdown
+
+^tag(restart-menu)
+Restart Polybar,~/.config/polybar/launch.sh,xfce4-systray
+Restart SXHKD,pkill -USR1 -x sxhkd,input-keyboard
+Restart BSPWM,bspc wm -r && dunstify -i window_list "Successfully restarted BSPWM",terminal
+Restart KWIN,kwin_x11 --replace,windows95
+
+^tag(streaming-menu)
+Strem.IO,flatpak run com.stremio.Stremio,stremio
+Plex,flatpak run tv.plex.PlexDesktop,plex
+
+^tag(extra-menu)
+Mouse Battery Level,~/.dotfiles/bspwm/scripts/mouse-battery.sh,input-mouse
