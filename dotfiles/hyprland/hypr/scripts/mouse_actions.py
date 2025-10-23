@@ -6,17 +6,67 @@ import time
 import argparse
 import os
 import sys
-from evdev import InputDevice, UInput, ecodes as EC
+import logging
+import signal
+from evdev import InputDevice, UInput, ecodes as EC, list_devices
 
 
-def run_json(cmd):
-    out = subprocess.check_output(cmd, text=True)
-    return json.loads(out)
+def setup_logging(debug=False):
+    """Setup logging configuration"""
+    level = logging.DEBUG if debug else logging.INFO
+    logging.basicConfig(
+        level=level,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.StreamHandler(sys.stderr)
+        ]
+    )
+    return logging.getLogger(__name__)
+
+
+def run_json(cmd, timeout=5):
+    """Run command and return JSON output with timeout"""
+    try:
+        out = subprocess.check_output(cmd, text=True, timeout=timeout)
+        return json.loads(out)
+    except subprocess.TimeoutExpired:
+        raise Exception(f"Command timed out: {' '.join(cmd)}")
+    except subprocess.CalledProcessError as e:
+        raise Exception(f"Command failed: {' '.join(cmd)} - {e}")
+    except json.JSONDecodeError as e:
+        raise Exception(f"Invalid JSON from command: {' '.join(cmd)} - {e}")
+
+
+def find_mouse_device():
+    """Find the best mouse device automatically"""
+    try:
+        devices = list_devices()
+        for device_path in devices:
+            try:
+                device = InputDevice(device_path)
+                # Check if device has mouse capabilities
+                if any(cap in device.capabilities for cap in [EC.EV_REL, EC.EV_ABS]):
+                    # Check for wheel events specifically
+                    if EC.EV_REL in device.capabilities:
+                        rel_caps = device.capabilities[EC.EV_REL]
+                        if EC.REL_WHEEL in rel_caps or EC.REL_HWHEEL in rel_caps:
+                            return device_path, device.name
+            except (OSError, PermissionError):
+                continue
+    except Exception as e:
+        logging.warning(f"Error scanning devices: {e}")
+
+    return None, None
 
 
 def cursor_xy():
-    j = run_json(["hyprctl", "cursorpos", "-j"])
-    return int(j["x"]), int(j["y"])
+    """Get cursor position with error handling"""
+    try:
+        j = run_json(["hyprctl", "cursorpos", "-j"])
+        return int(j["x"]), int(j["y"])
+    except Exception as e:
+        logging.error(f"Failed to get cursor position: {e}")
+        raise
 
 
 class MonitorMap:
@@ -27,10 +77,14 @@ class MonitorMap:
     def refresh(self, max_age=5.0):
         now = time.monotonic()
         if now - self._last > max_age or not self._cache:
-            j = run_json(["hyprctl", "monitors", "-j"])
-            self._cache = [(int(m["x"]), int(m["y"]), int(
-                m["width"]), int(m["height"])) for m in j]
-            self._last = now
+            try:
+                j = run_json(["hyprctl", "monitors", "-j"])
+                self._cache = [(int(m["x"]), int(m["y"]), int(
+                    m["width"]), int(m["height"])) for m in j]
+                self._last = now
+            except Exception as e:
+                logging.error(f"Failed to refresh monitor map: {e}")
+                # Keep using old cache if available
 
     def edge_for(self, x, y, mt, mb, en_top, en_bottom):
         self.refresh()
@@ -62,7 +116,8 @@ def press_combo(ui, codes):
 async def main():
     ap = argparse.ArgumentParser(
         description="Edge scroll (top/bottom) + side scroll => Ctrl± with separate debounces")
-    ap.add_argument("--device", default="/dev/input/event8")
+    ap.add_argument("--device", default="/dev/input/event5",
+                    help="Input device path (auto-detect if not specified)")
     ap.add_argument("--margin-top", type=int, default=12)
     ap.add_argument("--margin-bottom", type=int, default=12)
 
@@ -100,19 +155,48 @@ async def main():
     ap.add_argument("--debug", action="store_true")
     args = ap.parse_args()
 
-    # Open devices
-    try:
-        dev = InputDevice(args.device)
-    except Exception as err:
-        print(f"Failed to open {args.device}: {err}", file=sys.stderr)
-        print("Fix permissions for /dev/input/event*, or run once with sudo, then add user to 'input' group.", file=sys.stderr)
-        sys.exit(1)
+    # Setup logging
+    logger = setup_logging(args.debug)
+
+    # Auto-detect device if not specified
+    device_path = args.device
+    if not device_path:
+        logger.info("Auto-detecting mouse device...")
+        device_path, device_name = find_mouse_device()
+        if device_path:
+            logger.info(f"Found mouse device: {device_path} ({device_name})")
+        else:
+            logger.error(
+                "No suitable mouse device found. Please specify --device manually.")
+            sys.exit(1)
+    else:
+        logger.info(f"Using specified device: {device_path}")
+
+    # Open devices with retry logic
+    dev = None
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            dev = InputDevice(device_path)
+            logger.info(f"Successfully opened device: {device_path}")
+            break
+        except Exception as err:
+            logger.warning(
+                f"Attempt {attempt + 1}/{max_retries} failed to open {device_path}: {err}")
+            if attempt == max_retries - 1:
+                logger.error("Failed to open device after all retries")
+                logger.error(
+                    "Fix permissions for /dev/input/event*, or run once with sudo, then add user to 'input' group.")
+                sys.exit(1)
+            await asyncio.sleep(1)
 
     try:
         ui = make_uinput(args.use_shift_for_plus)
+        logger.info("Successfully created uinput device")
     except Exception as err:
-        print(f"Failed to open /dev/uinput: {err}", file=sys.stderr)
-        print("Ensure /dev/uinput is group 'input' and you are in that group, or create a udev rule.", file=sys.stderr)
+        logger.error(f"Failed to open /dev/uinput: {err}")
+        logger.error(
+            "Ensure /dev/uinput is group 'input' and you are in that group, or create a udev rule.")
         sys.exit(1)
 
     monmap = MonitorMap()
@@ -126,10 +210,9 @@ async def main():
     REL_WHEEL_HI_RES = getattr(EC, "REL_WHEEL_HI_RES", 11)
     REL_HWHEEL_HI_RES = getattr(EC, "REL_HWHEEL_HI_RES", 12)
 
-    if args.debug:
-        print(f"[edge] device={args.device} Tmargin={args.margin_top} Bmargin={args.margin_bottom} "
-              f"vert_debounce={debounce_vert}s horiz_debounce={debounce_horiz}s "
-              f"top_enabled={args.enable_top} bottom_enabled={args.enable_bottom}", file=sys.stderr)
+    logger.info(f"Starting mouse actions with device={device_path} Tmargin={args.margin_top} Bmargin={args.margin_bottom} "
+                f"vert_debounce={debounce_vert}s horiz_debounce={debounce_horiz}s "
+                f"top_enabled={args.enable_top} bottom_enabled={args.enable_bottom}")
 
     async for ev in dev.async_read_loop():
         # ---------- Horizontal wheel => Ctrl± with its own debounce ----------
@@ -142,23 +225,24 @@ async def main():
 
             now = time.monotonic()
             if now - last_horiz_ts < debounce_horiz:
-                if args.debug:
-                    print("[edge] horiz debounced", file=sys.stderr)
+                logger.debug("horiz debounced")
                 continue
             last_horiz_ts = now
 
-            if v < 0:
-                seq = [EC.KEY_LEFTCTRL]
-                if args.use_shift_for_plus:
-                    seq.append(EC.KEY_LEFTSHIFT)
-                seq.append(EC.KEY_EQUAL)    # '+' with shift on many layouts
-                press_combo(ui, seq)
-                if args.debug:
-                    print("[edge] hwheel left  -> Ctrl++", file=sys.stderr)
-            elif v > 0:
-                press_combo(ui, [EC.KEY_LEFTCTRL, EC.KEY_MINUS])
-                if args.debug:
-                    print("[edge] hwheel right -> Ctrl+-", file=sys.stderr)
+            try:
+                if v < 0:
+                    seq = [EC.KEY_LEFTCTRL]
+                    if args.use_shift_for_plus:
+                        seq.append(EC.KEY_LEFTSHIFT)
+                    # '+' with shift on many layouts
+                    seq.append(EC.KEY_EQUAL)
+                    press_combo(ui, seq)
+                    logger.debug("hwheel left  -> Ctrl++")
+                elif v > 0:
+                    press_combo(ui, [EC.KEY_LEFTCTRL, EC.KEY_MINUS])
+                    logger.debug("hwheel right -> Ctrl+-")
+            except Exception as e:
+                logger.error(f"Error processing horizontal wheel: {e}")
             continue
 
         # ---------- Vertical wheel => edge actions with its debounce ----------
@@ -173,35 +257,47 @@ async def main():
 
         now = time.monotonic()
         if now - last_vert_ts < debounce_vert:
-            if args.debug:
-                print("[edge] vert debounced", file=sys.stderr)
+            logger.debug("vert debounced")
             continue
         last_vert_ts = now
 
         try:
             x, y = cursor_xy()
         except Exception as err:
-            if args.debug:
-                print(f"[edge] hyprctl failed: {err}", file=sys.stderr)
+            logger.warning(f"hyprctl failed: {err}")
             continue
 
         which = monmap.edge_for(
             x, y, args.margin_top, args.margin_bottom, args.enable_top, args.enable_bottom)
-        if args.debug:
-            print(
-                f"[edge] vert wheel={v} at x={x} y={y} edge={which}", file=sys.stderr)
+        logger.debug(f"vert wheel={v} at x={x} y={y} edge={which}")
         if not which:
             continue
 
         cmd = (args.top_cmd_up if v < 0 else args.top_cmd_down) if which == "top" \
             else (args.bottom_cmd_up if v < 0 else args.bottom_cmd_down)
 
-        if args.debug:
-            print(f"[edge] run: {cmd}", file=sys.stderr)
-        subprocess.Popen(["bash", "-lc", cmd])
+        logger.debug(f"run: {cmd}")
+        try:
+            subprocess.Popen(["bash", "-lc", cmd])
+        except Exception as e:
+            logger.error(f"Failed to execute command: {cmd} - {e}")
+
+
+def signal_handler(signum, frame):
+    """Handle shutdown signals gracefully"""
+    print(f"\nReceived signal {signum}, shutting down...")
+    sys.exit(0)
+
 
 if __name__ == "__main__":
+    # Setup signal handlers
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        pass
+        print("\nShutdown requested by user")
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        sys.exit(1)
