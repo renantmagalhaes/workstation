@@ -240,7 +240,7 @@
   "custom/power": {
     "format": " ⏻ ",
     "tooltip": false,
-    "on-click": "wlogout -b 4"
+    "on-click": "~/.config/waybar/scripts/wlogout.sh"
   },
   "custom/fullscreen": {
     "exec": "~/.config/waybar/scripts/fullscreen_status.sh",
