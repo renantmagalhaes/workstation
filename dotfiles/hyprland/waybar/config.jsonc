@@ -240,7 +240,8 @@
   "custom/power": {
     "format": " ⏻ ",
     "tooltip": false,
-    "on-click": "~/.config/waybar/scripts/wlogout.sh"
+    "on-click": "~/.config/waybar/scripts/wlogout.sh",
+    "on-click-right": "jgmenu_run"
   },
   "custom/fullscreen": {
     "exec": "~/.config/waybar/scripts/fullscreen_status.sh",
