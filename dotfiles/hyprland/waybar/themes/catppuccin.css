@@ -23,7 +23,7 @@
   /* `otf-font-awesome` is required to be installed for icons */
   font-family: JetBrainsMono Nerd Font;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 14px;
   border-radius: 7px;
 }
 
@@ -121,7 +121,7 @@ button:hover {
 #custom-gpt,
 #mpd {
   background: rgb(30, 30, 46);
-  padding: 1px 10px 1px 10px;
+  padding: 4px 12px 4px 12px;
   margin-top: 5px;
 }
 
@@ -159,7 +159,7 @@ button:hover {
 
 #custom-weather {
   color: #74c7ec;
-  padding: 1px 6px 1px 8px;
+  padding: 4px 8px 4px 10px;
 }
 
 #custom-gpt {
