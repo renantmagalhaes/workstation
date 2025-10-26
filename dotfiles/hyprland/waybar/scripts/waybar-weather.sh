@@ -10,8 +10,8 @@ set -euo pipefail
 if [ -n "${WEATHER_LOCATION:-}" ]; then
     # Use the specified location (URL encode spaces and special characters)
     location=$(printf '%s\n' "$WEATHER_LOCATION" | sed 's/ /%20/g')
-    curl -fsS "https://wttr.in/${location}?format=1" 2>/dev/null || echo ""
+    curl -fsS "https://wttr.in/${location}?format=1" 2>/dev/null | sed 's/  */ /g' || echo ""
 else
     # Use default behavior (auto-detect location)
-    curl -fsS "https://wttr.in?format=1" 2>/dev/null || echo ""
+    curl -fsS "https://wttr.in?format=1" 2>/dev/null | sed 's/  */ /g' || echo ""
 fi
