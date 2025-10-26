@@ -226,8 +226,8 @@
     "format": "{player_icon} {artist} - {title}",
     "format-paused": "{status_icon} {artist} - {title}",
     "tooltip-format": "{player} ({status})\n{artist} - {title}\n\nLeft-Click:   Play / Pause\nMiddle-Click: Previous Track\nRight-Click:  Next Track",
-    "title-len": 15,
-    "artist-len": 10,
+    "title-len": 25,
+    "artist-len": 25,
     "player-icons": {
       "default": "▶",
       "mpv": "",
