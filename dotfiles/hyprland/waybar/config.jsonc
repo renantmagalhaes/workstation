@@ -44,7 +44,8 @@
     }
   },
   "hyprland/window": {
-    "format": " {title} "
+    "format": " {title} ",
+    "max-length": 80
   },
   "custom/active-icon-window": {
     "exec": "~/.config/waybar/scripts/active_icon_window.sh",
