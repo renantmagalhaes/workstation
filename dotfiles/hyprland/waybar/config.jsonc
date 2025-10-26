@@ -80,7 +80,7 @@
   "custom/weather": {
     "exec": "~/.config/waybar/scripts/waybar-weather.sh",
     "on-click": "flatpak run io.github.amit9838.mousam",
-    "interval": 60,
+    "interval": 600,
     "tooltip": false,
     "format": "{}"
   },
@@ -226,7 +226,8 @@
     "format": "{player_icon} {artist} - {title}",
     "format-paused": "{status_icon} {artist} - {title}",
     "tooltip-format": "{player} ({status})\n{artist} - {title}\n\nLeft-Click:   Play / Pause\nMiddle-Click: Previous Track\nRight-Click:  Next Track",
-    "title-len": 25,
+    "title-len": 15,
+    "artist-len": 10,
     "player-icons": {
       "default": "▶",
       "mpv": "",
