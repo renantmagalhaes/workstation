@@ -68,7 +68,7 @@ button:hover {
 }
 
 #workspaces button {
-  padding: 0 5px;
+  padding: 1px 5px;
   color: #f38ba8;
   background-color: transparent;
 }
@@ -159,7 +159,7 @@ button:hover {
 
 #custom-weather {
   color: #74c7ec;
-  padding: 4px 8px 4px 10px;
+  padding: 1px 8px 1px 10px;
 }
 
 #custom-gpt {
