@@ -47,3 +47,6 @@ sudo flatpak install flathub com.stremio.Stremio
 
 ## Mousam (weather)
 sudo flatpak install flathub io.github.amit9838.mousam
+
+## Flatseal
+sudo flatpak install flathub com.github.tchx84.Flatseal
