@@ -36,7 +36,7 @@ window#waybar {
 }
 
 tooltip {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   border-radius: 7px;
 }
 
@@ -120,14 +120,14 @@ button:hover {
 #power-profiles-daemon,
 #custom-gpt,
 #mpd {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   padding: 4px 12px 4px 12px;
   margin-top: 5px;
 }
 
 #window,
 #workspaces {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   color: #f5e0dc;
   padding: 1px 1px 1px 1px;
   margin-top: 5px;
@@ -182,7 +182,7 @@ button:hover {
 
 #custom-power {
   color: #cba6f7;
-  background-color: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   margin-right: 5px;
   margin-top: 5px;
   padding: 1px 5px 1px 2px;
@@ -203,7 +203,7 @@ button:hover {
 
 @keyframes blink {
   to {
-    background: rgb(30, 30, 46);
+    background: rgba(30, 30, 46, 0.5);
     color: #000000;
     padding: 1px 10px 1px 10px;
     margin-top: 5px;
@@ -242,7 +242,7 @@ button:hover {
 }
 
 label:focus {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
 }
 
 #memory {
@@ -254,7 +254,7 @@ label:focus {
 }
 
 #disk {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
 }
 
 #backlight {
@@ -286,7 +286,7 @@ label:focus {
 }
 
 #wireplumber.muted {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
 }
@@ -297,7 +297,7 @@ label:focus {
 }
 
 #custom-media.custom-spotify {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
   color: #a6e3a1;
@@ -308,7 +308,7 @@ label:focus {
 }
 
 #mpris {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
   color: #a6e3a1;
@@ -319,7 +319,7 @@ label:focus {
 }
 
 #custom-swaync {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   color: #f9e2af;
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
@@ -343,14 +343,14 @@ label:focus {
 }
 
 #idle_inhibitor {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   color: #89b4fa;
   padding: 1px 12px 1px 5px;
   margin-top: 5px;
 }
 
 #idle_inhibitor.activated {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   color: #89b4fa;
   padding: 1px 12px 1px 5px;
   margin-top: 5px;
@@ -398,11 +398,11 @@ label:focus {
 }
 
 #keyboard-state > label.locked {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
 }
 
 #scratchpad {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   background: rgba(5, 5, 5, 0.2);
   color: #000000;
   padding: 1px 10px 1px 10px;
@@ -411,7 +411,7 @@ label:focus {
 
 #scratchpad.empty {
   background-color: transparent;
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   color: #000000;
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
@@ -439,7 +439,7 @@ label:focus {
 }
 
 #custom-notification {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   padding: 1px 13px 1px 10px;
   margin-top: 5px;
   color: #ffffff;
@@ -450,7 +450,7 @@ label:focus {
 }
 
 #bluetooth {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
   color: #89b4fa;
@@ -461,7 +461,7 @@ label:focus {
 }
 
 #temperature {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
   color: #88d2ff;
@@ -476,7 +476,7 @@ label:focus {
 }
 
 #tray {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
   color: #cdd6f4;
@@ -487,7 +487,7 @@ label:focus {
 }
 
 #hyprland-window {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
   color: #cdd6f4;
@@ -498,7 +498,7 @@ label:focus {
 }
 
 #network {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   padding: 1px 16px 1px 10px;
   margin-top: 5px;
   color: #ffffff;
@@ -509,7 +509,7 @@ label:focus {
 }
 
 #custom-active-icon-window {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   padding: 1px 12px 1px 10px;
   margin-top: 5px;
   color: #ffffff;
@@ -520,7 +520,7 @@ label:focus {
 }
 
 #custom-fullscreen {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
   color: #a6e3a1;
@@ -531,7 +531,7 @@ label:focus {
 }
 
 #custom-move_window_next_monitor {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
   color: #d3ff6c;
@@ -542,7 +542,7 @@ label:focus {
 }
 
 #custom-kill_active {
-  background: rgb(30, 30, 46);
+  background: rgba(30, 30, 46, 0.5);
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
   color: #f38ba8;
@@ -567,4 +567,21 @@ label:focus {
 #custom-kill_active {
   margin-left: -4px;
   border-radius: 0 7px 7px 0;
+}
+
+/* Ensure popups/menus/tooltips are semi-transparent so Hyprland blur shows through */
+tooltip,
+menu,
+.menu,
+.popover,
+.dropdown,
+.popup,
+window.menu,
+window.popup {
+  background: rgb(30, 30, 46);
+  border-radius: 7px;
+}
+
+tooltip label {
+  color: #ffffff;
 }
