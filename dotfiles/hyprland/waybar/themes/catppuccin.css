@@ -72,6 +72,7 @@ button:hover {
   padding: 1px 5px;
   color: #ffffff;
   background-color: transparent;
+  font-size: 18px;
 }
 
 #workspaces button:hover {
@@ -85,8 +86,14 @@ button:hover {
 }
 
 #workspaces button.urgent {
-  background-color: #eb4d4b;
+  background-color: rgba(
+    249,
+    226,
+    175,
+    0.3
+  );
   border-radius: 7px;
+  color: #f9e2af;
 }
 
 #workspaces button.visible {
@@ -585,4 +592,11 @@ window.popup {
 
 tooltip label {
   color: #ffffff;
+  padding: 4px 8px;
+}
+
+#workspaces button tooltip {
+  background: rgba(30, 30, 46, 0.9);
+  border-radius: 7px;
+  padding: 4px 8px;
 }
