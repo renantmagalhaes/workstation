@@ -263,7 +263,8 @@
   "custom/move_window_next_monitor": {
     "format": "",
     "tooltip-format": "Move window to next monitor (cycles through all monitors)",
-    "on-click": "~/.config/waybar/scripts/move_window_next_monitor.sh"
+    "on-click": "~/.config/waybar/scripts/move_window_next_monitor.sh",
+    "on-click-right": "~/.config/waybar/scripts/send-window-to-workspace.sh"
   },
   "custom/kill_active": {
     "format": "󰅙",
