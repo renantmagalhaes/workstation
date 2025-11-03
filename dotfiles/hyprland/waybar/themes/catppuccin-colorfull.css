@@ -70,8 +70,9 @@ button:hover {
 
 #workspaces button {
   padding: 1px 5px;
-  color: #f38ba8;
+  color: #798bff;
   background-color: transparent;
+  font-size: 18px;
 }
 
 #workspaces button:hover {
@@ -85,8 +86,14 @@ button:hover {
 }
 
 #workspaces button.urgent {
-  background-color: #eb4d4b;
+  background-color: rgba(
+    102,
+    73,
+    9,
+    0.3
+  );
   border-radius: 7px;
+  color: #f9e2af;
 }
 
 #workspaces button.visible {
@@ -149,7 +156,7 @@ button:hover {
 }
 
 #clock {
-  color: #f38ba8;
+  color: #f5ffa9;
   margin-top: 5px;
   margin-right: 5px;
 }
@@ -585,4 +592,11 @@ window.popup {
 
 tooltip label {
   color: #ffffff;
+  padding: 4px 8px;
+}
+
+#workspaces button tooltip {
+  background: rgba(30, 30, 46, 0.9);
+  border-radius: 7px;
+  padding: 4px 8px;
 }
