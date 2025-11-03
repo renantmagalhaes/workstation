@@ -1,4 +1,4 @@
-@import "themes/catppuccin.css";
+@import "themes/catppuccin-colorfull.css";
 
 #waybar.top > box.horizontal {
   border-radius: 12pt;
