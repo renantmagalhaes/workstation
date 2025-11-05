@@ -1,0 +1,105 @@
+/*
+ * ROFI clipboard manager theme with larger image previews
+ * Based on rtm-rofi-theme.rasi
+ */
+
+configuration {
+  font: "Cascadia Code 12";
+}
+
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  spacing: 0;
+
+  bg: #000000;
+	fg: #ABB2BF;
+    fg2:#DEDEDE80;
+	blue: #61AFEF;
+	blue-alt: #61AFEF15;
+	red: #E06C75;
+  red-alt: #E06C7515;
+  white: #FFFFFF;
+  gray: #424242;
+  purple: #6666ff;
+  purple-alt: #6666ff15;
+  green: #00ff99;
+
+  background-color: @bg;
+  text-color: @fg;
+}
+
+
+window {
+  border: 2px;
+  border-color: @blue-alt;
+  border-radius: 6px;
+  padding: 6px;
+  transparency: "real";
+}
+
+mainbox {
+  children: [inputbar, listview];
+}
+
+inputbar {
+  border: 0 2px 0 2px;
+  border-color: @green;
+  border-radius: 6px;
+  children: [icon-search, entry];
+  margin: 0 0 6px 0;
+}
+
+entry {
+  background-color: @blue-alt;
+  padding: 10px;
+  text-color: @white;
+}
+
+listview {
+  lines: 8;
+  spacing: 0.5em;
+}
+
+element {
+  border: 0 2px 0 2px;
+  children: [element-icon, element-text];
+  padding: 10px;
+}
+
+element selected {
+  border-color: @purple;
+  border-radius: 6px;
+}
+
+element-text {
+  padding: 10px 0;
+  text-color: @fg;
+}
+
+element-text selected {
+  background-color: @purple-alt;
+  text-color: @purple;
+}
+
+icon-search {
+    expand:     false;
+    filename:   "xterm";
+    size: 48px;
+}
+
+icon-search, entry, element-icon, element-text {
+    vertical-align: 0.5;
+}
+
+element-icon {
+    size:   64px;
+    padding: 5px 10px;
+}
+
+entry {
+    font:   inherit;
+    placeholder         : "Search";
+    placeholder-color   : @fg2;
+}
