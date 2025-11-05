@@ -26,7 +26,7 @@ configuration {
   purple-alt: #6666ff15;
   green: #00ff99;
 
-  background-color: @bg;
+  background-color: transparent;
   text-color: @fg;
 }
 
@@ -37,9 +37,11 @@ window {
   border-radius: 6px;
   padding: 6px;
   transparency: "real";
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 mainbox {
+  background-color: transparent;
   children: [inputbar, listview];
 }
 
@@ -49,6 +51,7 @@ inputbar {
   border-radius: 6px;
   children: [icon-search, entry];
   margin: 0 0 6px 0;
+  background-color: transparent;
 }
 
 entry {
@@ -60,12 +63,14 @@ entry {
 listview {
   lines: 8;
   spacing: 0.5em;
+  background-color: transparent;
 }
 
 element {
   border: 0 2px 0 2px;
   children: [element-icon, element-text];
   padding: 10px;
+  background-color: transparent;
 }
 
 element selected {
@@ -76,6 +81,7 @@ element selected {
 element-text {
   padding: 10px 0;
   text-color: @fg;
+  background-color: transparent;
 }
 
 element-text selected {
