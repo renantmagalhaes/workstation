@@ -58,7 +58,7 @@ window {
   border-radius: 6px;
   padding: 6px;
   transparency: "real";
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.75);
 }
 
 mainbox {
