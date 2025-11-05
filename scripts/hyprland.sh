@@ -56,7 +56,7 @@ echo "🔄 Updating system packages..."
 sudo zypper refresh && sudo zypper update
 
 echo "📦 Installing Hyprland and core packages..."
-sudo zypper install -y hyprland waybar wofi rofi playerctl pavucontrol hyprlock blueman hyprland-qtutils nwg-displays hypridle libevdev-devel evtest swappy grim slurp wl-clipboard mako pamixer xdg-desktop-portal-hyprland wireplumber python313-evdev python313-libevdev wlogout feh lxappearance scrot NetworkManager-applet pcp-pmda-lmsensors papirus-icon-theme pasystray jgmenu mate-polkit libnotify4 libnotify-devel libnotify-tools gnome-calendar
+sudo zypper install -y hyprland waybar wofi rofi playerctl pavucontrol hyprlock blueman hyprland-qtutils nwg-displays hypridle libevdev-devel evtest swappy grim slurp wl-clipboard mako pamixer xdg-desktop-portal-hyprland wireplumber python313-evdev python313-libevdev wlogout feh lxappearance scrot NetworkManager-applet pcp-pmda-lmsensors papirus-icon-theme pasystray jgmenu mate-polkit libnotify4 libnotify-devel libnotify-tools gnome-calendar cliphist gawk xdg-utils
 
 # Install Hyprland-specific packages
 echo "📦 Installing Hyprland-specific packages..."
@@ -210,6 +210,16 @@ if [ -d "$FOLDER_LOCATION/dotfiles/hyprland/hypr/scripts" ]; then
     echo "✅ Hyprland scripts made executable"
 fi
 
+# Cliphist configuration
+echo "📋 Setting up Cliphist configuration..."
+if [ -f "$FOLDER_LOCATION/dotfiles/hyprland/hypr/cliphist-config" ]; then
+    # Create cliphist config directory if it doesn't exist
+    mkdir -p ~/.config/cliphist
+    # Config parameters
+    echo "max-items 1000" >> ~/.config/cliphist/config
+    echo "✅ Cliphist configuration set to store 1000 items"
+fi
+
 echo ""
 echo "🎉 Hyprland installation and setup completed successfully!"
 echo ""
@@ -218,6 +228,7 @@ echo "✅ Hyprland - Wayland compositor installed"
 echo "✅ Waybar - Status bar configured" 
 echo "✅ Rofi - Application launcher configured"
 echo "✅ Mako - Notification daemon configured"
+echo "✅ Cliphist - Clipboard manager configured (1000 items)"
 echo "✅ BSPWM-style keybindings set up"
 echo "✅ Visual effects configured"
 echo "✅ Startup applications configured"
