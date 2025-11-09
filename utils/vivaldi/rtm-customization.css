@@ -511,7 +511,7 @@ button.vivaldi .expand-arrow {
  */
 
 :root {
-  --tabbar-collapsed-width: 37px;
+  --tabbar-collapsed-width: 40px;
   --tabbar-expanded-width: 200px;
   --tabbar-transition-duration: 0.3s;
   --tabbar-transition-timing: ease-in-out;
@@ -527,6 +527,7 @@ button.vivaldi .expand-arrow {
   width: var(
     --tabbar-collapsed-width
   ) !important;
+  overflow: visible !important;
   transition: width
     var(--tabbar-transition-duration)
     var(--tabbar-transition-timing) !important;
@@ -538,6 +539,203 @@ button.vivaldi .expand-arrow {
   width: var(
     --tabbar-expanded-width
   ) !important;
+}
+
+/* Make tab background transparent when collapsed - only favicon will have background */
+#browser.tabs-left
+  #tabs-tabbar-container:not(:hover)
+  .tab {
+  background-color: transparent !important;
+  background: transparent !important;
+  overflow: visible !important;
+  transition: background-color
+    var(--tabbar-transition-duration)
+    var(--tabbar-transition-timing) !important;
+}
+
+/* Ensure tab position doesn't clip the button */
+#browser.tabs-left
+  #tabs-tabbar-container:not(:hover)
+  .tab-position {
+  overflow: visible !important;
+  width: 100% !important;
+}
+
+/* Ensure tabbar-wrapper doesn't clip the button */
+#browser.tabs-left
+  #tabs-tabbar-container:not(:hover)
+  ~ .tabbar-wrapper,
+#browser.tabs-left
+  .tabbar-wrapper:has(
+    #tabs-tabbar-container:not(:hover)
+  ),
+#browser.tabs-left
+  .inner
+  > .tabbar-wrapper {
+  overflow: visible !important;
+}
+
+/* Ensure tabs-container doesn't clip */
+#browser.tabs-left
+  #tabs-tabbar-container:not(:hover)
+  #tabs-container {
+  overflow: visible !important;
+}
+
+/* Center the tab header when collapsed to properly center the favicon button */
+#browser.tabs-left
+  #tabs-tabbar-container:not(:hover)
+  .tab
+  .tab-header {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  overflow: visible !important;
+  padding: 0 !important;
+}
+
+/* Make favicon look like a button when collapsed - add background around favicon */
+#browser.tabs-left
+  #tabs-tabbar-container:not(:hover)
+  .tab
+  .favicon,
+#browser.tabs-left
+  #tabs-tabbar-container:not(:hover)
+  .tab
+  .tab-header
+  .favicon {
+  background-color: var(
+    --colorTabBar,
+    rgba(255, 255, 255, 0.1)
+  ) !important;
+  border-radius: 6px !important;
+  padding: 5px !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  width: 26px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  min-height: 26px !important;
+  max-width: 26px !important;
+  max-height: 26px !important;
+  overflow: visible !important;
+  flex-shrink: 0 !important;
+  transition: background-color
+      var(--tabbar-transition-duration)
+      var(--tabbar-transition-timing),
+    border-radius
+      var(--tabbar-transition-duration)
+      var(--tabbar-transition-timing),
+    padding
+      var(--tabbar-transition-duration)
+      var(--tabbar-transition-timing) !important;
+}
+
+/* Constrain the favicon image size inside the button */
+#browser.tabs-left
+  #tabs-tabbar-container:not(:hover)
+  .tab
+  .favicon
+  img,
+#browser.tabs-left
+  #tabs-tabbar-container:not(:hover)
+  .tab
+  .tab-header
+  .favicon
+  img,
+#browser.tabs-left
+  #tabs-tabbar-container:not(:hover)
+  .tab
+  .favicon
+  svg,
+#browser.tabs-left
+  #tabs-tabbar-container:not(:hover)
+  .tab
+  .tab-header
+  .favicon
+  svg {
+  max-width: 16px !important;
+  max-height: 16px !important;
+  width: 16px !important;
+  height: 16px !important;
+  display: block !important;
+  object-fit: contain !important;
+}
+
+/* Active tab favicon gets a slightly different background to indicate it's active */
+#browser.tabs-left
+  #tabs-tabbar-container:not(:hover)
+  .tab.active
+  .favicon,
+#browser.tabs-left
+  #tabs-tabbar-container:not(:hover)
+  .tab.active
+  .tab-header
+  .favicon {
+  background-color: rgb(
+    215,
+    215,
+    215
+  ) !important;
+}
+
+/* Remove button styling from favicon when expanded */
+#browser.tabs-left
+  #tabs-tabbar-container:hover
+  .tab
+  .favicon,
+#browser.tabs-left
+  #tabs-tabbar-container:hover
+  .tab
+  .tab-header
+  .favicon {
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  transition: background-color
+      var(--tabbar-transition-duration)
+      var(--tabbar-transition-timing),
+    border-radius
+      var(--tabbar-transition-duration)
+      var(--tabbar-transition-timing),
+    padding
+      var(--tabbar-transition-duration)
+      var(--tabbar-transition-timing) !important;
+}
+
+/* Restore normal tab header layout when expanded */
+#browser.tabs-left
+  #tabs-tabbar-container:hover
+  .tab
+  .tab-header {
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+}
+
+/* Restore normal tab backgrounds when expanded - ensure active tab keeps white background */
+#browser.tabs-left
+  #tabs-tabbar-container:hover
+  .tab.active {
+  background-color: rgb(
+    215,
+    215,
+    215
+  ) !important;
+  color: black !important;
+}
+
+/* Restore normal tab backgrounds for inactive tabs when expanded */
+#browser.tabs-left
+  #tabs-tabbar-container:hover
+  .tab:not(.active) {
+  background-color: unset !important;
+  background: unset !important;
 }
 
 /* Hide tab titles when collapsed */
@@ -600,6 +798,7 @@ button.vivaldi .expand-arrow {
   width: var(
     --tabbar-collapsed-width
   ) !important;
+  overflow: visible !important;
   transition: width
     var(--tabbar-transition-duration)
     var(--tabbar-transition-timing) !important;
@@ -611,6 +810,203 @@ button.vivaldi .expand-arrow {
   width: var(
     --tabbar-expanded-width
   ) !important;
+}
+
+/* Make tab background transparent when collapsed - only favicon will have background */
+#browser.tabs-right
+  #tabs-tabbar-container:not(:hover)
+  .tab {
+  background-color: transparent !important;
+  background: transparent !important;
+  overflow: visible !important;
+  transition: background-color
+    var(--tabbar-transition-duration)
+    var(--tabbar-transition-timing) !important;
+}
+
+/* Ensure tab position doesn't clip the button */
+#browser.tabs-right
+  #tabs-tabbar-container:not(:hover)
+  .tab-position {
+  overflow: visible !important;
+  width: 100% !important;
+}
+
+/* Ensure tabbar-wrapper doesn't clip the button */
+#browser.tabs-right
+  #tabs-tabbar-container:not(:hover)
+  ~ .tabbar-wrapper,
+#browser.tabs-right
+  .tabbar-wrapper:has(
+    #tabs-tabbar-container:not(:hover)
+  ),
+#browser.tabs-right
+  .inner
+  > .tabbar-wrapper {
+  overflow: visible !important;
+}
+
+/* Ensure tabs-container doesn't clip */
+#browser.tabs-right
+  #tabs-tabbar-container:not(:hover)
+  #tabs-container {
+  overflow: visible !important;
+}
+
+/* Center the tab header when collapsed to properly center the favicon button */
+#browser.tabs-right
+  #tabs-tabbar-container:not(:hover)
+  .tab
+  .tab-header {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  overflow: visible !important;
+  padding: 0 !important;
+}
+
+/* Make favicon look like a button when collapsed - add background around favicon */
+#browser.tabs-right
+  #tabs-tabbar-container:not(:hover)
+  .tab
+  .favicon,
+#browser.tabs-right
+  #tabs-tabbar-container:not(:hover)
+  .tab
+  .tab-header
+  .favicon {
+  background-color: var(
+    --colorTabBar,
+    rgba(255, 255, 255, 0.1)
+  ) !important;
+  border-radius: 6px !important;
+  padding: 5px !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  width: 26px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  min-height: 26px !important;
+  max-width: 26px !important;
+  max-height: 26px !important;
+  overflow: visible !important;
+  flex-shrink: 0 !important;
+  transition: background-color
+      var(--tabbar-transition-duration)
+      var(--tabbar-transition-timing),
+    border-radius
+      var(--tabbar-transition-duration)
+      var(--tabbar-transition-timing),
+    padding
+      var(--tabbar-transition-duration)
+      var(--tabbar-transition-timing) !important;
+}
+
+/* Constrain the favicon image size inside the button */
+#browser.tabs-right
+  #tabs-tabbar-container:not(:hover)
+  .tab
+  .favicon
+  img,
+#browser.tabs-right
+  #tabs-tabbar-container:not(:hover)
+  .tab
+  .tab-header
+  .favicon
+  img,
+#browser.tabs-right
+  #tabs-tabbar-container:not(:hover)
+  .tab
+  .favicon
+  svg,
+#browser.tabs-right
+  #tabs-tabbar-container:not(:hover)
+  .tab
+  .tab-header
+  .favicon
+  svg {
+  max-width: 16px !important;
+  max-height: 16px !important;
+  width: 16px !important;
+  height: 16px !important;
+  display: block !important;
+  object-fit: contain !important;
+}
+
+/* Active tab favicon gets a slightly different background to indicate it's active */
+#browser.tabs-right
+  #tabs-tabbar-container:not(:hover)
+  .tab.active
+  .favicon,
+#browser.tabs-right
+  #tabs-tabbar-container:not(:hover)
+  .tab.active
+  .tab-header
+  .favicon {
+  background-color: rgb(
+    215,
+    215,
+    215
+  ) !important;
+}
+
+/* Remove button styling from favicon when expanded */
+#browser.tabs-right
+  #tabs-tabbar-container:hover
+  .tab
+  .favicon,
+#browser.tabs-right
+  #tabs-tabbar-container:hover
+  .tab
+  .tab-header
+  .favicon {
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  transition: background-color
+      var(--tabbar-transition-duration)
+      var(--tabbar-transition-timing),
+    border-radius
+      var(--tabbar-transition-duration)
+      var(--tabbar-transition-timing),
+    padding
+      var(--tabbar-transition-duration)
+      var(--tabbar-transition-timing) !important;
+}
+
+/* Restore normal tab header layout when expanded */
+#browser.tabs-right
+  #tabs-tabbar-container:hover
+  .tab
+  .tab-header {
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+}
+
+/* Restore normal tab backgrounds when expanded - ensure active tab keeps white background */
+#browser.tabs-right
+  #tabs-tabbar-container:hover
+  .tab.active {
+  background-color: rgb(
+    215,
+    215,
+    215
+  ) !important;
+  color: black !important;
+}
+
+/* Restore normal tab backgrounds for inactive tabs when expanded */
+#browser.tabs-right
+  #tabs-tabbar-container:hover
+  .tab:not(.active) {
+  background-color: unset !important;
+  background: unset !important;
 }
 
 /* Hide tab titles when collapsed */
