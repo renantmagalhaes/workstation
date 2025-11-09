@@ -511,7 +511,7 @@ button.vivaldi .expand-arrow {
  */
 
 :root {
-  --tabbar-collapsed-width: 40px;
+  --tabbar-collapsed-width: 44px;
   --tabbar-expanded-width: 200px;
   --tabbar-transition-duration: 0.3s;
   --tabbar-transition-timing: ease-in-out;
@@ -616,12 +616,12 @@ button.vivaldi .expand-arrow {
   align-items: center !important;
   justify-content: center !important;
   box-sizing: border-box !important;
-  width: 26px !important;
-  height: 26px !important;
-  min-width: 26px !important;
-  min-height: 26px !important;
-  max-width: 26px !important;
-  max-height: 26px !important;
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  max-width: 30px !important;
+  max-height: 30px !important;
   overflow: visible !important;
   flex-shrink: 0 !important;
   transition: background-color
@@ -635,7 +635,7 @@ button.vivaldi .expand-arrow {
       var(--tabbar-transition-timing) !important;
 }
 
-/* Constrain the favicon image size inside the button */
+/* Constrain the favicon image size inside the button - bigger when collapsed */
 #browser.tabs-left
   #tabs-tabbar-container:not(:hover)
   .tab
@@ -658,10 +658,10 @@ button.vivaldi .expand-arrow {
   .tab-header
   .favicon
   svg {
-  max-width: 16px !important;
-  max-height: 16px !important;
-  width: 16px !important;
-  height: 16px !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
   display: block !important;
   object-fit: contain !important;
 }
@@ -683,61 +683,6 @@ button.vivaldi .expand-arrow {
   ) !important;
 }
 
-/* Remove button styling from favicon when expanded */
-#browser.tabs-left
-  #tabs-tabbar-container:hover
-  .tab
-  .favicon,
-#browser.tabs-left
-  #tabs-tabbar-container:hover
-  .tab
-  .tab-header
-  .favicon {
-  background-color: transparent !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  transition: background-color
-      var(--tabbar-transition-duration)
-      var(--tabbar-transition-timing),
-    border-radius
-      var(--tabbar-transition-duration)
-      var(--tabbar-transition-timing),
-    padding
-      var(--tabbar-transition-duration)
-      var(--tabbar-transition-timing) !important;
-}
-
-/* Restore normal tab header layout when expanded */
-#browser.tabs-left
-  #tabs-tabbar-container:hover
-  .tab
-  .tab-header {
-  display: flex !important;
-  justify-content: flex-start !important;
-  align-items: center !important;
-}
-
-/* Restore normal tab backgrounds when expanded - ensure active tab keeps white background */
-#browser.tabs-left
-  #tabs-tabbar-container:hover
-  .tab.active {
-  background-color: rgb(
-    215,
-    215,
-    215
-  ) !important;
-  color: black !important;
-}
-
-/* Restore normal tab backgrounds for inactive tabs when expanded */
-#browser.tabs-left
-  #tabs-tabbar-container:hover
-  .tab:not(.active) {
-  background-color: unset !important;
-  background: unset !important;
-}
-
 /* Hide tab titles when collapsed */
 #browser.tabs-left
   #tabs-tabbar-container:not(:hover)
@@ -754,21 +699,6 @@ button.vivaldi .expand-arrow {
       var(--tabbar-transition-timing) !important;
 }
 
-/* Show tab titles when expanded */
-#browser.tabs-left
-  #tabs-tabbar-container:hover
-  .tab
-  .title {
-  max-width: 150px !important;
-  opacity: 1 !important;
-  transition: max-width
-      var(--tabbar-transition-duration)
-      var(--tabbar-transition-timing),
-    opacity
-      var(--tabbar-transition-duration)
-      var(--tabbar-transition-timing) !important;
-}
-
 /* Hide workspace button text when collapsed */
 #browser.tabs-left
   #tabs-tabbar-container:not(:hover)
@@ -777,6 +707,15 @@ button.vivaldi .expand-arrow {
   max-width: 0 !important;
   opacity: 0 !important;
   overflow: hidden !important;
+}
+
+/* Show tab titles when expanded - restore natural state */
+#browser.tabs-left
+  #tabs-tabbar-container:hover
+  .tab
+  .title {
+  max-width: none !important;
+  opacity: 1 !important;
 }
 
 /* Show workspace button text when expanded */
@@ -887,12 +826,12 @@ button.vivaldi .expand-arrow {
   align-items: center !important;
   justify-content: center !important;
   box-sizing: border-box !important;
-  width: 26px !important;
-  height: 26px !important;
-  min-width: 26px !important;
-  min-height: 26px !important;
-  max-width: 26px !important;
-  max-height: 26px !important;
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  max-width: 30px !important;
+  max-height: 30px !important;
   overflow: visible !important;
   flex-shrink: 0 !important;
   transition: background-color
@@ -906,7 +845,7 @@ button.vivaldi .expand-arrow {
       var(--tabbar-transition-timing) !important;
 }
 
-/* Constrain the favicon image size inside the button */
+/* Constrain the favicon image size inside the button - bigger when collapsed */
 #browser.tabs-right
   #tabs-tabbar-container:not(:hover)
   .tab
@@ -929,10 +868,10 @@ button.vivaldi .expand-arrow {
   .tab-header
   .favicon
   svg {
-  max-width: 16px !important;
-  max-height: 16px !important;
-  width: 16px !important;
-  height: 16px !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
   display: block !important;
   object-fit: contain !important;
 }
@@ -954,61 +893,6 @@ button.vivaldi .expand-arrow {
   ) !important;
 }
 
-/* Remove button styling from favicon when expanded */
-#browser.tabs-right
-  #tabs-tabbar-container:hover
-  .tab
-  .favicon,
-#browser.tabs-right
-  #tabs-tabbar-container:hover
-  .tab
-  .tab-header
-  .favicon {
-  background-color: transparent !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  transition: background-color
-      var(--tabbar-transition-duration)
-      var(--tabbar-transition-timing),
-    border-radius
-      var(--tabbar-transition-duration)
-      var(--tabbar-transition-timing),
-    padding
-      var(--tabbar-transition-duration)
-      var(--tabbar-transition-timing) !important;
-}
-
-/* Restore normal tab header layout when expanded */
-#browser.tabs-right
-  #tabs-tabbar-container:hover
-  .tab
-  .tab-header {
-  display: flex !important;
-  justify-content: flex-start !important;
-  align-items: center !important;
-}
-
-/* Restore normal tab backgrounds when expanded - ensure active tab keeps white background */
-#browser.tabs-right
-  #tabs-tabbar-container:hover
-  .tab.active {
-  background-color: rgb(
-    215,
-    215,
-    215
-  ) !important;
-  color: black !important;
-}
-
-/* Restore normal tab backgrounds for inactive tabs when expanded */
-#browser.tabs-right
-  #tabs-tabbar-container:hover
-  .tab:not(.active) {
-  background-color: unset !important;
-  background: unset !important;
-}
-
 /* Hide tab titles when collapsed */
 #browser.tabs-right
   #tabs-tabbar-container:not(:hover)
@@ -1025,21 +909,6 @@ button.vivaldi .expand-arrow {
       var(--tabbar-transition-timing) !important;
 }
 
-/* Show tab titles when expanded */
-#browser.tabs-right
-  #tabs-tabbar-container:hover
-  .tab
-  .title {
-  max-width: 150px !important;
-  opacity: 1 !important;
-  transition: max-width
-      var(--tabbar-transition-duration)
-      var(--tabbar-transition-timing),
-    opacity
-      var(--tabbar-transition-duration)
-      var(--tabbar-transition-timing) !important;
-}
-
 /* Hide workspace button text when collapsed */
 #browser.tabs-right
   #tabs-tabbar-container:not(:hover)
@@ -1048,6 +917,15 @@ button.vivaldi .expand-arrow {
   max-width: 0 !important;
   opacity: 0 !important;
   overflow: hidden !important;
+}
+
+/* Show tab titles when expanded - restore natural state */
+#browser.tabs-right
+  #tabs-tabbar-container:hover
+  .tab
+  .title {
+  max-width: none !important;
+  opacity: 1 !important;
 }
 
 /* Show workspace button text when expanded */
