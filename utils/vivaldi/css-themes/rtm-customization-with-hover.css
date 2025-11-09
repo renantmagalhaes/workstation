@@ -37,28 +37,12 @@
   margin: 6px 3px 3px -3px;
 }
 
-/* Page content area - keep original margin since tab bar overlays on hover */
-
 /* Extra bottom gap for the vertical tabs bar (left side) */
 #browser:not(.tabs-top):not(
     .tabs-bottom
   ):not(.fullscreen)
   .tabbar-wrapper {
   margin: 3px 3px 6px 2px;
-}
-
-/* Ensure tab bar wrapper doesn't affect page layout when expanding */
-#browser.tabs-left:not(.tabs-top):not(
-    .tabs-bottom
-  ):not(.fullscreen)
-  .tabbar-wrapper {
-  position: relative !important;
-  z-index: 1 !important;
-  /* Only reserve collapsed width, tab bar overlays when expanded */
-  width: var(
-    --tabbar-collapsed-width
-  ) !important;
-  overflow: visible !important;
 }
 
 /* Extra gaps for the panels container on all sides */
@@ -531,53 +515,29 @@ button.vivaldi .expand-arrow {
   --tabbar-expanded-width: 200px;
   --tabbar-transition-duration: 0.3s;
   --tabbar-transition-timing: ease-in-out;
-  --tabbar-hover-delay: 0.3s;
 }
 
 /* ========================================================= */
 /* Left Vertical Tab Bar                                     */
 /* ========================================================= */
 
-/* Tab bar container - use width changes but prevent affecting page layout */
+/* Tab bar container - collapsed by default */
 #browser.tabs-left
   #tabs-tabbar-container {
   width: var(
     --tabbar-collapsed-width
   ) !important;
   overflow: visible !important;
-  /* Use absolute positioning to overlay when expanded */
-  position: absolute !important;
-  left: 0 !important;
-  top: 0 !important;
-  bottom: 0 !important;
-  z-index: 10 !important;
-  /* Prevent layout effects from propagating */
-  contain: layout style !important;
-  isolation: isolate !important;
-  /* Smooth transition with delay on hover */
   transition: width
     var(--tabbar-transition-duration)
     var(--tabbar-transition-timing) !important;
-  transition-delay: 0s !important;
 }
 
-/* Tab bar container - expanded on hover with delay */
+/* Tab bar container - expanded on hover */
 #browser.tabs-left
   #tabs-tabbar-container:hover {
   width: var(
     --tabbar-expanded-width
-  ) !important;
-  /* Keep absolute positioning to overlay */
-  position: absolute !important;
-  /* Prevent layout effects */
-  contain: layout style !important;
-  isolation: isolate !important;
-  /* Smooth transition with delay */
-  transition: width
-    var(--tabbar-transition-duration)
-    var(--tabbar-transition-timing) !important;
-  transition-delay: var(
-    --tabbar-hover-delay
   ) !important;
 }
 
@@ -587,37 +547,39 @@ button.vivaldi .expand-arrow {
   .tab {
   background-color: transparent !important;
   background: transparent !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   transition: background-color
     var(--tabbar-transition-duration)
     var(--tabbar-transition-timing) !important;
 }
 
-/* Ensure tab position doesn't clip the button and centers content */
+/* Ensure tab position doesn't clip the button */
 #browser.tabs-left
   #tabs-tabbar-container:not(:hover)
   .tab-position {
-  overflow: hidden !important;
+  overflow: visible !important;
   width: 100% !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  padding: 0 !important;
-  margin: 0 !important;
 }
 
-/* Ensure tabbar-wrapper doesn't clip the button - removed :has() selector to prevent page interference */
+/* Ensure tabbar-wrapper doesn't clip the button */
 #browser.tabs-left
   #tabs-tabbar-container:not(:hover)
-  ~ .tabbar-wrapper {
-  overflow: hidden !important;
+  ~ .tabbar-wrapper,
+#browser.tabs-left
+  .tabbar-wrapper:has(
+    #tabs-tabbar-container:not(:hover)
+  ),
+#browser.tabs-left
+  .inner
+  > .tabbar-wrapper {
+  overflow: visible !important;
 }
 
 /* Ensure tabs-container doesn't clip */
 #browser.tabs-left
   #tabs-tabbar-container:not(:hover)
   #tabs-container {
-  overflow: hidden !important;
+  overflow: visible !important;
 }
 
 /* Center the tab header when collapsed to properly center the favicon button */
@@ -629,20 +591,8 @@ button.vivaldi .expand-arrow {
   justify-content: center !important;
   align-items: center !important;
   width: 100% !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* Ensure tab itself is centered when collapsed */
-#browser.tabs-left
-  #tabs-tabbar-container:not(:hover)
-  .tab {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  padding: 0 !important;
-  margin: 0 auto !important;
 }
 
 /* Make favicon look like a button when collapsed - add background around favicon */
@@ -661,7 +611,7 @@ button.vivaldi .expand-arrow {
   ) !important;
   border-radius: 6px !important;
   padding: 5px !important;
-  margin: 0 auto !important;
+  margin: 0 !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -672,10 +622,8 @@ button.vivaldi .expand-arrow {
   min-height: 30px !important;
   max-width: 30px !important;
   max-height: 30px !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   flex-shrink: 0 !important;
-  /* Small adjustment to center perfectly */
-  transform: translateX(2px) !important;
   transition: background-color
       var(--tabbar-transition-duration)
       var(--tabbar-transition-timing),
@@ -783,46 +731,23 @@ button.vivaldi .expand-arrow {
 /* Right Vertical Tab Bar                                    */
 /* ========================================================= */
 
-/* Tab bar container - use width changes but prevent affecting page layout */
+/* Tab bar container - collapsed by default */
 #browser.tabs-right
   #tabs-tabbar-container {
   width: var(
     --tabbar-collapsed-width
   ) !important;
   overflow: visible !important;
-  /* Use absolute positioning to overlay when expanded */
-  position: absolute !important;
-  right: 0 !important;
-  top: 0 !important;
-  bottom: 0 !important;
-  z-index: 10 !important;
-  /* Prevent layout effects from propagating */
-  contain: layout style !important;
-  isolation: isolate !important;
-  /* Smooth transition with delay on hover */
   transition: width
     var(--tabbar-transition-duration)
     var(--tabbar-transition-timing) !important;
-  transition-delay: 0s !important;
 }
 
-/* Tab bar container - expanded on hover with delay */
+/* Tab bar container - expanded on hover */
 #browser.tabs-right
   #tabs-tabbar-container:hover {
   width: var(
     --tabbar-expanded-width
-  ) !important;
-  /* Keep absolute positioning to overlay */
-  position: absolute !important;
-  /* Prevent layout effects */
-  contain: layout style !important;
-  isolation: isolate !important;
-  /* Smooth transition with delay */
-  transition: width
-    var(--tabbar-transition-duration)
-    var(--tabbar-transition-timing) !important;
-  transition-delay: var(
-    --tabbar-hover-delay
   ) !important;
 }
 
@@ -832,37 +757,39 @@ button.vivaldi .expand-arrow {
   .tab {
   background-color: transparent !important;
   background: transparent !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   transition: background-color
     var(--tabbar-transition-duration)
     var(--tabbar-transition-timing) !important;
 }
 
-/* Ensure tab position doesn't clip the button and centers content */
+/* Ensure tab position doesn't clip the button */
 #browser.tabs-right
   #tabs-tabbar-container:not(:hover)
   .tab-position {
-  overflow: hidden !important;
+  overflow: visible !important;
   width: 100% !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  padding: 0 !important;
-  margin: 0 !important;
 }
 
-/* Ensure tabbar-wrapper doesn't clip the button - removed :has() selector to prevent page interference */
+/* Ensure tabbar-wrapper doesn't clip the button */
 #browser.tabs-right
   #tabs-tabbar-container:not(:hover)
-  ~ .tabbar-wrapper {
-  overflow: hidden !important;
+  ~ .tabbar-wrapper,
+#browser.tabs-right
+  .tabbar-wrapper:has(
+    #tabs-tabbar-container:not(:hover)
+  ),
+#browser.tabs-right
+  .inner
+  > .tabbar-wrapper {
+  overflow: visible !important;
 }
 
 /* Ensure tabs-container doesn't clip */
 #browser.tabs-right
   #tabs-tabbar-container:not(:hover)
   #tabs-container {
-  overflow: hidden !important;
+  overflow: visible !important;
 }
 
 /* Center the tab header when collapsed to properly center the favicon button */
@@ -874,20 +801,8 @@ button.vivaldi .expand-arrow {
   justify-content: center !important;
   align-items: center !important;
   width: 100% !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* Ensure tab itself is centered when collapsed */
-#browser.tabs-right
-  #tabs-tabbar-container:not(:hover)
-  .tab {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  padding: 0 !important;
-  margin: 0 auto !important;
 }
 
 /* Make favicon look like a button when collapsed - add background around favicon */
@@ -906,7 +821,7 @@ button.vivaldi .expand-arrow {
   ) !important;
   border-radius: 6px !important;
   padding: 5px !important;
-  margin: 0 auto !important;
+  margin: 0 !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -917,10 +832,8 @@ button.vivaldi .expand-arrow {
   min-height: 30px !important;
   max-width: 30px !important;
   max-height: 30px !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   flex-shrink: 0 !important;
-  /* Small adjustment to center perfectly */
-  transform: translateX(2px) !important;
   transition: background-color
       var(--tabbar-transition-duration)
       var(--tabbar-transition-timing),
