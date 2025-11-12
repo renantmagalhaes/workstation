@@ -7,14 +7,14 @@ DIR="${1:-next}"
 # Get active workspaces from both monitors
 ACTIVE_WS=$(hyprctl monitors -j | jq -r '.[] | .activeWorkspace.id' | sort -u)
 
-# Get all windows from active workspaces
-# Format: workspace_id|address|title
+# Get all windows from active workspaces, sorted by position (left to right)
+# Format: x_position|address|title
 WINDOWS=$(hyprctl clients -j | jq -r --arg ws "$ACTIVE_WS" '
   ($ws | split("\n") | map(tonumber)) as $ws_list |
   .[] | 
   select(.workspace.id as $wid | ($ws_list | index($wid) != null)) |
-  "\(.workspace.id)|\(.address)|\(.title)"
-' | sort -t'|' -k1,1n -k2,2n)
+  "\(.at[0])|\(.address)|\(.title)"
+' | sort -t'|' -k1,1n)
 
 # Get currently focused window address
 CURRENT_ADDR=$(hyprctl activewindow -j | jq -r '.address // empty')
