@@ -7,14 +7,14 @@ DIR="${1:-next}"
 # Get active workspaces from both monitors
 ACTIVE_WS=$(hyprctl monitors -j | jq -r '.[] | .activeWorkspace.id' | sort -u)
 
-# Get all windows from active workspaces, sorted by position (left to right)
-# Format: x_position|address|title
+# Get all windows from active workspaces, sorted by position (left to right, top to bottom)
+# Format: x_position|y_position|address|title
 WINDOWS=$(hyprctl clients -j | jq -r --arg ws "$ACTIVE_WS" '
   ($ws | split("\n") | map(tonumber)) as $ws_list |
   .[] | 
   select(.workspace.id as $wid | ($ws_list | index($wid) != null)) |
-  "\(.at[0])|\(.address)|\(.title)"
-' | sort -t'|' -k1,1n)
+  "\(.at[0])|\(.at[1])|\(.address)|\(.title)"
+' | sort -t'|' -k1,1n -k2,2n)
 
 # Get currently focused window address
 CURRENT_ADDR=$(hyprctl activewindow -j | jq -r '.address // empty')
@@ -29,7 +29,7 @@ mapfile -t WINDOW_ARRAY < <(echo "$WINDOWS")
 # Find current window index
 CURRENT_IDX=-1
 for i in "${!WINDOW_ARRAY[@]}"; do
-    ADDR=$(echo "${WINDOW_ARRAY[$i]}" | cut -d'|' -f2)
+    ADDR=$(echo "${WINDOW_ARRAY[$i]}" | cut -d'|' -f3)
     if [[ "$ADDR" == "$CURRENT_ADDR" ]]; then
         CURRENT_IDX=$i
         break
@@ -49,7 +49,7 @@ else
 fi
 
 # Get the window address to focus
-NEXT_ADDR=$(echo "${WINDOW_ARRAY[$NEXT_IDX]}" | cut -d'|' -f2)
+NEXT_ADDR=$(echo "${WINDOW_ARRAY[$NEXT_IDX]}" | cut -d'|' -f3)
 
 # Focus the window
 hyprctl dispatch focuswindow "address:$NEXT_ADDR"
