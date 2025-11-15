@@ -188,6 +188,12 @@ async def main():
     ap.add_argument("--use-shift-for-plus", action="store_true",
                     help="send Ctrl+Shift+= instead of Ctrl+= if your layout needs Shift for '+'")
 
+    # Right-click menu command
+    ap.add_argument("--right-click-cmd", default="jgmenu_run",
+                    help="command to run on right-click in edge areas (default: jgmenu_run)")
+    ap.add_argument("--right-click-debounce-ms", type=int, default=300,
+                    help="right-click debounce time (ms)")
+
     ap.add_argument("--debug", action="store_true")
     args = ap.parse_args()
 
@@ -262,8 +268,10 @@ async def main():
     # Separate clocks for debouncing
     last_vert_ts = 0.0
     last_horiz_ts = 0.0
+    last_right_click_ts = 0.0
     debounce_vert = args.debounce_ms / 1000.0
     debounce_horiz = args.horiz_debounce_ms / 1000.0
+    debounce_right_click = args.right_click_debounce_ms / 1000.0
 
     REL_WHEEL_HI_RES = getattr(EC, "REL_WHEEL_HI_RES", 11)
     REL_HWHEEL_HI_RES = getattr(EC, "REL_HWHEEL_HI_RES", 12)
@@ -301,6 +309,32 @@ async def main():
                     logger.debug("hwheel right -> Ctrl+-")
             except Exception as e:
                 logger.error(f"Error processing horizontal wheel: {e}")
+            continue
+
+        # ---------- Right-click in edge areas => jgmenu_run ----------
+        if ev.type == EC.EV_KEY and ev.code == EC.BTN_RIGHT and ev.value == 1:
+            now = time.monotonic()
+            if now - last_right_click_ts < debounce_right_click:
+                logger.debug("right-click debounced")
+                continue
+            last_right_click_ts = now
+
+            try:
+                x, y = cursor_xy()
+            except Exception as err:
+                logger.warning(f"hyprctl failed: {err}")
+                continue
+
+            which = monmap.edge_for(
+                x, y, args.margin_top, args.margin_bottom, args.enable_top, args.enable_bottom)
+            logger.debug(f"right-click at x={x} y={y} edge={which}")
+            if which:
+                logger.debug(f"run: {args.right_click_cmd}")
+                try:
+                    subprocess.Popen(["bash", "-lc", args.right_click_cmd])
+                except Exception as e:
+                    logger.error(
+                        f"Failed to execute command: {args.right_click_cmd} - {e}")
             continue
 
         # ---------- Vertical wheel => edge actions with its debounce ----------
