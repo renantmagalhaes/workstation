@@ -14,8 +14,9 @@ WM Options,^checkout(restart-menu),xfce4-systray
 Extra Options,^checkout(extra-menu),list-add
 
 ^sep()
-Find Window Class,bash -c 'hyprctl activewindow -j | jq -r ".class" | wl-copy && dunstify -i window_list "Find Window Class" "Window class copied to clipboard"',window_list
-Change Wallpaper,bash -c 'swww img "$(find "$HOME/Pictures/wallpapers" -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.jpeg" \) | shuf -n 1)"',nitrogen
+Find Window Class,bash -c 'SELECTED=$(hyprctl clients -j | jq -r ".[] | \"\(.title // \"(no title)\") | \(.class)\"" | rofi -dmenu -p "Select Window:" -theme menu.rasi -matching fuzzy) && CLASS=$(echo "$SELECTED" | cut -d"|" -f2 | xargs) && echo -n "$CLASS" | wl-copy && dunstify -i window_list "Find Window Class" "Window class \"$CLASS\" copied to clipboard"',window_list
+Find Window Class (Click),~/.config/hypr/scripts/get-window-class-by-click.py,window_list
+Change Wallpaper,waypaper,nitrogen
 Appearance,lxappearance,mtpaint
 Randomize Wallpaper,bash -c 'swww img "$(find "$HOME/Pictures/wallpapers" -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.jpeg" \) | shuf -n 1)"',phototonic
 
