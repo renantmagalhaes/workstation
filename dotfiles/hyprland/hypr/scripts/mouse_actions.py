@@ -8,6 +8,7 @@ import os
 import sys
 import logging
 import signal
+import threading
 from evdev import InputDevice, UInput, ecodes as EC, list_devices
 
 
@@ -189,8 +190,8 @@ async def main():
                     help="send Ctrl+Shift+= instead of Ctrl+= if your layout needs Shift for '+'")
 
     # Right-click menu command
-    ap.add_argument("--right-click-cmd", default="jgmenu_run",
-                    help="command to run on right-click in edge areas (default: jgmenu_run)")
+    ap.add_argument("--right-click-cmd", default="jgmenu --at-pointer",
+                    help="command to run on right-click in edge areas (default: jgmenu --at-pointer)")
     ap.add_argument("--right-click-debounce-ms", type=int, default=300,
                     help="right-click debounce time (ms)")
 
@@ -331,7 +332,52 @@ async def main():
             if which:
                 logger.debug(f"run: {args.right_click_cmd}")
                 try:
-                    subprocess.Popen(["bash", "-lc", args.right_click_cmd])
+                    lockfile_path = os.path.expanduser("~/.jgmenu-lockfile")
+
+                    # Always remove lockfile before execution
+                    if os.path.exists(lockfile_path):
+                        try:
+                            os.remove(lockfile_path)
+                            logger.debug(
+                                "Removed jgmenu lockfile before execution")
+                        except Exception as e:
+                            logger.warning(
+                                f"Could not remove lockfile before execution: {e}")
+
+                    # Run the command with proper process handling
+                    process = subprocess.Popen(
+                        ["bash", "-lc", args.right_click_cmd],
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL,
+                        start_new_session=True
+                    )
+
+                    # Clean up lockfile after process exits (non-blocking)
+                    def cleanup_lockfile_after_exit(proc, lockfile):
+                        try:
+                            proc.wait(timeout=30)  # Wait up to 30 seconds
+                        except subprocess.TimeoutExpired:
+                            pass
+                        # Always remove lockfile after process exits
+                        if os.path.exists(lockfile):
+                            try:
+                                # Small delay to let jgmenu clean up itself
+                                time.sleep(0.1)
+                                if os.path.exists(lockfile):
+                                    os.remove(lockfile)
+                                    logger.debug(
+                                        "Removed jgmenu lockfile after execution")
+                            except Exception as e:
+                                logger.debug(
+                                    f"Could not remove lockfile after execution: {e}")
+
+                    # Start cleanup in background
+                    cleanup_thread = threading.Thread(
+                        target=cleanup_lockfile_after_exit,
+                        args=(process, lockfile_path),
+                        daemon=True
+                    )
+                    cleanup_thread.start()
                 except Exception as e:
                     logger.error(
                         f"Failed to execute command: {args.right_click_cmd} - {e}")
