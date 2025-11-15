@@ -1,6 +1,7 @@
 stay_alive           = 1
 tint2_look           = 0
 position_mode        = pointer
+wm_window_type        = dock
 terminal_exec        = kitty
 terminal_args        = -e
 sub_spacing          = 5
@@ -28,4 +29,3 @@ color_sel_bg         = #282e49 100
 color_sel_fg         = #7bc5e4 100
 color_sep_fg         = #8fa1b3 40
 csv_cmd             = cat ~/.config/jgmenu/custom.csv 
-
