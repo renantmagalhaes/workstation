@@ -14,25 +14,25 @@ WM Options,^checkout(restart-menu),xfce4-systray
 Extra Options,^checkout(extra-menu),list-add
 
 ^sep()
-Find Window Class,dunstify -i window_list "Find Window Class" "$(xprop WM_CLASS | tr -d '\n' | xclip -selection 'clipboard' -f)",window_list
-Change Wallpaper,nitrogen,nitrogen
+Find Window Class,bash -c 'hyprctl activewindow -j | jq -r ".class" | wl-copy && dunstify -i window_list "Find Window Class" "Window class copied to clipboard"',window_list
+Change Wallpaper,bash -c 'swww img "$(find "$HOME/Pictures/wallpapers" -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.jpeg" \) | shuf -n 1)"',nitrogen
 Appearance,lxappearance,mtpaint
-Randomize Wallpaper,feh --no-fehbg --bg-fill --randomize "$HOME/Pictures/wallpapers",phototonic
+Randomize Wallpaper,bash -c 'swww img "$(find "$HOME/Pictures/wallpapers" -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.jpeg" \) | shuf -n 1)"',phototonic
 
 ^sep()
-Lock,~/.config/bspwm/scripts/blur-lock,system-lock-screen
-Logout,pkill -KILL -u "$USER" &,system-log-out
-Exit,~/.config/rofi/scripts/powermenu/type-5/powermenu.sh &,system-shutdown
+Lock,~/.config/hypr/scripts/lock.sh,system-lock-screen
+Logout,wlogout,system-log-out
+Exit,wlogout,system-shutdown
 
 ^tag(restart-menu)
-Restart Polybar,~/.config/polybar/launch.sh,xfce4-systray
-Restart SXHKD,pkill -USR1 -x sxhkd,input-keyboard
-Restart BSPWM,bspc wm -r && dunstify -i window_list "Successfully restarted BSPWM",terminal
-Restart KWIN,kwin_x11 --replace,windows95
+Restart Waybar,killall waybar && waybar &,xfce4-systray
+Reload Hyprland,hyprctl reload && dunstify -i window_list "Successfully reloaded Hyprland",terminal
+Restart Mako,killall mako && mako &,notification-new
+Restart Hypridle,killall hypridle && hypridle &,preferences-system
 
 ^tag(streaming-menu)
 Strem.IO,flatpak run com.stremio.Stremio,stremio
 Plex,flatpak run tv.plex.PlexDesktop,plex
 
 ^tag(extra-menu)
-Mouse Battery Level,~/.dotfiles/bspwm/scripts/mouse-battery.sh,input-mouse
+Mouse Battery Level,~/.config/hypr/scripts/mouse-battery.sh,input-mouse
