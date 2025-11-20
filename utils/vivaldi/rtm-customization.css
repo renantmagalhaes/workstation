@@ -44,7 +44,7 @@
     .tabs-bottom
   ):not(.fullscreen)
   .tabbar-wrapper {
-  margin: 3px 3px 6px 2px;
+  margin: 3px 12px 6px 2px;
 }
 
 /* Ensure tab bar wrapper doesn't affect page layout when expanding */
