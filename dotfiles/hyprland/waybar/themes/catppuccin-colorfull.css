@@ -538,6 +538,24 @@ label:focus {
   background-color: #181825;
 }
 
+#custom-fullscreen-indicator {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1px 10px 1px 10px;
+  margin-top: 5px;
+  color: #000000;
+  font-weight: bold;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#custom-fullscreen-indicator:hover {
+  background-color: rgb(106, 52, 254);
+  color: #ffffff;
+}
+
 #custom-move_window_next_monitor {
   background: rgba(30, 30, 46, 0.5);
   padding: 1px 10px 1px 10px;
