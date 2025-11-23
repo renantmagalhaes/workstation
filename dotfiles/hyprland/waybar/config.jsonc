@@ -31,6 +31,7 @@
     "pulseaudio",
     "tray",
     "custom/fullscreen",
+    "custom/fullscreen-indicator",
     "custom/move_window_next_monitor",
     "custom/kill_active",
     "custom/power"
@@ -259,6 +260,12 @@
     "format": "{}",
     "tooltip-format": "Toggle fullscreen",
     "on-click": "hyprctl dispatch fullscreen 1"
+  },
+  "custom/fullscreen-indicator": {
+    "exec": "~/.config/waybar/scripts/fullscreen_indicator.sh",
+    "interval": 1,
+    "format": "{}",
+    "tooltip-format": "Fullscreen mode active"
   },
   "custom/move_window_next_monitor": {
     "format": "",
