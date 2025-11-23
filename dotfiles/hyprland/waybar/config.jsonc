@@ -265,7 +265,8 @@
     "exec": "~/.config/waybar/scripts/fullscreen_indicator.sh",
     "interval": 1,
     "format": "{}",
-    "tooltip-format": "Fullscreen mode active"
+    "tooltip-format": "Fullscreen mode active",
+    "on-click": "hyprctl dispatch fullscreen 1"
   },
   "custom/move_window_next_monitor": {
     "format": "",
