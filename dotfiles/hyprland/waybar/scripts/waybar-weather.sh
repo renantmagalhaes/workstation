@@ -10,10 +10,10 @@ set -euo pipefail
 if [ -n "${WEATHER_LOCATION:-}" ]; then
     # Use the specified location (URL encode spaces and special characters)
     location=$(printf '%s\n' "$WEATHER_LOCATION" | sed 's/ /%20/g')
-    weather=$(curl -fsS "https://wttr.in/${location}?format=1" 2>/dev/null | sed 's/  */ /g' || echo "")
+    weather=$(curl -fsS "https://wttr.in/${location}?format=1&M" 2>/dev/null | sed 's/  */ /g' || echo "")
 else
     # Use default behavior (auto-detect location)
-    weather=$(curl -fsS "https://wttr.in?format=1" 2>/dev/null | sed 's/  */ /g' || echo "")
+    weather=$(curl -fsS "https://wttr.in?format=1&M" 2>/dev/null | sed 's/  */ /g' || echo "")
 fi
 
 # Extract temperature (look for number followed by °C or °F or just a number)
