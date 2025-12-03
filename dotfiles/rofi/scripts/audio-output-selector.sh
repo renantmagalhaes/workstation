@@ -81,14 +81,13 @@ formatted_profiles=$(pactl list cards | awk '
                 }
                 gsub(/^[[:space:]]+|[[:space:]]+$/, "", profile_desc)
                 
-                # Create a cleaner display name
-                display_name = "INZONE Buds"
+                # Create a cleaner display name with icons
                 if (profile_desc ~ /Analog Stereo/) {
-                    display_name = display_name " - Analog"
+                    display_name = "🎧 INZONE Buds - Analog"
                 } else if (profile_desc ~ /Digital Stereo|IEC958/) {
-                    display_name = display_name " - Digital (Gaming)"
+                    display_name = "🎮 INZONE Buds - Digital (Gaming)"
                 } else {
-                    display_name = display_name " - " profile_desc
+                    display_name = "🎧 INZONE Buds - " profile_desc
                 }
                 print display_name " | PROFILE:" card_name ":" profile_name
             }
@@ -108,39 +107,112 @@ formatted_profiles=$(pactl list cards | awk '
 
 # Show all sinks (one entry per device)
 # Extract device name from description and show one per unique device
-formatted_sinks=$(pactl list sinks short | while IFS=$'\t' read -r _ name description state rest; do
+# Use full sink list to get better descriptions
+formatted_sinks=$(pactl list sinks | awk '
+    BEGIN {
+        sink_name = ""
+        sink_desc = ""
+        sink_state = "SUSPENDED"
+    }
+    /^[[:space:]]*Name: / {
+        # Output previous sink if we have one
+        if (sink_name != "") {
+            print sink_name "|" sink_desc "|" sink_state
+        }
+        sink_name = $2
+        sink_desc = ""
+        sink_state = "SUSPENDED"
+    }
+    /^[[:space:]]*Description:/ {
+        sink_desc = substr($0, index($0, ":") + 2)
+        gsub(/^[[:space:]]+|[[:space:]]+$/, "", sink_desc)
+    }
+    /^[[:space:]]*State: / {
+        if ($2 == "RUNNING") {
+            sink_state = "RUNNING"
+        } else if ($2 == "IDLE") {
+            sink_state = "IDLE"
+        } else {
+            sink_state = "SUSPENDED"
+        }
+    }
+    END {
+        # Output last sink
+        if (sink_name != "") {
+            print sink_name "|" sink_desc "|" sink_state
+        }
+    }
+' | while IFS='|' read -r name description state; do
     description=$(echo "$description" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-    if [ -z "$description" ] || [ "$description" = " " ]; then
-        # Fallback: extract from sink name
-        if echo "$name" | grep -q "INZONE"; then
-            description="INZONE Buds"
-        elif echo "$name" | grep -q "hdmi"; then
-            description="HDMI"
-        elif echo "$name" | grep -q "usb"; then
-            description="USB Audio"
-        else
-            description="$name"
+    
+    # Determine device type and icon from sink name first (more reliable)
+    icon=""
+    device_type=""
+    
+    # Extract device info from sink name pattern: alsa_output.TYPE.DEVICE
+    name_lower=$(echo "$name" | tr '[:upper:]' '[:lower:]')
+    
+    if echo "$name_lower" | grep -qi "inzone"; then
+        icon="🎧"
+        device_type="INZONE Buds"
+    elif echo "$name_lower" | grep -qiE "hdmi"; then
+        icon="📺"
+        device_type="HDMI"
+    elif echo "$name_lower" | grep -qiE "usb.*c-media|usb.*sony"; then
+        icon="🔌"
+        device_type="USB Audio"
+    elif echo "$name_lower" | grep -qi "usb"; then
+        icon="🔌"
+        device_type="USB Audio"
+    elif echo "$name_lower" | grep -qiE "iec958|spdif"; then
+        icon="🔊"
+        device_type="Digital Audio"
+    elif echo "$name_lower" | grep -qi "pci"; then
+        icon="🖥️"
+        device_type="Built-in Audio"
+    else
+        icon="🔊"
+        device_type="Audio Device"
+    fi
+    
+    # Try to get better name from description if available and not just "PipeWire"
+    if [ -n "$description" ] && [ "$description" != " " ] && [ "$description" != "PipeWire" ]; then
+        # Check description for device type keywords (case insensitive)
+        desc_lower=$(echo "$description" | tr '[:upper:]' '[:lower:]')
+        
+        # Override device type if description gives us better info
+        if echo "$desc_lower" | grep -qi "inzone"; then
+            icon="🎧"
+            device_type="INZONE Buds"
+        elif echo "$desc_lower" | grep -qiE "hdmi|displayport"; then
+            icon="📺"
+            device_type="HDMI"
+        elif echo "$desc_lower" | grep -qiE "usb.*audio|c-media|usb advanced"; then
+            icon="🔌"
+            device_type="USB Audio"
+        elif echo "$desc_lower" | grep -qiE "starship|matisse|hd audio|built-in"; then
+            icon="🖥️"
+            device_type="Built-in Audio"
+        elif echo "$desc_lower" | grep -qiE "digital.*stereo|iec958|spdif"; then
+            # Extract a cleaner name for digital audio
+            clean_desc=$(echo "$description" | sed 's/[[:space:]]*Digital Stereo.*$//' | sed 's/[[:space:]]*(IEC958).*$//' | sed 's/[[:space:]]*(.*$//')
+            if [ -n "$clean_desc" ] && [ "$clean_desc" != " " ]; then
+                icon="🔊"
+                device_type="$clean_desc"
+            fi
         fi
     fi
     
-    # Extract device name - remove technical details
-    # Examples: "INZONE Buds Analog Stereo" -> "INZONE Buds"
-    #           "HDMI / DisplayPort" -> "HDMI"
-    clean_desc=$(echo "$description" | sed 's/[[:space:]]*Output$//' | sed 's/[[:space:]]*Analog Stereo$//' | sed 's/[[:space:]]*Digital Stereo.*$//' | sed 's/[[:space:]]*IEC958.*$//' | sed 's/[[:space:]]*\(IEC958\).*$//' | sed 's/ at usb.*$//' | sed 's/ at pci.*$//' | sed 's/ \/ .*$//')
+    # Final clean up of device type - remove common suffixes
+    clean_desc=$(echo "$device_type" | sed 's/[[:space:]]*Output$//' | sed 's/[[:space:]]*Analog Stereo$//' | sed 's/[[:space:]]*Digital Stereo.*$//' | sed 's/[[:space:]]*IEC958.*$//' | sed 's/[[:space:]]*(.*$//' | sed 's/[[:space:]]*$//')
     
-    # Simplify common device names
-    if echo "$clean_desc" | grep -qi "inzone"; then
-        clean_desc="INZONE Buds"
-    elif echo "$clean_desc" | grep -qiE "hdmi|displayport"; then
-        clean_desc="HDMI"
-    elif echo "$clean_desc" | grep -qiE "usb.*audio|c-media"; then
-        clean_desc="USB Audio"
+    # Ensure we have an icon (fallback if somehow missing)
+    if [ -z "$icon" ]; then
+        icon="🔊"
     fi
     
-    # If still empty, use a fallback
-    if [ -z "$clean_desc" ] || [ "$clean_desc" = " " ]; then
-        clean_desc="Audio Device"
-    fi
+    # Combine icon and device name
+    clean_desc="$icon $clean_desc"
     
     # Prefer RUNNING sinks, but show all devices
     priority=0
@@ -153,7 +225,7 @@ formatted_sinks=$(pactl list sinks short | while IFS=$'\t' read -r _ name descri
     fi
     
     echo "$priority|$clean_desc | SINK:$name"
-done | sort -t'|' -k1,1n -k2,2 | sed 's/^[0-9]|//' | awk -F'|' '!seen[$2]++ {print $2}')
+done | sort -t'|' -k1,1n -k2,2 | sed 's/^[0-9]|//' | awk -F'|' '!seen[$2]++ {print $0}')
 
 # Combine sinks and profiles, with sinks first
 all_options=$(echo -e "$formatted_sinks\n$formatted_profiles" | grep -v '^$' | sort -u)
@@ -164,7 +236,8 @@ if [ -z "$all_options" ]; then
 fi
 
 # Show rofi menu and get selection
-selected=$(echo "$all_options" | rofi -dmenu -i -p "Select Audio Output:" -no-custom)
+rofi_theme_dir="$(dirname "$(readlink -f "$0")")/.."
+selected=$(echo "$all_options" | rofi -dmenu -i -p "Select Audio Output:" -no-custom -theme "$rofi_theme_dir/rtm-rofi-theme.rasi")
 
 if [ -z "$selected" ]; then
     exit 0

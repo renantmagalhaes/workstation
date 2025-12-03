@@ -229,6 +229,7 @@
       "default": ["", "", " "]
     },
     "on-click": "pavucontrol",
+    "on-click-right": "~/.config/rofi/scripts/audio-output-selector.sh",
     "on-scroll-up": "~/.dotfiles/hyprland/hypr/scripts/volnotify.sh +1",
     "on-scroll-down": "~/.dotfiles/hyprland/hypr/scripts/volnotify.sh -1"
   },
