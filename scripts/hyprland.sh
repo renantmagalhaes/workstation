@@ -72,7 +72,7 @@ echo "🔄 Updating system..."
 sudo zypper refresh && sudo zypper update
 
 echo "📦 Installing core packages..."
-sudo zypper install -y hyprland waybar wofi rofi playerctl pavucontrol hyprlock blueman hyprland-qtutils nwg-displays hypridle libevdev-devel evtest swappy grim slurp wl-clipboard mako pamixer xdg-desktop-portal-hyprland wireplumber python313-evdev python313-libevdev wlogout feh lxappearance scrot NetworkManager-applet pcp-pmda-lmsensors papirus-icon-theme pasystray jgmenu mate-polkit libnotify4 libnotify-devel libnotify-tools gnome-calendar cliphist gawk xdg-utils xcb-util-cursor-devel
+sudo zypper install -y hyprland waybar wofi rofi playerctl pavucontrol hyprlock blueman hyprland-qtutils nwg-displays hypridle libevdev-devel evtest swappy grim slurp wl-clipboard mako pamixer xdg-desktop-portal-hyprland wireplumber python313-evdev python313-libevdev wlogout feh lxappearance scrot NetworkManager-applet pcp-pmda-lmsensors papirus-icon-theme pasystray jgmenu mate-polkit libnotify4 libnotify-devel libnotify-tools gnome-calendar cliphist gawk xdg-utils xcb-util-cursor-devel nautilus
 
 echo "📦 Installing Hyprland extras..."
 sudo zypper install -y hyprshot hyprpicker swww dunst kitty
@@ -153,6 +153,83 @@ if [ -f "$DOTFILES/hyprland/hypr/cliphist-config" ]; then
     mkdir -p "$HOME/.config/cliphist"
     echo "max-items 1000" >"$HOME/.config/cliphist/config"
 fi
+
+###########################################
+# RUN POST INSTALL SCRIPTS
+###########################################
+
+echo "▶️ Running additional setup scripts..."
+
+ROFI_SCRIPT="$FOLDER_LOCATION/scripts/rofi.sh"
+
+if [ -f "$ROFI_SCRIPT" ]; then
+    bash "$ROFI_SCRIPT"
+    echo "✅ Rofi script executed"
+else
+    echo "⚠️ Rofi script not found at $ROFI_SCRIPT, skipping."
+fi
+
+
+###########################################
+# GTK THEME CONFIGURATION
+###########################################
+
+echo "🎨 Applying GTK theme settings..."
+
+GTK3="$HOME/.config/gtk-3.0/settings.ini"
+GTK4="$HOME/.config/gtk-4.0/settings.ini"
+
+mkdir -p "$HOME/.config/gtk-3.0" "$HOME/.config/gtk-4.0"
+
+# Backup existing files if present
+[ -f "$GTK3" ] && cp "$GTK3" "$GTK3.bkp"
+[ -f "$GTK4" ] && cp "$GTK4" "$GTK4.bkp"
+
+# Write GTK3 configuration
+cat >"$GTK3" <<EOF
+[Settings]
+gtk-theme-name=Graphite-Dark
+gtk-icon-theme-name=Tela-circle-purple-light
+gtk-font-name=Noto Sans, 10
+gtk-cursor-theme-name=Fluent-dark-cursors
+gtk-cursor-theme-size=24
+gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
+gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-button-images=1
+gtk-menu-images=1
+gtk-enable-event-sounds=1
+gtk-enable-input-feedback-sounds=0
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle=hintslight
+gtk-xft-rgba=rgb
+gtk-application-prefer-dark-theme=1
+gtk-cursor-blink=true
+gtk-cursor-blink-time=1000
+gtk-decoration-layout=icon:minimize,maximize,close
+gtk-enable-animations=true
+gtk-primary-button-warps-slider=true
+gtk-sound-theme-name=ocean
+gtk-xft-dpi=98304
+EOF
+
+# Write GTK4 configuration
+cat >"$GTK4" <<EOF
+[Settings]
+gtk-theme-name=Graphite-Dark
+gtk-icon-theme-name=Tela-circle-purple-light
+gtk-font-name=Noto Sans, 10
+gtk-cursor-theme-name=Fluent-dark-cursors
+gtk-cursor-theme-size=24
+gtk-application-prefer-dark-theme=1
+EOF
+
+# Export theme variables to shells
+echo "export GTK_THEME=Graphite-Dark" >>"$HOME/.profile"
+echo "export GTK_THEME=Graphite-Dark" >>"$HOME/.zprofile"
+
+echo "🎨 GTK themes applied"
+
 
 ###########################################
 # DONE
