@@ -58,6 +58,7 @@ case $choice in
 	elif check_cmd zypper; then
 		echo "openSUSE-based system detected."
 		echo "Running Windscribe installation steps for openSUSE..."
+		sudo zypper in -y libcap-progs
 		# --- ADD openSUSE WINDSCRIBE COMMANDS HERE ---
 		curl -L -o /tmp/windscribe.rpm https://windscribe.com/install/desktop/linux_rpm_opensuse_x64
 		sudo rpm -i /tmp/windscribe.rpm
