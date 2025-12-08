@@ -78,6 +78,12 @@ echo "📦 Installing Hyprland extras..."
 sudo zypper install -y hyprshot hyprpicker swww dunst kitty
 
 ###########################################
+# Add user groups
+###########################################
+sudo usermod -aG input $USER
+
+
+###########################################
 # USER FOLDERS
 ###########################################
 

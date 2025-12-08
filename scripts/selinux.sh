@@ -52,4 +52,43 @@ fi
 
 echo "Script execution complete. You can now run your other scripts."
 
+echo "Fixing input udev rules for /dev/uinput..." 
+set -e
+
+RULE_FILE="/etc/udev/rules.d/40-uinput.rules"
+
+echo "==> Creating udev rule for /dev/uinput..."
+sudo bash -c "cat > $RULE_FILE" <<EOF
+KERNEL=="uinput", GROUP="input", MODE="0660"
+EOF
+
+echo "==> Udev rule written to $RULE_FILE"
+echo "     KERNEL==\"uinput\", GROUP=\"input\", MODE=\"0660\""
+
+echo "==> Reloading udev rules..."
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+
+echo "==> Reloading uinput kernel module..."
+sudo modprobe -r uinput 2>/dev/null || true
+sudo modprobe uinput
+
+echo "==> Checking /dev/uinput permissions..."
+ls -l /dev/uinput || { echo "ERROR: /dev/uinput does not exist"; exit 1; }
+
+PERM=$(stat -c "%a" /dev/uinput)
+OWNER=$(stat -c "%U" /dev/uinput)
+GROUP=$(stat -c "%G" /dev/uinput)
+
+echo "Permissions: $PERM, owner: $OWNER, group: $GROUP"
+
+if [[ "$PERM" == "660" && "$GROUP" == "input" ]]; then
+    echo "==> SUCCESS: /dev/uinput is now writable by group 'input'"
+    exit 0
+else
+    echo "==> FAILURE: /dev/uinput did not get the correct permissions"
+    echo "Expected: mode 660, group input"
+    exit 1
+fi
+
 exit 0
