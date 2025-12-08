@@ -230,6 +230,18 @@ echo "export GTK_THEME=Graphite-Dark" >>"$HOME/.zprofile"
 
 echo "🎨 GTK themes applied"
 
+###########################################
+# FORCE DARK MODE IN HYPRLAND
+###########################################
+
+echo "🌑 Enforcing dark mode globally..."
+
+# Install required packages for color scheme handling
+sudo zypper install -y gsettings-desktop-schemas kvantum
+
+# Set GNOME and XDG color scheme
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+gsettings set org.gnome.desktop.interface icon-theme Tela-circle-purple-light
 
 ###########################################
 # DONE
