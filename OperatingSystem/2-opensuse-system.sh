@@ -95,6 +95,9 @@ else
 	exit 1
 fi
 
+### Nix packages
+bash ./OperatingSystem/nix-packages.sh
+
 # Brew
 bash desktop/source/any/brew.sh
 
@@ -151,20 +154,7 @@ sudo zypper install -y code
 mkdir -p ~/GIT-REPOS/CORE
 
 # SCRIPTS
-# ## Install Nix
-# bash ./scripts/nix-install.sh
-#
-# if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-# 	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
-# elif [ -f "/etc/profile.d/nix.sh" ]; then
-# 	. "/etc/profile.d/nix.sh"
-# else
-# 	echo "Nix environment script not found."
-# 	exit 1
-# fi
-#
-# ## Nix packages
-# bash ./OperatingSystem/nix-packages.sh
+
 
 ## Brew
 bash ./scripts/brew.sh
