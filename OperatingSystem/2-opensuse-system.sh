@@ -231,7 +231,7 @@ sudo zypper install -y clamav clamtk
 # sudo snapper set-config SPACE_LIMIT=0.2 NUMBER_LIMIT=2-6 NUMBER_LIMIT_IMPORTANT=4
 
 ##Isolate Alt-Tab workspaces
-gsettings set org.gnome.shell.app-switcher current-workspace-only true
+#gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # Change to ZSH
 zsh

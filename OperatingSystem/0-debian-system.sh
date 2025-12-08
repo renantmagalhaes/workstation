@@ -221,7 +221,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y clamav-daemon
 sudo apt-get -f install -y
 
 # Isolate Alt-Tab workspaces
-gsettings set org.gnome.shell.app-switcher current-workspace-only true
+#gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # scrcpy
 sudo apt install -y ffmpeg libsdl2-2.0-0 adb wget \
