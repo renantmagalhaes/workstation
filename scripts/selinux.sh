@@ -52,43 +52,67 @@ fi
 
 echo "Script execution complete. You can now run your other scripts."
 
-echo "Fixing input udev rules for /dev/uinput..." 
+
+
+echo "Fixing persistent udev rules and module loading for /dev/uinput..."
+
 set -e
 
-RULE_FILE="/etc/udev/rules.d/40-uinput.rules"
+RULE_FILE="/etc/udev/rules.d/99-uinput.rules"
+MODULE_FILE="/etc/modules-load.d/uinput.conf"
 
-echo "==> Creating udev rule for /dev/uinput..."
+echo "==> Writing persistent udev rule to $RULE_FILE..."
 sudo bash -c "cat > $RULE_FILE" <<EOF
 KERNEL=="uinput", GROUP="input", MODE="0660"
 EOF
 
-echo "==> Udev rule written to $RULE_FILE"
-echo "     KERNEL==\"uinput\", GROUP=\"input\", MODE=\"0660\""
+echo "Rule created. Content:"
+cat "$RULE_FILE"
 
+echo
+echo "==> Ensuring the uinput module loads correctly at boot..."
+sudo bash -c "echo uinput > $MODULE_FILE"
+
+echo "Module load file created at $MODULE_FILE"
+cat "$MODULE_FILE"
+
+echo
 echo "==> Reloading udev rules..."
 sudo udevadm control --reload-rules
 sudo udevadm trigger
 
-echo "==> Reloading uinput kernel module..."
+echo
+echo "==> Reloading the uinput kernel module..."
 sudo modprobe -r uinput 2>/dev/null || true
 sudo modprobe uinput
 
+echo
 echo "==> Checking /dev/uinput permissions..."
-ls -l /dev/uinput || { echo "ERROR: /dev/uinput does not exist"; exit 1; }
+if [[ ! -e /dev/uinput ]]; then
+    echo "ERROR: /dev/uinput does not exist after reload"
+    exit 1
+fi
+
+ls -l /dev/uinput
 
 PERM=$(stat -c "%a" /dev/uinput)
 OWNER=$(stat -c "%U" /dev/uinput)
 GROUP=$(stat -c "%G" /dev/uinput)
 
-echo "Permissions: $PERM, owner: $OWNER, group: $GROUP"
+echo "Permissions reported: $PERM, owner $OWNER, group $GROUP"
 
 if [[ "$PERM" == "660" && "$GROUP" == "input" ]]; then
-    echo "==> SUCCESS: /dev/uinput is now writable by group 'input'"
-    exit 0
+    echo "==> SUCCESS. /dev/uinput is correctly configured and now persistent across reboots."
 else
-    echo "==> FAILURE: /dev/uinput did not get the correct permissions"
+    echo "==> FAILURE. Permissions are not correct."
     echo "Expected: mode 660, group input"
+    echo "Found: mode $PERM, group $GROUP"
+    echo "A fallback fix is possible using /etc/tmpfiles.d if needed."
     exit 1
 fi
+
+echo
+echo "Validation complete. Reboot to confirm persistence."
+
 
 exit 0
