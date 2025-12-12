@@ -134,8 +134,11 @@ if [[ $os_check == "darwin" ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
   export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/opt/homebrew/bin"
 elif [[ $os_check == "linux" ]]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   export PATH="$HOME/.local/bin:/usr/sbin:/usr/share/code/bin:$HOME/.cargo/bin:$HOME/.local/share/nvim/mason/bin:/mnt/c/Windows:/mnt/c/Windows/System32:/mnt/c/Program Files:/mnt/c/Program Files (x86):$PATH"
+  WIN_HOME="$(wslpath "$(cmd.exe /c echo %USERPROFILE% 2>/dev/null | tr -d '\r')")"
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  # WindowsApps
+  export PATH="$WIN_HOME/AppData/Local/Microsoft/WindowsApps:$PATH"
 else
   echo "⚠️ OS check failed"
 fi
