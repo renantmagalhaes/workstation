@@ -130,18 +130,92 @@ export TMUX_TMPDIR='/tmp'
 # =====================
 # Add paths depending on OS
 # =====================
+
+# --- Helper: robust WSL detection (WSL1 + WSL2, future-proof) ---
+is_wsl() {
+  # Primary: kernel release contains WSL
+  grep -qiE '(microsoft|wsl)' /proc/sys/kernel/osrelease 2>/dev/null && return 0
+
+  # Secondary: official WSL environment variable
+  [ -n "$WSL_DISTRO_NAME" ] && return 0
+
+  # Fallback: Windows mount point exists
+  [ -d /mnt/c ] && return 0
+
+  return 1
+}
+
+# --- Helper: resolve Windows HOME directory safely (WSL only) ---
+get_win_home() {
+  local win_home
+  win_home="$(cmd.exe /c echo %USERPROFILE% 2>/dev/null | tr -d '\r')"
+  wslpath "$win_home"
+}
+
 if [[ $os_check == "darwin" ]]; then
+  # -----------------
+  # macOS
+  # -----------------
   eval "$(/opt/homebrew/bin/brew shellenv)"
   export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/opt/homebrew/bin"
+
 elif [[ $os_check == "linux" ]]; then
-  export PATH="$HOME/.local/bin:/usr/sbin:/usr/share/code/bin:$HOME/.cargo/bin:$HOME/.local/share/nvim/mason/bin:/mnt/c/Windows:/mnt/c/Windows/System32:/mnt/c/Program Files:/mnt/c/Program Files (x86):$PATH"
-  WIN_HOME="$(wslpath "$(cmd.exe /c echo %USERPROFILE% 2>/dev/null | tr -d '\r')")"
+  # -----------------
+  # Linux (base)
+  # -----------------
+  export PATH="$HOME/.local/bin:/usr/sbin:/usr/share/code/bin:$HOME/.cargo/bin:$HOME/.local/share/nvim/mason/bin:$PATH"
+
+  # Linuxbrew
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  # WindowsApps
-  export PATH="$WIN_HOME/AppData/Local/Microsoft/WindowsApps:$PATH"
+
+  # -----------------
+  # WSL-specific logic
+  # -----------------
+  if is_wsl; then
+    # Core Windows system paths (read-only, safe)
+    export PATH="$PATH:/mnt/c/Windows:/mnt/c/Windows/System32"
+
+    # Resolve Windows home dynamically (Linux user ≠ Windows user safe)
+    WIN_HOME="$(get_win_home)"
+
+    # Windows App Execution Aliases (user-writable → keep LAST)
+    export PATH="$PATH:$WIN_HOME/AppData/Local/Microsoft/WindowsApps"
+
+    # -----------------
+    # Explicit aliases (SECURITY-FIRST)
+    # -----------------
+
+    code() {
+      local bin="$WIN_HOME/AppData/Local/Programs/Microsoft VS Code/bin/code"
+      if [ -x "$bin" ]; then
+        "$bin" "$@"
+      else
+        echo "❌ VS Code not found at expected location" >&2
+        return 127
+      fi
+    }
+
+    cursor() {
+      local bin="$WIN_HOME/AppData/Local/Programs/cursor/resources/app/bin/cursor"
+      if [ -x "$bin" ]; then
+        "$bin" "$@"
+      else
+        echo "❌ Cursor not found at expected location" >&2
+        return 127
+      fi
+    }
+
+
+  fi
+
 else
   echo "⚠️ OS check failed"
 fi
+
+# =====================
+
+
+
 # # =====================
 # # NIX load
 # # =====================
