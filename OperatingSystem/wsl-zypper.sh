@@ -149,6 +149,9 @@ bash ./scripts/fd-ignore.sh
 # Make tmux default shell
 sudo usermod --shell /usr/bin/tmux $USER
 
+# Set locale
+sudo localectl set-locale LANG=en_US.UTF-8
+
 # Change to ZSH
 zsh
 
