@@ -12,6 +12,7 @@ sudo flatpak install -y flathub org.kde.kdenlive
 sudo flatpak install -y flathub com.obsproject.Studio
 
 ## Obsidian
+### Need to run flatseal and activate wayland mode
 sudo flatpak install -y flathub md.obsidian.Obsidian
 
 ## Telegram
