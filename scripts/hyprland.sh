@@ -73,7 +73,6 @@ sudo zypper refresh && sudo zypper update
 
 echo "📦 Installing core packages..."
 sudo zypper install -y hyprland waybar wofi rofi playerctl pavucontrol hyprlock blueman hyprland-qtutils nwg-displays hypridle libevdev-devel evtest swappy grim slurp wl-clipboard mako pamixer xdg-desktop-portal-hyprland wireplumber python313-evdev python313-libevdev wlogout feh lxappearance scrot NetworkManager-applet pcp-pmda-lmsensors papirus-icon-theme pasystray jgmenu mate-polkit libnotify4 libnotify-devel libnotify-tools gnome-calendar cliphist gawk xdg-utils xcb-util-cursor-devel nautilus
-
 echo "📦 Installing Hyprland extras..."
 sudo zypper install -y hyprshot hyprpicker swww dunst kitty
 
@@ -243,7 +242,7 @@ echo "🎨 GTK themes applied"
 echo "🌑 Enforcing dark mode globally..."
 
 # Install required packages for color scheme handling
-sudo zypper install -y gsettings-desktop-schemas kvantum
+sudo zypper install -y gsettings-desktop-schemas kvantum-qt6
 
 # Set GNOME and XDG color scheme
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
