@@ -45,5 +45,8 @@ brew install jesseduffield/lazydocker/lazydocker
 # Codex CLI
 brew install codex
 
+# Gemini CLI
+brew install gemini-cli
+
 # Fish shell
 #brew install fish
