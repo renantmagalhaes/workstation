@@ -42,5 +42,8 @@ brew install lazygit
 # LazyDocker
 brew install jesseduffield/lazydocker/lazydocker
 
+# Codex CLI
+brew install codex
+
 # Fish shell
-brew install fish
+#brew install fish
