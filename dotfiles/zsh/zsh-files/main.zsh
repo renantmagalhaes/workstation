@@ -214,6 +214,8 @@ fi
 
 # =====================
 
+# Prefer system tools
+export PATH="/usr/bin:/bin:$PATH"
 
 
 # # =====================
