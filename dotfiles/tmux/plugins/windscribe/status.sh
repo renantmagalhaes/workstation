@@ -15,7 +15,11 @@ wgInterface=$(ls /sys/class/net | grep -E '^wireguard' | head -n1)
 if [[ $connectState == Connected:* ]]; then
 	# Strip the leading "Connected: " to get just the location
 	location=${connectState#Connected: }
-	echo "- #[fg=#7feaac][󰒄 VPN Connected: $location] #[fg=white]"
+	# Keep only the first place before " - " and capitalize first letter
+	location=${location%% - *}
+	location=${location^}
+	#echo "- #[fg=#7feaac][󰒄 VPN Connected: $location] #[fg=white]"
+	echo "- #[fg=#7feaac][󰒄 $location] #[fg=white]"
 elif [[ -n $wgInterface ]]; then
 	# If Windscribe itself isn’t connected but a WireGuard iface exists
 	echo "- #[fg=#7feaac][󰒄 VPN Connected] [WireGuard: $wgInterface] #[fg=white]"
