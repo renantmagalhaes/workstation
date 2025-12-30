@@ -17,9 +17,16 @@ gnome_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "GNOME" | awk '{print t
 kde_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "KDE" | awk '{print tolower($0)}')
 bspwm_check=$(env | grep DESKTOP_SESSION | grep -ioh "bspwm" | awk '{print tolower($0)}')
 hyprland_check=$(env | grep DESKTOP_SESSION | grep -ioh "hyprland" | awk '{print tolower($0)}')
-wsl_debian_check=$(env | grep WSL | grep -ioh "debian" | awk '{print tolower($0)}')
-wsl_thumbleweed_check=$(env | grep WSL | grep -ioh "openSUSE-Tumbleweed" | awk '{print tolower($0)}')
-wsl_leap_check=$(env | grep WSL | grep -ioh "openSUSE-Leap" | awk '{print tolower($0)}')
+# WSL distribution detection - use WSL_DISTRO_NAME if available, otherwise check env
+if [[ -n "$WSL_DISTRO_NAME" ]]; then
+    wsl_distro_lower=$(echo "$WSL_DISTRO_NAME" | awk '{print tolower($0)}')
+elif env | grep -q "^WSL_DISTRO_NAME="; then
+    wsl_distro_lower=$(env | grep "^WSL_DISTRO_NAME=" | cut -d'=' -f2- | awk '{print tolower($0)}')
+else
+    wsl_distro_lower=""
+fi
+wsl_debian_check=$(echo "$wsl_distro_lower" | grep -ioh "debian" || echo "")
+wsl_thumbleweed_check=$(echo "$wsl_distro_lower" | grep -ioh "opensuse-tumbleweed\|tumbleweed" || echo "")
 
 if check_cmd wsl.exe; then
     alias pdf="evince"
@@ -37,14 +44,15 @@ if check_cmd wsl.exe; then
     else
         alias folder="explorer.exe"
     fi
-    if [[ $wsl_debian_check == "debian" ]]; then
+    if [[ -n "$wsl_debian_check" ]]; then
         alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
         alias sudo="sudo "
         alias apt="nala"
-    elif [[ $wsl_thumbleweed_check == "opensuse-tumbleweed" ]]; then
+    elif [[ -n "$wsl_thumbleweed_check" ]]; then
         alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
-    elif [[ $wsl_leap_check == "opensuse-leap" ]]; then
-        alias update-all="sudo zypper ref && sudo zypper up && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
+    elif check_cmd zypper; then
+        # Fallback: if zypper exists, assume OpenSUSE (default to Tumbleweed behavior)
+        alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
     fi
 elif check_cmd apt-get; then # FOR DEB SYSTEMS
     alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
