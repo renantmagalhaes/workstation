@@ -6,8 +6,8 @@
 
 For:
 
+- openSUSE Tumbleweed (*Hyprland*/BSPWM/Gnome/KDE)
 - Debian 12 (BSPWM/Gnome)
-- openSUSE Tumbleweed (BSPWM/Gnome)
 
 ### Disclaimer
 
