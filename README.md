@@ -15,50 +15,28 @@ Use the script `install.sh`. Running the scripts directly may result in system m
 
 # TODO
 
-- [ ] Hyprland setup
+- [ ] Better menu and window handling
+- [ ] Automatic color scheme based on wallpaper
+- [ ] Gnome-like overview
+- [ ] Shortcuts preview
+- [ ] Lock screen customization
+- [ ] Notification Center
+- [ ] Clipboard Manager
 
-# BSPWM - Current version
+# HYPRLAND
 
 ### Menu
 
-![1.general_layout_bspwm-2024](assets/2024-04-04-17-04-38.png)
+![1.general_layout](assets/hyprland-menu-202601.png)
 
 ### Workflow
 
-![2-terminal_and_file-manager-bspwm-2024](assets/2024-04-04-17-10-29.png)
+![2-terminal_and_file-manager](assets/hyprland-terminal-fileManager-202601.png)
 
-![3-Tiling_window-bspwm-2024](assets/2024-04-04-17-13-11.png)
+![3-Tiling_window](assets/hyprland-tilling-202601.png)
 
 ### NeoVIM
 
-![4-vim-2024](./assets/4-vim-2024.png)
-
-### Terminal
-
-![terminal-2024](assets/terminal-2024.png)
-
-### Tmux
-
-![tmux-bar](assets/tmux-bar.png)
-
-# GNOME Version 4X.X
-
-![1-general_layout-gnome.png](./assets/workstation/1-general_layout-gnome.png)
-
-![2-terminal_and_file-manager-gnome.png](./assets/workstation/2-terminal_and_file-manager-gnome.png)
-
-![3-Tiling_window-gnome.png](./assets/workstation/3-Tiling_window-gnome.png)
-
-# KDE Plasma 6
-
-![alt text](./assets/workstation/kde6.png)
-
-# KDE Plasma 5.2X - Retired
-
-![1-general_layout-kde.png](./assets/workstation/1-general_layout-kde.png)
-
-![2-terminal_and_file-manager-kde.png](./assets/workstation/2-terminal_and_file-manager-kde.png)
-
-![3-Tiling_window-kde.png](./assets/workstation/3-Tiling_window-kde.png)
+![4-nvim](./assets/hyprland-nvim-202601.png)
 
 # RTM
