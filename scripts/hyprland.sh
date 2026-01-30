@@ -174,6 +174,10 @@ else
     echo "⚠️ Rofi script not found at $ROFI_SCRIPT, skipping."
 fi
 
+# flameshot
+mkdir -p "$HOME/.config/flameshot/"
+echo -e "[General]\ndisabledGrimWarning=true\nuseGrimAdapter=true" > "$HOME/.config/flameshot/flameshot.ini"
+echo "Config rewritten."
 
 ###########################################
 # GTK THEME CONFIGURATION
