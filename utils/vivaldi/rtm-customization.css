@@ -89,6 +89,16 @@
   box-sizing: border-box !important;
 }
 
+/* ========================================================= */
+/* Window buttons */
+/* ========================================================= */
+
+/* Send window buttons to the right and keep them clickable */
+/* Hide window buttons on mainbar */
+/* .window-buttongroup.on-mainbar {
+  display: none !important;
+} */
+
 /* Send window buttons to the right and keep them clickable */
 .toolbar.toolbar-mainbar
   > .window-buttongroup.on-mainbar {
@@ -120,6 +130,7 @@
   justify-content: center !important;
   margin: 0 1px !important;
   padding: 0 !important;
+  background: transparent !important;
 }
 
 /* Icons */
@@ -131,6 +142,8 @@
 /* --- Custom vertical offset (nudge up/down) --- */
 .window-buttongroup.on-mainbar {
   transform: translateY(-3px);
+  background: transparent !important;
+  backdrop-filter: inherit !important;
 }
 
 /* Always hide the Vivaldi 7.6 update toolbar */
