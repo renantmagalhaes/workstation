@@ -179,7 +179,7 @@ elif [[ $os_check == "linux" ]]; then
     WIN_HOME="$(get_win_home)"
 
     # Windows App Execution Aliases (user-writable → keep LAST)
-    export PATH="$PATH:$WIN_HOME/AppData/Local/Microsoft/WindowsApps"
+    export PATH="$PATH:$WIN_HOME/AppData/Local/Microsoft/WindowsApps:$WIN_HOME/AppData/Local/Microsoft/WinGet/Links"
 
     # -----------------
     # Explicit aliases (SECURITY-FIRST)
