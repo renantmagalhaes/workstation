@@ -1,0 +1,2580 @@
+/* TODO
+
+opravit:
+drag tile vypadá divně když je scrollbar
+zkusit barvu skupiny nastavit když tam neni nic nastavený
+zkusit upravit označený taby ctrl (asi nejde?)
+
+
+
+modernizace:
+jaký další modální okna???
+restart okno
+
+
+
+moooooooooooožnááá:
+horizontal tabs?? #tabs-tabbar-container.left
+arc like pinned taby?*-/
+
+*/
+
+:root {
+  --lessTransparent: transparent 50%; /* TRANSPARENCY OF BROWSER - 50% */
+  --blur: blur(
+    15px
+  ); /* BLUR OF BROWSER - 15px */
+}
+
+/* SETTINGS OF ALL INPUTS */
+
+select:not(.sortselector-dropdown) {
+  /* ADJUSTING SELECTS IN MANY WINDOWS ETC */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  ) !important;
+  border-color: transparent;
+}
+
+input[type="button"]:not(.circular),
+input[type="submit"]:not(.circular),
+input[type="submit"][type="submit"] {
+  /* REMOVING BG IMAGE FROM BUTTONS IN MANY WINDOWS ETC */
+  background-image: none;
+}
+
+input[type="button"]:not(
+    .circular
+  ).primary,
+input[type="submit"]:not(
+    .circular
+  ).primary,
+input[type="submit"][type="submit"] {
+  /* REMOVING UGLY COLORS FROM PRIMARY BUTTON IN MANY WINDOWS ETC */
+  color: var(--colorFg);
+  border-color: transparent;
+}
+
+input[type="button"]:not(
+    .circular
+  ).primary:hover,
+input[type="submit"]:not(
+    .circular
+  ).primary:hover,
+input[type="submit"][type="submit"]:hover {
+  /* REMOVING UGLY COLORS FROM HOVER OF PRIMARY BUTTON IN MANY WINDOWS ETC */
+  color: var(--colorFg);
+  background: var(--colorBg) !important;
+  border-color: transparent;
+}
+
+:focus-visible {
+  outline: none; /* REMOVING OUTLINE FROM FOCUSED SEARCH BAR */
+}
+
+input[type="tel"],
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="url"],
+input[type="date"],
+input[type="time"],
+input[type="password"],
+input[type="number"] {
+  box-shadow: none; /* REMOVE SHADOW FROM SEARCH BAR */
+  border-color: transparent;
+}
+
+input,
+input[type="search"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+input[type="radio"],
+input[type="date"],
+input[type="time"],
+input[type="checkbox"],
+input[type="button"],
+input[type="submit"] {
+  border-color: transparent; /* REMOVE BORDER FROM SEARCH BAR */
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  box-shadow: none; /* REMOVE SHADOW FROM CHECKBOX LIGHT MODE */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.theme-dark input[type="radio"],
+.theme-dark input[type="checkbox"] {
+  background-image: none; /* REMOVE SHADOW FROM CHECKBOX DARK MODE */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+input[type="checkbox"]:checked {
+  /* BG COLOR OF CHECKED CHECKBOX */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+input[type="radio"]:checked,
+input[type="checkbox"]:checked {
+  /* BORDER COLOR OF CHECKED CHECKBOX */
+  border-color: transparent;
+}
+
+input[type="checkbox"]:before,
+input[type="checkbox"]:after {
+  /* COLOR OF ICON IN CHECKBOX */
+  background-color: var(--colorFg);
+}
+
+/* SETTINGS OF ALL MODAL WINDOWS */
+
+#modal-bg.slide:not(.float) > div {
+  /* FIXING BORDER RADIUS */
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(
+    --radius
+  );
+}
+#modal-bg .modal-wrapper {
+  /* BG COLOR */
+  background-color: color-mix(
+    in srgb,
+    color-mix(
+      in srgb,
+      var(--colorBg),
+      var(--colorHighlightBg)
+    ),
+    var(--lessTransparent)
+  );
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-radius: var(--radius);
+}
+
+#modal-bg {
+  /* ADDING A BIT OF SPACE ABOVE MODAL */
+  margin: 6px auto;
+}
+
+#modal-bg input {
+  /* BG COLOR OF MODAL INPUT */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+/* MAINBAR */
+
+#browser.win.address-top
+  .toolbar-mainbar:has(
+    .window-buttongroup.on-mainbar
+  ),
+#browser.linux.address-top
+  .toolbar-mainbar:has(
+    .window-buttongroup.on-mainbar
+  ) {
+  min-height: calc(
+    44px / var(--uiZoomLevel)
+  ); /* HEIGHT OF MAINBAR */
+}
+
+.density-on .UrlBar-SearchField,
+.density-on .UrlBar-AddressField {
+  height: 34px; /* HEIGHT OF URL BAR */
+}
+
+.density-on#browser.win.disable-titlebar
+  .window-buttongroup {
+  height: 44px;
+  background-color: transparent;
+}
+
+.mainbar {
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  ); /* BG COLOR OF WHOLE MAINBAR */
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  margin: 5px;
+  border-radius: var(--radius);
+  z-index: 10;
+}
+
+#browser.fullscreen .mainbar {
+  margin: 0px; /* REMOVING MARGIN FROM MAINBAR WHEN IN FULLSCREEN */
+}
+
+.SearchField,
+.UrlBar-AddressField {
+  /* SEARCHBAR SETTINGS */
+  border: none !important;
+  background-color: transparent;
+}
+
+.SearchField:hover,
+.UrlBar-AddressField:hover {
+  /* HOVER OF SEARCHBAR */
+  background-color: var(--colorBg);
+}
+
+.color-behind-tabs-on
+  .SearchField:focus-within,
+.color-behind-tabs-on
+  .MailSearchField-Inner:focus-within,
+.color-behind-tabs-on
+  .UrlBar-AddressField:focus-within {
+  outline: none; /* REMOVE OF SEARCHBAR BORDER WHEN IN FOCUS */
+  background-color: var(--colorBg);
+}
+
+.UrlFragment-Wrapper--ShouldHighlight {
+  --HighlightColor: var(
+    --colorFg
+  ); /* FONT COLOR OF www.GOOGLE.com */
+  --LowlightColor: var(
+    --colorFg
+  ); /* FONT COLOR OF WWW.google.COM */
+}
+
+.OmniDropdown {
+  background-color: var(
+    --colorBg
+  ); /* CHANGING BG COLOR OF DROPDOWN URL */
+}
+
+.OmniLinkItem:not(
+    .OmniLinkItem--Highlighted
+  ):hover {
+  background-color: var(
+    --colorHighlightBg
+  ); /* CHANGING BG COLOR OF HOVER IN DROPDOWN URL */
+}
+
+.address-top .mainbar {
+  border-bottom: none; /* REMOVE BORDER UNDER MAINBAR */
+}
+
+.mainbar button:hover {
+  /* HOVER OF MAINBAR BUTTONS */
+  background-color: var(--colorBg);
+}
+
+#browser:not(.tabs-top) .vivaldi:hover,
+#browser:not(.tabs-top)
+  .vivaldi:focus-visible {
+  /* HOVER OF HAMBURGER BUTTON */
+  background-color: var(--colorBg);
+}
+
+.disable-titlebar.address-top#browser:not(
+    .tabs-top
+  )
+  .vivaldi {
+  margin: 0 5px; /* REDUCING SPACE NEXT TO HAMBURGER */
+}
+
+button.ToolbarButton-Button[name="TilingToggle"] {
+  /* FIXING SPACE NEXT TO TAB TILING ICON */
+  margin-left: 3px;
+  margin-right: 4px;
+}
+
+.toolbar > .button-toolbar.button-on,
+.toolbar
+  > .toolbar-group
+  .button-toolbar.button-on,
+.toolbar
+  > .button-toolbar
+  > .button-on.button-on,
+.toolbar
+  > .toolbar-group
+  .button-toolbar
+  > .button-on.button-on {
+  fill: var(
+    --colorFg
+  ); /* CHANGING COLOR FROM HIGHLIGHT */
+  color: var(--colorFg);
+}
+
+.color-behind-tabs-on
+  .toolbar-mainbar
+  .toolbar-extensions
+  > .button-toolbar
+  > button.button-pressed,
+.color-behind-tabs-on
+  .toolbar-mainbar
+  .page-zoom-controls
+  > .button-toolbar
+  > button.button-pressed,
+.color-behind-tabs-on
+  .toolbar-mainbar
+  > .button-toolbar
+  > button.button-pressed {
+  background-image: linear-gradient(
+    var(--colorBg),
+    var(--colorBg)
+  ); /* CHANGE COLOR WHEN ICON IS ACTIVE */
+}
+
+#browser.win
+  .window-buttongroup
+  button:hover {
+  background-color: var(
+    --colorBg
+  ); /* HOVER OF WINDOW BUTTONS LIGHT THEME*/
+}
+
+.theme-dark#browser.win
+  .window-buttongroup
+  button:hover {
+  background-color: var(
+    --colorBg
+  ); /* HOVER OF WINDOW BUTTONS DARK THEME */
+}
+
+#browser.win
+  .window-buttongroup
+  button.window-close:hover {
+  background-color: var(
+    --colorBg
+  ); /* HOVER OF WINDOW CLOSE BUTTON */
+  fill: var(--colorFg);
+}
+
+#browser.win
+  .window-buttongroup
+  button.window-close {
+  /* ADJUSTING CLOSE WINDOW BUTTON */
+  border-top-right-radius: var(
+    --radius
+  );
+  border-bottom-right-radius: var(
+    --radius
+  );
+}
+
+.button-toolbar > button {
+  /* HOVER OF ICONS IN URL */
+  border: none;
+}
+
+.BookmarkButton:hover {
+  /* HOVER OF BOOKMARK BUTTON IN URL */
+  border-color: transparent;
+}
+
+/* WORKSPACES */
+
+.color-behind-tabs-on
+  #tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > .button-toolbar,
+.color-behind-tabs-on
+  #tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > div
+  > .button-toolbar,
+.color-behind-tabs-on
+  #tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > .button-toolbar:hover,
+.color-behind-tabs-on
+  #tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > div
+  > .button-toolbar:hover {
+  color: var(--colorFg);
+  margin-top: 6px;
+} /* ADJUSTING WORKSPACE BUTTON */
+
+.tabs-left
+  .button-toolbar.workspace-popup.tabbar-workspace-button,
+.tabs-right
+  .button-toolbar.workspace-popup.tabbar-workspace-button {
+  background-color: transparent; /* BG OF WORKSPACE BUTTON */
+}
+
+#tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > .button-toolbar
+  > button:active,
+#tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > div
+  > .button-toolbar
+  > button:active,
+#tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > .button-toolbar:not(
+    .toolbar-spacer,
+    .toolbar-spacer-flexible
+  )
+  > button:not([disabled]):hover,
+#tabs-tabbar-container
+  .toolbar:not(.toolbar-small)
+  > div
+  > .button-toolbar:not(
+    .toolbar-spacer,
+    .toolbar-spacer-flexible
+  )
+  > button:not([disabled]):hover {
+  background-color: var(
+    --colorBg
+  ); /* HOVER OF WORKSPACES */
+}
+
+.tabs-left
+  #tabs-container:has(
+    .tab-strip.overflow
+  )
+  .toolbar-tabbar-before,
+.tabs-left
+  #tabs-container:has(
+    .tab-strip.overflow
+  )
+  .toolbar-tabbar-after,
+.tabs-right
+  #tabs-container:has(
+    .tab-strip.overflow
+  )
+  .toolbar-tabbar-before,
+.tabs-right
+  #tabs-container:has(
+    .tab-strip.overflow
+  )
+  .toolbar-tabbar-after {
+  padding: 0px 0px 3px 6px; /* FIXING SPACE WHEN MANY TABS */
+}
+
+/* TABS */
+
+#browser .tabbar-wrapper,
+#browser.tabs-top #header {
+  background-color: transparent; /* BG COLOR OF TAB BAR PART 1 */
+  padding-bottom: 5px;
+}
+
+#browser:not(.transparent-tabbar)
+  #tabs-tabbar-container {
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  ); /* BG COLOR OF TAB BAR PART 2 */
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-radius: var(--radius);
+}
+
+#browser:not(.transparent-tabbar)
+  #tabs-tabbar-container.left {
+  /* BG COLOR OF TAB BAR PART 3 - TABSLEFT */
+  margin-left: 5px;
+}
+
+#browser:not(.transparent-tabbar)
+  #tabs-tabbar-container.right {
+  /* BG COLOR OF TAB BAR PART 3 - TABSRIGHT */
+  margin-right: 5px;
+}
+
+.color-behind-tabs-on .tab {
+  color: var(
+    --colorFg
+  ); /* FONT COLOR OF NON ACTIVE TAB */
+}
+
+.density-on:not(.tabs-at-edge)
+  .tab.active:not(
+    .tab-in-accordion,
+    .tab-accordion
+  ) {
+  box-shadow: none; /* REMOVE SHADOW UNDER ACTIVE TAB */
+}
+
+#browser
+  #tabs-container
+  .tab.pinned.audio-on
+  .tab-audio {
+  /* ADJUSTING POSITION OF AUDIO ICON IN PINNED TAB */
+  left: 5px;
+  top: 5px;
+  padding: 1px 2px;
+}
+
+#browser:not(.alt-tabs)
+  #tabs-container
+  .tab:not(.tab-small).audio-on
+  .favicon {
+  /* HIDING FAVICON WHEN AUDIO IS PLAYING IN PINNED TAB */
+  transform: scale(0);
+}
+
+.separator hr {
+  /* ADJUSTING SEPARATOR UNDER PINNED TABS */
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--colorBg),
+      var(--lessTransparent)
+    );
+  background: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+  opacity: 0.2;
+  width: 100%;
+  margin-top: 6px;
+}
+
+@media not (prefers-contrast: more) {
+  /* HIDE TAB SCROLLBAR */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+#tabs-container.left:has(
+    .tab-strip.overflow
+  ),
+#tabs-container.right:has(
+    .tab-strip.overflow
+  ) {
+  padding-right: 6px; /* FIXING SPACE NEXT TO TAB WHEN MANY TABS */
+}
+
+#tabs-tabbar-container {
+  padding: 0px; /* ADDING SPACE NEXT TO TABS */
+}
+
+#browser.color-behind-tabs-on
+  .tab.active.active {
+  /* BG OF ACTIVE TAB */
+  background-color: var(--colorBg);
+}
+
+#tabs-container
+  .tab:not(
+    .tab-group,
+    .tab.active
+  ):hover {
+  /* HOVER OF TABS PART 1 */
+  background-color: var(--colorBg);
+}
+
+.color-behind-tabs-on
+  .tab-wrapper:hover
+  .tab:not(.active) {
+  /* HOVER OF TABS PART 2 */
+  background-color: transparent;
+}
+
+#browser:not(.theme-dark)
+  #tabs-tabbar-container.left {
+  /* HIDE WEIRD BORDER BETWEEN TAB SECTION AND WEB PAGE */
+  box-shadow: none;
+}
+
+.tab.active .favicon {
+  filter: none !important; /* HIDE FAVICON WHITE BORDER */
+}
+
+#browser
+  .tab-position.colored
+  .tab:not(.active) {
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  ); /* BG COLOR OF TAB GROUP  */
+  color: var(--colorFg);
+}
+
+#browser
+  .tab-position.colored.accordion-toggle-arrow:hover,
+#browser
+  .tab-position.colored
+  .tab:not(.active):hover {
+  background-color: var(
+    --colorBg
+  ); /* BG COLOR OF HOVER TAB IN GROUP */
+}
+
+#browser
+  .tab-position.colored.accordion-toggle-arrow,
+#browser
+  .tab-position.colored
+  .tab.active {
+  background-color: var(
+    --colorBg
+  ); /* BG COLOR OF ACTIVE TAB IN GROUP */
+}
+
+#browser
+  .tab-position.colored.accordion-toggle-arrow {
+  /* ARROW SETTINGS */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+  color: var(--colorFg);
+}
+
+#browser
+  .tab-position.colored
+  .tab:not(.marked)
+  + svg
+  .stack-frame {
+  stroke: transparent; /* BORDER COLOR OF TAB GROUP */
+}
+
+#browser
+  .tab-position.colored
+  .stack-counter {
+  background-color: var(
+    --colorHighlightBg
+  ); /* BG COLOR OF TAB GROUP NUMBER */
+  color: var(--colorAccentBg);
+}
+
+.tabs-left
+  #tabs-container
+  .toolbar-tabbar-after,
+.tabs-right
+  #tabs-container
+  .toolbar-tabbar-after {
+  /* ADJUSTING ICONS UNDER TABS */
+  margin-bottom: 5px;
+}
+
+#tabs-container
+  .toolbar-tabbar-before
+  > div
+  > .button-toolbar
+  > button,
+#tabs-container
+  .toolbar-tabbar-after
+  > div
+  > .button-toolbar
+  > button,
+#tabs-container
+  .toolbar-tabbar-before
+  > .button-toolbar
+  > button,
+#tabs-container
+  .toolbar-tabbar-after
+  > .button-toolbar
+  > button {
+  height: 34px;
+  min-width: 34px;
+} /* BIGGER HOVER EFFECT OF TRASH AND CLOUD ICONS */
+
+#tabs-tabbar-container
+  .toolbar-tabbar-after {
+  /* MOVING ALL ICONS UNDER TABS TO END OF FLEX */
+  align-content: flex-end;
+}
+
+#tabs-tabbar-container
+  .toolbar-tabbar-after {
+  gap: 4px; /* ADJUSTING GAP BETWEEN ICONS */
+}
+
+/* SIDEBAR */
+
+#switch {
+  padding-top: 5px; /* ADJUSTING SPACE ABOVE SIDEBAR ICONS */
+}
+
+.toolbar,
+.toolbar-group,
+.toolbar-wrap {
+  gap: 5px; /* ADJUSTING GAP BETWEEN ICONS */
+}
+
+#panels-container {
+  padding-bottom: 5px; /* MORE SPACE UNDER SETTINGS ICON */
+  min-width: 44px; /* FIXING SIDEBAR PART 1 */
+}
+
+#panels-container[style*="min(0px"] {
+  /* REMOVE PART 1 IF PANEL IS HIDDEN */
+  min-width: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.density-on #switch {
+  /* FIXING SIDEBAR PART 2 + ADJUSTING */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-radius: var(--radius);
+  padding-bottom: 5px;
+  padding-right: 5px;
+  min-width: 44px;
+}
+
+#panels-container {
+  /* FIXING SIDEBAR PART 3 */
+  background-color: transparent;
+}
+
+#main.right #panels-container {
+  /* FIXING SIDEBAR PART 4 - TABSLEFT */
+  margin-right: 5px;
+}
+
+#main.left #panels-container {
+  /* FIXING SIDEBAR PART 4 - TABSRIGHT */
+  margin-left: 5px;
+}
+
+#panels-container.right:not(.icons)
+  .panel-group,
+#panels-container.right.icons:not(
+    :has(.SlideBar)
+  ) {
+  border-left: none; /* HIDE WEIRD BORDER IN SIDEBAR - TABSLEFT */
+}
+
+#panels-container.left:not(.icons)
+  .panel-group,
+#panels-container.left.icons:not(
+    :has(.SlideBar)
+  ) {
+  border-right: none; /* HIDE WEIRD BORDER IN SIDEBAR - TABSRIGHT */
+}
+
+.ExtensionToggleIcon.ExtensionToggleIcon--Expanded {
+  background-color: transparent; /* TRANSPARENT BG COLOR FROM EXTENSION BUTTON */
+}
+
+.ExtensionIcon--Hidden {
+  /* ADJUSTING HIDDEN EXTENSIONS */
+  background-color: transparent;
+}
+
+#panels-container button:hover {
+  /* HOVER OF BUTTONS ON SIDEBAR */
+  background-color: var(--colorBg);
+}
+
+.ExtensionIcon--Hidden:hover,
+.ExtensionIcon--Hidden:active {
+  /* HOVER OF HIDDEN EXTENSIONS */
+  background-color: var(--colorBg);
+  border-radius: var(--radius);
+}
+
+.density-on#browser
+  .toolbar-vertical
+  .button-toolbar:not(:last-of-type) {
+  /* ADJUSTING HIDDEN EXTENSIONS HOVER */
+  padding-bottom: 0px;
+  height: 34px;
+}
+
+.toolbar-panel
+  > .button-toolbar
+  > button.button-pressed,
+.toolbar-panel
+  .toolbar-extensions
+  .button-toolbar
+  > button.button-pressed,
+.toolbar-panel
+  .page-zoom-controls
+  .button-toolbar
+  > button.button-pressed {
+  background-color: var(
+    --colorBg
+  ); /* CHANGING BG COLOR AND ICON COLOR WHEN DOWNLOAD ICON IS ACTIVE */
+}
+
+.density-on
+  #switch
+  .addwebpanel-wrapper
+  > button.active
+  button,
+.density-on
+  #switch
+  > .button-toolbar.active
+  button,
+.density-on
+  #switch
+  > *
+  > .button-toolbar.active
+  button,
+.density-on
+  #switch
+  > button.active
+  button {
+  background-color: var(
+    --colorBg
+  ); /* CHANGING BG COLOR AND ICON COLOR WHEN BOOKMARK ICON IS ACTIVE */
+}
+
+/* WEB PANELS */
+
+#panels-container.right .panel {
+  padding: 5px 13px 5px 5px; /* ADJUSTING ALL PANELS  PART 1 - TABSLEFT */
+}
+
+#panels-container.left .panel {
+  padding: 5px 5px 5px 13px; /* ADJUSTING ALL PANELS  PART 1 - TABSRIGHT */
+}
+
+#panels-container.right
+  .panel
+  .outerScrollbar {
+  margin-right: 0px; /* ADJUSTING ALL PANELS PART 2 - TABSLEFT */
+}
+
+#panels-container.left
+  .panel
+  .outerScrollbar {
+  margin-right: 0px; /* ADJUSTING ALL PANELS PART 2 - TABSRIGHT */
+}
+
+.panel-group {
+  /* ADJUSTING ALL PANELS PART 3 */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-radius: var(--radius);
+}
+
+#panels-container.right .panel-group {
+  /* ADJUSTING ALL PANELS PART 4 - TABSLEFT */
+  margin-right: 5px;
+}
+
+#panels-container.left .panel-group {
+  /* ADJUSTING ALL PANELS PART 4 - TABSRIGHT */
+  margin-left: 5px;
+}
+
+.panel > header h1 {
+  /* REMOVING TITLE OF PANELS */
+  display: none;
+}
+
+.SlideBar--FullHeight.alternate {
+  /* HIDES BLACK BAR TO RESIZE PANELS */
+  right: auto;
+  left: -3px;
+  opacity: 0;
+}
+
+/*
+#panels-container.right:not(.icons).overlay .panel-group {
+    box-shadow: none;  REMOVING LEFT SHADOW - ASI NENI POTŘEBA
+} */
+
+#panels-container.overlay .panel-group {
+  background-color: transparent; /* TRANSPARENT BG WHEN OPENED WEB APP */
+}
+
+#panels-container.right
+  #panels
+  .webpanel-stack
+  .webpanel
+  .webpanel-content {
+  /* ADJUSTING WEB APP - TABSLEFT */
+  margin-right: 7px;
+  /* border-bottom-right-radius: var(--radius); - ASI NENI POTŘEBA
+    border-top-right-radius: var(--radius); */
+}
+
+#panels-container.left
+  #panels
+  .webpanel-stack
+  .webpanel
+  .webpanel-content {
+  /* ADJUSTING WEB APP - TABSRIGHT */
+  margin-left: 7px;
+}
+
+#panels
+  .webpanel-stack
+  .webpanel.visible {
+  /* FIXING WEB APPS PANELS */
+  visibility: visible;
+  padding: 0px;
+}
+
+.panel > header {
+  margin-bottom: -1px; /* ADJUSTING GAP UNDER SEARCH BAR */
+}
+
+.vivaldi-tree .tree-row.dragover,
+.hasfocus
+  .vivaldi-tree:focus-within
+  .tree-row[data-selected] {
+  /* BG COLOR OF SELECTED ITEM WHEN BROWSER IS IN FOCUS */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+  color: var(--colorFg);
+}
+
+.vivaldi-tree .tree-row[data-selected] {
+  /* BG COLOR OF SELECTED ITEM WHEN BROWSER ISNT IN FOCUS */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.win.hasfocus
+  .vivaldi-tree
+  .VivaldiList:focus-within
+  .tree-item[data-lead]
+  .tree-row.tree-row,
+.linux.hasfocus
+  .vivaldi-tree
+  .VivaldiList:focus-within
+  .tree-item[data-lead]
+  .tree-row.tree-row {
+  box-shadow: none; /* REMOVING BORDER OF SELECTED ITEM */
+}
+
+.panel-group
+  .sortselector.sortselector-compact,
+.download-popout
+  .sortselector.sortselector-compact {
+  border: none; /* REMOVING BORDER OF SORT */
+}
+
+.panel-group
+  .sortselector.sortselector-compact
+  .sortselector-dropdown,
+.download-popout
+  .sortselector.sortselector-compact
+  .sortselector-dropdown {
+  border-radius: var(
+    --radius
+  ); /* BORDER RADIUS OF SORT */
+}
+
+.sortselector {
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  ); /* BG COLOR OF SORT */
+  height: calc(
+    var(--treeViewRowHeight) - 4px
+  ); /* FIXING SORT */
+}
+
+.sortselector.sortselector-compact:hover {
+  /* HOVER OF SORT */
+  background-color: var(--colorBg);
+}
+
+.toolbar-default
+  .button-toolbar
+  > button:enabled {
+  /* REMOVING BG OF BUTTONS */
+  background-image: none;
+}
+
+.toolbar-group
+  > .button-toolbar:not(:last-child)
+  > button,
+.toolbar-group
+  hr:not(:last-child)
+  > button {
+  /* BORDER RADIUS FOR BUTTONS PART 1 */
+  border-top-right-radius: var(
+    --radius
+  );
+  border-bottom-right-radius: var(
+    --radius
+  );
+}
+
+.toolbar-group
+  > .button-toolbar
+  + .button-toolbar
+  > button,
+.toolbar-group
+  hr
+  + .button-toolbar
+  > button {
+  /* BORDER RADIUS FOR BUTTONS PART 2 */
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(
+    --radius
+  );
+}
+
+.panel input,
+.find-in-page input {
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  ); /* BG COLOR OF SEARCH BAR IN PANELS AND CTRL+F */
+}
+
+/* BOOKMARKS PANEL */
+
+.item-count,
+.tree-item .nickname {
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  ); /*BG COLOR OF ITEM COUNT */
+}
+
+.panel-bookmarks .panel-bookmarks-edit {
+  display: none; /* REMOVING BOTTOM PART */
+}
+
+/* DOWNLOAD PANEL */
+
+.toolbar-default
+  .button-toolbar
+  > button:disabled {
+  background-color: transparent; /* REMOVING BG OF DISABLED ICONS */
+}
+
+.hasfocus
+  .vivaldi-tree:focus-within
+  .tree-row[data-selected]
+  .ActionButton
+  svg {
+  fill: var(
+    --colorFg
+  ); /* COLOR OF FOLDER ICON OF SELECTED ITEM WHEN BROWSER IS FOCUSED */
+}
+
+.download-editor.download-editor {
+  display: none; /* REMOVING BOTTOM PART */
+}
+
+input.circular,
+button.circular {
+  /* ADJUSTING RADIUS OF HOVER OF DOWNLAOD FOLDER ICON */
+  border-radius: var(--radiusHalf);
+}
+
+.sortselector.sortselector-compact
+  .sortselector-button {
+  /* REMOVING BORDER IN SORT */
+  border-left: none;
+}
+
+/* CALENDAR PANEL */
+
+.panel > header > .toolbar + .toolbar {
+  margin-top: 5px; /* ADJUSTING GAP OF EVERYTING IN HEADER */
+}
+
+.panel .calendar-grid-agenda {
+  margin-top: 6px; /* ADJUSTING GAP ABOVE EVENTS IN AGENDA */
+}
+
+.FilterAndSearch-Input.FilterAndSearch-Input {
+  /* RADIUS OF SEARCH BAR */
+  border-top-right-radius: var(
+    --radius
+  );
+  border-bottom-right-radius: var(
+    --radius
+  );
+}
+
+.FilterAndSearch-Button.FilterAndSearch-Button {
+  /* RADIUS OF SEARCH BUTTON */
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(
+    --radius
+  );
+}
+
+#calendar_panel
+  input[type="button"]:not(.circular),
+#calendar_panel input[type="submit"],
+#calendar_panel input[type="color"],
+#calendar_panel .FormButton {
+  /* BG COLOR OF SEARCH BUTTON */
+  background-image: none;
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+}
+
+.DatePickerPopup {
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  ); /* BG COLOR OF SELECTING WEEK WINDOW  PART 1 */
+}
+
+.DatePickerPopup .toolbar {
+  background-color: transparent; /* BG COLOR OF SELECTING WEEK WINDOW  PART 2 */
+}
+
+.button-popup-arrow-dark:before {
+  border-bottom-color: transparent; /* REMOVING ARROW */
+}
+
+#calendar_panel
+  .PeriodPicker.PeriodPicker {
+  /* FIXING BG OF PERIOD PICKER */
+  border-color: transparent;
+  background-image: none;
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+}
+
+.toolbar-default
+  .button-toolbar
+  > button:enabled.button-pressed {
+  /* FIXING ACTIVE BUTTON */
+  background-image: none;
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+}
+
+#panels #calendar_panel .cal-tasks-row,
+#panels #tasks_panel .cal-tasks-row {
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  ); /* BG COLOR OF EVENTS IN AGENDA */
+}
+
+.calendar-grid-agenda .cal-tasks-row {
+  border-bottom: none; /* REMOVING BORDER OF EVENTS IN AGENDA */
+}
+
+.theme-dark
+  .panel
+  .SlideBar--FullWidth.alternate {
+  display: none; /* REMOVING SEPARATOR DARK MODE */
+}
+
+.panel .SlideBar--FullWidth.alternate {
+  display: none; /* REMOVING SEPARATOR LIGHT MODE */
+}
+
+.MonthDayPicker {
+  margin-bottom: 0px; /* FIXING BOTTOM PART */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  ); /* BG OF BOTTOM CALENDAR */
+}
+
+.CalendarPanel-MiniCalendar {
+  padding-top: 5px; /* ADJUSTING SPACE ABOVE BOTTOM CALENDAR */
+}
+
+.MonthDayPicker-Header {
+  padding-top: 3px; /* ADJUSTING PADDING OF HEADER IN BOTTOM CALENDAR */
+}
+
+.MonthDayPicker-Header h2 {
+  /* ADJUSTING POSITION OF MONTH IN BOTTOM CALENDAR */
+  font-weight: normal;
+  padding-right: 5px;
+}
+
+.MonthDayPicker-Day--SelectedWeek {
+  border-radius: var(
+    --radiusHalf
+  ); /* RADIUS OF SELECTED WEEK IN BOTTOM CALENDAR */
+}
+
+.calendar-grid-days.calendar-grid-week {
+  margin-top: 6px; /* ADDING MARGIN TO WEEK CALENDAR */
+}
+
+.calendar-grid {
+  gap: 5px; /* ADJUSTING GAP OF WEEK CALENDAR */
+}
+
+.calendar-grid-days
+  .calendar-drop-target {
+  border-radius: var(
+    --radius
+  ); /* RADIUS OF DAYS IN WEEK CALENDAR */
+  border: none; /* ADJUSTING HIGHLIGHTED DAY IN WEEK CALENDAR  PART 1 */
+}
+
+.calendar-grid-days
+  .calendar-drop-target
+  .day.current {
+  /* ADJUSTING HIGHLIGHTED DAY IN WEEK CALENDAR  PART 2 */
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.calendar-grid .calendar-drop-target {
+  /* BG COLOR OF DAYS IN WEEK CALENDAR PART 1 */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.calendar-grid
+  .calendar-drop-target.weekend {
+  /* BG COLOR OF DAYS IN WEEK CALENDAR PART 2 */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.calendar-add-event-button {
+  /* BG COLOR OF DAYS IN WEEK CALENDAR PART 3 */
+  background-image: none;
+}
+
+.calendar-add-event-button {
+  /* REMOVING BORDER AND CHANGING RADIUS IN WEEK CALENDAR */
+  border: none;
+  border-radius: var(--radius);
+}
+
+.calendar-grid-day {
+  /* ADJUSTING POSITION OF MIDDLE PART IN DAY CALENDAR */
+  margin-top: 6px;
+}
+
+.calendar-grid .calendar-header-date {
+  /* ADDING RADIUS TO HEADER IN DAY CALENDAR */
+  outline: none;
+  border-radius: var(--radius);
+}
+
+/* MAIL PANEL */
+
+.toolbar-group > hr {
+  display: none; /* REMOVING HR BETWEEN BUTTONS */
+}
+
+/* ADD WEB PANEL PANEL */
+
+.addwebpanelcallout input {
+  /* FIXING BG COLOR OF INPUT */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.addwebpanelcallout
+  .webpanel-suggestion {
+  /* BG COLOR OF SUGGESTED WEB APPS */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.addwebpanelcallout button {
+  /* REMOVING BORDER OF SUGGESTED WEB APPS */
+  border-color: transparent;
+}
+
+.addwebpanelcallout .FormButton {
+  /* FIXING BG COLOR OF CUSTOMIZE PANEL... */
+  background-image: none;
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+/* INNER ROUND BORDERS */
+
+#browser:not(.fullscreen)
+  #webpage-stack {
+  border-radius: var(--radius);
+  margin: 0px 5px 5px 5px;
+}
+
+/* TAB TILES MODE */
+
+.tab-dropzone.dropleft > h1,
+.tab-dropzone.dropright > h1,
+.tab-dropzone.droptop > h1,
+.tab-dropzone.dropbottom > h1 {
+  /* ADJUSTING MOVING TILES BG COLORS */
+  background-color: color-mix(
+    in srgb,
+    color-mix(
+      in srgb,
+      var(--colorBg),
+      var(--colorHighlightBg)
+    ),
+    var(--lessTransparent)
+  );
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+}
+
+.tab-dropzone.dropcenter:not(
+    .movingtile
+  )
+  > h1 {
+  /* ADJUSTING MOVING TAB TO THE NEW WINDOW BG COLOR */
+  background-color: color-mix(
+    in srgb,
+    color-mix(
+      in srgb,
+      var(--colorBg),
+      var(--colorHighlightBg)
+    ),
+    var(--lessTransparent)
+  );
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+}
+
+#browser
+  .tile:has(> .tiled.webpageview) {
+  /* REMOVED DEFAULT BEHAVIOUR */
+  border: 0 solid transparent;
+}
+
+#browser .tiled:not(.webpageview) {
+  /* INSTEAD OF DEFAULT BEHAVIOR IS GAP */
+  gap: 9px;
+}
+
+#browser:not(.inner, .narrow-tiling)
+  #webpage-stack
+  > .tiled.visible {
+  box-shadow: inset 0 0 0 var(--n6)
+    transparent; /* REMOVING SOME WEIRD SHADOW */
+}
+
+.hasfocus .webpageview.tiled.active {
+  box-shadow: 0 0 0 2px
+    var(--colorAccentBg); /* CHANGING COLOR OF BORDER OF ACTIVE WHEN BROWSER IS FOCUSED */
+}
+
+.isblurred .webpageview.tiled.active {
+  box-shadow: 0 0 0 2px
+    var(--colorAccentBg); /* CHANGING COLOR OF BORDER OF ACTIVE WHEN BROWSER ISNT FOCUSED */
+}
+
+.webpageview.tiled:not(.active) {
+  box-shadow: 0 0 0 2px
+    color-mix(
+      in srgb,
+      var(--colorBg),
+      var(--lessTransparent)
+    ); /* CHANGING COLOR OF BORDER OF NON ACTIVE */
+}
+
+/* SPEED DIAL */
+
+.SpeedDial--Thumbnail {
+  /* BG COLOR OF TITLE */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  box-shadow: none;
+}
+
+.SpeedDialView-Settings {
+  /* ADJUSTING SETTINGS OF SPEED DIAL */
+  border-radius: var(--radius);
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+}
+
+.SpeedDialView-Settings .close {
+  /* REMOVING BG AROUND CLOSE BUTTON */
+  background-color: transparent;
+}
+
+.SpeedDialView-Settings .close:hover {
+  /* REMOVING HOVER BG AROUND CLOSE BUTTON */
+  background-color: transparent;
+}
+
+.SpeedDialView-Settings
+  a:-webkit-any-link {
+  /* COLOR OF LINK */
+  color: var(--colorFg);
+}
+
+.SpeedDialView-Settings hr {
+  /* HIDING HR IN SPEED DIAL SETTINS */
+  border: transparent;
+}
+
+.SpeedDialView-Settings
+  input:not(.Switch-Input) {
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  ); /* CHANGING BG COLOR OF SELECT IMAGE */
+}
+
+select:enabled:not([multiple], [size]),
+.SpeedDialView-Settings
+  .VivaldiSelector:not(:focus-within)
+  .Inner__control {
+  background-image: none; /* CHANGING BG COLOR OF SELECTS */
+}
+
+#browser .Switch .Switch-Input {
+  box-shadow: none; /* REMOVING SHADOW FROM SWITCH PART 1 */
+}
+
+#browser .Switch-Input {
+  box-shadow: none; /* REMOVING SHADOW FROM SWITCH PART 2 */
+}
+
+.theme-dark#browser
+  .Switch-Input:not(:checked) {
+  /* CHANGING BG COLOR OF UNCHECKED SWITCH DARK MODE */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+#browser .Switch-Input:not(:checked) {
+  /* CHANGING BG COLOR OF UNCHECKED SWITCH LIGHT MODE*/
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+#browser
+  .Switch-Input:not(:checked)
+  + .Switch-Button {
+  /* CHANGING COLOR FROM DOT OF UNCHECKED SWITCH */
+  background-color: var(--colorFg);
+}
+
+#browser .Switch-Button {
+  /* REMOVING SHADOW FROM DOT OF SWITCH */
+  box-shadow: none;
+}
+
+.startpage .startpage-navigation {
+  /* ADJUSTING THE DESIGN OF SPEED DIAL NAVIGATION */
+  min-height: 44px;
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  box-shadow: none;
+  border-bottom-right-radius: var(
+    --radius
+  );
+  border-bottom-left-radius: var(
+    --radius
+  );
+}
+
+.startpage
+  .startpage-navigation
+  .startpage-navigation-group
+  .button-startpage:hover {
+  /* BORDERR RADIUS OF HOVER */
+  background-color: var(--colorBg);
+  border-radius: var(--radius);
+}
+
+.startpage
+  .startpage-navigation
+  .startpage-navigation-group
+  .button-startpage {
+  border-radius: 8px; /* BORDER RADIUS OF ACTIVE */
+  padding-top: 2px; /* ICON INSIDE BUTTON MORE INTO CENTER */
+}
+
+.button-startpage:focus-visible,
+.button-startpage.active {
+  border-color: transparent; /* REMOVING BORDER FROM ACTIVE */
+  background-color: var(--colorBg);
+}
+
+.startpage
+  .startpage-navigation
+  .startpage-navigation-group:first-of-type {
+  /* ADJUSTING FIRST GROUP IN NAV BAR */
+  margin-top: 5px;
+  margin-bottom: 5px;
+  gap: 5px;
+}
+
+.startpage
+  .startpage-navigation
+  .startpage-navigation-group:nth-of-type(
+    2
+  ) {
+  /* ADJUSTING SECOND GROUP IN NAV BAR PART 1 */
+  margin: 5px;
+  gap: 5px;
+}
+
+.startpage
+  .startpage-navigation
+  .startpage-navigation-group:nth-of-type(
+    2
+  )
+  .button-startpage {
+  /* ADJUSTING SECOND GROUP IN NAV BAR PART 2 */
+  max-width: 34px;
+}
+
+.sdwrapper
+  .iconmenu-container.SearchField {
+  /* ADJUSTING THE DESIGN OF SEARCH BAR PART 1 */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-radius: var(--radius);
+}
+
+.sdwrapper .button-startpage,
+.sdwrapper .SearchField {
+  /* ADJUSTING THE DESIGN OF SEARCH BAR PART 2 */
+  box-shadow: none;
+}
+
+.Dashboard-Widgets .solid {
+  /* ADJUSTING THE DESIGN OF WIDGETS PART 1 */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+}
+
+.Dashboard-Widgets .semi-transparent {
+  /* ADJUSTING THE DESIGN OF WIDGETS PART 2 */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+}
+
+.widget-config {
+  /* ADJUSTING THE DESIGN OF WIDGETS PART 3 */
+  border: none;
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.Dashboard-Widgets .TabbedView-Content {
+  /* ADJUSTING THE DESIGN OF WIDGETS PART 4 */
+  margin: 0px 12px;
+}
+
+.Dashboard-Widgets .dashboard-widget {
+  /* ADJUSTING THE DESIGN OF WIDGETS PART 5 */
+  box-shadow: none;
+}
+
+.TabbedView-List {
+  /* ADJUSTING THE DESIGN OF WIDGETS PART 6 */
+  background-color: transparent;
+  border-bottom: none;
+}
+
+.TabbedView-List button {
+  /* ADJUSTING THE DESIGN OF WIDGETS PART 7 */
+  color: var(--colorFg);
+}
+
+.TabbedView-List button.active {
+  /* ADJUSTING THE DESIGN OF WIDGETS PART 8 */
+  background-color: var(--colorBg);
+  box-shadow: none;
+  border: none;
+  color: var(--colorFg);
+}
+
+.TabbedView-List
+  button:hover:not(.active) {
+  /* ADJUSTING THE DESIGN OF WIDGETS PART 9 */
+  background-color: var(--colorBg);
+  box-shadow: none;
+}
+
+.startpage input,
+.startpage select,
+.startpage textarea,
+.startpage
+  .dateInput
+  input[type="date"],
+.startpage
+  .dateInput
+  input[type="time"] {
+  /* ADJUSTING THE DESIGN OF WIDGETS PART 9 */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+#browser
+  .Dashboard-CalendarWidget
+  .scrollable {
+  /* FIXING CALENDAR WIDGET */
+  padding-right: 12px;
+}
+
+.Dashboard .email-wrapper {
+  /* FIXING EMAIL WIDGET */
+  padding-right: 0px;
+  margin: 0px 12px;
+}
+
+.Dashboard-TasksWidget
+  .calendar-viewport {
+  /* FIXING TASKS WIDGETS */
+  margin-right: 12px;
+}
+
+.Dashboard
+  .top-sites-wrapper
+  .item.semi-transparent {
+  /* FIXING TOP SITES WIDGET PART 1 */
+  background-color: transparent;
+}
+
+.Dashboard .top-sites-wrapper .item {
+  /* FIXING TOP SITES WIDGET PART 2 */
+  box-shadow: none;
+}
+
+.Dashboard-CurrencyWidget
+  .TabbedView-List {
+  /* FIXING CURRENCY WIDGET PART 1 */
+  background-color: transparent;
+}
+
+.Dashboard-CurrencyWidget .provider,
+.Dashboard-CurrencyWidget
+  .external-link {
+  /* FIXING CURRENCY WIDGET PART 2 */
+  padding-top: 10px;
+}
+
+.SpeedDial-Add-Buttons {
+  /* FIXING BOTTOM BUTTONS PART 1 */
+  height: 34px;
+  gap: 5px;
+  box-shadow: none;
+  border-radius: var(--radius);
+}
+
+.SpeedDial-Add-Button {
+  /* FIXING BOTTOM BUTTONS PART 2 */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-radius: var(--radius);
+}
+
+.SpeedDial-Add-Button:hover {
+  /* FIXING BOTTOM BUTTONS PART 3 */
+  background-color: var(--colorBg);
+}
+
+.dashboard-list-wrapper {
+  /* FIXING ADD WIDGET WINDOW PART 1 */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  box-shadow: none;
+  border-radius: var(--radius);
+}
+
+.dashboard-list-wrapper
+  .button-wrapper
+  .add-button {
+  /* FIXING ADD WIDGET WINDOW PART 2 */
+  box-shadow: none;
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.startpage .close {
+  /* ADJUSTING CLOSE BUTTON IN ADD WIDGET WINDOW */
+  background-color: transparent;
+}
+
+.startpage .close:hover {
+  /* ADJUSTING HOVER OF CLOSE BUTTON IN ADD WIDGET WINDOW */
+  background-color: transparent;
+}
+
+/* STATUS BAR */
+
+#browser:not(.tabs-bottom)
+  footer#footer {
+  /* ADJUSTING THE DESIGN OF STATUS BAR PART 1 */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-top: none;
+  border-radius: var(--radius);
+  margin: 0px 5px 5px 5px;
+  padding: 5px;
+}
+
+.toolbar-statusbar
+  > .button-toolbar
+  > button,
+.toolbar-statusbar
+  .drag-area
+  > .button-toolbar
+  > button,
+.toolbar-statusbar
+  .toolbar-extensions
+  .button-toolbar
+  > button,
+.toolbar-statusbar
+  .page-zoom-controls
+  .button-toolbar
+  > button {
+  /* ADJUSTING THE DESIGN OF STATUS BAR PART 2 */
+  min-width: 34px;
+  height: 34px;
+}
+
+/* VIVALDI SETTINGS */
+
+.vivaldi-settings .settings-content {
+  background-color: color-mix(
+    in srgb,
+    color-mix(
+      in srgb,
+      var(--colorBg),
+      var(--colorHighlightBg)
+    ),
+    var(--lessTransparent)
+  ); /* VIVALDI SETTINGS WERENT READABLE WITH COLORBG */
+}
+
+/* CTRL+F */
+
+.find-in-page-wrapper {
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  ); /* BG COLOR OF CTRL F */
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-bottom: none;
+  border-top-left-radius: var(
+    --radius
+  ); /* FIX FOR TAB TILES */
+  border-top-right-radius: var(
+    --radius
+  );
+}
+
+/* WORKSPACES WINDOW + SOME ADJUSTING FOR PAGE TILING WINDOW */
+
+.button-popup {
+  /* BG OF WORKSPACE WINDOW PART 1 */
+  background-color: color-mix(
+    in srgb,
+    color-mix(
+      in srgb,
+      var(--colorBg),
+      var(--colorHighlightBg)
+    ),
+    var(--lessTransparent)
+  );
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  /* width: 194px; */
+}
+
+.theme-dark .WorkspacePopup {
+  /* BG OF WORKSPACE WINDOW PART 2 DARK MODE */
+  background-color: transparent;
+}
+
+.WorkspacePopup {
+  /* BG OF WORKSPACE WINDOW PART 2 LIGHT MODE */
+  background-color: transparent;
+}
+
+.WorkspacePopup-Items
+  .workspace-item-wrapper
+  .checkmark,
+.WorkspacePopup-Items
+  .this-window
+  .checkmark {
+  /* ADJUSTING CHECKMARK OF ACTIVE WORKSPACE */
+  margin-right: 11px;
+  margin-top: 3px;
+  fill: var(--colorFg);
+}
+
+.theme-dark
+  .WorkspacePopup-Items
+  .workspace-item-wrapper,
+.theme-dark
+  .WorkspacePopup-Items
+  .this-window {
+  /* BG OF WORKSPACES DARK MODE */
+  background-color: transparent;
+  padding: 4px;
+}
+
+.WorkspacePopup-Items
+  .workspace-item-wrapper,
+.WorkspacePopup-Items .this-window {
+  /* BG OF WORKSPACES LIGHT MODE */
+  background-color: transparent;
+  padding: 4px;
+}
+
+.WorkspacePopup-Items
+  .workspace-item-wrapper
+  .title
+  .tab-count,
+.WorkspacePopup-Items
+  .this-window
+  .title
+  .tab-count {
+  color: var(
+    --colorFg
+  ); /* FONT COLOR OF NUMBER OF TABS */
+}
+
+.button-popup-right.button-popup-arrow-dark:before {
+  border-bottom-color: transparent; /* REMOVING ARROW */
+}
+
+.WorkspacePopup
+  .button-toolbar
+  > button {
+  /* BG COLOR OF NEW WORKSPACE BUTTON PART 1 */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.WorkspacePopup .FormButton {
+  /* BG COLOR OF NEW WORKSPACE BUTTON PART 2 */
+  background-image: none;
+}
+
+.WorkspacePopup-Items hr {
+  /* AJDUSTING MARGIN OF SEPARATOR */
+  margin-top: 5px;
+  margin-bottom: 1px;
+}
+
+:not(
+    :active,
+    .workspace-item-wrapper
+  ).WorkspacePopup-Items
+  .workspace-item-wrapper:hover {
+  /* REMOVING HOVER FROM EDITOR OF BG PART 1 */
+  background-color: transparent;
+}
+
+.WorkspacePopup-Items
+  .workspace-item-wrapper:hover:not(
+    .Workspace-Editor.workspace-item-wrapper
+  ) {
+  /* REMOVING HOVER FROM EDITOR OF BG PART 2 */
+  background-color: var(
+    --colorBg
+  ) !important;
+}
+
+.WorkspacePopup-Items
+  .workspace-item-wrapper
+  input:focus,
+.WorkspacePopup-Items
+  .workspace-item-wrapper
+  input {
+  /* CHANGING BG COLOR OF INPUT BAR OF NEW WORKSPACE NAME */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.Workspace-Editor.workspace-item-wrapper
+  .workspace-buttons {
+  border: none; /* REMOVING BORDER AROUND ICON EMOJI BUTTONS */
+}
+
+.Workspace-Editor.workspace-item-wrapper
+  .workspace-buttons
+  input.active {
+  /* CHANGING BG COLOR OF ACTIVE ICON EMOJI BUTTON */
+  background-color: var(--colorBg);
+}
+
+.Workspace-Editor.workspace-item-wrapper
+  .workspace-buttons
+  input {
+  /* CHANGING BG COLOR OF NON-ACTIVE ICON EMOJI BUTTON */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.Workspace-Editor.workspace-item-wrapper
+  .workspace-buttons
+  input:hover {
+  /* CHANGING HOVER OF BG COLOR OF NON-ACTIVE ICON EMOJI BUTTON */
+  background-color: var(--colorBg);
+}
+
+.Workspace-Editor.workspace-item-wrapper
+  .workspaces
+  input[type="text"] {
+  /* ADJUSTING INPUT ANY EMOJI */
+  border: none;
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.WorkspacePopup input {
+  /* CHANGING BG COLOR OF BUTTONS IN CREATE NEW WORKSPACE */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.Workspace-Editor.workspace-item-wrapper
+  .workspaces
+  input[type="submit"] {
+  /* REMOVING BORDER OF DONE BUTTON */
+  border-color: transparent;
+}
+
+.WorkspacePopup input[type="submit"] {
+  /* ADJUSTING DONE BUTTON */
+  background-image: none;
+}
+
+/* PAGE TILING WINDOW */
+
+.button-popup.ToolbarButtonPopup-DefaultStyles
+  h2 {
+  /* ADJUSTING PAGE TILING H2 */
+  background-color: transparent;
+  border-bottom: none;
+}
+
+.button-popup-arrow-light:before {
+  /* REMOVING ARROW */
+  border-bottom-color: transparent;
+}
+
+/* CALENDAR NOTIFICATIONS WINDOW */
+
+#modal-bg.calendar-alarm {
+  /* REMOVING COLOR WHICH MADE BROWSER DARKER WHEN NOTIFICATION SHOWS */
+  background-color: transparent;
+}
+
+.CalendarNotifications {
+  /* ADJUSTING BG OF CALENDAR NOTIFICATION */
+  background-color: color-mix(
+    in srgb,
+    color-mix(
+      in srgb,
+      var(--colorBg),
+      var(--colorHighlightBg)
+    ),
+    var(--lessTransparent)
+  );
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+}
+
+.dialog-footer {
+  /* REMOVING BORDER AND BG COLOR  OF FOOTER OF NOTIFICATION*/
+  background-color: transparent;
+  border-top: none;
+}
+
+.dialog-header {
+  /* ADJUSTING PADDING OF HEADER */
+  padding: 12px 12px 5px;
+}
+
+.CalendarNotification-Content {
+  /* ADJUSTING MARGIN OF NAME OF EVENT */
+  margin: 0 5px 0 5px;
+}
+
+.dialog-double-header,
+.dialog-content,
+.dialog-footer {
+  /* ADJUSTING PADDING OF FOOTER */
+  padding: 12px 12px;
+}
+
+/* TAB BUTTON WINDOW */
+
+.TabButtonPopup {
+  /* BG COLOR OF HEADER */
+  background: transparent;
+}
+
+.TabButtonPopup > header {
+  /* ADJSUTING POSITION OF SEARCHBAR */
+  padding: 6px 6px 0px 6px;
+}
+
+.TabButtonPopup
+  > header
+  .qc-entry:focus-within {
+  /* REMOVING OUTLINE OF SEARHBAR WHEN FOCUSED */
+  outline: none;
+}
+
+.TabButtonPopup > header .qc-entry {
+  /* REMOVING BORDER OF SEARCHBAR WHEN NOT IN FOCUS */
+  border: 1px solid transparent;
+}
+
+.TabButtonPopup > header .qc-entry {
+  /* BG COLOR OF SEARCH BAR */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.TabButtonPopup
+  > header
+  .button-toolbar
+  > button:hover {
+  /* BG COLOR OF HOVER OF MENU ICON */
+  background-color: var(--colorBg);
+}
+
+.TabButtonPopup .dialog-content,
+.TabButtonPopup .no-results {
+  /* BG COLOR OF THE REST */
+  background-color: transparent;
+}
+
+.theme-dark
+  .TabButtonPopup
+  .vivaldi-tree
+  .VivaldiList
+  .tree-item
+  .tree-row {
+  /* BG BEHIND TEXT DARK MODE */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.TabButtonPopup
+  .vivaldi-tree
+  .VivaldiList
+  .tree-item
+  .tree-row {
+  /* BG BEHIND TEXT LIGHT MODE */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.TabButtonPopup .quick-commands,
+.TabButtonPopup .dialog-content,
+.TabButtonPopup .no-results {
+  /* BG OF RESULTS FROM SEARCH BAR PART 1 */
+  background-color: transparent;
+}
+
+.TabButtonPopup
+  .quick-commands
+  > .VivaldiList
+  .VivaldiList-Offset {
+  padding: 6px 6px;
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  ); /* BG OF RESULTS FROM SEARCH BAR PART 2 */
+  border-radius: var(
+    --radiusHalf
+  ); /* BORDER RADIUS OF RESULTS PART 1 */
+}
+
+.TabButtonPopup .VivaldiList {
+  /* BORDER RADIUS OF RESULTS PART 2 */
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(
+    --radius
+  );
+}
+
+.TabButtonPopup
+  .tree-row[data-selected]
+  .window-entry:not(
+    .window-entry-button
+  ) {
+  /* BG OF SELECTED ITEM IN LIST */
+  background-color: var(--colorBg);
+}
+
+.hasfocus
+  .TabButtonPopup
+  .vivaldi-tree
+  .VivaldiList:focus-within
+  .tree-row[data-selected]
+  .window-entry:not(
+    .window-entry-button
+  ) {
+  background-color: var(
+    --colorBg
+  ); /* BG OF SELECTED ITEM IN LIST */
+}
+
+.TabButtonPopup
+  .tree-row
+  .window-entry:not(
+    .window-entry-button
+  ):hover {
+  /* BG OF HOVER OF ITEM IN LIST PART 1 */
+  background-color: var(--colorBg);
+}
+
+.TabButtonPopup
+  .tree-row-selected
+  label,
+.TabButtonPopup .tree-row:hover label {
+  /* BG OF HOVER OF ITEM IN LIST PART 2 */
+  background-color: transparent;
+}
+
+.TabButtonPopup
+  .vivaldi-tree
+  .VivaldiList
+  .tree-item
+  .tree-row:not([data-selected])
+  .colored {
+  /* BG COLOR OF TAB GROUPS IN TAB BUTTON */
+  background-color: color-mix(
+    in srgb,
+    color-mix(
+      in srgb,
+      var(--colorBg),
+      var(--colorHighlightBg)
+    ),
+    var(--lessTransparent)
+  );
+}
+
+.TabButtonPopup .vivaldi-tree input {
+  /* BG OF BOTTOM BUTTON */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.TabButtonPopup .window-entry-button {
+  /* FIXING POSITION OF BOTTOM BUTTON */
+  padding: 8px 3px;
+}
+
+/* DOWNLOAD WINDOW */
+
+#modal-bg.dialog-download {
+  /* FIXING BG COLOR */
+  background-color: transparent;
+}
+
+/* DELETE WORKSPACE WINDOW */
+
+.theme-dark
+  input[type="button"]:not(
+    .circular
+  ).danger {
+  /* FIXING FONT COLOR DARK MODE */
+  color: var(--colorFg);
+}
+
+input[type="button"]:not(
+    .circular
+  ).danger {
+  /* FIXING FONT COLOR LIGHT MODE */
+  color: var(--colorFg) !important;
+}
+
+input[type="button"]:not(
+    .circular
+  ).danger,
+input[type="submit"].danger,
+input[type="color"].danger,
+.FormButton.danger {
+  /* FIXING DELETE BUTTON */
+  color: var(--colorFg);
+  border-color: transparent;
+}
+
+input[type="button"]:not(
+    .circular
+  ).danger.danger:hover {
+  /* FIXING HOVER OF DELETE BUTTON */
+  color: var(--colorFg);
+  background: var(--colorBg);
+  border-color: transparent;
+  background-image: linear-gradient(
+    var(--colorBg),
+    var(--colorBg)
+  );
+}
+
+/* TOOLBAR EDITOR WINDOW */
+
+#modal-bg.toolbar-editor
+  section.dialog-preview {
+  /* REMOVING BG AND BORDER OF DEFAULT TOOLBAR PREVIEW */
+  background-color: transparent;
+  border: none;
+}
+
+/* QUICK COMMANDS WINDOW */
+
+#modal-bg
+  .quick-command-container
+  input {
+  /* BG COLOR OF INPUT */
+  background-color: transparent;
+}
+
+.quick-command-container
+  .quick-command-search,
+.quick-command-container
+  .quick-command-search-hint {
+  /* REMOVING BORDER UNDER INPUT */
+  border-bottom: none;
+}
+
+.quick-command-container
+  .quick-command-search-hint {
+  /* REMOVING OPACITY OF FONT IN INPUT */
+  opacity: 1;
+}
+
+.quick-command-container
+  .quick-commands {
+  /* BG COLOR OF WINDOW */
+  background-color: transparent;
+}
+
+.hasfocus
+  .quick-command-container
+  .quick-commands
+  .quick-command[data-selected] {
+  /* FIXING BG COLOR OF HOVER OF ITEM WHEN BROWSER IS IN FOCUS */
+  color: var(--colorFg);
+  background-color: var(--colorBg);
+}
+
+/* ADD BOOKMARK TO SPEED DIAL WINDOW */
+
+.startpage #modal-bg.startpage-drawer {
+  /* BG COLOR OF WHOLE WINDOW */
+  background-color: color-mix(
+    in srgb,
+    color-mix(
+      in srgb,
+      var(--colorBg),
+      var(--colorHighlightBg)
+    ),
+    var(--lessTransparent)
+  );
+  backdrop-filter: none;
+}
+
+.startpage
+  #modal-bg.startpage-drawer
+  section
+  .SpeedDial {
+  /* BG COLOR OF SITES */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+  border-radius: var(--radius);
+}
+
+.startpage
+  #modal-bg.startpage-drawer
+  .FormButton {
+  /* FIXING NEW FOLDER BUTTON */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+  border-color: transparent;
+  background-image: none;
+}
+
+.startpage
+  #modal-bg.startpage-drawer
+  .FormButton:hover {
+  /* FIXING HOVER OF NEW FOLDER BUTTON */
+  background-color: var(--colorBg);
+}
+
+/* ADD BOOKMARK WINDOW */
+
+.BookmarkPopup .dialog-header {
+  /* BG COLOR OF HEADER IN BOOKMARK WINDOW */
+  background-color: transparent;
+}
+
+.BookmarkPopup {
+  /* BG COLOR OF WHOLE BOOKMARK WINDOW */
+  background-color: transparent;
+}
+
+.BookmarkInputField:focus-within {
+  /* REMOVING ACTIVE UNDERLINE */
+  border-bottom-color: transparent;
+  box-shadow: none;
+}
+
+.BookmarkInputField {
+  /* REMOVING REST UNDERLINES */
+  border-bottom: transparent;
+}
+
+.BookmarkPopup
+  .button-toolbar
+  > button {
+  /* FIXING NEW FOLDER BUTTON PART 1 */
+  border: none;
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.BookmarkLocationSelector-AddFolderButton
+  > button {
+  /* FIXING NEW FOLDER BUTTON PART 2 */
+  background-image: none;
+}
+
+.BookmarkPopup
+  .button-toolbar
+  > button:hover {
+  /* FIXING HOVER OF NEW FOLDER BUTTON */
+  background-color: var(--colorBg);
+}
+
+.BookmarkPopup input {
+  /* FIXING BG COLOR OF INPUTS */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+/* ALLOW SOMETHING WINDOW */
+
+.addressfield-popup-container
+  .addressfield-popup
+  .addressfield-popup-header,
+.addressfield-popup-container
+  .addressfield-popup
+  .dialog-footer {
+  /* BG COLOR OF WHOLE ALLOW WINDOW */
+  background-color: transparent;
+  border-bottom: transparent;
+}
+
+.addressfield-popup-container input {
+  /* FIXING BUTTONS */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+/* CONTENT BLOCKER WINDOW */
+
+#app .ContentBlocker-Header {
+  /* REMOVING BORDER OF HEADER */
+  border-bottom: transparent;
+}
+
+button.privacy-btn-icon {
+  /* FIXING PRIVACY BUTTON */
+  background-image: none;
+  border-color: transparent;
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.ContentBlocker-Field input {
+  /* FIXING MANAGE BUTTON */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+/* TRANSLATE WINDOW FROM ULR BAR */
+
+.TranslatePopup {
+  /* FIXING BG COLOR OF UPPER PART */
+  background-color: transparent;
+}
+
+.button-popup.ToolbarButtonPopup-DefaultStyles
+  footer {
+  /* FIXING BG COLOR OF FOOTER PART */
+  background: transparent;
+  border-top: transparent;
+}
+
+.TranslatePopup input {
+  /* FIXING TRANSLATE BUTTON */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+}
+
+.TranslatePopup-Buttons-MenuButton {
+  /* FIXING OPTIONS BUTTON */
+  background-color: color-mix(
+    in srgb,
+    var(--colorBg),
+    var(--lessTransparent)
+  );
+  border-color: transparent;
+}
