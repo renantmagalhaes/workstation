@@ -6,6 +6,12 @@ PING_COUNT=3
 CHECK_INTERVAL=60
 LOG_FILE="$HOME/vpn-connection-status.log"
 
+if ! command -v windscribe-cli &> /dev/null; then
+    # We can't log to the file yet if we want to be safe, but let's assume it's fine
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Error: windscribe-cli not found. Aborting." >> "$LOG_FILE"
+    exit 1
+fi
+
 sleep "$INITIAL_DELAY"
 
 while true; do
