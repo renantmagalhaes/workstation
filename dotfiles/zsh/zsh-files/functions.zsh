@@ -545,3 +545,18 @@ genpass() {
 alias passgen='genpass'
 alias password_generator='genpass'
 alias pwgen_rtm='genpass'
+
+# Generate a random number
+# Usage: genum [max] OR genum [min] [max]
+random_number() {
+  if [ $# -eq 0 ]; then
+    # Default: random number between 1 and 100
+    echo $(( RANDOM % 100 + 1 ))
+  elif [ $# -eq 1 ]; then
+    # Range: 1 to [max]
+    echo $(( RANDOM % $1 + 1 ))
+  else
+    # Range: [min] to [max]
+    echo $(( RANDOM % ($2 - $1 + 1) + $1 ))
+  fi
+}
