@@ -549,14 +549,15 @@ alias pwgen_rtm='genpass'
 # Generate a random number
 # Usage: genum [max] OR genum [min] [max]
 random_number() {
+# Pull a 4-byte (32-bit) unsigned integer from /dev/urandom
+  # This gives us a range up to 4,294,967,295
+  local seed=$(od -An -N4 -tu4 < /dev/urandom | tr -d ' ')
+  
   if [ $# -eq 0 ]; then
-    # Default: random number between 1 and 100
-    echo $(( RANDOM % 100 + 1 ))
+    echo $(( seed % 100 + 1 ))
   elif [ $# -eq 1 ]; then
-    # Range: 1 to [max]
-    echo $(( RANDOM % $1 + 1 ))
+    echo $(( seed % $1 + 1 ))
   else
-    # Range: [min] to [max]
-    echo $(( RANDOM % ($2 - $1 + 1) + $1 ))
+    echo $(( seed % ($2 - $1 + 1) + $1 ))
   fi
 }
