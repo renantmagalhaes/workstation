@@ -533,3 +533,15 @@ vpn() {
       ;;
   esac
 }
+
+# Generate a secure, web-compatible, shell-safe password
+# Usage: genpass [length] [count] (Defaults to 20 1)
+genpass() {
+  local len=${1:-20}
+  local count=${2:-1}
+  pwgen -s -y -c -n -B -1 "$len" "$count" -r "\`~[](){}:;<>^\\|'\",./?*$"
+}
+
+alias passgen='genpass'
+alias password_generator='genpass'
+alias pwgen_rtm='genpass'
