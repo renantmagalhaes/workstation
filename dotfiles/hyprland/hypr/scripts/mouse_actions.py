@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# To fix "/dev/uinput" permissions:
+# sudo rm /etc/udev/rules.d/40-uinput.rules /etc/udev/rules.d/90-uinput.rules
+# echo 'KERNEL=="uinput", GROUP="input", MODE="0660", TAG+="uaccess", RUN+="/usr/bin/setfacl -m g:input:rw /dev/$name"' | sudo tee /etc/udev/rules.d/99-uinput.rules
+# sudo udevadm control --reload-rules && sudo udevadm trigger
+# sudo setfacl -m g:input:rw /dev/uinput
 import asyncio
 import subprocess
 import json
@@ -262,6 +267,7 @@ async def main():
         logger.error(f"Failed to open /dev/uinput: {err}")
         logger.error(
             "Ensure /dev/uinput is group 'input' and you are in that group, or create a udev rule.")
+        logger.error(f"See the top of this script ({__file__}) for the required setup commands.")
         sys.exit(1)
 
     monmap = MonitorMap()
