@@ -163,7 +163,7 @@ elif [[ $os_check == "linux" ]]; then
   # -----------------
   # Linux (base)
   # -----------------
-  export PATH="$HOME/.local/bin:/usr/sbin:/usr/share/code/bin:$HOME/.cargo/bin:$HOME/.local/share/nvim/mason/bin:$PATH"
+  export PATH="$HOME/.local/bin:/usr/sbin:/usr/share/code/bin:$HOME/.cargo/bin:$HOME/.local/share/nvim/mason/bin:$HOME/go/bin:$PATH"
 
   # Linuxbrew
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
