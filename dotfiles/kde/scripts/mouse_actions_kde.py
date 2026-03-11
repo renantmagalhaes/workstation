@@ -113,9 +113,25 @@ async def handle_device(dev, args, logger, vc):
                 logger.debug(f"Wheel {v} at Virtual({int(vc.x)}, {int(vc.y)}) -> Edge: {edge}")
                 
                 if edge != "none":
-                    cmd = "nextDesktop" if v < 0 else "previousDesktop"
-                    logger.info(f"Virtual Edge {edge} scroll -> {cmd}")
-                    subprocess.Popen(["qdbus6", "org.kde.KWin", "/KWin", f"org.kde.KWin.{cmd}"])
+                    try:
+                        # Get current desktop index and total count to prevent wrapping
+                        current = int(run_command(["qdbus6", "org.kde.KWin", "/KWin", "org.kde.KWin.currentDesktop"]).strip())
+                        total = int(run_command(["qdbus6", "org.kde.KWin", "/VirtualDesktopManager", "org.kde.KWin.VirtualDesktopManager.count"]).strip())
+                        
+                        if v < 0: # Scroll up -> nextDesktop
+                            if current < total:
+                                logger.info(f"Virtual Edge {edge} scroll UP -> nextDesktop")
+                                subprocess.Popen(["qdbus6", "org.kde.KWin", "/KWin", "org.kde.KWin.nextDesktop"])
+                            else:
+                                logger.debug(f"At last desktop ({current}/{total}), stopping.")
+                        else: # Scroll down -> previousDesktop
+                            if current > 1:
+                                logger.info(f"Virtual Edge {edge} scroll DOWN -> previousDesktop")
+                                subprocess.Popen(["qdbus6", "org.kde.KWin", "/KWin", "org.kde.KWin.previousDesktop"])
+                            else:
+                                logger.debug(f"At first desktop ({current}/{total}), stopping.")
+                    except Exception as e:
+                        logger.error(f"Desktop switch error: {e}")
 
         # 3. Track Right Click
         elif ev.type == EC.EV_KEY and ev.code == EC.BTN_RIGHT and ev.value == 1:
