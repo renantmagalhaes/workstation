@@ -24,7 +24,7 @@
     // "custom/swaync",
     // "sway/language",
     // "backlight",
-    "network",
+    //"network",
     // "bluetooth",
     "custom/temperature",
     "custom/notification",
@@ -159,8 +159,13 @@
   "network": {
     "format-wifi": "{signalStrength}% ",
     "format-ethernet": "",
+    "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "󰤭",
-    "tooltip": true
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "tooltip-format": "{ifname} via {gwaddr}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) \nIP: {ipaddr}\nGW: {gwaddr}",
+    "tooltip-format-ethernet": "{ifname} \nIP: {ipaddr}\nGW: {gwaddr}",
+    "tooltip-format-disconnected": "Disconnected"
   },
   "bluetooth": {
     "format": "{status} ",
