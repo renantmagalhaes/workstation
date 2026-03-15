@@ -1060,7 +1060,7 @@ button.vivaldi .expand-arrow {
   /* Ensure a solid background so it blocks the page when visible */
   background-color: var(--colorBg) !important;
   border-radius: var(--radius) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0) !important;
 }
 
 /* Expand mainbar on hover or when a child element (like address bar) is focused */
@@ -1083,6 +1083,6 @@ button.vivaldi .expand-arrow {
   right: 0;
   /* 35px ensures that even when the bar is physically shifted up by -30px, 
      the trigger zone extends 5px down into the actual visible screen area. */
-  height: 35px;
+  height: 10px;
   background: transparent;
 }
