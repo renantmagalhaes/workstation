@@ -16,6 +16,7 @@ is_running() {
 # Function to launch waybar
 launch_waybar() {
     if ! is_running "waybar"; then
+        ~/.config/waybar/scripts/set_cpu_temp_symlink.sh
         waybar >/dev/null 2>&1 &
     fi
 }

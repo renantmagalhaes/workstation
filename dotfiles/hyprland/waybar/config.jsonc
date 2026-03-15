@@ -169,9 +169,11 @@
     "tooltip": true
   },
   "temperature": {
+    "interval": 10,
     "format": "{temperatureC}°C ",
     "critical-threshold": 80,
-    "hwmon-path": "/sys/class/thermal/thermal_zone0/temp",
+    "hwmon-path": "/home/rtm/.config/waybar/cpu_temp",
+    "on-click": "~/.config/waybar/scripts/sys_info_modal.sh",
     "tooltip": true
   },
   "battery": {
