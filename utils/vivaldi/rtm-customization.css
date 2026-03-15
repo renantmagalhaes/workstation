@@ -1065,13 +1065,19 @@ button.vivaldi .expand-arrow {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0) !important;
 }
 
-/* Expand mainbar on hover or when a child element (like address bar) is focused */
-#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar:hover,
-#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar:focus-within {
+/* Expand mainbar on hover with a small delay to prevent accidental activation */
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar:hover {
   /* Restore the original 8px top margin. The UI below it will shift down by 38px. */
   margin-top: 8px !important;
   opacity: 1;
-  /* Instant appearance on interaction */
+  /* Small delay before activating on hover */
+  transition-delay: 0.2s !important;
+}
+
+/* Instant appearance when a child element (like address bar) is focused */
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar:focus-within {
+  margin-top: 8px !important;
+  opacity: 1;
   transition-delay: 0s !important;
 }
 
