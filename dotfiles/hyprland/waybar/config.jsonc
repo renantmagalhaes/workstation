@@ -43,7 +43,7 @@
       "default": "",
       "focused": "",
       "urgent": "",
-      "visible": ""
+      "visible": " "
     },
     "tooltip": true,
     "tooltip-format": "{name}",

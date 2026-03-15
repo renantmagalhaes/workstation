@@ -97,9 +97,19 @@ button:hover {
 }
 
 #workspaces button.visible {
-  /* background: rgba(0, 0, 0, 0.5); */
   background: transparent;
   border-radius: 7px;
+  background-image: url("../icons/workspace-visible-pill.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 32px 23px;
+  color: transparent;
+  font-size: 0;
+  min-width: 16px;
+}
+
+#workspaces button.visible label {
+  font-size: 0;
 }
 
 #mode {
