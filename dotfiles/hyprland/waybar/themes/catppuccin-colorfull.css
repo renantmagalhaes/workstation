@@ -479,18 +479,18 @@ label:focus {
   background-color: #181825;
 }
 
-#temperature {
+#temperature, #custom-temperature {
   background: rgba(30, 30, 46, 0.5);
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
   color: #88d2ff;
 }
 
-#temperature.critical {
+#temperature, #custom-temperature.critical {
   color: #ff6262;
 }
 
-#temperature:hover {
+#temperature, #custom-temperature:hover {
   background-color: #181825;
 }
 
