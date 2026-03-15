@@ -91,8 +91,8 @@
     "exec": "~/.config/waybar/scripts/waybar-weather.sh",
     "on-click": "flatpak run io.github.amit9838.mousam",
     "interval": 600,
-    "tooltip": false,
-    "format": "{}"
+    "return-type": "json",
+    "tooltip": true
   },
   // System load average
   "custom/notification": {
