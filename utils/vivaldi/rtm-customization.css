@@ -2,60 +2,6 @@
 /* RTM */
 /* ========================================================= */
 
-
-/* ========================================================= */
-/* Auto-hide Address/Extensions Top Bar (Displacing layout)  */
-/* ========================================================= */
-
-/* Hide mainbar by sliding it up with negative margin, so it takes no vertical space */
-#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar {
-  /* 
-     Height is 30px. By setting margin-top to -30px, the total vertical space 
-     occupied by the element is 0, so the tabs and webpage shift to the top.
-     Note: this overrides the 8px top margin set earlier.
-  */
-  margin-top: -30px !important;
-  z-index: 100 !important;
-  position: relative !important;
-  opacity: 0;
-  
-  /* Animate the margin to push the layout downwards */
-  transition: margin-top 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-  transition-delay: 0.3s !important;
-  
-  /* Ensure a blurred translucent background so it blends with the theme when visible */
-  background-color: var(--bg) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border-radius: var(--radius) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0) !important;
-}
-
-/* Expand mainbar on hover or when a child element (like address bar) is focused */
-#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar:hover,
-#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar:focus-within {
-  /* Restore the original 8px top margin. The UI below it will shift down by 38px. */
-  margin-top: 8px !important;
-  opacity: 1;
-  /* Instant appearance on interaction */
-  transition-delay: 0s !important;
-}
-
-/* Invisible hover trigger area extending below the hidden mainbar 
-   so the user's mouse can trigger it by touching the top of the browser screen */
-#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  /* 35px ensures that even when the bar is physically shifted up by -30px, 
-     the trigger zone extends 5px down into the actual visible screen area. */
-  height: 10px;
-  background: transparent;
-}
-
-
 /* ========================================================= */
 /* Tab Color */
 /* ========================================================= */
@@ -1089,4 +1035,56 @@ button.vivaldi .expand-arrow {
   .button-title {
   max-width: none !important;
   opacity: 1 !important;
+}
+
+/* ========================================================= */
+/* Auto-hide Address/Extensions Top Bar (Displacing layout)  */
+/* ========================================================= */
+
+/* Hide mainbar by sliding it up with negative margin, so it takes no vertical space */
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar {
+  /* 
+     Height is 30px. By setting margin-top to -30px, the total vertical space 
+     occupied by the element is 0, so the tabs and webpage shift to the top.
+     Note: this overrides the 8px top margin set earlier.
+  */
+  margin-top: -30px !important;
+  z-index: 100 !important;
+  position: relative !important;
+  opacity: 0;
+  
+  /* Animate the margin to push the layout downwards */
+  transition: margin-top 0.25s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  transition-delay: 0.3s !important;
+  
+  /* Ensure a blurred translucent background so it blends with the theme when visible */
+  background-color: var(--bg) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0) !important;
+}
+
+/* Expand mainbar on hover or when a child element (like address bar) is focused */
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar:hover,
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar:focus-within {
+  /* Restore the original 8px top margin. The UI below it will shift down by 38px. */
+  margin-top: 8px !important;
+  opacity: 1;
+  /* Instant appearance on interaction */
+  transition-delay: 0s !important;
+}
+
+/* Invisible hover trigger area extending below the hidden mainbar 
+   so the user's mouse can trigger it by touching the top of the browser screen */
+#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  /* 35px ensures that even when the bar is physically shifted up by -30px, 
+     the trigger zone extends 5px down into the actual visible screen area. */
+  height: 10px;
+  background: transparent;
 }
