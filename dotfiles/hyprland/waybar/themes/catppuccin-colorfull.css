@@ -97,7 +97,8 @@ button:hover {
 }
 
 #workspaces button.visible {
-  background: rgba(0, 0, 0, 0.5);
+  /* background: rgba(0, 0, 0, 0.5); */
+  background: transparent;
   border-radius: 7px;
 }
 
