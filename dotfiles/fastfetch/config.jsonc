@@ -89,6 +89,11 @@
       "key": "  \u001B[38;5;186m\u001B[0m "
     },
     {
+      "type": "colors",
+      "key": "  \u001B[38;5;186m\u001B[0m ",
+      "symbol": "circle"
+    },
+    {
       "type": "custom",
       "format": ""
     },
