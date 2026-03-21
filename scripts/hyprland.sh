@@ -71,12 +71,16 @@ fi
 echo "🔄 Updating system..."
 sudo zypper refresh && sudo zypper update
 
+echo "📦 Adding QuickShell repository..."
+sudo zypper addrepo https://download.opensuse.org/repositories/home:AvengeMedia:danklinux/openSUSE_Tumbleweed/home:AvengeMedia:danklinux.repo
+sudo zypper refresh
+
 echo "📦 Installing core packages..."
 sudo zypper install -y hyprland waybar wofi rofi playerctl pavucontrol hyprlock blueman hyprland-qtutils nwg-displays hypridle libevdev-devel evtest swappy grim slurp wl-clipboard mako pamixer xdg-desktop-portal-hyprland wireplumber python313-evdev python313-libevdev wlogout feh lxappearance scrot NetworkManager-applet pcp-pmda-lmsensors papirus-icon-theme pasystray jgmenu mate-polkit libnotify4 libnotify-devel libnotify-tools gnome-calendar cliphist gawk xdg-utils xcb-util-cursor-devel nautilus libpixman-1-0-devel pango-devel libudev1 hyprland-devel libinput-devel systemd-devel libdrm-devel libxkbcommon-devel wayland-devel glslang-devel
 sudo zypper in -y patterns-hyprland-hyprland_extra
 
 echo "📦 Installing Hyprland extras..."
-sudo zypper install -y hyprshot hyprpicker swww dunst kitty
+sudo zypper install -y hyprshot hyprpicker swww dunst kitty quickshell-git
 
 ###########################################
 # Add user groups
@@ -89,6 +93,21 @@ sudo usermod -aG input $USER
 ###########################################
 
 mkdir -p "$HOME/GIT-REPOS/CORE"
+
+###########################################
+# QS-LAUNCHER
+###########################################
+
+echo "📥 Setting up QS-Launcher..."
+
+QS_LAUNCHER_DIR="$HOME/.QS-Launcher"
+
+if [ -d "$QS_LAUNCHER_DIR/.git" ]; then
+    echo "ℹ️ QS-Launcher already cloned, skipping."
+else
+    rm -rf "$QS_LAUNCHER_DIR"
+    git clone git@github.com:renantmagalhaes/QS-Launcher.git "$QS_LAUNCHER_DIR"
+fi
 
 ###########################################
 # HYPRLAND DESKTOP ENTRY
