@@ -1,0 +1,100 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "kitty-icat",
+    "source": "~/.config/fastfetch/framework_white.png",
+    "padding": {
+      // "right": 40,
+      "left": 60
+    }
+  },
+  "display": {
+    "separator": " :: "
+  },
+  "modules": [
+    {
+      "type": "custom",
+      "format": ""
+    },
+    {
+      "type": "custom",
+      "format": "┌─────────── \u001B[1m    ハードウェア    \u001B[0m ───────────┐"
+    },
+    {
+      "type": "custom",
+      "format": ""
+    },
+    {
+      "type": "custom",
+      "format": "    :: MAINFRAME"
+    },
+    {
+      "type": "cpu",
+      "format": "{name} ({cores-physical}C/{cores-logical}T)",
+      "key": "  \u001B[38;5;81m\u001B[0m "
+    },
+    {
+      "type": "gpu",
+      "key": "  \u001B[38;5;211m󰨇\u001B[0m ",
+      "format": "{name}"
+    },
+    {
+      "type": "memory",
+      "key": "  \u001B[38;5;220m\u001B[0m "
+    },
+    {
+      "type": "disk",
+      "key": "  \u001B[38;5;153m\u001B[0m ",
+      "format": "{size-used} / {size-total} ({size-percentage})"
+    },
+    {
+      "type": "monitor",
+      "key": "  \u001B[38;5;121m󰍹\u001B[0m ",
+      "format": "{name} ({width}x{height})"
+    },
+    {
+      "type": "custom",
+      "format": ""
+    },
+    {
+      "type": "custom",
+      "format": "├─────────── \u001B[1m    ソフトウェア    \u001B[0m ───────────┤"
+    },
+    {
+      "type": "custom",
+      "format": ""
+    },
+    {
+      "type": "os",
+      "key": "  \u001B[38;5;39m\u001B[0m "
+    },
+    {
+      "type": "kernel",
+      "key": "  \u001B[38;5;180m󰌽\u001B[0m "
+    },
+    {
+      "type": "de",
+      "key": "  \u001B[38;5;114m\u001B[0m "
+    },
+    {
+      "type": "datetime",
+      "key": "  \u001B[38;5;215m󰃰\u001B[0m "
+    },
+    {
+      "type": "shell",
+      "key": "  \u001B[38;5;141m\u001B[0m "
+    },
+    {
+      "type": "packages",
+      "key": "  \u001B[38;5;186m\u001B[0m "
+    },
+    {
+      "type": "custom",
+      "format": ""
+    },
+    {
+      "type": "custom",
+      "format": "└────────────────────────────────────────┘"
+    }
+  ]
+}

@@ -201,6 +201,9 @@ ln -s -f $PWD/.dotfiles/kde/polybar/ ~/.config/
 #rm -rf ~/.config/jgmenu/
 ln -s -f $PWD/dotfiles/kde/jgmenu ~/.config/
 
+## Fastfetch
+ln -s -f $PWD/dotfiles/fastfetch/ ~/.config/
+
 ## KDE Tilling window setup
 bash ./scripts/kde-DE-transformation.sh
 
