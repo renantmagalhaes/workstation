@@ -5,7 +5,7 @@
     "source": "~/.config/fastfetch/framework_white.png",
     "padding": {
       // "right": 40,
-      "left": 60
+      // "left": 60
     }
   },
   "display": {
@@ -96,10 +96,10 @@
     {
       "type": "custom",
       "format": ""
-    },
-    {
-      "type": "custom",
-      "format": "└────────────────────────────────────────┘"
     }
+    // {
+    // "type": "custom",
+    // "format": "└────────────────────────────────────────┘"
+    // }
   ]
 }
