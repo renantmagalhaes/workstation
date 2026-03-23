@@ -9,9 +9,13 @@ LOCKSCREEN_DIR="/tmp/hyprlock"
 USE_PRE_BLUR="${USE_PRE_BLUR:-0}"
 BLUR_INTENSITY="${BLUR_INTENSITY:-5}"  # Only used if USE_PRE_BLUR=1
 LOCK_OVERLAY_DIR="${LOCK_OVERLAY_DIR:-$HOME/.config/hypr/lock-frames}"
-LOCK_OVERLAY_FPS="${LOCK_OVERLAY_FPS:-12}"
-LOCK_OVERLAY_CROSSFADE_MS="${LOCK_OVERLAY_CROSSFADE_MS:-80}"
+LOCK_OVERLAY_FPS="${LOCK_OVERLAY_FPS:-16}"
+LOCK_OVERLAY_CROSSFADE_MS="${LOCK_OVERLAY_CROSSFADE_MS:-45}"
 LOCK_OVERLAY_SCRIPT="$HOME/.dotfiles/hyprland/hypr/scripts/lock_overlay_frame.sh"
+LOCK_BG_BRIGHTNESS="${LOCK_BG_BRIGHTNESS:-0.87}"
+LOCK_BG_CONTRAST="${LOCK_BG_CONTRAST:-0.95}"
+LOCK_BG_VIBRANCY="${LOCK_BG_VIBRANCY:-0.22}"
+LOCK_BG_NOISE="${LOCK_BG_NOISE:-0.014}"
 
 # Find hyprlock config - check both standard location and dotfiles
 HYPRLOCK_CONFIG=""
@@ -142,6 +146,10 @@ if [[ -f "$HYPRLOCK_CONFIG" ]]; then
             else
                 echo "    blur_passes = 3"
             fi
+            echo "    brightness = $LOCK_BG_BRIGHTNESS"
+            echo "    contrast = $LOCK_BG_CONTRAST"
+            echo "    vibrancy = $LOCK_BG_VIBRANCY"
+            echo "    noise = $LOCK_BG_NOISE"
             echo "    color = \$base"
             echo "}"
 
