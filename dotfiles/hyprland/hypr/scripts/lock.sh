@@ -16,6 +16,12 @@ LOCK_BG_BRIGHTNESS="${LOCK_BG_BRIGHTNESS:-0.87}"
 LOCK_BG_CONTRAST="${LOCK_BG_CONTRAST:-0.95}"
 LOCK_BG_VIBRANCY="${LOCK_BG_VIBRANCY:-0.22}"
 LOCK_BG_NOISE="${LOCK_BG_NOISE:-0.014}"
+LOCK_DYNAMIC_ACCENT="${LOCK_DYNAMIC_ACCENT:-1}"  ##### MAKE THE COLORS MATCH THE BACKGROUND! #####
+
+accent_base_hex=""
+accent_alt_hex=""
+accent_base_rgb=""
+accent_alt_rgb=""
 
 # Find hyprlock config - check both standard location and dotfiles
 HYPRLOCK_CONFIG=""
@@ -89,6 +95,42 @@ capture_monitor() {
     return $((1 - captured))
 }
 
+extract_hex_from_image() {
+    local image_path="$1"
+    [[ -f "$image_path" ]] || return 1
+    command -v convert >/dev/null 2>&1 || return 1
+
+    local sampled_hex=""
+    sampled_hex=$(convert "$image_path" -resize 1x1\! -format '%[hex:p{0,0}]' info:- 2>/dev/null | tr '[:lower:]' '[:upper:]')
+    [[ "$sampled_hex" =~ ^[0-9A-F]{6}$ ]] || return 1
+
+    printf '%s\n' "$sampled_hex"
+}
+
+tune_hex_color() {
+    local base_hex="$1"
+    local modulate_args="${2:-135,180,100}"
+    [[ -n "$base_hex" ]] || return 1
+    command -v convert >/dev/null 2>&1 || return 1
+
+    local tuned_hex=""
+    tuned_hex=$(convert "xc:#$base_hex" -modulate "$modulate_args" -format '%[hex:p{0,0}]' info:- 2>/dev/null | tr '[:lower:]' '[:upper:]')
+    [[ "$tuned_hex" =~ ^[0-9A-F]{6}$ ]] || return 1
+
+    printf '%s\n' "$tuned_hex"
+}
+
+hex_to_rgb_csv() {
+    local hex="$1"
+    [[ "$hex" =~ ^[0-9A-Fa-f]{6}$ ]] || return 1
+
+    local red=$((16#${hex:0:2}))
+    local green=$((16#${hex:2:2}))
+    local blue=$((16#${hex:4:2}))
+
+    printf '%d, %d, %d\n' "$red" "$green" "$blue"
+}
+
 # Capture screenshots in parallel for speed
 captured_count=0
 pids=()
@@ -109,6 +151,23 @@ if [[ $captured_count -eq 0 ]]; then
     echo "Warning: No screenshots were captured. Hyprlock will use color fallback." >&2
 fi
 
+if [[ "$LOCK_DYNAMIC_ACCENT" == "1" ]] && command -v convert >/dev/null 2>&1; then
+    for monitor in $monitors; do
+        [[ -z "$monitor" ]] && continue
+        if [[ -f "$LOCKSCREEN_DIR/${monitor}.png" ]]; then
+            accent_base_hex=$(extract_hex_from_image "$LOCKSCREEN_DIR/${monitor}.png" || echo "")
+            [[ -n "$accent_base_hex" ]] && break
+        fi
+    done
+
+    if [[ -n "$accent_base_hex" ]]; then
+        accent_base_hex=$(tune_hex_color "$accent_base_hex" "135,180,100" || echo "$accent_base_hex")
+        accent_alt_hex=$(tune_hex_color "$accent_base_hex" "115,140,100" || echo "$accent_base_hex")
+        accent_base_rgb=$(hex_to_rgb_csv "$accent_base_hex" || echo "")
+        accent_alt_rgb=$(hex_to_rgb_csv "$accent_alt_hex" || echo "")
+    fi
+fi
+
 overlay_enabled=0
 overlay_reload_ms=0
 if [[ -x "$LOCK_OVERLAY_SCRIPT" ]] && [[ -d "$LOCK_OVERLAY_DIR" ]]; then
@@ -125,8 +184,28 @@ fi
 if [[ -f "$HYPRLOCK_CONFIG" ]]; then
     # Read the base config and generate per-monitor backgrounds
     {
-        # Include base config but skip existing background blocks
-        awk '/^background \{/,/^\}/ {next} {print}' "$HYPRLOCK_CONFIG"
+        # Include base config but skip existing background blocks. Inject dynamic
+        # accent variables right after the theme source line so widgets can use them.
+        awk -v accent_base_hex="$accent_base_hex" -v accent_alt_hex="$accent_alt_hex" -v accent_base_rgb="$accent_base_rgb" -v accent_alt_rgb="$accent_alt_rgb" '
+            /^background \{/ { skip = 1 }
+            skip && /^\}/ { skip = 0; next }
+            skip { next }
+            /^\$accent = / && accent_base_hex != "" { next }
+            /^\$accent_alt = / && accent_alt_hex != "" { next }
+            /^\$lock_accent_border = / && accent_base_rgb != "" { next }
+            /^\$lock_accent_ring = / && accent_base_rgb != "" { next }
+            /^\$lock_accent_focus = / && accent_base_rgb != "" { next }
+            { print }
+            /^source = / {
+                if (accent_base_hex != "") {
+                    printf "$accent = rgb(%s)\n", accent_base_hex
+                    printf "$accent_alt = rgb(%s)\n", accent_alt_hex != "" ? accent_alt_hex : accent_base_hex
+                    printf "$lock_accent_border = rgba(%s, 0.30)\n", accent_base_rgb
+                    printf "$lock_accent_ring = rgba(%s, 0.16)\n", accent_base_rgb
+                    printf "$lock_accent_focus = rgba(%s, 0.85)\n", accent_base_rgb
+                }
+            }
+        ' "$HYPRLOCK_CONFIG"
         
         # Add per-monitor background blocks
         echo ""
