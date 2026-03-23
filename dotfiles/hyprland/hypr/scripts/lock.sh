@@ -8,6 +8,10 @@ LOCKSCREEN_DIR="/tmp/hyprlock"
 # Set to 1 to use ImageMagick pre-blur (slower but more control)
 USE_PRE_BLUR="${USE_PRE_BLUR:-0}"
 BLUR_INTENSITY="${BLUR_INTENSITY:-5}"  # Only used if USE_PRE_BLUR=1
+LOCK_OVERLAY_DIR="${LOCK_OVERLAY_DIR:-$HOME/.config/hypr/lock-frames}"
+LOCK_OVERLAY_FPS="${LOCK_OVERLAY_FPS:-12}"
+LOCK_OVERLAY_CROSSFADE_MS="${LOCK_OVERLAY_CROSSFADE_MS:-80}"
+LOCK_OVERLAY_SCRIPT="$HOME/.dotfiles/hyprland/hypr/scripts/lock_overlay_frame.sh"
 
 # Find hyprlock config - check both standard location and dotfiles
 HYPRLOCK_CONFIG=""
@@ -101,6 +105,17 @@ if [[ $captured_count -eq 0 ]]; then
     echo "Warning: No screenshots were captured. Hyprlock will use color fallback." >&2
 fi
 
+overlay_enabled=0
+overlay_reload_ms=0
+if [[ -x "$LOCK_OVERLAY_SCRIPT" ]] && [[ -d "$LOCK_OVERLAY_DIR" ]]; then
+    if find "$LOCK_OVERLAY_DIR" -maxdepth 1 -type f \( -iname '*.png' -o -iname '*.webp' -o -iname '*.jpg' -o -iname '*.jpeg' \) | read -r _; then
+        overlay_enabled=1
+        if [[ "$LOCK_OVERLAY_FPS" =~ ^[0-9]+$ ]] && [[ "$LOCK_OVERLAY_FPS" -gt 0 ]]; then
+            overlay_reload_ms=$((1000 / LOCK_OVERLAY_FPS))
+        fi
+    fi
+fi
+
 # Generate dynamic hyprlock config with per-monitor backgrounds
 # Copy base config and add per-monitor background blocks
 if [[ -f "$HYPRLOCK_CONFIG" ]]; then
@@ -120,6 +135,7 @@ if [[ -f "$HYPRLOCK_CONFIG" ]]; then
             echo "background {"
             echo "    monitor = $monitor"
             echo "    path = $LOCKSCREEN_DIR/${monitor}.png"
+            echo "    zindex = -2"
             # Use more blur passes if not pre-blurring, otherwise use fewer
             if [[ "$USE_PRE_BLUR" == "1" ]]; then
                 echo "    blur_passes = 1"
@@ -128,6 +144,17 @@ if [[ -f "$HYPRLOCK_CONFIG" ]]; then
             fi
             echo "    color = \$base"
             echo "}"
+
+            if [[ $overlay_enabled -eq 1 ]] && [[ $overlay_reload_ms -gt 0 ]]; then
+                echo ""
+                echo "background {"
+                echo "    monitor = $monitor"
+                echo "    path = cmd[$LOCK_OVERLAY_SCRIPT \"$LOCK_OVERLAY_DIR\" \"$monitor\"]"
+                echo "    reload_time = $overlay_reload_ms"
+                echo "    crossfade_time = $LOCK_OVERLAY_CROSSFADE_MS"
+                echo "    zindex = -1"
+                echo "}"
+            fi
         done
     } > "$TEMP_CONFIG"
     
