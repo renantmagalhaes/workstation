@@ -131,13 +131,24 @@ export TMUX_TMPDIR='/tmp'
 # Add paths depending on OS
 # =====================
 
+WSL_DEFAULT_DISTRO=$(wsl.exe --list 2>/dev/null \
+  | iconv -f utf-16le -t utf-8 2>/dev/null \
+  | grep -m1 '(Default)' \
+  | sed 's/ (Default)//' \
+  | tr -d '\r\n')
+
 # --- Helper: robust WSL detection (WSL1 + WSL2, future-proof) ---
 is_wsl() {
   # Primary: kernel release contains WSL
   grep -qiE '(microsoft|wsl)' /proc/sys/kernel/osrelease 2>/dev/null && return 0
 
   # Secondary: official WSL environment variable
-  [ -n "$WSL_DISTRO_NAME" ] && return 0
+  [ -n "$WSL_DEFAULT_DISTRO" ] && return 0
+
+  # Tertiary: wsl.exe reachable and lists distros (same logic as distro detection)
+  wsl.exe --list 2>/dev/null \
+    | iconv -f utf-16le -t utf-8 2>/dev/null \
+    | grep -q '(Default)' && return 0
 
   # Fallback: Windows mount point exists
   [ -d /mnt/c ] && return 0
@@ -179,31 +190,48 @@ elif [[ $os_check == "linux" ]]; then
     WIN_HOME="$(get_win_home)"
 
     # Windows App Execution Aliases (user-writable → keep LAST)
-    export PATH="$PATH:$WIN_HOME/AppData/Local/Microsoft/WindowsApps:$WIN_HOME/AppData/Local/Microsoft/WinGet/Links"
+    export PATH="$PATH:$WIN_HOME/AppData/Local/Microsoft/WindowsApps:$WIN_HOME/AppData/Local/Microsoft/WinGet/Links:$WIN_HOME/AppData/Local/Programs/Microsoft VS Code/bin"
+
+    # -----------------
+    # Detect default WSL distro, then alias code to open remotely
+    # PowerShell handles UTF-16 encoding natively; first line = default distro
+    # -----------------
+
+    if [[ -n "$WSL_DEFAULT_DISTRO" ]]; then
+      code() {
+        local bin="$WIN_HOME/AppData/Local/Programs/Microsoft VS Code/bin/code"
+        local -a args=()
+        for arg in "$@"; do
+          [[ -e "$arg" ]] && arg="$(realpath "$arg")"
+          args+=("$arg")
+        done
+        "$bin" -n --remote "wsl+${WSL_DEFAULT_DISTRO}" "${args[@]}"
+      }
+    fi
 
     # -----------------
     # Explicit aliases (SECURITY-FIRST)
     # -----------------
 
-    code() {
-      local bin="$WIN_HOME/AppData/Local/Programs/Microsoft VS Code/bin/code"
-      if [ -x "$bin" ]; then
-        "$bin" "$@"
-      else
-        echo "❌ VS Code not found at expected location" >&2
-        return 127
-      fi
-    }
-
-    cursor() {
-      local bin="$WIN_HOME/AppData/Local/Programs/cursor/resources/app/bin/cursor"
-      if [ -x "$bin" ]; then
-        "$bin" "$@"
-      else
-        echo "❌ Cursor not found at expected location" >&2
-        return 127
-      fi
-    }
+    # code() {
+    #   local bin="$WIN_HOME/AppData/Local/Programs/Microsoft VS Code/bin/code"
+    #   if [ -x "$bin" ]; then
+    #     "$bin" "$@"
+    #   else
+    #     echo "❌ VS Code not found at expected location" >&2
+    #     return 127
+    #   fi
+    # }
+    #
+    # cursor() {
+    #   local bin="$WIN_HOME/AppData/Local/Programs/cursor/resources/app/bin/cursor"
+    #   if [ -x "$bin" ]; then
+    #     "$bin" "$@"
+    #   else
+    #     echo "❌ Cursor not found at expected location" >&2
+    #     return 127
+    #   fi
+    # }
 
 
   fi
