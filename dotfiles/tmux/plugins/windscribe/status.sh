@@ -3,6 +3,16 @@
 # Windscribe‑CLI + WireGuard VPN status check
 
 CACHE_FILE="/tmp/windscribe-last-location"
+uid="$(id -u)"
+
+# tmux can start before the graphical session has exported its runtime env.
+# Rebuild the minimum DBus/runtime vars Windscribe expects so status checks
+# keep working after tmux is already running.
+export HOME="${HOME:-$(getent passwd "$uid" | cut -d: -f6)}"
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$uid}"
+export DBUS_SESSION_BUS_ADDRESS="${DBUS_SESSION_BUS_ADDRESS:-unix:path=${XDG_RUNTIME_DIR}/bus}"
+export LANG="${LANG:-C.UTF-8}"
+export LC_ALL="${LC_ALL:-C.UTF-8}"
 
 if ! command -v windscribe-cli &>/dev/null; then
 	echo "#[fg=#ff4237][󰒄 VPN Disconnected] #[fg=white]"
