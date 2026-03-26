@@ -36,13 +36,13 @@ if [[ $exit_code -eq 124 ]] || [[ -z "$connectState" ]]; then
 		# If we have a cached location from before the daemon hung, use it
 		if [[ -f "$CACHE_FILE" ]]; then
 			location=$(cat "$CACHE_FILE")
-			echo "- #[fg=#7feaac][󰒄 $location] #[fg=white]"
+			echo "#[fg=#7feaac][󰒄 $location] #[fg=white]"
 		else
-			echo "- #[fg=#7feaac][󰒄 VPN Connected] #[fg=white]"
+			echo "#[fg=#7feaac][󰒄 VPN Connected] #[fg=white]"
 		fi
 	else
 		if [[ $exit_code -eq 124 ]]; then
-			echo "- #[fg=#fef65b][󰒄 VPN Timeout] #[fg=white]"
+			echo "#[fg=#fef65b][󰒄 VPN Timeout] #[fg=white]"
 		else
 			echo "#[fg=#ff4237][󰒄 VPN Disconnected] #[fg=white]"
 		fi
@@ -61,7 +61,7 @@ if [[ $connectState == Connected:* ]]; then
 	echo "$location" > "$CACHE_FILE"
 	
 	#echo "- #[fg=#7feaac][󰒄 VPN Connected: $location] #[fg=white]"
-	echo "- #[fg=#7feaac][󰒄 $location] #[fg=white]"
+	echo "#[fg=#7feaac][󰒄 $location] #[fg=white]"
 elif [[ $connectState == Disconnected ]]; then
 	# Treat as disconnected if Windscribe reports disconnected
 	# Clean up cache when disconnected
