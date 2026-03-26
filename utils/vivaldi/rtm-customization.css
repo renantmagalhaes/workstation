@@ -99,10 +99,9 @@
   display: none !important;
 } */
 
-/* Send window buttons to the right and keep them clickable */
+/* Window controls: keep clickable; Windows/Linux pin to the right */
 .toolbar.toolbar-mainbar
   > .window-buttongroup.on-mainbar {
-  margin-left: auto !important;
   display: flex !important;
   align-items: center !important;
   -webkit-app-region: no-drag !important;
@@ -110,19 +109,18 @@
   position: relative !important;
   z-index: 5 !important;
 }
-/* force window controls to the far right */
-.toolbar.toolbar-mainbar {
-  display: flex !important;
-}
 
-.toolbar.toolbar-mainbar
+#browser:not(.mac)
+  .toolbar.toolbar-mainbar
   > .window-buttongroup.on-mainbar {
   margin-left: auto !important;
   order: 9999 !important;
 }
 
-/* Normalize button size */
-.window-buttongroup.on-mainbar button {
+/* Win/Linux: square control glyphs; macOS keeps native traffic-light sizing */
+#browser:not(.mac)
+  .window-buttongroup.on-mainbar
+  button {
   width: 32px !important;
   height: 24px !important;
   display: flex !important;
@@ -133,14 +131,14 @@
   background: transparent !important;
 }
 
-/* Icons */
-.window-buttongroup.on-mainbar svg {
+#browser:not(.mac)
+  .window-buttongroup.on-mainbar
+  svg {
   width: 8px !important;
   height: 8px !important;
 }
 
-/* --- Custom vertical offset (nudge up/down) --- */
-.window-buttongroup.on-mainbar {
+#browser:not(.mac) .window-buttongroup.on-mainbar {
   transform: translateY(-3px);
   background: transparent !important;
   backdrop-filter: inherit !important;
@@ -1041,8 +1039,9 @@ button.vivaldi .expand-arrow {
 /* Auto-hide Address/Extensions Top Bar (Displacing layout)  */
 /* ========================================================= */
 
+/* macOS: bar stays visible (native controls + CSS hide attempts unreliable). Win/Linux: auto-hide. */
 /* Hide mainbar by sliding it up with negative margin, so it takes no vertical space */
-#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar {
+#browser:not(.mac):not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar {
   /* 
      Height is 30px. By setting margin-top to -30px, the total vertical space 
      occupied by the element is 0, so the tabs and webpage shift to the top.
@@ -1066,7 +1065,7 @@ button.vivaldi .expand-arrow {
 }
 
 /* Expand mainbar on hover with a small delay to prevent accidental activation */
-#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar:hover {
+#browser:not(.mac):not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar:hover {
   /* Restore the original 8px top margin. The UI below it will shift down by 38px. */
   margin-top: 8px !important;
   opacity: 1;
@@ -1075,7 +1074,7 @@ button.vivaldi .expand-arrow {
 }
 
 /* Instant appearance when a child element (like address bar) is focused */
-#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar:focus-within {
+#browser:not(.mac):not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar:focus-within {
   margin-top: 8px !important;
   opacity: 1;
   transition-delay: 0s !important;
@@ -1083,7 +1082,7 @@ button.vivaldi .expand-arrow {
 
 /* Invisible hover trigger area extending below the hidden mainbar 
    so the user's mouse can trigger it by touching the top of the browser screen */
-#browser:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar::after {
+#browser:not(.mac):not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .mainbar::after {
   content: "";
   position: absolute;
   top: 100%;
