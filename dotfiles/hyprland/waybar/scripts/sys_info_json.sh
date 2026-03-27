@@ -26,6 +26,11 @@ if [ -z "$LOAD_AVG" ]; then
     LOAD_AVG="N/A"
 fi
 
+LOAD_CLASS="normal"
+if [ "$LOAD_AVG" != "N/A" ] && awk "BEGIN {exit !($LOAD_AVG > 6)}"; then
+    LOAD_CLASS="critical"
+fi
+
 CPU_AVG=$(awk '{print $1 " / " $2 " / " $3}' /proc/loadavg 2>/dev/null)
 if [ -z "$CPU_AVG" ]; then
     CPU_AVG="N/A"
@@ -65,4 +70,4 @@ TOOLTIP+="<span color='#f38ba8'>🎮  <b>GPU Temp:</b></span>\t${GPU_TEMP}\r"
 TOOLTIP+="<span color='#a6e3a1'>💾  <b>NVMe Temp:</b></span>\t${NVME_TEMP}"
 
 # Format as JSON string
-echo "{\"text\": \"${LOAD_AVG} \", \"tooltip\": \"${TOOLTIP}\"}"
+echo "{\"text\": \"${LOAD_AVG} \", \"tooltip\": \"${TOOLTIP}\", \"class\": \"${LOAD_CLASS}\"}"
