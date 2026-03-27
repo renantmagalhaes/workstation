@@ -26,7 +26,7 @@
     // "backlight",
     //"network",
     // "bluetooth",
-    "custom/temperature",
+    "custom/systeminfo",
     "custom/notification",
     "pulseaudio",
     "tray",
@@ -173,7 +173,7 @@
     "format-disabled": "",
     "tooltip": true
   },
-  "custom/temperature": {
+  "custom/systeminfo": {
     "exec": "~/.config/waybar/scripts/sys_info_json.sh",
     "return-type": "json",
     "interval": 10,
