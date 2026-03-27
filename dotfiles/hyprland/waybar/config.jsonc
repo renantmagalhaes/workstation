@@ -53,7 +53,7 @@
     }
   },
   "hyprland/window": {
-    "format": " {title} ",
+    "format": "{title}",
     "max-length": 80
   },
   "custom/active-icon-window": {
