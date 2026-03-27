@@ -27,7 +27,7 @@ if [ -z "$LOAD_AVG" ]; then
 fi
 
 LOAD_CLASS="normal"
-if [ "$LOAD_AVG" != "N/A" ] && awk "BEGIN {exit !($LOAD_AVG > 6)}"; then
+if [ "$LOAD_AVG" != "N/A" ] && awk "BEGIN {exit !($LOAD_AVG > 11)}"; then
     LOAD_CLASS="critical"
 fi
 
