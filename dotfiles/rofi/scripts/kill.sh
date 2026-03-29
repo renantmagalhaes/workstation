@@ -7,12 +7,23 @@ theme='style-7'
 PROCESS_LIST=$(ps -u "$USER" -o comm= | grep -vE "kill.sh|ps|grep|sort|sed|awk|sh|bash" | sort -u)
 
 # Prepare list for Rofi
-# We just pass the name as the icon name. Rofi will find it if it exists in the current icon theme.
-# This is O(n) and very fast compared to searching desktop files.
+# We'll clean up common process suffixes to help Rofi find the correct icon
 ROFI_INPUT=""
 while read -r comm; do
     [ -z "$comm" ] && continue
-    ROFI_INPUT+="${comm}\0icon\x1f${comm}\n"
+    
+    # Try to find a better icon name by stripping common suffixes
+    icon="${comm%-bin}"
+    icon="${icon%_bin}"
+    icon="${icon%-wrapped}"
+    icon="${icon%.real}"
+    icon="${icon#python-}" # handles some script wrappers
+    icon="${icon,,}" # lowercase
+    
+    # Special cases
+    if [[ "$comm" == "code" ]]; then icon="visual-studio-code"; fi
+    
+    ROFI_INPUT+="${comm}\0icon\x1f${icon}\n"
 done <<< "$PROCESS_LIST"
 
 # Show the process list in Rofi for selection
