@@ -86,7 +86,7 @@ EOF
 cat <<EOF >~/.local/share/applications/power-menu-shutdown.desktop
 [Desktop Entry]
 Name=Shutdown
-Exec=sh -c 'echo "Yes\nNo" | rofi -dmenu -i -p "Shutdown?" -theme Arc-Dark -lines 2 -theme-str "window { width: 10%; } listview { lines: 2; }" | grep -q Yes && systemctl poweroff'
+Exec=/home/rtm/.config/rofi/scripts/rofi-shutdown.sh
 Icon=system-shutdown
 Terminal=false
 Type=Application
@@ -96,7 +96,7 @@ EOF
 cat <<EOF >~/.local/share/applications/power-menu-restart.desktop
 [Desktop Entry]
 Name=Restart
-Exec=sh -c 'echo "Yes\nNo" | rofi -dmenu -i -p "Restart?" -theme Arc-Dark -lines 2 -theme-str "window { width: 10%; } listview { lines: 2; }" | grep -q Yes && systemctl reboot'
+Exec=/home/rtm/.config/rofi/scripts/rofi-restart.sh
 Icon=system-reboot
 Terminal=false
 Type=Application
@@ -106,12 +106,15 @@ EOF
 cat <<EOF >~/.local/share/applications/power-menu-logout.desktop
 [Desktop Entry]
 Name=Logout
-Exec=sh -c 'echo "Yes\nNo" | rofi -dmenu -i -p "Logout?" -theme Arc-Dark -lines 2 -theme-str "window { width: 10%; } listview { lines: 2; }" | grep -q Yes && bspc quit'
+Exec=/home/rtm/.config/rofi/scripts/rofi-logout.sh
 Icon=system-log-out
 Terminal=false
 Type=Application
 Categories=System;
 EOF
+
+# Make scripts executable
+chmod +x $FOLDER_LOCATION/dotfiles/rofi/scripts/*.sh
 
 # Refresh the desktop database to pick up the new entries
 update-desktop-database ~/.local/share/applications
