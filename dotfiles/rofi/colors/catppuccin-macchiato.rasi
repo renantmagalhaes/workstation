@@ -1,0 +1,12 @@
+/**
+ * Catppuccin Macchiato
+ **/
+
+* {
+    background:     #24273AFF;
+    background-alt: #36394EFF;
+    foreground:     #CAD3F5FF;
+    selected:       #8AADF4FF;
+    active:         #A6DA95FF;
+    urgent:         #ED8796FF;
+}

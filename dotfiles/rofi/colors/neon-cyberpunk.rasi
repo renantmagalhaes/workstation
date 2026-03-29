@@ -1,0 +1,12 @@
+/**
+ * Neon Cyberpunk
+ **/
+
+* {
+    background:     #000000FF;
+    background-alt: #1A1A1AFF;
+    foreground:     #FDFDFDFF;
+    selected:       #FCEE0AFF;
+    active:         #00FF00FF;
+    urgent:         #FF003CFF;
+}

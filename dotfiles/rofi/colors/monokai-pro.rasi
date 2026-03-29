@@ -1,0 +1,12 @@
+/**
+ * Monokai Pro
+ **/
+
+* {
+    background:     #2D2A2EFF;
+    background-alt: #403E41FF;
+    foreground:     #FCFCFAFF;
+    selected:       #FFD866FF;
+    active:         #A9DC76FF;
+    urgent:         #FF6188FF;
+}

@@ -1,0 +1,12 @@
+/**
+ * Black & White (Soft Zinc)
+ **/
+
+* {
+    background:     #18181BFF;
+    background-alt: #27272AFF;
+    foreground:     #FFFFFFFF;
+    selected:       #FFFFFFFF;
+    active:         #E4E4E7FF;
+    urgent:         #A1A1AAFF;
+}

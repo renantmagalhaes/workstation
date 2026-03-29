@@ -1,0 +1,12 @@
+/**
+ * Black & White (Deep Grey)
+ **/
+
+* {
+    background:     #262626FF;
+    background-alt: #404040FF;
+    foreground:     #FFFFFFFF;
+    selected:       #FFFFFFFF;
+    active:         #D4D4D4FF;
+    urgent:         #737373FF;
+}

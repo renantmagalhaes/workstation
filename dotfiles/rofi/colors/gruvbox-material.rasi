@@ -1,0 +1,12 @@
+/**
+ * Gruvbox Material (Dark)
+ **/
+
+* {
+    background:     #282828FF;
+    background-alt: #32302FFF;
+    foreground:     #D4BE98FF;
+    selected:       #7DAEA3FF;
+    active:         #A9B665FF;
+    urgent:         #EA6962FF;
+}

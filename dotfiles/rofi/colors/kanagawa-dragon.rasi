@@ -1,0 +1,12 @@
+/**
+ * Kanagawa Dragon
+ **/
+
+* {
+    background:     #181820FF;
+    background-alt: #1F1F28FF;
+    foreground:     #DCD7BAFF;
+    selected:       #2D4F67FF;
+    active:         #76946AFF;
+    urgent:         #C34043FF;
+}

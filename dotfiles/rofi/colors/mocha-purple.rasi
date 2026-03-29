@@ -1,0 +1,12 @@
+/**
+ * Mocha Purple
+ **/
+
+* {
+    background:     #1E1E2EFF;
+    background-alt: #181825FF;
+    foreground:     #CDD6F4FF;
+    selected:       #CBA6F7FF;
+    active:         #94E2D5FF;
+    urgent:         #F38BA8FF;
+}

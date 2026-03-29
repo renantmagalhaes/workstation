@@ -1,0 +1,12 @@
+/**
+ * Carbon (Dark Grey)
+ **/
+
+* {
+    background:     #141414FF;
+    background-alt: #262626FF;
+    foreground:     #D0D0D0FF;
+    selected:       #393939FF;
+    active:         #525252FF;
+    urgent:         #FF7EB6FF;
+}

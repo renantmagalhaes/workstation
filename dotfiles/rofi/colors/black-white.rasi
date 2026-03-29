@@ -1,0 +1,12 @@
+/**
+ * Black & White
+ **/
+
+* {
+    background:     #000000FF;
+    background-alt: #080808FF;
+    foreground:     #FFFFFFFF;
+    selected:       #FFFFFFFF;
+    active:         #E5E5E5FF;
+    urgent:         #B2B2B2FF;
+}

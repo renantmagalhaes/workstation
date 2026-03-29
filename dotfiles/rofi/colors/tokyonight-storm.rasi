@@ -1,0 +1,12 @@
+/**
+ * Tokyo Night Storm
+ **/
+
+* {
+    background:     #24283BFF;
+    background-alt: #292E42FF;
+    foreground:     #C0CAF5FF;
+    selected:       #3D59A1FF;
+    active:         #414868FF;
+    urgent:         #F7768EFF;
+}

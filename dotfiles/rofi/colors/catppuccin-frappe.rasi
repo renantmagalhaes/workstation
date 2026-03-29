@@ -1,0 +1,12 @@
+/**
+ * Catppuccin Frappe
+ **/
+
+* {
+    background:     #303446FF;
+    background-alt: #414559FF;
+    foreground:     #C6D0F5FF;
+    selected:       #8CAAEEFF;
+    active:         #A6D189FF;
+    urgent:         #E78284FF;
+}

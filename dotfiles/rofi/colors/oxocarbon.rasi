@@ -1,0 +1,12 @@
+/**
+ * Oxocarbon
+ **/
+
+* {
+    background:     #161616FF;
+    background-alt: #262626FF;
+    foreground:     #FFFFFFFF;
+    selected:       #393939FF;
+    active:         #EE5396FF;
+    urgent:         #3DDBD9FF;
+}

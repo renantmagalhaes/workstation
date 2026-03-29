@@ -1,0 +1,12 @@
+/**
+ * Black & White (Midnight Slate)
+ **/
+
+* {
+    background:     #0F172AFF;
+    background-alt: #1E293BFF;
+    foreground:     #FFFFFFFF;
+    selected:       #FFFFFFFF;
+    active:         #F1F5F9FF;
+    urgent:         #94A3B8FF;
+}
