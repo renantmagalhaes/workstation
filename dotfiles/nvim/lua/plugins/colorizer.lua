@@ -7,8 +7,31 @@ return {
   },
   {
     "HiPhish/rainbow-delimiters.nvim",
+    submodules = false,
     config = function()
-      submodules = false, require("rainbow-delimiters.setup").setup({})
+      local rb = require("rainbow-delimiters")
+      require("rainbow-delimiters.setup").setup({
+        strategy = {
+          [""] = rb.strategy["global"],
+        },
+        query = {
+          [""] = "rainbow-delimiters",
+        },
+        highlight = {
+          "RainbowDelimiterRed",
+          "RainbowDelimiterYellow",
+          "RainbowDelimiterBlue",
+          "RainbowDelimiterOrange",
+          "RainbowDelimiterGreen",
+          "RainbowDelimiterViolet",
+          "RainbowDelimiterCyan",
+        },
+        -- Skip special buffers like terminal, snacks, etc. to avoid "parser nil" error
+        condition = function(bufnr)
+          local buftype = vim.api.nvim_get_option_value("buftype", { buf = bufnr })
+          return buftype == ""
+        end,
+      })
     end,
   },
 }
