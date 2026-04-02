@@ -43,7 +43,8 @@ if check_cmd nix-env; then # FOR NIX PKG MANAGER
 		nixpkgs.zoxide \
 		nixpkgs.nwg-look \
 		nixpkgs.waypaper \
-		nixpkgs.pywal
+		nixpkgs.pywal \
+		nixpkgs.fastfetch
 
 else
 	echo "Nix package manager not installed, go to https://nixos.org/download"

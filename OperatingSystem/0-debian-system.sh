@@ -67,16 +67,16 @@ sudo apt-get update && sudo apt-get -y upgrade
 ln -s -f $PWD/dotfiles/ ~/.dotfiles
 
 # Install the packages from repo
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wget zsh clementine breeze-cursor-theme dia vim vim-gui-common nmap vlc blender fonts-powerline fonts-cantarell brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle3 fonts-hack-ttf htop meld dconf-cli openvpn network-manager-openvpn nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload gir1.2-gmenu-3.0 pwgen sysstat alacarte ffmpeg neofetch xclip flameshot python3-pip gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors cheese ncdu whois piper libratbag-tools timeshift adb fastboot materia-gtk-theme jp2a unrar-free dnsutils imagemagick scrot x11-utils wmctrl xdotool software-properties-common apt-transport-https ca-certificates curl flatpak xournal evince jq pulseaudio-utils sassc gcc make nala python3.11-venv sqlite3 pipx ruby-dev ntp ntpdate cifs-utils solaar nmon
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wget zsh clementine breeze-cursor-theme dia vim vim-gui-common nmap vlc blender fonts-powerline fonts-cantarell brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle3 fonts-hack-ttf htop meld dconf-cli openvpn network-manager-openvpn nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload gir1.2-gmenu-3.0 pwgen sysstat alacarte ffmpeg xclip flameshot python3-pip gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors cheese ncdu whois piper libratbag-tools timeshift adb fastboot materia-gtk-theme jp2a unrar-free dnsutils imagemagick scrot x11-utils wmctrl xdotool software-properties-common apt-transport-https ca-certificates curl flatpak xournal evince jq pulseaudio-utils sassc gcc make nala python3.11-venv sqlite3 pipx ruby-dev ntp ntpdate cifs-utils solaar nmon python-is-python3 papirus-icon-theme
 
 # Based on DE
 gnome_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "GNOME" | awk '{print tolower($0)}')
 kde_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "KDE" | awk '{print tolower($0)}')
 if [[ $gnome_check == "gnome" ]]; then
-	sudo DEBIAN_FRONTEND=noninteractive apt-get -y network-manager-openvpn-gnome gnome-tweaks chrome-gnome-shell gnome-menus
+	sudo DEBIAN_FRONTEND=noninteractive apt-get install -y network-manager-openvpn-gnome gnome-tweaks gnome-browser-connector gnome-menus
 	bash ./scripts/gnome-themes.sh
 elif [[ $kde_check == "kde" ]]; then
-	sudo DEBIAN_FRONTEND=noninteractive apt-get install -y qt5-style-kvantum qt5-style-kvantum-themes kwin-bismuth extra-cmake-modules
+	sudo DEBIAN_FRONTEND=noninteractive apt-get install -y qt5-style-kvantum extra-cmake-modules
 else
 	echo "Not able to identify desktop environment"
 fi
@@ -116,8 +116,8 @@ sudo systemctl restart docker
 sudo usermod -aG docker $USER
 
 ## Vivaldi Browser
-wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo apt-key add -
-sudo add-apt-repository 'deb https://repo.vivaldi.com/archive/deb/ stable main'
+sudo wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/vivaldi-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/vivaldi-archive-keyring.gpg arch=amd64] https://repo.vivaldi.com/archive/deb/ stable main" | sudo tee /etc/apt/sources.list.d/vivaldi.list
 sudo apt-get update
 sudo apt-get install -y vivaldi-stable
 
@@ -181,11 +181,8 @@ bash ./scripts/kitty.sh
 ## Guake
 guake --restore-preferences ./utils/guake/rtm-guake-setting
 
-## Neofetch
-bash ./scripts/neofetch.sh
-
 ## Wine
-bash ./scripts/wine.sh
+#bash ./scripts/wine.sh
 
 ## GIT
 bash ./utils/git-config/git-config.sh
@@ -193,9 +190,6 @@ bash ./utils/git-config/git-config.sh
 # Enable BT FastConnectable
 sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
 
-# Fix python default path
-sudo ln -s /usr/bin/python3 /usr/bin/python
-sudo ln -s /usr/bin/pip3 /usr/bin/pip
 
 # Install pip packages
 pipx install virtualenv
@@ -224,13 +218,13 @@ sudo apt-get -f install -y
 #gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # scrcpy
-sudo apt install -y ffmpeg libsdl2-2.0-0 adb wget \
-	gcc git pkg-config meson ninja-build libsdl2-dev \
-	libavcodec-dev libavdevice-dev libavformat-dev libavutil-dev \
-	libswresample-dev libusb-1.0-0 libusb-1.0-0-dev
-git clone https://github.com/Genymobile/scrcpy ~/GIT-REPOS/CORE/scrcpy
-cd ~/GIT-REPOS/CORE/scrcpy || return
-bash install_release.sh
+# sudo apt install -y ffmpeg libsdl2-2.0-0 adb wget \
+# 	gcc git pkg-config meson ninja-build libsdl2-dev \
+# 	libavcodec-dev libavdevice-dev libavformat-dev libavutil-dev \
+# 	libswresample-dev libusb-1.0-0 libusb-1.0-0-dev
+# git clone https://github.com/Genymobile/scrcpy ~/GIT-REPOS/CORE/scrcpy
+# cd ~/GIT-REPOS/CORE/scrcpy || return
+# bash install_release.sh
 
 # Return to original path
 cd $FOLDER_LOCATION
