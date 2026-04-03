@@ -44,11 +44,11 @@ brew install kubectl
 brew install hashicorp/tap/terraform
 
 if check_cmd apt-get; then # FOR DEB SYSTEMS
-	neofetch
+	fastfetch
 elif check_cmd zypper; then # FOR SUSE SYSTEMS
-	neofetch
+	fastfetch
 elif check_cmd sw_vers; then # FOR Arch SYSTEMS
-	neofetch
+	fastfetch
 else
 	echo "Not able to identify the system"
 fi
