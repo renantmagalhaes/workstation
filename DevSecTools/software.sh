@@ -23,11 +23,11 @@ mkdir -p ~/Apps
 #Mindmap
 # sudo flatpak install -y flathub net.xmind.XMind8
 # sudo flatpak override --filesystem=home:ro net.xmind.XMind8
-sudo flatpak install -y flathub net.xmind.ZEN
-sudo flatpak override --filesystem=home:ro net.xmind.ZEN
+# sudo flatpak install -y flathub net.xmind.ZEN
+# sudo flatpak override --filesystem=home:ro net.xmind.ZEN
 
 # Redis
-sudo flatpak install -y flathub dev.rdm.RDM
+# sudo flatpak install -y flathub dev.rdm.RDM
 #sudo snap install redis-desktop-manager
 #wget https://github.com/qishibo/AnotherRedisDesktopManager/releases/download/v1.3.9/Another-Redis-Desktop-Manager.1.3.9.AppImage -O ~/Apps/Another-Redis-Desktop-Manager.1.3.9.AppImage
 #chmod +x ~/Apps/Another-Redis-Desktop-Manager.1.3.9.AppImage

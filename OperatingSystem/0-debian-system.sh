@@ -68,7 +68,7 @@ sudo apt-get update && sudo apt-get -y upgrade
 ln -s -f $PWD/dotfiles/ ~/.dotfiles
 
 # Install the packages from repo
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wget zsh clementine strawberry breeze-cursor-theme dia vim vim-gui-common nmap vlc blender fonts-powerline fonts-cantarell brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle fonts-hack-ttf htop meld dconf-cli openvpn network-manager-openvpn nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload gir1.2-gmenu-3.0 pwgen sysstat alacarte ffmpeg xclip flameshot python3-pip gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors cheese ncdu whois piper ratbagd timeshift adb fastboot jp2a unrar-free bind9-dnsutils imagemagick scrot x11-utils wmctrl xdotool apt-transport-https ca-certificates curl flatpak xournal evince jq pulseaudio-utils sassc gcc make nala python3-venv sqlite3 pipx ruby-dev ntpsec ntpsec-ntpdate cifs-utils solaar nmon python-is-python3 papirus-icon-theme
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wget zsh clementine strawberry breeze-cursor-theme dia vim vim-gui-common nmap vlc blender fonts-powerline fonts-cantarell brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle fonts-hack-ttf htop meld dconf-cli openvpn network-manager-openvpn nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload gir1.2-gmenu-3.0 pwgen sysstat alacarte ffmpeg xclip flameshot python3-pip gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors cheese ncdu whois piper ratbagd timeshift adb fastboot jp2a unrar-free bind9-dnsutils imagemagick scrot x11-utils wmctrl xdotool apt-transport-https ca-certificates curl flatpak xournal evince jq pulseaudio-utils sassc gcc make nala python3-venv sqlite3 pipx ruby-dev ntpsec ntpsec-ntpdate cifs-utils solaar nmon python-is-python3 papirus-icon-theme guake guake-indicator
 
 # Based on DE
 gnome_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "GNOME" | awk '{print tolower($0)}')
@@ -181,7 +181,7 @@ bash ./scripts/zsh.sh
 bash ./scripts/kitty.sh
 
 ## Guake
-guake --restore-preferences ./utils/guake/rtm-guake-setting
+guake --restore-preferences ./utils/guake/rtm-guake-settings
 
 ## Wine
 #bash ./scripts/wine.sh
@@ -198,6 +198,7 @@ pipx install virtualenv
 pipx install virtualenvwrapper
 pipx install pylint
 pipx install bpytop
+pipx ensurepath
 
 # fd - ignore NFS
 bash ./scripts/fd-ignore.sh
@@ -206,18 +207,19 @@ bash ./scripts/fd-ignore.sh
 # bash ./scripts/droidcam.sh
 
 # Install ClamAV
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y clamav clamtk
-sudo apt-get -f install -y
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y clamav-daemon
+# sudo DEBIAN_FRONTEND=noninteractive apt-get install -y clamav clamtk
+# sudo apt-get -f install -y
+# sudo DEBIAN_FRONTEND=noninteractive apt-get install -y clamav-daemon
 
 #Distrobox
 #https://github.com/89luca89/distrobox#installation
 
 # Make sure all package are installed
 sudo apt-get -f install -y
+sudo apt autoremove -y
 
 # Isolate Alt-Tab workspaces
-#gsettings set org.gnome.shell.app-switcher current-workspace-only true
+gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # scrcpy
 # sudo apt install -y ffmpeg libsdl2-2.0-0 adb wget \
