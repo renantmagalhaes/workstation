@@ -8,4 +8,4 @@ sudo apt-get install -y nodejs
 sudo npm install --global yarn
 # Display installed versions
 echo "Node.js version: $(node --version)"
-echo "npm version: $(npm --version)
+echo "npm version: $(npm --version)"
