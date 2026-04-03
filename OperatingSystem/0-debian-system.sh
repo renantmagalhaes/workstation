@@ -136,8 +136,8 @@ sudo dpkg -i /tmp/visual_code_amd64.deb
 sudo sed -i 's/\,arm64\,armhf//g' /etc/apt/sources.list.d/vscode.list
 
 ## Teamviewer
-wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp/teamviewer_amd64.deb
-sudo dpkg -i /tmp/teamviewer_amd64.deb
+# wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp/teamviewer_amd64.deb
+# sudo dpkg -i /tmp/teamviewer_amd64.deb
 
 # Flatpack repo
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo

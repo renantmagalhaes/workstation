@@ -23,16 +23,16 @@ sudo flatpak install -y flathub md.obsidian.Obsidian
 sudo flatpak install -y flathub tv.plex.PlexDesktop
 
 ## CopyQ - Clipboard manager
-sudo flatpak install flathub com.github.hluk.copyq
+sudo flatpak install -y flathub com.github.hluk.copyq
 
 ## Save desktop1
-sudo flatpak install flathub io.github.vikdevelop.SaveDesktop
+sudo flatpak install -y flathub io.github.vikdevelop.SaveDesktop
 
 ## StreamDeck - StreamController
-sudo flatpak install flathub com.core447.StreamController
+sudo flatpak install -y flathub com.core447.StreamController
 
 ## Stremio
-sudo flatpak install flathub com.stremio.Stremio
+sudo flatpak install -y flathub com.stremio.Stremio
 
 ## Bottles - Game on Linux
 # sudo flatpak install flathub com.usebottles.bottles
@@ -47,10 +47,10 @@ sudo flatpak install flathub com.stremio.Stremio
 # sudo flatpak install flathub com.rustdesk.RustDesk
 
 ## Mousam (weather)
-sudo flatpak install flathub io.github.amit9838.mousam
+sudo flatpak install -y flathub io.github.amit9838.mousam
 
 ## Flatseal
-sudo flatpak install flathub com.github.tchx84.Flatseal
+sudo flatpak install -y flathub com.github.tchx84.Flatseal
 
 ## Stream
-flatpak install flathub com.valvesoftware.Steam
+flatpak install -y flathub com.valvesoftware.Steam
