@@ -93,9 +93,9 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y install qemu-system-x86 libvirt-c
 
 # Virtualbox
 wget -O- -q https://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc | sudo gpg --dearmour -o /usr/share/keyrings/oracle_vbox_2016.gpg
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] http://download.virtualbox.org/virtualbox/debian bookworm contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] http://download.virtualbox.org/virtualbox/debian trixie contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 sudo apt-get update
-sudo apt-get install -y virtualbox-7.1
+sudo apt-get install -y virtualbox-7.2
 
 # virtualbox user
 sudo usermod -aG vboxusers $USER
@@ -115,6 +115,7 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 sudo systemctl enable docker
 sudo systemctl restart docker
 sudo usermod -aG docker $USER
+newgrp docker
 
 ## Vivaldi Browser
 sudo wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/vivaldi-archive-keyring.gpg
@@ -127,7 +128,7 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -
 sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb
 
 ## Zen Browser
-bash <(curl -s https://updates.zen-browser.app/install.sh)
+# bash <(curl -s https://updates.zen-browser.app/install.sh)
 
 ## Install Visual Code
 wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tmp/visual_code_amd64.deb
