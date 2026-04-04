@@ -207,6 +207,9 @@ pipx ensurepath
 # fd - ignore NFS
 bash ./scripts/fd-ignore.sh
 
+## Fastfetch
+ln -s -f $PWD/dotfiles/fastfetch/ ~/.config/
+
 # ## Droidcam
 # bash ./scripts/droidcam.sh
 

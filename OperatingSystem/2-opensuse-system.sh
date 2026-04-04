@@ -184,10 +184,10 @@ guake --restore-preferences ./utils/guake/rtm-guake-setting
 # Neofetch handled by fastfetch in Nix
 
 ## Gems
-bash ./scripts/gems.sh
+# bash ./scripts/gems.sh
 
 ## Rust
-bash ./scripts/rust.sh
+# bash ./scripts/rust.sh
 
 ## GIT
 bash ./utils/git-config/git-config.sh
