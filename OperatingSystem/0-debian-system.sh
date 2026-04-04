@@ -76,8 +76,12 @@ kde_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "KDE" | awk '{print tolow
 if [[ $gnome_check == "gnome" ]]; then
 	sudo DEBIAN_FRONTEND=noninteractive apt-get install -y network-manager-openvpn-gnome gnome-tweaks gnome-browser-connector gnome-menus
 	bash ./scripts/gnome-themes.sh
+	# Isolate Alt-Tab workspaces
+	gsettings set org.gnome.shell.app-switcher current-workspace-only true
+
 elif [[ $kde_check == "kde" ]]; then
 	sudo DEBIAN_FRONTEND=noninteractive apt-get install -y qt5-style-kvantum extra-cmake-modules
+	bash ./scripts/kde-themes.sh
 else
 	echo "Not able to identify desktop environment"
 fi
@@ -115,7 +119,7 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 sudo systemctl enable docker
 sudo systemctl restart docker
 sudo usermod -aG docker $USER
-newgrp docker
+#newgrp docker
 
 ## Vivaldi Browser
 sudo wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/vivaldi-archive-keyring.gpg
@@ -218,8 +222,6 @@ bash ./scripts/fd-ignore.sh
 sudo apt-get -f install -y
 sudo apt autoremove -y
 
-# Isolate Alt-Tab workspaces
-gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 # scrcpy
 # sudo apt install -y ffmpeg libsdl2-2.0-0 adb wget \
