@@ -1,5 +1,10 @@
 [ActivityManager][Global Shortcuts]
 switch-to-activity-178ff1b1-9197-402c-a868-eb9ba5bbfab8=
+switch-to-activity-221cb1cf-1c98-466b-813e-8c22a04c8296=
+
+[Custom Commands][net.local.1password.desktop]
+Exec=1password --quick-access
+Name=1password quick access
 
 [Custom Commands][net.local.flameshot-2.desktop]
 Exec=flameshot gui
@@ -8,6 +13,10 @@ Name=flameshot
 [Custom Commands][net.local.flameshot.desktop]
 Exec=flameshot gui
 Name=flameshot
+
+[Custom Commands][net.local.tdrop.desktop]
+Exec=/home/rtm/.dotfiles/kde/scripts/tdrop.sh
+Name=tdrop
 
 [KDE Keyboard Layout Switcher][Global Shortcuts]
 Switch to Last-Used Keyboard Layout=Meta+Alt+L
@@ -30,7 +39,7 @@ ConfigureNotifications=
 ConfigureToolbars=
 Copy=Ctrl+Ins; Ctrl+C
 CreateFolder=Ctrl+Shift+N
-Cut=Ctrl+X; Shift+Del
+Cut=Shift+Del; Ctrl+X
 DeleteFile=Shift+Del
 DeleteWordBack=Ctrl+Backspace
 DeleteWordForward=Ctrl+Del
@@ -47,14 +56,14 @@ FindPrev=Shift+F3
 FitToHeight=
 FitToPage=
 FitToWidth=
-Forward=Alt+Right; Forward
+Forward=Forward; Alt+Right
 ForwardWord=Ctrl+Right
 FullScreen=Ctrl+Shift+F
 Goto=
 GotoLine=Ctrl+G
 GotoPage=
 Help=F1
-Home=Alt+Home; Home Page
+Home=Home Page; Alt+Home
 KeyBindings=Ctrl+Alt+,
 Mail=
 MoveToTrash=Del
@@ -65,7 +74,7 @@ Open=Ctrl+O
 OpenContextMenu=Menu; Shift+F10
 OpenMainMenu=F10
 OpenRecent=
-Paste=Shift+Ins; Ctrl+V
+Paste=Ctrl+V; Shift+Ins
 Paste Selection=Ctrl+Shift+Ins
 Preferences=Ctrl+Shift+,
 PrevCompletion=Ctrl+Up
@@ -74,7 +83,7 @@ PrintPreview=
 Prior=PgUp
 Quit=Ctrl+Q
 Redo=Ctrl+Shift+Z
-Reload=Refresh; F5
+Reload=F5; Refresh
 RenameFile=F2
 Replace=Ctrl+R
 ReportBug=
@@ -96,7 +105,7 @@ Undo=Ctrl+Z
 Up=Alt+Up
 WhatsThis=Shift+F1
 Zoom=
-ZoomIn=Ctrl++; Ctrl+=
+ZoomIn=Ctrl+=; Ctrl++
 ZoomOut=Ctrl+-
 
 [com.github.hluk.copyq.desktop][Global Shortcuts]
@@ -108,7 +117,7 @@ Toggle Screen Reader On and Off=Meta+Alt+S
 [kcm_touchpad][Global Shortcuts]
 Disable Touchpad=Touchpad Off
 Enable Touchpad=Touchpad On
-Toggle Touchpad=Meta+Ctrl+Zenkaku Hankaku; Meta+Ctrl+Touchpad Toggle; Touchpad Toggle
+Toggle Touchpad=Meta+Ctrl+Touchpad Toggle; Touchpad Toggle; Meta+Ctrl+Zenkaku Hankaku
 
 [kitty.desktop][Global Shortcuts]
 _launch=Ctrl+Alt+T
@@ -120,8 +129,8 @@ decrease_volume_small=Shift+Volume Down
 increase_microphone_volume=Microphone Volume Up
 increase_volume=Volume Up
 increase_volume_small=Shift+Volume Up
-mic_mute=
-mute=
+mic_mute=Microphone Mute; Meta+Volume Mute
+mute=Volume Mute
 
 [ksmserver][Global Shortcuts]
 Halt Without Confirmation=
@@ -146,15 +155,16 @@ ExposeClassCurrentDesktop=
 Grid View=Meta+G
 Increase Opacity=
 Kill Window=Meta+Ctrl+Esc
+Move Tablet to Next Output=
 MoveMouseToCenter=Meta+F6
 MoveMouseToFocus=Meta+F5
 MoveZoomDown=
 MoveZoomLeft=
 MoveZoomRight=
 MoveZoomUp=
-Overview=Meta+Tab; Meta+W
+Overview=Meta+W
 Setup Window Shortcut=
-Show Desktop=Meta+D
+Show Desktop=
 Suspend Compositing=Alt+Shift+F12
 Switch One Desktop Down=Meta+Ctrl+Down
 Switch One Desktop Up=Meta+Ctrl+Up
@@ -212,7 +222,7 @@ Walk Through Windows of Current Application Alternative=
 Walk Through Windows of Current Application Alternative (Reverse)=
 Window Above Other Windows=
 Window Below Other Windows=
-Window Close=Alt+F4; Meta+Q
+Window Close=Meta+Q; Alt+F4
 Window Custom Quick Tile Bottom=
 Window Custom Quick Tile Left=
 Window Custom Quick Tile Right=
@@ -221,7 +231,7 @@ Window Fullscreen=
 Window Grow Horizontal=
 Window Grow Vertical=
 Window Lower=
-Window Maximize=Meta+PgUp; Meta+Up
+Window Maximize=Meta+Up; Meta+M; Meta+PgUp
 Window Maximize Horizontal=
 Window Maximize Vertical=
 Window Minimize=Meta+PgDown
@@ -235,7 +245,7 @@ Window One Desktop to the Left=Meta+Ctrl+Shift+Left
 Window One Desktop to the Right=Meta+Ctrl+Shift+Right
 Window One Screen Down=
 Window One Screen Up=
-Window One Screen to the Left=Meta+Return
+Window One Screen to the Left=
 Window One Screen to the Right=
 Window Operations Menu=Alt+F3
 Window Pack Down=
@@ -276,7 +286,7 @@ Window to Desktop 7=
 Window to Desktop 8=
 Window to Desktop 9=
 Window to Next Desktop=
-Window to Next Screen=Meta+Shift+Right
+Window to Next Screen=Meta+Return; Meta+Shift+Right
 Window to Previous Desktop=
 Window to Previous Screen=Meta+Shift+Left
 Window to Screen 0=
@@ -287,8 +297,9 @@ Window to Screen 4=
 Window to Screen 5=
 Window to Screen 6=
 Window to Screen 7=
+disableInputCapture=Meta+Shift+Esc
 view_actual_size=Meta+0
-view_zoom_in=Meta++; Meta+=
+view_zoom_in=Meta+=; Meta++
 view_zoom_out=Meta+-
 
 [mediacontrol][Global Shortcuts]
@@ -297,15 +308,21 @@ mediavolumeup=
 nextmedia=Media Next
 pausemedia=Media Pause
 playmedia=
-playpausemedia=Volume Mute; Media Play; Meta+C
+playpausemedia=Media Play
 previousmedia=Media Previous
 stopmedia=Media Stop
+
+[net.local.1password.desktop][Global Shortcuts]
+_launch=Ctrl+Shift+Space
 
 [net.local.flameshot-2.desktop][Global Shortcuts]
 _launch=Print
 
 [net.local.flameshot.desktop][Global Shortcuts]
 _launch=Print
+
+[net.local.tdrop.desktop][Global Shortcuts]
+_launch=Ctrl+Return
 
 [org.kde.dolphin.desktop][Global Shortcuts]
 _launch=Meta+E
@@ -316,14 +333,14 @@ _launch=Calculator
 [org.kde.konsole.desktop][Global Shortcuts]
 NewTab=
 NewWindow=
-_launch=
+_launch=Ctrl+Alt+T
 
 [org.kde.krunner.desktop][Global Shortcuts]
 RunClipboard=Alt+Shift+F2
-_launch=Meta; Alt+F2; Search; Alt+Space
+_launch=Meta; Search; Alt+F2; Alt+Space
 
 [org.kde.kscreen.desktop][Global Shortcuts]
-ShowOSD=Display; Meta+P
+ShowOSD=Meta+P; Display
 
 [org.kde.plasma-systemmonitor.desktop][Global Shortcuts]
 _launch=Meta+Esc
@@ -341,7 +358,7 @@ RecordScreen=Meta+Alt+R
 RecordWindow=Meta+Ctrl+R
 RectangularRegionScreenShot=Meta+Shift+Print
 WindowUnderCursorScreenShot=Meta+Ctrl+Print
-_launch=Meta+Shift+S
+_launch=Print; Meta+Shift+S
 
 [org_kde_powerdevil][Global Shortcuts]
 Decrease Keyboard Brightness=Keyboard Brightness Down
@@ -356,7 +373,7 @@ PowerOff=Power Off
 Sleep=Sleep
 Toggle Keyboard Backlight=Keyboard Light On/Off
 Turn Off Screen=
-powerProfile=Battery; Meta+B
+powerProfile=Meta+B; Battery
 
 [plasmashell][Global Shortcuts]
 activate application launcher=Alt+F1
@@ -376,12 +393,12 @@ cycle-panels=Meta+Alt+P
 cycleNextAction=
 cyclePrevAction=
 manage activities=
-next activity=Meta+A
-previous activity=Meta+Shift+A
+next activity=
+previous activity=
 repeat_action=
-show dashboard=
+show dashboard=Meta+D
 show-barcode=
-show-on-mouse-pos=
+show-on-mouse-pos=Meta+V
 stop current activity=Meta+S
 switch to next activity=
 switch to previous activity=
@@ -404,3 +421,6 @@ Previous Profile=Meta+Ctrl+P
 Toggle screen map selection=Meta+Ctrl+M
 Toggle stylus mode=Meta+Ctrl+S
 Toggle touch tool=Meta+Ctrl+T
+
+[yakuake][Global Shortcuts]
+toggle-window-state=
