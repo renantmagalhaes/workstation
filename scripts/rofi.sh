@@ -13,19 +13,34 @@ if check_cmd apt-get; then # FOR DEB SYSTEMS
 
 	# sudo apt-get install -y rofi
 
-	sudo apt-get install -y flex libxkbcommon-dev libxkbcommon-x11-dev libxcb-cursor-dev libxcb-xinerama0-dev libstartup-notification0-dev check bison meson libxcb-util-dev libxcb-ewmh-dev libxcb-icccm4-dev libpango1.0-dev libpangocairo-1.0-0 libgdk-pixbuf-2.0-dev
-	ROFI_RELEASE=1.7.5
+	sudo apt-get install -y meson ninja-build flex bison \
+			libxkbcommon-dev libxkbcommon-x11-dev libxcb-cursor-dev \
+			libxcb-xinerama0-dev libstartup-notification0-dev check \
+			libxcb-util-dev libxcb-ewmh-dev libxcb-icccm4-dev \
+			libpango1.0-dev libpangocairo-1.0-0 libgdk-pixbuf-2.0-dev \
+			libxcb-randr0-dev libxcb-xkb-dev libxcb-keysyms1-dev
+	ROFI_RELEASE=2.0.0
 	rofi_script_path=$(pwd)
+	
+	# Create directory and download
+	mkdir -p ~/GIT-REPOS/CORE/
 	wget https://github.com/davatorium/rofi/releases/download/$ROFI_RELEASE/rofi-$ROFI_RELEASE.tar.gz -O ~/GIT-REPOS/CORE/rofi.tar.gz
-	cd ~/GIT-REPOS/CORE/ && tar -xvf rofi.tar.gz && cd rofi-$ROFI_RELEASE
-	mkdir -p build && cd build
-	../configure
-	make
-	sudo make install
-	cd $rofi_script_path
+	
+	# Extract
+	cd ~/GIT-REPOS/CORE/
+	tar -xvf rofi.tar.gz
+	cd rofi-$ROFI_RELEASE
+
+	meson setup build --prefix=/usr/local -Dwayland=disabled
+	ninja -C build
+	sudo ninja -C build install
+
+# Clean up path
+cd $rofi_script_path
 
 	#XCAPE - Bind rofi to SuperKey
 	sudo apt-get install -y git gcc make pkg-config libx11-dev libxtst-dev libxi-dev
+	sudo apt-get install -y xcape
 
 elif check_cmd zypper; then # FOR RPM SYSTEMS
 	sudo zypper install -y rofi
@@ -51,10 +66,10 @@ cd $FOLDER_LOCATION
 ln -s -f $PWD/dotfiles/rofi/ ~/.config/
 
 #XCAPE - Bind rofi to SuperKey
-git clone https://github.com/alols/xcape.git ~/GIT-REPOS/CORE/xcape
-cd ~/GIT-REPOS/CORE/xcape
-make
-sudo make install
+# git clone https://github.com/alols/xcape.git ~/GIT-REPOS/CORE/xcape
+# cd ~/GIT-REPOS/CORE/xcape
+# make
+# sudo make install
 
 # XCAPE syslink to autostart
 mkdir -p ~/.config/autostart/
