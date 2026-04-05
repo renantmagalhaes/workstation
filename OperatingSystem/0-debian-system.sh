@@ -28,8 +28,8 @@
 
 ## Root check
 if [ “$(id -u)” = “0” ]; then
-	echo “Dont run this script as root” 2>&1
-	exit 1
+  echo “Dont run this script as root” 2>&1
+  exit 1
 fi
 
 # # Check Window System
@@ -45,10 +45,10 @@ fi
 
 # Check if the user is a member of the sudo or adm group
 if groups | grep -E -q "(^| )sudo($| )" || groups | grep -E -q "(^| )adm($| )" || groups | grep -E -q "(^| )root($| )"; then
-	echo "User is a member of the sudo, adm or root group."
+  echo "User is a member of the sudo, adm or root group."
 else
-	echo "User is not a member of the sudo or adm group."
-	exit 1
+  echo "User is not a member of the sudo or adm group."
+  exit 1
 fi
 
 # Get current folder
@@ -68,22 +68,22 @@ sudo apt-get update && sudo apt-get -y upgrade
 ln -s -f $PWD/dotfiles/ ~/.dotfiles
 
 # Install the packages from repo
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wget zsh clementine strawberry breeze-cursor-theme dia vim vim-gui-common nmap vlc blender fonts-powerline fonts-cantarell brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle fonts-hack-ttf htop meld dconf-cli openvpn network-manager-openvpn nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload gir1.2-gmenu-3.0 pwgen sysstat alacarte ffmpeg xclip flameshot python3-pip gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors cheese ncdu whois piper ratbagd timeshift adb fastboot jp2a unrar-free bind9-dnsutils imagemagick scrot x11-utils wmctrl xdotool apt-transport-https ca-certificates curl flatpak xournal evince jq pulseaudio-utils sassc gcc make nala python3-venv sqlite3 pipx ruby-dev ntpsec ntpsec-ntpdate cifs-utils solaar nmon python-is-python3 papirus-icon-theme guake guake-indicator
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wget zsh clementine strawberry breeze-cursor-theme dia vim vim-gui-common nmap vlc blender fonts-powerline fonts-cantarell brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle fonts-hack-ttf htop meld dconf-cli openvpn network-manager-openvpn nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload gir1.2-gmenu-3.0 pwgen sysstat alacarte ffmpeg xclip flameshot python3-pip gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors cheese ncdu whois piper ratbagd timeshift adb fastboot jp2a zip unrar-free bind9-dnsutils imagemagick scrot x11-utils wmctrl xdotool apt-transport-https ca-certificates curl flatpak xournal evince jq pulseaudio-utils sassc gcc make nala python3-venv sqlite3 pipx ruby-dev ntpsec ntpsec-ntpdate cifs-utils solaar nmon python-is-python3 papirus-icon-theme guake guake-indicator
 
 # Based on DE
 gnome_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "GNOME" | awk '{print tolower($0)}')
 kde_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "KDE" | awk '{print tolower($0)}')
 if [[ $gnome_check == "gnome" ]]; then
-	sudo DEBIAN_FRONTEND=noninteractive apt-get install -y network-manager-openvpn-gnome gnome-tweaks gnome-browser-connector gnome-menus
-	bash ./scripts/gnome-themes.sh
-	# Isolate Alt-Tab workspaces
-	gsettings set org.gnome.shell.app-switcher current-workspace-only true
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y network-manager-openvpn-gnome gnome-tweaks gnome-browser-connector gnome-menus
+  bash ./scripts/gnome-themes.sh
+  # Isolate Alt-Tab workspaces
+  gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 elif [[ $kde_check == "kde" ]]; then
-	sudo DEBIAN_FRONTEND=noninteractive apt-get install -y qt5-style-kvantum extra-cmake-modules
-	bash ./scripts/kde-themes.sh
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y qt5-style-kvantum extra-cmake-modules
+  bash ./scripts/kde-themes.sh
 else
-	echo "Not able to identify desktop environment"
+  echo "Not able to identify desktop environment"
 fi
 
 # Latest Go
@@ -111,9 +111,9 @@ sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
 echo \
-	"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
-	sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+  sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo systemctl enable docker
@@ -151,12 +151,12 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 bash ./scripts/nix-install.sh
 
 if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+  . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 elif [ -f "/etc/profile.d/nix.sh" ]; then
-	. "/etc/profile.d/nix.sh"
+  . "/etc/profile.d/nix.sh"
 else
-	echo "Nix environment script not found."
-	exit 1
+  echo "Nix environment script not found."
+  exit 1
 fi
 
 ## Nix packages
@@ -196,7 +196,6 @@ bash ./utils/git-config/git-config.sh
 # Enable BT FastConnectable
 sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluetooth/main.conf
 
-
 # Install pip packages
 pipx install virtualenv
 pipx install virtualenvwrapper
@@ -224,7 +223,6 @@ ln -s -f $PWD/dotfiles/fastfetch/ ~/.config/
 # Make sure all package are installed
 sudo apt-get -f install -y
 sudo apt autoremove -y
-
 
 # scrcpy
 # sudo apt install -y ffmpeg libsdl2-2.0-0 adb wget \
