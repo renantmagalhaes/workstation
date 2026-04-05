@@ -41,9 +41,10 @@ echo " 24) Git Config"
 echo " 25) Wallpapers"
 echo ""
 echo " ==== WindowManager ===="
-echo " 31) BSPWM"
+echo " 31) BSPWM (Deb/Zypper)"
 echo " 32) Rofi"
 echo " 33) Polybar"
+echo " 34) Hyprland (Zypper)"
 echo ""
 echo " ==== NIX ===="
 echo " 41) Nix package manager"
@@ -76,6 +77,7 @@ case $n in
 31) bash ./scripts/bspwm.sh ;;
 32) bash ./scripts/rofi.sh ;;
 33) bash ./scripts/polybar.sh ;;
+34) bash ./scripts/hyprland.sh ;;
 	# ===================================================================================
 41) bash ./scripts/nix-install.sh ;;
 42) bash ./OperatingSystem/nix-basesystem.sh ;;
