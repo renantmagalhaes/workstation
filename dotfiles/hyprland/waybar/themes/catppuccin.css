@@ -30,14 +30,14 @@
 
 window#waybar {
   background-color: rgba(43, 48, 59, 0);
-  color: #cdd6f4;
+  color: #fdfff8;
   border-radius: 0px;
   transition-property: background-color;
   transition-duration: 0.5s;
 }
 
 tooltip {
-  background: rgba(30, 30, 46, 0.5);
+  background: rgba(49, 50, 68, 0.8);
   border-radius: 7px;
 }
 
@@ -70,7 +70,7 @@ button:hover {
 
 #workspaces button {
   padding: 1px 5px;
-  color: #cdd6f4;
+  color: #fdfff8;
   background-color: transparent;
   font-size: 18px;
 }
@@ -81,12 +81,22 @@ button:hover {
 }
 
 #workspaces button.focused {
-  background-color: rgba(205, 214, 244, 0.2);
+  background-color: rgba(
+    205,
+    214,
+    244,
+    0.2
+  );
   box-shadow: none;
 }
 
 #workspaces button.urgent {
-  background-color: rgba(245, 224, 220, 0.3);
+  background-color: rgba(
+    245,
+    224,
+    220,
+    0.3
+  );
   border-radius: 7px;
   color: #f5e0dc;
   font-weight: bold;
@@ -98,10 +108,15 @@ button:hover {
 }
 
 #mode {
-  background-color: rgba(30, 30, 46, 0.5);
-  box-shadow: inset 0 0px #cdd6f4;
+  background-color: rgba(
+    30,
+    30,
+    46,
+    0.5
+  );
+  box-shadow: inset 0 0px #fdfff8;
   background: rgba(5, 5, 5, 0.3);
-  color: #cdd6f4;
+  color: #fdfff8;
   padding: 1px 10px 1px 10px;
   border-radius: 0px 0px 0px 0px;
   margin-top: 5px;
@@ -141,8 +156,8 @@ button:hover {
 #custom-kill_active,
 #language,
 #keyboard-state {
-  background: rgba(30, 30, 46, 0.5);
-  color: #cdd6f4;
+  background: rgba(49, 50, 68, 0.8);
+  color: #fdfff8;
   padding: 4px 12px 4px 12px;
   margin-top: 5px;
 }
@@ -228,8 +243,21 @@ button:hover {
 }
 
 /* Ensure all specific overrides are removed or simplified */
-#memory, #backlight, #pulseaudio, #bluetooth, #temperature, #custom-temperature, #custom-systeminfo, #tray, #hyprland-window, #network, #custom-active-icon-window, #custom-fullscreen, #custom-move_window_next_monitor, #custom-kill_active {
-  color: #cdd6f4;
+#memory,
+#backlight,
+#pulseaudio,
+#bluetooth,
+#temperature,
+#custom-temperature,
+#custom-systeminfo,
+#tray,
+#hyprland-window,
+#network,
+#custom-active-icon-window,
+#custom-fullscreen,
+#custom-move_window_next_monitor,
+#custom-kill_active {
+  color: #fdfff8;
 }
 
 /* Window controls grouping */
@@ -263,12 +291,12 @@ window.popup {
 }
 
 tooltip label {
-  color: #cdd6f4;
+  color: #fdfff8;
   padding: 4px 8px;
 }
 
 #workspaces button tooltip {
-  background: rgba(30, 30, 46, 0.9);
+  background: rgba(49, 50, 68, 0.9);
   border-radius: 7px;
   padding: 4px 8px;
 }
