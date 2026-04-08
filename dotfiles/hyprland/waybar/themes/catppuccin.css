@@ -81,13 +81,15 @@ button:hover {
 }
 
 #workspaces button.focused {
-  background-color: rgba(
-    205,
-    214,
-    244,
-    0.2
-  );
-  box-shadow: none;
+  background: transparent;
+  color: transparent;
+  border-radius: 7px;
+  background-image: url("../icons/workspace-visible-pill-mono.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 32px 23px;
+  min-width: 16px;
+  font-size: 0;
 }
 
 #workspaces button.urgent {
@@ -103,8 +105,15 @@ button:hover {
 }
 
 #workspaces button.visible {
-  background: rgba(205, 214, 244, 0.1);
+  background: transparent;
+  color: transparent;
   border-radius: 7px;
+  background-image: url("../icons/workspace-visible-pill-mono.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 32px 23px;
+  min-width: 16px;
+  font-size: 0;
 }
 
 #mode {
