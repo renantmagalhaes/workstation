@@ -1,0 +1,310 @@
+/*                                                                                                                                       */
+/*    /$$      /$$                     /$$                                  /$$$$$$   /$$               /$$                              */
+/*   | $$  /$ | $$                    | $$                                 /$$__  $$ | $$              | $$                              */
+/*   | $$ /$$$| $$  /$$$$$$  /$$   /$$| $$$$$$$   /$$$$$$   /$$$$$$       | $$  \__//$$$$$$   /$$   /$$| $$  /$$$$$$                     */
+/*   | $$/$$ $$ $$ |____  $$| $$  | $$| $$__  $$ |____  $$ /$$__  $$      |  $$$$$$|_  $$_/  | $$  | $$| $$ /$$__  $$                    */
+/*   | $$$$_  $$$$  /$$$$$$$| $$  | $$| $$  \ $$  /$$$$$$$| $$  \__/       \____  $$ | $$    | $$  | $$| $$| $$$$$$$$                    */
+/*   | $$$/ \  $$$ /$$__  $$| $$  | $$| $$  | $$ /$$__  $$| $$             /$$  \ $$ | $$ /$$| $$  | $$| $$| $$_____/                    */
+/*   | $$/   \  $$|  $$$$$$$|  $$$$$$$| $$$$$$$/|  $$$$$$$| $$            |  $$$$$$/ |  $$$$/|  $$$$$$$| $$|  $$$$$$$                    */
+/*   |__/     \__/ \_______/ \____  $$|_______/  \_______/|__/             \______/   \___/   \____  $$|__/ \_______/                    */
+/*                           /$$  | $$                                                        /$$  | $$                                  */
+/*                          |  $$$$$$/                                                       |  $$$$$$/                                  */
+/*                           \______/                                                         \______/                                   */
+/*    ____               _                                                                                                               */
+/*   |  _ \             | |                                                                                                              */
+/*   | |_) |_   _       | |_      ___ __                                                                                                 */
+/*   |  _ <| | | |  _   | \ \ /\ / / '_ \                                                                                                */
+/*   | |_) | |_| | | |__| |\ V  V /| |_) |                                                                                               */
+/*   |____/ \__, |  \____/  \_/\_/ | .__/                                                                                                */
+/*           __/ |                 | |                                                                                                   */
+/*          |___/                  |_|                                                                                                   */
+
+* {
+  /* `otf-font-awesome` is required to be installed for icons */
+  font-family: CaskaydiaCove Nerd Font;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 14px;
+  border-radius: 7px;
+}
+
+window#waybar {
+  background-color: rgba(43, 48, 59, 0);
+  color: #fdfff8;
+  border-radius: 0px;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+tooltip {
+  background: rgba(49, 50, 68, 0.8);
+  border-radius: 7px;
+}
+
+window#waybar.termite {
+  background-color: #3f3f3f;
+}
+
+window#waybar.chromium {
+  background-color: #11111b;
+  border: none;
+}
+
+button {
+  /* Use box-shadow instead of border so the text isn't offset */
+  box-shadow: inset 0 3px transparent;
+  /* Avoid rounded borders under each button name */
+  border: none;
+  border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+  background: inherit;
+}
+
+/* you can set a style on hover for any module like this */
+#pulseaudio:hover {
+  background-color: #181825;
+}
+
+#workspaces button {
+  padding: 1px 5px;
+  color: #fdfff8;
+  background-color: transparent;
+  font-size: 18px;
+}
+
+#workspaces button:hover {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 7px;
+}
+
+#workspaces button.focused {
+  background: transparent;
+  color: transparent;
+  border-radius: 7px;
+  background-image: url("../icons/workspace-visible-pill-mono.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 32px 23px;
+  min-width: 16px;
+  font-size: 0;
+}
+
+#workspaces button.urgent {
+  background-color: rgba(
+    245,
+    224,
+    220,
+    0.3
+  );
+  border-radius: 7px;
+  color: #f5e0dc;
+  font-weight: bold;
+}
+
+#workspaces button.visible {
+  background: transparent;
+  color: transparent;
+  border-radius: 7px;
+  background-image: url("../icons/workspace-visible-pill-mono.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 32px 23px;
+  min-width: 16px;
+  font-size: 0;
+}
+
+#mode {
+  background-color: rgba(
+    30,
+    30,
+    46,
+    0.5
+  );
+  box-shadow: inset 0 0px #fdfff8;
+  background: rgba(5, 5, 5, 0.3);
+  color: #fdfff8;
+  padding: 1px 10px 1px 10px;
+  border-radius: 0px 0px 0px 0px;
+  margin-top: 5px;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#mpris,
+#custom-swaync,
+#backlight,
+#pulseaudio,
+#wireplumber,
+#tray,
+#mode,
+#custom-weather,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#custom-gpt,
+#mpd,
+#window,
+#workspaces,
+#custom-power,
+#custom-notification,
+#bluetooth,
+#temperature,
+#custom-temperature,
+#custom-systeminfo,
+#hyprland-window,
+#network,
+#custom-active-icon-window,
+#custom-fullscreen,
+#custom-move_window_next_monitor,
+#custom-kill_active,
+#language,
+#keyboard-state {
+  background: rgba(49, 50, 68, 0.5);
+  color: #fdfff8;
+  padding: 4px 12px 4px 12px;
+}
+
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#mpris:hover,
+#custom-swaync:hover,
+#backlight:hover,
+#pulseaudio:hover,
+#wireplumber:hover,
+#tray:hover,
+#mode:hover,
+#custom-weather:hover,
+#idle_inhibitor:hover,
+#scratchpad:hover,
+#power-profiles-daemon:hover,
+#custom-gpt:hover,
+#mpd:hover,
+#window:hover,
+#workspaces:hover,
+#custom-power:hover,
+#custom-notification:hover,
+#bluetooth:hover,
+#temperature:hover,
+#custom-temperature:hover,
+#custom-systeminfo:hover,
+#hyprland-window:hover,
+#network:hover,
+#custom-active-icon-window:hover,
+#custom-fullscreen:hover,
+#custom-move_window_next_monitor:hover,
+#custom-kill_active:hover,
+#language:hover,
+#keyboard-state:hover {
+  background-color: #181825;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left
+  > widget:first-child
+  > #workspaces {
+  margin-left: 5px;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right
+  > widget:last-child
+  > #workspaces {
+  margin-right: 0;
+}
+
+#clock {
+  margin-right: 5px;
+}
+
+#custom-power {
+  margin-right: 5px;
+  padding: 1px 5px 1px 2px;
+}
+
+#battery.critical:not(.charging),
+#custom-temperature.critical,
+#custom-systeminfo.critical,
+#network.disconnected,
+#pulseaudio.muted,
+#mpd.disconnected {
+  color: #f38ba8; /* Keeping a subtle red for alerts if requested, but I'll make them monochrome if strictly one color. Let's stick to monochrome. */
+}
+
+/* Redefining critical states to be monochrome (bold/different shade) as requested */
+#battery.critical:not(.charging),
+#custom-temperature.critical,
+#custom-systeminfo.critical,
+#network.disconnected,
+#pulseaudio.muted,
+#mpd.disconnected {
+  color: #f5e0dc; /* Flamingo-ish shade for alert, but still monochrome-ish */
+  font-weight: bold;
+}
+
+/* Ensure all specific overrides are removed or simplified */
+#memory,
+#backlight,
+#pulseaudio,
+#bluetooth,
+#temperature,
+#custom-temperature,
+#custom-systeminfo,
+#tray,
+#hyprland-window,
+#network,
+#custom-active-icon-window,
+#custom-fullscreen,
+#custom-move_window_next_monitor,
+#custom-kill_active {
+  color: #fdfff8;
+}
+
+/* Window controls grouping */
+#custom-fullscreen {
+  margin-right: -4px;
+  border-radius: 7px 0 0 7px;
+}
+
+#custom-move_window_next_monitor {
+  margin-left: -4px;
+  margin-right: -4px;
+  border-radius: 0;
+}
+
+#custom-kill_active {
+  margin-left: -4px;
+  border-radius: 0 7px 7px 0;
+}
+
+/* Ensure popups/menus/tooltips are semi-transparent so Hyprland blur shows through */
+tooltip,
+menu,
+.menu,
+.popover,
+.dropdown,
+.popup,
+window.menu,
+window.popup {
+  background: rgb(30, 30, 46);
+  border-radius: 7px;
+}
+
+tooltip label {
+  color: #fdfff8;
+  padding: 4px 8px;
+}
+
+#workspaces button tooltip {
+  background: rgba(49, 50, 68, 0.9);
+  border-radius: 7px;
+  padding: 4px 8px;
+}
