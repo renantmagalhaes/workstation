@@ -21,10 +21,37 @@ def setup_logging(debug=False):
 
 def run_command(cmd, timeout=5):
     try:
-        out = subprocess.check_output(cmd, text=True, timeout=timeout)
+        out = subprocess.check_output(cmd, text=True, timeout=timeout, stderr=subprocess.DEVNULL)
         return out
     except Exception as e:
         raise Exception(f"Command failed: {cmd} - {e}")
+
+def get_desktop_count(logger):
+    try:
+        # qdbus6 often segfaults on /VirtualDesktopManager, so use dbus-send
+        cmd = [
+            "dbus-send", "--session", "--print-reply",
+            "--dest=org.kde.KWin", "/VirtualDesktopManager",
+            "org.freedesktop.DBus.Properties.Get",
+            "string:org.kde.KWin.VirtualDesktopManager", "string:count"
+        ]
+        out = run_command(cmd)
+        for line in out.splitlines():
+            if "uint32" in line:
+                return int(line.split()[-1])
+    except Exception as e:
+        logger.error(f"Failed to get desktop count: {e}")
+    return 1
+
+def get_current_desktop(logger):
+    try:
+        # This one is usually safe with qdbus6, but let's be consistent or keep it if it works
+        # The user's log showed only count failing.
+        out = run_command(["qdbus6", "org.kde.KWin", "/KWin", "org.kde.KWin.currentDesktop"])
+        return int(out.strip())
+    except Exception as e:
+        logger.error(f"Failed to get current desktop: {e}")
+        return 1
 
 class VirtualCursor:
     def __init__(self, logger, sensitivity=3.0):
@@ -115,19 +142,19 @@ async def handle_device(dev, args, logger, vc):
                 if edge != "none":
                     try:
                         # Get current desktop index and total count to prevent wrapping
-                        current = int(run_command(["qdbus6", "org.kde.KWin", "/KWin", "org.kde.KWin.currentDesktop"]).strip())
-                        total = int(run_command(["qdbus6", "org.kde.KWin", "/VirtualDesktopManager", "org.kde.KWin.VirtualDesktopManager.count"]).strip())
+                        current = get_current_desktop(logger)
+                        total = get_desktop_count(logger)
                         
                         if v < 0: # Scroll up -> nextDesktop
                             if current < total:
-                                logger.info(f"Virtual Edge {edge} scroll UP -> nextDesktop")
-                                subprocess.Popen(["qdbus6", "org.kde.KWin", "/KWin", "org.kde.KWin.nextDesktop"])
+                                logger.info(f"Virtual Edge {edge} scroll UP -> nextDesktop (current: {current}/{total})")
+                                subprocess.Popen(["qdbus6", "org.kde.KWin", "/KWin", "org.kde.KWin.nextDesktop"], stderr=subprocess.DEVNULL)
                             else:
                                 logger.debug(f"At last desktop ({current}/{total}), stopping.")
                         else: # Scroll down -> previousDesktop
                             if current > 1:
-                                logger.info(f"Virtual Edge {edge} scroll DOWN -> previousDesktop")
-                                subprocess.Popen(["qdbus6", "org.kde.KWin", "/KWin", "org.kde.KWin.previousDesktop"])
+                                logger.info(f"Virtual Edge {edge} scroll DOWN -> previousDesktop (current: {current}/{total})")
+                                subprocess.Popen(["qdbus6", "org.kde.KWin", "/KWin", "org.kde.KWin.previousDesktop"], stderr=subprocess.DEVNULL)
                             else:
                                 logger.debug(f"At first desktop ({current}/{total}), stopping.")
                     except Exception as e:
