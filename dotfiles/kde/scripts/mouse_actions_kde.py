@@ -55,7 +55,7 @@ def get_current_desktop(logger):
         return 1
 
 class VirtualCursor:
-    def __init__(self, logger, sensitivity=1.0):
+    def __init__(self, logger, sensitivity=2.0):
         self.logger = logger
         self.sensitivity = sensitivity
         self.x = 0
@@ -65,7 +65,7 @@ class VirtualCursor:
         self.max_x = 1920
         self.max_y = 1080
         self.monitors = []
-        self.margin = 12
+        self.margin = 8
 
     def refresh_monitors(self):
         try:
@@ -137,6 +137,7 @@ async def handle_device(dev, args, logger, vc):
                 last_vert_ts = now
                 
                 edge = vc.get_edge()
+                logger.debug(f"Wheel {v} at Virtual({int(vc.x)}, {int(vc.y)}) -> Edge: {edge}")
                 if edge != "none":
                     logger.info(f"Wheel {v} at Virtual({int(vc.x)}, {int(vc.y)}) -> Edge: {edge}")
                     try:
@@ -183,7 +184,7 @@ def get_all_mice():
 
 async def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--sensitivity", type=float, default=1.0, help="Sensitivity for virtual cursor tracking (default 1.0)")
+    ap.add_argument("--sensitivity", type=float, default=2.0, help="Sensitivity for virtual cursor tracking (default 2.0)")
     ap.add_argument("--debounce-ms", type=int, default=100)
     ap.add_argument("--right-click-cmd", default="jgmenu --at-pointer")
     ap.add_argument("--right-click-debounce-ms", type=int, default=300)
