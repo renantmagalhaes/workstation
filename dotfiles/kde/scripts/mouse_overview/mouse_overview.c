@@ -16,15 +16,15 @@ void emit(struct libevdev_uinput *uidev, unsigned int type, unsigned int code, i
 }
 
 void tap_meta_tab(struct libevdev_uinput *uidev) {
-    printf("Triggering Meta+Tab\n");
+    printf("Triggering Meta+Tab (Overview)\n");
     emit(uidev, EV_KEY, KEY_LEFTMETA, 1);
     emit(uidev, EV_KEY, KEY_TAB, 1);
-    usleep(50000); // 50ms
+    usleep(50000); 
     emit(uidev, EV_KEY, KEY_TAB, 0);
     emit(uidev, EV_KEY, KEY_LEFTMETA, 0);
 }
 
-int is_mouse_with_forward(int fd) {
+int has_forward_button(int fd) {
     struct libevdev *dev = NULL;
     int rc = libevdev_new_from_fd(fd, &dev);
     if (rc < 0) return 0;
@@ -42,7 +42,7 @@ int main() {
 
     // 1. Setup Virtual Keyboard
     struct libevdev *uidev_raw = libevdev_new();
-    libevdev_set_name(uidev_raw, "KDE Mouse Actions Virtual Keyboard (C)");
+    libevdev_set_name(uidev_raw, "KDE Mouse Overview Virtual Keyboard");
     libevdev_enable_event_type(uidev_raw, EV_KEY);
     libevdev_enable_event_code(uidev_raw, EV_KEY, KEY_LEFTMETA, NULL);
     libevdev_enable_event_code(uidev_raw, EV_KEY, KEY_TAB, NULL);
@@ -63,8 +63,8 @@ int main() {
             snprintf(path, sizeof(path), "/dev/input/%s", ent->d_name);
             int fd = open(path, O_RDONLY | O_NONBLOCK);
             if (fd >= 0) {
-                if (is_mouse_with_forward(fd)) {
-                    printf("Monitoring: %s\n", path);
+                if (has_forward_button(fd)) {
+                    printf("Monitoring: %s (Forward Button found)\n", path);
                     libevdev_new_from_fd(fd, &devs[dev_count]);
                     fds[dev_count] = fd;
                     dev_count++;
@@ -77,11 +77,11 @@ int main() {
     closedir(dir);
 
     if (dev_count == 0) {
-        fprintf(stderr, "No mice with Forward button found.\n");
+        fprintf(stderr, "No mice with Forward button (277) found.\n");
         return 1;
     }
 
-    printf("Ready. Press Forward button to trigger Overview.\n");
+    printf("Ready. Monitoring %d devices for button 277.\n", dev_count);
 
     // 3. Main Loop
     while (1) {
@@ -93,7 +93,7 @@ int main() {
                 }
             }
         }
-        usleep(10000); // 10ms sleep to avoid 100% CPU
+        usleep(10000); // 10ms sleep
     }
 
     return 0;
