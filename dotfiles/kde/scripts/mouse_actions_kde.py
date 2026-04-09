@@ -8,6 +8,7 @@ import os
 import sys
 import logging
 import signal
+import shlex
 from evdev import InputDevice, ecodes as EC, list_devices
 
 def setup_logging(debug=False):
@@ -54,7 +55,7 @@ def get_current_desktop(logger):
         return 1
 
 class VirtualCursor:
-    def __init__(self, logger, sensitivity=3.0):
+    def __init__(self, logger, sensitivity=1.0):
         self.logger = logger
         self.sensitivity = sensitivity
         self.x = 0
@@ -114,7 +115,6 @@ async def handle_device(dev, args, logger, vc):
     
     last_vert_ts = 0.0
     last_right_click_ts = 0.0
-    
     REL_WHEEL_HI_RES = getattr(EC, "REL_WHEEL_HI_RES", 11)
 
     async for ev in dev.async_read_loop():
@@ -137,9 +137,8 @@ async def handle_device(dev, args, logger, vc):
                 last_vert_ts = now
                 
                 edge = vc.get_edge()
-                logger.debug(f"Wheel {v} at Virtual({int(vc.x)}, {int(vc.y)}) -> Edge: {edge}")
-                
                 if edge != "none":
+                    logger.info(f"Wheel {v} at Virtual({int(vc.x)}, {int(vc.y)}) -> Edge: {edge}")
                     try:
                         # Get current desktop index and total count to prevent wrapping
                         current = get_current_desktop(logger)
@@ -168,7 +167,7 @@ async def handle_device(dev, args, logger, vc):
             edge = vc.get_edge()
             if edge != "none":
                 logger.info(f"Virtual Edge {edge} right-click -> {args.right_click_cmd}")
-                subprocess.Popen(["bash", "-lc", args.right_click_cmd])
+                subprocess.Popen(["bash", "-lc", args.right_click_cmd], stderr=subprocess.DEVNULL)
 
 def get_all_mice():
     mice = []
@@ -184,7 +183,7 @@ def get_all_mice():
 
 async def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--sensitivity", type=float, default=3.0, help="Sensitivity for virtual cursor tracking")
+    ap.add_argument("--sensitivity", type=float, default=1.0, help="Sensitivity for virtual cursor tracking (default 1.0)")
     ap.add_argument("--debounce-ms", type=int, default=100)
     ap.add_argument("--right-click-cmd", default="jgmenu --at-pointer")
     ap.add_argument("--right-click-debounce-ms", type=int, default=300)
@@ -192,6 +191,7 @@ async def main():
     args = ap.parse_args()
 
     logger = setup_logging(args.debug)
+    logger.info(f"DBUS_SESSION_BUS_ADDRESS: {os.environ.get('DBUS_SESSION_BUS_ADDRESS')}")
     
     vc = VirtualCursor(logger, args.sensitivity)
     vc.refresh_monitors()
