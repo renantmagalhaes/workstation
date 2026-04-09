@@ -1,6 +1,7 @@
 [ActivityManager][Global Shortcuts]
 switch-to-activity-178ff1b1-9197-402c-a868-eb9ba5bbfab8=
 switch-to-activity-221cb1cf-1c98-466b-813e-8c22a04c8296=
+switch-to-activity-647c6822-9d2e-410b-a97b-d263fff008f3=
 
 [Custom Commands][net.local.1password.desktop]
 Exec=1password --quick-access
@@ -25,7 +26,7 @@ Switch to Next Keyboard Layout=Meta+Alt+K
 [StandardShortcuts]
 AboutApp=
 AboutKDE=
-Activate Next Tab=Ctrl+]; Ctrl+PgDown
+Activate Next Tab=Ctrl+PgDown; Ctrl+]
 Activate Previous Tab=Ctrl+PgUp; Ctrl+[
 ActualSize=Ctrl+0
 AddBookmark=Ctrl+B
@@ -56,7 +57,7 @@ FindPrev=Shift+F3
 FitToHeight=
 FitToPage=
 FitToWidth=
-Forward=Forward; Alt+Right
+Forward=Alt+Right; Forward
 ForwardWord=Ctrl+Right
 FullScreen=Ctrl+Shift+F
 Goto=
@@ -71,7 +72,7 @@ New=Ctrl+N
 Next=PgDown
 NextCompletion=Ctrl+Down
 Open=Ctrl+O
-OpenContextMenu=Menu; Shift+F10
+OpenContextMenu=Shift+F10; Menu
 OpenMainMenu=F10
 OpenRecent=
 Paste=Ctrl+V; Shift+Ins
@@ -83,7 +84,7 @@ PrintPreview=
 Prior=PgUp
 Quit=Ctrl+Q
 Redo=Ctrl+Shift+Z
-Reload=F5; Refresh
+Reload=Refresh; F5
 RenameFile=F2
 Replace=Ctrl+R
 ReportBug=
@@ -93,7 +94,7 @@ RotateUp=Up
 Save=Ctrl+S
 SaveAs=Ctrl+Shift+S
 SelectAll=Ctrl+A
-ShowHideHiddenFiles=Alt+.; Ctrl+H
+ShowHideHiddenFiles=Ctrl+H; Alt+.
 ShowMenubar=Ctrl+M
 ShowStatusbar=
 ShowToolbar=
@@ -148,13 +149,49 @@ Cycle Overview=
 Cycle Overview Opposite=
 Decrease Opacity=
 Edit Tiles=Meta+T
-Expose=Ctrl+F9
-ExposeAll=Ctrl+F10; Launch (C)
-ExposeClass=Ctrl+F7
+Expose=Meta+F9; Ctrl+F9
+ExposeAll=Meta+F10; Launch (C); Ctrl+F10
+ExposeClass=Ctrl+F7; Meta+F7
 ExposeClassCurrentDesktop=
 Grid View=Meta+G
 Increase Opacity=
 Kill Window=Meta+Ctrl+Esc
+KrohnkiteBTreeLayout=
+KrohnkiteColumnsLayout=
+KrohnkiteDecrease=Meta+D
+KrohnkiteFloatAll=Meta+Shift+F
+KrohnkiteFloatingLayout=
+KrohnkiteFocusDown=Meta+J
+KrohnkiteFocusLeft=Meta+H
+KrohnkiteFocusNext=
+KrohnkiteFocusPrev=Meta+,
+KrohnkiteFocusRight=
+KrohnkiteFocusUp=Meta+K
+KrohnkiteGrowHeight=Meta+Ctrl+J
+KrohnkiteIncrease=Meta+I
+KrohnkiteMonocleLayout=
+KrohnkiteNextLayout=Meta+\\
+KrohnkitePreviousLayout=Meta+|
+KrohnkiteQuarterLayout=
+KrohnkiteRotate=
+KrohnkiteRotatePart=
+KrohnkiteSetMaster=
+KrohnkiteShiftDown=Meta+Shift+J
+KrohnkiteShiftLeft=Meta+Shift+H
+KrohnkiteShiftRight=Meta+Shift+L
+KrohnkiteShiftUp=Meta+Shift+K
+KrohnkiteShrinkHeight=Meta+Ctrl+K
+KrohnkiteShrinkWidth=Meta+Ctrl+H
+KrohnkiteSpiralLayout=
+KrohnkiteSpreadLayout=
+KrohnkiteStackedLayout=
+KrohnkiteStairLayout=
+KrohnkiteTileLayout=
+KrohnkiteToggleFloat=Meta+F
+KrohnkiteTreeColumnLayout=
+KrohnkitegrowWidth=Meta+Ctrl+L
+KrohnkitetoggleDock=
+Move Tablet to Next LogicalOutput=
 Move Tablet to Next Output=
 MoveMouseToCenter=Meta+F6
 MoveMouseToFocus=Meta+F5
@@ -162,7 +199,7 @@ MoveZoomDown=
 MoveZoomLeft=
 MoveZoomRight=
 MoveZoomUp=
-Overview=Meta+W
+Overview=Meta+W; Meta+Tab
 Setup Window Shortcut=
 Show Desktop=
 Suspend Compositing=Alt+Shift+F12
@@ -187,6 +224,11 @@ Switch to Desktop 18=
 Switch to Desktop 19=
 Switch to Desktop 2=Ctrl+F2
 Switch to Desktop 20=
+Switch to Desktop 21=
+Switch to Desktop 22=
+Switch to Desktop 23=
+Switch to Desktop 24=
+Switch to Desktop 25=
 Switch to Desktop 3=Ctrl+F3
 Switch to Desktop 4=Ctrl+F4
 Switch to Desktop 5=
@@ -222,7 +264,7 @@ Walk Through Windows of Current Application Alternative=
 Walk Through Windows of Current Application Alternative (Reverse)=
 Window Above Other Windows=
 Window Below Other Windows=
-Window Close=Meta+Q; Alt+F4
+Window Close=Alt+F4; Meta+Q
 Window Custom Quick Tile Bottom=
 Window Custom Quick Tile Left=
 Window Custom Quick Tile Right=
@@ -231,7 +273,7 @@ Window Fullscreen=
 Window Grow Horizontal=
 Window Grow Vertical=
 Window Lower=
-Window Maximize=Meta+Up; Meta+M; Meta+PgUp
+Window Maximize=Meta+Up; Meta+PgUp; Meta+M
 Window Maximize Horizontal=
 Window Maximize Vertical=
 Window Minimize=Meta+PgDown
@@ -252,7 +294,7 @@ Window Pack Down=
 Window Pack Left=
 Window Pack Right=
 Window Pack Up=
-Window Quick Tile Bottom=Meta+Down
+Window Quick Tile Bottom=
 Window Quick Tile Bottom Left=
 Window Quick Tile Bottom Right=
 Window Quick Tile Left=Meta+Left
@@ -278,6 +320,11 @@ Window to Desktop 18=
 Window to Desktop 19=
 Window to Desktop 2=
 Window to Desktop 20=
+Window to Desktop 21=
+Window to Desktop 22=
+Window to Desktop 23=
+Window to Desktop 24=
+Window to Desktop 25=
 Window to Desktop 3=
 Window to Desktop 4=
 Window to Desktop 5=
@@ -299,7 +346,7 @@ Window to Screen 6=
 Window to Screen 7=
 disableInputCapture=Meta+Shift+Esc
 view_actual_size=Meta+0
-view_zoom_in=Meta+=; Meta++
+view_zoom_in=Meta++; Meta+=
 view_zoom_out=Meta+-
 
 [mediacontrol][Global Shortcuts]
@@ -308,8 +355,12 @@ mediavolumeup=
 nextmedia=Media Next
 pausemedia=Media Pause
 playmedia=
-playpausemedia=Media Play
+playpausemedia=Meta+C; Media Play
 previousmedia=Media Previous
+seekbackwardmedia=Media Rewind
+seekbackwardmedialong=
+seekforwardmedia=Media Fast Forward
+seekforwardmedialong=
 stopmedia=Media Stop
 
 [net.local.1password.desktop][Global Shortcuts]
@@ -337,10 +388,10 @@ _launch=Ctrl+Alt+T
 
 [org.kde.krunner.desktop][Global Shortcuts]
 RunClipboard=Alt+Shift+F2
-_launch=Meta; Search; Alt+F2; Alt+Space
+_launch=Meta; Alt+F2; Search
 
 [org.kde.kscreen.desktop][Global Shortcuts]
-ShowOSD=Meta+P; Display
+ShowOSD=Display; Meta+P
 
 [org.kde.plasma-systemmonitor.desktop][Global Shortcuts]
 _launch=Meta+Esc
@@ -353,12 +404,17 @@ ActiveWindowScreenShot=Meta+Print
 CurrentMonitorScreenShot=
 FullScreenScreenShot=Shift+Print
 OpenWithoutScreenshot=
-RecordRegion=Meta+R; Meta+Shift+R
+RecordRegion=Meta+Shift+R; Meta+R
 RecordScreen=Meta+Alt+R
 RecordWindow=Meta+Ctrl+R
 RectangularRegionScreenShot=Meta+Shift+Print
 WindowUnderCursorScreenShot=Meta+Ctrl+Print
-_launch=Print; Meta+Shift+S
+_launch=Meta+Shift+S; Print
+
+[org.kde.touchpadshortcuts.desktop][Global Shortcuts]
+DisableTouchpad=Touchpad Off
+EnableTouchpad=Touchpad On
+ToggleTouchpad=Touchpad Toggle; Meta+Ctrl+Touchpad Toggle; Meta+Ctrl+Zenkaku Hankaku
 
 [org_kde_powerdevil][Global Shortcuts]
 Decrease Keyboard Brightness=Keyboard Brightness Down
@@ -376,6 +432,7 @@ Turn Off Screen=
 powerProfile=Meta+B; Battery
 
 [plasmashell][Global Shortcuts]
+Slideshow Wallpaper Next Image=
 activate application launcher=Alt+F1
 activate task manager entry 1=Meta+1
 activate task manager entry 10=
@@ -392,17 +449,21 @@ clipboard_action=Meta+Ctrl+X
 cycle-panels=Meta+Alt+P
 cycleNextAction=
 cyclePrevAction=
+edit_clipboard=
 manage activities=
 next activity=
 previous activity=
 repeat_action=
-show dashboard=Meta+D
+show dashboard=
 show-barcode=
 show-on-mouse-pos=Meta+V
 stop current activity=Meta+S
 switch to next activity=
 switch to previous activity=
 toggle do not disturb=
+
+[rofi-menu.sh.desktop][Global Shortcuts]
+_launch=
 
 [systemsettings.desktop][Global Shortcuts]
 _launch=Tools
