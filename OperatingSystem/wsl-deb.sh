@@ -51,7 +51,7 @@ sudo ntpdate pool.ntp.org
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install zsh fonts-powerline vim wget tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat xclip unrar-free unzip python3 python3-pip net-tools ncdu whois flatpak xournal evince jq dnsutils nala sassc gawk telnet bc neofetch python3-venv sqlite3 pipx cifs-utils python3-requests ffmpeg nmon
+sudo apt-get -y install zsh fonts-powerline vim wget tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat xclip unrar-free unzip python3 python3-pip net-tools ncdu whois flatpak xournal evince jq dnsutils nala sassc gawk telnet bc neofetch python3-venv sqlite3 pipx cifs-utils python3-requests ffmpeg nmon nmap jp2a zip imagemagick gcc make ruby-dev python-is-python3 openvpn
 
 # Latest Go
 bash ./scripts/latest-go.sh
@@ -100,6 +100,9 @@ bash ./scripts/zsh.sh
 ## Neofetch
 bash ./scripts/neofetch.sh
 
+## Fastfetch
+ln -s -f "$PWD/dotfiles/fastfetch/" ~/.config/
+
 ## GIT
 bash ./utils/git-config/git-config.sh
 
@@ -108,6 +111,7 @@ pipx install virtualenv
 pipx install virtualenvwrapper
 pipx install pylint
 pipx install bpytop
+pipx ensurepath
 
 # WSL config
 sudo bash -c 'cat << EOF > /mnt/c/Users/renan/.wslconfig
