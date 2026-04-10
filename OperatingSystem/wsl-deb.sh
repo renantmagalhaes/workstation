@@ -44,14 +44,14 @@ sudo apt-get update
 ln -s -f $PWD/dotfiles/ ~/.dotfiles
 
 # Set tz
-sudo apt install -y ntpdate
-sudo ntpdate pool.ntp.org
+sudo apt install -y ntpsec-ntpdate
+sudo ntpsec-ntpdate pool.ntp.org
 
 # upgrade
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install zsh fonts-powerline vim wget tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat xclip unrar-free unzip python3 python3-pip net-tools ncdu whois flatpak xournal evince jq dnsutils nala sassc gawk telnet bc neofetch python3-venv sqlite3 pipx cifs-utils python3-requests ffmpeg nmon nmap jp2a zip imagemagick gcc make ruby-dev python-is-python3 openvpn
+sudo apt-get -y install zsh fonts-powerline vim wget tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat xclip unrar-free unzip python3 python3-pip net-tools ncdu whois flatpak xournal evince jq dnsutils nala sassc gawk telnet bc python3-venv sqlite3 pipx cifs-utils python3-requests ffmpeg nmon nmap jp2a zip imagemagick gcc make ruby-dev python-is-python3 openvpn
 
 # Latest Go
 bash ./scripts/latest-go.sh
@@ -96,9 +96,6 @@ bash ./scripts/tmux.sh
 
 ## ZSH
 bash ./scripts/zsh.sh
-
-## Neofetch
-bash ./scripts/neofetch.sh
 
 ## Fastfetch
 ln -s -f "$PWD/dotfiles/fastfetch/" ~/.config/
