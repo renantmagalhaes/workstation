@@ -11,43 +11,47 @@ fi
 
 # --- Step 1: Set SELinux to permissive mode for the current session ---
 
-# Check the current SELinux status
-CURRENT_STATUS=$(getenforce)
-echo "Current SELinux status is: $CURRENT_STATUS"
+if command -v getenforce >/dev/null 2>&1; then
+  # Check the current SELinux status
+  CURRENT_STATUS=$(getenforce)
+  echo "Current SELinux status is: $CURRENT_STATUS"
 
-if [ "$CURRENT_STATUS" != "Disabled" ]; then
-  echo "Setting SELinux to permissive mode for the current session..."
-  setenforce 0
-  if [ $? -eq 0 ]; then
-    echo "Successfully set SELinux to permissive mode."
-    echo "New SELinux status is: $(getenforce)"
+  if [ "$CURRENT_STATUS" != "Disabled" ]; then
+    echo "Setting SELinux to permissive mode for the current session..."
+    setenforce 0
+    if [ $? -eq 0 ]; then
+      echo "Successfully set SELinux to permissive mode."
+      echo "New SELinux status is: $(getenforce)"
+    else
+      echo "Failed to set SELinux to permissive mode."
+      exit 1
+    fi
   else
-    echo "Failed to set SELinux to permissive mode."
+    echo "SELinux is disabled. Cannot change to permissive mode without a reboot after enabling."
+    echo "Please enable SELinux in /etc/selinux/config and reboot."
+  fi
+
+  # --- Step 2: Make the permissive mode setting persistent across reboots ---
+
+  SELINUX_CONFIG="/etc/selinux/config"
+
+  if [ -f "$SELINUX_CONFIG" ]; then
+    echo "Updating $SELINUX_CONFIG to set SELINUX=permissive for future boots..."
+    # Use sed to replace the line starting with SELINUX= with SELINUX=permissive
+    sed -i 's/^SELINUX=.*/SELINUX=permissive/' "$SELINUX_CONFIG"
+    if [ $? -eq 0 ]; then
+      echo "Successfully updated $SELINUX_CONFIG."
+      echo "SELinux will be in permissive mode after the next reboot."
+    else
+      echo "Failed to update $SELINUX_CONFIG."
+      exit 1
+    fi
+  else
+    echo "SELinux configuration file not found at $SELINUX_CONFIG."
     exit 1
   fi
 else
-  echo "SELinux is disabled. Cannot change to permissive mode without a reboot after enabling."
-  echo "Please enable SELinux in /etc/selinux/config and reboot."
-fi
-
-# --- Step 2: Make the permissive mode setting persistent across reboots ---
-
-SELINUX_CONFIG="/etc/selinux/config"
-
-if [ -f "$SELINUX_CONFIG" ]; then
-  echo "Updating $SELINUX_CONFIG to set SELINUX=permissive for future boots..."
-  # Use sed to replace the line starting with SELINUX= with SELINUX=permissive
-  sed -i 's/^SELINUX=.*/SELINUX=permissive/' "$SELINUX_CONFIG"
-  if [ $? -eq 0 ]; then
-    echo "Successfully updated $SELINUX_CONFIG."
-    echo "SELinux will be in permissive mode after the next reboot."
-  else
-    echo "Failed to update $SELINUX_CONFIG."
-    exit 1
-  fi
-else
-  echo "SELinux configuration file not found at $SELINUX_CONFIG."
-  exit 1
+  echo "SELinux tools not found (typical for Debian). Skipping SELinux configuration."
 fi
 
 echo "Script execution complete. You can now run your other scripts."
@@ -104,15 +108,40 @@ echo "Permissions reported: $PERM, owner $OWNER, group $GROUP"
 if [[ "$PERM" == "660" && "$GROUP" == "input" ]]; then
     echo "==> SUCCESS. /dev/uinput is correctly configured and now persistent across reboots."
 else
-    echo "==> FAILURE. Permissions are not correct."
+    echo "==> WARNING. Permissions are not correct via udev alone."
     echo "Expected: mode 660, group input"
     echo "Found: mode $PERM, group $GROUP"
-    echo "A fallback fix is possible using /etc/tmpfiles.d if needed."
-    exit 1
+    echo "Applying fallback fix using /etc/tmpfiles.d..."
+    
+    sudo bash -c 'echo "z /dev/uinput 0660 root input -" > /etc/tmpfiles.d/uinput.conf'
+    sudo systemd-tmpfiles --create /etc/tmpfiles.d/uinput.conf 2>/dev/null
+    
+    PERM=$(stat -c "%a" /dev/uinput)
+    GROUP=$(stat -c "%G" /dev/uinput)
+    
+    if [[ "$PERM" == "660" && "$GROUP" == "input" ]]; then
+        echo "==> SUCCESS. /dev/uinput is correctly configured using fallback tmpfiles.d rule."
+    else
+        echo "==> FAILURE even with tmpfiles.d fallback. Required manual intervention."
+        exit 1
+    fi
 fi
 
 echo
 echo "Validation complete. Reboot to confirm persistence."
 
+# On Debian/Ubuntu, add the user to the input group so scripts can read /dev/input/*
+if [ -f /etc/debian_version ]; then
+    echo
+    echo "==> Detected Debian. Configuring input group for evdev..."
+    if [ -n "$SUDO_USER" ]; then
+        echo "Adding user '$SUDO_USER' to the input group..."
+        usermod -aG input "$SUDO_USER"
+        echo "Done. IMPORTANT: '$SUDO_USER' needs to log out and log back in (or reboot) for the new group to take effect!"
+    else
+        echo "Could not detect SUDO_USER. Please add your normal user to the input group manually:"
+        echo "sudo usermod -aG input <your_username>"
+    fi
+fi
 
 exit 0
