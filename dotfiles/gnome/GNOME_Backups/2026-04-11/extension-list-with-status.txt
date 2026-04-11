@@ -10,3 +10,5 @@
 [ENABLED]  gsconnect@andyholmes.github.io
 [ENABLED]  just-perfection-desktop@just-perfection
 [ENABLED]  scroll-workspaces@rtm
+[ENABLED]  caffeine@patapon.info
+[ENABLED]  clipboard-indicator@tudmotu.com
