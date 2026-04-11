@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Mouse Lateral Zoom (GNOME)
+Exec=/home/rtm/GIT-REPOS/workstation/dotfiles/gnome/scripts/mouse_lateral_zoom/mouse_lateral_zoom
+Terminal=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true
+Comment=Zoom in/out with lateral mouse wheel

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Mouse Overview (GNOME)
+Exec=/home/rtm/GIT-REPOS/workstation/dotfiles/gnome/scripts/mouse_overview/mouse_overview
+Terminal=false
+NoDisplay=true
+X-GNOME-Autostart-enabled=true
+Comment=Trigger GNOME overview with mouse button
