@@ -9,3 +9,4 @@
 [ENABLED]  mprisLabel@moon-0xff.github.com
 [ENABLED]  gsconnect@andyholmes.github.io
 [ENABLED]  just-perfection-desktop@just-perfection
+[ENABLED]  scroll-workspaces@rtm
