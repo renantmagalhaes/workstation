@@ -5,3 +5,5 @@
 [ENABLED]  user-theme@gnome-shell-extensions.gcampax.github.com
 [ENABLED]  Vitals@CoreCoding.com
 [ENABLED]  dash-to-dock@micxgx.gmail.com
+[ENABLED]  blur-my-shell@aunetx
+[ENABLED]  mprisLabel@moon-0xff.github.com
