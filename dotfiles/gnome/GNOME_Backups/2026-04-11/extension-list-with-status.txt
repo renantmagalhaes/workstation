@@ -1,0 +1,7 @@
+# GNOME Extension Audit - 2026-04-11
+[ENABLED]  forge@jmmaranan.com
+[DISABLED] dhruva@narkagni
+[ENABLED]  openbar@neuromorph
+[ENABLED]  user-theme@gnome-shell-extensions.gcampax.github.com
+[ENABLED]  Vitals@CoreCoding.com
+[ENABLED]  dash-to-dock@micxgx.gmail.com
