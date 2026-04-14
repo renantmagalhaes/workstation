@@ -4,6 +4,7 @@
   # We will group all OpenSSH settings together for clarity.
   services.openssh = {
     enable = true;
+    openFirewall = true;
     settings = {
       PasswordAuthentication = true;
       # This allows the 'root' user to log in with a password.
