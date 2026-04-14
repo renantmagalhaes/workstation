@@ -14,7 +14,7 @@
       url = "path:/home/rtm/GIT-REPOS/workstation/dotfiles";
       flake = false;
     };
-    nix-flatpak.url = "github:gabr1sr/nix-flatpak";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
   outputs = { self, nixpkgs, home-manager, dotfiles, nix-flatpak, ... }@inputs: {
