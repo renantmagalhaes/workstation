@@ -23,12 +23,12 @@
   };
 
   boot.initrd = {
-    # Broad set of drivers to ensure the system can mount root on most hardware/VMs
+    # Available for auto-detection
     availableKernelModules = [ 
-      "ahci" "nvme" "xhci_pci" "virtio_pci" "virtio_blk" "virtio_scsi" 
-      "sd_mod" "sr_mod" "usb_storage" "ata_piix" "uhci_hcd" 
+      "ahci" "nvme" "xhci_pci" "usb_storage" "ata_piix" "uhci_hcd" 
     ];
-    kernelModules = [ ];
+    # Force-load these to ensure storage is found immediately
+    kernelModules = [ "virtio_pci" "virtio_blk" "virtio_scsi" "sd_mod" "sr_mod" ];
   };
 
   # Use latest kernel for better hardware support
