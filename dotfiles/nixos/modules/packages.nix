@@ -48,12 +48,12 @@
     git-extras
     unrar
     zip
-    dnsutils
+    bind
     scrot
     wmctrl
     xdotool
     xorg.xprop
-    xwininfo
+    xorg.xwininfo
     xbindkeys
     fzf
     zoxide
@@ -117,6 +117,5 @@
     alacarte
     kdePackages.kdeconnect-kde
     gnome-keyring
-
   ];
 }

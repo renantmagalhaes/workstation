@@ -11,7 +11,7 @@
   environment.systemPackages = with pkgs; [
     python3
     pipx
-    gtk_engines
+    gtk-engines
     go
     nodejs_20
     sqlite
@@ -24,12 +24,11 @@
     ruby
     rustup
     glibc
-    libstdcxx5
     openssl
     sqlite-interactive # replaces sqlite3-devel in nix
     pkg-config
-    xorg.libX11.dev
-    xorg.libXcursor.dev
+    xorg.libX11
+    xorg.libXcursor
     xcbutilcursor
     libxcrypt-legacy # for older compatibility if needed
   ];
