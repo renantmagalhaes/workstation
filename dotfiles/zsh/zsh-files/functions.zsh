@@ -29,19 +29,19 @@ function ip-geolocation() {
 
 ### find alias
 function find-folder () {
-find $1 -type d -iname $2 -exec bat {} +
+  find "${1:-.}" -type d -iname "$2" -exec bat {} +
 }
 
 function find-folder-root () {
-sudo find $1 -type d -iname $2 -exec bat {} +
+  sudo find "${1:-.}" -type d -iname "$2" -exec bat {} +
 }
 
 function find-file () {
-find $1 -type f -iname $2 -exec bat {} +
+  find "${1:-.}" -type f -iname "$2" -exec bat {} +
 }
 
 function find-file-root () {
-sudo find $1 -type f -iname $2 -exec bat {} +
+  sudo find "${1:-.}" -type f -iname "$2" -exec bat {} +
 }
 
 
@@ -414,7 +414,8 @@ git-optimize-repo() {
 # A multi-purpose cd command with a powerful fzf-based menu.
 function cd {
     # --- Case 1: `cd .` to interactively climb up the directory tree ---
-    if [[ "$1" == "." ]]; then
+    # Only trigger if input is exactly '.' and shell is interactive
+    if [[ "$1" == "." && -t 0 ]]; then
         local up_target_dir
         up_target_dir=$(
             local current_path="$PWD"
@@ -432,7 +433,7 @@ function cd {
     fi
 
     # --- Case 2: `cd -` to show a list of the last 5 chronological directories ---
-    if [[ "$1" == "-" ]]; then
+    if [[ "$1" == "-" && -t 0 ]]; then
         local recent_target_dir
         # Use `dirs -pl` to print full, absolute paths and avoid tilde expansion errors.
         recent_target_dir=$(
@@ -451,21 +452,27 @@ function cd {
     fi
 
     # --- Case 4: The main interactive fzf menu ---
-    local target_dir
-    target_dir=$(
-        (
-            zoxide query -l;
-            zoxide query -l | xargs -I {} fd --max-depth 1 --type d . "{}"
-        ) | awk '!seen[$0]++ && $0' | fzf --height 50% --reverse \
-            --query="$@" \
-            --header "SMART LIST (Ctrl+F for deep search)" \
-            --preview 'lsd -a --tree --depth=1 {} || exa -a --tree --level=2 {} || ls -la {}' \
-            --bind "ctrl-f:reload(fd --type d --hidden . \"$HOME\" \
-                --exclude /home/rtm/Data \
-            )+change-header(FULL FILESYSTEM SEARCH)"
-    )
-    if [[ -n "$target_dir" ]]; then
-        builtin cd "$target_dir"
+    # Only trigger if shell is interactive to avoid breaking scripts
+    if [[ -t 0 ]]; then
+        local target_dir
+        target_dir=$(
+            (
+                zoxide query -l;
+                zoxide query -l | xargs -I {} fd --max-depth 1 --type d . "{}"
+            ) | awk '!seen[$0]++ && $0' | fzf --height 50% --reverse \
+                --query="$@" \
+                --header "SMART LIST (Ctrl+F for deep search)" \
+                --preview 'lsd -a --tree --depth=1 {} || exa -a --tree --level=2 {} || ls -la {}' \
+                --bind "ctrl-f:reload(fd --type d --hidden . \"$HOME\" \
+                    --exclude /home/rtm/Data \
+                )+change-header(FULL FILESYSTEM SEARCH)"
+        )
+        if [[ -n "$target_dir" ]]; then
+            builtin cd "$target_dir"
+        fi
+    else
+        # Fallback for non-interactive shells
+        builtin cd "$@"
     fi
 }
 

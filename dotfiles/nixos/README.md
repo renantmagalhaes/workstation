@@ -16,6 +16,11 @@ These applications depend on `qtwebengine-5.15.x`, which is officially marked as
 *   **Nix Strategy**: Refuses to build these packages without explicit security overrides.
 *   **Flatpak Strategy**: Provides these apps in a containerized environment (bubblewrap sandbox), which is safer than running them natively with unpatched libraries.
 
+### ZSH Navigation Hardening (Smart CD)
+The custom `cd` function in `functions.zsh` has been hardened to prevent "Smart" interactive features (like the parent directory climber) from being triggered by background processes or plugins (e.g., `zoxide`). 
+- **Interactivity Check**: Interactive menus only trigger if `[[ -t 0 ]]` (stdin is a terminal).
+- **Automation Friendly**: Non-interactive calls to `cd` now fallback safely to `builtin cd`.
+
 ### Future Action:
 Periodically check if these applications have been updated to **Qt 6** (which uses a modern, secure WebEngine). Once they are on Qt 6, they can be safely moved back to native Nix packages in `modules/packages.nix`.
 
