@@ -43,34 +43,39 @@
     ];
 
     # 1. EARLY INITIALIZATION (NixOS 25.11 standard to avoid warnings)
-    initContent = lib.mkOrder 550 ''
-      # Restored from your original zshrc flow
-      [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/main.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/main.zsh"
-      [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/programs.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/programs.zsh"
+    initContent = lib.mkMerge [
+      (lib.mkOrder 550 ''
+        # Restored from your original zshrc flow
+        [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/main.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/main.zsh"
+        [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/programs.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/programs.zsh"
 
-      # Replicate your legendary openSUSE patches via environment variables:
-      # 1. Remap enhancd triggers (Move interactive search off of ..)
-      export ENHANCD_ARG_DOUBLE_DOT="."
-      export ENHANCD_ARG_SINGLE_DOT=".."
-      # 2. Replicate your second sed hack
-      export ENHANCD_DISABLE_HYPHEN=1
-      export ENHANCD_FILTER="fzf --height 50% --reverse --border --inline-info"
+        # Replicate your legendary openSUSE patches via environment variables:
+        # 1. Remap enhancd triggers (Move interactive search off of ..)
+        export ENHANCD_ARG_DOUBLE_DOT="."
+        export ENHANCD_ARG_SINGLE_DOT=".."
+        # 2. Replicate your second sed hack
+        export ENHANCD_DISABLE_HYPHEN=1
+        export ENHANCD_FILTER="fzf --height 50% --reverse --border --inline-info"
 
-      # Initialize Oh My Posh (Primary Theme)
-      eval "$(oh-my-posh init zsh --config ${config.home.homeDirectory}/.config/omp/oh-my-posh-minimal.yaml)"
+        # Initialize Oh My Posh (Primary Theme)
+        eval "$(oh-my-posh init zsh --config ${config.home.homeDirectory}/.config/omp/oh-my-posh-minimal.yaml)"
 
-      # Powerlevel10k (Backup/Manual if needed)
-      [[ -f "${config.home.homeDirectory}/.p10k.zsh" ]] && source "${config.home.homeDirectory}/.p10k.zsh"
+        # Powerlevel10k (Backup/Manual if needed)
+        [[ -f "${config.home.homeDirectory}/.p10k.zsh" ]] && source "${config.home.homeDirectory}/.p10k.zsh"
+      '')
 
-      # Source custom functions LAST so our 'cd .' wins over enhancd
-      [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/functions.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/functions.zsh"
-      [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/extras.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/extras.zsh"
+      # 2. LATE OVERRIDES (Ensure these run AFTER Oh My Zsh and its plugins)
+      (lib.mkOrder 2000 ''
+        # Source custom functions LAST so our 'cd .' wins over enhancd
+        [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/functions.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/functions.zsh"
+        [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/extras.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/extras.zsh"
 
-      # Source aliases (including overrides)
-      [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/aliases.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/aliases.zsh"
-      
-      # Restore the openSUSE hack: '..' is normal
-      alias ..="builtin cd .."
-    '';
+        # Source aliases (including overrides)
+        [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/aliases.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/aliases.zsh"
+        
+        # Restore the openSUSE hack: '..' is normal
+        alias ..="builtin cd .."
+      '')
+    ];
   };
 }
