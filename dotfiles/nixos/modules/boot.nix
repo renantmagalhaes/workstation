@@ -4,7 +4,7 @@
   # Agnostic GRUB Configuration
   boot.loader = {
     efi = {
-      canTouchEfiVariables = true;
+      canTouchEfiVariables = false;
       efiSysMountPoint = "/boot"; # Standard mount point
     };
     grub = {
