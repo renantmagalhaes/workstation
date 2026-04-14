@@ -14,10 +14,6 @@
       url = "path:/home/rtm/GIT-REPOS/workstation/dotfiles";
       flake = false;
     };
-    zen-browser = {
-      url = "github:ch402/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = { self, nixpkgs, home-manager, dotfiles, ... }@inputs: {
