@@ -31,6 +31,7 @@
     nload
     sysstat
     neofetch
+    fastfetch
     xclip
     bat
     gawk
@@ -46,11 +47,18 @@
     bc
     git-extras
     unrar
+    zip
     dnsutils
     scrot
     wmctrl
     xdotool
     xorg.xprop
+    xwininfo
+    xbindkeys
+    fzf
+    zoxide
+    nmon
+    pciutils
 
     # Media
     mpv
@@ -67,6 +75,8 @@
     flameshot
     scrcpy
     jp2a
+    brasero
+    playerctl
 
     # Networking & System Utilities
     nmap
@@ -87,13 +97,26 @@
     timeshift
     android-tools
     materia-theme
+    papirus-icon-theme
     lm_sensors
     clamav
     clamtk
     #teamviewer
     droidcam
     virtualbox
+    solaar
+    cifs-utils
     kitty
+    
+    # Groundwork for TWM (not activated yet)
+    polybar
+    jgmenu
+    sxhkd
+
+    # Desktop Environment Utilities
+    alacarte
+    kdePackages.kdeconnect-kde
+    gnome-keyring
 
   ];
 }

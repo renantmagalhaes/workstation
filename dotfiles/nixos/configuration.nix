@@ -13,6 +13,8 @@
     ./modules/services.nix
     ./modules/apps/1password.nix
     ./modules/apps/vivaldi.nix
+    ./modules/apps/google-chrome.nix
+    ./modules/apps/zen-browser.nix
   ];
 
   home-manager.users.rtm = import ./home.nix;

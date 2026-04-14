@@ -10,7 +10,10 @@ check_cmd() {
 	command -v "$1" 2>/dev/null
 }
 
-if check_cmd explorer.exe; then # FOR WSL SYSTEMS
+if [[ -f /etc/NIXOS ]]; then # FOR NIXOS SYSTEMS
+	echo "NixOS detected. Applying configuration..."
+	sudo nixos-rebuild switch --flake ./dotfiles/nixos#workstation
+elif check_cmd explorer.exe; then # FOR WSL SYSTEMS
 	if check_cmd apt-get; then
 		bash ./OperatingSystem/wsl-deb.sh
 	elif check_cmd zypper; then

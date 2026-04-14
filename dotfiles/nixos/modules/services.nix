@@ -14,4 +14,22 @@
 
   # Enable the Docker daemon.
   virtualisation.docker.enable = true;
+
+  # Enable Libvirtd for KVM/QEMU virtualization.
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      ovmf.enable = true;
+      ovmf.packages = [ pkgs.OVMFFull.fd ];
+      swtpm.enable = true;
+    };
+  };
+
+  # Enable Flatpak service.
+  services.flatpak.enable = true;
+
+  # Enable Cron.
+  services.cron.enable = true;
 }

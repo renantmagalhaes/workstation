@@ -161,9 +161,17 @@ alias systemctl-list-services='sudo systemctl list-unit-files'
 alias systemctl-running-services='sudo systemctl |grep running'
 
 ### NIX ###
+alias ns='nix-shell -p'
+alias nsh='nix-shell'
+alias ncg='sudo nix-collect-garbage -d && nix-collect-garbage -d'
+alias nopt='nix-store --optimise'
 alias nix-install='nix-env -i'
 alias nix-remove='nix-env --uninstall'
 alias nix-search='echo "Go to https://search.nixos.org/packages"'
+if [[ -f /etc/NIXOS ]]; then
+    alias nrb='sudo nixos-rebuild switch --flake ~/.dotfiles/nixos#workstation'
+    alias nfu='nix flake update --flake ~/.dotfiles/nixos'
+fi
 
 ### System ###
 alias pip='pipx'
