@@ -33,11 +33,20 @@
       {
         name = "enhancd";
         file = "init.sh";
-        src = pkgs.fetchFromGitHub {
-          owner = "b4b4r07";
-          repo = "enhancd";
-          rev = "v2.5.1";
-          sha256 = "1cljfw3ygg6s5nzl99wsj041pnjlby375vfjrpxv2z6jnnsaga4i";
+        src = pkgs.stdenv.mkDerivation {
+          name = "enhancd-patched";
+          src = pkgs.fetchFromGitHub {
+            owner = "b4b4r07";
+            repo = "enhancd";
+            rev = "v2.5.1";
+            sha256 = "1cljfw3ygg6s5nzl99wsj041pnjlby375vfjrpxv2z6jnnsaga4i";
+          };
+          installPhase = ''
+            mkdir -p $out
+            cp -r . $out
+            # The legendary openSUSE hack: move interactive trigger from .. to .
+            sed -i 's/\.\./\./g' $out/init.sh
+          '';
         };
       }
     ];
