@@ -43,35 +43,33 @@
     ];
 
     # 1. EARLY INITIALIZATION (NixOS 25.11 standard to avoid warnings)
-    initContent = lib.mkMerge [
-      (lib.mkOrder 550 ''
-        # Restored from your original zshrc flow
-        [[ -f "${inputs.dotfiles}/zsh/zsh-files/main.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/main.zsh"
-        [[ -f "${inputs.dotfiles}/zsh/zsh-files/programs.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/programs.zsh"
-      '')
+    initContent = lib.mkOrder 550 ''
+      # Restored from your original zshrc flow
+      [[ -f "${inputs.dotfiles}/zsh/zsh-files/main.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/main.zsh"
+      [[ -f "${inputs.dotfiles}/zsh/zsh-files/programs.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/programs.zsh"
+    '';
 
-      # 2. FINAL INITIALIZATION (Source functions/aliases AFTER plugins load)
-      # We use 2000 to ensure this is truly at the end of the generated .zshrc
-      (lib.mkOrder 2000 ''
-        export ENHANCD_DISABLE_HYPHEN=1
-        export ENHANCD_FILTER="fzf --height 50% --reverse --border --inline-info"
+    # 2. FINAL INITIALIZATION (Source functions/aliases AFTER plugins load)
+    # Using initExtra for final customization ensures plugins load correctly in 25.11
+    initExtra = ''
+      export ENHANCD_DISABLE_HYPHEN=1
+      export ENHANCD_FILTER="fzf --height 50% --reverse --border --inline-info"
 
-        # Initialize Oh My Posh (Primary Theme)
-        eval "$(oh-my-posh init zsh --config ${config.home.homeDirectory}/.config/omp/oh-my-posh-minimal.yaml)"
+      # Initialize Oh My Posh (Primary Theme)
+      eval "$(oh-my-posh init zsh --config ${config.home.homeDirectory}/.config/omp/oh-my-posh-minimal.yaml)"
 
-        # Powerlevel10k (Backup/Manual if needed)
-        [[ -f "${config.home.homeDirectory}/.p10k.zsh" ]] && source "${config.home.homeDirectory}/.p10k.zsh"
+      # Powerlevel10k (Backup/Manual if needed)
+      [[ -f "${config.home.homeDirectory}/.p10k.zsh" ]] && source "${config.home.homeDirectory}/.p10k.zsh"
 
-        # Source custom functions LAST so our 'cd .' wins over enhancd
-        [[ -f "${inputs.dotfiles}/zsh/zsh-files/functions.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/functions.zsh"
-        [[ -f "${inputs.dotfiles}/zsh/zsh-files/extras.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/extras.zsh"
+      # Source custom functions LAST so our 'cd .' wins over enhancd
+      [[ -f "${inputs.dotfiles}/zsh/zsh-files/functions.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/functions.zsh"
+      [[ -f "${inputs.dotfiles}/zsh/zsh-files/extras.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/extras.zsh"
 
-        # Source aliases (including overrides)
-        [[ -f "${inputs.dotfiles}/zsh/zsh-files/aliases.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/aliases.zsh"
-        
-        # Restore the openSUSE hack: '..' is normal
-        alias ..="builtin cd .."
-      '')
-    ];
+      # Source aliases (including overrides)
+      [[ -f "${inputs.dotfiles}/zsh/zsh-files/aliases.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/aliases.zsh"
+      
+      # Restore the openSUSE hack: '..' is normal
+      alias ..="builtin cd .."
+    '';
   };
 }
