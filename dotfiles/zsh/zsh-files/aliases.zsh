@@ -169,8 +169,8 @@ alias nix-install='nix-env -i'
 alias nix-remove='nix-env --uninstall'
 alias nix-search='echo "Go to https://search.nixos.org/packages"'
 if [[ -f /etc/NIXOS ]]; then
-    alias nrb='sudo nixos-rebuild switch --flake ~/.dotfiles/nixos#workstation'
-    alias nfu='nix flake update --flake ~/.dotfiles/nixos'
+    alias nrb='sudo nixos-rebuild switch --flake ~/GIT-REPOS/workstation/dotfiles/nixos#workstation'
+    alias nfu='nix flake update --flake ~/GIT-REPOS/workstation/dotfiles/nixos'
 fi
 
 ### System ###
