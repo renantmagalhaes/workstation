@@ -33,23 +33,11 @@
       {
         name = "enhancd";
         file = "init.sh";
-        src = pkgs.stdenv.mkDerivation {
-          name = "enhancd-patched";
-          src = pkgs.fetchFromGitHub {
-            owner = "b4b4r07";
-            repo = "enhancd";
-            rev = "v2.5.1";
-            sha256 = "1cljfw3ygg6s5nzl99wsj041pnjlby375vfjrpxv2z6jnnsaga4i";
-          };
-          installPhase = ''
-            mkdir -p $out
-            cp -r . $out
-            # The legendary openSUSE recursive hacks:
-            # 1. Move interactive trigger from .. to .
-            find $out -type f -name "*.sh" -exec sed -i 's/\.\./\./g' {} +
-            # 2. Force disable hyphen behavior inside the plugin source
-            find $out -type f -name "*.sh" -exec sed -i 's/ENHANCD_DISABLE_HYPHEN\:\-0/ENHANCD_DISABLE_HYPHEN\:\-1/g' {} +
-          '';
+        src = pkgs.fetchFromGitHub {
+          owner = "b4b4r07";
+          repo = "enhancd";
+          rev = "v2.5.1";
+          sha256 = "1cljfw3ygg6s5nzl99wsj041pnjlby375vfjrpxv2z6jnnsaga4i";
         };
       }
     ];
@@ -59,6 +47,13 @@
       # Restored from your original zshrc flow
       [[ -f "${inputs.dotfiles}/zsh/zsh-files/main.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/main.zsh"
       [[ -f "${inputs.dotfiles}/zsh/zsh-files/programs.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/programs.zsh"
+
+      # Replicate your legendary openSUSE patches via environment variables:
+      # 1. Remap enhancd triggers (Move interactive search off of ..)
+      export ENHANCD_ARG_DOUBLE_DOT="."
+      export ENHANCD_ARG_SINGLE_DOT=".."
+      # 2. Replicate your second sed hack
+      export ENHANCD_DISABLE_HYPHEN=1
     '';
 
     # 2. FINAL INITIALIZATION (Source functions/aliases AFTER plugins load)
