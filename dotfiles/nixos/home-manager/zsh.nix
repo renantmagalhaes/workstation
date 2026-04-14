@@ -45,8 +45,8 @@
     # 1. EARLY INITIALIZATION (NixOS 25.11 standard to avoid warnings)
     initContent = lib.mkOrder 550 ''
       # Restored from your original zshrc flow
-      [[ -f "${inputs.dotfiles}/zsh/zsh-files/main.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/main.zsh"
-      [[ -f "${inputs.dotfiles}/zsh/zsh-files/programs.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/programs.zsh"
+      [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/main.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/main.zsh"
+      [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/programs.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/programs.zsh"
 
       # Replicate your legendary openSUSE patches via environment variables:
       # 1. Remap enhancd triggers (Move interactive search off of ..)
@@ -63,11 +63,11 @@
       [[ -f "${config.home.homeDirectory}/.p10k.zsh" ]] && source "${config.home.homeDirectory}/.p10k.zsh"
 
       # Source custom functions LAST so our 'cd .' wins over enhancd
-      [[ -f "${inputs.dotfiles}/zsh/zsh-files/functions.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/functions.zsh"
-      [[ -f "${inputs.dotfiles}/zsh/zsh-files/extras.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/extras.zsh"
+      [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/functions.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/functions.zsh"
+      [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/extras.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/extras.zsh"
 
       # Source aliases (including overrides)
-      [[ -f "${inputs.dotfiles}/zsh/zsh-files/aliases.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/aliases.zsh"
+      [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/aliases.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/aliases.zsh"
       
       # Restore the openSUSE hack: '..' is normal
       alias ..="builtin cd .."
