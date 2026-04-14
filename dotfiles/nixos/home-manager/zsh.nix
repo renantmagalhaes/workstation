@@ -44,8 +44,11 @@
           installPhase = ''
             mkdir -p $out
             cp -r . $out
-            # The legendary openSUSE hack: move interactive trigger from .. to .
-            sed -i 's/\.\./\./g' $out/init.sh
+            # The legendary openSUSE recursive hacks:
+            # 1. Move interactive trigger from .. to .
+            find $out -type f -name "*.sh" -exec sed -i 's/\.\./\./g' {} +
+            # 2. Force disable hyphen behavior inside the plugin source
+            find $out -type f -name "*.sh" -exec sed -i 's/ENHANCD_DISABLE_HYPHEN\:\-0/ENHANCD_DISABLE_HYPHEN\:\-1/g' {} +
           '';
         };
       }
