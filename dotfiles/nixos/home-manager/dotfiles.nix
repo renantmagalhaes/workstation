@@ -33,6 +33,11 @@
     ".p10k.zsh" = {
       source = "${inputs.dotfiles}/zsh/p10k.zsh";
     };
+    # Compatibility link for legacy scripts
+    ".zsh" = {
+      source = "${inputs.dotfiles}/zsh/zsh-files";
+      recursive = true;
+    };
     # The crucial legacy link many scripts depend on
     ".dotfiles" = {
       source = "${inputs.dotfiles}";

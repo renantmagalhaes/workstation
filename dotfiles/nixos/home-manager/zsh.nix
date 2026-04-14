@@ -32,7 +32,13 @@
       }
       {
         name = "enhancd";
-        src = pkgs.zsh-enhancd;
+        file = "init.sh";
+        src = pkgs.fetchFromGitHub {
+          owner = "b4b4r07";
+          repo = "enhancd";
+          rev = "v2.2.1";
+          sha256 = "0iqa9j09fwm6nj5rpip87x3hnvbbz9w9ajgm6wkrd5fls8fn8i5g";
+        };
       }
     ];
 
@@ -48,11 +54,11 @@
       [[ -f "${config.home.homeDirectory}/.p10k.zsh" ]] && source "${config.home.homeDirectory}/.p10k.zsh"
 
       # Source custom scripts from dotfiles
-      [[ -f "${inputs.dotfiles}/zsh/main.zsh" ]] && source "${inputs.dotfiles}/zsh/main.zsh"
-      [[ -f "${inputs.dotfiles}/zsh/programs.zsh" ]] && source "${inputs.dotfiles}/zsh/programs.zsh"
-      [[ -f "${inputs.dotfiles}/zsh/functions.zsh" ]] && source "${inputs.dotfiles}/zsh/functions.zsh"
-      [[ -f "${inputs.dotfiles}/zsh/extras.zsh" ]] && source "${inputs.dotfiles}/zsh/extras.zsh"
-      [[ -f "${inputs.dotfiles}/zsh/aliases.zsh" ]] && source "${inputs.dotfiles}/zsh/aliases.zsh"
+      [[ -f "${inputs.dotfiles}/zsh/zsh-files/main.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/main.zsh"
+      [[ -f "${inputs.dotfiles}/zsh/zsh-files/programs.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/programs.zsh"
+      [[ -f "${inputs.dotfiles}/zsh/zsh-files/functions.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/functions.zsh"
+      [[ -f "${inputs.dotfiles}/zsh/zsh-files/extras.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/extras.zsh"
+      [[ -f "${inputs.dotfiles}/zsh/zsh-files/aliases.zsh" ]] && source "${inputs.dotfiles}/zsh/zsh-files/aliases.zsh"
     '';
   };
 }

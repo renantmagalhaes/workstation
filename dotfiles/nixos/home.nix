@@ -11,5 +11,6 @@
     ./home-manager/dotfiles.nix
     ./home-manager/packages.nix
     ./home-manager/tmux.nix 
+    ./home-manager/kitty.nix
   ];
 }
