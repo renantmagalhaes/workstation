@@ -412,6 +412,7 @@ git-optimize-repo() {
 # This definitive version automatically includes subdirectories from your zoxide history,
 # AND allows for a deep filesystem search with Ctrl+F.
 # A multi-purpose cd command with a powerful fzf-based menu.
+unalias cd 2>/dev/null
 cd() {
     # --- Case 1: `cd .` to interactively climb up the directory tree ---
     if [[ "$1" == "." ]]; then
