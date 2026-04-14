@@ -21,9 +21,9 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment with GDM.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # Enable the GNOME Desktop Environment with GDM (New 25.11 syntax)
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   # SDDM and Plasma 6 (disabled)
   # services.displayManager.sddm.enable = true;
