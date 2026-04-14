@@ -1,13 +1,13 @@
 {
-  description = "My NixOS System Flake (25.05)";
+  description = "My NixOS System Flake (25.11)";
 
   inputs = {
     nixpkgs = {
       #url = "github:NixOS/nixpkgs/fc0ef7621938b5826a7f49d080327a164e5a3d5e";
-      url = "github:NixOS/nixpkgs/nixos-25.05";
+      url = "github:NixOS/nixpkgs/nixos-25.11";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dotfiles = {
