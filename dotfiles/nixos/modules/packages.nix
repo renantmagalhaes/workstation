@@ -63,7 +63,6 @@
     # Media
     mpv
     vlc
-    clementine
     krita
     blender
     audacity
@@ -123,7 +122,6 @@
     kdePackages.kdenlive
     obs-studio
     obsidian
-    plex-desktop
     copyq
     stremio
     hydrapaper

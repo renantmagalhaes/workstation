@@ -54,12 +54,6 @@
       export ENHANCD_ARG_SINGLE_DOT=".."
       # 2. Replicate your second sed hack
       export ENHANCD_DISABLE_HYPHEN=1
-    '';
-
-    # 2. FINAL INITIALIZATION (Source functions/aliases AFTER plugins load)
-    # Using initExtra for final customization ensures plugins load correctly in 25.11
-    initExtra = ''
-      export ENHANCD_DISABLE_HYPHEN=1
       export ENHANCD_FILTER="fzf --height 50% --reverse --border --inline-info"
 
       # Initialize Oh My Posh (Primary Theme)
