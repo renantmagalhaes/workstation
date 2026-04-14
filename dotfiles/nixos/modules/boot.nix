@@ -22,6 +22,15 @@
     };
   };
 
+  boot.initrd = {
+    # Broad set of drivers to ensure the system can mount root on most hardware/VMs
+    availableKernelModules = [ 
+      "ahci" "nvme" "xhci_pci" "virtio_pci" "virtio_blk" "virtio_scsi" 
+      "sd_mod" "sr_mod" "usb_storage" "ata_piix" "uhci_hcd" 
+    ];
+    kernelModules = [ ];
+  };
+
   # Use latest kernel for better hardware support
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
