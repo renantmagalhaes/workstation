@@ -13,10 +13,10 @@ alias pf="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}
 export VISUAL=vim
 
 #Aliases
-gnome_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "GNOME" | awk '{print tolower($0)}')
-kde_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "KDE" | awk '{print tolower($0)}')
-bspwm_check=$(env | grep DESKTOP_SESSION | grep -ioh "bspwm" | awk '{print tolower($0)}')
-hyprland_check=$(env | grep DESKTOP_SESSION | grep -ioh "hyprland" | awk '{print tolower($0)}')
+gnome_check=$(env | grep XDG_CURRENT_DESKTOP | grep -iohE "GNOME" | awk '{print tolower($0)}')
+kde_check=$(env | grep XDG_CURRENT_DESKTOP | grep -iohE "KDE" | awk '{print tolower($0)}')
+bspwm_check=$(env | grep DESKTOP_SESSION | grep -iohE "bspwm" | awk '{print tolower($0)}')
+hyprland_check=$(env | grep DESKTOP_SESSION | grep -iohE "hyprland" | awk '{print tolower($0)}')
 # WSL distribution detection - prefer WSL_DISTRO_NAME, fall back to /etc/os-release (handles tmux env stripping)
 if [[ -n "$WSL_DISTRO_NAME" ]]; then
     wsl_distro_lower=$(echo "$WSL_DISTRO_NAME" | awk '{print tolower($0)}')
@@ -25,8 +25,8 @@ elif [[ -f /etc/os-release ]]; then
 else
     wsl_distro_lower=""
 fi
-wsl_debian_check=$(echo "$wsl_distro_lower" | grep -ioh "debian" || echo "")
-wsl_thumbleweed_check=$(echo "$wsl_distro_lower" | grep -ioh "opensuse-tumbleweed\|tumbleweed" || echo "")
+wsl_debian_check=$(echo "$wsl_distro_lower" | grep -iohE "debian" || echo "")
+wsl_thumbleweed_check=$(echo "$wsl_distro_lower" | grep -iohE "opensuse-tumbleweed|tumbleweed" || echo "")
 
 if check_cmd wsl.exe; then
     alias pdf="evince"

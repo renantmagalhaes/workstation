@@ -55,6 +55,7 @@
     initContent = ''
       # ENHANCD CONFIGURATION (restored from your old script)
       export ENHANCD_DISABLE_HYPHEN=1
+      export ENHANCD_FILTER="fzf --height 50% --reverse --border --inline-info"
 
       # Initialize Oh My Posh (Primary Theme)
       eval "$(oh-my-posh init zsh --config ${config.home.homeDirectory}/.config/omp/oh-my-posh-minimal.yaml)"
