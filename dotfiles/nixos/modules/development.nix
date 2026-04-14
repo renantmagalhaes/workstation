@@ -11,7 +11,7 @@
   environment.systemPackages = with pkgs; [
     python3
     pipx
-    gtk-engines
+    gtk_engines
     go
     nodejs_20
     sqlite
