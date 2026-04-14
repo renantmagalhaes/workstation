@@ -17,11 +17,11 @@ gnome_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "GNOME" | awk '{print t
 kde_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "KDE" | awk '{print tolower($0)}')
 bspwm_check=$(env | grep DESKTOP_SESSION | grep -ioh "bspwm" | awk '{print tolower($0)}')
 hyprland_check=$(env | grep DESKTOP_SESSION | grep -ioh "hyprland" | awk '{print tolower($0)}')
-# WSL distribution detection - use WSL_DISTRO_NAME if available, otherwise check env
+# WSL distribution detection - prefer WSL_DISTRO_NAME, fall back to /etc/os-release (handles tmux env stripping)
 if [[ -n "$WSL_DISTRO_NAME" ]]; then
     wsl_distro_lower=$(echo "$WSL_DISTRO_NAME" | awk '{print tolower($0)}')
-elif env | grep -q "^WSL_DISTRO_NAME="; then
-    wsl_distro_lower=$(env | grep "^WSL_DISTRO_NAME=" | cut -d'=' -f2- | awk '{print tolower($0)}')
+elif [[ -f /etc/os-release ]]; then
+    wsl_distro_lower=$(. /etc/os-release 2>/dev/null; echo "${ID:-${NAME:-}}" | awk '{print tolower($0)}')
 else
     wsl_distro_lower=""
 fi
