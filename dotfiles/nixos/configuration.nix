@@ -19,6 +19,9 @@
   home-manager.users.rtm = import ./home.nix;
 
 
+  # Enable flakes and the nix-command experimental features
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # This now correctly matches the nixos-25.11 Nixpkgs branch from the flake
   system.stateVersion = "25.11";
 }
