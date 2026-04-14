@@ -18,6 +18,9 @@
 
   home-manager.users.rtm = import ./home.nix;
 
+  # Enable Native Steam (properly hooks up 32-bit libs and drivers)
+  programs.steam.enable = true;
+
 
   # Enable flakes and the nix-command experimental features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

@@ -117,5 +117,15 @@
     alacarte
     kdePackages.kdeconnect-kde
     gnome-keyring
+    gnome-extension-manager
+
+    # Native Apps (Migrated from Flatpak)
+    kdePackages.kdenlive
+    obs-studio
+    obsidian
+    plex-desktop
+    copyq
+    stremio
+    hydrapaper
   ];
 }
