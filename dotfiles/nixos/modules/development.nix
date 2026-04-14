@@ -29,7 +29,6 @@
     pkg-config
     xorg.libX11
     xorg.libXcursor
-    xcbutilcursor
     libxcrypt-legacy # for older compatibility if needed
   ];
 }
