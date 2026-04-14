@@ -23,6 +23,20 @@
       source = "${inputs.dotfiles}/fastfetch";
       recursive = true;
     };
+    ".config/lsd" = {
+      source = "${inputs.dotfiles}/zsh/lsd";
+      recursive = true;
+    };
+    ".config/starship.toml" = {
+      source = "${inputs.dotfiles}/zsh/starship/starship.toml";
+    };
+    ".p10k.zsh" = {
+      source = "${inputs.dotfiles}/zsh/p10k.zsh";
+    };
+    # The crucial legacy link many scripts depend on
+    ".dotfiles" = {
+      source = "${inputs.dotfiles}";
+    };
     # Guake preferences link (groundwork)
     ".config/guake/guake-settings" = {
       source = "${inputs.dotfiles}/utils/guake/rtm-guake-setting";
