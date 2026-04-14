@@ -11,6 +11,7 @@
     ./modules/shell.nix 
     ./modules/packages.nix
     ./modules/services.nix
+    ./modules/flatpaks.nix
     ./modules/apps/1password.nix
     ./modules/apps/vivaldi.nix
     ./modules/apps/google-chrome.nix

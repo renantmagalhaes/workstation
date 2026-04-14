@@ -14,14 +14,16 @@
       url = "path:/home/rtm/GIT-REPOS/workstation/dotfiles";
       flake = false;
     };
+    nix-flatpak.url = "github:gabr1sr/nix-flatpak";
   };
 
-  outputs = { self, nixpkgs, home-manager, dotfiles, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, dotfiles, nix-flatpak, ... }@inputs: {
     nixosConfigurations."workstation" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
         home-manager.nixosModules.home-manager
+        nix-flatpak.nixosModules.nix-flatpak
         {
           home-manager.extraSpecialArgs = { inherit inputs; };
         }

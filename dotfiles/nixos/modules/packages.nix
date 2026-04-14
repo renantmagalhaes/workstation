@@ -122,8 +122,6 @@
     kdePackages.kdenlive
     obs-studio
     obsidian
-    copyq
-    stremio
     hydrapaper
   ];
 }

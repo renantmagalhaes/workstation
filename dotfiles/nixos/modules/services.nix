@@ -26,9 +26,6 @@
     };
   };
 
-  # Enable Flatpak service.
-  services.flatpak.enable = true;
-
   # Enable Cron.
   services.cron.enable = true;
 }
