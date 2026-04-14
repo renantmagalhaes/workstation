@@ -117,6 +117,7 @@
     kdePackages.kdeconnect-kde
     gnome-keyring
     gnome-extension-manager
+    gnome-tweaks
 
     # Native Apps (Migrated from Flatpak)
     kdePackages.kdenlive
