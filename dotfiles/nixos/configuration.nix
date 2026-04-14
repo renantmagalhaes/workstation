@@ -20,6 +20,6 @@
   home-manager.users.rtm = import ./home.nix;
 
 
-  # This now correctly matches the unstable Nixpkgs branch from the flake
+  # This now correctly matches the nixos-25.05 Nixpkgs branch from the flake
   system.stateVersion = "25.05";
 }
