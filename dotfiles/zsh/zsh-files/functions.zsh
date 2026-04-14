@@ -412,36 +412,18 @@ git-optimize-repo() {
 # This definitive version automatically includes subdirectories from your zoxide history,
 # AND allows for a deep filesystem search with Ctrl+F.
 # A multi-purpose cd command with a powerful fzf-based menu.
-function cd {
-    # --- Case 1: `cd .` to interactively climb up the directory tree ---
-    # Only trigger if input is exactly '.' and shell is interactive
+function _smart_cd {
+    # --- Case 1: Interactively climb up the directory tree ---
     if [[ "$1" == "." && -t 0 ]]; then
-        local up_target_dir
-        up_target_dir=$(
-            local current_path="$PWD"
-            local parent_path
-            while [ "$current_path" != "/" ]; do
-                parent_path=$(dirname "$current_path")
-                echo "$parent_path"
-                current_path="$parent_path"
-            done | fzf --height 25% --reverse --header "Jump up to which parent directory?"
-        )
-        if [[ -n "$up_target_dir" ]]; then
-            builtin cd "$up_target_dir"
-        fi
+        local up_target_dir=$(local current_path="$PWD"; local p; while [ "$current_path" != "/" ]; do p=$(dirname "$current_path"); echo "$p"; current_path="$p"; done | fzf --height 25% --reverse --header "Jump up to which parent directory?")
+        [[ -n "$up_target_dir" ]] && builtin cd "$up_target_dir"
         return
     fi
 
-    # --- Case 2: `cd -` to show a list of the last 5 chronological directories ---
+    # --- Case 2: Show a list of the last 5 chronological directories ---
     if [[ "$1" == "-" && -t 0 ]]; then
-        local recent_target_dir
-        # Use `dirs -pl` to print full, absolute paths and avoid tilde expansion errors.
-        recent_target_dir=$(
-            dirs -pl | tail -n +2 | head -n 5 | fzf --height 25% --reverse --header "Recent Directories (Chronological)"
-        )
-        if [[ -n "$recent_target_dir" ]]; then
-            builtin cd "$recent_target_dir"
-        fi
+        local recent_target_dir=$(dirs -pl | tail -n +2 | head -n 5 | fzf --height 25% --reverse --header "Recent Directories (Chronological)")
+        [[ -n "$recent_target_dir" ]] && builtin cd "$recent_target_dir"
         return
     fi
 
@@ -452,26 +434,10 @@ function cd {
     fi
 
     # --- Case 4: The main interactive fzf menu ---
-    # Only trigger if shell is interactive to avoid breaking scripts
     if [[ -t 0 ]]; then
-        local target_dir
-        target_dir=$(
-            (
-                zoxide query -l;
-                zoxide query -l | xargs -I {} fd --max-depth 1 --type d . "{}"
-            ) | awk '!seen[$0]++ && $0' | fzf --height 50% --reverse \
-                --query="$@" \
-                --header "SMART LIST (Ctrl+F for deep search)" \
-                --preview 'lsd -a --tree --depth=1 {} || exa -a --tree --level=2 {} || ls -la {}' \
-                --bind "ctrl-f:reload(fd --type d --hidden . \"$HOME\" \
-                    --exclude /home/rtm/Data \
-                )+change-header(FULL FILESYSTEM SEARCH)"
-        )
-        if [[ -n "$target_dir" ]]; then
-            builtin cd "$target_dir"
-        fi
+        local target_dir=$( (zoxide query -l; zoxide query -l | xargs -I {} fd --max-depth 1 --type d . "{}") | awk '!seen[$0]++ && $0' | fzf --height 50% --reverse --query="$@" --header "SMART LIST (Ctrl+F for deep search)" --preview 'lsd -a --tree --depth=1 {} || exa -a --tree --level=2 {} || ls -la {}' --bind "ctrl-f:reload(fd --type d --hidden . \"$HOME\" --exclude /home/rtm/Data)+change-header(FULL FILESYSTEM SEARCH)")
+        [[ -n "$target_dir" ]] && builtin cd "$target_dir"
     else
-        # Fallback for non-interactive shells
         builtin cd "$@"
     fi
 }
