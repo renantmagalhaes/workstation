@@ -15,9 +15,13 @@
       flake = false;
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    quickshell = {
+      url = "github:quickshell-mirror/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, dotfiles, nix-flatpak, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, dotfiles, nix-flatpak, quickshell, ... }@inputs: {
     nixosConfigurations."workstation" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };

@@ -16,6 +16,7 @@
     ./modules/apps/1password.nix
     ./modules/apps/vivaldi.nix
     ./modules/apps/google-chrome.nix
+    ./modules/desktop/hyprland.nix
   ];
 
   home-manager.users.rtm = import ./home.nix;

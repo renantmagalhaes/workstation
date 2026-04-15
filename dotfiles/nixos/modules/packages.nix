@@ -107,9 +107,8 @@
     cifs-utils
     kitty
     
-    # Groundwork for TWM (not activated yet)
+    # Groundwork for BSPWM (not yet activated)
     polybar
-    jgmenu
     sxhkd
 
     # Desktop Environment Utilities

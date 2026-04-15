@@ -12,5 +12,6 @@
     ./home-manager/packages.nix
     ./home-manager/tmux.nix 
     ./home-manager/kitty.nix
+    ./home-manager/hyprland.nix
   ];
 }
