@@ -441,6 +441,10 @@ function cd {
         builtin cd "$@"
     fi
 }
+# Tell ZSH's completion system to use the built-in _cd completer for our function
+# wrapper. Without this, shadowing the cd builtin with a function loses directory
+# tab-completion on all platforms.
+compdef _cd cd
 
 # Function to safely clean the zoxide database with confirmation.
 # This version uses the most robust, basic form of `read` to avoid shell issues.
