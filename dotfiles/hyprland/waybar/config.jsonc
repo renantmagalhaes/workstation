@@ -17,7 +17,9 @@
     "battery",
     "battery#bat2"
   ],
-  "modules-center": ["clock"],
+  "modules-center": [
+    "clock"
+  ],
   "modules-right": [
     "mpris",
     "custom/weather",
@@ -48,8 +50,20 @@
     "tooltip": true,
     "tooltip-format": "{name}",
     "persistent-workspaces": {
-      "DP-1": [1, 2, 3, 4, 5],
-      "HDMI-A-1": [6, 7, 8, 9, 10]
+      "DP-1": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "HDMI-A-1": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ]
     }
   },
   "hyprland/window": {
@@ -83,7 +97,10 @@
   "sway/scratchpad": {
     "format": "{icon} {count}",
     "show-empty": false,
-    "format-icons": ["", ""],
+    "format-icons": [
+      "",
+      ""
+    ],
     "tooltip": true,
     "tooltip-format": "{app}: {title}"
   },
@@ -224,7 +241,6 @@
     "format-muted": " ",
     "format-source": " {volume}% ",
     "format-source-muted": "",
-
     "format-icons": {
       "headphone": "",
       "hands-free": "",
@@ -232,7 +248,11 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": ["", "", " "]
+      "default": [
+        "",
+        "",
+        " "
+      ]
     },
     "on-click": "pavucontrol",
     "on-click-right": "~/.config/rofi/scripts/audio-output-selector.sh",
@@ -259,7 +279,7 @@
     "format": " ⏻ ",
     "tooltip": false,
     "on-click": "~/.config/waybar/scripts/wlogout.sh",
-    "on-click-right": "jgmenu_run"
+    "on-click-right": "~/.dotfiles/rofi/scripts/launchers/type-7/launcher.sh"
   },
   "custom/fullscreen": {
     "exec": "~/.config/waybar/scripts/fullscreen_status.sh",
