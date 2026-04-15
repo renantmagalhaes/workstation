@@ -1,6 +1,13 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
+  # Ensure ~/.dotfiles is a live symlink to the actual git repo, not a nix-store copy.
+  # This runs before home-manager writes any files, so other activation steps can rely on it.
+  # Bootstrap (first install only): ln -sfn /path/to/workstation/dotfiles ~/.dotfiles
+  home.activation.linkDotfiles = lib.hm.dag.entryBefore [ "writeBoundary" ] ''
+    run ln -sfn "/home/rtm/GIT-REPOS/workstation/dotfiles" "$HOME/.dotfiles"
+  '';
+
   home.file = {
     # Alacritty — full folder so both .toml and .yml variants are available
     ".config/alacritty" = {
@@ -41,10 +48,6 @@
     ".zsh" = {
       source = "${inputs.dotfiles}/zsh/zsh-files";
       recursive = true;
-    };
-    # The crucial legacy link many scripts depend on
-    ".dotfiles" = {
-      source = "${inputs.dotfiles}";
     };
     # Guake preferences — full folder so all theme variants are available
     ".config/guake" = {

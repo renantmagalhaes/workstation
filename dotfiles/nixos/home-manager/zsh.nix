@@ -58,8 +58,8 @@
     initContent = lib.mkMerge [
       (lib.mkOrder 550 ''
         # Restored from your original zshrc flow
-        [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/main.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/main.zsh"
-        [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/programs.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/programs.zsh"
+        [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/main.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/main.zsh"
+        [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/programs.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/programs.zsh"
 
         # enhancd trigger remapping (kept for compatibility; function cd overrides enhancd at mkOrder 2000)
         export ENHANCD_ARG_DOUBLE_DOT="."
@@ -77,11 +77,11 @@
       # 2. LATE OVERRIDES (Ensure these run AFTER Oh My Zsh and its plugins)
       (lib.mkOrder 2000 ''
         # Source custom functions LAST so our 'cd .' wins over enhancd
-        [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/functions.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/functions.zsh"
-        [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/extras.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/extras.zsh"
+        [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/functions.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/functions.zsh"
+        [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/extras.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/extras.zsh"
 
         # Source aliases (including overrides)
-        [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/aliases.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/aliases.zsh"
+        [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/aliases.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/aliases.zsh"
         
         # Restore the openSUSE hack: '..' is normal
         alias ..="builtin cd .."

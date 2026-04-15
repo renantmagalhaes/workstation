@@ -11,7 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dotfiles = {
-      url = "path:/home/rtm/GIT-REPOS/workstation/dotfiles";
+      url = "path:/home/rtm/.dotfiles";
       flake = false;
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
