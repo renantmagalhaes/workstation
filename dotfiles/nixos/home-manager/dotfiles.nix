@@ -7,9 +7,10 @@ let
 in
 {
   # Ensure ~/.dotfiles is a live symlink to the actual git repo, not a nix-store copy.
-  # Bootstrap (first install only): ln -sfn /path/to/workstation/dotfiles ~/.dotfiles
+  # NOTE: Initial bootstrapping MUST be done by install.sh because flake.nix
+  # depends on ~/.dotfiles existing at evaluation time (chicken-and-egg problem).
   home.activation.linkDotfiles = lib.hm.dag.entryBefore [ "writeBoundary" ] ''
-    run ln -sfn "/home/rtm/GIT-REPOS/workstation/dotfiles" "$HOME/.dotfiles"
+    run ln -sfn "${home}/GIT-REPOS/workstation/dotfiles" "$HOME/.dotfiles"
   '';
 
   home.file = {
