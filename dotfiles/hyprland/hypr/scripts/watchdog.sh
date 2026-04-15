@@ -10,7 +10,7 @@ MOUSE_ACTIONS_SCRIPT="$HOME/.config/hypr/scripts/mouse_actions.py"
 # Function to check if a process is running
 is_running() {
     local process_name="$1"
-    pgrep -x "$process_name" >/dev/null 2>&1
+    pgrep -f "$process_name" >/dev/null 2>&1
 }
 
 # Function to launch waybar

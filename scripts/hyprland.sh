@@ -49,19 +49,18 @@ echo "✅ OpenSUSE detected"
 # DOTFILES MAIN SYMLINK
 ###########################################
 
-echo "📁 Setting up main dotfiles symlink..."
-
 SOURCE_DOTFILES="$FOLDER_LOCATION/dotfiles"
 
-if [ -e "$DOTFILES" ]; then
-    echo "ℹ️ ~/.dotfiles already exists, skipping."
-else
+if [[ ! -L "$DOTFILES" ]] || [[ "$(readlink "$DOTFILES")" != "$SOURCE_DOTFILES" ]]; then
+    echo "🔗 Setting up main dotfiles symlink..."
     if [ ! -d "$SOURCE_DOTFILES" ]; then
         echo "❌ Source dotfiles folder not found at: $SOURCE_DOTFILES"
         exit 1
     fi
-    ln -s "$SOURCE_DOTFILES" "$DOTFILES"
+    ln -sfn "$SOURCE_DOTFILES" "$DOTFILES"
     echo "✅ Main dotfiles symlink created"
+else
+    echo "ℹ️ ~/.dotfiles already exists and is correct, skipping."
 fi
 
 ###########################################

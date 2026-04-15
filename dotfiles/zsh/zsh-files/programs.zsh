@@ -41,4 +41,6 @@ command -v bat > /dev/null && \
     }
 
 # colorize ls
-[ -x /usr/bin/dircolors ] && eval "$(dircolors -b)"
+if check_cmd dircolors; then
+    eval "$(dircolors -b)"
+fi

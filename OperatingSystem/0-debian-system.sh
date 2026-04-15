@@ -65,7 +65,11 @@ sudo sed -i 's/main/main contrib non-free non-free-firmware/g' /etc/apt/sources.
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Dotfiles syslink
-ln -s -f $PWD/dotfiles/ ~/.dotfiles
+DOTFILES_DIR="$PWD/dotfiles"
+if [[ ! -L "$HOME/.dotfiles" ]] || [[ "$(readlink "$HOME/.dotfiles")" != "$DOTFILES_DIR" ]]; then
+    echo "🔗 Creating ~/.dotfiles symlink..."
+    ln -sfn "$DOTFILES_DIR" "$HOME/.dotfiles"
+fi
 
 # Install the packages from repo
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wget zsh clementine strawberry breeze-cursor-theme dia vim vim-gui-common nmap vlc blender fonts-powerline fonts-cantarell brasero gparted wireshark tmux curl net-tools iproute2 vpnc-scripts network-manager-vpnc vpnc network-manager-vpnc-gnome git gnome-icon-theme idle fonts-hack-ttf htop meld dconf-cli openvpn network-manager-openvpn nautilus nautilus-admin nautilus-data nautilus-extension-gnome-terminal nautilus-share krita frei0r-plugins audacity filezilla tree remmina remmina-plugin-rdp ffmpeg nload gir1.2-gmenu-3.0 pwgen sysstat alacarte ffmpeg xclip flameshot python3-pip gawk net-tools coreutils gir1.2-gtop-2.0 lm-sensors cheese ncdu whois piper ratbagd timeshift adb fastboot jp2a zip unrar-free bind9-dnsutils imagemagick scrot x11-utils wmctrl xdotool apt-transport-https ca-certificates curl flatpak xournal evince jq pulseaudio-utils sassc gcc make nala python3-venv sqlite3 pipx ruby-dev ntpsec ntpsec-ntpdate cifs-utils solaar nmon python-is-python3 papirus-icon-theme guake guake-indicator

@@ -19,6 +19,15 @@
     evince
     vscode
     docker-compose
-    # gir-rs is not a direct package, it's a Rust development tool
+    gcc
+    gnumake
+    ruby
+    rustup
+    glibc
+    sqlite-interactive # replaces sqlite3-devel in nix
+    pkg-config
+    xorg.libX11
+    xorg.libXcursor
+    libxcrypt-legacy # for older compatibility if needed
   ];
 }

@@ -23,6 +23,16 @@ cat <<"EOF"
 EOF
 echo ""
 echo ""
+
+# Bootstrap ~/.dotfiles symlink (Required for Nix Flake evaluation)
+REPO_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+DOTFILES_DIR="$REPO_DIR/dotfiles"
+if [[ ! -L "$HOME/.dotfiles" ]] || [[ "$(readlink "$HOME/.dotfiles")" != "$DOTFILES_DIR" ]]; then
+    echo "Checking ~/.dotfiles symlink..."
+    ln -sfn "$DOTFILES_DIR" "$HOME/.dotfiles"
+    echo "Symlink created: ~/.dotfiles -> $DOTFILES_DIR"
+fi
+
 echo "#### Menu Selector ####"
 echo " 1) Full Workstation setup"
 echo ""

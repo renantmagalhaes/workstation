@@ -41,7 +41,11 @@ sudo systemctl mask packagekit
 sudo zypper refresh && sudo zypper update
 
 # Dotfiles syslink
-ln -s -f $PWD/dotfiles/ ~/.dotfiles
+DOTFILES_DIR="$PWD/dotfiles"
+if [[ ! -L "$HOME/.dotfiles" ]] || [[ "$(readlink "$HOME/.dotfiles")" != "$DOTFILES_DIR" ]]; then
+    echo "🔗 Creating ~/.dotfiles symlink..."
+    ln -sfn "$DOTFILES_DIR" "$HOME/.dotfiles"
+fi
 mkdir -p ~/.config/sxhkd/sxhkdrc
 ln -s -f $PWD/dotfiles/kde/sxhkd/sxhkdrc ~/.config/sxhkd/sxhkdrc
 

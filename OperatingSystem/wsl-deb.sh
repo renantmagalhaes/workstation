@@ -41,7 +41,11 @@ fi
 sudo apt-get update
 
 # Dotfiles syslink
-ln -s -f $PWD/dotfiles/ ~/.dotfiles
+DOTFILES_DIR="$PWD/dotfiles"
+if [[ ! -L "$HOME/.dotfiles" ]] || [[ "$(readlink "$HOME/.dotfiles")" != "$DOTFILES_DIR" ]]; then
+    echo "🔗 Creating ~/.dotfiles symlink..."
+    ln -sfn "$DOTFILES_DIR" "$HOME/.dotfiles"
+fi
 
 # Set tz
 sudo apt install -y ntpsec-ntpdate

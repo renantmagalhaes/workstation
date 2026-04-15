@@ -29,19 +29,19 @@ function ip-geolocation() {
 
 ### find alias
 function find-folder () {
-find $1 -type d -iname $2 -exec bat {} +
+  find "${1:-.}" -type d -iname "$2" -exec bat {} +
 }
 
 function find-folder-root () {
-sudo find $1 -type d -iname $2 -exec bat {} +
+  sudo find "${1:-.}" -type d -iname "$2" -exec bat {} +
 }
 
 function find-file () {
-find $1 -type f -iname $2 -exec bat {} +
+  find "${1:-.}" -type f -iname "$2" -exec bat {} +
 }
 
 function find-file-root () {
-sudo find $1 -type f -iname $2 -exec bat {} +
+  sudo find "${1:-.}" -type f -iname "$2" -exec bat {} +
 }
 
 
@@ -412,7 +412,16 @@ git-optimize-repo() {
 # This definitive version automatically includes subdirectories from your zoxide history,
 # AND allows for a deep filesystem search with Ctrl+F.
 # A multi-purpose cd command with a powerful fzf-based menu.
-cd() {
+# _CD_ACTIVE guards against chpwd hooks re-entering this function (e.g. enhancd).
+typeset -g _CD_ACTIVE=0
+
+function cd {
+    # Re-entrant guard: a chpwd hook triggered by our own builtin cd called us again.
+    # Do NOT call builtin cd here — it would re-fire chpwd and loop.
+    (( _CD_ACTIVE )) && return 0
+
+    _CD_ACTIVE=1
+
     # --- Case 1: `cd .` to interactively climb up the directory tree ---
     if [[ "$1" == "." ]]; then
         local up_target_dir
@@ -425,28 +434,26 @@ cd() {
                 current_path="$parent_path"
             done | fzf --height 25% --reverse --header "Jump up to which parent directory?"
         )
-        if [[ -n "$up_target_dir" ]]; then
-            builtin cd "$up_target_dir"
-        fi
+        [[ -n "$up_target_dir" ]] && builtin cd "$up_target_dir"
+        _CD_ACTIVE=0
         return
     fi
 
     # --- Case 2: `cd -` to show a list of the last 5 chronological directories ---
     if [[ "$1" == "-" ]]; then
         local recent_target_dir
-        # Use `dirs -pl` to print full, absolute paths and avoid tilde expansion errors.
         recent_target_dir=$(
             dirs -pl | tail -n +2 | head -n 5 | fzf --height 25% --reverse --header "Recent Directories (Chronological)"
         )
-        if [[ -n "$recent_target_dir" ]]; then
-            builtin cd "$recent_target_dir"
-        fi
+        [[ -n "$recent_target_dir" ]] && builtin cd "$recent_target_dir"
+        _CD_ACTIVE=0
         return
     fi
 
     # --- Case 3: Standard cd behavior for any existing directory ---
     if [ -d "$1" ]; then
         builtin cd "$1"
+        _CD_ACTIVE=0
         return
     fi
 
@@ -464,9 +471,8 @@ cd() {
                 --exclude /home/rtm/Data \
             )+change-header(FULL FILESYSTEM SEARCH)"
     )
-    if [[ -n "$target_dir" ]]; then
-        builtin cd "$target_dir"
-    fi
+    [[ -n "$target_dir" ]] && builtin cd "$target_dir"
+    _CD_ACTIVE=0
 }
 
 # Function to safely clean the zoxide database with confirmation.

@@ -5,5 +5,11 @@
     oh-my-posh
     lazygit
     neovim
+    zoxide
+    fastfetch
+    fzf
+    bat
+    lsd
+    alacritty
   ];
 }

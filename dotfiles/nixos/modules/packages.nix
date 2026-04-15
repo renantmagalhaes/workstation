@@ -31,6 +31,7 @@
     nload
     sysstat
     neofetch
+    fastfetch
     xclip
     bat
     gawk
@@ -46,16 +47,22 @@
     bc
     git-extras
     unrar
-    dnsutils
+    zip
+    bind
     scrot
     wmctrl
     xdotool
     xorg.xprop
+    xorg.xwininfo
+    xbindkeys
+    fzf
+    zoxide
+    nmon
+    pciutils
 
     # Media
     mpv
     vlc
-    clementine
     krita
     blender
     audacity
@@ -67,6 +74,8 @@
     flameshot
     scrcpy
     jp2a
+    brasero
+    playerctl
 
     # Networking & System Utilities
     nmap
@@ -87,13 +96,32 @@
     timeshift
     android-tools
     materia-theme
+    papirus-icon-theme
     lm_sensors
     clamav
     clamtk
     #teamviewer
     droidcam
     virtualbox
+    solaar
+    cifs-utils
     kitty
+    
+    # Groundwork for BSPWM (not yet activated)
+    polybar
+    sxhkd
 
+    # Desktop Environment Utilities
+    alacarte
+    kdePackages.kdeconnect-kde
+    gnome-keyring
+    gnome-extension-manager
+    gnome-tweaks
+
+    # Native Apps (Migrated from Flatpak)
+    kdePackages.kdenlive
+    obs-studio
+    obsidian
+    hydrapaper
   ];
 }

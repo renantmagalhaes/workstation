@@ -13,10 +13,10 @@ alias pf="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}
 export VISUAL=vim
 
 #Aliases
-gnome_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "GNOME" | awk '{print tolower($0)}')
-kde_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "KDE" | awk '{print tolower($0)}')
-bspwm_check=$(env | grep DESKTOP_SESSION | grep -ioh "bspwm" | awk '{print tolower($0)}')
-hyprland_check=$(env | grep DESKTOP_SESSION | grep -ioh "hyprland" | awk '{print tolower($0)}')
+gnome_check=$(env | grep XDG_CURRENT_DESKTOP | grep -iohE "GNOME" | awk '{print tolower($0)}')
+kde_check=$(env | grep XDG_CURRENT_DESKTOP | grep -iohE "KDE" | awk '{print tolower($0)}')
+bspwm_check=$(env | grep DESKTOP_SESSION | grep -iohE "bspwm" | awk '{print tolower($0)}')
+hyprland_check=$(env | grep DESKTOP_SESSION | grep -iohE "hyprland" | awk '{print tolower($0)}')
 # WSL distribution detection - prefer WSL_DISTRO_NAME, fall back to /etc/os-release (handles tmux env stripping)
 if [[ -n "$WSL_DISTRO_NAME" ]]; then
     wsl_distro_lower=$(echo "$WSL_DISTRO_NAME" | awk '{print tolower($0)}')
@@ -25,8 +25,8 @@ elif [[ -f /etc/os-release ]]; then
 else
     wsl_distro_lower=""
 fi
-wsl_debian_check=$(echo "$wsl_distro_lower" | grep -ioh "debian" || echo "")
-wsl_thumbleweed_check=$(echo "$wsl_distro_lower" | grep -ioh "opensuse-tumbleweed\|tumbleweed" || echo "")
+wsl_debian_check=$(echo "$wsl_distro_lower" | grep -iohE "debian" || echo "")
+wsl_thumbleweed_check=$(echo "$wsl_distro_lower" | grep -iohE "opensuse-tumbleweed|tumbleweed" || echo "")
 
 if check_cmd wsl.exe; then
     alias pdf="evince"
@@ -141,6 +141,11 @@ alias la='ls -A'
 alias l='ls -F'
 alias ls='lsd'
 
+### Navigation
+# Re-register _cd completer after compinit (oh-my-zsh resets it if placed earlier).
+# This restores directory tab-completion for the custom cd() function wrapper.
+compdef _cd cd
+
 ### SSH-KEYGEN ###
 alias ssh-keygen-4096='ssh-keygen -t rsa -b 4096'
 alias ssh-keygen-ed25519='ssh-keygen -t ed25519'
@@ -161,9 +166,17 @@ alias systemctl-list-services='sudo systemctl list-unit-files'
 alias systemctl-running-services='sudo systemctl |grep running'
 
 ### NIX ###
+alias ns='nix-shell -p'
+alias nsh='nix-shell'
+alias ncg='sudo nix-collect-garbage -d && nix-collect-garbage -d'
+alias nopt='nix-store --optimise'
 alias nix-install='nix-env -i'
 alias nix-remove='nix-env --uninstall'
 alias nix-search='echo "Go to https://search.nixos.org/packages"'
+if [[ -f /etc/NIXOS ]]; then
+    alias nrb='sudo nixos-rebuild switch --flake ~/GIT-REPOS/workstation/dotfiles/nixos#workstation'
+    alias nfu='nix flake update --flake ~/GIT-REPOS/workstation/dotfiles/nixos'
+fi
 
 ### System ###
 alias pip='pipx'

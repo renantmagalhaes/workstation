@@ -176,8 +176,10 @@ elif [[ $os_check == "linux" ]]; then
   # -----------------
   export PATH="$HOME/.local/bin:/usr/sbin:/usr/share/code/bin:$HOME/.cargo/bin:$HOME/.local/share/nvim/mason/bin:$HOME/go/bin:$PATH"
 
-  # Linuxbrew
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  # Linuxbrew (Only load if present AND not on NixOS)
+  if [[ ! -f /etc/NIXOS ]]; then
+    [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  fi
 
   # -----------------
   # WSL-specific logic

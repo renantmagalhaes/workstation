@@ -21,16 +21,26 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment with SSDM.
-  services.displayManager.sddm.enable = true;
-  #services.displayManager.gdm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # Enable the GNOME Desktop Environment with GDM (New 25.11 syntax)
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+
+  # SDDM and Plasma 6 (disabled)
+  # services.displayManager.sddm.enable = true;
+  # services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
+
+  # Fonts
+  fonts.packages = with pkgs; [
+    maple-mono.NF
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
+  ];
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

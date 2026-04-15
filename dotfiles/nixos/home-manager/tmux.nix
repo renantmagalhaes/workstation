@@ -1,25 +1,14 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 
 let
-  tmuxDotfiles = "${inputs.dotfiles}/tmux";
+  link = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/${path}";
 in
 {
-  # This section just enables the tmux program itself.
-  programs.tmux = {
-    enable = true;
-  };
+  home.packages = [ pkgs.tmux ];
 
-  # This section's only job is to symlink
   home.file = {
-    ".tmux.conf" = {
-      source = "${tmuxDotfiles}/tmux.conf";
-    };
-    ".tmux.conf.local" = {
-      source = "${tmuxDotfiles}/tmux.conf.local";
-    };
-    ".tmux/plugins" = {
-      source = "${tmuxDotfiles}/plugins";
-      recursive = true;
-    };
+    ".tmux.conf".source       = link "tmux/tmux.conf";
+    ".tmux.conf.local".source = link "tmux/tmux.conf.local";
+    ".tmux/plugins".source    = link "tmux/plugins";
   };
 }

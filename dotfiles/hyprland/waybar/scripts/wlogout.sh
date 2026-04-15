@@ -3,8 +3,8 @@ A_1080=250
 B_1080=250
 
 # Check if wlogout is already running
-if pgrep -x "wlogout" > /dev/null; then
-    pkill -x "wlogout"
+if pgrep -f "wlogout" > /dev/null; then
+    pkill -f "wlogout"
     exit 0
 fi
 
