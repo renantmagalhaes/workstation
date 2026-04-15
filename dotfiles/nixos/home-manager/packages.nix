@@ -10,5 +10,6 @@
     fzf
     bat
     lsd
+    alacritty
   ];
 }

@@ -2,6 +2,11 @@
 
 {
   home.file = {
+    # Alacritty
+    ".config/alacritty/alacritty.yml" = {
+      source = "${inputs.dotfiles}/alacritty/alacritty.yml";
+    };
+
     # Oh My Posh themes — symlink the whole folder so all variants are available
     ".config/omp" = {
       source = "${inputs.dotfiles}/zsh/omp";
