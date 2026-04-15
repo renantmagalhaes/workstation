@@ -60,6 +60,10 @@
 
       # 2. LATE OVERRIDES (Ensure these run AFTER Oh My Zsh and its plugins)
       (lib.mkOrder 2000 ''
+        # Re-enable fzf-tab after compinit (plugins can be sourced before compinit,
+        # causing Tab to be rebound by the completion init — this restores it)
+        enable-fzf-tab 2>/dev/null || true
+
         # Source custom functions LAST so our 'cd' wins over any plugin
         [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/functions.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/functions.zsh"
         [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/extras.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/extras.zsh"
