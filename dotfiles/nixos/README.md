@@ -31,4 +31,4 @@ Periodically check if these applications have been updated to **Qt 6** (which us
 *   `home-manager/`: User-level configuration and ZSH setup.
 
 # TESTS
-sync
+sync 12
