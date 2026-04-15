@@ -28,4 +28,7 @@
 
   # Enable Cron.
   services.cron.enable = true;
+
+  # Enable envfs to provide fallback paths like /bin/bash for non-Nix scripts
+  services.envfs.enable = true;
 }
