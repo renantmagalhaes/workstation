@@ -413,6 +413,12 @@ git-optimize-repo() {
 # AND allows for a deep filesystem search with Ctrl+F.
 # A multi-purpose cd command with a powerful fzf-based menu.
 function cd {
+    # Non-interactive context (hooks, scripts) — skip fzf magic entirely
+    [[ ! -o interactive ]] && { builtin cd "$@"; return $?; }
+
+    # No arguments — go home
+    [[ $# -eq 0 ]] && { builtin cd; return $?; }
+
     # --- Case 1: `cd .` to interactively climb up the directory tree ---
     if [[ "$1" == "." ]]; then
         local up_target_dir
