@@ -38,10 +38,6 @@
         name = "zsh-autopair";
         src = pkgs.zsh-autopair;
       }
-      {
-        name = "fzf-tab";
-        src = pkgs.zsh-fzf-tab;
-      }
     ];
 
     # 1. EARLY INITIALIZATION (NixOS 25.11 standard to avoid warnings)
@@ -60,10 +56,9 @@
 
       # 2. LATE OVERRIDES (Ensure these run AFTER Oh My Zsh and its plugins)
       (lib.mkOrder 2000 ''
-        # Re-bind Tab to fzf-tab-complete LAST — the OMZ fzf plugin overwrites it
-        # with its own fzf-completion widget, so we force fzf-tab to win.
-        enable-fzf-tab 2>/dev/null || true
-        bindkey '^I' fzf-tab-complete
+        # Source fzf-tab HERE (after compinit) — loading it via programs.zsh.plugins
+        # causes it to load before compinit, so the widget is never registered.
+        source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.zsh
 
         # Source custom functions LAST so our 'cd' wins over any plugin
         [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/functions.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/functions.zsh"
