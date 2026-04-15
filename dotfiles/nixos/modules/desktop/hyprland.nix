@@ -16,7 +16,7 @@
   environment.systemPackages = with pkgs; [
     waybar
     mako
-    rofi-wayland
+    rofi
     swww
     hyprlock
     hypridle
