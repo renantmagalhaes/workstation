@@ -35,6 +35,13 @@
     variant = "";
   };
 
+  # Fonts
+  fonts.packages = with pkgs; [
+    maple-mono.NF
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
+  ];
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
