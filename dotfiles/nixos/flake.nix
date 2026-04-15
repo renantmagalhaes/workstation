@@ -19,15 +19,17 @@
       url = "github:quickshell-mirror/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, home-manager, dotfiles, nix-flatpak, quickshell, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, dotfiles, nix-flatpak, quickshell, hyprland, ... }@inputs: {
     nixosConfigurations."workstation" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
         home-manager.nixosModules.home-manager
         nix-flatpak.nixosModules.nix-flatpak
+        hyprland.nixosModules.default
         {
           home-manager.extraSpecialArgs = { inherit inputs; };
         }
