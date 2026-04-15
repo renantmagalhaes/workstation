@@ -45,9 +45,6 @@
   # Ensure user is in the right groups for desktop access
   users.users.rtm.extraGroups = [ "input" "video" ];
 
-  # Screen sharing / Portals
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
-  };
+  # NOTE: Portals and XDG integration are now handled automatically by the 
+  # official Hyprland flake module imported in flake.nix.
 }
