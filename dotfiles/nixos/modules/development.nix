@@ -24,19 +24,10 @@
     ruby
     rustup
     glibc
-    openssl
     sqlite-interactive # replaces sqlite3-devel in nix
     pkg-config
     xorg.libX11
     xorg.libXcursor
     libxcrypt-legacy # for older compatibility if needed
-
-    # DevOps / Cloud (migrated from DevSecTools/devops.sh)
-    awscli2
-    aws-iam-authenticator
-    eksctl
-    kubectl
-    terraform
-    pgadmin4-desktopmode
   ];
 }

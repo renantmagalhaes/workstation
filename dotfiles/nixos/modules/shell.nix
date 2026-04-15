@@ -1,4 +1,4 @@
-# /etc/nixos/modules/shell.nix
+# dotfiles/nixos/modules/shell.nix
 { config, pkgs, ... }:
 
 {

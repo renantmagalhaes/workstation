@@ -8,7 +8,8 @@
     ./modules/users.nix
     ./modules/desktop.nix
     ./modules/development.nix
-    ./modules/shell.nix 
+    ./modules/devops.nix
+    ./modules/shell.nix
     ./modules/packages.nix
     ./modules/services.nix
     ./modules/flatpaks.nix
@@ -21,7 +22,6 @@
 
   # Enable Native Steam (properly hooks up 32-bit libs and drivers)
   programs.steam.enable = true;
-
 
   # Enable flakes and the nix-command experimental features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

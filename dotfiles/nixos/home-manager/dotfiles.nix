@@ -2,9 +2,10 @@
 
 {
   home.file = {
-    # Alacritty
-    ".config/alacritty/alacritty.toml" = {
-      source = "${inputs.dotfiles}/alacritty/alacritty.toml";
+    # Alacritty — full folder so both .toml and .yml variants are available
+    ".config/alacritty" = {
+      source = "${inputs.dotfiles}/alacritty";
+      recursive = true;
     };
 
     # Oh My Posh themes — symlink the whole folder so all variants are available
@@ -21,9 +22,6 @@
     ".config/jgmenu" = {
       source = "${inputs.dotfiles}/kde/jgmenu";
       recursive = true;
-    };
-    ".config/sxhkd/sxhkdrc" = {
-      source = "${inputs.dotfiles}/kde/sxhkd/sxhkdrc";
     };
     ".config/fastfetch" = {
       source = "${inputs.dotfiles}/fastfetch";
@@ -48,9 +46,10 @@
     ".dotfiles" = {
       source = "${inputs.dotfiles}";
     };
-    # Guake preferences link (groundwork)
-    ".config/guake/guake-settings" = {
-      source = "${inputs.dotfiles}/utils/guake/rtm-guake-setting";
+    # Guake preferences — full folder so all theme variants are available
+    ".config/guake" = {
+      source = "${inputs.dotfiles}/guake";
+      recursive = true;
     };
   };
 }
