@@ -1,4 +1,4 @@
-[Catppuccin.RTM.bright]
+[schemes.Catppuccin.RTM.bright]
 black = "0x828bb8"
 blue = "0x82aaff"
 cyan = "0xb4f9f8"
@@ -8,11 +8,11 @@ red = "0xff98a4"
 white = "0x5f8787"
 yellow = "0xffc777"
 
-[Catppuccin.RTM.cursor]
+[schemes.Catppuccin.RTM.cursor]
 cursor = "#ffffff"
 text = "#1d1f21"
 
-[Catppuccin.RTM.normal]
+[schemes.Catppuccin.RTM.normal]
 black = "0x444a73"
 blue = "0x3e68d7"
 cyan = "0x86e1fc"
@@ -22,11 +22,11 @@ red = "0xff5370"
 white = "0xd0d0d0"
 yellow = "0xffc777"
 
-[Catppuccin.RTM.primary]
+[schemes.Catppuccin.RTM.primary]
 background = "0x1e2030"
 foreground = "#ffffff"
 
-[Catppuccin.RTM-purple-world.bright]
+[schemes.Catppuccin.RTM-purple-world.bright]
 black = "#666666"
 blue = "#5C78FF"
 cyan = "#5AC8FF"
@@ -36,11 +36,11 @@ red = "#8A43BD"
 white = "#FFFFFF"
 yellow = "#3D2AFF"
 
-[Catppuccin.RTM-purple-world.cursor]
+[schemes.Catppuccin.RTM-purple-world.cursor]
 cursor = "#ffffff"
 text = "#1d1f21"
 
-[Catppuccin.RTM-purple-world.normal]
+[schemes.Catppuccin.RTM-purple-world.normal]
 black = "#121212"
 blue = "#2B4FFF"
 cyan = "#28B9FF"
@@ -50,11 +50,11 @@ red = "#A52AFF"
 white = "#F1F1F1"
 yellow = "#3D2AFF"
 
-[Catppuccin.RTM-purple-world.primary]
+[schemes.Catppuccin.RTM-purple-world.primary]
 background = "#1A1A1A"
 foreground = "#F1F1F1"
 
-[Catppuccin.bright]
+[schemes.Catppuccin.bright]
 black = "0x988BA2"
 blue = "0x96CDFB"
 cyan = "0x89DCEB"
@@ -64,19 +64,19 @@ red = "0xF28FAD"
 white = "0xD9E0EE"
 yellow = "0xFAE3B0"
 
-[Catppuccin.cursor]
+[schemes.Catppuccin.cursor]
 cursor = "0xF5E0DC"
 text = "0x1E1D2F"
 
-[[Catppuccin.indexed_colors]]
+[[schemes.Catppuccin.indexed_colors]]
 color = "0xF8BD96"
 index = 16
 
-[[Catppuccin.indexed_colors]]
+[[schemes.Catppuccin.indexed_colors]]
 color = "0xF5E0DC"
 index = 17
 
-[Catppuccin.normal]
+[schemes.Catppuccin.normal]
 black = "0x6E6C7E"
 blue = "0x96CDFB"
 cyan = "0x89DCEB"
@@ -86,7 +86,7 @@ red = "0xF28FAD"
 white = "0xD9E0EE"
 yellow = "0xFAE3B0"
 
-[Catppuccin.primary]
+[schemes.Catppuccin.primary]
 background = "0x1E1D2F"
 foreground = "0xD9E0EE"
 
@@ -123,13 +123,6 @@ foreground = "#F1F1F1"
 
 [env]
 TERM = "xterm-256color"
-decorations = "none"
-dynamic_padding = false
-title = "Alacritty"
-
-[env.class]
-general = "Alacritty"
-instance = "Alacritty"
 
 [font]
 size = 10.0
@@ -533,5 +526,12 @@ history = 50000
 
 [window]
 opacity = 0.92
+decorations = "none"
+dynamic_padding = false
+title = "Alacritty"
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
 
 [keyboard]
