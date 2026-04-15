@@ -413,17 +413,33 @@ git-optimize-repo() {
 # AND allows for a deep filesystem search with Ctrl+F.
 # A multi-purpose cd command with a powerful fzf-based menu.
 function cd {
-    # --- Case 1: Interactively climb up the directory tree ---
-    if [[ "$1" == "." && -t 0 ]]; then
-        local up_target_dir=$(local current_path="$PWD"; local p; while [ "$current_path" != "/" ]; do p=$(dirname "$current_path"); echo "$p"; current_path="$p"; done | fzf --height 25% --reverse --header "Jump up to which parent directory?")
-        [[ -n "$up_target_dir" ]] && builtin cd "$up_target_dir"
+    # --- Case 1: `cd .` to interactively climb up the directory tree ---
+    if [[ "$1" == "." ]]; then
+        local up_target_dir
+        up_target_dir=$(
+            local current_path="$PWD"
+            local parent_path
+            while [ "$current_path" != "/" ]; do
+                parent_path=$(dirname "$current_path")
+                echo "$parent_path"
+                current_path="$parent_path"
+            done | fzf --height 25% --reverse --header "Jump up to which parent directory?"
+        )
+        if [[ -n "$up_target_dir" ]]; then
+            builtin cd "$up_target_dir"
+        fi
         return
     fi
 
-    # --- Case 2: Show a list of the last 5 chronological directories ---
-    if [[ "$1" == "-" && -t 0 ]]; then
-        local recent_target_dir=$(dirs -pl | tail -n +2 | head -n 5 | fzf --height 25% --reverse --header "Recent Directories (Chronological)")
-        [[ -n "$recent_target_dir" ]] && builtin cd "$recent_target_dir"
+    # --- Case 2: `cd -` to show a list of the last 5 chronological directories ---
+    if [[ "$1" == "-" ]]; then
+        local recent_target_dir
+        recent_target_dir=$(
+            dirs -pl | tail -n +2 | head -n 5 | fzf --height 25% --reverse --header "Recent Directories (Chronological)"
+        )
+        if [[ -n "$recent_target_dir" ]]; then
+            builtin cd "$recent_target_dir"
+        fi
         return
     fi
 
@@ -434,17 +450,23 @@ function cd {
     fi
 
     # --- Case 4: The main interactive fzf menu ---
-    if [[ -t 0 ]]; then
-        local target_dir=$( (zoxide query -l; zoxide query -l | xargs -I {} fd --max-depth 1 --type d . "{}") | awk '!seen[$0]++ && $0' | fzf --height 50% --reverse --query="$@" --header "SMART LIST (Ctrl+F for deep search)" --preview 'lsd -a --tree --depth=1 {} || exa -a --tree --level=2 {} || ls -la {}' --bind "ctrl-f:reload(fd --type d --hidden . \"$HOME\" --exclude /home/rtm/Data)+change-header(FULL FILESYSTEM SEARCH)")
-        [[ -n "$target_dir" ]] && builtin cd "$target_dir"
-    else
-        builtin cd "$@"
+    local target_dir
+    target_dir=$(
+        (
+            zoxide query -l;
+            zoxide query -l | xargs -I {} fd --max-depth 1 --type d . "{}"
+        ) | awk '!seen[$0]++ && $0' | fzf --height 50% --reverse \
+            --query="$@" \
+            --header "SMART LIST (Ctrl+F for deep search)" \
+            --preview 'lsd -a --tree --depth=1 {} || exa -a --tree --level=2 {} || ls -la {}' \
+            --bind "ctrl-f:reload(fd --type d --hidden . \"$HOME\" \
+                --exclude /home/rtm/Data \
+            )+change-header(FULL FILESYSTEM SEARCH)"
+    )
+    if [[ -n "$target_dir" ]]; then
+        builtin cd "$target_dir"
     fi
 }
-# Tell ZSH's completion system to use the built-in _cd completer for our function
-# wrapper. Without this, shadowing the cd builtin with a function loses directory
-# tab-completion on all platforms.
-compdef _cd cd
 
 # Function to safely clean the zoxide database with confirmation.
 # This version uses the most robust, basic form of `read` to avoid shell issues.
