@@ -29,3 +29,6 @@ Periodically check if these applications have been updated to **Qt 6** (which us
 *   `modules/flatpaks.nix`: List of managed Flatpak applications.
 *   `modules/packages.nix`: Native system-wide Nix packages.
 *   `home-manager/`: User-level configuration and ZSH setup.
+
+# TESTS
+sync
