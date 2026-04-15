@@ -10,8 +10,20 @@
     # Oh-My-Zsh setup
     oh-my-zsh = {
       enable = true;
-      plugins = [ 
-        "git" "docker" "docker-compose" "fzf" "sudo" "extract" "ssh-agent"
+      plugins = [
+        # Core git
+        "git" "git-auto-fetch"
+        # Containers
+        "docker" "docker-compose"
+        # Cloud / infra
+        "kubectl" "aws" "tmux"
+        # Shell quality-of-life
+        "colored-man-pages" "colorize" "virtualenv"
+        "copyfile" "copybuffer" "copypath"
+        "systemadmin" "rsync"
+        # Already present
+        "fzf" "sudo" "extract" "ssh-agent"
+        # command-not-found intentionally omitted — needs nix-index on NixOS
       ];
       theme = "robbyrussell";
     };
