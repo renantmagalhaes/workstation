@@ -412,8 +412,6 @@ git-optimize-repo() {
 # This definitive version automatically includes subdirectories from your zoxide history,
 # AND allows for a deep filesystem search with Ctrl+F.
 # A multi-purpose cd command with a powerful fzf-based menu.
-# Not loaded on NixOS — enhancd handles cd there; NixOS support to be wired up later.
-if [[ ! -f /etc/NIXOS ]]; then
 function cd {
     # --- Case 1: Interactively climb up the directory tree ---
     if [[ "$1" == "." && -t 0 ]]; then
@@ -443,7 +441,6 @@ function cd {
         builtin cd "$@"
     fi
 }
-fi
 
 # Function to safely clean the zoxide database with confirmation.
 # This version uses the most robust, basic form of `read` to avoid shell issues.
