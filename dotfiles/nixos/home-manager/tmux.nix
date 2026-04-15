@@ -4,12 +4,10 @@ let
   tmuxDotfiles = "${inputs.dotfiles}/tmux";
 in
 {
-  # This section just enables the tmux program itself.
-  programs.tmux = {
-    enable = true;
-  };
+  # Install tmux via packages — config comes entirely from the dotfiles symlinks below.
+  # Using programs.tmux.enable would write its own tmux.conf and conflict with home.file.
+  home.packages = [ pkgs.tmux ];
 
-  # This section's only job is to symlink
   home.file = {
     ".tmux.conf" = {
       source = "${tmuxDotfiles}/tmux.conf";
