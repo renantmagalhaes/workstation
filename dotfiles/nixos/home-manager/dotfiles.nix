@@ -44,11 +44,6 @@
     ".p10k.zsh" = {
       source = "${inputs.dotfiles}/zsh/p10k.zsh";
     };
-    # Compatibility link for legacy scripts
-    ".zsh" = {
-      source = "${inputs.dotfiles}/zsh/zsh-files";
-      recursive = true;
-    };
     # Guake preferences — full folder so all theme variants are available
     ".config/guake" = {
       source = "${inputs.dotfiles}/guake";
