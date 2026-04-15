@@ -20,6 +20,12 @@
       "tv.plex.PlexDesktop"
       "com.stremio.Stremio"
       "com.github.hluk.copyq"
+
+      # Migrated from DevSecTools/software.sh
+      "io.dbeaver.DBeaverCommunity"
+      "com.getpostman.Postman"
+      "com.github.artemanufrij.regextester"
+      "net.sourceforge.jpdftweak.jPdfTweak"
     ];
 
     # Automatically update these apps

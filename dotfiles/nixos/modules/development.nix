@@ -30,5 +30,13 @@
     xorg.libX11
     xorg.libXcursor
     libxcrypt-legacy # for older compatibility if needed
+
+    # DevOps / Cloud (migrated from DevSecTools/devops.sh)
+    awscli2
+    aws-iam-authenticator
+    eksctl
+    kubectl
+    terraform
+    pgadmin4-desktopmode
   ];
 }
