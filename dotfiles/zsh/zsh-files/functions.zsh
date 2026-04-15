@@ -414,7 +414,7 @@ git-optimize-repo() {
 # A multi-purpose cd command with a powerful fzf-based menu.
 # Not loaded on NixOS — enhancd handles cd there; NixOS support to be wired up later.
 if [[ ! -f /etc/NIXOS ]]; then
-cd() {
+function cd {
     # --- Case 1: Interactively climb up the directory tree ---
     if [[ "$1" == "." && -t 0 ]]; then
         local up_target_dir=$(local current_path="$PWD"; local p; while [ "$current_path" != "/" ]; do p=$(dirname "$current_path"); echo "$p"; current_path="$p"; done | fzf --height 25% --reverse --header "Jump up to which parent directory?")
