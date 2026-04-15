@@ -17,7 +17,6 @@ in
     ".config/alacritty".source  = link "alacritty";
     ".config/omp".source        = link "zsh/omp";
     ".config/polybar".source    = link "kde/polybar";
-    ".config/jgmenu".source     = link "kde/jgmenu";
     ".config/fastfetch".source  = link "fastfetch";
     ".config/guake".source      = link "guake";
     ".config/lsd/config.yaml".source = link "zsh/lsd-config.yaml";
