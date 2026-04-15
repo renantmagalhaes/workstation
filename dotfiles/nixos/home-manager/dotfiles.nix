@@ -3,8 +3,8 @@
 {
   home.file = {
     # Alacritty
-    ".config/alacritty/alacritty.yml" = {
-      source = "${inputs.dotfiles}/alacritty/alacritty.yml";
+    ".config/alacritty/alacritty.toml" = {
+      source = "${inputs.dotfiles}/alacritty/alacritty.toml";
     };
 
     # Oh My Posh themes — symlink the whole folder so all variants are available
