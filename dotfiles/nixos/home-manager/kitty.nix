@@ -1,12 +1,11 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 
 {
-  programs.kitty = {
-    enable = true;
-    # We will use your existing configuration directory by symlinking it
-  };
+  # Install kitty via packages — config comes entirely from the dotfiles symlink below.
+  # Using programs.kitty.enable would write its own kitty.conf and conflict with the symlink.
+  home.packages = [ pkgs.kitty ];
 
-  # Symlink the entire kitty config folder — live link so edits take effect immediately
+  # Live symlink so kitty config edits in ~/.dotfiles take effect without rebuilding.
   home.file.".config/kitty" = {
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/kitty";
   };
