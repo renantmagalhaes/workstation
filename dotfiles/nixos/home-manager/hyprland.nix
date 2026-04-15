@@ -7,9 +7,9 @@ let
 in
 {
   home.packages = with pkgs; [
-    graphite-gtk-theme
-    tela-circle-icon-theme
-    fluent-cursor-theme
+    catppuccin-gtk
+    papirus-icon-theme
+    bibata-cursors
     wlogout
     swaybg
     yad
@@ -31,16 +31,20 @@ in
   gtk = {
     enable = true;
     theme = {
-      name = "Graphite-Dark";
-      package = pkgs.graphite-gtk-theme;
+      name = "catppuccin-macchiato-pink-standard";
+      package = pkgs.catppuccin-gtk.override {
+        accents = [ "pink" ];
+        size = "standard";
+        variant = "macchiato";
+      };
     };
     iconTheme = {
-      name = "Tela-circle-purple-light";
-      package = pkgs.tela-circle-icon-theme;
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
     };
     cursorTheme = {
-      name = "Fluent-dark-cursors";
-      package = pkgs.fluent-cursor-theme;
+      name = "Bibata-Modern-Classic";
+      package = pkgs.bibata-cursors;
       size = 24;
     };
   };
