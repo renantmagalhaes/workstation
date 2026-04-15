@@ -412,7 +412,7 @@ git-optimize-repo() {
 # This definitive version automatically includes subdirectories from your zoxide history,
 # AND allows for a deep filesystem search with Ctrl+F.
 # A multi-purpose cd command with a powerful fzf-based menu.
-function _smart_cd {
+cd() {
     # --- Case 1: Interactively climb up the directory tree ---
     if [[ "$1" == "." && -t 0 ]]; then
         local up_target_dir=$(local current_path="$PWD"; local p; while [ "$current_path" != "/" ]; do p=$(dirname "$current_path"); echo "$p"; current_path="$p"; done | fzf --height 25% --reverse --header "Jump up to which parent directory?")

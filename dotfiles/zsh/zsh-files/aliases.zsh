@@ -142,7 +142,6 @@ alias l='ls -F'
 alias ls='lsd'
 
 ### Navigation
-alias cd='_smart_cd'
 
 ### SSH-KEYGEN ###
 alias ssh-keygen-4096='ssh-keygen -t rsa -b 4096'
