@@ -142,6 +142,9 @@ alias l='ls -F'
 alias ls='lsd'
 
 ### Navigation
+# Re-register _cd completer after compinit (oh-my-zsh resets it if placed earlier).
+# This restores directory tab-completion for the custom cd() function wrapper.
+compdef _cd cd
 
 ### SSH-KEYGEN ###
 alias ssh-keygen-4096='ssh-keygen -t rsa -b 4096'

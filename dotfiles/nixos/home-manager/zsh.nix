@@ -49,16 +49,14 @@
         [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/main.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/main.zsh"
         [[ -f "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/programs.zsh" ]] && source "${config.home.homeDirectory}/GIT-REPOS/workstation/dotfiles/zsh/zsh-files/programs.zsh"
 
-        # Replicate your legendary openSUSE patches via environment variables:
-        # 1. Remap enhancd triggers (Move interactive search off of ..)
+        # enhancd trigger remapping (kept for compatibility; function cd overrides enhancd at mkOrder 2000)
         export ENHANCD_ARG_DOUBLE_DOT="."
         export ENHANCD_ARG_SINGLE_DOT=".."
-        # 2. Replicate your second sed hack
         export ENHANCD_DISABLE_HYPHEN=1
         export ENHANCD_FILTER="fzf --height 50% --reverse --border --inline-info"
 
-        # Initialize Oh My Posh (Primary Theme)
-        eval "$(oh-my-posh init zsh --config ${config.home.homeDirectory}/.config/omp/oh-my-posh-minimal.yaml)"
+        # Initialize Oh My Posh — must live here since NixOS has no Debian .zshrc
+        eval "$(oh-my-posh init zsh --config ${config.home.homeDirectory}/.config/omp/oh-my-posh-bubbles.yaml)"
 
         # Powerlevel10k (Backup/Manual if needed)
         [[ -f "${config.home.homeDirectory}/.p10k.zsh" ]] && source "${config.home.homeDirectory}/.p10k.zsh"
