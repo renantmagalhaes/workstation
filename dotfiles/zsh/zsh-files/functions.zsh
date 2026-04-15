@@ -416,10 +416,9 @@ git-optimize-repo() {
 typeset -g _CD_ACTIVE=0
 
 function cd {
-    # Re-entrant guard: a chpwd hook triggered by our own builtin cd called us again
-    if (( _CD_ACTIVE )); then
-        builtin cd "$@"; return $?
-    fi
+    # Re-entrant guard: a chpwd hook triggered by our own builtin cd called us again.
+    # Do NOT call builtin cd here — it would re-fire chpwd and loop.
+    (( _CD_ACTIVE )) && return 0
 
     _CD_ACTIVE=1
 

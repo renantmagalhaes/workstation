@@ -42,16 +42,6 @@
         name = "fzf-tab";
         src = pkgs.zsh-fzf-tab;
       }
-      {
-        name = "enhancd";
-        file = "init.sh";
-        src = pkgs.fetchFromGitHub {
-          owner = "b4b4r07";
-          repo = "enhancd";
-          rev = "v2.5.1";
-          sha256 = "1cljfw3ygg6s5nzl99wsj041pnjlby375vfjrpxv2z6jnnsaga4i";
-        };
-      }
     ];
 
     # 1. EARLY INITIALIZATION (NixOS 25.11 standard to avoid warnings)
@@ -60,12 +50,6 @@
         # Restored from your original zshrc flow
         [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/main.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/main.zsh"
         [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/programs.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/programs.zsh"
-
-        # enhancd trigger remapping (kept for compatibility; function cd overrides enhancd at mkOrder 2000)
-        export ENHANCD_ARG_DOUBLE_DOT="."
-        export ENHANCD_ARG_SINGLE_DOT=".."
-        export ENHANCD_DISABLE_HYPHEN=1
-        export ENHANCD_FILTER="fzf --height 50% --reverse --border --inline-info"
 
         # Initialize Oh My Posh — must live here since NixOS has no Debian .zshrc
         eval "$(oh-my-posh init zsh --config ${config.home.homeDirectory}/.config/omp/oh-my-posh-bubbles.yaml)"
@@ -76,7 +60,7 @@
 
       # 2. LATE OVERRIDES (Ensure these run AFTER Oh My Zsh and its plugins)
       (lib.mkOrder 2000 ''
-        # Source custom functions LAST so our 'cd .' wins over enhancd
+        # Source custom functions LAST so our 'cd' wins over any plugin
         [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/functions.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/functions.zsh"
         [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/extras.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/extras.zsh"
 
