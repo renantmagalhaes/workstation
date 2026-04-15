@@ -24,13 +24,13 @@
       source = "${inputs.dotfiles}/fastfetch";
       recursive = true;
     };
-    ".config/lsd" = {
-      source = "${inputs.dotfiles}/zsh/lsd";
-      recursive = true;
+    ".config/lsd/config.yaml" = {
+      source = "${inputs.dotfiles}/zsh/lsd-config.yaml";
     };
-    ".config/starship.toml" = {
-      source = "${inputs.dotfiles}/zsh/starship/starship.toml";
-    };
+    # starship.toml not yet in repo — add dotfiles/zsh/starship/starship.toml to enable
+    # ".config/starship.toml" = {
+    #   source = "${inputs.dotfiles}/zsh/starship/starship.toml";
+    # };
     ".p10k.zsh" = {
       source = "${inputs.dotfiles}/zsh/p10k.zsh";
     };
