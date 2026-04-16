@@ -29,7 +29,14 @@
   # Enable flakes and the nix-command experimental features
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
+    max-jobs = 4;
+    cores = 2;
   };
+
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 4096; # MB
+  }];
 
   # stateVersion tracks initial install — do not bump when switching channels
   system.stateVersion = "25.11";
