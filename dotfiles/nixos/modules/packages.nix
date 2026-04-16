@@ -30,7 +30,6 @@
     dconf
     nload
     sysstat
-    neofetch
     fastfetch
     xclip
     bat
