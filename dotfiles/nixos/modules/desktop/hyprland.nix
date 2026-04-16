@@ -22,6 +22,7 @@
     hypridle
     hyprpicker
     hyprshot
+    swappy
     grim
     slurp
     wl-clipboard
@@ -35,6 +36,10 @@
     hyprland-qtutils
     nwg-displays
     mate-polkit
+    jgmenu
+    evtest
+    pasystray
+    nautilus
     # Using the quickshell package from the flake input
     inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
