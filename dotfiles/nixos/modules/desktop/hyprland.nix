@@ -40,6 +40,8 @@
     evtest
     pasystray
     nautilus
+    zenity
+    curl
     # Using the quickshell package from the flake input
     inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
