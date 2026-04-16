@@ -10,7 +10,6 @@
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     python3
-    pipx
     gtk_engines
     go
     nodejs_20

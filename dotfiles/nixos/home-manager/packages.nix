@@ -11,5 +11,11 @@
     bat
     lsd
     alacritty
+
+    # Python tools
+    bpytop
+    pylint
+    python3Packages.virtualenv
+    python3Packages.virtualenvwrapper
   ];
 }
