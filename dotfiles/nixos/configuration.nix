@@ -29,10 +29,8 @@
   # Enable flakes and the nix-command experimental features
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
-    substituters = [ "https://hyprland.cachix.org" ];
-    trusted-public-keys = [ "hyprland.cachix.org-1:G7vU885SGYAnAQRiV2p+76m79E/vax58H9mF6j4/U30=" ];
   };
 
-  # This now correctly matches the nixos-25.11 Nixpkgs branch from the flake
+  # stateVersion tracks initial install — do not bump when switching channels
   system.stateVersion = "25.11";
 }
