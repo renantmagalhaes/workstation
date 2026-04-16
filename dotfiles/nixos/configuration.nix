@@ -31,6 +31,30 @@
     experimental-features = [ "nix-command" "flakes" ];
     max-jobs = 4;
     cores = 2;
+    auto-optimise-store = true;
+  };
+
+  # GC: keep last 15 system / 3 user generations, collect store older than 90 days (weekly)
+  systemd.services.nix-gc = {
+    description = "Nix Garbage Collection";
+    serviceConfig.Type = "oneshot";
+    script = ''
+      # Step 1: delete old generations from all profiles
+      ${pkgs.nix}/bin/nix-env --profile /nix/var/nix/profiles/system --delete-generations +15
+      ${pkgs.nix}/bin/nix-env --profile /nix/var/nix/profiles/per-user/rtm/home-manager --delete-generations +3
+      ${pkgs.nix}/bin/nix-env --profile /nix/var/nix/profiles/per-user/rtm/profile --delete-generations +3
+
+      # Step 2: single GC pass — collects anything now unreferenced older than 90 days
+      ${pkgs.nix}/bin/nix-collect-garbage --delete-older-than 90d
+    '';
+  };
+
+  systemd.timers.nix-gc = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "weekly";
+      Persistent = true;
+    };
   };
 
   swapDevices = [{
