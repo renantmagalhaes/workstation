@@ -13,7 +13,7 @@
     alacritty
 
     # Python tools
-    bpytop
+    btop
     pylint
     python3Packages.virtualenv
     python3Packages.virtualenvwrapper
