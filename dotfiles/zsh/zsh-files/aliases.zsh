@@ -176,6 +176,7 @@ alias nix-search='echo "Go to https://search.nixos.org/packages"'
 if [[ -f /etc/NIXOS ]]; then
     alias nrb='sudo nixos-rebuild switch --flake ~/GIT-REPOS/workstation/dotfiles/nixos#workstation'
     alias nfu='nix flake update --flake ~/GIT-REPOS/workstation/dotfiles/nixos'
+    alias ngc='sudo systemctl start nix-store-cleanup'
 
     # GC: keep last 15 system / 3 user generations, delete older than 7 days
     ngc7() {

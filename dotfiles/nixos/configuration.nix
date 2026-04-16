@@ -35,8 +35,8 @@
   };
 
   # GC: keep last 15 system / 3 user generations, collect store older than 90 days (weekly)
-  systemd.services.nix-gc = {
-    description = "Nix Garbage Collection";
+  systemd.services.nix-store-cleanup = {
+    description = "Nix Store Cleanup";
     serviceConfig.Type = "oneshot";
     script = ''
       # Step 1: delete old generations from all profiles
@@ -49,7 +49,7 @@
     '';
   };
 
-  systemd.timers.nix-gc = {
+  systemd.timers.nix-store-cleanup = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
       OnCalendar = "weekly";
