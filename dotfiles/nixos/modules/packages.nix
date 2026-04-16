@@ -51,8 +51,8 @@
     scrot
     wmctrl
     xdotool
-    xorg.xprop
-    xorg.xwininfo
+    xprop
+    xwininfo
     xbindkeys
     fzf
     zoxide

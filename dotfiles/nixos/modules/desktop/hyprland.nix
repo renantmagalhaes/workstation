@@ -17,7 +17,7 @@
     waybar
     mako
     rofi
-    swww
+    awww
     hyprlock
     hypridle
     hyprpicker
@@ -34,9 +34,9 @@
     xdg-utils
     hyprland-qtutils
     nwg-displays
-    mate.mate-polkit
+    mate-polkit
     # Using the quickshell package from the flake input
-    inputs.quickshell.packages.${pkgs.system}.default
+    inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   # Security / Polkit

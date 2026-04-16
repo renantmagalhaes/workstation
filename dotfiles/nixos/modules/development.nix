@@ -26,8 +26,8 @@
     glibc
     sqlite-interactive # replaces sqlite3-devel in nix
     pkg-config
-    xorg.libX11
-    xorg.libXcursor
+    libx11
+    libxcursor
     libxcrypt-legacy # for older compatibility if needed
   ];
 }
