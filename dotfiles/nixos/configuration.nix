@@ -39,10 +39,16 @@
     description = "Nix Store Cleanup";
     serviceConfig.Type = "oneshot";
     script = ''
-      # Step 1: delete old generations from all profiles
+      # Step 1: delete old generations from all profiles (skip if profile doesn't exist yet)
       ${pkgs.nix}/bin/nix-env --profile /nix/var/nix/profiles/system --delete-generations +15
-      ${pkgs.nix}/bin/nix-env --profile /nix/var/nix/profiles/per-user/rtm/home-manager --delete-generations +3
-      ${pkgs.nix}/bin/nix-env --profile /nix/var/nix/profiles/per-user/rtm/profile --delete-generations +3
+
+      if [ -e /nix/var/nix/profiles/per-user/rtm/home-manager ]; then
+        ${pkgs.nix}/bin/nix-env --profile /nix/var/nix/profiles/per-user/rtm/home-manager --delete-generations +3
+      fi
+
+      if [ -e /nix/var/nix/profiles/per-user/rtm/profile ]; then
+        ${pkgs.nix}/bin/nix-env --profile /nix/var/nix/profiles/per-user/rtm/profile --delete-generations +3
+      fi
 
       # Step 2: single GC pass — collects anything now unreferenced older than 90 days
       ${pkgs.nix}/bin/nix-collect-garbage --delete-older-than 90d
