@@ -59,6 +59,7 @@
     nmon
     pciutils
     wireguard-tools
+    lxappearance
 
     # Media
     mpv
