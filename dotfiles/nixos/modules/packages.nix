@@ -58,6 +58,7 @@
     zoxide
     nmon
     pciutils
+    wireguard-tools
 
     # Media
     mpv
