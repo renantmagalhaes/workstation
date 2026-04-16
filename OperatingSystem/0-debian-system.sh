@@ -204,7 +204,7 @@ sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluet
 pipx install virtualenv
 pipx install virtualenvwrapper
 pipx install pylint
-pipx install bpytop
+pipx install btop
 pipx ensurepath
 
 # fd - ignore NFS
