@@ -10,6 +10,7 @@
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     # Shell & CLI tools
+    procps
     lsd
     fd
     colorls
