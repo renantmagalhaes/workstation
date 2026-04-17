@@ -15,7 +15,7 @@ in
     # Wrapper that shadows the system rofi via ~/.nix-profile/bin.
     # GNOME/Mutter doesn't support wlr-layer-shell, so --normal-window is required there.
     (pkgs.writeShellScriptBin "rofi" ''
-      if [ "$XDG_CURRENT_DESKTOP" = "GNOME" ]; then
+      if [ "$DESKTOP_SESSION" = "gnome" ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME" ]; then
         exec ${pkgs.rofi}/bin/rofi -normal-window "$@"
       else
         exec ${pkgs.rofi}/bin/rofi "$@"
