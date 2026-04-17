@@ -6,7 +6,7 @@
     maple-mono.NF
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
-    nerd-fonts.cascadia-code
+    cascadia-code
     powerline-fonts
     cantarell-fonts
     font-awesome
