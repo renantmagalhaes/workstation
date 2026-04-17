@@ -14,7 +14,8 @@ dotfiles/nixos/modules/mounts.nix
 dotfiles/nixos/host.nix
 
 # tmux TPM-managed plugins (installed at runtime by TPM into ~/.tmux/plugins/)
-dotfiles/tmux/plugins/
+dotfiles/tmux/plugins/*
+!dotfiles/tmux/plugins/.gitkeep
 dotfiles/tmux/plugins/tpm_log.txt
 
 ## END
