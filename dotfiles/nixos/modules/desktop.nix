@@ -18,8 +18,15 @@
     LC_TIME = "pt_PT.UTF-8";
   };
 
+  # GPU / graphics stack
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Enable the GNOME Desktop Environment with GDM (New 25.11 syntax)
   services.displayManager.gdm.enable = true;
