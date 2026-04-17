@@ -24,8 +24,11 @@
       };
     };
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
+      name = "Tela-circle-dracula";
+      package = pkgs.tela-circle-icon-theme.override {
+        circularFolder = true;
+        colorVariants = [ "dracula" ];
+      };
     };
     cursorTheme = {
       name = "Breeze_Light";
@@ -52,7 +55,7 @@
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       gtk-theme    = "catppuccin-macchiato-pink-standard";
-      icon-theme   = "Papirus-Dark";
+      icon-theme   = "Tela-circle-dracula";
       cursor-theme = "Breeze_Light";
       cursor-size  = 24;
     };

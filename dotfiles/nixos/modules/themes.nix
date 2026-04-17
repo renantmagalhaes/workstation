@@ -30,7 +30,10 @@
     # Icon Themes
     papirus-icon-theme
     tela-icon-theme
-    tela-circle-icon-theme
+    (tela-circle-icon-theme.override {
+      circularFolder = true;
+      colorVariants = [ "black" "purple" "manjaro" "ubuntu" "dracula" "nord" ];
+    })
     kdePackages.breeze-icons
     dracula-icon-theme
   ];
