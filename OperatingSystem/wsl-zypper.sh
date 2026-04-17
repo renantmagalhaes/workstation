@@ -118,7 +118,7 @@ sudo ln -s /usr/bin/pip3 /usr/bin/pip
 # Install pip packages
 pipx install wheel
 pipx install virtualenv virtualenvwrapper pylint
-pipx install bpytop
+pipx install btop
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE

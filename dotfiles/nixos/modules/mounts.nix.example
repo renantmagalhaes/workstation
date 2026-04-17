@@ -1,0 +1,51 @@
+{ ... }:
+
+# Copy this file to mounts.nix and run the setup script to populate real values.
+# mounts.nix is gitignored — never commit it.
+# Credentials are stored in /etc/smb-credentials (also not in git).
+{
+  systemd.tmpfiles.rules = [
+    "d /home/rtm/Downloads 0755 rtm users -"
+    "d /home/rtm/Data      0755 rtm users -"
+    "d /home/rtm/Documents 0755 rtm users -"
+    "d /home/rtm/Pictures  0755 rtm users -"
+    "d /home/rtm/Videos    0755 rtm users -"
+    "d /home/rtm/plex      0755 rtm users -"
+  ];
+
+  fileSystems."/home/rtm/Downloads" = {
+    device = "//NAS_IP/home/drive/Downloads";
+    fsType = "cifs";
+    options = [ "credentials=/etc/smb-credentials" "uid=1000" "gid=1000" "file_mode=0777" "dir_mode=0777" "nofail" "x-systemd.automount" "x-systemd.idle-timeout=60" ];
+  };
+
+  fileSystems."/home/rtm/Documents" = {
+    device = "//NAS_IP/home/drive/Documents";
+    fsType = "cifs";
+    options = [ "credentials=/etc/smb-credentials" "uid=1000" "gid=1000" "file_mode=0777" "dir_mode=0777" "nofail" "x-systemd.automount" "x-systemd.idle-timeout=60" ];
+  };
+
+  fileSystems."/home/rtm/Pictures" = {
+    device = "//NAS_IP/home/drive/Images";
+    fsType = "cifs";
+    options = [ "credentials=/etc/smb-credentials" "uid=1000" "gid=1000" "file_mode=0777" "dir_mode=0777" "nofail" "x-systemd.automount" "x-systemd.idle-timeout=60" ];
+  };
+
+  fileSystems."/home/rtm/Videos" = {
+    device = "//NAS_IP/home/drive/Videos";
+    fsType = "cifs";
+    options = [ "credentials=/etc/smb-credentials" "uid=1000" "gid=1000" "file_mode=0777" "dir_mode=0777" "nofail" "x-systemd.automount" "x-systemd.idle-timeout=60" ];
+  };
+
+  fileSystems."/home/rtm/Data" = {
+    device = "//NAS_IP/home/";
+    fsType = "cifs";
+    options = [ "credentials=/etc/smb-credentials" "uid=1000" "gid=1000" "file_mode=0777" "dir_mode=0777" "nofail" "x-systemd.automount" "x-systemd.idle-timeout=60" ];
+  };
+
+  fileSystems."/home/rtm/plex" = {
+    device = "//NAS_IP/PlexMediaServer/";
+    fsType = "cifs";
+    options = [ "credentials=/etc/smb-credentials" "uid=1000" "gid=1000" "file_mode=0777" "dir_mode=0777" "nofail" "x-systemd.automount" "x-systemd.idle-timeout=60" ];
+  };
+}

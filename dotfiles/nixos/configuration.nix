@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -11,13 +11,14 @@
     ./modules/devops.nix
     ./modules/shell.nix
     ./modules/packages.nix
+    ./modules/themes.nix
     ./modules/services.nix
     ./modules/flatpaks.nix
     ./modules/apps/1password.nix
     ./modules/apps/vivaldi.nix
     ./modules/apps/google-chrome.nix
     ./modules/desktop/hyprland.nix
-  ];
+  ] ++ lib.optional (builtins.pathExists /etc/nixos/mounts.nix) /etc/nixos/mounts.nix;
 
   home-manager.users.rtm = import ./home.nix;
   # Rename conflicting files instead of hard-failing activation
@@ -29,10 +30,45 @@
   # Enable flakes and the nix-command experimental features
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
-    substituters = [ "https://hyprland.cachix.org" ];
-    trusted-public-keys = [ "hyprland.cachix.org-1:G7vU885SGYAnAQRiV2p+76m79E/vax58H9mF6j4/U30=" ];
+    max-jobs = 4;
+    cores = 2;
+    auto-optimise-store = true;
   };
 
-  # This now correctly matches the nixos-25.11 Nixpkgs branch from the flake
+  # GC: keep last 15 system / 3 user generations, collect store older than 90 days (weekly)
+  systemd.services.nix-store-cleanup = {
+    description = "Nix Store Cleanup";
+    serviceConfig.Type = "oneshot";
+    script = ''
+      # Step 1: delete old generations from all profiles (skip if profile doesn't exist yet)
+      ${pkgs.nix}/bin/nix-env --profile /nix/var/nix/profiles/system --delete-generations +15
+
+      if [ -e /nix/var/nix/profiles/per-user/rtm/home-manager ]; then
+        ${pkgs.nix}/bin/nix-env --profile /nix/var/nix/profiles/per-user/rtm/home-manager --delete-generations +3
+      fi
+
+      if [ -e /nix/var/nix/profiles/per-user/rtm/profile ]; then
+        ${pkgs.nix}/bin/nix-env --profile /nix/var/nix/profiles/per-user/rtm/profile --delete-generations +3
+      fi
+
+      # Step 2: single GC pass — collects anything now unreferenced older than 90 days
+      ${pkgs.nix}/bin/nix-collect-garbage --delete-older-than 90d
+    '';
+  };
+
+  systemd.timers.nix-store-cleanup = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "weekly";
+      Persistent = true;
+    };
+  };
+
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 4096; # MB
+  }];
+
+  # stateVersion tracks initial install — do not bump when switching channels
   system.stateVersion = "25.11";
 }

@@ -174,8 +174,29 @@ alias nix-install='nix-env -i'
 alias nix-remove='nix-env --uninstall'
 alias nix-search='echo "Go to https://search.nixos.org/packages"'
 if [[ -f /etc/NIXOS ]]; then
-    alias nrb='sudo nixos-rebuild switch --flake ~/GIT-REPOS/workstation/dotfiles/nixos#workstation'
+    alias nrb='sudo nixos-rebuild switch --impure --flake ~/GIT-REPOS/workstation/dotfiles/nixos#workstation'
     alias nfu='nix flake update --flake ~/GIT-REPOS/workstation/dotfiles/nixos'
+    alias nix-gen-list='sudo nix-env --list-generations -p /nix/var/nix/profiles/system'
+    alias nix-gen-rollback='sudo nixos-rebuild switch --rollback'
+    nix-gen-switch() { sudo nix-env -p /nix/var/nix/profiles/system --switch-generation "$1" && sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch; }
+    alias ngc='sudo systemctl start nix-store-cleanup'
+    alias ngcall='sudo nix-collect-garbage -d && nix-collect-garbage -d'
+
+    # GC: keep last 15 system / 3 user generations, delete older than 7 days
+    ngc7() {
+        sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations +15
+        sudo nix-env --profile /nix/var/nix/profiles/per-user/$USER/home-manager --delete-generations +3
+        sudo nix-env --profile /nix/var/nix/profiles/per-user/$USER/profile --delete-generations +3
+        sudo nix-collect-garbage --delete-older-than 7d
+    }
+
+    # GC: keep last 15 system / 3 user generations, delete older than 30 days
+    ngc30() {
+        sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations +15
+        sudo nix-env --profile /nix/var/nix/profiles/per-user/$USER/home-manager --delete-generations +3
+        sudo nix-env --profile /nix/var/nix/profiles/per-user/$USER/profile --delete-generations +3
+        sudo nix-collect-garbage --delete-older-than 30d
+    }
 fi
 
 ### System ###

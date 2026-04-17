@@ -35,12 +35,8 @@
     variant = "";
   };
 
-  # Fonts
-  fonts.packages = with pkgs; [
-    maple-mono.NF
-    nerd-fonts.fira-code
-    nerd-fonts.jetbrains-mono
-  ];
+  # Required for GTK apps to read dconf settings (dark mode, theme prefs)
+  programs.dconf.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

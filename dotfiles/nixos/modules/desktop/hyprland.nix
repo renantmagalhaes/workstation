@@ -16,12 +16,19 @@
   environment.systemPackages = with pkgs; [
     waybar
     mako
-    rofi
-    swww
+    (pkgs.writeShellScriptBin "rofi" ''
+      if [ "$DESKTOP_SESSION" = "gnome" ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME" ]; then
+        exec env -u WAYLAND_DISPLAY ${pkgs.rofi}/bin/rofi "$@"
+      else
+        exec ${pkgs.rofi}/bin/rofi "$@"
+      fi
+    '')
+    awww
     hyprlock
     hypridle
     hyprpicker
     hyprshot
+    swappy
     grim
     slurp
     wl-clipboard
@@ -34,9 +41,15 @@
     xdg-utils
     hyprland-qtutils
     nwg-displays
-    mate.mate-polkit
+    mate-polkit
+    jgmenu
+    evtest
+    pasystray
+    nautilus
+    zenity
+    curl
     # Using the quickshell package from the flake input
-    inputs.quickshell.packages.${pkgs.system}.default
+    inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   # Security / Polkit

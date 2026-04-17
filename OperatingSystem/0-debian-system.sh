@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 #
 #?Site        :https://insecure.codes
@@ -78,13 +78,13 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wget zsh clementine straw
 gnome_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "GNOME" | awk '{print tolower($0)}')
 kde_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "KDE" | awk '{print tolower($0)}')
 if [[ $gnome_check == "gnome" ]]; then
-  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y network-manager-openvpn-gnome gnome-tweaks gnome-browser-connector gnome-menus
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y network-manager-openvpn-gnome gnome-tweaks gnome-browser-connector gnome-menus zenity
   bash ./scripts/gnome-themes.sh
   # Isolate Alt-Tab workspaces
   gsettings set org.gnome.shell.app-switcher current-workspace-only true
 
 elif [[ $kde_check == "kde" ]]; then
-  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y qt5-style-kvantum extra-cmake-modules
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y qt5-style-kvantum extra-cmake-modules kdialog qdbus-qt5
   bash ./scripts/kde-themes.sh
 else
   echo "Not able to identify desktop environment"
@@ -204,7 +204,7 @@ sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluet
 pipx install virtualenv
 pipx install virtualenvwrapper
 pipx install pylint
-pipx install bpytop
+pipx install btop
 pipx ensurepath
 
 # fd - ignore NFS

@@ -79,8 +79,8 @@ alias drop_cache="sudo sh -c \"echo 3 > /proc/sys/vm/drop_caches && swapoff -a &
 # =====================
 # Use best available top
 # =====================
-if check_cmd bpytop; then
-  alias top='bpytop'
+if check_cmd btop; then
+  alias top='btop'
 elif check_cmd htop; then
   alias top='htop'
 fi

@@ -7,4 +7,11 @@ dotfiles/nvim/lazyvim.json
 ./desktop/source/any/config/nvim/lazy-lock.json
 desktop/source/any/config/nvim/lazy-lock.json #lazy-vim pkg files
 
+# NixOS local-only mounts (contains private NAS IP — use mounts.nix.example as template)
+dotfiles/nixos/modules/mounts.nix
+
+# tmux TPM-managed plugins (installed at runtime by TPM into ~/.tmux/plugins/)
+dotfiles/tmux/plugins/
+dotfiles/tmux/plugins/tpm_log.txt
+
 ## END

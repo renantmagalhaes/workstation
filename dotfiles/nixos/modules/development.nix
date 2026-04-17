@@ -10,7 +10,6 @@
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     python3
-    pipx
     gtk_engines
     go
     nodejs_20
@@ -26,8 +25,8 @@
     glibc
     sqlite-interactive # replaces sqlite3-devel in nix
     pkg-config
-    xorg.libX11
-    xorg.libXcursor
+    libx11
+    libxcursor
     libxcrypt-legacy # for older compatibility if needed
   ];
 }

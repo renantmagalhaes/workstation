@@ -1,3 +1,3 @@
 #!/bin/bash
 
-setsid -f alacritty -e bpytop
+setsid -f alacritty -e btop

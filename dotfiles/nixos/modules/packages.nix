@@ -9,14 +9,6 @@
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
-    # Cursors & Fonts
-    capitaine-cursors
-    apple-cursor
-    comixcursors
-    afterglow-cursors-recolored
-    powerline-fonts
-    cantarell-fonts
-
     # Shell & CLI tools
     lsd
     fd
@@ -30,7 +22,6 @@
     dconf
     nload
     sysstat
-    neofetch
     fastfetch
     xclip
     bat
@@ -52,13 +43,15 @@
     scrot
     wmctrl
     xdotool
-    xorg.xprop
-    xorg.xwininfo
+    xprop
+    xwininfo
     xbindkeys
     fzf
     zoxide
     nmon
     pciutils
+    wireguard-tools
+    lxappearance
 
     # Media
     mpv
@@ -95,8 +88,6 @@
     libratbag
     timeshift
     android-tools
-    materia-theme
-    papirus-icon-theme
     lm_sensors
     clamav
     clamtk

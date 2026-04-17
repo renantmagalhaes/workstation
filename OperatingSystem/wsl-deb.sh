@@ -111,7 +111,7 @@ bash ./utils/git-config/git-config.sh
 pipx install virtualenv
 pipx install virtualenvwrapper
 pipx install pylint
-pipx install bpytop
+pipx install btop
 pipx ensurepath
 
 # WSL config

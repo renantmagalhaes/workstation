@@ -19,7 +19,7 @@ if ! command -v windscribe-cli &>/dev/null; then
 	exit 0
 fi
 
-# Grab the full status output (silence errors if windscribe‑cli isn’t installed)
+# Grab the full status output (silence errors if windscribe‑cli isn't installed)
 # Use timeout to prevent tmux from freezing if the daemon hangs
 status=$(timeout 1 windscribe-cli status 2>/dev/null)
 exit_code=$?
@@ -56,10 +56,10 @@ if [[ $connectState == Connected:* ]]; then
 	# Keep only the first place before " - " and capitalize first letter
 	location=${location%% - *}
 	location=${location^}
-	
+
 	# Cache the location for fallback scenarios
 	echo "$location" > "$CACHE_FILE"
-	
+
 	#echo "- #[fg=#7feaac][󰒄 VPN Connected: $location] #[fg=white]"
 	echo "#[fg=#7feaac][󰒄 $location] #[fg=white]"
 elif [[ $connectState == Disconnected ]]; then
