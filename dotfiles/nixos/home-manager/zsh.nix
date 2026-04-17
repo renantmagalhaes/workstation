@@ -60,6 +60,9 @@
         # causes it to load before compinit, so the widget is never registered.
         source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.zsh
 
+        # Initialize zoxide (must run before functions.zsh so our custom cd wins)
+        eval "$(zoxide init zsh)"
+
         # Source custom functions LAST so our 'cd' wins over any plugin
         [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/functions.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/functions.zsh"
         [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/extras.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/extras.zsh"
