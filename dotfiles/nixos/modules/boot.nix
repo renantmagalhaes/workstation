@@ -1,17 +1,18 @@
 { config, pkgs, lib, ... }:
 
 {
+  # Default: systemd-boot (UEFI, EFI at /boot/efi).
+  # Override in /etc/nixos/mounts.nix for GRUB machines:
+  #   boot.loader.systemd-boot.enable = lib.mkForce false;
+  #   boot.loader.grub = { enable = true; device = "nodev"; efiSupport = true; useOSProber = true; };
   boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
+    systemd-boot = {
+      enable = lib.mkDefault true;
+      configurationLimit = lib.mkDefault 10;
     };
-    grub = {
-      enable = true;
-      efiSupport = true;
-      device = "nodev";
-      useOSProber = true;
-      efiInstallAsRemovable = lib.mkDefault false;
+    efi = {
+      canTouchEfiVariables = lib.mkDefault true;
+      efiSysMountPoint = lib.mkDefault "/boot/efi";
     };
   };
 
