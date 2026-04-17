@@ -47,10 +47,7 @@
     # Icon Themes
     papirus-icon-theme
     tela-icon-theme
-    (tela-circle-icon-theme.override {
-      circularFolder = true;
-      colorVariants = [ "black" "purple" "manjaro" "ubuntu" "dracula" "nord" ];
-    })
+    tela-circle-icon-theme
     fluent-icon-theme
     colloid-icon-theme
     reversal-icon-theme
