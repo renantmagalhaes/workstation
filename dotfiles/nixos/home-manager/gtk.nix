@@ -16,9 +16,9 @@
     colorScheme = "dark";
 
     theme = {
-      name = "catppuccin-macchiato-pink-standard";
+      name = "catppuccin-macchiato-mauve-standard";
       package = pkgs.catppuccin-gtk.override {
-        accents = [ "pink" ];
+        accents = [ "mauve" ];
         size = "standard";
         variant = "macchiato";
       };
@@ -54,7 +54,7 @@
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
-      gtk-theme    = "catppuccin-macchiato-pink-standard";
+      gtk-theme    = "catppuccin-macchiato-mauve-standard";
       icon-theme   = "Tela-circle-dracula";
       cursor-theme = "Breeze_Light";
       cursor-size  = 24;
