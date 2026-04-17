@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -18,7 +18,7 @@
     ./modules/apps/vivaldi.nix
     ./modules/apps/google-chrome.nix
     ./modules/desktop/hyprland.nix
-  ];
+  ] ++ lib.optional (builtins.pathExists ./modules/mounts.nix) ./modules/mounts.nix;
 
   home-manager.users.rtm = import ./home.nix;
   # Rename conflicting files instead of hard-failing activation
