@@ -14,7 +14,10 @@
 
   # System-level packages required for the Hyprland environment
   environment.systemPackages = with pkgs; [
-    (python3.withPackages (ps: with ps; [ evdev ]))
+    (pkgs.writeShellScriptBin "mouse_actions" ''
+      exec ${pkgs.python3.withPackages (ps: with ps; [ ps.evdev ])}/bin/python3 \
+        "$HOME/.config/hypr/scripts/mouse_actions.py" "$@"
+    '')
     waybar
     mako
     waypaper
