@@ -22,9 +22,9 @@ in
     text = ''
       #!/bin/sh
       if [ "$XDG_CURRENT_DESKTOP" = "GNOME" ]; then
-        exec ${pkgs.rofi-wayland}/bin/rofi --normal-window "$@"
+        exec ${pkgs.rofi}/bin/rofi --normal-window "$@"
       else
-        exec ${pkgs.rofi-wayland}/bin/rofi "$@"
+        exec ${pkgs.rofi}/bin/rofi "$@"
       fi
     '';
     executable = true;
