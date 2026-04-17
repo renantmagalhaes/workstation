@@ -16,7 +16,13 @@
   environment.systemPackages = with pkgs; [
     waybar
     mako
-    rofi
+    (pkgs.writeShellScriptBin "rofi" ''
+      if [ "$DESKTOP_SESSION" = "gnome" ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME" ]; then
+        exec ${pkgs.rofi}/bin/rofi -normal-window "$@"
+      else
+        exec ${pkgs.rofi}/bin/rofi "$@"
+      fi
+    '')
     awww
     hyprlock
     hypridle
