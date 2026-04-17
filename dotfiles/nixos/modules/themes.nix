@@ -16,12 +16,16 @@
     apple-cursor
     comixcursors
     afterglow-cursors-recolored
+    bibata-cursors
+    kdePackages.breeze
 
     # GTK / Qt Themes
+    catppuccin-gtk
     materia-theme
     fluent-gtk-theme
     dracula-theme
     dracula-qt5-theme
+    xdg-desktop-portal-gtk
 
     # Icon Themes
     papirus-icon-theme

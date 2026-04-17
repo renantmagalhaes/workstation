@@ -7,15 +7,11 @@ let
 in
 {
   home.packages = with pkgs; [
-    catppuccin-gtk
-    papirus-icon-theme
-    bibata-cursors
     wlogout
     swaybg
     yad
     brightnessctl
     playerctl
-    xdg-desktop-portal-gtk
   ];
 
   # Symlinks to dotfiles repo
@@ -26,66 +22,6 @@ in
     ".config/rofi".source = link "rofi";
     ".config/jgmenu".source = link "hyprland/hypr/jgmenu";
     ".config/wlogout".source = link "hyprland/waybar/extra/wlogout";
-  };
-
-  # System-wide cursor (covers non-GTK apps: Electron, terminals, etc.)
-  home.pointerCursor = {
-    gtk.enable = true;
-    name = "Bibata-Modern-Classic";
-    package = pkgs.bibata-cursors;
-    size = 24;
-  };
-
-  # GTK Theme configuration
-  gtk = {
-    enable = true;
-
-    colorScheme = "dark";
-
-    theme = {
-      name = "catppuccin-macchiato-pink-standard";
-      package = pkgs.catppuccin-gtk.override {
-        accents = [ "pink" ];
-        size = "standard";
-        variant = "macchiato";
-      };
-    };
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-    cursorTheme = {
-      name = "Bibata-Modern-Classic";
-      package = pkgs.bibata-cursors;
-      size = 24;
-    };
-
-    gtk3 = {
-      colorScheme = "dark";
-      extraConfig.gtk-application-prefer-dark-theme = 1;
-    };
-    gtk4 = {
-      colorScheme = "dark";
-      theme = config.gtk.theme;
-      extraConfig.gtk-application-prefer-dark-theme = 1;
-    };
-  };
-
-  # Qt follows GTK theme
-  qt = {
-    enable = true;
-    platformTheme.name = "gtk";
-    style.name = "adwaita-dark";
-  };
-
-  # Forces GTK to use the portal for settings — needed on non-GNOME compositors
-  home.sessionVariables.GTK_USE_PORTAL = "1";
-
-  # Global dark preference read by GTK4 and portal-aware apps
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-    };
   };
 
   # Rofi desktop entries (replaces the imperative creation in scripts/rofi.sh)
