@@ -174,7 +174,7 @@ alias nix-install='nix-env -i'
 alias nix-remove='nix-env --uninstall'
 alias nix-search='echo "Go to https://search.nixos.org/packages"'
 if [[ -f /etc/NIXOS ]]; then
-    alias nrb='sudo nixos-rebuild switch --flake ~/GIT-REPOS/workstation/dotfiles/nixos#workstation'
+    alias nrb='sudo nixos-rebuild switch --impure --flake ~/GIT-REPOS/workstation/dotfiles/nixos#workstation'
     alias nfu='nix flake update --flake ~/GIT-REPOS/workstation/dotfiles/nixos'
     alias nix-gen-list='sudo nix-env --list-generations -p /nix/var/nix/profiles/system'
     alias nix-gen-rollback='sudo nixos-rebuild switch --rollback'
