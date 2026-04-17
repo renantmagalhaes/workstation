@@ -23,6 +23,7 @@
 
   # Enable the GNOME Desktop Environment with GDM (New 25.11 syntax)
   services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.wayland = true;
   services.desktopManager.gnome.enable = true;
 
   # SDDM and Plasma 6 (disabled)
