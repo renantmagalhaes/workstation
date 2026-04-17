@@ -16,6 +16,7 @@
   environment.systemPackages = with pkgs; [
     waybar
     mako
+    swww
     (pkgs.writeShellScriptBin "rofi" ''
       if [ "$DESKTOP_SESSION" = "gnome" ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME" ]; then
         exec env -u WAYLAND_DISPLAY ${pkgs.rofi}/bin/rofi "$@"
