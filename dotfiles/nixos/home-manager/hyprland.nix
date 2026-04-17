@@ -12,23 +12,16 @@ in
     yad
     brightnessctl
     playerctl
-  ];
-
-  home.sessionPath = [ "$HOME/.local/bin" ];
-
-  # Rofi wrapper shadowing the real binary via ~/.local/bin (which is earlier in PATH).
-  # Passes --normal-window on GNOME since it doesn't support the layer shell protocol.
-  home.file.".local/bin/rofi" = {
-    text = ''
-      #!/bin/sh
+    # Wrapper that shadows the system rofi via ~/.nix-profile/bin.
+    # GNOME/Mutter doesn't support wlr-layer-shell, so --normal-window is required there.
+    (pkgs.writeShellScriptBin "rofi" ''
       if [ "$XDG_CURRENT_DESKTOP" = "GNOME" ]; then
-        exec ${pkgs.rofi}/bin/rofi --normal-window "$@"
+        exec ${pkgs.rofi}/bin/rofi -normal-window "$@"
       else
         exec ${pkgs.rofi}/bin/rofi "$@"
       fi
-    '';
-    executable = true;
-  };
+    '')
+  ];
 
   # Symlinks to dotfiles repo
   home.file = {
