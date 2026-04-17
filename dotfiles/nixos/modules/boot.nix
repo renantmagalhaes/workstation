@@ -1,20 +1,20 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
 {
-  # Default: systemd-boot (UEFI, EFI at /boot/efi).
-  # Override in /etc/nixos/mounts.nix for GRUB machines:
-  #   boot.loader.systemd-boot.enable = lib.mkForce false;
+  # Bootloader is intentionally NOT configured here — it is machine-specific.
+  # Each machine must have /etc/nixos/host.nix with its own bootloader config.
+  #
+  # UEFI + systemd-boot (most physical machines):
+  #   boot.loader.systemd-boot.enable = true;
+  #   boot.loader.efi.canTouchEfiVariables = true;
+  #   boot.loader.efi.efiSysMountPoint = "/boot/efi"; # or "/boot"
+  #
+  # UEFI + GRUB (dual-boot with Windows):
   #   boot.loader.grub = { enable = true; device = "nodev"; efiSupport = true; useOSProber = true; };
-  boot.loader = {
-    systemd-boot = {
-      enable = lib.mkDefault true;
-      configurationLimit = lib.mkDefault 10;
-    };
-    efi = {
-      canTouchEfiVariables = lib.mkDefault true;
-      efiSysMountPoint = lib.mkDefault "/boot/efi";
-    };
-  };
+  #   boot.loader.efi = { canTouchEfiVariables = true; efiSysMountPoint = "/boot/efi"; };
+  #
+  # BIOS + GRUB (VMs, legacy hardware):
+  #   boot.loader.grub = { enable = true; device = "/dev/sda"; };
 
   boot.initrd = {
     # Available for auto-detection
