@@ -14,6 +14,7 @@
 
   # System-level packages required for the Hyprland environment
   environment.systemPackages = with pkgs; [
+    (python3.withPackages (ps: with ps; [ evdev ]))
     waybar
     mako
     waypaper
