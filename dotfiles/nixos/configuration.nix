@@ -14,6 +14,7 @@
     ./modules/themes.nix
     ./modules/services.nix
     ./modules/flatpaks.nix
+    ./modules/aliases.nix
     ./modules/apps/1password.nix
     ./modules/apps/vivaldi.nix
     ./modules/apps/google-chrome.nix
