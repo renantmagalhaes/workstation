@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # Fonts
@@ -11,16 +11,13 @@
     cantarell-fonts
     font-awesome
 
-    # Custom rofi fonts not in nixpkgs (fetched impurely — requires --impure build)
     (stdenvNoCC.mkDerivation {
       name = "rofi-custom-fonts";
       dontUnpack = true;
       installPhase = ''
         mkdir -p $out/share/fonts/truetype
-        cp ${builtins.fetchurl "https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/GrapeNuts-Regular.ttf"} \
-           $out/share/fonts/truetype/GrapeNuts-Regular.ttf
-        cp ${builtins.fetchurl "https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/Icomoon-Feather.ttf"} \
-           $out/share/fonts/truetype/Icomoon-Feather.ttf
+        cp ${inputs.grapeNutsFont} $out/share/fonts/truetype/GrapeNuts-Regular.ttf
+        cp ${inputs.icomoonFont} $out/share/fonts/truetype/Icomoon-Feather.ttf
       '';
     })
   ];

@@ -16,9 +16,17 @@
       url = "github:quickshell-mirror/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    grapeNutsFont = {
+      url = "https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/GrapeNuts-Regular.ttf";
+      flake = false;
+    };
+    icomoonFont = {
+      url = "https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/Icomoon-Feather.ttf";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, dotfiles, nix-flatpak, quickshell, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, dotfiles, nix-flatpak, quickshell, grapeNutsFont, icomoonFont, ... }@inputs: {
     nixosConfigurations."workstation" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
