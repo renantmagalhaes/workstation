@@ -35,6 +35,9 @@
     variant = "";
   };
 
+  # Required for GTK apps to read dconf settings (dark mode, theme prefs)
+  programs.dconf.enable = true;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
