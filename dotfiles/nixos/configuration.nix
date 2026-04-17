@@ -30,8 +30,8 @@
   # Enable flakes and the nix-command experimental features
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
-    max-jobs = 4;
-    cores = 2;
+    max-jobs = "auto";
+    cores = 0;
     auto-optimise-store = true;
   };
 

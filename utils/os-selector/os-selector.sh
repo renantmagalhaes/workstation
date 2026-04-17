@@ -12,7 +12,7 @@ check_cmd() {
 
 if [[ -f /etc/NIXOS ]]; then # FOR NIXOS SYSTEMS
 	echo "NixOS detected. Applying configuration..."
-	sudo nixos-rebuild switch --flake ./dotfiles/nixos#workstation
+	sudo nixos-rebuild switch --impure --flake ./dotfiles/nixos#workstation --cores "$(nproc)" -j "$(nproc)"
 elif check_cmd explorer.exe; then # FOR WSL SYSTEMS
 	if check_cmd apt-get; then
 		bash ./OperatingSystem/wsl-deb.sh
