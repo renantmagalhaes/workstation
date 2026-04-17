@@ -11,6 +11,7 @@
     ./modules/devops.nix
     ./modules/shell.nix
     ./modules/packages.nix
+    ./modules/themes.nix
     ./modules/services.nix
     ./modules/flatpaks.nix
     ./modules/apps/1password.nix

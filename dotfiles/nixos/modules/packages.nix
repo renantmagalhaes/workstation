@@ -9,14 +9,6 @@
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
-    # Cursors & Fonts
-    capitaine-cursors
-    apple-cursor
-    comixcursors
-    afterglow-cursors-recolored
-    powerline-fonts
-    cantarell-fonts
-
     # Shell & CLI tools
     lsd
     fd
@@ -96,8 +88,6 @@
     libratbag
     timeshift
     android-tools
-    materia-theme
-    papirus-icon-theme
     lm_sensors
     clamav
     clamtk
