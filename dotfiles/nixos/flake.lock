@@ -13,6 +13,18 @@
         "type": "path"
       }
     },
+    "grapeNutsFont": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-x8oNtcbBX6aRnZ4LF1G/O0CSBQ/h3w0D0P85m0mM/KM=",
+        "type": "file",
+        "url": "https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/GrapeNuts-Regular.ttf"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/GrapeNuts-Regular.ttf"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -31,6 +43,18 @@
         "owner": "nix-community",
         "repo": "home-manager",
         "type": "github"
+      }
+    },
+    "icomoonFont": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-2NsqqQLiWm6zk1ri1Cd4KQi0YMp+h3CZdudFCF6rlOk=",
+        "type": "file",
+        "url": "https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/Icomoon-Feather.ttf"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/Icomoon-Feather.ttf"
       }
     },
     "nix-flatpak": {
@@ -88,7 +112,9 @@
     "root": {
       "inputs": {
         "dotfiles": "dotfiles",
+        "grapeNutsFont": "grapeNutsFont",
         "home-manager": "home-manager",
+        "icomoonFont": "icomoonFont",
         "nix-flatpak": "nix-flatpak",
         "nixpkgs": "nixpkgs",
         "quickshell": "quickshell"
