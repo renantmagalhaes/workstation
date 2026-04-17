@@ -14,6 +14,22 @@ in
     playerctl
   ];
 
+  home.sessionPath = [ "$HOME/.local/bin" ];
+
+  # Rofi wrapper shadowing the real binary via ~/.local/bin (which is earlier in PATH).
+  # Passes --normal-window on GNOME since it doesn't support the layer shell protocol.
+  home.file.".local/bin/rofi" = {
+    text = ''
+      #!/bin/sh
+      if [ "$XDG_CURRENT_DESKTOP" = "GNOME" ]; then
+        exec ${pkgs.rofi-wayland}/bin/rofi --normal-window "$@"
+      else
+        exec ${pkgs.rofi-wayland}/bin/rofi "$@"
+      fi
+    '';
+    executable = true;
+  };
+
   # Symlinks to dotfiles repo
   home.file = {
     ".config/hypr".source = link "hyprland/hypr";
