@@ -34,13 +34,18 @@
     bibata-cursors
     kdePackages.breeze
 
-    # GTK / Qt Themes
+    # GTK Themes
     catppuccin-gtk
     materia-theme
     fluent-gtk-theme
+    graphite-gtk-theme
+    colloid-gtk-theme
     dracula-theme
     dracula-qt5-theme
     xdg-desktop-portal-gtk
+
+    # KDE Themes
+    materia-kde-theme
 
     # Icon Themes
     papirus-icon-theme
@@ -49,6 +54,9 @@
       circularFolder = true;
       colorVariants = [ "black" "purple" "manjaro" "ubuntu" "dracula" "nord" ];
     })
+    fluent-icon-theme
+    colloid-icon-theme
+    reversal-icon-theme
     kdePackages.breeze-icons
     dracula-icon-theme
   ];
