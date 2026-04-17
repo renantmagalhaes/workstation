@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 #
 #?Site        :https://insecure.codes
@@ -62,10 +62,10 @@ sudo npm install --global yarn
 gnome_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "GNOME" | awk '{print tolower($0)}')
 kde_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "KDE" | awk '{print tolower($0)}')
 if [[ $gnome_check == "gnome" ]]; then
-	## Themes
+	sudo zypper --non-interactive install -y zenity
 	bash ./scripts/gnome-themes.sh
 elif [[ $kde_check == "kde" ]]; then
-	sudo zypper --non-interactive install -y kvantum-qt6 kvantum-manager kvantum-themes
+	sudo zypper --non-interactive install -y kvantum-qt6 kvantum-manager kvantum-themes kdialog libqt5-qdbus
 	bash ./scripts/gnome-themes.sh
   bash ./scripts/kde-themes.sh
 else
