@@ -47,6 +47,8 @@
     xprop
     xwininfo
     xbindkeys
+    ydotool
+    pulseaudio
     fzf
     zoxide
     nmon
