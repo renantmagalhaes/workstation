@@ -15,6 +15,6 @@
     ./home-manager/gtk.nix
     ./home-manager/qt.nix
     ./home-manager/hyprland.nix
-    inputs.nix-index-database.hmModules.nix-index
+    inputs.nix-index-database.homeModules.nix-index
   ];
 }
