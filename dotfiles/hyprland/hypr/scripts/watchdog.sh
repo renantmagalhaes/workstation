@@ -21,7 +21,7 @@ launch_waybar() {
 launch_mouse_actions() {
     # Check specifically for mouse_actions.py process
     if ! pgrep -f "mouse_actions.py" >/dev/null 2>&1; then
-        mouse_actions >/dev/null 2>&1 &
+        ~/.dotfiles/hyprland/hypr/scripts/mouse_actions.py >/dev/null 2>&1 &
     fi
 }
 
