@@ -24,6 +24,10 @@
       url = "https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/Icomoon-Feather.ttf";
       flake = false;
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, dotfiles, nix-flatpak, quickshell, grapeNutsFont, icomoonFont, ... }@inputs: {

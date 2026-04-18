@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # Top-level settings that apply to entire Home Manager config
@@ -15,5 +15,6 @@
     ./home-manager/gtk.nix
     ./home-manager/qt.nix
     ./home-manager/hyprland.nix
+    inputs.nix-index-database.hmModules.nix-index
   ];
 }
