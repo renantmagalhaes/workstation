@@ -12,11 +12,13 @@
     lidSwitch = "ignore";
     lidSwitchExternalPower = "ignore";
     lidSwitchDocked = "ignore";
-    extraConfig = ''
-      HandlePowerKey=ignore
-      HandleSuspendKey=ignore
-      HandleHibernateKey=ignore
-      HandleLidSwitch=ignore
-    '';
+    settings = {
+      Login = {
+        HandlePowerKey = "ignore";
+        HandleSuspendKey = "ignore";
+        HandleHibernateKey = "ignore";
+        HandleLidSwitch = "ignore";
+      };
+    };
   };
 }
