@@ -1,6 +1,8 @@
 { config, pkgs, inputs, lib, ... }:
 
 {
+  programs.nix-index.enable = true;
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -29,9 +31,6 @@
       theme = "robbyrussell";
     };
 
-    # Enable nix-index for command-not-found on NixOS
-    nix-index.enable = true;
-
     # Additional custom plugins via Nixpkgs
     plugins = [
       {
@@ -46,7 +45,7 @@
     ];
 
     # 1. EARLY INITIALIZATION (NixOS 25.11 standard to avoid warnings)
-    initExtra = lib.mkMerge [
+    initContent = lib.mkMerge [
       (lib.mkOrder 550 ''
         # Restored from your original zshrc flow
         [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/main.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/main.zsh"
