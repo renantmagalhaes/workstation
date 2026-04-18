@@ -17,6 +17,7 @@
     sassc
     evince
     vscode
+    antigravity
     docker-compose
     gcc
     gnumake

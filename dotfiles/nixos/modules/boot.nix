@@ -1,26 +1,20 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
 {
-  # Agnostic GRUB Configuration
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = lib.mkDefault false;
-      efiSysMountPoint = "/boot"; # Standard mount point
-    };
-    grub = {
-      enable = true;
-      efiSupport = lib.mkDefault false;
-      # "nodev" works for UEFI only. For Legacy BIOS, we need a device.
-      # We use mkDefault so it's easy to override in host-specific configs.
-      device = lib.mkDefault "/dev/sda"; 
-      
-      # Use this for UEFI-only machines or where legacy is not used:
-      # device = "nodev"; 
-
-      useOSProber = true;
-      efiInstallAsRemovable = lib.mkDefault false; # Only for UEFI
-    };
-  };
+  # Bootloader is intentionally NOT configured here — it is machine-specific.
+  # Each machine must have /etc/nixos/host.nix with its own bootloader config.
+  #
+  # UEFI + systemd-boot (most physical machines):
+  #   boot.loader.systemd-boot.enable = true;
+  #   boot.loader.efi.canTouchEfiVariables = true;
+  #   boot.loader.efi.efiSysMountPoint = "/boot/efi"; # or "/boot"
+  #
+  # UEFI + GRUB (dual-boot with Windows):
+  #   boot.loader.grub = { enable = true; device = "nodev"; efiSupport = true; useOSProber = true; };
+  #   boot.loader.efi = { canTouchEfiVariables = true; efiSysMountPoint = "/boot/efi"; };
+  #
+  # BIOS + GRUB (VMs, legacy hardware):
+  #   boot.loader.grub = { enable = true; device = "/dev/sda"; };
 
   boot.initrd = {
     # Available for auto-detection

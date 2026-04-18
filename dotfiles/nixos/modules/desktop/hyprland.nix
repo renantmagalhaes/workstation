@@ -14,8 +14,13 @@
 
   # System-level packages required for the Hyprland environment
   environment.systemPackages = with pkgs; [
+    (pkgs.writeShellScriptBin "mouse_actions" ''
+      exec ${pkgs.python3.withPackages (ps: with ps; [ ps.evdev ])}/bin/python3 \
+        "$HOME/.config/hypr/scripts/mouse_actions.py" "$@"
+    '')
     waybar
     mako
+    waypaper
     (pkgs.writeShellScriptBin "rofi" ''
       if [ "$DESKTOP_SESSION" = "gnome" ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME" ]; then
         exec env -u WAYLAND_DISPLAY ${pkgs.rofi}/bin/rofi "$@"

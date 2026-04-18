@@ -4,9 +4,6 @@
 
 set -euo pipefail
 
-# Path to mouse_actions.py script
-MOUSE_ACTIONS_SCRIPT="$HOME/.config/hypr/scripts/mouse_actions.py"
-
 # Function to check if a process is running
 is_running() {
     local process_name="$1"
@@ -24,7 +21,7 @@ launch_waybar() {
 launch_mouse_actions() {
     # Check specifically for mouse_actions.py process
     if ! pgrep -f "mouse_actions.py" >/dev/null 2>&1; then
-        python3 "$MOUSE_ACTIONS_SCRIPT" >/dev/null 2>&1 &
+        ~/.dotfiles/hyprland/hypr/scripts/mouse_actions.py >/dev/null 2>&1 &
     fi
 }
 

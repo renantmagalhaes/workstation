@@ -14,11 +14,13 @@
     ./modules/themes.nix
     ./modules/services.nix
     ./modules/flatpaks.nix
+    ./modules/aliases.nix
     ./modules/apps/1password.nix
     ./modules/apps/vivaldi.nix
     ./modules/apps/google-chrome.nix
     ./modules/desktop/hyprland.nix
-  ] ++ lib.optional (builtins.pathExists /etc/nixos/mounts.nix) /etc/nixos/mounts.nix;
+  ] ++ lib.optional (builtins.pathExists /etc/nixos/mounts.nix) /etc/nixos/mounts.nix
+    ++ lib.optional (builtins.pathExists /etc/nixos/host.nix) /etc/nixos/host.nix;
 
   home-manager.users.rtm = import ./home.nix;
   # Rename conflicting files instead of hard-failing activation
@@ -30,8 +32,8 @@
   # Enable flakes and the nix-command experimental features
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
-    max-jobs = 4;
-    cores = 2;
+    max-jobs = "auto";
+    cores = 0;
     auto-optimise-store = true;
   };
 
