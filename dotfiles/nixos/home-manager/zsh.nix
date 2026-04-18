@@ -23,10 +23,14 @@
         "systemadmin" "rsync"
         # Already present
         "fzf" "sudo" "extract" "ssh-agent"
-        # command-not-found intentionally omitted — needs nix-index on NixOS
+        # command-not-found enabled since we added nix-index below
+        "command-not-found"
       ];
       theme = "robbyrussell";
     };
+
+    # Enable nix-index for command-not-found on NixOS
+    nix-index.enable = true;
 
     # Additional custom plugins via Nixpkgs
     plugins = [
@@ -37,11 +41,12 @@
       {
         name = "zsh-autopair";
         src = pkgs.zsh-autopair;
+        file = "share/zsh/zsh-autopair/autopair.zsh";
       }
     ];
 
     # 1. EARLY INITIALIZATION (NixOS 25.11 standard to avoid warnings)
-    initContent = lib.mkMerge [
+    initExtra = lib.mkMerge [
       (lib.mkOrder 550 ''
         # Restored from your original zshrc flow
         [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/main.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/main.zsh"
