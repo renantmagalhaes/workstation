@@ -3,8 +3,10 @@
 {
   # 1. Create the directory for WireGuard configs securely
   # This ensures /etc/wireguard exists with 0700 permissions (root only)
+  # and ensures the wireguard.conf file is locked down to 0600.
   systemd.tmpfiles.rules = [
     "d /etc/wireguard 0700 root root -"
+    "z /etc/wireguard/wireguard.conf 0600 root root -"
   ];
 
   # 2. Generic WireGuard interface using wg-quick
