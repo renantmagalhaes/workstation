@@ -79,7 +79,7 @@ sudo zypper install -y hyprland waybar wofi rofi playerctl pavucontrol hyprlock 
 sudo zypper in -y patterns-hyprland-hyprland_extra
 
 echo "📦 Installing Hyprland extras..."
-sudo zypper install -y hyprshot hyprpicker swww dunst kitty quickshell-git
+sudo zypper install -y hyprshot hyprpicker awww dunst kitty quickshell-git
 
 ###########################################
 # Add user groups
