@@ -9,15 +9,14 @@
 
   # Avoid sleep even when triggered by hardware events
   services.logind = {
-    lidSwitch = "ignore";
-    lidSwitchExternalPower = "ignore";
-    lidSwitchDocked = "ignore";
     settings = {
       Login = {
         HandlePowerKey = "ignore";
         HandleSuspendKey = "ignore";
         HandleHibernateKey = "ignore";
         HandleLidSwitch = "ignore";
+        HandleLidSwitchExternalPower = "ignore";
+        HandleLidSwitchDocked = "ignore";
       };
     };
   };

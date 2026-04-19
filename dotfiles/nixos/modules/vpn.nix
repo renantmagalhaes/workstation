@@ -19,5 +19,5 @@
   # 3. Smart Start Logic
   # We override the service to only start if the config file actually exists.
   # This prevents boot errors or "failed" units if you haven't put the file there yet.
-  systemd.services.wg-quick-vpn.serviceConfig.ConditionPathExists = "/etc/wireguard/wireguard.conf";
+  systemd.services.wg-quick-vpn.unitConfig.ConditionPathExists = "/etc/wireguard/wireguard.conf";
 }
