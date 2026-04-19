@@ -10,6 +10,6 @@
     vpn-up      = "sudo systemctl start wg-quick-vpn.service";
     vpn-down    = "sudo systemctl stop wg-quick-vpn.service";
     vpn-restart = "sudo systemctl restart wg-quick-vpn.service";
-    vpn-status  = "wg show";
+    vpn-status  = "sudo wg show";
   };
 }
