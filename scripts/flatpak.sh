@@ -35,7 +35,7 @@ sudo flatpak install -y flathub com.core447.StreamController
 sudo flatpak install -y flathub com.stremio.Stremio
 
 ## Bottles - Game on Linux
-# sudo flatpak install flathub com.usebottles.bottles
+sudo flatpak install flathub com.usebottles.bottles
 
 ## Play on Linux - Game on Linux
 # sudo flatpak install flathub com.playonlinux.PlayOnLinux4
