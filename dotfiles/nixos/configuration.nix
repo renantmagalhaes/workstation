@@ -19,6 +19,8 @@
     ./modules/apps/vivaldi.nix
     ./modules/apps/google-chrome.nix
     ./modules/desktop/hyprland.nix
+    ./modules/power.nix
+    ./modules/vpn.nix
   ] ++ lib.optional (builtins.pathExists /etc/nixos/mounts.nix) /etc/nixos/mounts.nix
     ++ lib.optional (builtins.pathExists /etc/nixos/host.nix) /etc/nixos/host.nix;
 

@@ -13,39 +13,44 @@ os_check=$(uname -s | tr '[:upper:]' '[:lower:]')
 # =====================
 # Oh My Zsh Plugins
 # =====================
-plugins=(
-  git
-  kubectl
-  zsh-completions
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  colored-man-pages
-  colorize
-  command-not-found
-  docker
-  docker-compose
-  tmux
-  virtualenv
-  git-auto-fetch
-  aws
-  sudo
-  copyfile
-  copybuffer
-  copypath
-  systemadmin
-  rsync
-  fzf
-  fzf-tab
-)
+# Only set plugins array if NOT on NixOS (Home Manager handles this on NixOS)
+if [[ ! -f /etc/NIXOS ]]; then
+  plugins=(
+    git
+    kubectl
+    zsh-completions
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    colored-man-pages
+    colorize
+    command-not-found
+    docker
+    docker-compose
+    tmux
+    virtualenv
+    git-auto-fetch
+    aws
+    sudo
+    copyfile
+    copybuffer
+    copypath
+    systemadmin
+    rsync
+    fzf
+    fzf-tab
+  )
+fi
 
 # =====================
 # Custom Plugins
 # =====================
 ZSH_CUSTOM="${ZSH_CUSTOM:-$ZSH/custom}"
 
-# zsh-autopair (not part of OMZ)
-if [[ -r $ZSH_CUSTOM/plugins/zsh-autopair/autopair.zsh ]]; then
-  source $ZSH_CUSTOM/plugins/zsh-autopair/autopair.zsh
+# zsh-autopair (not part of OMZ) - Only manually source if NOT on NixOS
+if [[ ! -f /etc/NIXOS ]]; then
+  if [[ -r $ZSH_CUSTOM/plugins/zsh-autopair/autopair.zsh ]]; then
+    source $ZSH_CUSTOM/plugins/zsh-autopair/autopair.zsh
+  fi
 fi
 
 # fzf integration (optional)

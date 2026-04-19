@@ -1,6 +1,8 @@
 { config, pkgs, inputs, lib, ... }:
 
 {
+  programs.nix-index.enable = true;
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -23,7 +25,8 @@
         "systemadmin" "rsync"
         # Already present
         "fzf" "sudo" "extract" "ssh-agent"
-        # command-not-found intentionally omitted — needs nix-index on NixOS
+        # command-not-found enabled since we added nix-index below
+        "command-not-found"
       ];
       theme = "robbyrussell";
     };
@@ -37,6 +40,7 @@
       {
         name = "zsh-autopair";
         src = pkgs.zsh-autopair;
+        file = "share/zsh/zsh-autopair/autopair.zsh";
       }
     ];
 

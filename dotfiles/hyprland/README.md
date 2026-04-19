@@ -83,7 +83,7 @@ dotfiles/hyprland/
 
 - hyprland, waybar, wofi, rofi, playerctl, pavucontrol
 - hyprlock, blueman, hyprland-qtutils, nwg-displays
-- hypridle, hyprshot, hyprpicker, swww
+- hypridle, hyprshot, hyprpicker, awww
 
 **System Tools:**
 

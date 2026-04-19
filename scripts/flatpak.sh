@@ -53,4 +53,4 @@ sudo flatpak install -y flathub io.github.amit9838.mousam
 sudo flatpak install -y flathub com.github.tchx84.Flatseal
 
 ## Stream
-flatpak install -y flathub com.valvesoftware.Steam
+sudo flatpak install -y flathub com.valvesoftware.Steam
