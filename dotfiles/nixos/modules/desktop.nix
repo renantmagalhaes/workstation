@@ -2,7 +2,7 @@
 
 let
   # Choose your desktop environment: "gnome" or "kde"
-  desktopEnv = "gnome"; 
+  desktopEnv = "kde"; 
 in
 {
   imports = [
