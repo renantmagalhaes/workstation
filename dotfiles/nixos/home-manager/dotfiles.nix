@@ -23,5 +23,12 @@ in
     ".config/guake".source      = link "guake";
     ".config/lsd/config.yaml".source = link "zsh/lsd-config.yaml";
     ".p10k.zsh".source          = link "zsh/p10k.zsh";
+
+    # Forcefully overwrite these files to prevent activation failures
+    ".gtkrc-2.0".force = true;
   };
+
+  # Also force GTK3/4 config files which are managed by the gtk module
+  xdg.configFile."gtk-3.0/settings.ini".force = true;
+  xdg.configFile."gtk-4.0/settings.ini".force = true;
 }

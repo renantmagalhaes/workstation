@@ -25,8 +25,6 @@
     ++ lib.optional (builtins.pathExists /etc/nixos/host.nix) /etc/nixos/host.nix;
 
   home-manager.users.rtm = import ./home.nix;
-  # Rename conflicting files instead of hard-failing activation
-  home-manager.backupFileExtension = "hm-bak";
 
   # Enable Native Steam (properly hooks up 32-bit libs and drivers)
   programs.steam.enable = true;
