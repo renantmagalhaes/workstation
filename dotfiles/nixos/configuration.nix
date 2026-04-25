@@ -36,8 +36,8 @@
     experimental-features = [ "nix-command" "flakes" ];
     
     # Limit parallel builds to avoid Out-Of-Memory (OOM) errors on low-RAM systems
-    max-jobs = 1;
-    cores = 1;
+    max-jobs = 4;
+    cores = 2;
     
     # Uncomment these for unlimited power on systems with more RAM
     # max-jobs = "auto";
