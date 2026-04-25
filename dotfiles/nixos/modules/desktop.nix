@@ -33,9 +33,9 @@ in
     enable32Bit = true;
   };
 
-  # The XServer module is required as a framework for GDM/SDDM and session management,
-  # even when using Wayland exclusively.
-  services.xserver.enable = true;
+  # Attempting Wayland-only by disabling the X11 framework.
+  # If login fails, this must be set back to true.
+  services.xserver.enable = false;
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Configure keymap
