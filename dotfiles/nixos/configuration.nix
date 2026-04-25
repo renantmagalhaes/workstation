@@ -25,6 +25,8 @@
     ++ lib.optional (builtins.pathExists /etc/nixos/host.nix) /etc/nixos/host.nix;
 
   home-manager.users.rtm = import ./home.nix;
+  # Standard backup extension to handle initial migration of files
+  home-manager.backupFileExtension = "bak";
 
   # Enable Native Steam (properly hooks up 32-bit libs and drivers)
   programs.steam.enable = true;
