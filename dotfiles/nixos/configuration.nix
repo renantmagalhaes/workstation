@@ -34,8 +34,9 @@
   # Enable flakes and the nix-command experimental features
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
-    max-jobs = "auto";
-    cores = 0;
+    # Limit parallel builds to avoid Out-Of-Memory (OOM) errors on low-RAM systems
+    max-jobs = 1;
+    cores = 1;
     auto-optimise-store = true;
   };
 
