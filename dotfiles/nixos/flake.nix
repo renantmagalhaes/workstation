@@ -7,6 +7,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     dotfiles = {
       url = "path:/home/rtm/.dotfiles";
       flake = false;
@@ -30,7 +35,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, dotfiles, nix-flatpak, quickshell, grapeNutsFont, icomoonFont, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, plasma-manager, dotfiles, nix-flatpak, quickshell, ... }@inputs: {
     nixosConfigurations."workstation" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
@@ -39,6 +44,7 @@
         nix-flatpak.nixosModules.nix-flatpak
         {
           home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
         }
         ./configuration.nix
       ];

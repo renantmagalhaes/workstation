@@ -16,7 +16,7 @@ in
     ".config/omp".source        = link "zsh/omp";
     
     # KDE / Plasma configuration
-    ".config/kglobalshortcutsrc".source = link "kde/kglobalshortcutsrc.live";
+    # (Shortcuts are now managed natively in plasma.nix via plasma-manager)
     ".config/kvantum".source            = link "kde/kvantum";
     
     ".config/fastfetch".source  = link "fastfetch";
