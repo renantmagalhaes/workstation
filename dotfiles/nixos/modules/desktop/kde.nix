@@ -13,7 +13,6 @@
     kdePackages.ark
     kdePackages.gwenview
     kdePackages.kdialog
-    kdePackages.kvantum
-    kdePackages.qdbus
+    libsForQt5.kvantum
   ];
 }
