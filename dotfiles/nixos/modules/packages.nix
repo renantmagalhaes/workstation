@@ -14,7 +14,6 @@
     lsd
     fd
     colorls
-    xcolor
     zsh
     tmux
     git
@@ -24,7 +23,6 @@
     nload
     sysstat
     fastfetch
-    xclip
     bat
     gawk
     coreutils
@@ -41,20 +39,14 @@
     unrar
     zip
     bind
-    scrot
-    wmctrl
-    xdotool
-    xprop
-    xwininfo
-    xbindkeys
-    ydotool
-    pulseaudio
     fzf
     zoxide
     nmon
     pciutils
     wireguard-tools
     lxappearance
+    ydotool
+    pulseaudio
 
     # Media
     mpv
@@ -65,7 +57,6 @@
     frei0r
     ffmpeg
     imagemagick
-    xwinwrap
     cheese
     flameshot
     scrcpy
@@ -101,16 +92,10 @@
     cifs-utils
     kitty
     
-    # Groundwork for BSPWM (not yet activated)
-    polybar
-    sxhkd
-
     # Desktop Environment Utilities
     alacarte
     kdePackages.kdeconnect-kde
     gnome-keyring
-    gnome-extension-manager
-    gnome-tweaks
 
     # Native Apps (Migrated from Flatpak)
     kdePackages.kdenlive

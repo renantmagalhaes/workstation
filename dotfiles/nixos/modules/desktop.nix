@@ -1,6 +1,14 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  # Choose your desktop environment: "gnome" or "kde"
+  desktopEnv = "gnome"; 
+in
 {
+  imports = [
+    (if desktopEnv == "gnome" then ./desktop/gnome.nix else ./desktop/kde.nix)
+  ];
+
   # Set your time zone.
   time.timeZone = "Europe/Lisbon";
 
@@ -25,20 +33,11 @@
     enable32Bit = true;
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # Disable the X11 windowing system (using Wayland-only)
+  services.xserver.enable = false;
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  # Enable the GNOME Desktop Environment with GDM (New 25.11 syntax)
-  services.displayManager.gdm.enable = true;
-  services.displayManager.gdm.wayland = true;
-  services.desktopManager.gnome.enable = true;
-
-  # SDDM and Plasma 6 (disabled)
-  # services.displayManager.sddm.enable = true;
-  # services.desktopManager.plasma6.enable = true;
-
-  # Configure keymap in X11
+  # Configure keymap (Still uses xserver module for global defaults)
   services.xserver.xkb = {
     layout = "us";
     variant = "";
