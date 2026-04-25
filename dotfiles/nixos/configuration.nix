@@ -35,13 +35,9 @@
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     
-    # Balanced settings for a 2GB RAM / 8GB Swap system
-    max-jobs = 4;
-    cores = 2;
-    
-    # Uncomment these for unlimited power on systems with more RAM
-    # max-jobs = "auto";
-    # cores = 0;
+    # Generic "Unlimited" settings for machines with plenty of RAM
+    max-jobs = "auto";
+    cores = 0;
     
     auto-optimise-store = true;
     
@@ -87,7 +83,7 @@
 
   swapDevices = [{
     device = "/var/lib/swapfile";
-    size = 8192; # Increased to 8GB to prevent OOM during heavy rebuilds
+    size = 8192; # Keep at 8GB for safety
   }];
 
   # stateVersion tracks initial install — do not bump when switching channels

@@ -55,7 +55,7 @@ else
     sudo tee "$HOST_NIX" > /dev/null << EOF
 { ... }: {
   boot.loader.grub.enable = true;
-  boot.loader.grub.device = "$ROOT_DISK";
+  boot.loader.grub.devices = [ "$ROOT_DISK" ];
 }
 EOF
     echo "Generated BIOS/GRUB host.nix (device $ROOT_DISK)"
