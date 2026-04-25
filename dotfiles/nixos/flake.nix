@@ -1,6 +1,12 @@
 {
   description = "My NixOS System Flake (unstable)";
 
+  # This allows the flake to automatically use the Quickshell binary cache
+  nixConfig = {
+    extra-substituters = [ "https://quickshell.cachix.org" ];
+    extra-trusted-public-keys = [ "quickshell.cachix.org-1:vBm3s5tZThc5KDLj6zhHVCMp8wX/AZJwle9wqdi81ts=" ];
+  };
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
