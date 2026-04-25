@@ -15,7 +15,7 @@
     kdePackages.kdialog
     
     # Kvantum packages for both Qt6 (Plasma 6) and Qt5
-    kvantum
+    # kdePackages.qtstyleplugin-kvantum includes the Kvantum Manager
     kdePackages.qtstyleplugin-kvantum
     libsForQt5.qtstyleplugin-kvantum
   ];
