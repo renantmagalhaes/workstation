@@ -34,10 +34,20 @@
   # Enable flakes and the nix-command experimental features
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
+    
     # Limit parallel builds to avoid Out-Of-Memory (OOM) errors on low-RAM systems
     max-jobs = 1;
     cores = 1;
+    
+    # Uncomment these for unlimited power on systems with more RAM
+    # max-jobs = "auto";
+    # cores = 0;
+    
     auto-optimise-store = true;
+    
+    # Ensure we use binary caches as much as possible
+    substituters = [ "https://cache.nixos.org/" ];
+    trusted-public-keys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
   };
 
   # GC: keep last 15 system / 3 user generations, collect store older than 90 days (weekly)
@@ -71,7 +81,7 @@
 
   swapDevices = [{
     device = "/var/lib/swapfile";
-    size = 4096; # MB
+    size = 8192; # Increased to 8GB to prevent OOM during heavy rebuilds
   }];
 
   # stateVersion tracks initial install — do not bump when switching channels
