@@ -13,6 +13,10 @@
     kdePackages.ark
     kdePackages.gwenview
     kdePackages.kdialog
-    libsForQt5.kvantum
+    
+    # Kvantum packages for both Qt6 (Plasma 6) and Qt5
+    kvantum
+    kdePackages.qtstyleplugin-kvantum
+    libsForQt5.qtstyleplugin-kvantum
   ];
 }
