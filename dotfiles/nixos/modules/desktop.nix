@@ -33,11 +33,12 @@ in
     enable32Bit = true;
   };
 
-  # Disable the X11 windowing system (using Wayland-only)
-  services.xserver.enable = false;
+  # The XServer module is required as a framework for GDM/SDDM and session management,
+  # even when using Wayland exclusively.
+  services.xserver.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  # Configure keymap (Still uses xserver module for global defaults)
+  # Configure keymap
   services.xserver.xkb = {
     layout = "us";
     variant = "";
