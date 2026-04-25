@@ -19,7 +19,6 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     quickshell = {
       url = "github:quickshell-mirror/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     grapeNutsFont = {
       url = "https://github.com/renantmagalhaes/workstation/raw/static-files/fonts/GrapeNuts-Regular.ttf";
