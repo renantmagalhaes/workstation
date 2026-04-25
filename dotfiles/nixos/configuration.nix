@@ -25,7 +25,7 @@
     ++ lib.optional (builtins.pathExists /etc/nixos/host.nix) /etc/nixos/host.nix;
 
   home-manager.users.rtm = import ./home.nix;
-  # Rename conflicting files instead of hard-failing activation
+  # Standard backup extension to handle initial migration of files
   home-manager.backupFileExtension = "bak";
 
   # Enable Native Steam (properly hooks up 32-bit libs and drivers)
@@ -34,9 +34,22 @@
   # Enable flakes and the nix-command experimental features
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
+    
+    # Generic "Unlimited" settings for machines with plenty of RAM
     max-jobs = "auto";
     cores = 0;
+    
     auto-optimise-store = true;
+    
+    # Ensure we use binary caches as much as possible
+    substituters = [ 
+      "https://cache.nixos.org/"
+      "https://quickshell.cachix.org"
+    ];
+    trusted-public-keys = [ 
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" 
+      "quickshell.cachix.org-1:vBm3s5tZThc5KDLj6zhHVCMp8wX/AZJwle9wqdi81ts="
+    ];
   };
 
   # GC: keep last 15 system / 3 user generations, collect store older than 90 days (weekly)
@@ -70,7 +83,7 @@
 
   swapDevices = [{
     device = "/var/lib/swapfile";
-    size = 4096; # MB
+    size = 8192; # Keep at 8GB for safety
   }];
 
   # stateVersion tracks initial install — do not bump when switching channels

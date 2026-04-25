@@ -53,8 +53,8 @@
     nautilus
     zenity
     curl
-    # Using the quickshell package from the flake input
-    inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
+    # Temporarily disabled to avoid long compilation on low-RAM server
+    # inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   # Security / Polkit
