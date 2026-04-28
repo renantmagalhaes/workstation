@@ -287,6 +287,7 @@
     "exec": "~/.config/waybar/scripts/fullscreen_status.sh",
     "interval": 1,
     "format": "{}",
+    "signal": 10,
     "tooltip-format": "Toggle fullscreen",
     "on-click": "hyprctl dispatch fullscreen 1"
   },
@@ -294,6 +295,7 @@
     "exec": "~/.config/waybar/scripts/fullscreen_indicator.sh",
     "interval": 1,
     "format": "{}",
+    "signal": 10,
     "tooltip-format": "Fullscreen mode active",
     "on-click": "hyprctl dispatch fullscreen 1"
   },
@@ -301,6 +303,7 @@
     "exec": "~/.config/waybar/scripts/scroll_indicator.sh left",
     "interval": 1,
     "format": "{}",
+    "signal": 8,
     "tooltip-format": "More windows to the left",
     "on-click": "hyprctl dispatch layoutmsg focus l"
   },
@@ -308,6 +311,7 @@
     "exec": "~/.config/waybar/scripts/scroll_indicator.sh right",
     "interval": 1,
     "format": "{}",
+    "signal": 9,
     "tooltip-format": "More windows to the right",
     "on-click": "hyprctl dispatch layoutmsg focus r"
   },
