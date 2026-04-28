@@ -86,12 +86,10 @@ button:hover {
 }
 
 #workspaces button.urgent {
-  background-color: rgba(
-    102,
-    73,
-    9,
-    0.3
-  );
+  background-color: rgba(102,
+      73,
+      9,
+      0.3);
   border-radius: 7px;
   color: #f9e2af;
 }
@@ -153,16 +151,12 @@ button:hover {
 }
 
 /* If workspaces is the leftmost module, omit left margin */
-.modules-left
-  > widget:first-child
-  > #workspaces {
+.modules-left>widget:first-child>#workspaces {
   margin-left: 5px;
 }
 
 /* If workspaces is the rightmost module, omit right margin */
-.modules-right
-  > widget:last-child
-  > #workspaces {
+.modules-right>widget:last-child>#workspaces {
   margin-right: 0;
 }
 
@@ -352,11 +346,11 @@ label:focus {
   background-color: #2980b9;
 }
 
-#tray > .passive {
+#tray>.passive {
   -gtk-icon-effect: dim;
 }
 
-#tray > .needs-attention {
+#tray>.needs-attention {
   -gtk-icon-effect: highlight;
   background-color: #eb4d4b;
 }
@@ -412,11 +406,11 @@ label:focus {
   min-width: 16px;
 }
 
-#keyboard-state > label {
+#keyboard-state>label {
   padding: 0 5px;
 }
 
-#keyboard-state > label.locked {
+#keyboard-state>label.locked {
   background: rgba(30, 30, 46, 0.5);
 }
 
@@ -479,18 +473,24 @@ label:focus {
   background-color: #181825;
 }
 
-#temperature, #custom-temperature, #custom-systeminfo {
+#temperature,
+#custom-temperature,
+#custom-systeminfo {
   background: rgba(30, 30, 46, 0.5);
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
   color: #88d2ff;
 }
 
-#temperature, #custom-temperature.critical, #custom-systeminfo.critical {
+#temperature,
+#custom-temperature.critical,
+#custom-systeminfo.critical {
   color: #ff6262;
 }
 
-#temperature, #custom-temperature:hover, #custom-systeminfo:hover {
+#temperature,
+#custom-temperature:hover,
+#custom-systeminfo:hover {
   background-color: #181825;
 }
 
@@ -564,6 +564,26 @@ label:focus {
 
 #custom-fullscreen-indicator:hover {
   background-color: rgb(106, 52, 254);
+  color: #ffffff;
+}
+
+#custom-scroll-indicator-left,
+#custom-scroll-indicator-right {
+  background: #f9e2af;
+  padding: 1px 10px 1px 10px;
+  margin-top: 5px;
+  color: #000000;
+  font-weight: bold;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#custom-scroll-indicator-left:hover,
+#custom-scroll-indicator-right:hover {
+  background-color: #fab387;
   color: #ffffff;
 }
 

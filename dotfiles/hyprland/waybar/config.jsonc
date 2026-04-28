@@ -32,6 +32,8 @@
     "custom/notification",
     "pulseaudio",
     "tray",
+    "custom/scroll-indicator-left",
+    "custom/scroll-indicator-right",
     "custom/fullscreen",
     "custom/fullscreen-indicator",
     "custom/move_window_next_monitor",
@@ -294,6 +296,20 @@
     "format": "{}",
     "tooltip-format": "Fullscreen mode active",
     "on-click": "hyprctl dispatch fullscreen 1"
+  },
+  "custom/scroll-indicator-left": {
+    "exec": "~/.config/waybar/scripts/scroll_indicator.sh left",
+    "interval": 1,
+    "format": "{}",
+    "tooltip-format": "More windows to the left",
+    "on-click": "hyprctl dispatch layoutmsg focus l"
+  },
+  "custom/scroll-indicator-right": {
+    "exec": "~/.config/waybar/scripts/scroll_indicator.sh right",
+    "interval": 1,
+    "format": "{}",
+    "tooltip-format": "More windows to the right",
+    "on-click": "hyprctl dispatch layoutmsg focus r"
   },
   "custom/move_window_next_monitor": {
     "format": "",
