@@ -26,7 +26,7 @@ if [ "$direction" = "left" ]; then
       select(.at[0] < $edge) | .address
     ')
     if [ -n "$windows_on_left" ]; then
-        output=" 󰁍 "
+        output="󰁍"
     fi
 elif [ "$direction" = "right" ]; then
     # Check for windows on the right
@@ -34,7 +34,7 @@ elif [ "$direction" = "right" ]; then
       select((.at[0] + .size[0]) > $edge) | .address
     ')
     if [ -n "$windows_on_right" ]; then
-        output=" 󰁔 "
+        output="󰁔"
     fi
 fi
 
