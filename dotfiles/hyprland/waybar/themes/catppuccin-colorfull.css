@@ -223,6 +223,12 @@ button:hover {
   }
 }
 
+@keyframes soft-blink {
+  to {
+    background-color: rgba(114, 94, 228, 0.518);
+  }
+}
+
 /* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
   color: #ffffff;
@@ -569,12 +575,12 @@ label:focus {
 
 #custom-scroll-indicator-left,
 #custom-scroll-indicator-right {
-  background: #f9e2af;
+  background: rgb(114, 94, 228);
   padding: 1px 10px 1px 10px;
   margin-top: 5px;
   color: #000000;
   font-weight: bold;
-  animation-name: blink;
+  animation-name: soft-blink;
   animation-duration: 0.5s;
   animation-timing-function: steps(12);
   animation-iteration-count: infinite;
