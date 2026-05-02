@@ -6,8 +6,8 @@
 
 For:
 
-- openSUSE Tumbleweed (*Hyprland*/BSPWM/Gnome/KDE)
-- Debian 12 (BSPWM/Gnome)
+- openSUSE Tumbleweed (*Hyprland*/Gnome)
+- Debian 12 (Gnome)
 
 ### Disclaimer
 
@@ -22,6 +22,8 @@ Use the script `install.sh`. Running the scripts directly may result in system m
 - [ ] Lock screen customization
 - [ ] Notification Center
 - [ ] Clipboard Manager
+- [ ] MangoWM
+- [ ] Paperwm setup for Gnome
 
 # HYPRLAND
 
