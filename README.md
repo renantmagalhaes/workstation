@@ -15,15 +15,11 @@ Use the script `install.sh`. Running the scripts directly may result in system m
 
 # TODO
 
-- [ ] Better menu and window handling
-- [ ] Automatic color scheme based on wallpaper
-- [ ] Gnome-like overview
-- [ ] Shortcuts preview
-- [ ] Lock screen customization
+- [ ] Gnome-like overview for hyprland
 - [ ] Notification Center
-- [ ] Clipboard Manager
-- [ ] MangoWM
-- [ ] Paperwm setup for Gnome
+- [ ] Clipboard Manager improvements (Quickshell?)
+- [ ] MangoWM test
+- [ ] Paperwm setup for Gnome (Scrolling layout)
 
 # HYPRLAND
 
