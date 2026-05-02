@@ -62,58 +62,86 @@ sudo zypper install -y \
     gcc-c++ \
     pkgconf-pkg-config
 
-echo "📥 Cloning and building wlroots..."
-cd "$CORE_DIR"
-if [ -d "wlroots" ]; then
-    echo "ℹ️ wlroots directory already exists, updating repo..."
-    cd wlroots
-    git fetch --all
-    git checkout 0.19.3
+if [ -d /usr/include/wlroots-0.19 ]; then
+    echo "ℹ️ wlroots already built and installed, skipping."
 else
-    git clone -b 0.19.3 https://gitlab.freedesktop.org/wlroots/wlroots.git
-    cd wlroots
+    echo "📥 Cloning and building wlroots..."
+    cd "$CORE_DIR"
+    if [ -d "wlroots" ]; then
+        echo "ℹ️ wlroots directory already exists, updating repo..."
+        cd wlroots
+        git fetch --all
+        git checkout 0.19.3
+    else
+        git clone -b 0.19.3 https://gitlab.freedesktop.org/wlroots/wlroots.git
+        cd wlroots
+    fi
+    if [ -d "build" ]; then
+        meson setup build -Dprefix=/usr --wipe || rm -rf build && meson build -Dprefix=/usr
+    else
+        meson build -Dprefix=/usr
+    fi
+    sudo ninja -C build install
 fi
-if [ -d "build" ]; then
-    meson setup build -Dprefix=/usr --wipe || rm -rf build && meson build -Dprefix=/usr
-else
-    meson build -Dprefix=/usr
-fi
-sudo ninja -C build install
 
-echo "📥 Cloning and building scenefx..."
-cd "$CORE_DIR"
-if [ -d "scenefx" ]; then
-    echo "ℹ️ scenefx directory already exists, updating repo..."
-    cd scenefx
-    git fetch --all
-    git checkout 0.4.1
+if [ -d /usr/include/scenefx-0.4 ]; then
+    echo "ℹ️ scenefx already built and installed, skipping."
 else
-    git clone -b 0.4.1 https://github.com/wlrfx/scenefx.git
-    cd scenefx
+    echo "📥 Cloning and building scenefx..."
+    cd "$CORE_DIR"
+    if [ -d "scenefx" ]; then
+        echo "ℹ️ scenefx directory already exists, updating repo..."
+        cd scenefx
+        git fetch --all
+        git checkout 0.4.1
+    else
+        git clone -b 0.4.1 https://github.com/wlrfx/scenefx.git
+        cd scenefx
+    fi
+    if [ -d "build" ]; then
+        meson setup build -Dprefix=/usr --wipe || rm -rf build && meson build -Dprefix=/usr
+    else
+        meson build -Dprefix=/usr
+    fi
+    sudo ninja -C build install
 fi
-if [ -d "build" ]; then
-    meson setup build -Dprefix=/usr --wipe || rm -rf build && meson build -Dprefix=/usr
-else
-    meson build -Dprefix=/usr
-fi
-sudo ninja -C build install
 
-echo "📥 Cloning and building mangowm..."
-cd "$CORE_DIR"
-if [ -d "mango" ]; then
-    echo "ℹ️ mango directory already exists, updating repo..."
-    cd mango
-    git pull
+
+if command -v mango >/dev/null 2>&1; then
+    echo "ℹ️ MangoWM already built and installed, skipping."
 else
-    git clone https://github.com/mangowm/mango.git
-    cd mango
+    echo "📥 Cloning and building mangowm..."
+    cd "$CORE_DIR"
+    if [ -d "mango" ]; then
+        echo "ℹ️ mango directory already exists, updating repo..."
+        cd mango
+        git pull
+    else
+        git clone https://github.com/mangowm/mango.git
+        cd mango
+    fi
+    if [ -d "build" ]; then
+        meson setup build -Dprefix=/usr --wipe || rm -rf build && meson build -Dprefix=/usr
+    else
+        meson build -Dprefix=/usr
+    fi
+    sudo ninja -C build install
 fi
-if [ -d "build" ]; then
-    meson setup build -Dprefix=/usr --wipe || rm -rf build && meson build -Dprefix=/usr
+
+
+echo "📁 Linking MangoWM configuration folder..."
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+WORKSTATION_DIR=$(cd "$SCRIPT_DIR/.." && pwd)
+DOTFILES_DIR="$WORKSTATION_DIR/dotfiles"
+
+mkdir -p "$HOME/.config"
+if [ -d "$DOTFILES_DIR/mangowm" ]; then
+    rm -rf "$HOME/.config/mango"
+    ln -sfn "$DOTFILES_DIR/mangowm" "$HOME/.config/mango"
+    echo "🔗 Linked $HOME/.config/mango → $DOTFILES_DIR/mangowm"
 else
-    meson build -Dprefix=/usr
+    echo "⚠️ Warning: $DOTFILES_DIR/mangowm not found, skipping symlink creation."
 fi
-sudo ninja -C build install
 
 echo ""
 echo "🎉 MangoWM installation and build completed successfully!"
