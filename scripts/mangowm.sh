@@ -95,6 +95,8 @@ elif [ "$OS" = "debian" ]; then
         git \
         build-essential \
         pkgconf \
+        libgles-dev \
+        libegl-dev \
         libxcb-composite0-dev \
         libxcb-render0-dev \
         libxcb-xfixes0-dev \
