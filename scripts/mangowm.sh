@@ -56,6 +56,7 @@ if [ "$OS" = "opensuse" ]; then
         libdisplay-info-devel \
         libliftoff-devel \
         hwdata \
+        seatd \
         seatd-devel \
         pcre2-devel \
         xwayland-devel \
@@ -85,6 +86,7 @@ elif [ "$OS" = "debian" ]; then
         libdisplay-info-dev \
         libliftoff-dev \
         hwdata \
+        seatd \
         libseat-dev \
         libpcre2-dev \
         xwayland \
