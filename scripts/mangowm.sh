@@ -114,8 +114,8 @@ elif [ "$OS" = "debian" ]; then
         libx11-xcb-dev
 fi
 
-if [ -d /usr/include/wlroots-0.19 ]; then
-    echo "ℹ️ wlroots already built and installed, skipping."
+if [ -d /usr/include/wlroots-0.19 ] && [ -f /usr/include/wlroots-0.19/wlr/render/egl.h ]; then
+    echo "ℹ️ wlroots already built and installed with EGL, skipping."
 else
     echo "📥 Cloning and building wlroots..."
     cd "$CORE_DIR"
