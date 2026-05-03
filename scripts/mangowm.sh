@@ -38,14 +38,23 @@ else
     exit 1
 fi
 
+echo "🔗 Setting up main dotfiles symlink..."
+DOTFILES="$HOME/.dotfiles"
+if [[ ! -L "$DOTFILES" ]] || [[ "$(readlink "$DOTFILES")" != "$DOTFILES_DIR" ]]; then
+    ln -sfn "$DOTFILES_DIR" "$DOTFILES"
+    echo "✅ Main dotfiles symlink created"
+fi
+
 echo "📂 Setting up working directory at $CORE_DIR..."
 mkdir -p "$CORE_DIR"
 
 if [ "$OS" = "opensuse" ]; then
+    echo "📦 Adding QuickShell repository..."
+    sudo zypper addrepo https://download.opensuse.org/repositories/home:AvengeMedia:danklinux/openSUSE_Tumbleweed/home:AvengeMedia:danklinux.repo || true
     echo "🔄 Refreshing zypper repositories..."
     sudo zypper refresh
 
-    echo "📦 Installing exact openSUSE dependencies..."
+    echo "📦 Installing exact openSUSE dependencies and apps..."
     sudo zypper install -y \
         wayland-devel \
         wayland-protocols-devel \
@@ -70,7 +79,45 @@ if [ "$OS" = "opensuse" ]; then
         git \
         gcc \
         gcc-c++ \
-        pkgconf-pkg-config
+        pkgconf-pkg-config \
+        waybar \
+        wofi \
+        rofi \
+        playerctl \
+        pavucontrol \
+        hyprlock \
+        blueman \
+        nwg-displays \
+        hypridle \
+        libevdev-devel \
+        evtest \
+        swappy \
+        grim \
+        slurp \
+        wl-clipboard \
+        mako \
+        pamixer \
+        wireplumber \
+        wlogout \
+        feh \
+        lxappearance \
+        scrot \
+        NetworkManager-applet \
+        papirus-icon-theme \
+        pasystray \
+        jgmenu \
+        mate-polkit \
+        libnotify-devel \
+        libnotify-tools \
+        gnome-calendar \
+        cliphist \
+        nautilus \
+        xcb-util-cursor-devel \
+        hyprshot \
+        hyprpicker \
+        awww \
+        dunst \
+        kitty
 elif [ "$OS" = "debian" ]; then
     echo "🔄 Refreshing apt repositories..."
     sudo apt-get update
@@ -186,14 +233,45 @@ else
 fi
 
 
-echo "📁 Linking MangoWM configuration folder..."
+link_config() {
+    SRC="$1"
+    DEST="$2"
+
+    if [ ! -e "$SRC" ]; then
+        echo "⚠️ Missing source: $SRC, skipping."
+        return
+    fi
+
+    rm -rf "$DEST"
+    ln -sfn "$SRC" "$DEST"
+    echo "🔗 Linked $DEST → $SRC"
+}
+
+echo "📁 Linking configuration folders..."
 mkdir -p "$HOME/.config"
-if [ -d "$DOTFILES_DIR/mangowm" ]; then
-    rm -rf "$HOME/.config/mango"
-    ln -sfn "$DOTFILES_DIR/mangowm" "$HOME/.config/mango"
-    echo "🔗 Linked $HOME/.config/mango → $DOTFILES_DIR/mangowm"
-else
-    echo "⚠️ Warning: $DOTFILES_DIR/mangowm not found, skipping symlink creation."
+
+link_config "$DOTFILES_DIR/mangowm" "$HOME/.config/mango"
+link_config "$DOTFILES_DIR/hyprland/waybar" "$HOME/.config/waybar"
+link_config "$DOTFILES_DIR/mako" "$HOME/.config/mako"
+link_config "$DOTFILES_DIR/rofi" "$HOME/.config/rofi"
+link_config "$DOTFILES_DIR/hyprland/hypr/jgmenu" "$HOME/.config/jgmenu"
+link_config "$DOTFILES_DIR/hyprland/waybar/extra/wlogout" "$HOME/.config/wlogout"
+
+if [ -d "$HOME/.config/rofi/rofi" ]; then
+    echo "⚠️ Found nested rofi folder, fixing..."
+    mv "$HOME/.config/rofi/rofi/"* "$HOME/.config/rofi/"
+    rmdir "$HOME/.config/rofi/rofi"
+fi
+
+if [ "$OS" = "opensuse" ]; then
+    echo "📥 Setting up QS-Launcher..."
+    QS_LAUNCHER_DIR="$HOME/.QS-Launcher"
+    if [ -d "$QS_LAUNCHER_DIR/.git" ]; then
+        echo "ℹ️ QS-Launcher already cloned, skipping."
+    else
+        rm -rf "$QS_LAUNCHER_DIR"
+        git clone git@github.com:renantmagalhaes/QS-Launcher.git "$QS_LAUNCHER_DIR" || true
+    fi
 fi
 
 echo ""
