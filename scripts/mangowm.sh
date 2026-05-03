@@ -6,6 +6,9 @@
 
 set -e
 
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+WORKSTATION_DIR=$(cd "$SCRIPT_DIR/.." && pwd)
+DOTFILES_DIR="$WORKSTATION_DIR/dotfiles"
 CORE_DIR="$HOME/GIT-REPOS/CORE"
 
 check_cmd() {
@@ -129,9 +132,9 @@ else
         cd wlroots
     fi
     if [ -d "build" ]; then
-        meson setup build -Dprefix=/usr --wipe || rm -rf build && meson build -Dprefix=/usr
+        meson setup build -Dprefix=/usr --wipe || (sudo rm -rf build && meson setup build -Dprefix=/usr)
     else
-        meson build -Dprefix=/usr
+        meson setup build -Dprefix=/usr
     fi
     sudo ninja -C build install
 fi
@@ -151,9 +154,9 @@ else
         cd scenefx
     fi
     if [ -d "build" ]; then
-        meson setup build -Dprefix=/usr --wipe || rm -rf build && meson build -Dprefix=/usr
+        meson setup build -Dprefix=/usr --wipe || (sudo rm -rf build && meson setup build -Dprefix=/usr)
     else
-        meson build -Dprefix=/usr
+        meson setup build -Dprefix=/usr
     fi
     sudo ninja -C build install
 fi
@@ -173,19 +176,15 @@ else
         cd mango
     fi
     if [ -d "build" ]; then
-        meson setup build -Dprefix=/usr --wipe || rm -rf build && meson build -Dprefix=/usr
+        meson setup build -Dprefix=/usr --wipe || (sudo rm -rf build && meson setup build -Dprefix=/usr)
     else
-        meson build -Dprefix=/usr
+        meson setup build -Dprefix=/usr
     fi
     sudo ninja -C build install
 fi
 
 
 echo "📁 Linking MangoWM configuration folder..."
-SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-WORKSTATION_DIR=$(cd "$SCRIPT_DIR/.." && pwd)
-DOTFILES_DIR="$WORKSTATION_DIR/dotfiles"
-
 mkdir -p "$HOME/.config"
 if [ -d "$DOTFILES_DIR/mangowm" ]; then
     rm -rf "$HOME/.config/mango"
