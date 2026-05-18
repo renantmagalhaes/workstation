@@ -116,6 +116,7 @@ if [ "$OS" = "opensuse" ]; then
         hyprshot \
         hyprpicker \
         awww \
+        wlr-randr \
         dunst \
         kitty
 elif [ "$OS" = "debian" ]; then
@@ -163,6 +164,7 @@ elif [ "$OS" = "debian" ]; then
         libxcb-xrm-dev \
         libxcb-image0-dev \
         libxcb-errors-dev \
+        wlr-randr \
         libx11-xcb-dev
 fi
 
