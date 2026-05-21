@@ -8,8 +8,8 @@ RTMIN=$(kill -l SIGRTMIN 2>/dev/null || echo 34)
 
 # Function to poke Waybar to refresh the indicators
 update_waybar() {
-    # Find Waybar PIDs
-    local pids=$(pidof waybar)
+    # Find main Waybar PID only
+    local pids=$(pgrep -f "waybar -c .*[c]onfig.jsonc")
     
     if [ -n "$pids" ]; then
         # Send signal 10 (RTMIN+10) corresponding to "signal": 10 in Waybar config for fullscreen

@@ -1,0 +1,33 @@
+[
+  {
+    "name": "trigger-bottom",
+    "layer": "overlay",
+    "position": "bottom",
+    "height": 2,
+    "exclusive": false,
+    "modules-left": ["custom/trigger-bottom"],
+    "custom/trigger-bottom": {
+        "format": " ",
+        "tooltip": false,
+        "on-click-right": "jgmenu --at-pointer",
+        "on-scroll-up": "~/.dotfiles/mangowm/scripts/change_workspace.sh left",
+        "on-scroll-down": "~/.dotfiles/mangowm/scripts/change_workspace.sh right"
+    }
+  },
+  {
+    "name": "trigger-top",
+    "layer": "overlay",
+    "position": "top",
+    "height": 2,
+    "exclusive": false,
+    "margin-top": -50,
+    "modules-left": ["custom/trigger-top"],
+    "custom/trigger-top": {
+        "format": " ",
+        "tooltip": false,
+        "on-click-right": "jgmenu --at-pointer",
+        "on-scroll-up": "~/.dotfiles/mangowm/scripts/change_workspace.sh left",
+        "on-scroll-down": "~/.dotfiles/mangowm/scripts/change_workspace.sh right"
+    }
+  }
+]
