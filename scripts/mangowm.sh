@@ -255,11 +255,15 @@ echo "📁 Linking configuration folders..."
 mkdir -p "$HOME/.config"
 
 link_config "$DOTFILES_DIR/mangowm" "$HOME/.config/mango"
-link_config "$DOTFILES_DIR/hyprland/waybar" "$HOME/.config/waybar"
+link_config "$DOTFILES_DIR/mangowm/waybar" "$HOME/.config/waybar"
 link_config "$DOTFILES_DIR/mako" "$HOME/.config/mako"
 link_config "$DOTFILES_DIR/rofi" "$HOME/.config/rofi"
 link_config "$DOTFILES_DIR/hyprland/hypr/jgmenu" "$HOME/.config/jgmenu"
-link_config "$DOTFILES_DIR/hyprland/waybar/extra/wlogout" "$HOME/.config/wlogout"
+link_config "$DOTFILES_DIR/mangowm/waybar/extra/wlogout" "$HOME/.config/wlogout"
+
+if [ -d "$DOTFILES_DIR/mangowm/waybar/scripts" ]; then
+    chmod +x "$DOTFILES_DIR/mangowm/waybar/scripts/"*.sh
+fi
 
 if [ -d "$HOME/.config/rofi/rofi" ]; then
     echo "⚠️ Found nested rofi folder, fixing..."

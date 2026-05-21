@@ -1,0 +1,272 @@
+// -*- mode: jsonc -*-
+//
+// Adopted from dot/catppuccin Waybar
+{
+  "layer": "top", // Waybar at top layer
+  "spacing": 4, // Gaps between modules (4px)
+  "margin-left": 100,
+  "margin-right": 100,
+  // Choose the order of the modules
+  "modules-left": [
+    "dwl/tags",
+    "custom/active-icon-window",
+    "dwl/window",
+    "battery",
+    "battery#bat2"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "mpris",
+    "custom/weather",
+    "custom/systeminfo",
+    "custom/notification",
+    "pulseaudio",
+    "tray",
+    "custom/fullscreen",
+    "custom/fullscreen-indicator",
+    "custom/move_window_next_monitor",
+    "custom/kill_active",
+    "custom/power"
+  ],
+  // Modules configuration
+  "dwl/tags": {
+    "num-tags": 9
+  },
+  "dwl/window": {
+    "format": "{title}",
+    "max-length": 80
+  },
+  "custom/active-icon-window": {
+    "exec": "~/.config/waybar/scripts/active_icon_window.sh",
+    "interval": 1,
+    "format": "{}",
+    "tooltip": false
+  },
+  "sway/mode": {
+    "format": "<span style=\"italic\">{}</span>"
+  },
+  "custom/cava": {
+    "format": " ",
+    "tooltip": false,
+    "on-click": "kitty -e cava"
+  },
+  "custom/waypaper": {
+    "format": " ",
+    "tooltip": false,
+    "on-click": "waypaper"
+  },
+  "custom/gpt": {
+    "format": " ",
+    "tooltip": false,
+    "on-click": "firefox -P ai --new-window https://chatgpt.com/"
+  },
+  "sway/scratchpad": {
+    "format": "{icon} {count}",
+    "show-empty": false,
+    "format-icons": [
+      "",
+      ""
+    ],
+    "tooltip": true,
+    "tooltip-format": "{app}: {title}"
+  },
+  "custom/weather": {
+    "exec": "~/.config/waybar/scripts/waybar-weather.sh",
+    "on-click": "flatpak run io.github.amit9838.mousam",
+    "interval": 600,
+    "return-type": "json",
+    "tooltip": true
+  },
+  "custom/notification": {
+    "format": "",
+    "on-click": "makoctl restore",
+    "on-click-right": "makoctl restore",
+    "tooltip-format": "Notifications"
+  },
+  "tray": {
+    "spacing": 10
+  },
+  "clock": {
+    "format": "{:%Y-%m-%d | %H:%M}  ",
+    "format-alt": "{:%A, %B %d, %Y (%R)}  ",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "on-click-right": "mode",
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+  "memory": {
+    "format": "{}% "
+  },
+  "custom/swaync": {
+    "exec": "~/.config/waybar/scripts/waybar-swaync.sh",
+    "interval": 1,
+    "tooltip": false,
+    "format": "{} ",
+    "on-click": "swaync-client -t"
+  },
+  "backlight": {
+    "format": "{percent}% {icon}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "network": {
+    "format-wifi": "{signalStrength}% ",
+    "format-ethernet": "",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "󰤭",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "tooltip-format": "{ifname} via {gwaddr}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) \nIP: {ipaddr}\nGW: {gwaddr}",
+    "tooltip-format-ethernet": "{ifname} \nIP: {ipaddr}\nGW: {gwaddr}",
+    "tooltip-format-disconnected": "Disconnected"
+  },
+  "bluetooth": {
+    "format": "{status} ",
+    "format-connected": "{num_connections} ",
+    "format-disabled": "",
+    "tooltip": true
+  },
+  "custom/systeminfo": {
+    "exec": "~/.config/waybar/scripts/sys_info_json.sh",
+    "return-type": "json",
+    "interval": 10,
+    "on-click": "~/.config/waybar/scripts/sys_info_modal.sh",
+    "tooltip": true
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-full": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    "interval": 3,
+    "format-icons": [
+      " ",
+      " ",
+      " ",
+      " ",
+      " "
+    ]
+  },
+  "battery#bat2": {
+    "bat": "BAT2"
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
+    }
+  },
+  "pulseaudio": {
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon} ",
+    "format-bluetooth-muted": "  {icon} ",
+    "format-muted": " ",
+    "format-source": " {volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        " "
+      ]
+    },
+    "on-click": "pavucontrol",
+    "on-click-right": "~/.config/rofi/scripts/audio-output-selector.sh",
+    "on-scroll-up": "~/.dotfiles/hyprland/hypr/scripts/volnotify.sh +1",
+    "on-scroll-down": "~/.dotfiles/hyprland/hypr/scripts/volnotify.sh -1"
+  },
+  "mpris": {
+    "format": "{player_icon} {artist} - {title}",
+    "format-paused": "{status_icon} {artist} - {title}",
+    "tooltip-format": "{player} ({status})\n{artist} - {title}\n\nLeft-Click:   Play / Pause\nMiddle-Click: Previous Track\nRight-Click:  Next Track",
+    "title-len": 25,
+    "artist-len": 25,
+    "player-icons": {
+      "default": "▶",
+      "mpv": "",
+      "spotify": "󰓇"
+    },
+    "status-icons": {
+      "paused": "",
+      "stopped": ""
+    }
+  },
+  "custom/power": {
+    "format": " ⏻ ",
+    "tooltip": false,
+    "on-click": "~/.config/waybar/scripts/wlogout.sh",
+    "on-click-right": "~/.dotfiles/rofi/scripts/launchers/type-7/launcher.sh"
+  },
+  "custom/fullscreen": {
+    "exec": "~/.config/waybar/scripts/fullscreen_status.sh",
+    "interval": 1,
+    "format": "{}",
+    "signal": 10,
+    "tooltip-format": "Toggle fullscreen",
+    "on-click": "mmsg -d togglefullscreen"
+  },
+  "custom/fullscreen-indicator": {
+    "exec": "~/.config/waybar/scripts/fullscreen_indicator.sh",
+    "interval": 1,
+    "format": "{}",
+    "signal": 10,
+    "tooltip-format": "Fullscreen mode active",
+    "on-click": "mmsg -d togglefullscreen"
+  },
+  "custom/move_window_next_monitor": {
+    "format": "",
+    "tooltip-format": "Move window to next monitor (cycles through all monitors)",
+    "on-click": "~/.config/waybar/scripts/move_window_next_monitor.sh",
+    "on-click-right": "~/.config/waybar/scripts/send-window-to-workspace.sh"
+  },
+  "custom/kill_active": {
+    "format": "󰅙",
+    "tooltip-format": "Kill active window",
+    "on-click": "mmsg -d killclient"
+  }
+}

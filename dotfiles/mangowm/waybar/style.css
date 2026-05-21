@@ -1,0 +1,21 @@
+@import "themes/catppuccin-colorfull.css";
+
+#waybar.top > box.horizontal {
+  border-radius: 12pt;
+  margin-top: 6pt;
+  /* margin: 1pt; */
+  padding: 2pt;
+}
+
+#tags button:nth-child(n+6) {
+  padding: 0px;
+  margin: 0px;
+  min-width: 0px;
+  min-height: 0px;
+  font-size: 0px;
+  background: transparent;
+  color: transparent;
+  border: none;
+  box-shadow: none;
+  opacity: 0;
+}
