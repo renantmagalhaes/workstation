@@ -17,6 +17,7 @@ gnome_check=$(env | grep XDG_CURRENT_DESKTOP | grep -iohE "GNOME" | awk '{print 
 kde_check=$(env | grep XDG_CURRENT_DESKTOP | grep -iohE "KDE" | awk '{print tolower($0)}')
 bspwm_check=$(env | grep DESKTOP_SESSION | grep -iohE "bspwm" | awk '{print tolower($0)}')
 hyprland_check=$(env | grep DESKTOP_SESSION | grep -iohE "hyprland" | awk '{print tolower($0)}')
+mango_check=$(env | grep DESKTOP_SESSION | grep -iohE "mango" | awk '{print tolower($0)}')
 # WSL distribution detection - prefer WSL_DISTRO_NAME, fall back to /etc/os-release (handles tmux env stripping)
 if [[ -n "$WSL_DISTRO_NAME" ]]; then
     wsl_distro_lower=$(echo "$WSL_DISTRO_NAME" | awk '{print tolower($0)}')
@@ -67,6 +68,9 @@ elif check_cmd apt-get; then # FOR DEB SYSTEMS
     elif [[ $hyprland_check == "hyprland" ]]; then
         alias folder="nautilus"
         alias pdf="evince"
+    elif [[ $mango_check == "mango" ]]; then
+        alias folder="nautilus"
+        alias pdf="evince"
     elif [[ $kde_check == "kde" ]]; then
         alias folder="dolphin"
         alias pdf="evince"
@@ -81,6 +85,9 @@ elif check_cmd zypper; then # FOR ZYPPER TW SYSTEMS
         alias folder="nautilus"
         alias pdf="evince"
     elif [[ $hyprland_check == "hyprland" ]]; then
+        alias folder="nautilus"
+        alias pdf="evince"
+    elif [[ $mango_check == "mango" ]]; then
         alias folder="nautilus"
         alias pdf="evince"
     elif [[ $kde_check == "kde" ]]; then
