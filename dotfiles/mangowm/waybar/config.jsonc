@@ -24,6 +24,7 @@
     "custom/notification",
     "pulseaudio",
     "tray",
+    "custom/scroll-indicator",
     "custom/fullscreen",
     "custom/fullscreen-indicator",
     "custom/move_window_next_monitor",
@@ -268,5 +269,12 @@
     "format": "󰅙",
     "tooltip-format": "Kill active window",
     "on-click": "mmsg -d killclient"
+  },
+  "custom/scroll-indicator": {
+    "exec": "~/.dotfiles/mangowm/waybar/scripts/scroll_indicator.py",
+    "interval": 1,
+    "format": "{}",
+    "signal": 8,
+    "tooltip-format": "Active scroll indicators"
   }
 }

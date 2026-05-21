@@ -580,10 +580,10 @@ label:focus {
   color: #ffffff;
 }
 
-#custom-scroll-indicator-left,
-#custom-scroll-indicator-right {
+#custom-scroll-indicator {
   background: rgb(114, 94, 228);
-  padding: 1px 10px 1px 10px;
+  padding: 1px 5px 1px 5px;
+  font-size: 11px;
   margin-top: 5px;
   color: #000000;
   font-weight: bold;
@@ -594,8 +594,7 @@ label:focus {
   animation-direction: alternate;
 }
 
-#custom-scroll-indicator-left:hover,
-#custom-scroll-indicator-right:hover {
+#custom-scroll-indicator:hover {
   background-color: #fab387;
   color: #ffffff;
 }
