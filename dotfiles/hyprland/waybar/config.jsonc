@@ -73,7 +73,7 @@
     "max-length": 80
   },
   "custom/active-icon-window": {
-    "exec": "~/.config/waybar/scripts/active_icon_window.sh",
+    "exec": "~/.dotfiles/hyprland/waybar/scripts/active_icon_window.sh",
     "interval": 1,
     "format": "{}",
     "tooltip": false
@@ -107,7 +107,7 @@
     "tooltip-format": "{app}: {title}"
   },
   "custom/weather": {
-    "exec": "~/.config/waybar/scripts/waybar-weather.sh",
+    "exec": "~/.dotfiles/hyprland/waybar/scripts/waybar-weather.sh",
     "on-click": "flatpak run io.github.amit9838.mousam",
     "interval": 600,
     "return-type": "json",
@@ -154,7 +154,7 @@
     "format": "{}% "
   },
   "custom/swaync": {
-    "exec": "~/.config/waybar/scripts/waybar-swaync.sh",
+    "exec": "~/.dotfiles/hyprland/waybar/scripts/waybar-swaync.sh",
     "interval": 1,
     "tooltip": false,
     "format": "{} ",
@@ -193,10 +193,10 @@
     "tooltip": true
   },
   "custom/systeminfo": {
-    "exec": "~/.config/waybar/scripts/sys_info_json.sh",
+    "exec": "~/.dotfiles/hyprland/waybar/scripts/sys_info_json.sh",
     "return-type": "json",
     "interval": 10,
-    "on-click": "~/.config/waybar/scripts/sys_info_modal.sh",
+    "on-click": "~/.dotfiles/hyprland/waybar/scripts/sys_info_modal.sh",
     "tooltip": true
   },
   "battery": {
@@ -280,11 +280,11 @@
   "custom/power": {
     "format": " ⏻ ",
     "tooltip": false,
-    "on-click": "~/.config/waybar/scripts/wlogout.sh",
+    "on-click": "~/.dotfiles/hyprland/waybar/scripts/wlogout.sh",
     "on-click-right": "~/.dotfiles/rofi/scripts/launchers/type-7/launcher.sh"
   },
   "custom/fullscreen": {
-    "exec": "~/.config/waybar/scripts/fullscreen_status.sh",
+    "exec": "~/.dotfiles/hyprland/waybar/scripts/fullscreen_status.sh",
     "interval": 1,
     "format": "{}",
     "signal": 10,
@@ -292,7 +292,7 @@
     "on-click": "hyprctl dispatch fullscreen 1"
   },
   "custom/fullscreen-indicator": {
-    "exec": "~/.config/waybar/scripts/fullscreen_indicator.sh",
+    "exec": "~/.dotfiles/hyprland/waybar/scripts/fullscreen_indicator.sh",
     "interval": 1,
     "format": "{}",
     "signal": 10,
@@ -300,7 +300,7 @@
     "on-click": "hyprctl dispatch fullscreen 1"
   },
   "custom/scroll-indicator-left": {
-    "exec": "~/.config/waybar/scripts/scroll_indicator.sh left",
+    "exec": "~/.dotfiles/hyprland/waybar/scripts/scroll_indicator.sh left",
     "interval": 1,
     "format": "{}",
     "signal": 8,
@@ -308,7 +308,7 @@
     "on-click": "hyprctl dispatch layoutmsg focus l"
   },
   "custom/scroll-indicator-right": {
-    "exec": "~/.config/waybar/scripts/scroll_indicator.sh right",
+    "exec": "~/.dotfiles/hyprland/waybar/scripts/scroll_indicator.sh right",
     "interval": 1,
     "format": "{}",
     "signal": 9,
@@ -318,8 +318,8 @@
   "custom/move_window_next_monitor": {
     "format": "",
     "tooltip-format": "Move window to next monitor (cycles through all monitors)",
-    "on-click": "~/.config/waybar/scripts/move_window_next_monitor.sh",
-    "on-click-right": "~/.config/waybar/scripts/send-window-to-workspace.sh"
+    "on-click": "~/.dotfiles/hyprland/waybar/scripts/move_window_next_monitor.sh",
+    "on-click-right": "~/.dotfiles/hyprland/waybar/scripts/send-window-to-workspace.sh"
   },
   "custom/kill_active": {
     "format": "󰅙",
