@@ -2768,10 +2768,6 @@ button.privacy-btn-icon {
 
 /* Vivaldi 8.0 Layout Spacing / Gaps Reset */
 #main,
-#webview-container,
-.webview-container,
-#webpage-stack,
-.webpageview,
 .mosaic-tile,
 #panels-container,
 #panels,
@@ -2782,4 +2778,15 @@ button.privacy-btn-icon {
   padding: 0px !important;
   gap: 0px !important;
   border-radius: 0px !important;
+}
+
+#webview-container,
+.webview-container,
+#webpage-stack,
+.webpageview {
+  margin: 0px !important;
+  padding: 0px !important;
+  gap: 0px !important;
+  border-radius: var(--radius) !important;
+  overflow: hidden !important;
 }
