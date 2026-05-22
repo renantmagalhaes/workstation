@@ -21,7 +21,7 @@ while true; do
     if command -v mmsg >/dev/null 2>&1; then
         mmsg -w | while read -r line; do
             case "$line" in
-                *selmon*|*tag*|*layout*)
+                *selmon*|*tag*|*layout*|*width*|*height*|*fullscreen*|*floating*)
                     update_waybar
                     ;;
             esac
