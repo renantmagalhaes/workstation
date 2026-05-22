@@ -1,0 +1,7 @@
+#webview-container,
+.webview-container,
+#webpage-stack,
+.webpageview {
+  border-radius: var(--radius) !important;
+  overflow: hidden !important;
+}
