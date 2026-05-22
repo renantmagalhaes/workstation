@@ -1,0 +1,38 @@
+Menu,~/.config/rofi/scripts/launchers/type-7/launcher.sh,appimagekit-archipelago
+Terminal,kitty,Terminal
+File Explorer,nautilus,stock_folder
+Browser,/usr/bin/vivaldi,vivaldi
+Browser (Incognito),/usr/bin/vivaldi --incognito,abrowser
+
+^sep()
+Streaming,^checkout(streaming-menu),camera-video
+
+^sep()
+WM Options,^checkout(restart-menu),xfce4-systray
+
+^sep()
+Extra Options,^checkout(extra-menu),list-add
+
+^sep()
+Find Window Class,bash -c "active_mon=\$(mmsg -g | awk '\$2==\"selmon\" && \$3==\"1\"{print \$1}') && CLASS=\$(mmsg -g | awk -v mon=\"\$active_mon\" '\$1==mon && \$2==\"appid\"{print \$3}') && if [ -n \"\$CLASS\" ]; then echo -n \"\$CLASS\" | wl-copy && notify-send -i window_list 'Find Window Class' \"Window class \$CLASS copied to clipboard\"; else notify-send -i window_list 'Find Window Class' 'No focused window found'; fi",window_list
+Find Window Class (Click),~/.config/mango/scripts/get-window-class-by-click.py,window_list
+Change Wallpaper,waypaper,nitrogen
+Appearance,lxappearance,mtpaint
+Randomize Wallpaper,bash -c 'awww img "$(find "$HOME/Pictures/wallpapers" -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.jpeg" \) | shuf -n 1)"',phototonic
+
+^sep()
+Lock,~/.config/mango/scripts/lock.sh,system-lock-screen
+Logout,wlogout,system-log-out
+Exit,wlogout,system-shutdown
+
+^tag(restart-menu)
+Restart Waybar,killall waybar && waybar -c ~/.config/waybar/config.jsonc -s ~/.config/waybar/style.css & waybar -c ~/.config/waybar/trigger_config.jsonc -s ~/.config/waybar/trigger_style.css &,xfce4-systray
+Reload MangoWM,mmsg -d reload_config && notify-send -i preferences-desktop "MangoWM" "Successfully reloaded MangoWM",terminal
+Restart Mako,killall mako && mako &,notification-new
+
+^tag(streaming-menu)
+Strem.IO,flatpak run com.stremio.Stremio,stremio
+Plex,flatpak run tv.plex.PlexDesktop,plex
+
+^tag(extra-menu)
+Mouse Battery Level,~/.config/mango/scripts/mouse-battery.sh,input-mouse

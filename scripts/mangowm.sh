@@ -258,7 +258,7 @@ link_config "$DOTFILES_DIR/mangowm" "$HOME/.config/mango"
 link_config "$DOTFILES_DIR/mangowm/waybar" "$HOME/.config/waybar"
 link_config "$DOTFILES_DIR/mako" "$HOME/.config/mako"
 link_config "$DOTFILES_DIR/rofi" "$HOME/.config/rofi"
-link_config "$DOTFILES_DIR/hyprland/hypr/jgmenu" "$HOME/.config/jgmenu"
+link_config "$DOTFILES_DIR/mangowm/jgmenu" "$HOME/.config/jgmenu"
 link_config "$DOTFILES_DIR/mangowm/waybar/extra/wlogout" "$HOME/.config/wlogout"
 
 if [ -d "$DOTFILES_DIR/mangowm/waybar/scripts" ]; then
