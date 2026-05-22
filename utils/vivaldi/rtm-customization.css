@@ -80,13 +80,22 @@ button.vivaldi .vivaldi-v svg {
 }
 
 /* Replace it with your own PNG (external or base64) */
+button.vivaldi {
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
 button.vivaldi .vivaldi-v {
   display: inline-block;
   width: 22px;
   /* same size as original */
   height: 22px;
-  background: url("https://cdn-icons-png.flaticon.com/512/124/124585.png") center center;
-  /* background: url("https://cdn-icons-png.flaticon.com/512/18310/18310983.png") no-repeat center center; */
+  margin: 0 !important;
+  padding: 0 !important;
+  /* background: url("https://cdn-icons-png.flaticon.com/512/124/124585.png") no-repeat center center; */
+  background: url("https://cdn-icons-png.flaticon.com/512/18310/18310983.png") no-repeat center center;
   /* background: url("https://cdn-icons-png.flaticon.com/512/124/124585.png") no-repeat center center; */
   background-size: contain;
 }
