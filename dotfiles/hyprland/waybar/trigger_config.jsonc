@@ -9,7 +9,7 @@
     "custom/trigger-bottom": {
         "format": " ",
         "tooltip": false,
-        "on-click-right": "jgmenu --at-pointer",
+        "on-click-right": "jgmenu --config-file=~/.dotfiles/hyprland/hypr/jgmenu/jgmenurc --at-pointer",
         "on-scroll-up": "~/.config/hypr/scripts/wpairswitch.sh prev",
         "on-scroll-down": "~/.config/hypr/scripts/wpairswitch.sh next"
     }
@@ -25,7 +25,7 @@
     "custom/trigger-top": {
         "format": " ",
         "tooltip": false,
-        "on-click-right": "jgmenu --at-pointer",
+        "on-click-right": "jgmenu --config-file=~/.dotfiles/hyprland/hypr/jgmenu/jgmenurc --at-pointer",
         "on-scroll-up": "~/.config/hypr/scripts/wpairswitch.sh prev",
         "on-scroll-down": "~/.config/hypr/scripts/wpairswitch.sh next"
     }

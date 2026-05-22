@@ -28,4 +28,4 @@ color_norm_fg        = #8fa1b3 100
 color_sel_bg         = #282e49 100
 color_sel_fg         = #7bc5e4 100
 color_sep_fg         = #8fa1b3 40
-csv_cmd             = cat ~/.config/jgmenu/custom.csv 
+csv_cmd             = cat ~/.dotfiles/mangowm/jgmenu/custom.csv 
