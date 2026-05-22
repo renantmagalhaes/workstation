@@ -188,7 +188,13 @@ button.vivaldi .expand-arrow {
   z-index: 10 !important;
   contain: layout style !important;
   isolation: isolate !important;
-  transition: width var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
+  border-right: 1px solid transparent !important;
+  transition: width var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    background-color var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    backdrop-filter var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    box-shadow var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    border-color var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
   transition-delay: 0s !important;
 }
 
@@ -197,13 +203,17 @@ button.vivaldi .expand-arrow {
   position: absolute !important;
   contain: layout style !important;
   isolation: isolate !important;
-  transition: width var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
-  transition-delay: var(--tabbar-hover-delay) !important;
   background-color: color-mix(in srgb, var(--colorBg) 80%, transparent) !important;
   backdrop-filter: blur(25px) !important;
   -webkit-backdrop-filter: blur(25px) !important;
   box-shadow: 5px 0 25px rgba(0, 0, 0, 0.15) !important;
   border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+  transition: width var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    background-color var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    backdrop-filter var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    box-shadow var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    border-color var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
+  transition-delay: var(--tabbar-hover-delay) !important;
 }
 
 #browser.tabs-left #tabs-tabbar-container:not(:hover) .tab {
@@ -328,7 +338,13 @@ button.vivaldi .expand-arrow {
   z-index: 10 !important;
   contain: layout style !important;
   isolation: isolate !important;
-  transition: width var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
+  border-left: 1px solid transparent !important;
+  transition: width var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    background-color var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    backdrop-filter var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    box-shadow var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    border-color var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
   transition-delay: 0s !important;
 }
 
@@ -337,13 +353,17 @@ button.vivaldi .expand-arrow {
   position: absolute !important;
   contain: layout style !important;
   isolation: isolate !important;
-  transition: width var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
-  transition-delay: var(--tabbar-hover-delay) !important;
   background-color: color-mix(in srgb, var(--colorBg) 80%, transparent) !important;
   backdrop-filter: blur(25px) !important;
   -webkit-backdrop-filter: blur(25px) !important;
   box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15) !important;
   border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+  transition: width var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    background-color var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    backdrop-filter var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    box-shadow var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    border-color var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
+  transition-delay: var(--tabbar-hover-delay) !important;
 }
 
 #browser.tabs-right #tabs-tabbar-container:not(:hover) .tab {
