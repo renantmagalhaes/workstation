@@ -152,3 +152,304 @@ button.vivaldi .expand-arrow {
 /* height: 10px; */
 /* background: transparent; */
 /* } */
+
+/* ========================================================= */
+/* Vertical Tab Bar Auto Collapse on Hover                  */
+/* ========================================================= */
+:root {
+  --tabbar-collapsed-width: 44px;
+  --tabbar-expanded-width: 200px;
+  --tabbar-transition-duration: 0.3s;
+  --tabbar-transition-timing: ease-in-out;
+  --tabbar-hover-delay: 0.3s;
+}
+
+/* Ensure tab bar wrapper doesn't affect page layout when expanding */
+#browser.tabs-left:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .tabbar-wrapper,
+#browser.tabs-right:not(.tabs-top):not(.tabs-bottom):not(.fullscreen) .tabbar-wrapper {
+  position: relative !important;
+  z-index: 1 !important;
+  /* Only reserve collapsed width, tab bar overlays when expanded */
+  width: var(--tabbar-collapsed-width) !important;
+  overflow: visible !important;
+}
+
+/* ========================================================= */
+/* Left Vertical Tab Bar                                     */
+/* ========================================================= */
+
+#browser.tabs-left #tabs-tabbar-container {
+  width: var(--tabbar-collapsed-width) !important;
+  overflow: visible !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  z-index: 10 !important;
+  contain: layout style !important;
+  isolation: isolate !important;
+  transition: width var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
+  transition-delay: 0s !important;
+}
+
+#browser.tabs-left #tabs-tabbar-container:hover {
+  width: var(--tabbar-expanded-width) !important;
+  position: absolute !important;
+  contain: layout style !important;
+  isolation: isolate !important;
+  transition: width var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
+  transition-delay: var(--tabbar-hover-delay) !important;
+  background-color: color-mix(in srgb, var(--colorBg) 80%, transparent) !important;
+  backdrop-filter: blur(25px) !important;
+  -webkit-backdrop-filter: blur(25px) !important;
+  box-shadow: 5px 0 25px rgba(0, 0, 0, 0.15) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+#browser.tabs-left #tabs-tabbar-container:not(:hover) .tab {
+  background-color: transparent !important;
+  background: transparent !important;
+  overflow: hidden !important;
+  transition: background-color var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
+}
+
+#browser.tabs-left #tabs-tabbar-container:not(:hover) .tab-position {
+  overflow: hidden !important;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#browser.tabs-left #tabs-tabbar-container:not(:hover)~.tabbar-wrapper {
+  overflow: hidden !important;
+}
+
+#browser.tabs-left #tabs-tabbar-container:not(:hover) #tabs-container {
+  overflow: hidden !important;
+}
+
+#browser.tabs-left #tabs-tabbar-container:not(:hover) .tab .tab-header {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#browser.tabs-left #tabs-tabbar-container:not(:hover) .tab {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+}
+
+#browser.tabs-left #tabs-tabbar-container:not(:hover) .tab .favicon,
+#browser.tabs-left #tabs-tabbar-container:not(:hover) .tab .tab-header .favicon {
+  background-color: var(--colorTabBar, rgba(255, 255, 255, 0.1)) !important;
+  border-radius: 6px !important;
+  padding: 5px !important;
+  margin: 0 auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  max-width: 30px !important;
+  max-height: 30px !important;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
+  transform: translateX(2px) !important;
+  transition: background-color var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    border-radius var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    padding var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
+}
+
+#browser.tabs-left #tabs-tabbar-container:not(:hover) .tab .favicon img,
+#browser.tabs-left #tabs-tabbar-container:not(:hover) .tab .tab-header .favicon img,
+#browser.tabs-left #tabs-tabbar-container:not(:hover) .tab .favicon svg,
+#browser.tabs-left #tabs-tabbar-container:not(:hover) .tab .tab-header .favicon svg {
+  max-width: 20px !important;
+  max-height: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+  display: block !important;
+  object-fit: contain !important;
+}
+
+#browser.tabs-left #tabs-tabbar-container:not(:hover) .tab.active .favicon,
+#browser.tabs-left #tabs-tabbar-container:not(:hover) .tab.active .tab-header .favicon {
+  background-color: rgb(215, 215, 215) !important;
+}
+
+#browser.tabs-left #tabs-tabbar-container:not(:hover) .tab .title {
+  max-width: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  transition: max-width var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    opacity var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
+}
+
+#browser.tabs-left #tabs-tabbar-container:not(:hover) .button-toolbar.workspace-popup.tabbar-workspace-button .button-title {
+  max-width: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+}
+
+#browser.tabs-left #tabs-tabbar-container:hover .tab .title {
+  max-width: none !important;
+  opacity: 1 !important;
+}
+
+#browser.tabs-left #tabs-tabbar-container:hover .button-toolbar.workspace-popup.tabbar-workspace-button .button-title {
+  max-width: none !important;
+  opacity: 1 !important;
+}
+
+/* ========================================================= */
+/* Right Vertical Tab Bar                                    */
+/* ========================================================= */
+
+#browser.tabs-right #tabs-tabbar-container {
+  width: var(--tabbar-collapsed-width) !important;
+  overflow: visible !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  z-index: 10 !important;
+  contain: layout style !important;
+  isolation: isolate !important;
+  transition: width var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
+  transition-delay: 0s !important;
+}
+
+#browser.tabs-right #tabs-tabbar-container:hover {
+  width: var(--tabbar-expanded-width) !important;
+  position: absolute !important;
+  contain: layout style !important;
+  isolation: isolate !important;
+  transition: width var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
+  transition-delay: var(--tabbar-hover-delay) !important;
+  background-color: color-mix(in srgb, var(--colorBg) 80%, transparent) !important;
+  backdrop-filter: blur(25px) !important;
+  -webkit-backdrop-filter: blur(25px) !important;
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+#browser.tabs-right #tabs-tabbar-container:not(:hover) .tab {
+  background-color: transparent !important;
+  background: transparent !important;
+  overflow: hidden !important;
+  transition: background-color var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
+}
+
+#browser.tabs-right #tabs-tabbar-container:not(:hover) .tab-position {
+  overflow: hidden !important;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#browser.tabs-right #tabs-tabbar-container:not(:hover)~.tabbar-wrapper {
+  overflow: hidden !important;
+}
+
+#browser.tabs-right #tabs-tabbar-container:not(:hover) #tabs-container {
+  overflow: hidden !important;
+}
+
+#browser.tabs-right #tabs-tabbar-container:not(:hover) .tab .tab-header {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#browser.tabs-right #tabs-tabbar-container:not(:hover) .tab {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+}
+
+#browser.tabs-right #tabs-tabbar-container:not(:hover) .tab .favicon,
+#browser.tabs-right #tabs-tabbar-container:not(:hover) .tab .tab-header .favicon {
+  background-color: var(--colorTabBar, rgba(255, 255, 255, 0.1)) !important;
+  border-radius: 6px !important;
+  padding: 5px !important;
+  margin: 0 auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  max-width: 30px !important;
+  max-height: 30px !important;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
+  transform: translateX(2px) !important;
+  transition: background-color var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    border-radius var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    padding var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
+}
+
+#browser.tabs-right #tabs-tabbar-container:not(:hover) .tab .favicon img,
+#browser.tabs-right #tabs-tabbar-container:not(:hover) .tab .tab-header .favicon img,
+#browser.tabs-right #tabs-tabbar-container:not(:hover) .tab .favicon svg,
+#browser.tabs-right #tabs-tabbar-container:not(:hover) .tab .tab-header .favicon svg {
+  max-width: 20px !important;
+  max-height: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+  display: block !important;
+  object-fit: contain !important;
+}
+
+#browser.tabs-right #tabs-tabbar-container:not(:hover) .tab.active .favicon,
+#browser.tabs-right #tabs-tabbar-container:not(:hover) .tab.active .tab-header .favicon {
+  background-color: rgb(215, 215, 215) !important;
+}
+
+#browser.tabs-right #tabs-tabbar-container:not(:hover) .tab .title {
+  max-width: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  transition: max-width var(--tabbar-transition-duration) var(--tabbar-transition-timing),
+    opacity var(--tabbar-transition-duration) var(--tabbar-transition-timing) !important;
+}
+
+#browser.tabs-right #tabs-tabbar-container:not(:hover) .button-toolbar.workspace-popup.tabbar-workspace-button .button-title {
+  max-width: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+}
+
+#browser.tabs-right #tabs-tabbar-container:hover .tab .title {
+  max-width: none !important;
+  opacity: 1 !important;
+}
+
+#browser.tabs-right #tabs-tabbar-container:hover .button-toolbar.workspace-popup.tabbar-workspace-button .button-title {
+  max-width: none !important;
+  opacity: 1 !important;
+}
