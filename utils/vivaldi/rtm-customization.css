@@ -484,3 +484,14 @@ button.vivaldi .expand-arrow {
   max-width: none !important;
   opacity: 1 !important;
 }
+
+/* ========================================================= */
+/* Sidebar / Panels Container width matching Tab Bar          */
+/* ========================================================= */
+#panels-container.icons,
+#panels-container.icons #switch {
+  box-sizing: border-box !important;
+  width: 38px !important;
+  min-width: 38px !important;
+  max-width: 38px !important;
+}
