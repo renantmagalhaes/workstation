@@ -93,20 +93,28 @@ function url-redirect() {
 
 ## Launch Strem.IO companion app for web
 function stremio-web-companion-app(){
-    # Check if ffmpeg is installed
-    if ! command -v ffmpeg >/dev/null 2>&1; then
-        echo "ffmpeg not found."
-        return 1
-    fi
-
     # Check if docker is installed
     if ! command -v docker >/dev/null 2>&1; then
         echo "docker not found."
         return 1
     fi
 
-    # Run the Docker command
-    docker run --rm -d --name stremio-web -p 11470:11470 -p 12470:12470 stremio/server:latest
+    # Remove existing container if it's running/stuck
+    if docker ps -a --format '{{.Names}}' | grep -Eq "^stremio-web$"; then
+        echo "Stopping and removing existing stremio-web container..."
+        docker stop stremio-web >/dev/null 2>&1
+        docker rm stremio-web >/dev/null 2>&1
+    fi
+
+    echo "Launching Stremio Server with CORS disabled..."
+    # Run the official image with NO_CORS enabled
+    docker run -d \
+      --name stremio-web \
+      -p 11470:11470 \
+      -p 12470:12470 \
+      -e NO_CORS=1 \
+      --restart unless-stopped \
+      stremio/server:latest
 }
 
 
