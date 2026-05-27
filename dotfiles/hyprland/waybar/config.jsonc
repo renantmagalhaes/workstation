@@ -289,7 +289,7 @@
     "format": "{}",
     "signal": 10,
     "tooltip-format": "Toggle fullscreen",
-    "on-click": "hyprctl dispatch fullscreen 1"
+    "on-click": "hyprctl dispatch 'hl.dsp.window.fullscreen({mode = 1})'"
   },
   "custom/fullscreen-indicator": {
     "exec": "~/.dotfiles/hyprland/waybar/scripts/fullscreen_indicator.sh",
@@ -297,7 +297,7 @@
     "format": "{}",
     "signal": 10,
     "tooltip-format": "Fullscreen mode active",
-    "on-click": "hyprctl dispatch fullscreen 1"
+    "on-click": "hyprctl dispatch 'hl.dsp.window.fullscreen({mode = 1})'"
   },
   "custom/scroll-indicator-left": {
     "exec": "~/.dotfiles/hyprland/waybar/scripts/scroll_indicator.sh left",
@@ -305,7 +305,7 @@
     "format": "{}",
     "signal": 8,
     "tooltip-format": "More windows to the left",
-    "on-click": "hyprctl dispatch layoutmsg focus l"
+    "on-click": "hyprctl dispatch 'hl.dsp.layout(\"focus l\")'"
   },
   "custom/scroll-indicator-right": {
     "exec": "~/.dotfiles/hyprland/waybar/scripts/scroll_indicator.sh right",
@@ -313,7 +313,7 @@
     "format": "{}",
     "signal": 9,
     "tooltip-format": "More windows to the right",
-    "on-click": "hyprctl dispatch layoutmsg focus r"
+    "on-click": "hyprctl dispatch 'hl.dsp.layout(\"focus r\")'"
   },
   "custom/move_window_next_monitor": {
     "format": "",
@@ -324,6 +324,6 @@
   "custom/kill_active": {
     "format": "󰅙",
     "tooltip-format": "Kill active window",
-    "on-click": "hyprctl dispatch killactive"
+    "on-click": "hyprctl dispatch 'hl.dsp.window.close()'"
   }
 }
