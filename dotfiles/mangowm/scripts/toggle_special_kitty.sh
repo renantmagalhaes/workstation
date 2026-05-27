@@ -1,31 +1,31 @@
 #!/usr/bin/env bash
 
-# Get current focused monitor name and tag
+# Scratchpad launch command (uses tmux to preserve shell state across window close/kill events)
+LAUNCH_CMD="kitty --class kitty-scratch -T kitty-scratch tmux new -A -s kitty-scratch"
+
+# Find out if kitty-scratch is currently running
+if ! pgrep -f "kitty-scratch" > /dev/null; then
+    # It does not exist yet. Spawn it (will trigger native zoom-in popup animation)
+    $LAUNCH_CMD &
+    exit 0
+fi
+
+# Get current focused monitor name
 mon=$(mmsg -g | awk '$2 == "selmon" && $3 == "1" {print $1; exit}')
 if [ -z "$mon" ]; then
     mon=$(mmsg -O | head -n 1)
 fi
-tag=$(mmsg -g | awk -v m="$mon" '$1==m && $2=="tag" && $4=="1" {print $3; exit}')
 
-# Find out if kitty-scratch is currently visible on this monitor
-visible_on_mon=$(mmsg -g | awk -v m="$mon" '$1==m && ($2=="title" || $2=="appid") && $3=="kitty-scratch" {print $1; exit}')
+# Find out if kitty-scratch is currently focused on the active monitor
+focused_appid=$(mmsg -g | awk -v m="$mon" '$1==m && $2=="appid" {print $3; exit}')
 
-# If it exists and is already visible on the current monitor, just toggle it to hide it!
-if [ -n "$visible_on_mon" ]; then
-    mmsg -d toggle_named_scratchpad,none,kitty-scratch,"kitty --class kitty-scratch -T kitty-scratch"
-    exit 0
+if [ "$focused_appid" = "kitty-scratch" ]; then
+    # It is currently focused. Close/kill it (will trigger native zoom-out collapse animation)
+    mmsg -s -d killclient
+else
+    # It is running but unfocused. Focus it instantly (no animation), then kill it (collapse animation)
+    mmsg -s -d setoption,animations,0
+    mmsg -s -d toggle_named_scratchpad,kitty-scratch,none,"$LAUNCH_CMD"
+    mmsg -s -d setoption,animations,1
+    mmsg -s -d killclient
 fi
-
-# Otherwise, if it already exists, we bring it over to the current monitor/tag
-if pgrep -f "kitty-scratch" > /dev/null; then
-    # Toggle it (which brings it over/shows it)
-    mmsg -d toggle_named_scratchpad,none,kitty-scratch,"kitty --class kitty-scratch -T kitty-scratch"
-    
-    # Wait for focus and bring the window over to the current monitor and tag
-    sleep 0.1
-    mmsg -d tagcrossmon,"$tag","$mon"
-    exit 0
-fi
-
-# It does not exist yet. Let's create it.
-mmsg -d toggle_named_scratchpad,none,kitty-scratch,"kitty --class kitty-scratch -T kitty-scratch"
