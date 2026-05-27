@@ -52,5 +52,5 @@ fi
 NEXT_ADDR=$(echo "${WINDOW_ARRAY[$NEXT_IDX]}" | cut -d'|' -f3)
 
 # Focus the window
-hyprctl dispatch focuswindow "address:$NEXT_ADDR"
-hyprctl dispatch bringactivetotop
+hyprctl dispatch "hl.dsp.focus({window = \"address:$NEXT_ADDR\"})"
+hyprctl dispatch 'hl.dsp.window.alter_zorder({mode = "top"})'

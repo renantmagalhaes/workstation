@@ -11,4 +11,4 @@
 HYPRLAND_INSTANCE_SIGNATURE=$(echo "$HYPRLAND_INSTANCE_SIGNATURE")
 HYPRLAND_CMD="hyprctl --instance $HYPRLAND_INSTANCE_SIGNATURE"
 
-$HYPRLAND_CMD dispatch exec "[workspace special:kitty silent]" kitty
+$HYPRLAND_CMD dispatch 'hl.dsp.exec_cmd("[workspace special:kitty silent] kitty")'

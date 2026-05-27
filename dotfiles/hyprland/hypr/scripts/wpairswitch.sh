@@ -8,7 +8,7 @@ DIR="${1:-next}"          # next | prev
 command -v hyprctl >/dev/null
 
 # Base on PRIMARY's current numeric workspace
-hyprctl dispatch focusmonitor "$PRIMARY"
+hyprctl dispatch "hl.dsp.focus({monitor = \"$PRIMARY\"})"
 cur_ws="$(hyprctl monitors | awk -v M="$PRIMARY" '
   /^Monitor /{gsub(":","",$2); blk=($2==M)}
   blk && /active workspace:/{
@@ -35,7 +35,7 @@ fi
 pair=$(( n + 5 ))
 
 # Apply, small sleeps help avoid race
-hyprctl dispatch workspace "$n";            sleep 0.02
-hyprctl dispatch focusmonitor "$SECONDARY"; sleep 0.02
-hyprctl dispatch workspace "$pair";         sleep 0.02
-hyprctl dispatch focusmonitor "$PRIMARY"
+hyprctl dispatch "hl.dsp.focus({workspace = \"$n\"})";            sleep 0.02
+hyprctl dispatch "hl.dsp.focus({monitor = \"$SECONDARY\"})"; sleep 0.02
+hyprctl dispatch "hl.dsp.focus({workspace = \"$pair\"})";         sleep 0.02
+hyprctl dispatch "hl.dsp.focus({monitor = \"$PRIMARY\"})"

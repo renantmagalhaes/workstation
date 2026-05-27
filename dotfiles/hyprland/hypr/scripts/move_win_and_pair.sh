@@ -60,23 +60,23 @@ primary_target="$target_base"         # PRIMARY shows n
 secondary_target=$((target_base + 5)) # SECONDARY shows n+5
 
 # Move the window first, then align monitors
-hyprctl dispatch movetoworkspace "$win_target"
+hyprctl dispatch "hl.dsp.window.move({workspace = \"$win_target\"})"
 
 sleep 0.02
-hyprctl dispatch focusmonitor "$PRIMARY"
+hyprctl dispatch "hl.dsp.focus({monitor = \"$PRIMARY\"})"
 sleep 0.02
-hyprctl dispatch workspace "$primary_target"
+hyprctl dispatch "hl.dsp.focus({workspace = \"$primary_target\"})"
 sleep 0.02
-hyprctl dispatch focusmonitor "$SECONDARY"
+hyprctl dispatch "hl.dsp.focus({monitor = \"$SECONDARY\"})"
 sleep 0.02
-hyprctl dispatch workspace "$secondary_target"
+hyprctl dispatch "hl.dsp.focus({workspace = \"$secondary_target\"})"
 sleep 0.02
 
 # Final focus should follow the window's rail
 if [[ "$rail" == "secondary" ]]; then
-  hyprctl dispatch focusmonitor "$SECONDARY"
+  hyprctl dispatch "hl.dsp.focus({monitor = \"$SECONDARY\"})"
 else
-  hyprctl dispatch focusmonitor "$PRIMARY"
+  hyprctl dispatch "hl.dsp.focus({monitor = \"$PRIMARY\"})"
 fi
 
 # Optional, also refocus the moved window itself

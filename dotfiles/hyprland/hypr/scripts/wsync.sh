@@ -30,8 +30,8 @@ if ! hyprctl monitors | grep -qE "Monitor ${SECONDARY} "; then
 fi
 
 # Do the switch
-hyprctl dispatch focusmonitor "${PRIMARY}"
-hyprctl dispatch workspace "${n}"
-hyprctl dispatch focusmonitor "${SECONDARY}"
-hyprctl dispatch workspace "${pair}"
-hyprctl dispatch focusmonitor "${PRIMARY}"
+hyprctl dispatch "hl.dsp.focus({monitor = \"${PRIMARY}\"})"
+hyprctl dispatch "hl.dsp.focus({workspace = \"${n}\"})"
+hyprctl dispatch "hl.dsp.focus({monitor = \"${SECONDARY}\"})"
+hyprctl dispatch "hl.dsp.focus({workspace = \"${pair}\"})"
+hyprctl dispatch "hl.dsp.focus({monitor = \"${PRIMARY}\"})"

@@ -15,16 +15,16 @@ has_kitty_in_special() {
 
 if has_kitty_in_special; then
   # Kitty exists already, just toggle visibility
-  "${CMD[@]}" dispatch togglespecialworkspace kitty
+  "${CMD[@]}" dispatch 'hl.dsp.workspace.toggle_special("kitty")'
   exit 0
 fi
 
 # No kitty in special
 if is_on_special; then
   # We are already on the special workspace, just spawn and focus it
-  "${CMD[@]}" dispatch exec '[workspace special:kitty]' kitty
+  "${CMD[@]}" dispatch 'hl.dsp.exec_cmd("[workspace special:kitty] kitty")'
 else
   # Not on special, switch to it then spawn focused
-  "${CMD[@]}" dispatch workspace special:kitty
-  "${CMD[@]}" dispatch exec '[workspace special:kitty]' kitty
+  "${CMD[@]}" dispatch 'hl.dsp.focus({workspace = "special:kitty"})'
+  "${CMD[@]}" dispatch 'hl.dsp.exec_cmd("[workspace special:kitty] kitty")'
 fi
