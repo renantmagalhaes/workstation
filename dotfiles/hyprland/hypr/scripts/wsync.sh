@@ -29,9 +29,15 @@ if ! hyprctl monitors | grep -qE "Monitor ${SECONDARY} "; then
   exit 4
 fi
 
-# Do the switch
-hyprctl dispatch focusmonitor "${PRIMARY}"
-hyprctl dispatch workspace "${n}"
-hyprctl dispatch focusmonitor "${SECONDARY}"
-hyprctl dispatch workspace "${pair}"
-hyprctl dispatch focusmonitor "${PRIMARY}"
+# Do the switch and update cache
+hyprctl eval "hl.dispatch(hl.dsp.focus({monitor = \"${PRIMARY}\"})); hl.dispatch(hl.dsp.focus({workspace = \"${n}\"})); hl.dispatch(hl.dsp.focus({monitor = \"${SECONDARY}\"})); hl.dispatch(hl.dsp.focus({workspace = \"${pair}\"})); hl.dispatch(hl.dsp.focus({monitor = \"${PRIMARY}\"}))" >/dev/null
+echo "$n $(date +%s%3N)" > /tmp/wpair_current_ws
+
+# Warp cursor slightly to trigger Wayland motion/hover events on the Waybar overlay
+pos=$(hyprctl cursorpos)
+x="${pos%%,*}"
+y="${pos#*,}"
+x="${x//[[:space:]]/}"
+y="${y//[[:space:]]/}"
+hyprctl eval "hl.dispatch(hl.dsp.cursor.move({ x = $((x + 1)), y = $y })); hl.dispatch(hl.dsp.cursor.move({ x = $x, y = $y }))" >/dev/null
+

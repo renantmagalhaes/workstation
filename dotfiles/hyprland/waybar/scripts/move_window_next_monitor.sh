@@ -34,4 +34,4 @@ fi
 
 # Move window to next monitor
 next_monitor="${monitor_array[$next_index]}"
-hyprctl dispatch movewindow mon:"$next_monitor"
+hyprctl dispatch "hl.dsp.window.move({monitor = \"$next_monitor\"})"

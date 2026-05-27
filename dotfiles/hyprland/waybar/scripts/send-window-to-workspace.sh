@@ -77,21 +77,8 @@ else
     target_monitor="$PRIMARY"
 fi
 
-# Move the focused window to the target workspace
-hyprctl dispatch movetoworkspace "$target_workspace"
-
-# Sync both monitors to show the paired workspaces
-sleep 0.02
-hyprctl dispatch focusmonitor "$PRIMARY"
-sleep 0.02
-hyprctl dispatch workspace "$selected_space"
-sleep 0.02
-hyprctl dispatch focusmonitor "$SECONDARY"
-sleep 0.02
-hyprctl dispatch workspace "$paired_workspace"
-
-# Return focus to the monitor where the window was moved
-sleep 0.02
-hyprctl dispatch focusmonitor "$target_monitor"
+# Move the focused window to the target workspace and sync monitors atomically
+hyprctl eval "hl.dispatch(hl.dsp.window.move({workspace = \"$target_workspace\"})); hl.dispatch(hl.dsp.focus({monitor = \"$PRIMARY\"})); hl.dispatch(hl.dsp.focus({workspace = \"$selected_space\"})); hl.dispatch(hl.dsp.focus({monitor = \"$SECONDARY\"})); hl.dispatch(hl.dsp.focus({workspace = \"$paired_workspace\"})); hl.dispatch(hl.dsp.focus({monitor = \"$target_monitor\"}))"
+echo "$selected_space $(date +%s%3N)" > /tmp/wpair_current_ws
 
 echo "Moved window to workspace $target_workspace and synced monitors (primary: $selected_space, secondary: $paired_workspace)."

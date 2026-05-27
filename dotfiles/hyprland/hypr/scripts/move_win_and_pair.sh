@@ -59,25 +59,13 @@ fi
 primary_target="$target_base"         # PRIMARY shows n
 secondary_target=$((target_base + 5)) # SECONDARY shows n+5
 
-# Move the window first, then align monitors
-hyprctl dispatch movetoworkspace "$win_target"
-
-sleep 0.02
-hyprctl dispatch focusmonitor "$PRIMARY"
-sleep 0.02
-hyprctl dispatch workspace "$primary_target"
-sleep 0.02
-hyprctl dispatch focusmonitor "$SECONDARY"
-sleep 0.02
-hyprctl dispatch workspace "$secondary_target"
-sleep 0.02
-
-# Final focus should follow the window's rail
+# Move the window first, then align monitors and focus
 if [[ "$rail" == "secondary" ]]; then
-  hyprctl dispatch focusmonitor "$SECONDARY"
+  hyprctl eval "hl.dispatch(hl.dsp.window.move({workspace = \"$win_target\"})); hl.dispatch(hl.dsp.focus({monitor = \"$PRIMARY\"})); hl.dispatch(hl.dsp.focus({workspace = \"$primary_target\"})); hl.dispatch(hl.dsp.focus({monitor = \"$SECONDARY\"})); hl.dispatch(hl.dsp.focus({workspace = \"$secondary_target\"})); hl.dispatch(hl.dsp.focus({monitor = \"$SECONDARY\"}))"
 else
-  hyprctl dispatch focusmonitor "$PRIMARY"
+  hyprctl eval "hl.dispatch(hl.dsp.window.move({workspace = \"$win_target\"})); hl.dispatch(hl.dsp.focus({monitor = \"$PRIMARY\"})); hl.dispatch(hl.dsp.focus({workspace = \"$primary_target\"})); hl.dispatch(hl.dsp.focus({monitor = \"$SECONDARY\"})); hl.dispatch(hl.dsp.focus({workspace = \"$secondary_target\"})); hl.dispatch(hl.dsp.focus({monitor = \"$PRIMARY\"}))"
 fi
+echo "$target_base $(date +%s%3N)" > /tmp/wpair_current_ws
 
 # Optional, also refocus the moved window itself
 # hyprctl dispatch focuscurrentorlast

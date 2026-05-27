@@ -36,7 +36,7 @@ confirm_cmd() {
 selected="$(echo -e "$yes\n$no" | confirm_cmd)"
 if [[ "$selected" == "$yes" ]]; then
     if command -v hyprctl >/dev/null 2>&1; then
-        hyprctl dispatch exit
+        hyprctl dispatch 'hl.dsp.exit()'
     elif command -v bspc >/dev/null 2>&1; then
         bspc quit
     else
