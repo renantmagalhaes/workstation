@@ -20,3 +20,5 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 animations {
     // slowdown 3.0
 }
+
+workspace "__scratchpad"

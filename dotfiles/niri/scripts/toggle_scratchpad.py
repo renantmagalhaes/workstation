@@ -54,13 +54,19 @@ def main():
         run_cmd(["niri", "msg", "action", "move-window-to-workspace", "__scratchpad", "--window-id", str(scratch_window["id"]), "--focus", "false"])
     else:
         # Move it to the currently focused workspace and focus it.
-        # Use workspace name if present, otherwise use its index (as string)
         target_ws = focused_workspace.get("name")
+        should_cleanup_name = False
         if not target_ws:
-            target_ws = str(focused_workspace.get("idx"))
+            target_ws = "__temp_scratch_target"
+            run_cmd(["niri", "msg", "action", "set-workspace-name", target_ws])
+            should_cleanup_name = True
             
-        run_cmd(["niri", "msg", "action", "move-window-to-workspace", target_ws, "--window-id", str(scratch_window["id"])])
-        run_cmd(["niri", "msg", "action", "focus-window", "--id", str(scratch_window["id"])])
+        try:
+            run_cmd(["niri", "msg", "action", "move-window-to-workspace", target_ws, "--window-id", str(scratch_window["id"])])
+            run_cmd(["niri", "msg", "action", "focus-window", "--id", str(scratch_window["id"])])
+        finally:
+            if should_cleanup_name:
+                run_cmd(["niri", "msg", "action", "unset-workspace-name", target_ws])
 
 if __name__ == "__main__":
     main()
