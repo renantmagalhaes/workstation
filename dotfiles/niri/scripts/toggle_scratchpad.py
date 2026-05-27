@@ -50,8 +50,23 @@ def main():
         
     # 3. Toggle behavior
     if scratch_window.get("is_focused"):
-        # If scratchpad is focused, move it to the hidden "__scratchpad" workspace and don't follow focus
-        run_cmd(["niri", "msg", "action", "move-window-to-workspace", "__scratchpad", "--window-id", str(scratch_window["id"]), "--focus", "false"])
+        # If scratchpad is focused, move it to the monitor-specific hidden workspace and don't follow focus
+        output = focused_workspace.get("output", "DP-1")
+        target_scratch_ws = f"__scratchpad_{output}"
+        
+        target_ws = focused_workspace.get("name")
+        should_cleanup_name = False
+        if not target_ws:
+            target_ws = "__temp_scratch_target"
+            run_cmd(["niri", "msg", "action", "set-workspace-name", target_ws])
+            should_cleanup_name = True
+            
+        try:
+            run_cmd(["niri", "msg", "action", "move-window-to-workspace", target_scratch_ws, "--window-id", str(scratch_window["id"]), "--focus", "false"])
+            run_cmd(["niri", "msg", "action", "focus-workspace", target_ws])
+        finally:
+            if should_cleanup_name:
+                run_cmd(["niri", "msg", "action", "unset-workspace-name", target_ws])
     else:
         # Move it to the currently focused workspace and focus it.
         target_ws = focused_workspace.get("name")

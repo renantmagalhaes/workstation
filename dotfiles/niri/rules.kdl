@@ -16,6 +16,14 @@ window-rule {
     clip-to-geometry true
 }
 
+// Enable background blur for all windows
+window-rule {
+    background-effect {
+        blur true
+    }
+}
+
+
 // Named scratchpad window rules for kitty-scratch
 window-rule {
     match app-id="^kitty-scratch$"
@@ -27,7 +35,7 @@ window-rule {
 // Nautilus active/inactive opacities
 window-rule {
     match app-id="Nautilus" is-active=true
-    opacity 0.95
+    opacity 0.90
 }
 window-rule {
     match app-id="Nautilus" is-active=false
@@ -37,19 +45,29 @@ window-rule {
 // VS Code active/inactive opacities
 window-rule {
     match app-id="code" is-active=true
-    opacity 0.98
+    opacity 0.90
 }
 window-rule {
     match app-id="code" is-active=false
-    opacity 0.90
+    opacity 0.80
 }
 
 // Antigravity active/inactive opacities
 window-rule {
     match app-id="antigravity" is-active=true
-    opacity 0.98
+    opacity 0.90
 }
 window-rule {
     match app-id="antigravity" is-active=false
+    opacity 0.80
+}
+
+// Kitty active/inactive opacities
+window-rule {
+    match app-id="kitty" is-active=true
     opacity 0.90
+}
+window-rule {
+    match app-id="kitty" is-active=false
+    opacity 0.80
 }

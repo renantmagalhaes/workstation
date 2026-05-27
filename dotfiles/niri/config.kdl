@@ -21,4 +21,17 @@ animations {
     // slowdown 3.0
 }
 
-workspace "__scratchpad"
+blur {
+    on
+    passes 5
+    offset 4.0
+    noise 0.02
+    saturation 1.6
+}
+
+workspace "__scratchpad_DP-1" {
+    open-on-output "DP-1"
+}
+workspace "__scratchpad_HDMI-A-1" {
+    open-on-output "HDMI-A-1"
+}
