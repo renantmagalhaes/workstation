@@ -1,0 +1,41 @@
+layout {
+    gaps 5
+    struts {
+        left 10
+        right 10
+        top 10
+        bottom 10
+    }
+
+    center-focused-column "never"
+
+    preset-column-widths {
+        proportion 0.5
+        proportion 1.0
+    }
+
+    default-column-width { proportion 0.5; }
+
+    focus-ring {
+        width 2
+        active-color "#78FFB4"
+        inactive-color "#646464"
+        urgent-color "#ad401f"
+    }
+
+    border {
+        off
+        width 2
+        active-color "#78FFB4"
+        inactive-color "#646464"
+        urgent-color "#ad401f"
+    }
+
+    shadow {
+        off
+        softness 30
+        spread 5
+        offset x=0 y=5
+        color "#0007"
+    }
+}

@@ -1,0 +1,18 @@
+environment {
+    // Ported from mangowm envs.conf
+    XCURSOR_SIZE "24"
+    XCURSOR_THEME "Breeze_Light"
+    GDK_BACKEND "wayland,x11,*"
+    QT_QPA_PLATFORM "wayland;xcb"
+    QT_STYLE_OVERRIDE "kvantum"
+    SDL_VIDEODRIVER "wayland"
+    MOZ_ENABLE_WAYLAND "1"
+    OZONE_PLATFORM "wayland"
+    XDG_SESSION_TYPE "wayland"
+    XDG_CURRENT_DESKTOP "niri"
+    XDG_SESSION_DESKTOP "niri"
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    GTK_THEME "Graphite-Dark"
+    GTK_APPLICATION_PREFER_DARK_THEME "1"
+    QT_QPA_PLATFORMTHEME "Kvantum"
+}

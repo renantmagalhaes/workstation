@@ -1,0 +1,55 @@
+// Work around WezTerm's initial configure bug
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+}
+
+// Open the Firefox picture-in-picture player as floating by default.
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+// Enable rounded corners for all windows (matching border_radius=6 in theme.conf)
+window-rule {
+    geometry-corner-radius 6
+    clip-to-geometry true
+}
+
+// Named scratchpad window rules for kitty-scratch
+window-rule {
+    match app-id="^kitty-scratch$"
+    open-floating true
+    default-column-width { fixed 2300; }
+    default-window-height { fixed 1250; }
+}
+
+// Nautilus active/inactive opacities
+window-rule {
+    match app-id="Nautilus" is-active=true
+    opacity 0.95
+}
+window-rule {
+    match app-id="Nautilus" is-active=false
+    opacity 0.80
+}
+
+// VS Code active/inactive opacities
+window-rule {
+    match app-id="code" is-active=true
+    opacity 0.98
+}
+window-rule {
+    match app-id="code" is-active=false
+    opacity 0.90
+}
+
+// Antigravity active/inactive opacities
+window-rule {
+    match app-id="antigravity" is-active=true
+    opacity 0.98
+}
+window-rule {
+    match app-id="antigravity" is-active=false
+    opacity 0.90
+}

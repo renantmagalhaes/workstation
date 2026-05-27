@@ -1,0 +1,108 @@
+binds {
+    // Important Hotkeys Overlay
+    Super+Shift+Slash { show-hotkey-overlay; }
+
+    // Applications & Launchers
+    Ctrl+Alt+T { spawn "kitty"; }
+    Ctrl+Shift+Space { spawn "1password" "--quick-access"; }
+    Super+E { spawn "nautilus"; }
+    Alt+Space { spawn "~/.config/rofi/scripts/rofi-menu.sh"; }
+    Super+L { spawn "/home/rtm/.dotfiles/niri/scripts/lock.sh"; }
+
+    // Session Control
+    Super+Alt+Escape { quit skip-confirmation=true; }
+    Super+Q { close-window; }
+
+    // Clipboard Manager
+    Super+V { spawn-sh "/home/rtm/.dotfiles/niri/scripts/cliphist-rofi-img | rofi -dmenu -show-icons -theme ~/.config/rofi/cliphist.rasi -matching fuzzy -i | awk '{print $1}' | xargs -r /home/rtm/.dotfiles/niri/scripts/cliphist-rofi-img"; }
+    Alt+V { spawn-sh "/home/rtm/.dotfiles/niri/scripts/cliphist-rofi-img | rofi -dmenu -show-icons -theme ~/.config/rofi/cliphist.rasi -matching fuzzy -i | awk '{print $1}' | xargs -r /home/rtm/.dotfiles/niri/scripts/cliphist-rofi-img"; }
+
+    // Floating windows
+    Super+T { toggle-window-floating; }
+
+    // Overview & Monitors
+    Super+Tab { toggle-overview; }
+    Alt+Tab { focus-monitor-next; }
+    Super+Return { move-window-to-monitor-next; }
+
+    // Focus Movement
+    Super+Left  { focus-column-left; }
+    Super+Right { focus-column-right; }
+    Super+Up    { focus-window-up; }
+    Super+Down  { focus-window-down; }
+
+    // Window swapping & exchanging
+    Super+Period { move-column-right; }
+    Super+Comma  { move-column-left; }
+    Super+Shift+Period { move-column-right; }
+    Super+Shift+Comma  { move-column-left; }
+
+    Super+Shift+Left  { move-column-left; }
+    Super+Shift+Right { move-column-right; }
+    Super+Shift+Up    { move-window-up; }
+    Super+Shift+Down  { move-window-down; }
+
+    // Layout resizing & controls
+    Super+M { switch-preset-column-width; }
+    Super+Shift+M { fullscreen-window; }
+    Super+Ctrl+M { set-column-width "50%"; }
+    Super+F { set-column-width "100%"; }
+    Super+Shift+F { set-column-width "50%"; }
+    Super+Shift+R { switch-preset-column-width-back; }
+
+    // Named Scratchpad (Python custom toggle) & Terminal spawning
+    Ctrl+Return { spawn "/home/rtm/.dotfiles/niri/scripts/toggle_scratchpad.py"; }
+    Ctrl+Shift+Return { spawn "kitty"; }
+
+    // Workspace Navigation & Management
+    Super+1 { focus-workspace 1; }
+    Super+2 { focus-workspace 2; }
+    Super+3 { focus-workspace 3; }
+    Super+4 { focus-workspace 4; }
+    Super+5 { focus-workspace 5; }
+
+    Super+Ctrl+Left  { focus-workspace-up; }
+    Super+Ctrl+Right { focus-workspace-down; }
+
+    Super+Ctrl+Shift+Left  { move-column-to-workspace-up; }
+    Super+Ctrl+Shift+Right { move-column-to-workspace-down; }
+
+    Super+Shift+1 { move-column-to-workspace 1; }
+    Super+Shift+2 { move-column-to-workspace 2; }
+    Super+Shift+3 { move-column-to-workspace 3; }
+    Super+Shift+4 { move-column-to-workspace 4; }
+    Super+Shift+5 { move-column-to-workspace 5; }
+
+    // Tabbed Layout
+    Super+W { toggle-column-tabbed-display; }
+
+    // Mouse scroll window cycling
+    Alt+WheelScrollDown   cooldown-ms=150 { focus-window-down; }
+    Alt+WheelScrollUp     cooldown-ms=150 { focus-window-up; }
+    Shift+WheelScrollDown cooldown-ms=150 { focus-window-down; }
+    Shift+WheelScrollUp   cooldown-ms=150 { focus-window-up; }
+
+    // Mouse forward button to Rofi mouse menu
+    MouseForward { spawn "/home/rtm/.config/rofi/scripts/rofi-mouse-menu.sh"; }
+
+    // Media keys
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "/home/rtm/.dotfiles/niri/scripts/volnotify.sh" "+5"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "/home/rtm/.dotfiles/niri/scripts/volnotify.sh" "-5"; }
+    XF86AudioMute        allow-when-locked=true { spawn "playerctl" "play-pause"; }
+    Super+C              allow-when-locked=true { spawn "playerctl" "play-pause"; }
+    XF86AudioPlay        allow-when-locked=true { spawn "playerctl" "play-pause"; }
+    XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "previous"; }
+    XF86AudioNext        allow-when-locked=true { spawn "playerctl" "next"; }
+
+    // Brightness keys
+    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+
+    // Screenshots
+    Print { spawn "flameshot" "gui"; }
+    Ctrl+Print { screenshot-screen; }
+    Alt+Print { screenshot-window; }
+
+    // Escape hatch
+    Super+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+}

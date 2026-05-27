@@ -1,0 +1,118 @@
+/* ----------- 💫 https://github.com/JaKooLit 💫 -------- */
+/* Catppuccin wlogout theme */
+
+/* Catppuccin color variables */
+@define-color background #1e1e2e;
+@define-color foreground #cdd6f4;
+@define-color color0 #313244;
+@define-color color1 #f38ba8;
+@define-color color2 #a6e3a1;
+@define-color color3 #f9e2af;
+@define-color color4 #89b4fa;
+@define-color color5 #cba6f7;
+@define-color color6 #f5c2e7;
+@define-color color7 #bac2de;
+@define-color color8 #585b70;
+@define-color color9 #f38ba8;
+@define-color color10 #a6e3a1;
+@define-color color11 #f9e2af;
+@define-color color12 #89b4fa;
+@define-color color13 #cba6f7;
+@define-color color14 #f5c2e7;
+@define-color color15 #a6adc8;
+
+window {
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 16pt;
+  color: @foreground; /* text */
+  background-color: rgba(
+    30,
+    30,
+    46,
+    0.4
+  );
+}
+
+button {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20%;
+  background-color: transparent;
+  animation: gradient_f 20s ease-in
+    infinite;
+  transition: all 0.3s ease-in;
+  box-shadow: 0 0 10px 2px transparent;
+  border-radius: 36px;
+  margin: 10px;
+}
+
+button:focus {
+  box-shadow: none;
+  background-size: 20%;
+}
+
+button:hover {
+  background-size: 50%;
+  box-shadow: 0 0 10px 3px
+    rgba(0, 0, 0, 0.4);
+  background-color: #5f38fb;
+  color: @foreground;
+  transition: all 0.3s
+      cubic-bezier(0.55, 0, 0.28, 1.682),
+    box-shadow 0.5s ease-in;
+}
+
+#shutdown {
+  background-image: image(
+    url("./icons/power.png")
+  );
+}
+#shutdown:hover {
+  background-image: image(
+    url("./icons/power-hover.png")
+  );
+}
+
+#logout {
+  background-image: image(
+    url("./icons/logout.png")
+  );
+}
+#logout:hover {
+  background-image: image(
+    url("./icons/logout-hover.png")
+  );
+}
+
+#reboot {
+  background-image: image(
+    url("./icons/restart.png")
+  );
+}
+#reboot:hover {
+  background-image: image(
+    url("./icons/restart-hover.png")
+  );
+}
+
+#lock {
+  background-image: image(
+    url("./icons/lock.png")
+  );
+}
+#lock:hover {
+  background-image: image(
+    url("./icons/lock-hover.png")
+  );
+}
+
+#hibernate {
+  background-image: image(
+    url("./icons/hibernate.png")
+  );
+}
+#hibernate:hover {
+  background-image: image(
+    url("./icons/hibernate-hover.png")
+  );
+}

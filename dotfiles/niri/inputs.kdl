@@ -1,0 +1,25 @@
+input {
+    keyboard {
+        xkb {
+            layout "us"
+        }
+        repeat-delay 600
+        repeat-rate 25
+    }
+
+    touchpad {
+        tap
+        dwt
+        drag true
+        drag-lock
+    }
+
+    mouse {
+    }
+
+    trackpoint {
+    }
+
+    warp-mouse-to-focus
+    focus-follows-mouse max-scroll-amount="0%"
+}

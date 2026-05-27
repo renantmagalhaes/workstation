@@ -1,0 +1,33 @@
+[
+  {
+    "name": "trigger-bottom",
+    "layer": "overlay",
+    "position": "bottom",
+    "height": 2,
+    "exclusive": false,
+    "modules-left": ["custom/trigger-bottom"],
+    "custom/trigger-bottom": {
+        "format": " ",
+        "tooltip": false,
+        "on-click-right": "~/.config/rofi/scripts/rofi-menu.sh",
+        "on-scroll-up": "niri msg action focus-workspace-up",
+        "on-scroll-down": "niri msg action focus-workspace-down"
+    }
+  },
+  {
+    "name": "trigger-top",
+    "layer": "overlay",
+    "position": "top",
+    "height": 2,
+    "exclusive": false,
+    "margin-top": -50,
+    "modules-left": ["custom/trigger-top"],
+    "custom/trigger-top": {
+        "format": " ",
+        "tooltip": false,
+        "on-click-right": "~/.config/rofi/scripts/rofi-menu.sh",
+        "on-scroll-up": "niri msg action focus-workspace-up",
+        "on-scroll-down": "niri msg action focus-workspace-down"
+    }
+  }
+]
