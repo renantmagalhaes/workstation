@@ -250,7 +250,7 @@
     "format": "{}",
     "signal": 10,
     "tooltip-format": "Toggle fullscreen",
-    "on-click": "mmsg -d togglefullscreen"
+    "on-click": "mmsg -d switch_proportion_preset"
   },
   "custom/fullscreen-indicator": {
     "exec": "~/.dotfiles/mangowm/waybar/scripts/fullscreen_indicator.sh",
@@ -258,7 +258,7 @@
     "format": "{}",
     "signal": 10,
     "tooltip-format": "Fullscreen mode active",
-    "on-click": "mmsg -d togglefullscreen"
+    "on-click": "mmsg -d switch_proportion_preset"
   },
   "custom/move_window_next_monitor": {
     "format": "",
@@ -272,19 +272,19 @@
     "on-click": "mmsg -d killclient"
   },
   "custom/scroll-indicator-left": {
-    "exec": "~/.dotfiles/mangowm/waybar/scripts/scroll_indicator.py left",
+    "exec": "~/.dotfiles/mangowm/waybar/scripts/scroll_indicator.sh left",
     "interval": 1,
     "format": "{}",
     "signal": 8,
     "tooltip-format": "More windows to the left",
-    "on-click": "~/.dotfiles/mangowm/waybar/scripts/scroll_indicator.py click_left"
+    "on-click": "~/.dotfiles/mangowm/waybar/scripts/scroll_indicator.sh click_left"
   },
   "custom/scroll-indicator-right": {
-    "exec": "~/.dotfiles/mangowm/waybar/scripts/scroll_indicator.py right",
+    "exec": "~/.dotfiles/mangowm/waybar/scripts/scroll_indicator.sh right",
     "interval": 1,
     "format": "{}",
     "signal": 8,
     "tooltip-format": "More windows to the right",
-    "on-click": "~/.dotfiles/mangowm/waybar/scripts/scroll_indicator.py click_right"
+    "on-click": "~/.dotfiles/mangowm/waybar/scripts/scroll_indicator.sh click_right"
   }
 }
