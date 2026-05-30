@@ -17,11 +17,20 @@ last_trigger_time = 0.0
 def on_enter(widget, event):
     global last_trigger_time
     now = time.monotonic()
-    # Debounce trigger within 500ms
-    if now - last_trigger_time > 0.5:
-        last_trigger_time = now
-        os.system(f"{SCRIPT_PATH} &")
+    
+    # Check if we were already in the hotarea (prevent duplicate triggers)
+    if not getattr(widget, "is_in_hotarea", False):
+        widget.is_in_hotarea = True
+        # Cooldown trigger within 1.0s
+        if now - last_trigger_time > 1.0:
+            last_trigger_time = now
+            os.system(f"{SCRIPT_PATH} &")
     return True
+
+def on_leave(widget, event):
+    widget.is_in_hotarea = False
+    return True
+
 
 def create_hotarea_window(monitor):
     win = Gtk.Window()
@@ -51,9 +60,11 @@ def create_hotarea_window(monitor):
     # Request the target hotarea size
     win.set_size_request(HOTAREA_SIZE, HOTAREA_SIZE)
     
-    # Track pointer entry
-    win.add_events(Gdk.EventMask.ENTER_NOTIFY_MASK)
+    # Track pointer entry and exit
+    win.add_events(Gdk.EventMask.ENTER_NOTIFY_MASK | Gdk.EventMask.LEAVE_NOTIFY_MASK)
     win.connect("enter-notify-event", on_enter)
+    win.connect("leave-notify-event", on_leave)
+    win.is_in_hotarea = False
     
     win.show_all()
     return win
