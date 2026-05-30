@@ -24,7 +24,8 @@
     "custom/notification",
     "pulseaudio",
     "tray",
-    "custom/scroll-indicator",
+    "custom/scroll-indicator-left",
+    "custom/scroll-indicator-right",
     "custom/fullscreen",
     "custom/fullscreen-indicator",
     "custom/move_window_next_monitor",
@@ -270,11 +271,20 @@
     "tooltip-format": "Kill active window",
     "on-click": "mmsg -d killclient"
   },
-  "custom/scroll-indicator": {
-    "exec": "~/.dotfiles/mangowm/waybar/scripts/scroll_indicator.py",
+  "custom/scroll-indicator-left": {
+    "exec": "~/.dotfiles/mangowm/waybar/scripts/scroll_indicator.py left",
     "interval": 1,
     "format": "{}",
     "signal": 8,
-    "tooltip-format": "Active scroll indicators"
+    "tooltip-format": "More windows to the left",
+    "on-click": "~/.dotfiles/mangowm/waybar/scripts/scroll_indicator.py click_left"
+  },
+  "custom/scroll-indicator-right": {
+    "exec": "~/.dotfiles/mangowm/waybar/scripts/scroll_indicator.py right",
+    "interval": 1,
+    "format": "{}",
+    "signal": 8,
+    "tooltip-format": "More windows to the right",
+    "on-click": "~/.dotfiles/mangowm/waybar/scripts/scroll_indicator.py click_right"
   }
 }
