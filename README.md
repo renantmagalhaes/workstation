@@ -6,8 +6,8 @@
 
 For:
 
-- openSUSE Tumbleweed (*Hyprland*/Gnome)
-- Debian 12 (Gnome)
+- openSUSE Tumbleweed (_MangoWM_/Hyprland/Gnome)
+- Debian 13 (_MangoWM_/Gnome)
 
 ### Disclaimer
 
@@ -18,10 +18,9 @@ Use the script `install.sh`. Running the scripts directly may result in system m
 - [ ] Gnome-like overview for hyprland
 - [ ] Notification Center
 - [ ] Clipboard Manager improvements (Quickshell?)
-- [ ] MangoWM test
 - [ ] Paperwm setup for Gnome (Scrolling layout)
 
-# HYPRLAND
+# MangoWM
 
 ### Menu
 
