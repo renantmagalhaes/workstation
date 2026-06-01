@@ -56,7 +56,7 @@ fi
 #clear
 echo "###########################"
 echo "#                         #"
-echo "#      insecure.codes          #"
+echo "#      seclabs.cc          #"
 echo "#       DONE              #"
 echo "#                         #"
 echo "###########################"

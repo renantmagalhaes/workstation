@@ -23,7 +23,7 @@ cat <<EOF >~/.gitconfig
 EOF
 
 #GIT CONFIG
-git config --global user.email "rtm@insecure.codes"
+git config --global user.email "renan@seclabs.cc"
 git config --global user.name "RTM"
 git config --global pull.rebase false
 

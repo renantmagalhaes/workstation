@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 #
-#?Site        :https://insecure.codes
+#?Site        :https://seclabs.cc
 #?Author      :Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
 #?                                     <https://github.com/renantmagalhaes>
 #

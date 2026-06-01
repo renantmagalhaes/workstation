@@ -119,5 +119,5 @@ dotfiles/hyprland/
 
 ---
 
-**Setup by insecure.codes**  
+**Setup by seclabs.cc**  
 _Productive workflow, powered by Hyprland!_

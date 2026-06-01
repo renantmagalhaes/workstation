@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #
-#?Site        :https://insecure.codes
+#?Site        :https://seclabs.cc
 #?Author      :Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
 #?                                     <https://github.com/renantmagalhaes>
 #
@@ -252,7 +252,7 @@ zsh
 #clear
 echo "#################################"
 echo "#                               #"
-echo "#         insecure.codes             #"
+echo "#         seclabs.cc             #"
 echo "#     Please reboot your pc     #"
 echo "#                               #"
 echo "#################################"

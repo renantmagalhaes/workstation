@@ -51,7 +51,7 @@ sudo flatpak install -y flathub net.sourceforge.jpdftweak.jPdfTweak
 #clear
 echo "###########################"
 echo "#                         #"
-echo "#      insecure.codes          #"
+echo "#      seclabs.cc          #"
 echo "#       DONE              #"
 echo "#                         #"
 echo "###########################"
