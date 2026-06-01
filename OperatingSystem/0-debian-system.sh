@@ -143,6 +143,9 @@ wget --content-disposition https://go.microsoft.com/fwlink/?LinkID=760868 -O /tm
 sudo dpkg -i /tmp/visual_code_amd64.deb
 sudo sed -i 's/\,arm64\,armhf//g' /etc/apt/sources.list.d/vscode.list
 
+## Install Google Antigravity
+bash ./scripts/latest-antigravity.sh
+
 ## Teamviewer
 # wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -O /tmp/teamviewer_amd64.deb
 # sudo dpkg -i /tmp/teamviewer_amd64.deb

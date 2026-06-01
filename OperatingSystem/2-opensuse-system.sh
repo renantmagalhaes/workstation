@@ -155,9 +155,7 @@ sudo zypper refresh
 sudo zypper install -y code
 
 ## Install Google Antigravity
-sudo zypper addrepo --gpgcheck-allow-unsigned https://us-central1-yum.pkg.dev/projects/antigravity-auto-updater-dev/antigravity-rpm antigravity-rpm
-sudo zypper refresh
-sudo zypper install -y antigravity
+bash ./scripts/latest-antigravity.sh
 
 # Create git-folder
 mkdir -p ~/GIT-REPOS/CORE
