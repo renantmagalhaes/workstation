@@ -261,6 +261,14 @@ link_config "$DOTFILES_DIR/rofi" "$HOME/.config/rofi"
 link_config "$DOTFILES_DIR/mangowm/jgmenu" "$HOME/.config/jgmenu"
 link_config "$DOTFILES_DIR/mangowm/waybar/extra/wlogout" "$HOME/.config/wlogout"
 
+echo "⚙️ Creating swappy configuration..."
+mkdir -p "$HOME/.config/swappy"
+cat <<'EOF' > "$HOME/.config/swappy/config"
+[Default]
+save_dir=$HOME/Pictures/Screenshots
+save_filename_format=Screenshot_%Y%m%d_%H%M%S.png
+EOF
+
 if [ -d "$DOTFILES_DIR/mangowm/waybar/scripts" ]; then
     chmod +x "$DOTFILES_DIR/mangowm/waybar/scripts/"*.sh
 fi
