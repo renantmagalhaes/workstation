@@ -267,6 +267,7 @@ cat <<'EOF' > "$HOME/.config/swappy/config"
 [Default]
 save_dir=$HOME/Pictures/Screenshots
 save_filename_format=Screenshot_%Y%m%d_%H%M%S.png
+early_exit=true
 EOF
 
 if [ -d "$DOTFILES_DIR/mangowm/waybar/scripts" ]; then
