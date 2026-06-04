@@ -80,10 +80,7 @@ window#waybar {
 #custom-notification,
 #pulseaudio,
 #tray,
-#custom-scroll-indicator-left,
-#custom-scroll-indicator-right,
 #custom-fullscreen,
-#custom-fullscreen-indicator,
 #custom-move_window_next_monitor,
 #custom-kill_active,
 #custom-power {
@@ -101,15 +98,58 @@ window#waybar {
 #custom-notification:hover,
 #pulseaudio:hover,
 #tray:hover,
-#custom-scroll-indicator-left:hover,
-#custom-scroll-indicator-right:hover,
 #custom-fullscreen:hover,
-#custom-fullscreen-indicator:hover,
 #custom-move_window_next_monitor:hover,
 #custom-kill_active:hover,
 #custom-power:hover {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
+}
+
+/* Blinking Keyframes - Monotone */
+@keyframes blink {
+    to {
+        background-color: @surface_container;
+        color: #ffffff;
+    }
+}
+
+@keyframes soft-blink {
+    to {
+        background-color: @surface_container;
+        color: #ffffff;
+    }
+}
+
+/* Fullscreen Indicator (blinks white/black to parent background) */
+#custom-fullscreen-indicator {
+    background-color: #ffffff;
+    color: #000000;
+    font-weight: bold;
+    padding: 0px 8px;
+    margin: 0px 4px;
+    border-radius: 4px;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Scroll Indicators (blinks mid-gray to parent background) */
+#custom-scroll-indicator-left,
+#custom-scroll-indicator-right {
+    background-color: #888888;
+    color: #000000;
+    font-weight: bold;
+    padding: 0px 6px;
+    margin: 0px 4px;
+    border-radius: 4px;
+    animation-name: soft-blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 /* Standalone Left/Center/Right Capsule Containers */

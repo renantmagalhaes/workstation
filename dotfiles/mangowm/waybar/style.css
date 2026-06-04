@@ -1,7 +1,7 @@
 /* @import "themes/catppuccin-colorfull.css"; */
 @import "themes/capsule-rice.css";
 
-#waybar.top > box.horizontal {
+#waybar.top>box.horizontal {
   border-radius: 12pt;
   margin-top: 6pt;
   /* margin: 1pt; */
@@ -50,5 +50,3 @@
   background-image: url("icons/tag-focused.svg");
 }
 */
-
-
