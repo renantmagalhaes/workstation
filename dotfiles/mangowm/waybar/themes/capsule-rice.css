@@ -70,7 +70,7 @@ window#waybar {
     background-color: @surface_container;
     border-radius: 7px;
     padding: 4px 12px;
-    margin: 5px 4px;
+    margin: 5px 4px 0px 4px;
     color: @foreground;
 }
 
@@ -162,7 +162,7 @@ window#waybar {
     background-color: @surface_container;
     border-radius: 7px;
     padding: 4px 12px;
-    margin: 5px 4px;
+    margin: 5px 4px 0px 4px;
     color: @foreground;
 }
 
@@ -180,7 +180,7 @@ window#waybar {
     background-color: @surface_container;
     border-radius: 7px;
     padding: 2px 6px;
-    margin: 5px 4px;
+    margin: 5px 4px 0px 4px;
 }
 
 #tags button {
