@@ -1,0 +1,51 @@
+@import "themes/catppuccin-colorfull.css";
+
+#waybar.top > box.horizontal {
+  border-radius: 12pt;
+  margin-top: 6pt;
+  /* margin: 1pt; */
+  padding: 2pt;
+}
+
+#tags button:nth-child(n+6) {
+  padding: 0px;
+  margin: 0px;
+  min-width: 0px;
+  min-height: 0px;
+  font-size: 0px;
+  background: transparent;
+  color: transparent;
+  border: none;
+  box-shadow: none;
+  opacity: 0;
+}
+
+#tags button label {
+  font-size: 0px;
+  color: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+#tags button {
+  min-width: 20px;
+  min-height: 20px;
+  background-image: url("icons/tag-empty.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px 10px;
+}
+
+#tags button.occupied {
+  background-image: url("icons/tag-occupied.svg");
+}
+
+#tags button.focused {
+  background-image: url("icons/tag-focused.svg");
+}
+
+#tags button.urgent {
+  background-image: url("icons/tag-focused.svg");
+}
+
+
