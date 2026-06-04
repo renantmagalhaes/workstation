@@ -152,6 +152,31 @@ window#waybar {
     animation-direction: alternate;
 }
 
+/* Window Capsule Container (Groups active-icon-window and dwl-window) */
+#window-capsule {
+    background-color: @surface_container;
+    border-radius: 7px;
+    padding: 4px 8px;
+    margin: 5px 4px 0px 4px;
+    color: @foreground;
+}
+
+#window-capsule #custom-active-icon-window,
+#window-capsule #dwl-window,
+#window-capsule #window {
+    background-color: transparent;
+    background: transparent;
+    padding: 0px 6px;
+    margin: 0px;
+}
+
+#window-capsule #custom-active-icon-window:hover,
+#window-capsule #dwl-window:hover,
+#window-capsule #window:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
 /* Standalone Left/Center/Right Capsule Containers */
 #clock,
 #battery,

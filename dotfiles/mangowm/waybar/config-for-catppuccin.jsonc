@@ -9,8 +9,7 @@
   // Choose the order of the modules
   "modules-left": [
     "dwl/tags",
-    "custom/active-icon-window",
-    "dwl/window",
+    "group/window-capsule",
     "battery",
     "battery#bat2"
   ],
@@ -32,6 +31,14 @@
     "custom/kill_active",
     "custom/power"
   ],
+  "group/window-capsule": {
+    "orientation": "horizontal",
+    "name": "window-capsule",
+    "modules": [
+      "custom/active-icon-window",
+      "dwl/window"
+    ]
+  },
   // Modules configuration
   "dwl/tags": {
     "num-tags": 9

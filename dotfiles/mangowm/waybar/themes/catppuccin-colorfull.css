@@ -518,6 +518,29 @@ label:focus {
   background-color: #181825;
 }
 
+#window-capsule {
+  background: rgba(30, 30, 46, 0.5);
+  padding: 1px 4px 1px 4px;
+  margin-top: 5px;
+  border-radius: 7px;
+}
+
+#window-capsule #custom-active-icon-window,
+#window-capsule #dwl-window,
+#window-capsule #window {
+  background: transparent;
+  background-color: transparent;
+  padding: 0px 6px;
+  margin: 0px;
+}
+
+#window-capsule #custom-active-icon-window:hover,
+#window-capsule #dwl-window:hover,
+#window-capsule #window:hover {
+  background-color: #181825;
+  border-radius: 7px;
+}
+
 #dwl-window {
   background: rgba(30, 30, 46, 0.5);
   padding: 1px 10px 1px 10px;
