@@ -217,13 +217,6 @@ window#waybar {
         min-width  0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
-#tags button.focused {
-    background-image: none;
-    color: @on_primary_fixed;
-    background-color: @color4;
-    min-width: 32px;
-}
-
 #tags button.occupied {
     background-image: none;
     background-color: @color1;
@@ -231,6 +224,13 @@ window#waybar {
 
 #tags button:hover {
     background-color: @color2;
+}
+
+#tags button.focused {
+    background-image: none;
+    color: @on_primary_fixed;
+    background-color: @color4;
+    min-width: 32px;
 }
 
 #tags button.urgent {
