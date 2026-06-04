@@ -101,6 +101,22 @@ window#waybar {
     border-radius: 4px;
 }
 
+#custom-fullscreen:hover {
+    color: #f1c40f;
+}
+
+#custom-move_window_next_monitor:hover {
+    color: #2ecc71;
+}
+
+#custom-kill_active:hover {
+    color: #ff4444;
+}
+
+#custom-power:hover {
+    color: #9b59b6;
+}
+
 /* Blinking Keyframes - Monotone */
 @keyframes blink {
     to {
