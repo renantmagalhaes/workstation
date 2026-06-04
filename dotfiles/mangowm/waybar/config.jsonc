@@ -20,19 +20,26 @@
   ],
   "modules-right": [
     "mpris",
-    "custom/weather",
-    "custom/systeminfo",
-    "custom/notification",
-    "pulseaudio",
-    "tray",
-    "custom/scroll-indicator-left",
-    "custom/scroll-indicator-right",
-    "custom/fullscreen",
-    "custom/fullscreen-indicator",
-    "custom/move_window_next_monitor",
-    "custom/kill_active",
-    "custom/power"
+    "group/status-capsule"
   ],
+  "group/status-capsule": {
+    "orientation": "horizontal",
+    "name": "status-capsule",
+    "modules": [
+      "custom/weather",
+      "custom/systeminfo",
+      "custom/notification",
+      "pulseaudio",
+      "tray",
+      "custom/scroll-indicator-left",
+      "custom/scroll-indicator-right",
+      "custom/fullscreen",
+      "custom/fullscreen-indicator",
+      "custom/move_window_next_monitor",
+      "custom/kill_active",
+      "custom/power"
+    ]
+  },
   // Modules configuration
   "dwl/tags": {
     "num-tags": 9
