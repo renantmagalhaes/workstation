@@ -19,7 +19,9 @@
   ],
   "modules-right": [
     "mpris",
-    "group/status-capsule"
+    "group/status-capsule",
+    "tray",
+    "group/sys-actions-capsule"
   ],
   "group/window-capsule": {
     "orientation": "horizontal",
@@ -36,8 +38,13 @@
       "custom/weather",
       "custom/systeminfo",
       "custom/notification",
-      "pulseaudio",
-      "tray",
+      "pulseaudio"
+    ]
+  },
+  "group/sys-actions-capsule": {
+    "orientation": "horizontal",
+    "name": "sys-actions-capsule",
+    "modules": [
       "custom/scroll-indicator-left",
       "custom/scroll-indicator-right",
       "custom/fullscreen",

@@ -58,14 +58,11 @@ window#waybar {
 }
 
 /* 
- * Unified Right Status Capsule:
- * Combines weather, pulseaudio, power, tray, etc., into a single capsule.
+ * Unified Right Status Capsules:
+ * Combines weather, pulseaudio, etc., into capsules.
  */
 #status-capsule,
-#group-status-capsule,
-.group-status-capsule,
-.status-capsule,
-.group {
+#sys-actions-capsule {
     background: @surface_container;
     background-color: @surface_container;
     border-radius: 7px;
@@ -74,12 +71,11 @@ window#waybar {
     color: @foreground;
 }
 
-/* Transparent child modules inside the unified right capsule */
+/* Transparent child modules inside the unified right capsules */
 #custom-weather,
 #custom-systeminfo,
 #custom-notification,
 #pulseaudio,
-#tray,
 #custom-fullscreen,
 #custom-move_window_next_monitor,
 #custom-kill_active,
@@ -97,7 +93,6 @@ window#waybar {
 #custom-systeminfo:hover,
 #custom-notification:hover,
 #pulseaudio:hover,
-#tray:hover,
 #custom-fullscreen:hover,
 #custom-move_window_next_monitor:hover,
 #custom-kill_active:hover,
@@ -183,7 +178,8 @@ window#waybar {
 #dwl-window,
 #window,
 #custom-active-icon-window,
-#mpris {
+#mpris,
+#tray {
     background-color: @surface_container;
     border-radius: 7px;
     padding: 4px 12px;
@@ -196,7 +192,8 @@ window#waybar {
 #dwl-window:hover,
 #window:hover,
 #custom-active-icon-window:hover,
-#mpris:hover {
+#mpris:hover,
+#tray:hover {
     background-color: rgba(255, 255, 255, 0.15);
 }
 
