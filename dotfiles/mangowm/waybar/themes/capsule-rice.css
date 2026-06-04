@@ -285,3 +285,43 @@ window#waybar {
 @keyframes blink {
     to { color: transparent; }
 }
+
+/* Ensure popups/menus/tooltips are formatted correctly */
+tooltip,
+menu,
+.menu,
+.popover,
+.dropdown,
+.popup,
+window.menu,
+window.popup {
+    background-color: #1e1e1e;
+    color: @foreground;
+    border: 1px solid #444444;
+    border-radius: 7px;
+    padding: 6px;
+    margin: 4px;
+}
+
+tooltip label,
+menu label,
+.menu label,
+menuitem label {
+    color: @foreground;
+    padding: 4px 8px;
+    font-size: 13px;
+}
+
+menuitem,
+menu menuitem {
+    background: transparent;
+    padding: 4px 12px;
+    margin: 2px;
+    border-radius: 4px;
+    color: @foreground;
+}
+
+menuitem:hover,
+menu menuitem:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
