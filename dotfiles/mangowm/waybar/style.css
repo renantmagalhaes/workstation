@@ -1,4 +1,5 @@
-@import "themes/catppuccin-colorfull.css";
+/* @import "themes/catppuccin-colorfull.css"; */
+@import "themes/capsule-rice.css";
 
 #waybar.top > box.horizontal {
   border-radius: 12pt;
@@ -27,6 +28,7 @@
   margin: 0;
 }
 
+/* Commented out for the Capsule Pill theme icons to show correctly:
 #tags button {
   min-width: 20px;
   min-height: 20px;
@@ -47,5 +49,6 @@
 #tags button.urgent {
   background-image: url("icons/tag-focused.svg");
 }
+*/
 
 

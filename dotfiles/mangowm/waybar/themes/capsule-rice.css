@@ -1,0 +1,194 @@
+/*
+ * Monotone Capsule Style for Waybar
+ * A cohesive layout with unified containers, white text, and a clean tag switcher.
+ */
+
+/* Color definitions - Monotone Dark & White */
+@define-color background rgba(17, 17, 17, 0.5);
+@define-color foreground #ffffff;
+@define-color surface_container rgba(30, 30, 30, 0.75); /* Unified container background */
+@define-color surface_container_highest #444444; /* Inactive tag dot */
+
+/* Accent / Active colors - Monotone */
+@define-color color0  #222222;
+@define-color color1  #666666; /* Occupied tag dot */
+@define-color color2  #555555;
+@define-color color3  #282828;
+@define-color color4  #ffffff; /* Active/Focused tag button (White) */
+@define-color color5  #aaaaaa;
+@define-color color6  #cccccc;
+@define-color color7  #ffffff;
+@define-color color8  #333333;
+
+@define-color on_primary #ffffff;
+@define-color on_primary_fixed #000000;
+@define-color tertiary_fixed_dim #ffffff;
+@define-color on_surface #ffffff;
+@define-color error #ff4444;
+@define-color on_error #ffffff;
+@define-color success #44ff44;
+
+/* Base layout & typography (14px italic) */
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "CaskaydiaCove Nerd Font", "Font Awesome 6 Free";
+    font-weight: 600;
+    font-style: italic;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    min-height: 1px;
+}
+
+window#waybar {
+    background-color: transparent;
+    color: @foreground;
+    border-radius: 12px;
+}
+
+/* 
+ * Unified Right Capsule Container:
+ * Combines all status indicators and controls on the right into a single capsule.
+ */
+.modules-right {
+    background-color: @surface_container;
+    border-radius: 7px;
+    padding: 4px 12px;
+    margin: 5px 4px;
+    color: @foreground;
+}
+
+/* Transparent child modules inside the unified right capsule */
+#mpris,
+#custom-weather,
+#custom-systeminfo,
+#custom-notification,
+#pulseaudio,
+#tray,
+#custom-scroll-indicator-left,
+#custom-scroll-indicator-right,
+#custom-fullscreen,
+#custom-fullscreen-indicator,
+#custom-move_window_next_monitor,
+#custom-kill_active,
+#custom-power {
+    background-color: transparent;
+    background: transparent;
+    border-radius: 0px;
+    padding: 0px 8px;
+    margin: 0px;
+    color: @foreground;
+}
+
+/* Hover highlights for right-side child modules */
+#mpris:hover,
+#custom-weather:hover,
+#custom-systeminfo:hover,
+#custom-notification:hover,
+#pulseaudio:hover,
+#tray:hover,
+#custom-scroll-indicator-left:hover,
+#custom-scroll-indicator-right:hover,
+#custom-fullscreen:hover,
+#custom-fullscreen-indicator:hover,
+#custom-move_window_next_monitor:hover,
+#custom-kill_active:hover,
+#custom-power:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+/* Standalone Left/Center Capsule Containers */
+#clock,
+#battery,
+#dwl-window,
+#window,
+#custom-active-icon-window {
+    background-color: @surface_container;
+    border-radius: 7px;
+    padding: 4px 12px;
+    margin: 5px 4px;
+    color: @foreground;
+}
+
+#clock:hover,
+#battery:hover,
+#dwl-window:hover,
+#window:hover,
+#custom-active-icon-window:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* DWL tags styled as pill workspaces */
+#tags {
+    background-color: @surface_container;
+    border-radius: 7px;
+    padding: 2px 6px;
+    margin: 5px 4px;
+}
+
+#tags button {
+    min-width: 10px;
+    min-height: 10px;
+    margin: 6px 4px;
+    background-image: none;
+    background-color: @surface_container_highest;
+    border-radius: 7px;
+    transition:
+        background 0.2s cubic-bezier(0.4, 0.0, 0.2, 1),
+        min-width  0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+#tags button.focused {
+    background-image: none;
+    color: @on_primary_fixed;
+    background-color: @color4;
+    min-width: 32px;
+}
+
+#tags button.occupied {
+    background-image: none;
+    background-color: @color1;
+}
+
+#tags button:hover {
+    background-color: @color2;
+}
+
+#tags button.urgent {
+    background-image: none;
+    background-color: @error;
+}
+
+/* Specific state updates */
+#pulseaudio.muted {
+    color: @color5;
+}
+
+#network.disconnected {
+    color: @error;
+}
+
+/* Battery state styles */
+#battery.charging {
+    background-color: @color1;
+}
+
+#battery.warning {
+    background-color: @error;
+    color: @on_error;
+}
+
+#battery.critical {
+    background-color: @error;
+    color: @on_error;
+}
+
+#battery.critical:not(.charging) {
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+    to { color: transparent; }
+}

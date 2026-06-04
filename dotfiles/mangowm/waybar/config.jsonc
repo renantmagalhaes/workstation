@@ -6,6 +6,7 @@
   "spacing": 4, // Gaps between modules (4px)
   "margin-left": 100,
   "margin-right": 100,
+  "reload_style_on_change": true,
   // Choose the order of the modules
   "modules-left": [
     "dwl/tags",
