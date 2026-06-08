@@ -113,8 +113,8 @@
     "spacing": 10
   },
   "clock": {
-    "format": "{:%Y-%m-%d | %H:%M}  ",
-    "format-alt": "{:%A, %B %d, %Y (%R)}  ",
+    "format": "{:%Y-%m-%d | %H:%M} ",
+    "format-alt": "{:%A, %B %d, %Y (%R)} ",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "calendar": {
       "mode": "year",
@@ -223,7 +223,7 @@
     "format": "{volume}% {icon}",
     "format-bluetooth": "{volume}% {icon} ",
     "format-bluetooth-muted": "  {icon} ",
-    "format-muted": " ",
+    "format-muted": "",
     "format-source": " {volume}% ",
     "format-source-muted": "",
     "format-icons": {
@@ -236,7 +236,7 @@
       "default": [
         "",
         "",
-        " "
+        ""
       ]
     },
     "on-click": "pavucontrol",
@@ -261,7 +261,7 @@
     }
   },
   "custom/power": {
-    "format": " ⏻ ",
+    "format": "⏻",
     "tooltip": false,
     "on-click": "~/.dotfiles/mangowm/waybar/scripts/wlogout.sh",
     "on-click-right": "~/.dotfiles/rofi/scripts/launchers/type-7/launcher.sh"
