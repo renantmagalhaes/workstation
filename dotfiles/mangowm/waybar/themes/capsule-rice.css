@@ -42,9 +42,52 @@
 }
 
 window#waybar {
+    background: transparent;
     background-color: transparent;
     color: @foreground;
     border-radius: 12px;
+    border: none;
+    box-shadow: none;
+}
+
+#waybar.top > box,
+.modules-left,
+.modules-center,
+.modules-right,
+.modules-left > widget,
+.modules-center > widget,
+.modules-right > widget {
+    background: transparent;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+button {
+    background: transparent;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+/* Force all child elements inside capsule modules to have transparent backgrounds to prevent square edge leakage */
+#clock *,
+#battery *,
+#dwl-window *,
+#window *,
+#custom-active-icon-window *,
+#mpris *,
+#tray *,
+#custom-notification *,
+#pulseaudio *,
+#status-capsule *,
+#sys-actions-capsule *,
+#window-capsule * {
+    background: transparent;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
 }
 
 /* 

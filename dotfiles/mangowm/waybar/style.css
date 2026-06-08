@@ -2,6 +2,9 @@
 @import "themes/capsule-rice.css";
 
 #waybar.top>box.horizontal {
+  background: transparent;
+  background-color: transparent;
+  box-shadow: none;
   border-radius: 12pt;
   margin-top: 6pt;
   /* margin: 1pt; */
