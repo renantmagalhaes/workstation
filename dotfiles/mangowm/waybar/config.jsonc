@@ -20,6 +20,8 @@
   "modules-right": [
     "mpris",
     "group/status-capsule",
+    "custom/notification",
+    "pulseaudio",
     "tray",
     "group/sys-actions-capsule"
   ],
@@ -36,9 +38,7 @@
     "name": "status-capsule",
     "modules": [
       "custom/weather",
-      "custom/systeminfo",
-      "custom/notification",
-      "pulseaudio"
+      "custom/systeminfo"
     ]
   },
   "group/sys-actions-capsule": {

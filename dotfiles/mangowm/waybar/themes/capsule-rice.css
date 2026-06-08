@@ -74,8 +74,6 @@ window#waybar {
 /* Transparent child modules inside the unified right capsules */
 #custom-weather,
 #custom-systeminfo,
-#custom-notification,
-#pulseaudio,
 #custom-fullscreen,
 #custom-move_window_next_monitor,
 #custom-kill_active,
@@ -91,8 +89,6 @@ window#waybar {
 /* Hover highlights for right-side child modules */
 #custom-weather:hover,
 #custom-systeminfo:hover,
-#custom-notification:hover,
-#pulseaudio:hover,
 #custom-fullscreen:hover,
 #custom-move_window_next_monitor:hover,
 #custom-kill_active:hover,
@@ -195,7 +191,9 @@ window#waybar {
 #window,
 #custom-active-icon-window,
 #mpris,
-#tray {
+#tray,
+#custom-notification,
+#pulseaudio {
     background-color: @surface_container;
     border-radius: 7px;
     padding: 4px 12px;
@@ -209,7 +207,9 @@ window#waybar {
 #window:hover,
 #custom-active-icon-window:hover,
 #mpris:hover,
-#tray:hover {
+#tray:hover,
+#custom-notification:hover,
+#pulseaudio:hover {
     background-color: rgba(255, 255, 255, 0.15);
 }
 
