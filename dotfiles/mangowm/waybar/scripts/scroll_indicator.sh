@@ -2,31 +2,31 @@
 
 action=$1
 
+if [ -z "$MANGO_INSTANCE_SIGNATURE" ] || [ ! -S "$MANGO_INSTANCE_SIGNATURE" ]; then
+    mango_pid=$(pgrep -u "$USER" -x mango | head -n 1)
+    if [ -n "$mango_pid" ]; then
+        export MANGO_INSTANCE_SIGNATURE="/run/user/$(id -u)/mango-${mango_pid}.sock"
+    fi
+fi
+
 check_scroll() {
-    eval "$(mmsg -g | awk '
-      $2 == "selmon" && $3 == "1" { active_mon = $1 }
-      active_mon && $1 == active_mon {
-        if ($2 == "tag") {
-          if ($4 % 2 == 1) {
-            active_tag_clients += $5
-          }
-        }
-        if ($2 == "width") {
-          client_width = $3
-        }
-        if ($2 == "layout") {
-          layout_symbol = $3
-        }
-      }
-      END {
-        if (active_mon) {
-          print "active_monitor=\"" active_mon "\""
-          print "active_tag_clients=" (active_tag_clients ? active_tag_clients : 0)
-          print "client_width=" (client_width ? client_width : 0)
-          print "layout_symbol=\"" layout_symbol "\""
-        }
-      }
-    ')"
+    monitors_json=$(mmsg get all-monitors 2>/dev/null)
+    if [ -n "$monitors_json" ] && [ "$monitors_json" != "null" ]; then
+        active_monitor=$(echo "$monitors_json" | jq -r '.monitors[] | select(.active) | .name')
+        layout_symbol=$(echo "$monitors_json" | jq -r '.monitors[] | select(.active) | .layout_symbol')
+        active_tag_clients=$(echo "$monitors_json" | jq -r '.monitors[] | select(.active) | .tags[] | select(.is_active) | .client_count // 0')
+    else
+        active_monitor=""
+        layout_symbol=""
+        active_tag_clients=0
+    fi
+
+    client_json=$(mmsg get focusing-client 2>/dev/null)
+    if [ -n "$client_json" ] && [ "$client_json" != "null" ]; then
+        client_width=$(echo "$client_json" | jq -r '.width // 0')
+    else
+        client_width=0
+    fi
 
     if [ -z "$active_monitor" ] || [ "$layout_symbol" != "S" ]; then
         return 1
@@ -36,7 +36,7 @@ check_scroll() {
         return 0
     fi
 
-    if [ "${active_tag_clients:-0}" -eq 2 ] && [ -n "$client_width" ]; then
+    if [ "${active_tag_clients:-0}" -eq 2 ] && [ "$client_width" -gt 0 ]; then
         mon_width=$(wlr-randr | awk -v mon="$active_monitor" '
           $0 ~ "^" mon { flag = 1; next }
           /^[A-Z]/ { flag = 0 }
@@ -72,7 +72,7 @@ elif [ "$action" = "right" ]; then
         echo ""
     fi
 elif [ "$action" = "click_left" ]; then
-    mmsg -d focusstack,prev
+    mmsg dispatch focusstack,prev
 elif [ "$action" = "click_right" ]; then
-    mmsg -d focusstack,next
+    mmsg dispatch focusstack,next
 fi

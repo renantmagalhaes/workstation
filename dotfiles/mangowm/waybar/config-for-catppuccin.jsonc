@@ -257,7 +257,7 @@
     "format": "{}",
     "signal": 10,
     "tooltip-format": "Toggle fullscreen",
-    "on-click": "mmsg -d switch_proportion_preset"
+    "on-click": "env MANGO_INSTANCE_SIGNATURE=/run/user/1000/mango-$(pgrep -x mango).sock mmsg dispatch switch_proportion_preset"
   },
   "custom/fullscreen-indicator": {
     "exec": "~/.dotfiles/mangowm/waybar/scripts/fullscreen_indicator.sh",
@@ -265,7 +265,7 @@
     "format": "{}",
     "signal": 10,
     "tooltip-format": "Fullscreen mode active",
-    "on-click": "mmsg -d switch_proportion_preset"
+    "on-click": "env MANGO_INSTANCE_SIGNATURE=/run/user/1000/mango-$(pgrep -x mango).sock mmsg dispatch switch_proportion_preset"
   },
   "custom/move_window_next_monitor": {
     "format": "",
@@ -276,7 +276,7 @@
   "custom/kill_active": {
     "format": "󰅙",
     "tooltip-format": "Kill active window",
-    "on-click": "mmsg -d killclient"
+    "on-click": "env MANGO_INSTANCE_SIGNATURE=/run/user/1000/mango-$(pgrep -x mango).sock mmsg dispatch killclient"
   },
   "custom/scroll-indicator-left": {
     "exec": "~/.dotfiles/mangowm/waybar/scripts/scroll_indicator.sh left",

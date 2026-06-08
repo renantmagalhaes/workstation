@@ -1,14 +1,15 @@
 #!/bin/bash
 
-# Get the fullscreen state of the active monitor in MangoWM
-active_monitor=$(mmsg -g | awk '$2=="selmon" && $3=="1" {print $1}')
-if [ -n "$active_monitor" ]; then
-    fullscreen_state=$(mmsg -g | awk -v mon="$active_monitor" '$1==mon && $2=="fullscreen" {print $3}')
-else
-    fullscreen_state="0"
+if [ -z "$MANGO_INSTANCE_SIGNATURE" ] || [ ! -S "$MANGO_INSTANCE_SIGNATURE" ]; then
+    mango_pid=$(pgrep -u "$USER" -x mango | head -n 1)
+    if [ -n "$mango_pid" ]; then
+        export MANGO_INSTANCE_SIGNATURE="/run/user/$(id -u)/mango-${mango_pid}.sock"
+    fi
 fi
 
-if [ "$fullscreen_state" = "1" ]; then
+fullscreen_state=$(mmsg get focusing-client | jq -r '.is_fullscreen // "false"')
+
+if [ "$fullscreen_state" = "true" ]; then
     # Window is fullscreen, show exit fullscreen icon
     echo ""
 else

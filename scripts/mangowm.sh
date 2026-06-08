@@ -74,6 +74,7 @@ if [ "$OS" = "opensuse" ]; then
         libgbm-devel \
         glslang-devel \
         vulkan-devel \
+        cJSON-devel \
         meson \
         ninja \
         git \
@@ -144,6 +145,7 @@ elif [ "$OS" = "debian" ]; then
         libgbm-dev \
         glslang-tools \
         libvulkan-dev \
+        libcjson-dev \
         meson \
         ninja-build \
         git \
@@ -185,10 +187,11 @@ else
         cd wlroots
     fi
     if [ -d "build" ]; then
-        meson setup build -Dprefix=/usr --wipe || (sudo rm -rf build && meson setup build -Dprefix=/usr)
-    else
-        meson setup build -Dprefix=/usr
+        echo "🧹 Cleaning previous build directory..."
+        sudo rm -rf build
     fi
+    meson setup build -Dprefix=/usr
+    ninja -C build
     sudo ninja -C build install
 fi
 
@@ -207,10 +210,11 @@ else
         cd scenefx
     fi
     if [ -d "build" ]; then
-        meson setup build -Dprefix=/usr --wipe || (sudo rm -rf build && meson setup build -Dprefix=/usr)
-    else
-        meson setup build -Dprefix=/usr
+        echo "🧹 Cleaning previous build directory..."
+        sudo rm -rf build
     fi
+    meson setup build -Dprefix=/usr
+    ninja -C build
     sudo ninja -C build install
 fi
 
@@ -229,10 +233,11 @@ else
         cd mango
     fi
     if [ -d "build" ]; then
-        meson setup build -Dprefix=/usr --wipe || (sudo rm -rf build && meson setup build -Dprefix=/usr)
-    else
-        meson setup build -Dprefix=/usr
+        echo "🧹 Cleaning previous build directory..."
+        sudo rm -rf build
     fi
+    meson setup build -Dprefix=/usr
+    ninja -C build
     sudo ninja -C build install
 fi
 

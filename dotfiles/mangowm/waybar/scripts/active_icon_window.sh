@@ -3,14 +3,21 @@
 # Dependencies: mmsg, awk
 
 # Fetch active monitor and its focused window appid/title
-active_monitor=$(mmsg -g | awk '$2=="selmon" && $3=="1" {print $1}')
-if [[ -z "$active_monitor" ]]; then
-	echo ""
-	exit 0
+if [ -z "$MANGO_INSTANCE_SIGNATURE" ] || [ ! -S "$MANGO_INSTANCE_SIGNATURE" ]; then
+    mango_pid=$(pgrep -u "$USER" -x mango | head -n 1)
+    if [ -n "$mango_pid" ]; then
+        export MANGO_INSTANCE_SIGNATURE="/run/user/$(id -u)/mango-${mango_pid}.sock"
+    fi
 fi
 
-title=$(mmsg -g | awk -v mon="$active_monitor" '$1==mon && $2=="title" { $1=""; $2=""; print substr($0, 3) }')
-appid=$(mmsg -g | awk -v mon="$active_monitor" '$1==mon && $2=="appid" { $1=""; $2=""; print substr($0, 3) }')
+client_json=$(mmsg get focusing-client 2>/dev/null)
+if [ -n "$client_json" ] && [ "$client_json" != "null" ]; then
+    title=$(echo "$client_json" | jq -r '.title // ""')
+    appid=$(echo "$client_json" | jq -r '.appid // ""')
+else
+    title=""
+    appid=""
+fi
 
 if [[ -z "$title" && -z "$appid" ]]; then
 	echo ""

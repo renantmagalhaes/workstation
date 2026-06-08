@@ -14,7 +14,7 @@ WM Options,^checkout(restart-menu),xfce4-systray
 Extra Options,^checkout(extra-menu),list-add
 
 ^sep()
-Find Window Class,bash -c "active_mon=\$(mmsg -g | awk '\$2==\"selmon\" && \$3==\"1\"{print \$1}') && CLASS=\$(mmsg -g | awk -v mon=\"\$active_mon\" '\$1==mon && \$2==\"appid\"{print \$3}') && if [ -n \"\$CLASS\" ]; then echo -n \"\$CLASS\" | wl-copy && notify-send -i window_list 'Find Window Class' \"Window class \$CLASS copied to clipboard\"; else notify-send -i window_list 'Find Window Class' 'No focused window found'; fi",window_list
+Find Window Class,bash -c "CLASS=\$(env MANGO_INSTANCE_SIGNATURE=/run/user/\$(id -u)/mango-\$(pgrep -x mango).sock mmsg get focusing-client | jq -r '.appid // empty') && if [ -n \"\$CLASS\" ]; then echo -n \"\$CLASS\" | wl-copy && notify-send -i window_list 'Find Window Class' \"Window class \$CLASS copied to clipboard\"; else notify-send -i window_list 'Find Window Class' 'No focused window found'; fi",window_list
 Find Window Class (Click),~/.config/mango/scripts/get-window-class-by-click.py,window_list
 Change Wallpaper,waypaper,nitrogen
 Appearance,lxappearance,mtpaint
@@ -27,7 +27,7 @@ Exit,wlogout,system-shutdown
 
 ^tag(restart-menu)
 Restart Waybar,killall waybar && waybar -c ~/.config/waybar/config.jsonc -s ~/.config/waybar/style.css & waybar -c ~/.config/waybar/trigger_config.jsonc -s ~/.config/waybar/trigger_style.css &,xfce4-systray
-Reload MangoWM,mmsg -d reload_config && notify-send -i preferences-desktop "MangoWM" "Successfully reloaded MangoWM",terminal
+Reload MangoWM,env MANGO_INSTANCE_SIGNATURE=/run/user/\$(id -u)/mango-\$(pgrep -x mango).sock mmsg dispatch reload_config && notify-send -i preferences-desktop "MangoWM" "Successfully reloaded MangoWM",terminal
 Restart Mako,killall mako && mako &,notification-new
 
 ^tag(streaming-menu)

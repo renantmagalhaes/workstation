@@ -11,21 +11,28 @@ if ! pgrep -f "kitty-scratch" > /dev/null; then
 fi
 
 # Get current focused monitor name
-mon=$(mmsg -g | awk '$2 == "selmon" && $3 == "1" {print $1; exit}')
+if [ -z "$MANGO_INSTANCE_SIGNATURE" ] || [ ! -S "$MANGO_INSTANCE_SIGNATURE" ]; then
+    mango_pid=$(pgrep -u "$USER" -x mango | head -n 1)
+    if [ -n "$mango_pid" ]; then
+        export MANGO_INSTANCE_SIGNATURE="/run/user/$(id -u)/mango-${mango_pid}.sock"
+    fi
+fi
+
+mon=$(mmsg get all-monitors | jq -r '.monitors[] | select(.active) | .name')
 if [ -z "$mon" ]; then
-    mon=$(mmsg -O | head -n 1)
+    mon=$(mmsg get all-monitors | jq -r '.monitors[0].name')
 fi
 
 # Find out if kitty-scratch is currently focused on the active monitor
-focused_appid=$(mmsg -g | awk -v m="$mon" '$1==m && $2=="appid" {print $3; exit}')
+focused_appid=$(mmsg get focusing-client | jq -r '.appid // empty')
 
 if [ "$focused_appid" = "kitty-scratch" ]; then
     # It is currently focused. Close/kill it (will trigger native zoom-out collapse animation)
-    mmsg -s -d killclient
+    mmsg dispatch killclient
 else
     # It is running but unfocused. Focus it instantly (no animation), then kill it (collapse animation)
-    mmsg -s -d setoption,animations,0
-    mmsg -s -d toggle_named_scratchpad,kitty-scratch,none,"$LAUNCH_CMD"
-    mmsg -s -d setoption,animations,1
-    mmsg -s -d killclient
+    mmsg dispatch setoption,animations,0
+    mmsg dispatch toggle_named_scratchpad,kitty-scratch,none,"$LAUNCH_CMD"
+    mmsg dispatch setoption,animations,1
+    mmsg dispatch killclient
 fi

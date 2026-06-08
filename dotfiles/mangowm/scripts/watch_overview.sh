@@ -2,19 +2,26 @@
 
 declare -A initial_layouts
 
-for mon in $(mmsg -O); do
-    initial_layouts["$mon"]=$(mmsg -g | awk -v m="$mon" '$1 == m && $2 == "layout" {print $3; exit}')
+if [ -z "$MANGO_INSTANCE_SIGNATURE" ] || [ ! -S "$MANGO_INSTANCE_SIGNATURE" ]; then
+    mango_pid=$(pgrep -u "$USER" -x mango | head -n 1)
+    if [ -n "$mango_pid" ]; then
+        export MANGO_INSTANCE_SIGNATURE="/run/user/$(id -u)/mango-${mango_pid}.sock"
+    fi
+fi
+
+for mon in $(mmsg get all-monitors | jq -r '.monitors[].name'); do
+    initial_layouts["$mon"]=$(mmsg get all-monitors | jq -r --arg m "$mon" '.monitors[] | select(.name == $m) | .layout_symbol')
 done
 
 while true; do
     sleep 0.1
-    mode=$(mmsg -g -b | awk '$2 == "keymode" {print $3; exit}')
+    mode=$(mmsg get keymode | jq -r '.keymode')
     if [ "$mode" != "overview" ]; then
         exit 0
     fi
 
-    for mon in $(mmsg -O); do
-        curr_layout=$(mmsg -g | awk -v m="$mon" '$1 == m && $2 == "layout" {print $3; exit}')
+    for mon in $(mmsg get all-monitors | jq -r '.monitors[].name'); do
+        curr_layout=$(mmsg get all-monitors | jq -r --arg m "$mon" '.monitors[] | select(.name == $m) | .layout_symbol')
         
         layout_changed=false
         if [ "${initial_layouts["$mon"]}" = "󰃇" ] && [ "$curr_layout" != "󰃇" ]; then
@@ -22,31 +29,31 @@ while true; do
         fi
         if [ "$layout_changed" = true ]; then
             # A window was selected. Get the current active monitor.
-            current_mon=$(mmsg -g | awk '$2 == "selmon" && $3 == "1" {print $1}')
+            current_mon=$(mmsg get all-monitors | jq -r '.monitors[] | select(.active) | .name')
             
             # Get the active tag of the selected window's monitor
-            selected_tag=$(mmsg -g -t | awk -v m="$current_mon" '$1 == m && $2 == "tag" && $4 == "1" {print $3; exit}')
+            selected_tag=$(mmsg get all-monitors | jq -r '.monitors[] | select(.active) | .active_tags[0]')
             
             # Disable overview on all monitors and synchronize their active tag
-            for m in $(mmsg -O); do
-                layout=$(mmsg -g | awk -v mon="$m" '$1 == mon && $2 == "layout" {print $3; exit}')
+            for m in $(mmsg get all-monitors | jq -r '.monitors[].name'); do
+                layout=$(mmsg get all-monitors | jq -r --arg mon "$m" '.monitors[] | select(.name == $mon) | .layout_symbol')
                 if [ "$layout" = "󰃇" ]; then
-                    mmsg -d focusmon,"$m"
-                    mmsg -d toggleoverview
+                    mmsg dispatch focusmon,"$m"
+                    mmsg dispatch toggleoverview
                 fi
                 
                 if [ "$m" != "$current_mon" ] && [ -n "$selected_tag" ]; then
-                    mmsg -d focusmon,"$m"
-                    mmsg -d view,"$selected_tag",1
+                    mmsg dispatch focusmon,"$m"
+                    mmsg dispatch view,"$selected_tag",1
                 fi
             done
             
             # Focus back on the monitor where the window was selected
             if [ -n "$current_mon" ]; then
-                mmsg -d focusmon,"$current_mon"
+                mmsg dispatch focusmon,"$current_mon"
             fi
             
-            mmsg -d setkeymode,default
+            mmsg dispatch setkeymode,default
             exit 0
         fi
     done

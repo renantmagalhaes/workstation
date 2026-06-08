@@ -51,31 +51,21 @@ def find_mouse_device():
     return None, None
 
 def get_focused_window_info():
-    """Get active monitor's focused window info from mmsg -g"""
+    """Get active monitor's focused window info from mmsg"""
     try:
-        out = subprocess.check_output(["mmsg", "-g"], text=True)
-        active_mon = None
-        for line in out.splitlines():
-            parts = line.strip().split()
-            if len(parts) >= 3 and parts[1] == "selmon" and parts[2] == "1":
-                active_mon = parts[0]
-                break
-        
-        if not active_mon:
+        import json
+        import os
+        if "MANGO_INSTANCE_SIGNATURE" not in os.environ or not os.path.exists(os.environ["MANGO_INSTANCE_SIGNATURE"]):
+            try:
+                mango_pid = subprocess.check_output(["pgrep", "-u", os.environ.get("USER", ""), "-x", "mango"], text=True).strip().split()[0]
+                os.environ["MANGO_INSTANCE_SIGNATURE"] = f"/run/user/{os.getuid()}/mango-{mango_pid}.sock"
+            except Exception:
+                pass
+        out = subprocess.check_output(["mmsg", "get", "focusing-client"], text=True)
+        data = json.loads(out)
+        if not data or data == "null" or not isinstance(data, dict):
             return None, None
-
-        appid = None
-        title = None
-        for line in out.splitlines():
-            parts = line.strip().split(maxsplit=2)
-            if len(parts) < 3 or parts[0] != active_mon:
-                continue
-            field, val = parts[1], parts[2]
-            if field == "appid":
-                appid = val
-            elif field == "title":
-                title = val
-        return appid, title
+        return data.get("appid"), data.get("title")
     except Exception as e:
         print(f"Error getting window info: {e}", file=sys.stderr)
         return None, None

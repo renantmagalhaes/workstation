@@ -1,27 +1,40 @@
 #!/bin/bash
 
-# Get all active monitor information from mmsg -g
-eval "$(mmsg -g | awk '
-  $2 == "selmon" && $3 == "1" { active_mon = $1 }
-  active_mon && $1 == active_mon {
-    if ($2 == "tag") {
-      if ($4 % 2 == 1) {
-        active_tag_clients += $5
-      }
-    }
-    if ($2 == "fullscreen") print "fullscreen_state=" $3
-    if ($2 == "floating") print "floating_state=" $3
-    if ($2 == "width") print "client_width=" $3
-    if ($2 == "height") print "client_height=" $3
-    if ($2 == "layout") print "layout_symbol=\"" $3 "\""
-  }
-  END {
-    if (active_mon) {
-      print "active_monitor=\"" active_mon "\""
-      print "active_tag_clients=" (active_tag_clients ? active_tag_clients : 0)
-    }
-  }
-')"
+if [ -z "$MANGO_INSTANCE_SIGNATURE" ] || [ ! -S "$MANGO_INSTANCE_SIGNATURE" ]; then
+    mango_pid=$(pgrep -u "$USER" -x mango | head -n 1)
+    if [ -n "$mango_pid" ]; then
+        export MANGO_INSTANCE_SIGNATURE="/run/user/$(id -u)/mango-${mango_pid}.sock"
+    fi
+fi
+
+# Get active monitor details using the new mmsg JSON queries
+client_json=$(mmsg get focusing-client 2>/dev/null)
+if [ -n "$client_json" ] && [ "$client_json" != "null" ]; then
+    fullscreen_state=$(echo "$client_json" | jq -r '.is_fullscreen // false')
+    floating_state=$(echo "$client_json" | jq -r '.is_floating // false')
+    client_width=$(echo "$client_json" | jq -r '.width // 0')
+    client_height=$(echo "$client_json" | jq -r '.height // 0')
+else
+    fullscreen_state="false"
+    floating_state="false"
+    client_width=0
+    client_height=0
+fi
+
+monitors_json=$(mmsg get all-monitors 2>/dev/null)
+if [ -n "$monitors_json" ] && [ "$monitors_json" != "null" ]; then
+    active_monitor=$(echo "$monitors_json" | jq -r '.monitors[] | select(.active) | .name')
+    layout_symbol=$(echo "$monitors_json" | jq -r '.monitors[] | select(.active) | .layout_symbol')
+    active_tag_clients=$(echo "$monitors_json" | jq -r '.monitors[] | select(.active) | .tags[] | select(.is_active) | .client_count // 0')
+else
+    active_monitor=""
+    layout_symbol=""
+    active_tag_clients=0
+fi
+
+# Convert true/false to 1/0 for existing compatibility
+if [ "$fullscreen_state" = "true" ]; then fullscreen_state="1"; else fullscreen_state="0"; fi
+if [ "$floating_state" = "true" ]; then floating_state="1"; else floating_state="0"; fi
 
 show_indicator=0
 
