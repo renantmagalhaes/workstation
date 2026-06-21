@@ -23,7 +23,8 @@
     "custom/notification",
     "pulseaudio",
     "tray",
-    "group/sys-actions-capsule"
+    "group/sys-actions-capsule",
+    "custom/power"
   ],
   "group/window-capsule": {
     "orientation": "horizontal",
@@ -50,8 +51,7 @@
       "custom/fullscreen",
       "custom/fullscreen-indicator",
       "custom/move_window_next_monitor",
-      "custom/kill_active",
-      "custom/power"
+      "custom/kill_active"
     ]
   },
   // Modules configuration
@@ -247,6 +247,7 @@
   "mpris": {
     "format": "{player_icon} {artist} - {title}",
     "format-paused": "{status_icon} {artist} - {title}",
+    "format-stopped": "",
     "tooltip-format": "{player} ({status})\n{artist} - {title}\n\nLeft-Click:   Play / Pause\nMiddle-Click: Previous Track\nRight-Click:  Next Track",
     "title-len": 25,
     "artist-len": 25,

@@ -119,8 +119,7 @@ button {
 #custom-systeminfo,
 #custom-fullscreen,
 #custom-move_window_next_monitor,
-#custom-kill_active,
-#custom-power {
+#custom-kill_active {
     background-color: transparent;
     background: transparent;
     border-radius: 0px;
@@ -134,8 +133,7 @@ button {
 #custom-systeminfo:hover,
 #custom-fullscreen:hover,
 #custom-move_window_next_monitor:hover,
-#custom-kill_active:hover,
-#custom-power:hover {
+#custom-kill_active:hover {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
 }
@@ -233,10 +231,10 @@ button {
 #dwl-window,
 #window,
 #custom-active-icon-window,
-#mpris,
 #tray,
 #custom-notification,
-#pulseaudio {
+#pulseaudio,
+#custom-power {
     background-color: @surface_container;
     border-radius: 7px;
     padding: 4px 12px;
@@ -249,10 +247,34 @@ button {
 #dwl-window:hover,
 #window:hover,
 #custom-active-icon-window:hover,
-#mpris:hover,
 #tray:hover,
 #custom-notification:hover,
-#pulseaudio:hover {
+#pulseaudio:hover,
+#custom-power:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* MPRIS Standalone Capsule (Only visible when active/playing/paused) */
+#mpris {
+    background-color: transparent;
+    background: transparent;
+    border-radius: 0px;
+    padding: 0px;
+    margin: 0px;
+    color: transparent;
+}
+
+#mpris.playing,
+#mpris.paused {
+    background-color: @surface_container;
+    border-radius: 7px;
+    padding: 4px 12px;
+    margin: 5px 4px 0px 4px;
+    color: @foreground;
+}
+
+#mpris.playing:hover,
+#mpris.paused:hover {
     background-color: rgba(255, 255, 255, 0.15);
 }
 
