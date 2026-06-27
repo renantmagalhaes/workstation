@@ -29,6 +29,7 @@ hl.bind(mainMod .. " + T",         hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + ALT + escape", hl.dsp.exit())
 hl.bind(mainMod .. " + L",            hl.dsp.exec_cmd("~/.dotfiles/hyprland/hypr/scripts/lock.sh"))
 hl.bind("CTRL + SUPER + C",           hl.dsp.exec_cmd("~/.dotfiles/utils/inzone_reset_usb_pkexec.sh"))
+hl.bind(mainMod .. " + Insert",       hl.dsp.exec_cmd("~/.config/hypr/scripts/dead-keys/dead-keys.sh"))
 
 -----------------------
 ---- SCREENSHOT ----
