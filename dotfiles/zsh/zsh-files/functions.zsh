@@ -422,6 +422,50 @@ git-optimize-repo() {
 # A multi-purpose cd command with a powerful fzf-based menu.
 # _CD_ACTIVE guards against chpwd hooks re-entering this function (e.g. enhancd).
 typeset -g _CD_ACTIVE=0
+typeset -g _CD_SCORE_FILE="${HOME}/.local/share/zsh/cd_scores.db"
+
+# Initialize the score database if it doesn't exist
+_cd_init_scores() {
+    local score_dir="${_CD_SCORE_FILE%/*}"
+    [[ ! -d "$score_dir" ]] && mkdir -p "$score_dir"
+    [[ ! -f "$_CD_SCORE_FILE" ]] && touch "$_CD_SCORE_FILE"
+}
+
+# Record a directory selection with a score increment
+_cd_record_selection() {
+    local target_dir="$1"
+    _cd_init_scores
+    
+    # Use awk to safely handle special characters in paths
+    local temp_file="${_CD_SCORE_FILE}.tmp"
+    awk -v dir="$target_dir" -F: '{
+        if ($1 == dir) {
+            print dir":"($2+1)
+            next
+        }
+        print $0
+    } END {
+        if (!found++) print dir":1"
+    }' "$_CD_SCORE_FILE" > "$temp_file"
+    
+    mv -f "$temp_file" "$_CD_SCORE_FILE" >/dev/null 2>&1
+}
+
+# Get sorted directories by score, then deduplicated
+_cd_get_scored_dirs() {
+    _cd_init_scores
+    
+    # Cache zoxide results to avoid calling it multiple times
+    local zoxide_list
+    zoxide_list=$(zoxide query -l 2>/dev/null) || return 1
+    
+    # Build directory list: scored dirs → zoxide dirs → zoxide subdirs
+    {
+        sort -t: -k2 -rn "$_CD_SCORE_FILE" 2>/dev/null | cut -d: -f1
+        echo "$zoxide_list"
+        echo "$zoxide_list" | xargs -I {} fd --max-depth 1 --type d . "{}" 2>/dev/null
+    } | awk '!seen[$0]++'
+}
 
 function cd {
     # Re-entrant guard: a chpwd hook triggered by our own builtin cd called us again.
@@ -442,7 +486,7 @@ function cd {
                 current_path="$parent_path"
             done | fzf --height 25% --reverse --header "Jump up to which parent directory?"
         )
-        [[ -n "$up_target_dir" ]] && builtin cd "$up_target_dir"
+        [[ -n "$up_target_dir" ]] && builtin cd "$up_target_dir" && _cd_record_selection "$up_target_dir"
         _CD_ACTIVE=0
         return
     fi
@@ -453,7 +497,7 @@ function cd {
         recent_target_dir=$(
             dirs -pl | tail -n +2 | head -n 5 | fzf --height 25% --reverse --header "Recent Directories (Chronological)"
         )
-        [[ -n "$recent_target_dir" ]] && builtin cd "$recent_target_dir"
+        [[ -n "$recent_target_dir" ]] && builtin cd "$recent_target_dir" && _cd_record_selection "$recent_target_dir"
         _CD_ACTIVE=0
         return
     fi
@@ -461,25 +505,21 @@ function cd {
     # --- Case 3: Standard cd behavior for any existing directory ---
     if [ -d "$1" ]; then
         builtin cd "$1"
+        _cd_record_selection "$1"
         _CD_ACTIVE=0
         return
     fi
 
-    # --- Case 4: The main interactive fzf menu ---
+    # --- Case 4: The main interactive fzf menu with scoring ---
     local target_dir
     target_dir=$(
-        (
-            zoxide query -l;
-            zoxide query -l | xargs -I {} fd --max-depth 1 --type d . "{}"
-        ) | awk '!seen[$0]++ && $0' | fzf --height 50% --reverse \
+        _cd_get_scored_dirs | fzf --height 50% --reverse --no-sort \
             --query="$@" \
-            --header "SMART LIST (Ctrl+F for deep search)" \
-            --preview 'lsd -a --tree --depth=1 {} || exa -a --tree --level=2 {} || ls -la {}' \
-            --bind "ctrl-f:reload(fd --type d --hidden . \"$HOME\" \
-                --exclude /home/rtm/Data \
-            )+change-header(FULL FILESYSTEM SEARCH)"
+            --header "SMART LIST (Ctrl+F for deep search) | Scored by frequency" \
+            --preview 'lsd -a --tree --depth=1 {} 2>/dev/null || exa -a --tree --level=2 {} 2>/dev/null || ls -la {} 2>/dev/null' \
+            --bind "ctrl-f:reload(fd --type d --hidden . \"$HOME\" --exclude /home/rtm/Data 2>/dev/null)+change-header(FULL FILESYSTEM SEARCH)"
     )
-    [[ -n "$target_dir" ]] && builtin cd "$target_dir"
+    [[ -n "$target_dir" ]] && builtin cd "$target_dir" && _cd_record_selection "$target_dir"
     _CD_ACTIVE=0
 }
 
