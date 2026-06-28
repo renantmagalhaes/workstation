@@ -474,53 +474,53 @@ function cd {
 
     _CD_ACTIVE=1
 
-    # --- Case 1: `cd .` to interactively climb up the directory tree ---
-    if [[ "$1" == "." ]]; then
-        local up_target_dir
-        up_target_dir=$(
-            local current_path="$PWD"
-            local parent_path
-            while [ "$current_path" != "/" ]; do
-                parent_path=$(dirname "$current_path")
-                echo "$parent_path"
-                current_path="$parent_path"
-            done | fzf --height 25% --reverse --header "Jump up to which parent directory?"
+    {
+        # --- Case 1: `cd .` to interactively climb up the directory tree ---
+        if [[ "$1" == "." ]]; then
+            local up_target_dir
+            up_target_dir=$(
+                local current_path="$PWD"
+                local parent_path
+                while [ "$current_path" != "/" ]; do
+                    parent_path=$(dirname "$current_path")
+                    echo "$parent_path"
+                    current_path="$parent_path"
+                done | fzf --height 25% --reverse --header "Jump up to which parent directory?"
+            )
+            [[ -n "$up_target_dir" ]] && builtin cd "$up_target_dir" && _cd_record_selection "$up_target_dir"
+            return
+        fi
+
+        # --- Case 2: `cd -` to show a list of the last 5 chronological directories ---
+        if [[ "$1" == "-" ]]; then
+            local recent_target_dir
+            recent_target_dir=$(
+                dirs -pl | tail -n +2 | head -n 5 | fzf --height 25% --reverse --header "Recent Directories (Chronological)"
+            )
+            [[ -n "$recent_target_dir" ]] && builtin cd "$recent_target_dir" && _cd_record_selection "$recent_target_dir"
+            return
+        fi
+
+        # --- Case 3: Standard cd behavior for any existing directory ---
+        if [ -d "$1" ]; then
+            builtin cd "$1"
+            _cd_record_selection "$1"
+            return
+        fi
+
+        # --- Case 4: The main interactive fzf menu with scoring ---
+        local target_dir
+        target_dir=$(
+            _cd_get_scored_dirs | fzf --height 50% --reverse --no-sort \
+                --query="$@" \
+                --header "SMART LIST (Ctrl+F for deep search) | Scored by frequency" \
+                --preview 'lsd -a --tree --depth=1 {} 2>/dev/null || exa -a --tree --level=2 {} 2>/dev/null || ls -la {} 2>/dev/null' \
+                --bind "ctrl-f:reload(fd --type d --hidden . \"$HOME\" --exclude /home/rtm/Data 2>/dev/null)+change-header(FULL FILESYSTEM SEARCH)"
         )
-        [[ -n "$up_target_dir" ]] && builtin cd "$up_target_dir" && _cd_record_selection "$up_target_dir"
+        [[ -n "$target_dir" ]] && builtin cd "$target_dir" && _cd_record_selection "$target_dir"
+    } always {
         _CD_ACTIVE=0
-        return
-    fi
-
-    # --- Case 2: `cd -` to show a list of the last 5 chronological directories ---
-    if [[ "$1" == "-" ]]; then
-        local recent_target_dir
-        recent_target_dir=$(
-            dirs -pl | tail -n +2 | head -n 5 | fzf --height 25% --reverse --header "Recent Directories (Chronological)"
-        )
-        [[ -n "$recent_target_dir" ]] && builtin cd "$recent_target_dir" && _cd_record_selection "$recent_target_dir"
-        _CD_ACTIVE=0
-        return
-    fi
-
-    # --- Case 3: Standard cd behavior for any existing directory ---
-    if [ -d "$1" ]; then
-        builtin cd "$1"
-        _cd_record_selection "$1"
-        _CD_ACTIVE=0
-        return
-    fi
-
-    # --- Case 4: The main interactive fzf menu with scoring ---
-    local target_dir
-    target_dir=$(
-        _cd_get_scored_dirs | fzf --height 50% --reverse --no-sort \
-            --query="$@" \
-            --header "SMART LIST (Ctrl+F for deep search) | Scored by frequency" \
-            --preview 'lsd -a --tree --depth=1 {} 2>/dev/null || exa -a --tree --level=2 {} 2>/dev/null || ls -la {} 2>/dev/null' \
-            --bind "ctrl-f:reload(fd --type d --hidden . \"$HOME\" --exclude /home/rtm/Data 2>/dev/null)+change-header(FULL FILESYSTEM SEARCH)"
-    )
-    [[ -n "$target_dir" ]] && builtin cd "$target_dir" && _cd_record_selection "$target_dir"
-    _CD_ACTIVE=0
+    }
 }
 
 # Function to safely clean the zoxide database with confirmation.
