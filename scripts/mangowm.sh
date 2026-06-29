@@ -279,6 +279,10 @@ if [ -d "$DOTFILES_DIR/mangowm/waybar/scripts" ]; then
     chmod +x "$DOTFILES_DIR/mangowm/waybar/scripts/"*.sh
 fi
 
+if [ -d "$DOTFILES_DIR/mangowm/scripts" ]; then
+    chmod +x "$DOTFILES_DIR/mangowm/scripts/"*.sh
+fi
+
 if [ -d "$HOME/.config/rofi/rofi" ]; then
     echo "⚠️ Found nested rofi folder, fixing..."
     mv "$HOME/.config/rofi/rofi/"* "$HOME/.config/rofi/"
