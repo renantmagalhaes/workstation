@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-mmsg -d toggleoverview
-mode=$(mmsg -g -b | awk '$2 == "keymode" {print $3; exit}')
+mmsg dispatch toggleoverview
+mode=$(mmsg get keymode | jq -r '.keymode')
 if [ "$mode" = "overview" ]; then
-    mmsg -d setkeymode,default
+    mmsg dispatch setkeymode,default
 else
-    mmsg -d setkeymode,overview
+    mmsg dispatch setkeymode,overview
     /home/rtm/GIT-REPOS/workstation/dotfiles/mangowm/scripts/watch_overview.sh &
 fi

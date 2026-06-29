@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-declare -A initial_layouts
+declare -A initial_overview
 
 if [ -z "$MANGO_INSTANCE_SIGNATURE" ] || [ ! -S "$MANGO_INSTANCE_SIGNATURE" ]; then
     mango_pid=$(pgrep -u "$USER" -x mango | head -n 1)
@@ -10,7 +10,7 @@ if [ -z "$MANGO_INSTANCE_SIGNATURE" ] || [ ! -S "$MANGO_INSTANCE_SIGNATURE" ]; t
 fi
 
 for mon in $(mmsg get all-monitors | jq -r '.monitors[].name'); do
-    initial_layouts["$mon"]=$(mmsg get all-monitors | jq -r --arg m "$mon" '.monitors[] | select(.name == $m) | .layout_symbol')
+    initial_overview["$mon"]=$(mmsg get all-monitors | jq -r --arg m "$mon" '.monitors[] | select(.name == $m) | if .active_tags[0] == 0 then "true" else "false" end')
 done
 
 while true; do
@@ -21,10 +21,10 @@ while true; do
     fi
 
     for mon in $(mmsg get all-monitors | jq -r '.monitors[].name'); do
-        curr_layout=$(mmsg get all-monitors | jq -r --arg m "$mon" '.monitors[] | select(.name == $m) | .layout_symbol')
+        is_overview=$(mmsg get all-monitors | jq -r --arg m "$mon" '.monitors[] | select(.name == $m) | if .active_tags[0] == 0 then "true" else "false" end')
         
         layout_changed=false
-        if [ "${initial_layouts["$mon"]}" = "󰃇" ] && [ "$curr_layout" != "󰃇" ]; then
+        if [ "${initial_overview["$mon"]}" = "true" ] && [ "$is_overview" = "false" ]; then
             layout_changed=true
         fi
         if [ "$layout_changed" = true ]; then
@@ -36,8 +36,8 @@ while true; do
             
             # Disable overview on all monitors and synchronize their active tag
             for m in $(mmsg get all-monitors | jq -r '.monitors[].name'); do
-                layout=$(mmsg get all-monitors | jq -r --arg mon "$m" '.monitors[] | select(.name == $mon) | .layout_symbol')
-                if [ "$layout" = "󰃇" ]; then
+                is_m_overview=$(mmsg get all-monitors | jq -r --arg mon "$m" '.monitors[] | select(.name == $mon) | if .active_tags[0] == 0 then "true" else "false" end')
+                if [ "$is_m_overview" = "true" ]; then
                     mmsg dispatch focusmon,"$m"
                     mmsg dispatch toggleoverview
                 fi
