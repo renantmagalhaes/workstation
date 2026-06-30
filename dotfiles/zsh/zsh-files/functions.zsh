@@ -424,16 +424,30 @@ git-optimize-repo() {
 typeset -g _CD_ACTIVE=0
 typeset -g _CD_SCORE_FILE="${HOME}/.local/share/zsh/cd_scores.db"
 
-# Initialize the score database if it doesn't exist
+# Initialize the score database if it doesn't exist, and prune any legacy relative paths
 _cd_init_scores() {
     local score_dir="${_CD_SCORE_FILE%/*}"
     [[ ! -d "$score_dir" ]] && mkdir -p "$score_dir"
     [[ ! -f "$_CD_SCORE_FILE" ]] && touch "$_CD_SCORE_FILE"
+
+    # If the database contains any line that doesn't start with '/' (relative paths), clean them up
+    if grep -q -E '^[^/]' "$_CD_SCORE_FILE" 2>/dev/null; then
+        local temp_file="${_CD_SCORE_FILE}.tmp"
+        grep -E '^/' "$_CD_SCORE_FILE" > "$temp_file" 2>/dev/null
+        mv -f "$temp_file" "$_CD_SCORE_FILE" 2>/dev/null
+    fi
 }
 
-# Record a directory selection with a score increment
+# Record a directory selection with a score increment (always absolute paths)
 _cd_record_selection() {
     local target_dir="$1"
+
+    # Ensure target_dir is an absolute path.
+    # Since this is called after builtin cd succeeds, the target directory is the current PWD.
+    if [[ "$target_dir" != /* ]]; then
+        target_dir="$PWD"
+    fi
+    
     _cd_init_scores
     
     # Use awk to safely handle special characters in paths
@@ -487,7 +501,7 @@ function cd {
                     current_path="$parent_path"
                 done | fzf --height 25% --reverse --header "Jump up to which parent directory?"
             )
-            [[ -n "$up_target_dir" ]] && builtin cd "$up_target_dir" && _cd_record_selection "$up_target_dir"
+            [[ -n "$up_target_dir" ]] && builtin cd "$up_target_dir" && _cd_record_selection "$PWD"
             return
         fi
 
@@ -497,14 +511,14 @@ function cd {
             recent_target_dir=$(
                 dirs -pl | tail -n +2 | head -n 5 | fzf --height 25% --reverse --header "Recent Directories (Chronological)"
             )
-            [[ -n "$recent_target_dir" ]] && builtin cd "$recent_target_dir" && _cd_record_selection "$recent_target_dir"
+            [[ -n "$recent_target_dir" ]] && builtin cd "$recent_target_dir" && _cd_record_selection "$PWD"
             return
         fi
 
         # --- Case 3: Standard cd behavior for any existing directory ---
         if [ -d "$1" ]; then
             builtin cd "$1"
-            _cd_record_selection "$1"
+            _cd_record_selection "$PWD"
             return
         fi
 
@@ -517,7 +531,7 @@ function cd {
                 --preview 'lsd -a --tree --depth=1 {} 2>/dev/null || exa -a --tree --level=2 {} 2>/dev/null || ls -la {} 2>/dev/null' \
                 --bind "ctrl-f:reload(fd --type d --hidden . \"$HOME\" --exclude /home/rtm/Data 2>/dev/null)+change-header(FULL FILESYSTEM SEARCH)"
         )
-        [[ -n "$target_dir" ]] && builtin cd "$target_dir" && _cd_record_selection "$target_dir"
+        [[ -n "$target_dir" ]] && builtin cd "$target_dir" && _cd_record_selection "$PWD"
     } always {
         _CD_ACTIVE=0
     }
