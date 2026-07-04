@@ -424,16 +424,42 @@ git-optimize-repo() {
 typeset -g _CD_ACTIVE=0
 typeset -g _CD_SCORE_FILE="${HOME}/.local/share/zsh/cd_scores.db"
 
-# Initialize the score database if it doesn't exist, and prune any legacy relative paths
+# Initialize the score database if it doesn't exist, and prune/merge duplicate or relative paths
 _cd_init_scores() {
     local score_dir="${_CD_SCORE_FILE%/*}"
     [[ ! -d "$score_dir" ]] && mkdir -p "$score_dir"
     [[ ! -f "$_CD_SCORE_FILE" ]] && touch "$_CD_SCORE_FILE"
 
-    # If the database contains any line that doesn't start with '/' (relative paths), clean them up
-    if grep -q -E '^[^/]' "$_CD_SCORE_FILE" 2>/dev/null; then
+    # Merge duplicate paths by summing their scores, and prune relative paths
+    local total_lines unique_paths
+    total_lines=$(wc -l < "$_CD_SCORE_FILE" 2>/dev/null || echo 0)
+    unique_paths=$(awk -F: '{
+        path = $1
+        for (i = 2; i < NF; i++) {
+            path = path ":" $i
+        }
+        print path
+    }' "$_CD_SCORE_FILE" 2>/dev/null | sort -u | wc -l || echo 0)
+
+    if (( total_lines != unique_paths )) || grep -q -E '^[^/]' "$_CD_SCORE_FILE" 2>/dev/null; then
         local temp_file="${_CD_SCORE_FILE}.tmp"
-        grep -E '^/' "$_CD_SCORE_FILE" > "$temp_file" 2>/dev/null
+        awk -F: '
+            NF >= 2 {
+                score = $NF
+                path = $1
+                for (i = 2; i < NF; i++) {
+                    path = path ":" $i
+                }
+                if (path ~ /^\//) {
+                    scores[path] += score
+                }
+            }
+            END {
+                for (p in scores) {
+                    print p":"scores[p]
+                }
+            }
+        ' "$_CD_SCORE_FILE" > "$temp_file" 2>/dev/null
         mv -f "$temp_file" "$_CD_SCORE_FILE" 2>/dev/null
     fi
 }
@@ -450,17 +476,28 @@ _cd_record_selection() {
     
     _cd_init_scores
     
-    # Use awk to safely handle special characters in paths
+    # Use awk to safely handle special characters in paths and update/insert score
     local temp_file="${_CD_SCORE_FILE}.tmp"
-    awk -v dir="$target_dir" -F: '{
-        if ($1 == dir) {
-            print dir":"($2+1)
-            next
+    awk -v dir="$target_dir" -F: '
+        {
+            path = $1
+            for (i = 2; i < NF; i++) {
+                path = path ":" $i
+            }
+            score = $NF
+            if (path == dir) {
+                print dir ":" (score + 1)
+                found = 1
+                next
+            }
+            print $0
         }
-        print $0
-    } END {
-        if (!found++) print dir":1"
-    }' "$_CD_SCORE_FILE" > "$temp_file"
+        END {
+            if (!found) {
+                print dir ":1"
+            }
+        }
+    ' "$_CD_SCORE_FILE" > "$temp_file"
     
     mv -f "$temp_file" "$_CD_SCORE_FILE" >/dev/null 2>&1
 }
