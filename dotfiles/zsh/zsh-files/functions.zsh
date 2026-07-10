@@ -169,80 +169,103 @@ function vim-delete-config() {
   fi
 }
 
-# Wipes all history, rebuilding only the repo's default branch
+# Wipes all Git history, keeping only the current working-tree files as one commit.
+# Usage: git-nuke-history ["commit message"]
 git-nuke-history() {
-  echo "⚠️  THIS WILL IRREVERSIBLY DELETE your .git folder and all history."
-  echo "Type RESET to continue:"
-  read -r CONFIRM
-  if [[ "$CONFIRM" != "RESET" ]]; then
-    echo "Aborted: did not type RESET."
-    return 1
-  fi
-
-  # ensure we’re in a Git repo and go to its root
   local root
   root=$(git rev-parse --show-toplevel 2>/dev/null) || {
     echo "✖ Not inside a Git repo."
     return 1
   }
-  cd "$root" || return 1
 
-  # grab remote URL
-  local origin_url
-  origin_url=$(git config --get remote.origin.url)
-  if [[ -z "$origin_url" ]]; then
-    echo "✖ No 'origin' remote found. Aborting."
+  local origin_url branch
+  origin_url=$(git -C "$root" config --get remote.origin.url)
+  branch=$(git -C "$root" branch --show-current)
+  [[ -z "$branch" ]] && branch="main"
+
+  echo "⚠️  THIS WILL PERMANENTLY DESTROY ALL GIT HISTORY in:"
+  echo "    $root"
+  echo
+  echo "What will happen:"
+  echo "  - All commits, branches, tags, and reflog will be deleted."
+  echo "  - The current files on disk will be kept and committed as ONE new commit."
+  echo "  - The repo will end up with exactly one branch: '$branch'."
+  if [[ -n "$origin_url" ]]; then
+    echo "  - '$branch' will be FORCE-PUSHED to origin, overwriting remote history:"
+    echo "    $origin_url"
+    echo "  - You'll be shown any other remote branches and asked separately before deleting them."
+  else
+    echo "  - No 'origin' remote configured; this will stay local-only."
+  fi
+  echo
+  echo "Type RESET (all caps) to proceed:"
+  read -r reply
+  if [[ "$reply" != "RESET" ]]; then
+    echo "Aborted: did not type RESET."
     return 1
   fi
 
-  # detect default branch from origin HEAD
-  local default_branch
-  default_branch=$(git remote show origin \
-    | sed -n 's/.*HEAD branch: //p')
-  # fall back if detection fails
-  if [[ -z "$default_branch" ]]; then
-    default_branch="main"
-    echo "→ Could not detect default; assuming 'main'."
-  else
-    echo "→ Detected default branch: '$default_branch'."
-  fi
+  builtin cd "$root" || return 1
 
   local msg="${1:-Initial commit}"
+  local backup="${TMPDIR:-/tmp}/git-nuke-backup-$(date +%s)-$$"
 
-  echo "→ Deleting old .git directory…"
-  rm -rf .git
+  echo "→ Backing up .git to $backup (safety net for this run only)…"
+  mv .git "$backup" || { echo "✖ Failed to back up .git. Aborting."; return 1; }
 
-  echo "→ Re-initializing repo…"
-  # for older Git, you may need to do 'git init' then 'git checkout -b'
-  git init --initial-branch="$default_branch"
-  git remote add origin "$origin_url"
+  _git_nuke_restore() {
+    echo "✖ $1 Restoring previous .git — nothing was lost."
+    rm -rf .git
+    mv "$backup" .git
+  }
 
-  echo "→ Creating and committing on '$default_branch'…"
-  git add -A
-  git commit -m "$msg"
-
-  echo "→ Force-pushing '$default_branch' and setting upstream…"
-  if ! git push -u -f origin "$default_branch"; then
-    echo "✖ Failed to push $default_branch. Check your credentials or remote URL."
+  echo "→ Re-initializing repo on branch '$branch'…"
+  if ! git init -q --initial-branch="$branch"; then
+    _git_nuke_restore "git init failed."
     return 1
   fi
 
-  # determine the other branch name to delete on remote
-  local other_branch
-  if [[ "$default_branch" = "main" ]]; then
-    other_branch="master"
-  else
-    other_branch="main"
+  [[ -n "$origin_url" ]] && git remote add origin "$origin_url"
+
+  git add -A
+  if ! git commit -q -m "$msg"; then
+    _git_nuke_restore "Nothing to commit (or commit failed)."
+    return 1
   fi
 
-  echo "→ Deleting remote '$other_branch' (if it exists)…"
-  git push origin --delete "$other_branch" 2>/dev/null || true
+  if [[ -n "$origin_url" ]]; then
+    echo "→ Force-pushing '$branch' to origin…"
+    if ! git push -u -f origin "$branch"; then
+      _git_nuke_restore "Push failed. Check credentials/remote URL."
+      return 1
+    fi
 
-  echo "→ Running final garbage-collection…"
+    local other_branches
+    other_branches=$(git branch -r 2>/dev/null \
+      | sed 's#^[* ]*origin/##' \
+      | grep -v -x -e "HEAD -> .*" -e "$branch")
+    if [[ -n "$other_branches" ]]; then
+      echo "→ Other remote branches still exist:"
+      echo "$other_branches" | sed 's/^/    /'
+      echo "Type DELETE-REMOTE-BRANCHES to delete them all, or press enter to keep them:"
+      read -r del_reply
+      if [[ "$del_reply" == "DELETE-REMOTE-BRANCHES" ]]; then
+        echo "$other_branches" | while IFS= read -r b; do
+          [[ -n "$b" ]] && git push origin --delete "$b"
+        done
+      else
+        echo "→ Kept other remote branches."
+      fi
+    fi
+  fi
+
+  echo "→ Cleaning up backup and running garbage collection…"
+  rm -rf "$backup"
   git reflog expire --expire-unreachable=now --all
-  git gc --prune=now --aggressive
+  git gc -q --prune=now --aggressive
+  unfunction _git_nuke_restore
 
-  echo "🎉 Done! Only '$default_branch' exists locally and on origin."
+  echo "🎉 Done! Repo now has a single commit on '$branch'."
 }
 
 # ==============================================================================
