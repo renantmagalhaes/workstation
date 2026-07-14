@@ -407,6 +407,71 @@ git-optimize-repo() {
   echo "\n\e[1;32mOptimization and analysis process finished!\e[0m"
 }
 
+# Open the current repo's remote URL (e.g. GitHub/GitLab page) in the default browser.
+# Usage: git-open-remote [remote-name]  (defaults to "origin")
+git-open-remote() {
+  if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "✖ Not inside a Git repo."
+    return 1
+  fi
+
+  local remote="${1:-origin}"
+  local url
+  url=$(git config --get "remote.${remote}.url")
+
+  if [[ -z "$url" ]]; then
+    echo "✖ No URL found for remote '$remote'."
+    return 1
+  fi
+
+  # Normalize SSH/git-protocol URLs to HTTPS so the browser can open them.
+  if [[ "$url" == git@*:* ]]; then
+    url="${url#git@}"
+    url="${url/://}"
+    url="https://${url}"
+  elif [[ "$url" == ssh://git@* ]]; then
+    url="${url#ssh://git@}"
+    url="${url/://}"
+    url="https://${url}"
+  elif [[ "$url" == git://* ]]; then
+    url="https://${url#git://}"
+  fi
+
+  url="${url%.git}"
+
+  # If we're inside a subfolder of the repo, deep-link to that folder on the given branch.
+  local rel branch
+  rel=$(git rev-parse --show-prefix)
+  rel="${rel%/}"
+
+  if [[ -n "$rel" ]]; then
+    branch=$(git branch --show-current)
+    [[ -z "$branch" ]] && branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+    [[ -z "$branch" ]] && branch="main"
+
+    if [[ "$url" == *bitbucket.org* ]]; then
+      url="${url}/src/${branch}/${rel}"
+    else
+      url="${url}/tree/${branch}/${rel}"
+    fi
+  fi
+
+  url="${url// /%20}"
+
+  echo "→ Opening $url"
+
+  if check_cmd xdg-open; then
+    xdg-open "$url" >/dev/null 2>&1 &
+  elif check_cmd open; then
+    open "$url"
+  elif check_cmd wslview; then
+    wslview "$url"
+  else
+    echo "✖ No suitable command found to open a browser (tried xdg-open, open, wslview)."
+    return 1
+  fi
+}
+
 # Ensure noglob is applied *before* Zsh expands arguments
 # Force Zsh to disable globbing before anything reaches _scp
 # alias scp='noglob _scp'
