@@ -9,7 +9,7 @@
   "reload_style_on_change": true,
   // Choose the order of the modules
   "modules-left": [
-    "dwl/tags",
+    "mango/workspaces",
     "group/window-capsule",
     "battery",
     "battery#bat2"
@@ -31,7 +31,7 @@
     "name": "window-capsule",
     "modules": [
       "custom/active-icon-window",
-      "dwl/window"
+      "mango/window"
     ]
   },
   "group/status-capsule": {
@@ -55,10 +55,10 @@
     ]
   },
   // Modules configuration
-  "dwl/tags": {
-    "num-tags": 9
+  "mango/workspaces": {
+    "on-click": "activate"
   },
-  "dwl/window": {
+  "mango/window": {
     "format": "{title}",
     "max-length": 80
   },

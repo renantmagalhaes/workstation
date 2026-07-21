@@ -278,15 +278,15 @@ button {
     background-color: rgba(255, 255, 255, 0.15);
 }
 
-/* DWL tags styled as pill workspaces */
-#tags {
+/* Mango workspaces styled as pill workspaces */
+#workspaces {
     background-color: @surface_container;
     border-radius: 7px;
     padding: 2px 6px;
     margin: 5px 4px 0px 4px;
 }
 
-#tags button {
+#workspaces button {
     min-width: 10px;
     min-height: 10px;
     margin: 6px 4px;
@@ -298,23 +298,23 @@ button {
         min-width  0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
-#tags button.occupied {
+#workspaces button:not(.empty) {
     background-image: none;
     background-color: @color1;
 }
 
-#tags button:hover {
+#workspaces button:hover {
     background-color: @color2;
 }
 
-#tags button.focused {
+#workspaces button.active {
     background-image: none;
     color: @on_primary_fixed;
     background-color: @color4;
     min-width: 32px;
 }
 
-#tags button.urgent {
+#workspaces button.urgent {
     background-image: none;
     background-color: @error;
 }
