@@ -53,9 +53,6 @@
 
         # Initialize Oh My Posh — must live here since NixOS has no Debian .zshrc
         eval "$(oh-my-posh init zsh --config ${config.home.homeDirectory}/.config/omp/oh-my-posh-bubbles.yaml)"
-
-        # Powerlevel10k (Backup/Manual if needed)
-        [[ -f "${config.home.homeDirectory}/.p10k.zsh" ]] && source "${config.home.homeDirectory}/.p10k.zsh"
       '')
 
       # 2. LATE OVERRIDES (Ensure these run AFTER Oh My Zsh and its plugins)

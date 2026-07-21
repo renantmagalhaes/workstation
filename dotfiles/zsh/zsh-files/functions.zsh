@@ -1,12 +1,3 @@
-# check cmd function
-check_cmd() {
-    command -v "$1" >/dev/null 2>&1
-}
-
-#RTM
-macos_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
-linux_check=`uname -a |awk '{print $1}' | awk '{print tolower($0)}'`
-
 # Colormap
 function colormap() {
   for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
@@ -511,12 +502,20 @@ git-open-remote() {
 # _CD_ACTIVE guards against chpwd hooks re-entering this function (e.g. enhancd).
 typeset -g _CD_ACTIVE=0
 typeset -g _CD_SCORE_FILE="${HOME}/.local/share/zsh/cd_scores.db"
+# Set once the merge/dedupe integrity check below has run this session, so it
+# doesn't re-scan the whole score file (wc + awk + sort + wc, ~10ms measured)
+# on every single `cd`. That per-cd tax was the main cause of noticeable
+# lag entering folders — it was unconditional regardless of git status.
+typeset -g _CD_SCORES_VALIDATED=0
 
 # Initialize the score database if it doesn't exist, and prune/merge duplicate or relative paths
 _cd_init_scores() {
     local score_dir="${_CD_SCORE_FILE%/*}"
     [[ ! -d "$score_dir" ]] && mkdir -p "$score_dir"
     [[ ! -f "$_CD_SCORE_FILE" ]] && touch "$_CD_SCORE_FILE"
+
+    (( _CD_SCORES_VALIDATED )) && return
+    _CD_SCORES_VALIDATED=1
 
     # Merge duplicate paths by summing their scores, and prune relative paths
     local total_lines unique_paths
@@ -597,12 +596,19 @@ _cd_get_scored_dirs() {
     # Cache zoxide results to avoid calling it multiple times
     local zoxide_list
     zoxide_list=$(zoxide query -l 2>/dev/null) || return 1
-    
-    # Build directory list: scored dirs → zoxide dirs → zoxide subdirs
+    local -a zoxide_dirs
+    zoxide_dirs=("${(f)zoxide_list}")
+
+    # Build directory list: scored dirs → zoxide dirs → zoxide subdirs.
+    # `fd` accepts multiple search paths in one call, so we search across
+    # every zoxide dir in a single process. This used to be `xargs -I {} fd
+    # ... "{}"`, spawning one `fd` subprocess PER zoxide dir — 227 sequential
+    # spawns measured on this machine (~1.7s), the entire reason the
+    # interactive picker was slow while a direct `cd /path` stayed instant.
     {
         sort -t: -k2 -rn "$_CD_SCORE_FILE" 2>/dev/null | cut -d: -f1
-        echo "$zoxide_list"
-        echo "$zoxide_list" | xargs -I {} fd --max-depth 1 --type d . "{}" 2>/dev/null
+        [[ -n "$zoxide_list" ]] && print -l -- "${zoxide_dirs[@]}"
+        [[ -n "$zoxide_list" ]] && fd --max-depth 1 --type d . "${zoxide_dirs[@]}" 2>/dev/null
     } | awk '!seen[$0]++'
 }
 
@@ -648,9 +654,23 @@ function cd {
         fi
 
         # --- Case 4: The main interactive fzf menu with scoring ---
+        # No --no-sort: with it, fzf only filters and keeps our frecency
+        # order, so a scattered fuzzy hit that ranks high by frequency (e.g.
+        # "BlockForgeMD" loosely matching "core") wins over an exact/tight
+        # match ("CORE") lower in that order. Without --no-sort, frecency
+        # order is still what you see with an empty query, but the moment
+        # you actually type something fzf's own match-quality scoring takes
+        # over and puts the tightest match first — which is what we want.
+        #
+        # --tiebreak=index: fzf's own default tiebreak is "length" (among
+        # equally-good matches, prefer the shorter string) — so querying
+        # "workstation" would pick /home/rtm/git/workstation over the longer
+        # but far more frecently-used /home/rtm/GIT-REPOS/workstation.
+        # "index" breaks ties by original input position instead, which is
+        # our frecency order, so the dir you actually use wins the tie.
         local target_dir
         target_dir=$(
-            _cd_get_scored_dirs | fzf --height 50% --reverse --no-sort \
+            _cd_get_scored_dirs | fzf --height 50% --reverse --tiebreak=index \
                 --query="$@" \
                 --header "SMART LIST (Ctrl+F for deep search) | Scored by frequency" \
                 --preview 'lsd -a --tree --depth=1 {} 2>/dev/null || exa -a --tree --level=2 {} 2>/dev/null || ls -la {} 2>/dev/null' \

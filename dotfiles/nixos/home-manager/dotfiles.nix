@@ -22,6 +22,5 @@ in
     ".config/fastfetch".source  = link "fastfetch";
     ".config/guake".source      = link "guake";
     ".config/lsd/config.yaml".source = link "zsh/lsd-config.yaml";
-    ".p10k.zsh".source          = link "zsh/p10k.zsh";
   };
 }

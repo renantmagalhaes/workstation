@@ -10,6 +10,12 @@ check_cmd() {
 # =====================
 os_check=$(uname -s | tr '[:upper:]' '[:lower:]')
 
+# macos_check/linux_check: legacy-named lowercase uname first-field,
+# kept for aliases.zsh's branching. Defined once here since this file
+# loads first on both the legacy zshrc path and the NixOS home-manager path.
+macos_check=$(uname -a | awk '{print $1}' | awk '{print tolower($0)}')
+linux_check=$(uname -a | awk '{print $1}' | awk '{print tolower($0)}')
+
 # =====================
 # Oh My Zsh Plugins
 # =====================

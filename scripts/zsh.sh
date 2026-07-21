@@ -13,18 +13,12 @@ type curl >/dev/null 2>&1 || {
 	exit 1
 }
 
-macos_check=$(uname -a | awk '{print $1}' | awk '{print tolower($0)}')
-linux_check=$(uname -a | awk '{print $1}' | awk '{print tolower($0)}')
-
 #install oh-my-zsh
 # sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O /tmp/zsh.sh
 sed -i 's/exec\ zsh\ \-l//g' /tmp/zsh.sh
 chmod +x /tmp/zsh.sh
 sh -c '/tmp/zsh.sh'
-
-# Install startship
-#curl -sS https://starship.rs/install.sh | sh -s -- -y
 
 # Install OMP - Oh my Posh
 curl -s https://ohmyposh.dev/install.sh | bash -s
@@ -33,14 +27,8 @@ curl -s https://ohmyposh.dev/install.sh | bash -s
 ln -s -f $PWD/dotfiles/zsh/zshrc ~/.zshrc
 ln -s -f $PWD/dotfiles/zsh/zsh-files ~/.zsh
 
-# p10k config
-ln -s -f $PWD/dotfiles/zsh/p10k.zsh ~/.p10k.zsh
-
 # omp config
 ln -s -f $PWD/dotfiles/zsh/omp ~/.config/
-
-# starship config
-ln -s -f $PWD/dotfiles/zsh/starship/ ~/.config/
 
 #lsd config
 mkdir -p ~/.config/lsd/
@@ -64,28 +52,6 @@ autoload -U compinit && compinit
 
 ## fzf-tab
 git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
-
-## enhancd
-git clone https://github.com/b4b4r07/enhancd ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd
-cd ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd/
-#git checkout tags/v2.5.0
-cd -
-
-if [[ $macos_check == "darwin" ]]; then
-	sed -i '' 's/\.\./\./g' ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd/init.sh
-	sed -i '' 's/ENHANCD_DISABLE_HYPHEN\:\-0/ENHANCD_DISABLE_HYPHEN\:\-1/g' ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd/init.sh
-elif [[ $linux_check == "linux" ]]; then
-	sed -i 's/\.\./\./g' ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd/init.sh
-	sed -i 's/ENHANCD_DISABLE_HYPHEN\:\-0/ENHANCD_DISABLE_HYPHEN\:\-1/g' ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/enhancd/init.sh
-else
-	echo "Not able to identify desktop environment"
-fi
-
-#install powerlevel9k
-#git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
-
-# install powerlevel10k
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 #fix fzf
 export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin/
