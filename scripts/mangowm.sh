@@ -1,7 +1,9 @@
 #!/bin/bash
 #
 # MangoWM Installation Script for openSUSE & Debian
-# Builds wlroots, scenefx, mangowm, and waybar from source.
+# Builds wlroots, scenefx, mangowm, and waybar from source, plus whichever
+# of wayland/wayland-protocols/libdrm/xkbcommon/pixman the distro's own
+# packages are too old to satisfy (each is version-gated, see below).
 #
 
 set -e
@@ -106,6 +108,11 @@ if [ "$OS" = "opensuse" ]; then
     gtk-layer-shell-devel \
     wireplumber-devel \
     libdbusmenu-gtk3-devel \
+    libexpat-devel \
+    libffi-devel \
+    libxml2-devel \
+    libpciaccess-devel \
+    bison \
     wofi \
     rofi \
     playerctl \
@@ -208,7 +215,12 @@ elif [ "$OS" = "debian" ]; then
     libxkbregistry-dev \
     libgtk-layer-shell-dev \
     libwireplumber-0.5-dev \
-    libdbusmenu-gtk3-dev
+    libdbusmenu-gtk3-dev \
+    libexpat1-dev \
+    libffi-dev \
+    libxml2-dev \
+    libpciaccess-dev \
+    bison
 fi
 
 # Homebrew (linuxbrew) is common on dev workstations and ships its own
@@ -233,72 +245,109 @@ for pc in /usr/lib*/pkgconfig/fmt.pc /usr/lib*/pkgconfig/spdlog.pc /usr/lib/*/pk
   fi
 done
 
-if [ -d /usr/include/wlroots-0.20 ] && [ -f /usr/include/wlroots-0.20/wlr/render/egl.h ]; then
-  echo "ℹ️ wlroots already built and installed with EGL, skipping."
-else
-  echo "📥 Cloning and building wlroots..."
+# Clones (or updates) a meson-based project into $CORE_DIR/<name> and
+# builds+installs it. Re-run-safe: an existing checkout is fetched and
+# switched to $ref rather than re-cloned; $ref="master" (or "main") also
+# pulls to pick up new commits on repeat runs.
+build_meson_project() {
+  local name="$1" repo_url="$2" ref="$3"
+  shift 3
+  local meson_opts=("$@")
+
+  echo "📥 Cloning and building $name (ref: $ref)..."
   cd "$CORE_DIR"
-  if [ -d "wlroots" ]; then
-    echo "ℹ️ wlroots directory already exists, updating repo..."
-    cd wlroots
+  if [ -d "$name" ]; then
+    echo "ℹ️ $name directory already exists, updating repo..."
+    cd "$name"
     git fetch --all
-    git checkout 0.20.2
+    git checkout "$ref"
+    if [ "$ref" = "master" ] || [ "$ref" = "main" ]; then
+      git pull
+    fi
   else
-    git clone -b 0.20.2 https://gitlab.freedesktop.org/wlroots/wlroots.git
-    cd wlroots
+    git clone "$repo_url" "$name"
+    cd "$name"
+    git checkout "$ref"
   fi
   if [ -d "build" ]; then
     echo "🧹 Cleaning previous build directory..."
     sudo rm -rf build
   fi
-  PATH="$CLEAN_PATH" meson setup build -Dprefix=/usr
+  PATH="$CLEAN_PATH" meson setup build -Dprefix=/usr "${meson_opts[@]}"
   PATH="$CLEAN_PATH" ninja -C build
   sudo ninja -C build install
+}
+
+# --- wlroots 0.20's own dependency floor, and what Debian actually ships ---
+# (checked against Debian trixie/testing; bookworm/stable is further behind
+# on all of these). openSUSE Tumbleweed is rolling and usually already
+# satisfies every one of these, so on it these are normally all no-ops:
+#   dependency         wlroots needs   trixie ships
+#   wayland-server      >=1.24.0        1.23.1   (too old)
+#   wayland-protocols   >=1.47          1.44     (too old)
+#   libdrm              >=2.4.129       2.4.124  (too old)
+#   xkbcommon           >=1.8.0         1.7.0    (too old)
+#   pixman-1            >=0.46.0        0.44.0   (too old, subdir requirement
+#                                                  stricter than the top-level
+#                                                  meson.build check)
+# Each is version-gated so a fresh-enough system package is left alone.
+
+if pkg-config --atleast-version=1.24.0 wayland-server 2>/dev/null; then
+  echo "ℹ️ wayland-server >= 1.24.0 already installed, skipping."
+else
+  # -Dtests=false / -Ddocumentation=false: we only need the libraries and
+  # wayland-scanner, not wayland's own test suite or its Doxygen/xmlto/dot
+  # docs (which need a toolchain we don't otherwise install).
+  build_meson_project wayland https://gitlab.freedesktop.org/wayland/wayland.git 1.26.0 \
+    -Dtests=false -Ddocumentation=false
+fi
+
+if pkg-config --atleast-version=1.47 wayland-protocols 2>/dev/null; then
+  echo "ℹ️ wayland-protocols >= 1.47 already installed, skipping."
+else
+  build_meson_project wayland-protocols https://gitlab.freedesktop.org/wayland/wayland-protocols.git 1.49
+fi
+
+if pkg-config --atleast-version=2.4.129 libdrm 2>/dev/null; then
+  echo "ℹ️ libdrm >= 2.4.129 already installed, skipping."
+else
+  # -Dcairo-tests / -Dman-pages / -Dvalgrind disabled: keeps this off the
+  # critical path of needing cairo-dev/docutils/valgrind-dev installed for
+  # functionality we don't use. Per-driver support (intel/amdgpu/radeon/...)
+  # stays on its "auto" default and self-selects based on what's available.
+  build_meson_project libdrm https://gitlab.freedesktop.org/mesa/libdrm.git libdrm-2.4.134 \
+    -Dtests=false -Dcairo-tests=disabled -Dman-pages=disabled -Dvalgrind=disabled
+fi
+
+if pkg-config --atleast-version=1.8.0 xkbcommon 2>/dev/null; then
+  echo "ℹ️ xkbcommon >= 1.8.0 already installed, skipping."
+else
+  build_meson_project libxkbcommon https://github.com/xkbcommon/libxkbcommon.git xkbcommon-1.13.2
+fi
+
+if pkg-config --atleast-version=0.46.0 pixman-1 2>/dev/null; then
+  echo "ℹ️ pixman-1 >= 0.46.0 already installed, skipping."
+else
+  build_meson_project pixman https://gitlab.freedesktop.org/pixman/pixman.git pixman-0.46.4 \
+    -Ddemos=disabled -Dtests=disabled
+fi
+
+if [ -d /usr/include/wlroots-0.20 ] && [ -f /usr/include/wlroots-0.20/wlr/render/egl.h ]; then
+  echo "ℹ️ wlroots already built and installed with EGL, skipping."
+else
+  build_meson_project wlroots https://gitlab.freedesktop.org/wlroots/wlroots.git 0.20.2
 fi
 
 if [ -d /usr/include/scenefx-0.5 ]; then
   echo "ℹ️ scenefx already built and installed, skipping."
 else
-  echo "📥 Cloning and building scenefx..."
-  cd "$CORE_DIR"
-  if [ -d "scenefx" ]; then
-    echo "ℹ️ scenefx directory already exists, updating repo..."
-    cd scenefx
-    git fetch --all
-    git checkout 0.5
-  else
-    git clone -b 0.5 https://github.com/wlrfx/scenefx.git
-    cd scenefx
-  fi
-  if [ -d "build" ]; then
-    echo "🧹 Cleaning previous build directory..."
-    sudo rm -rf build
-  fi
-  PATH="$CLEAN_PATH" meson setup build -Dprefix=/usr
-  PATH="$CLEAN_PATH" ninja -C build
-  sudo ninja -C build install
+  build_meson_project scenefx https://github.com/wlrfx/scenefx.git 0.5
 fi
 
 if command -v mango >/dev/null 2>&1; then
   echo "ℹ️ MangoWM already built and installed, skipping."
 else
-  echo "📥 Cloning and building mangowm..."
-  cd "$CORE_DIR"
-  if [ -d "mango" ]; then
-    echo "ℹ️ mango directory already exists, updating repo..."
-    cd mango
-    git pull
-  else
-    git clone https://github.com/mangowm/mango.git
-    cd mango
-  fi
-  if [ -d "build" ]; then
-    echo "🧹 Cleaning previous build directory..."
-    sudo rm -rf build
-  fi
-  PATH="$CLEAN_PATH" meson setup build -Dprefix=/usr
-  PATH="$CLEAN_PATH" ninja -C build
-  sudo ninja -C build install
+  build_meson_project mango https://github.com/mangowm/mango.git master
 fi
 
 # MangoWM 0.15 dropped the dwl-ipc Wayland protocol in favor of its own IPC
@@ -310,33 +359,12 @@ if command -v waybar >/dev/null 2>&1 && strings "$(command -v waybar)" 2>/dev/nu
   echo "ℹ️ Waybar with MangoWM IPC support already built and installed, skipping."
   echo "   (remove /usr/bin/waybar and re-run this script to rebuild at a different WAYBAR_VERSION)"
 else
-  echo "📥 Cloning and building waybar (ref: $WAYBAR_REF, for mango/window + mango/workspaces support)..."
-  cd "$CORE_DIR"
-  if [ -d "waybar" ]; then
-    echo "ℹ️ waybar directory already exists, updating repo..."
-    cd waybar
-    git fetch --all
-    git checkout "$WAYBAR_REF"
-    if [ "$WAYBAR_REF" = "master" ]; then
-      git pull
-    fi
-  else
-    git clone https://github.com/Alexays/Waybar.git waybar
-    cd waybar
-    git checkout "$WAYBAR_REF"
-  fi
-  if [ -d "build" ]; then
-    echo "🧹 Cleaning previous build directory..."
-    sudo rm -rf build
-  fi
   # -Dtests=disabled: this system's catch2 devel package is a version
   # mismatch with what Waybar's test suite expects (missing
   # catch2/internal/catch_config_prefix_messages.hpp), which fails the
   # build if the default "auto" pulls tests in. We don't need the tests,
   # only the waybar binary itself.
-  PATH="$CLEAN_PATH" meson setup build -Dprefix=/usr -Dtests=disabled
-  PATH="$CLEAN_PATH" ninja -C build
-  sudo ninja -C build install
+  build_meson_project waybar https://github.com/Alexays/Waybar.git "$WAYBAR_REF" -Dtests=disabled
 fi
 
 link_config() {
