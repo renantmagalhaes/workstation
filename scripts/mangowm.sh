@@ -344,11 +344,16 @@ else
   build_meson_project scenefx https://github.com/wlrfx/scenefx.git 0.5
 fi
 
-if command -v mango >/dev/null 2>&1; then
-  echo "ℹ️ MangoWM already built and installed, skipping."
-else
-  build_meson_project mango https://github.com/mangowm/mango.git master
-fi
+# Unlike wlroots/scenefx (version-specific header path) or waybar (checked
+# by feature string below), mango has no version pin and no reliable way
+# to check "is the installed binary current" from the outside — it always
+# tracks master. So, unlike those, we don't skip based on presence alone:
+# `command -v mango` would stay true forever after the first install, even
+# across wlroots/scenefx rebuilds that change mango's own ABI dependencies,
+# permanently wedging it on a stale build. Always re-check out and rebuild;
+# git pull is a fast no-op when there's nothing new, and this guarantees
+# mango is linked against whatever wlroots/scenefx were just installed.
+build_meson_project mango https://github.com/mangowm/mango.git master
 
 # MangoWM 0.15 dropped the dwl-ipc Wayland protocol in favor of its own IPC
 # socket. Waybar's replacement modules (mango/window, mango/workspaces)
