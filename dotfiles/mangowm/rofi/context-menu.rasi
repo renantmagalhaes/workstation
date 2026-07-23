@@ -1,0 +1,69 @@
+/* Right-click context menu theme, matched to waybar's capsule-rice.css look:
+   dark glass capsules, white text, single vivid accent on selection. */
+
+configuration {
+    show-icons: true;
+    icon-theme: "Papirus";
+    hover-select: true;
+    me-select-entry: "";
+    me-accept-entry: "MousePrimary";
+}
+
+* {
+    bg:     rgba(17, 17, 17, 0.92);
+    border: rgba(255, 255, 255, 0.08);
+    fg:     #cccccc;
+    accent: #8b5cf6;
+    accent-bg: rgba(139, 92, 246, 0.18);
+
+    background-color: transparent;
+    text-color: @fg;
+}
+
+window {
+    background-color: @bg;
+    width: 260px;
+    padding: 8px 6px;
+    border-radius: 14px;
+    border: 1px;
+    border-color: @border;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [listview];
+}
+
+listview {
+    background-color: transparent;
+    lines: 12;
+    scrollbar: false;
+    spacing: 4px;
+    fixed-height: false;
+}
+
+element {
+    background-color: transparent;
+    text-color: @fg;
+    padding: 8px 10px;
+    border-radius: 9px;
+    border: 0px 0px 0px 3px;
+    border-color: transparent;
+}
+
+element selected {
+    background-color: @accent-bg;
+    text-color: #ffffff;
+    border-color: @accent;
+}
+
+element-icon {
+    size: 21px;
+    vertical-align: 0.5;
+}
+
+element-text {
+    vertical-align: 0.5;
+    padding: 0px 0px 0px 8px;
+    font: "CaskaydiaCove Nerd Font 11";
+}

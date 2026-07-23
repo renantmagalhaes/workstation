@@ -9,7 +9,7 @@
     "custom/trigger-bottom": {
         "format": " ",
         "tooltip": false,
-        "on-click-right": "jgmenu --config-file=~/.dotfiles/mangowm/jgmenu/jgmenurc --at-pointer",
+        "on-click-right": "~/.dotfiles/mangowm/scripts/mango-menu.sh bottom",
         "on-scroll-up": "~/.dotfiles/mangowm/scripts/change_workspace.sh left",
         "on-scroll-down": "~/.dotfiles/mangowm/scripts/change_workspace.sh right"
     }
@@ -25,7 +25,7 @@
     "custom/trigger-top": {
         "format": " ",
         "tooltip": false,
-        "on-click-right": "jgmenu --config-file=~/.dotfiles/mangowm/jgmenu/jgmenurc --at-pointer",
+        "on-click-right": "~/.dotfiles/mangowm/scripts/mango-menu.sh top",
         "on-scroll-up": "~/.dotfiles/mangowm/scripts/change_workspace.sh left",
         "on-scroll-down": "~/.dotfiles/mangowm/scripts/change_workspace.sh right"
     }
