@@ -1,0 +1,7 @@
+# Grants the "input" group (and the active seat via uaccess) read/write
+# access to the ProtoArc EM01 NL trackball's hidraw nodes (rebranded as
+# "Compx 2.4G Receiver", VID 25a7 / PID fa61). Needed so
+# scripts/protoarc-battery.py can query its battery level via a raw
+# HIDIOCGFEATURE ioctl without sudo, since mouse-battery.sh runs
+# unattended from battery-watchdog.sh.
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="25a7", ATTRS{idProduct}=="fa61", MODE="0660", GROUP="input", TAG+="uaccess"

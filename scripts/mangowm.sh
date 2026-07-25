@@ -414,6 +414,20 @@ if [ -d "$DOTFILES_DIR/mangowm/scripts" ]; then
   chmod +x "$DOTFILES_DIR/mangowm/scripts/"*.sh
 fi
 
+echo "🖱️ Installing ProtoArc EM01 NL udev rule (mouse battery query access)..."
+UDEV_RULE_SRC="$DOTFILES_DIR/mangowm/udev/99-protoarc-mouse.rules"
+UDEV_RULE_DEST="/etc/udev/rules.d/99-protoarc-mouse.rules"
+if [ -f "$UDEV_RULE_SRC" ]; then
+  if cmp -s "$UDEV_RULE_SRC" "$UDEV_RULE_DEST" 2>/dev/null; then
+    echo "ℹ️ udev rule already up to date, skipping."
+  else
+    sudo cp "$UDEV_RULE_SRC" "$UDEV_RULE_DEST"
+    sudo udevadm control --reload-rules
+    sudo udevadm trigger
+    echo "✅ udev rule installed"
+  fi
+fi
+
 if [ -d "$HOME/.config/rofi/rofi" ]; then
   echo "⚠️ Found nested rofi folder, fixing..."
   mv "$HOME/.config/rofi/rofi/"* "$HOME/.config/rofi/"
