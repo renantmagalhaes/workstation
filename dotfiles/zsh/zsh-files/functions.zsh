@@ -759,6 +759,15 @@ alias passgen='genpass'
 alias password_generator='genpass'
 alias pwgen_rtm='genpass'
 
+# Force-reload the mangoWM compositor config (equivalent to the SUPER,r keybind)
+mango-reload() {
+  if ! command -v mmsg >/dev/null 2>&1; then
+    echo "✖ mmsg not found (mangoWM IPC client)."
+    return 1
+  fi
+  mmsg dispatch reload_config
+}
+
 # Generate a random number
 # Usage: genum [max] OR genum [min] [max]
 random_number() {
