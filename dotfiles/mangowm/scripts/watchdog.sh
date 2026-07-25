@@ -27,7 +27,7 @@ launch_trigger_waybar() {
 # Function to launch mouse_actions.py
 launch_mouse_actions() {
     if ! is_running "mangowm/scripts/mouse_actions.py"; then
-        "$HOME/.dotfiles/mangowm/scripts/mouse_actions.py" >/dev/null 2>&1 &
+        "$HOME/.dotfiles/mangowm/scripts/mouse_actions.py" --invert-hwheel >/dev/null 2>&1 &
     fi
 }
 
