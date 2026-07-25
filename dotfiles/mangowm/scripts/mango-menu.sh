@@ -15,6 +15,10 @@
 # asking mango directly for which monitor the pointer is on and anchoring
 # rofi to that monitor's matching corner ourselves.
 
+# mango/waybar don't source shell rc files, so nix profile bin dirs (where
+# things like waypaper live) are missing from PATH unless we add them here.
+export PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH"
+
 edge="${1:-bottom}" # "bottom" for the bottom trigger bar, "top" for the top one
 theme="$HOME/.dotfiles/mangowm/rofi/context-menu.rasi"
 
