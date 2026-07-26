@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 #
-#?Site        :https://seclabs.cc
+#?Site        :https://rtm.cc
 #?Author      :Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
 #?                                     <https://github.com/renantmagalhaes>
 #
@@ -96,7 +96,7 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 #clear
 echo "#################################"
 echo "#                               #"
-echo "#         seclabs.cc             #"
+echo "#         rtm.cc             #"
 echo "#     Please reboot your pc     #"
 echo "#                               #"
 echo "#################################"

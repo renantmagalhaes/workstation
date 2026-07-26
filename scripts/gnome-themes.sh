@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 #
-#?Site        :https://seclabs.cc
+#?Site        :https://rtm.cc
 #?Author      :Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
 #?                                     <https://github.com/renantmagalhaes>
 #

@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #
-#?Site        :https://seclabs.cc
+#?Site        :https://rtm.cc
 #?Author      :Renan Toesqui Magalhães <renantmagalhaes@gmail.com>
 #?                                     <https://github.com/renantmagalhaes>
 #
@@ -252,7 +252,7 @@ zsh
 #clear
 echo "#################################"
 echo "#                               #"
-echo "#         seclabs.cc             #"
+echo "#         rtm.cc             #"
 echo "#     Please reboot your pc     #"
 echo "#                               #"
 echo "#################################"

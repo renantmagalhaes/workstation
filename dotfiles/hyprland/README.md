@@ -119,5 +119,5 @@ dotfiles/hyprland/
 
 ---
 
-**Setup by seclabs.cc**  
+**Setup by rtm.cc**  
 _Productive workflow, powered by Hyprland!_

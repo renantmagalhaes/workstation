@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-TARGET="dns.seclabs.cc"
+TARGET="dns.rtm.cc"
 INITIAL_DELAY=60
 PING_COUNT=3
 CHECK_INTERVAL=60

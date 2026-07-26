@@ -56,7 +56,7 @@ fi
 #clear
 echo "###########################"
 echo "#                         #"
-echo "#      seclabs.cc          #"
+echo "#      rtm.cc             #"
 echo "#       DONE              #"
 echo "#                         #"
 echo "###########################"
