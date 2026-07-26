@@ -6,13 +6,15 @@ import "MenuData.js" as MenuData
 
 // Tree-style right-click context menu, replacing the rofi-based
 // mango-menu-rofi.sh. Launched fresh per invocation by mango-menu.sh, which
-// sets MENU_EDGE ("top"/"bottom") and MENU_MONITOR (mango output name) to
-// match whichever trigger bar/monitor the cursor was over.
+// sets MENU_MONITOR (mango output name) and MENU_CURSOR_X/Y (cursor
+// position local to that monitor) so the menu opens right at the cursor,
+// like a normal right-click menu, instead of an edge-anchored popup.
 ShellRoot {
     id: root
 
-    readonly property string edge: Quickshell.env("MENU_EDGE") || "bottom"
     readonly property string monitorName: Quickshell.env("MENU_MONITOR") || ""
+    readonly property real cursorX: Number(Quickshell.env("MENU_CURSOR_X")) || 0
+    readonly property real cursorY: Number(Quickshell.env("MENU_CURSOR_Y")) || 0
 
     function targetScreen() {
         for (let i = 0; i < Quickshell.screens.length; i++) {
@@ -29,7 +31,11 @@ ShellRoot {
         exclusionMode: ExclusionMode.Ignore
 
         WlrLayershell.namespace: "mango-menu"
-        WlrLayershell.layer: WlrLayershell.Top
+        // The waybar trigger strips run on the "overlay" layer (see
+        // trigger_config.jsonc) and the main bar on "top" - both of which
+        // otherwise render above a "Top"-layer menu near the screen edge,
+        // clipping/hiding whichever rows land underneath them.
+        WlrLayershell.layer: WlrLayershell.Overlay
         WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
 
         anchors {
@@ -57,8 +63,11 @@ ShellRoot {
                 screenSize: Qt.size(win.width, win.height)
                 depth: 0
 
-                x: 12
-                y: root.edge === "top" ? 12 : win.height - height - 12
+                // Open right where the cursor is, clamped so it never
+                // overflows the edge of the monitor (flips up/left near a
+                // screen edge, like a normal desktop context menu).
+                x: Math.max(8, Math.min(root.cursorX, win.width - width - 8))
+                y: Math.max(8, Math.min(root.cursorY, win.height - height - 8))
 
                 onRequestClose: Qt.quit()
             }

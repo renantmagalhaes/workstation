@@ -7,12 +7,12 @@
 # including the wrong monitor. Native Wayland clients with layer-shell
 # support get accurate pointer/monitor info straight from the compositor.
 #
-# Positioning turned out to only reliably pick the right monitor, always
-# anchoring to a corner of it -- literal "at the mouse" placement wasn't
-# reliable. Since both triggers are full-width edge strips (top/bottom), we
-# get the same "appears where you clicked" result more reliably by asking
-# mango directly for which monitor the pointer is on and anchoring to that
-# monitor's matching corner ourselves.
+# rofi's own positioning only reliably picks the right monitor, always
+# anchoring to a corner of it -- literal "at the mouse" placement isn't
+# reliable there (see mango-menu-rofi.sh). The quickshell backend doesn't
+# have that limitation, so it positions itself at the actual cursor
+# coordinates (clamped to stay on-screen), which is what makes it feel like
+# a real right-click menu instead of an edge-anchored popup.
 #
 # Two backends are available -- flip MENU_BACKEND below to compare them:
 #   quickshell - native tree menu with real flyout submenus (qs/quickshell-menu/)
@@ -38,9 +38,31 @@ rofi)
     exec "$HOME/.dotfiles/mangowm/scripts/mango-menu-rofi.sh" "$edge"
     ;;
 *)
-    monitor=$(mmsg get cursorpos 2>/dev/null | jq -r '.monitor // empty' 2>/dev/null)
-    export MENU_EDGE="$edge"
-    export MENU_MONITOR="$monitor"
+    cursor=$(mmsg get cursorpos 2>/dev/null)
+    monitor=$(printf '%s' "$cursor" | jq -r '.monitor // empty' 2>/dev/null)
+    cursor_x=$(printf '%s' "$cursor" | jq -r '.x // 0' 2>/dev/null)
+    cursor_y=$(printf '%s' "$cursor" | jq -r '.y // 0' 2>/dev/null)
+
+    # mmsg reports cursor position in global (all-monitors) coordinates, but
+    # the menu window is local to its own monitor, so subtract that
+    # monitor's origin to get where the cursor is within it.
+    if [ -n "$monitor" ]; then
+        geom=$(mmsg get monitor "$monitor" 2>/dev/null)
+        mon_x=$(printf '%s' "$geom" | jq -r '.x // 0' 2>/dev/null)
+        mon_y=$(printf '%s' "$geom" | jq -r '.y // 0' 2>/dev/null)
+    else
+        mon_x=0
+        mon_y=0
+    fi
+
+    # mmsg can report fractional pointer coordinates (fractional scaling /
+    # sub-pixel motion), which bash's integer-only `$(( ))` can't parse at
+    # all -- it throws a fatal syntax error and kills the script before the
+    # menu ever launches. awk handles floats fine and we don't need
+    # sub-pixel precision for menu placement anyway.
+    MENU_CURSOR_X=$(awk "BEGIN { printf \"%d\", ($cursor_x) - ($mon_x) }")
+    MENU_CURSOR_Y=$(awk "BEGIN { printf \"%d\", ($cursor_y) - ($mon_y) }")
+    export MENU_EDGE="$edge" MENU_MONITOR="$monitor" MENU_CURSOR_X MENU_CURSOR_Y
     exec quickshell -n -p "$HOME/.dotfiles/mangowm/quickshell-menu/shell.qml"
     ;;
 esac
