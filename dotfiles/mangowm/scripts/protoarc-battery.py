@@ -1,9 +1,17 @@
 #!/usr/bin/env python3
+# NOT CURRENTLY USED - not wired into mouse-battery.sh or battery-warning.sh.
+# Logged samples over ~2 days of real use showed the entire feature report, not just
+# byte offset 3, is bit-for-bit static - the receiver is echoing a cached value, not a
+# live battery reading. The "100" this returns is not trustworthy. Kept for reference
+# in case the real report/offset gets found later (e.g. via a USB capture of the
+# vendor's own app, if one exists).
+#
 # Battery query for the ProtoArc EM01 NL trackball (rebranded "Compx 2.4G Receiver",
 # USB VID 25a7 / PID fa61). It has no standard HID power-supply usage page, so it's
 # invisible to upower/solaar. Its report descriptor exposes a vendor-defined feature
-# report (ID 6, usage page 0xFF02) that returns a battery percentage at byte offset 3
-# (confirmed empirically: a freshly charged unit returned 100 there).
+# report (ID 6, usage page 0xFF02); byte offset 3 was assumed to be a battery
+# percentage from a single freshly-charged reading, but that assumption is now known
+# to be wrong (see above).
 #
 # Requires read/write access to /dev/hidraw* for this device, granted by
 # /etc/udev/rules.d/99-protoarc-mouse.rules.
@@ -50,6 +58,9 @@ def find_battery():
 
         if len(data) <= BATTERY_OFFSET or data[0] != REPORT_ID:
             continue
+
+        if os.environ.get("PROTOARC_DEBUG"):
+            print(f"{device} report {REPORT_ID} raw={list(data)}", file=sys.stderr)
 
         value = data[BATTERY_OFFSET]
         if 0 <= value <= 100:
