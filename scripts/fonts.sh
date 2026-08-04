@@ -53,7 +53,7 @@ git clone https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized.git /tmp/SF
 cp /tmp/SFMono-Nerd-Font-Ligaturized/*.otf ~/.local/share/fonts
 
 # SFMono-Nerd-Font
-git clone https://github.com/securitybydesign/SF-Mono-Nerd-Font.git /tmp/SFMono-Nerd-Font
+git clone https://github.com/rtm0x00/SF-Mono-Nerd-Font.git /tmp/SFMono-Nerd-Font
 cp /tmp/SFMono-Nerd-Font/*.otf ~/.local/share/fontsfonts
 
 # Maple font
