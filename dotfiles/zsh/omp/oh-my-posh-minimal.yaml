@@ -57,7 +57,7 @@ blocks:
           {{ else if hasPrefix .Path "~/" }}󰟒 {{ .Path }}
           {{ else }}  {{ .Path }}
           {{ end }}{{ if not .Writable }}{{ end }}</b>
-        foreground: "#FFFFFF"
+        foreground: "#bcfa31"
         # background: "#ffffff"
         type: path
         style: diamond
