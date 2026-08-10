@@ -21,4 +21,4 @@ source $ZSH/oh-my-zsh.sh
 eval "$(zoxide init zsh)"
 
 # Oh my posh
-eval "$(oh-my-posh init zsh --config $HOME/.config/omp/oh-my-posh-bubbles.yaml)"
+eval "$(oh-my-posh init zsh --config $HOME/.config/omp/oh-my-posh-minimal.yaml)"
