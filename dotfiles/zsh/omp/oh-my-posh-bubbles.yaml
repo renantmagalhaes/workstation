@@ -49,8 +49,8 @@ blocks:
         trailing_diamond: " "
         template: >-
           <b>{{ if eq .Path "~" }}󰟒 ~
-          {{ else if or (eq .Path "~/Documents") (hasPrefix .Path "~/Documents/") }}󰈙 {{ .Path }}
-          {{ else if or (eq .Path "~/Downloads") (hasPrefix .Path "~/Downloads/") }} {{ .Path }}
+          {{ else if or (eq .Path "~/Documents") (hasPrefix .Path "~/Documents/") }}󰈙 {{ .Path}}
+          {{ else if or (eq .Path "~/Downloads") (hasPrefix .Path "~/Downloads/") }} {{ .Path}}
           {{ else if or (eq .Path "~/Music") (hasPrefix .Path "~/Music/") }} {{ .Path }}
           {{ else if or (eq .Path "~/Pictures") (hasPrefix .Path "~/Pictures/") }}  {{ .Path }}
           {{ else if or (eq .Path "~/Images") (hasPrefix .Path "~/Images/") }}  {{ .Path }}
@@ -97,7 +97,7 @@ blocks:
         alias: git
         leading_diamond: " "
         trailing_diamond: ""
-        template: "{{ .UpstreamIcon }} {{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}"
+        template: "{{.UpstreamIcon }}{{.HEAD }}{{ if .BranchStatus }}{{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}"
         foreground: "#32174D"
         background: "#80EF80"
         type: git
