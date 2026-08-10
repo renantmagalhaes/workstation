@@ -1,0 +1,84 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+#
+# Operator: a quiet, two-line prompt for focused terminal work.
+# A Tokyo Night palette keeps the hierarchy sharp without turning the prompt
+# into a rainbow. Red is reserved for errors and non-writable locations.
+version: 3
+
+blocks:
+  # Context line: location first, then only the repository state that matters.
+  - type: prompt
+    alignment: left
+    segments:
+      - type: path
+        style: plain
+        foreground: "#c0caf5"
+        template: "󰉋 {{ .Path }}{{ if not .Writable }} <#f7768e>󰌾 READ-ONLY</>{{ end }}"
+        properties:
+          style: agnoster_short
+          max_depth: 4
+
+      - type: git
+        style: plain
+        foreground: "#bb9af7"
+        template: " 󰘬 {{ .HEAD }}{{ if .BranchStatus }} <#7dcfff>{{ .BranchStatus }}</>{{ end }}{{ if .Working.Changed }} <#e0af68> ±{{ .Working.String }}</>{{ end }}{{ if .Staging.Changed }} <#7dcfff> +{{ .Staging.String }}</>{{ end }}"
+        properties:
+          branch_icon: ""
+          branch_max_length: 32
+          fetch_status: true
+          fetch_upstream_icon: true
+
+  # Right-aligned diagnostics remain invisible until they are useful.
+  - type: prompt
+    alignment: right
+    segments:
+      # These appear only while their respective environment is active.
+      - type: python
+        style: plain
+        foreground: "#7dcfff"
+        template: " {{ .Venv }} "
+        properties:
+          display_mode: environment
+          fetch_version: false
+
+      - type: kubectl
+        style: plain
+        foreground: "#e0af68"
+        template: "󱃾 {{ .Context }}{{ if .Namespace }}:{{ .Namespace }}{{ end }} "
+        properties:
+          parse_kubeconfig: true
+          display_error: false
+
+      - type: executiontime
+        style: plain
+        foreground: "#565f89"
+        template: "󱎫 {{ .FormattedMs }}"
+        properties:
+          threshold: 2000
+
+      - type: status
+        style: plain
+        foreground: "#f7768e"
+        template: " ✗ {{ .Code }}"
+        properties:
+          always_enabled: false
+
+  # Input line: the colour changes only after a failing command.
+  - type: prompt
+    alignment: left
+    newline: true
+    segments:
+      - type: status
+        style: plain
+        foreground: "#7aa2f7"
+        foreground_templates:
+          - "{{ if gt .Code 0 }}#f7768e{{ end }}"
+        template: "❯ "
+        properties:
+          always_enabled: true
+
+transient_prompt:
+  foreground: "#565f89"
+  template: "❯ "
+
+auto_upgrade: false
