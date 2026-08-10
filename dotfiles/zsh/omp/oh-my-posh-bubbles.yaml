@@ -56,7 +56,7 @@ blocks:
           {{ else if or (eq .Path "~/Images") (hasPrefix .Path "~/Images/") }}  {{ .Path }}
           {{ else if hasPrefix .Path "~/" }}󰟒 {{ .Path }}
           {{ else }}  {{ .Path }}
-          {{ end }}{{ if not .Writable }}{{ end }}</b>
+          {{- end }}{{ if not .Writable }}{{ end }}</b>
         foreground: "#000000"
         background: "#ffffff"
         type: path
