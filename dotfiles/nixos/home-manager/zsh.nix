@@ -1,8 +1,6 @@
 { config, pkgs, inputs, lib, ... }:
 
 {
-  programs.nix-index.enable = true;
-
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -23,10 +21,8 @@
         "colored-man-pages" "colorize" "virtualenv"
         "copyfile" "copybuffer" "copypath"
         "systemadmin" "rsync"
-        # Already present
+        # Shell utilities
         "fzf" "sudo" "extract" "ssh-agent"
-        # command-not-found enabled since we added nix-index below
-        "command-not-found"
       ];
       theme = "robbyrussell";
     };

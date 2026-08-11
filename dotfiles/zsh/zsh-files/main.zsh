@@ -37,7 +37,6 @@ if [[ ! -f /etc/NIXOS ]]; then
     zsh-syntax-highlighting
     colored-man-pages
     colorize
-    command-not-found
     docker
     docker-compose
     tmux
