@@ -613,6 +613,13 @@ _cd_get_scored_dirs() {
 }
 
 function cd {
+    # The enhanced picker needs all of these tools. If this is a minimal
+    # Linux/WSL environment, preserve normal `cd` behavior instead.
+    if (( ! $+commands[fzf] || ! $+commands[zoxide] || ! $+commands[fd] )); then
+        builtin cd "$@"
+        return
+    fi
+
     # Re-entrant guard: a chpwd hook triggered by our own builtin cd called us again.
     # Do NOT call builtin cd here — it would re-fire chpwd and loop.
     (( _CD_ACTIVE )) && return 0

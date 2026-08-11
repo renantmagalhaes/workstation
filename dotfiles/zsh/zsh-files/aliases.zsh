@@ -1,5 +1,7 @@
-# alias with preview files on
-alias pf="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+# Alias with preview files on
+if check_cmd fzf && check_cmd bat; then
+    alias pf="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+fi
 # crontab editor
 export VISUAL=vim
 
@@ -37,19 +39,17 @@ if check_cmd wsl.exe; then
         alias folder="explorer.exe"
     fi
     if [[ -n "$wsl_debian_check" ]]; then
-        alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
         alias sudo="sudo "
-        alias apt="nala"
+        check_cmd nala && alias apt="nala"
     elif [[ -n "$wsl_thumbleweed_check" ]]; then
-        alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
+        :
     elif check_cmd zypper; then
         # Fallback: if zypper exists, assume OpenSUSE (default to Tumbleweed behavior)
-        alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
+        :
     fi
 elif check_cmd apt-get; then # FOR DEB SYSTEMS
-    alias update-all="sudo apt update && sudo apt upgrade -y && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
     alias sudo="sudo "
-    alias apt="nala"
+    check_cmd nala && alias apt="nala"
     if [[ $gnome_check == "gnome" ]]; then
         alias folder="nautilus"
         alias pdf="evince"
@@ -68,7 +68,6 @@ elif check_cmd apt-get; then # FOR DEB SYSTEMS
     fi
 
 elif check_cmd zypper; then # FOR ZYPPER TW SYSTEMS
-    alias update-all="sudo zypper ref && sudo zypper dup && brew update && brew upgrade && sudo flatpak update -y && nix-env --upgrade"
     if [[ $gnome_check == "gnome" ]]; then
         alias folder="nautilus"
         alias pdf="evince"
@@ -85,6 +84,33 @@ elif check_cmd zypper; then # FOR ZYPPER TW SYSTEMS
         alias folder="dolphin"
     fi
 fi
+
+# Update every package manager that is actually installed. Each block is
+# independent, so an absent (or failed) optional manager does not prevent the
+# remaining available managers from running.
+update-all() {
+    local status=0
+
+    if check_cmd apt-get; then
+        sudo apt-get update && sudo apt-get upgrade -y || status=1
+    elif check_cmd zypper; then
+        sudo zypper ref && sudo zypper dup || status=1
+    fi
+
+    if check_cmd brew; then
+        brew update && brew upgrade || status=1
+    fi
+
+    if check_cmd flatpak; then
+        sudo flatpak update -y || status=1
+    fi
+
+    if check_cmd nix-env; then
+        nix-env --upgrade || status=1
+    fi
+
+    return $status
+}
 
 # SYSTEM ALIASES
 if [[ $macos_check == "darwin" ]]; then
@@ -119,8 +145,8 @@ alias cp='cp -v'
 alias rm='rm -ir'
 alias mv='mv -iv'
 alias ln='ln -sriv'
-alias xclip='xclip -selection c'
-alias files='fzf'
+check_cmd xclip && alias xclip='xclip -selection c'
+check_cmd fzf && alias files='fzf'
 command -v vim >/dev/null && alias vi='vim'
 
 #eval $(thefuck --alias)
@@ -137,7 +163,11 @@ alias ip='ip --color=auto'
 alias ll='ls -la'
 alias la='ls -A'
 alias l='ls -F'
-alias ls='lsd'
+# This file loads after Oh My Zsh, so restore the lsd-backed alias only when
+# the executable is actually available.
+if (( $+commands[lsd] )); then
+  alias ls='lsd'
+fi
 
 ### Navigation
 # Re-register _cd completer after compinit (oh-my-zsh resets it if placed earlier).
@@ -149,12 +179,16 @@ alias ssh-keygen-4096='ssh-keygen -t rsa -b 4096'
 alias ssh-keygen-ed25519='ssh-keygen -t ed25519'
 
 # VIM
-alias vi='nvim'
-alias visearch='nvim $(fzf --preview="bat --style=plain --color=always {}")'
+if check_cmd nvim; then
+    alias vi='nvim'
+    if check_cmd fzf && check_cmd bat; then
+        alias visearch='nvim $(fzf --preview="bat --style=plain --color=always {}")'
+    fi
+fi
 
 ### UTILS ###
-alias disk-manager='ncdu'
-alias system-monitor='nmon'
+check_cmd ncdu && alias disk-manager='ncdu'
+check_cmd nmon && alias system-monitor='nmon'
 alias git-sync='git add -A && git commit -m sync && git push'
 alias webserver-python='python -m http.server 8888'
 alias vim-clean-swap='rm -rf /home/rtm/.local/state/nvim/swap/*'
@@ -198,16 +232,18 @@ if [[ -f /etc/NIXOS ]]; then
 fi
 
 ### System ###
-alias pip='pipx'
-alias pip3='python -m pip'
+check_cmd pipx && alias pip='pipx'
+check_cmd python && alias pip3='python -m pip'
 alias vinotes='vi ~/notes.md'
-alias lg='lazygit'
+check_cmd lazygit && alias lg='lazygit'
 alias killvi='pidof nvim |xargs kill -9'
 
 #Hex color get
-for name in hex-color color-hex; do
-    alias $name='xcolor |xclip && xclip -o'
-done
+if check_cmd xcolor && check_cmd xclip; then
+    for name in hex-color color-hex; do
+        alias $name='xcolor |xclip && xclip -o'
+    done
+fi
 
 ### Zypper UTILS
 alias zypper-reinstall='sudo zypper install --force'

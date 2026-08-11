@@ -52,7 +52,7 @@
         [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/programs.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/programs.zsh"
 
         # Initialize Oh My Posh — must live here since NixOS has no Debian .zshrc
-        eval "$(oh-my-posh init zsh --config ${config.home.homeDirectory}/.config/omp/oh-my-posh-bubbles.yaml)"
+        eval "$(oh-my-posh init zsh --config ${config.home.homeDirectory}/.config/omp/oh-my-posh-minimal.yaml)"
       '')
 
       # 2. LATE OVERRIDES (Ensure these run AFTER Oh My Zsh and its plugins)
@@ -62,7 +62,9 @@
         source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.zsh
 
         # Initialize zoxide (must run before functions.zsh so our custom cd wins)
-        eval "$(zoxide init zsh)"
+        if (( $+commands[zoxide] )); then
+          eval "$(zoxide init zsh)"
+        fi
 
         # Source custom functions LAST so our 'cd' wins over any plugin
         [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/functions.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/functions.zsh"

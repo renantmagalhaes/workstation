@@ -32,23 +32,23 @@ blocks:
       # --------------------------------------------------------------------------
       # Icon segment: Prints the diamond icon "" with its own styling.
       # --------------------------------------------------------------------------
-      - leading_diamond: ""
-        trailing_diamond: ""
-        template: ""
-        background: "#29315A"
-        foreground: "#ffffff"
-        type: text
-        style: diamond
+      # - leading_diamond: ""
+      #   trailing_diamond: ""
+      #   template: ""
+      #   background: "#29315A"
+      #   foreground: "#ffffff"
+      #   type: text
+      #   style: diamond
 
       # --------------------------------------------------------------------------
       # Path segment: Displays your current working directory.
       # --------------------------------------------------------------------------
       - properties:
           style: full
-        leading_diamond: " "
+        # leading_diamond: " "
         trailing_diamond: " "
         template: >-
-          <b>{{ if eq .Path "~" }}󰟒 ~
+          <b>{{ if eq .Path "~" }} ~
           {{ else if or (eq .Path "~/Documents") (hasPrefix .Path "~/Documents/") }}󰈙 {{ .Path }}
           {{ else if or (eq .Path "~/Downloads") (hasPrefix .Path "~/Downloads/") }} {{ .Path }}
           {{ else if or (eq .Path "~/Music") (hasPrefix .Path "~/Music/") }} {{ .Path }}
@@ -362,6 +362,8 @@ blocks:
         # template: " "
         template: "  "
         foreground: "#fffff1"
+        foreground_templates:
+          - "{{ if ne .Code 0 }}#7617f6{{ end }}"
         type: status
         style: plain
 

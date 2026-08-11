@@ -10,6 +10,14 @@ check_cmd() {
 # =====================
 os_check=$(uname -s | tr '[:upper:]' '[:lower:]')
 
+# GUI-launched terminals do not necessarily inherit the PATH prepared by a
+# login shell. Make Home Manager/Nix profile packages available to every Zsh
+# session, including Alacritty started from a desktop launcher.
+case ":$PATH:" in
+  *":$HOME/.nix-profile/bin:"*) ;;
+  *) [[ -d "$HOME/.nix-profile/bin" ]] && export PATH="$HOME/.nix-profile/bin:$PATH" ;;
+esac
+
 # macos_check/linux_check: legacy-named lowercase uname first-field,
 # kept for aliases.zsh's branching. Defined once here since this file
 # loads first on both the legacy zshrc path and the NixOS home-manager path.
@@ -59,8 +67,8 @@ if [[ ! -f /etc/NIXOS ]]; then
   fi
 fi
 
-# fzf integration (optional)
-check_cmd fzf && source <(fzf --zsh)
+# Oh My Zsh owns fzf initialization on both the legacy and Home Manager paths.
+# Loading `fzf --zsh` here as well duplicates its key bindings and completions.
 
 # =====================
 # Python virtualenv
@@ -97,13 +105,13 @@ elif check_cmd htop; then
 fi
 
 # =====================
-# Completion system with cache
+# Completion cache and preferences
 # =====================
+# Oh My Zsh (and Home Manager on NixOS) initializes `compinit` later in the
+# startup sequence. Do not run it here as well: rebuilding the completion
+# table twice is the largest part of shell startup time.
 ZSH_CACHE_DIR="${ZDOTDIR:-$HOME}/.zsh_cache"
 mkdir -p "$ZSH_CACHE_DIR"
-
-autoload -Uz compinit
-compinit -d "${ZSH_CACHE_DIR}/zcompdump"
 
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' rehash true
@@ -114,8 +122,6 @@ zstyle ':completion:*:descriptions' format '%U%F{cyan}%d%f%u'
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "${ZSH_CACHE_DIR}/zcache"
-
-autoload -U +X bashcompinit && bashcompinit
 
 # ==========================================
 # fzf-tab config (Reliable Full-Width Layout)
@@ -142,30 +148,30 @@ export TMUX_TMPDIR='/tmp'
 # Add paths depending on OS
 # =====================
 
-WSL_DEFAULT_DISTRO=$(wsl.exe --list 2>/dev/null \
-  | iconv -f utf-16le -t utf-8 2>/dev/null \
-  | grep -m1 '(Default)' \
-  | sed 's/ (Default)//' \
-  | tr -d '\r\n')
-
 # --- Helper: robust WSL detection (WSL1 + WSL2, future-proof) ---
 is_wsl() {
   # Primary: kernel release contains WSL
   grep -qiE '(microsoft|wsl)' /proc/sys/kernel/osrelease 2>/dev/null && return 0
 
-  # Secondary: official WSL environment variable
-  [ -n "$WSL_DEFAULT_DISTRO" ] && return 0
+  # Secondary: official WSL environment variables.
+  [[ -n "$WSL_INTEROP" || -n "$WSL_DISTRO_NAME" ]] && return 0
 
-  # Tertiary: wsl.exe reachable and lists distros (same logic as distro detection)
-  wsl.exe --list 2>/dev/null \
-    | iconv -f utf-16le -t utf-8 2>/dev/null \
-    | grep -q '(Default)' && return 0
-
-  # Fallback: Windows mount point exists
+  # Fallback: Windows mount point exists. Do not execute Windows programs
+  # during detection; native Linux must not invoke wsl.exe at startup.
   [ -d /mnt/c ] && return 0
 
   return 1
 }
+
+# Query Windows only after confirming that this is a WSL session.
+WSL_DEFAULT_DISTRO=""
+if is_wsl && check_cmd wsl.exe; then
+  WSL_DEFAULT_DISTRO=$(wsl.exe --list 2>/dev/null \
+    | iconv -f utf-16le -t utf-8 2>/dev/null \
+    | grep -m1 '(Default)' \
+    | sed 's/ (Default)//' \
+    | tr -d '\r\n')
+fi
 
 # --- Helper: resolve Windows HOME directory safely (WSL only) ---
 get_win_home() {

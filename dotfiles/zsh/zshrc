@@ -18,7 +18,9 @@ source $ZSH/oh-my-zsh.sh
 [[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
 
 # zoxide
-eval "$(zoxide init zsh)"
+if (( $+commands[zoxide] )); then
+  eval "$(zoxide init zsh)"
+fi
 
 # Oh my posh
 eval "$(oh-my-posh init zsh --config $HOME/.config/omp/oh-my-posh-minimal.yaml)"
