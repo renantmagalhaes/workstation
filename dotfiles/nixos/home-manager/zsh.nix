@@ -42,6 +42,11 @@
 
     # 1. EARLY INITIALIZATION (NixOS 25.11 standard to avoid warnings)
     initContent = lib.mkMerge [
+      (lib.mkOrder 500 ''
+        # Load zsh-defer before any startup work that may use it.
+        source ${pkgs.zsh-defer}/share/zsh-defer/zsh-defer.plugin.zsh
+      '')
+
       (lib.mkOrder 550 ''
         # Restored from your original zshrc flow
         [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/main.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/main.zsh"
@@ -59,7 +64,9 @@
 
         # Initialize zoxide (must run before functions.zsh so our custom cd wins)
         if (( $+commands[zoxide] )); then
-          eval "$(zoxide init zsh)"
+          # Keep the first prompt responsive; zsh-defer's default refresh
+          # actions safely update ZLE after this short idle delay.
+          zsh-defer -t 0.05 -c 'eval "$(zoxide init zsh)"'
         fi
 
         # Source custom functions LAST so our 'cd' wins over any plugin

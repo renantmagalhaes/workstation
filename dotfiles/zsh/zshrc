@@ -9,6 +9,12 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# Load the tiny deferral scheduler before startup work. The installer keeps
+# this plugin in Oh My Zsh's custom plugin directory.
+ZSH_DEFER_PLUGIN="${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-defer/zsh-defer.plugin.zsh"
+[[ -r "$ZSH_DEFER_PLUGIN" ]] && source "$ZSH_DEFER_PLUGIN"
+unset ZSH_DEFER_PLUGIN
+
 # Load configs
 [[ -f ~/.zsh/main.zsh ]] && source ~/.zsh/main.zsh
 [[ -f ~/.zsh/programs.zsh ]] && source ~/.zsh/programs.zsh
@@ -19,7 +25,13 @@ source $ZSH/oh-my-zsh.sh
 
 # zoxide
 if (( $+commands[zoxide] )); then
-  eval "$(zoxide init zsh)"
+  if (( $+functions[zsh-defer] )); then
+    # Run after the first idle cycle: zoxide is useful, but it needn't delay
+    # the first prompt. Default zsh-defer refresh actions keep ZLE in sync.
+    zsh-defer -t 0.05 -c 'eval "$(zoxide init zsh)"'
+  else
+    eval "$(zoxide init zsh)"
+  fi
 fi
 
 # Oh my posh

@@ -53,6 +53,16 @@ autoload -U compinit && compinit
 ## fzf-tab
 git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
 
+## zsh-defer: defer non-critical startup work after the first prompt
+ZSH_DEFER_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-defer"
+if [ -d "$ZSH_DEFER_DIR/.git" ]; then
+	git -C "$ZSH_DEFER_DIR" pull --ff-only
+elif [ ! -e "$ZSH_DEFER_DIR" ]; then
+	git clone https://github.com/romkatv/zsh-defer.git "$ZSH_DEFER_DIR"
+else
+	echo "zsh-defer target exists but is not a Git checkout: $ZSH_DEFER_DIR" >&2
+fi
+
 #fix fzf
 export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin/
 brew install fzf
