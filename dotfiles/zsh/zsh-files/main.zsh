@@ -33,8 +33,6 @@ if [[ ! -f /etc/NIXOS ]]; then
     git
     kubectl
     zsh-completions
-    zsh-autosuggestions
-    zsh-syntax-highlighting
     colored-man-pages
     colorize
     docker

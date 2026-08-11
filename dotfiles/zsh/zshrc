@@ -23,6 +23,21 @@ unset ZSH_DEFER_PLUGIN
 source $ZSH/oh-my-zsh.sh
 [[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
 
+# These two plugins are documented as safe zsh-defer candidates. Loading them
+# after the prompt is available makes startup feel instant without deferring
+# completion or prompt setup, which are more order-sensitive.
+ZSH_AUTOSUGGESTIONS_PLUGIN="$ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+ZSH_SYNTAX_HIGHLIGHTING_PLUGIN="$ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+for plugin in "$ZSH_AUTOSUGGESTIONS_PLUGIN" "$ZSH_SYNTAX_HIGHLIGHTING_PLUGIN"; do
+  [[ -r "$plugin" ]] || continue
+  if (( $+functions[zsh-defer] )); then
+    zsh-defer source "$plugin"
+  else
+    source "$plugin"
+  fi
+done
+unset ZSH_AUTOSUGGESTIONS_PLUGIN ZSH_SYNTAX_HIGHLIGHTING_PLUGIN plugin
+
 # zoxide
 if (( $+commands[zoxide] )); then
   if (( $+functions[zsh-defer] )); then

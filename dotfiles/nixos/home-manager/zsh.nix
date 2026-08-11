@@ -4,8 +4,9 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
+    # Loaded via zsh-defer below, after the first prompt is available.
+    autosuggestion.enable = false;
+    syntaxHighlighting.enable = false;
 
     # Oh-My-Zsh setup
     oh-my-zsh = {
@@ -62,19 +63,23 @@
         # causes it to load before compinit, so the widget is never registered.
         source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.zsh
 
-        # Initialize zoxide (must run before functions.zsh so our custom cd wins)
-        if (( $+commands[zoxide] )); then
-          # Keep the first prompt responsive; zsh-defer's default refresh
-          # actions safely update ZLE after this short idle delay.
-          zsh-defer -t 0.05 -c 'eval "$(zoxide init zsh)"'
-        fi
-
         # Source custom functions LAST so our 'cd' wins over any plugin
         [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/functions.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/functions.zsh"
         [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/extras.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/extras.zsh"
 
         # Source aliases (including overrides)
         [[ -f "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/aliases.zsh" ]] && source "${config.home.homeDirectory}/.dotfiles/zsh/zsh-files/aliases.zsh"
+
+        # zsh-defer's documented staged-loading pattern for interactive UI
+        # plugins. Syntax highlighting stays last, as required by the plugin.
+        zsh-defer source ${pkgs.zsh-autosuggestions}/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+        zsh-defer source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+        # zoxide is useful but non-critical for the first prompt. The short
+        # idle delay keeps it behind the interactive plugins in the queue.
+        if (( $+commands[zoxide] )); then
+          zsh-defer -t 0.05 -c 'eval "$(zoxide init zsh)"'
+        fi
         
         # Restore the openSUSE hack: '..' is normal
         alias ..="builtin cd .."
