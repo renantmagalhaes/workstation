@@ -89,27 +89,27 @@ fi
 # independent, so an absent (or failed) optional manager does not prevent the
 # remaining available managers from running.
 update-all() {
-    local status=0
+    local update_status=0
 
     if check_cmd apt-get; then
-        sudo apt-get update && sudo apt-get upgrade -y || status=1
+        sudo apt-get update && sudo apt-get upgrade -y || update_status=1
     elif check_cmd zypper; then
-        sudo zypper ref && sudo zypper dup || status=1
+        sudo zypper ref && sudo zypper dup || update_status=1
     fi
 
     if check_cmd brew; then
-        brew update && brew upgrade || status=1
+        brew update && brew upgrade || update_status=1
     fi
 
     if check_cmd flatpak; then
-        sudo flatpak update -y || status=1
+        sudo flatpak update -y || update_status=1
     fi
 
     if check_cmd nix-env; then
-        nix-env --upgrade || status=1
+        nix-env --upgrade || update_status=1
     fi
 
-    return $status
+    return $update_status
 }
 
 # SYSTEM ALIASES
