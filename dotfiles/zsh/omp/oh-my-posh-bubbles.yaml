@@ -12,6 +12,43 @@
 # "blocks" is the root list of prompt blocks. Each block has a "type", alignment,
 # and one or more segments that define what shows up in your prompt.
 # --------------------------------------------------------------------------------
+palette:
+  connector: "#FFD787"
+  surface: "#29315A"
+  text: "#FFFFFF"
+  text-dark: "#000000"
+
+  path-background: "#FFFFFF"
+  path-readonly: "#FF0000"
+  status-background: "#B388FF"
+  status-error: "#E91E63"
+  prompt-error: "#7617F6"
+  prompt-symbol: "#FFFFF1"
+  transient: "#8B7CFC"
+
+  aws: "#FF9900"
+  lua: "#00AEEF"
+  python: "#E4F34A"
+  go: "#7FD5EA"
+  node: "#42E66C"
+  ruby: "#E64747"
+  java: "#E64747"
+  julia: "#9B6BDF"
+  php: "#4063D8"
+  npm: "#CB3837"
+  terraform: "#5C4EE5"
+  kubernetes: "#0072CE"
+  kubernetes-background: "#FFFFF1"
+  execution-time: "#AEA4BF"
+
+  git-label-bg: "p:surface"
+  git-label-fg: "p:text"
+  git-text: "#32174D"
+  git-clean: "#42E66C"
+  git-dirty: "#FF9248"
+  git-ahead: "#35B5FF"
+  git-behind: "#F89CFA"
+  git-diverged: "#FF5F5F"
 # ==============================================================================
 # BLOCK 1: LEFT Prompt (TOP LINE)
 # ==============================================================================
@@ -25,7 +62,7 @@ blocks:
       - properties:
           always_enabled: true
         template: "\u250c "
-        foreground: "#ffce7b"
+        foreground: "p:connector"
         type: status
         style: plain
 
@@ -35,8 +72,8 @@ blocks:
       - leading_diamond: ""
         trailing_diamond: ""
         template: ""
-        background: "#29315A"
-        foreground: "#ffffff"
+        background: "p:surface"
+        foreground: "p:text"
         type: text
         style: diamond
 
@@ -57,12 +94,12 @@ blocks:
           {{ else if hasPrefix .Path "~/" }}󰟒 {{ .Path }}
           {{ else }}  {{ .Path }}
           {{- end }}{{ if not .Writable }}{{ end }}</b>
-        foreground: "#000000"
-        background: "#ffffff"
+        foreground: "p:text-dark"
+        background: "p:path-background"
         type: path
         style: diamond
         foreground_templates:
-          - "{{ if not .Writable }}#FF0000{{ end }}"
+          - "{{ if not .Writable }}p:path-readonly{{ end }}"
 
       # --------------------------------------------------------------------------
       #  Extra Trailing Diamond segment: Only displays when not inside a Git folder.
@@ -72,7 +109,7 @@ blocks:
       # - type: text
       #   template: "{{ if not .Segments.git }}{{ end }}"
       #   background: default # Try "transparent" if your terminal supports it.
-      #   foreground: "#ffffff" # Use the same as your path text, or adjust as needed.
+      #   foreground: "p:text" # Use the same as your path text, or adjust as needed.
       #   style: plain
 
       # --------------------------------------------------------------------------
@@ -82,8 +119,8 @@ blocks:
       - leading_diamond: ""
         trailing_diamond: ""
         template: "{{ if .Segments.git }}on{{ end }}"
-        background: "#29315A"
-        foreground: "#ffffff"
+        background: "p:git-label-bg"
+        foreground: "p:git-label-fg"
         type: text
         style: diamond
         condition: git
@@ -92,34 +129,23 @@ blocks:
           branch_max_length: 25.0
           branch_icon: " "
           fetch_stash_count: true
+          # Shows working-tree and staging status; disable only if large repos make
+          # prompt rendering noticeably slow.
           fetch_status: true
           fetch_upstream_icon: false
         alias: git
         leading_diamond: " "
         trailing_diamond: ""
         template: "{{.UpstreamIcon }}{{.HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}"
-        foreground: "#32174D"
-        background: "#80EF80"
+        foreground: "p:git-text"
+        background: "p:git-clean"
         type: git
         style: diamond
-        # `git status` is shelled out to synchronously on every single prompt
-        # render (unlike p10k's async gitstatusd), so it's the dominant cost
-        # of using a git folder — measured ~8ms even on a small clean repo
-        # here, much worse on larger/dirtier ones. Cache it per-folder so
-        # repeated prompts in the same repo don't re-run git status each time.
-        # cache:
-        # duration: 2s
-        # strategy: folder
         background_templates:
-          - "{{ if or (.Working.Changed) (.Staging.Changed) }}#FF9248{{ end }}"
-          - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#ff4500{{ end }}"
-          - "{{ if gt .Ahead 0 }}#594fed{{ end }}"
-          - "{{ if gt .Behind 0 }}#594fed{{ end }}"
-        foreground_templates:
-          - "{{ if or (.Working.Changed) (.Staging.Changed) }}#000000{{ end }}"
-          - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#000000{{ end }}"
-          - "{{ if gt .Ahead 0 }}#ffffff{{ end }}"
-          - "{{ if gt .Behind 0 }}#ffffff{{ end }}"
+          - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git-diverged{{ end }}"
+          - "{{ if gt .Behind 0 }}p:git-behind{{ end }}"
+          - "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git-dirty{{ end }}"
+          - "{{ if gt .Ahead 0 }}p:git-ahead{{ end }}"
 
       # --------------------------------------------------------------------------
       # Check if user has root credentials cached. if not show username else show wizard
@@ -128,8 +154,8 @@ blocks:
       - type: command
         # style: diamond
         style: plain
-        # foreground: "#ffffff"
-        # background: "#6D70E2"
+        # foreground: "p:text"
+        # background: "p:surface"
         # leading_diamond: ""
         # trailing_diamond: ""
         properties:
@@ -148,13 +174,13 @@ blocks:
       # --------------------------------------------------------------------------
       - type: status
         style: diamond
-        foreground: "#ffffff"
-        background: "#B388FF"
+        foreground: "p:text"
+        background: "p:status-background"
         leading_diamond: ""
         background_templates:
-          - "{{ if .Error }}#e91e63{{ end }}"
+          - "{{ if .Error }}p:status-error{{ end }}"
         trailing_diamond: " "
-        template: "{{ if eq .Code 0 }}<#FFFFFF></>{{ else }}\uf071 {{ reason .Code }}{{ end }}"
+        template: "{{ if eq .Code 0 }}{{ else }}\uf071 {{ reason .Code }}{{ end }}"
         properties:
           always_enabled: false
 
@@ -167,15 +193,15 @@ blocks:
         leading_diamond: ""
         trailing_diamond: " "
         template: " {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }}"
-        foreground: "#FF9900"
-        background: "#29315A"
+        foreground: "p:aws"
+        background: "p:surface"
         type: aws
         style: diamond
 
       # - type: command
       #   style: diamond
-      #   foreground: "#FF9900"
-      #   background: "#29315A"
+      #   foreground: "p:aws"
+      #   background: "p:surface"
       #   leading_diamond: "" # Left empty to connect from the previous segment.
       # trailing_diamond: " " # The final closing diamond for the block.
       #   template: "| {{ .Output }}" # A separator and the Account ID fetched from the command.
@@ -195,8 +221,8 @@ blocks:
         leading_diamond: ""
         trailing_diamond: " "
         template: "\ue620 {{ .Full }}"
-        foreground: "#00AEEF"
-        background: "#29315A"
+        foreground: "p:lua"
+        background: "p:surface"
         type: lua
         style: diamond
 
@@ -211,8 +237,8 @@ blocks:
         leading_diamond: ""
         trailing_diamond: " "
         template: " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }}{{ end }}{{ .Full }}{{ end }}"
-        foreground: "#E4F34A"
-        background: "#29315A"
+        foreground: "p:python"
+        background: "p:surface"
         type: python
         style: diamond
 
@@ -224,22 +250,21 @@ blocks:
         leading_diamond: ""
         trailing_diamond: " "
         template: "{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
-        foreground: "#7FD5EA"
-        background: "#29315A"
+        foreground: "p:go"
+        background: "p:surface"
         type: go
         style: diamond
 
       # --------------------------------------------------------------------------
-      # Node segment again. This is a duplicate of segment #3. If you don't
-      #    need two Node segments, you can remove one of them.
+      # Node segment: shows the package manager (when available) and Node version.
       # --------------------------------------------------------------------------
       - properties:
           fetch_version: true
         leading_diamond: ""
         trailing_diamond: " "
         template: " {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}"
-        foreground: "#42E66C"
-        background: "#29315A"
+        foreground: "p:node"
+        background: "p:surface"
         type: node
         style: diamond
 
@@ -251,8 +276,8 @@ blocks:
         leading_diamond: ""
         trailing_diamond: " "
         template: "{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
-        foreground: "#E64747"
-        background: "#29315A"
+        foreground: "p:ruby"
+        background: "p:surface"
         type: ruby
         style: diamond
 
@@ -264,8 +289,8 @@ blocks:
         leading_diamond: ""
         trailing_diamond: " "
         template: "{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
-        foreground: "#E64747"
-        background: "#29315A"
+        foreground: "p:java"
+        background: "p:surface"
         type: java
         style: diamond
 
@@ -277,8 +302,8 @@ blocks:
         leading_diamond: ""
         trailing_diamond: " "
         template: "\ue624{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
-        foreground: "#9B6BDF"
-        background: "#29315A"
+        foreground: "p:julia"
+        background: "p:surface"
         type: julia
         style: diamond
 
@@ -290,8 +315,8 @@ blocks:
         leading_diamond: ""
         trailing_diamond: " "
         template: "\ue73d {{ .Full }} "
-        foreground: "#ffffff"
-        background: "#4063D8"
+        foreground: "p:text"
+        background: "p:php"
         type: php
         style: diamond
 
@@ -305,8 +330,8 @@ blocks:
         leading_diamond: ""
         trailing_diamond: " "
         template: " {{ .FormattedMs }}"
-        foreground: "#AEA4BF"
-        background: "#29315A"
+        foreground: "p:execution-time"
+        background: "p:surface"
         type: executiontime
         style: diamond
       # --------------------------------------------------------------------------
@@ -317,8 +342,8 @@ blocks:
         style: diamond
         leading_diamond: ""
         trailing_diamond: " "
-        foreground: "#0072ce"
-        background: "#fffff1"
+        foreground: "p:kubernetes"
+        background: "p:kubernetes-background"
         template: "󱃾 {{ .Context }}{{ if .Namespace }} | {{ .Namespace }}{{ end }}"
         properties:
           # optional:
@@ -340,8 +365,8 @@ blocks:
         trailing_diamond: " "
         # icon: "" is the popular Nerd Fonts icon for NPM
         template: " {{ .Full }}"
-        foreground: "#CB3837" # typical npm red color
-        background: "#29315A"
+        foreground: "p:npm"
+        background: "p:surface"
         type: npm
         style: diamond
 
@@ -354,8 +379,8 @@ blocks:
         trailing_diamond: " "
         # You can swap "terraform:" for a TF icon if you have a Nerd Fonts symbol
         template: "󱁢 {{.WorkspaceName}}"
-        foreground: "#5C4EE5" # a purple color for TF
-        background: "#ffffff"
+        foreground: "p:terraform"
+        background: "p:text"
         type: terraform
         style: diamond
 
@@ -372,7 +397,7 @@ blocks:
           always_enabled: true
         # template: "╰─"
         template: "\u2514"
-        foreground: "#ffce7b"
+        foreground: "p:connector"
         type: status
         style: plain
 
@@ -383,7 +408,9 @@ blocks:
           always_enabled: true
         # template: " "
         template: "  "
-        foreground: "#fffff1"
+        foreground: "p:prompt-symbol"
+        foreground_templates:
+          - "{{ if ne .Code 0 }}p:prompt-error{{ end }}"
         type: status
         style: plain
 
@@ -399,7 +426,7 @@ blocks:
 # --------------------------------------------------------------------------------
 transient_prompt:
   background: transparent
-  foreground: "#8b7cfc"
+  foreground: "p:transient"
   # template: " "
   template: " "
   # newline: true
@@ -408,4 +435,4 @@ transient_prompt:
 # MISCELLANEOUS SETTINGS
 # --------------------------------------------------------------------------------
 auto_upgrade: false # if true, oh-my-posh updates itself automatically
-version: 3 # using oh-my-posh v4 schema
+version: 3 # Oh My Posh configuration version
