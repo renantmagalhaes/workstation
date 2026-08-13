@@ -25,7 +25,7 @@ blocks:
       - properties:
           always_enabled: true
         template: "\u250c "
-        foreground: "#ffce7b"
+        foreground: "#FFD787"
         type: status
         style: plain
 
@@ -57,7 +57,7 @@ blocks:
           {{ else if hasPrefix .Path "~/" }}󰟒 {{ .Path }}
           {{ else }}  {{ .Path }}
           {{ end }}{{ if not .Writable }}{{ end }}</b>
-        foreground: "#bcfa31"
+        foreground: "#8787FF"
         # background: "#ffffff"
         type: path
         style: diamond
