@@ -47,7 +47,7 @@ palette:
   git-clean: "#42E66C"
   git-dirty: "#FF9248"
   git-ahead: "#985CFF"
-  git-behind: "#F89CFA"
+  git-behind: "#F331F7"
   git-diverged: "#FF5F5F"
 # ==============================================================================
 # BLOCK 1: LEFT Prompt (TOP LINE)
