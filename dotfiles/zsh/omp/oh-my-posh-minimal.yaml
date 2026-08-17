@@ -13,8 +13,8 @@
 # and one or more segments that define what shows up in your prompt.
 # --------------------------------------------------------------------------------
 palette:
-  folder: "#8787FF"
-  connector: "#FFD787"
+  folder: "#D5FF57"
+  connector: "#8157FF"
   surface: "#29315A"
   text: "#FFFFFF"
   text-muted: "#C8CEFF"
@@ -22,8 +22,8 @@ palette:
   status-background: "#B388FF"
   status-error: "#E91E63"
   path-readonly: "#FF0000"
-  prompt-error: "#7617F6"
-  prompt-symbol: "#FFFFF1"
+  prompt-error: "#FC3555"
+  prompt-symbol: "#90F227"
   transient: "#8B7CFC"
 
   aws: "#FF9900"
