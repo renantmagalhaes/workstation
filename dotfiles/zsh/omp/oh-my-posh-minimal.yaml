@@ -23,7 +23,7 @@ palette:
   status-error: "#E91E63"
   path-readonly: "#FF0000"
   prompt-error: "#FC3555"
-  prompt-symbol: "#90F227"
+  prompt-symbol: "#DCFFBD"
   transient: "#8B7CFC"
 
   aws: "#FF9900"
