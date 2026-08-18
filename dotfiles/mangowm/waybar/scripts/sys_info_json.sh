@@ -57,12 +57,44 @@ if [ -z "$STORAGE_INFO" ]; then
     STORAGE_INFO="N/A"
 fi
 
+# Network bandwidth (download/upload rate between samples).
+# A state file stores the previous sample; the module interval drives the timing.
+NET_STATE="${XDG_RUNTIME_DIR:-/tmp}/waybar-net-speed"
+read -r NET_RX NET_TX < <(awk 'NR>2 {
+    gsub(/:/, " ")
+    if ($1 != "lo") { rx += $2; tx += $10 }
+} END { print rx+0, tx+0 }' /proc/net/dev)
+
+NET_INFO="N/A"
+if [[ -f "$NET_STATE" ]]; then
+    read -r OLD_TIME OLD_RX OLD_TX < "$NET_STATE"
+    echo "$(date +%s) $NET_RX $NET_TX" > "$NET_STATE"
+    if (( NET_RX >= OLD_RX && NET_TX >= OLD_TX )); then
+        ELAPSED=$(( $(date +%s) - OLD_TIME ))
+        (( ELAPSED < 1 )) && ELAPSED=1
+        DOWN=$(( (NET_RX - OLD_RX) / ELAPSED ))
+        UP=$(( (NET_TX - OLD_TX) / ELAPSED ))
+        fmt_speed() {
+            local bytes=$1
+            if   (( bytes >= 1073741824 )); then printf "%.1f GiB/s" "$(awk "BEGIN{print $bytes/1073741824}")"
+            elif (( bytes >= 1048576 ));    then printf "%.1f MiB/s" "$(awk "BEGIN{print $bytes/1048576}")"
+            elif (( bytes >= 1024 ));       then printf "%.1f KiB/s" "$(awk "BEGIN{print $bytes/1024}")"
+            else                                 printf "%d B/s" "$bytes"
+            fi
+        }
+        NET_INFO="$(fmt_speed "$DOWN") ↓ / $(fmt_speed "$UP") ↑"
+    fi
+else
+    echo "$(date +%s) $NET_RX $NET_TX" > "$NET_STATE"
+fi
+
 # Pango formatted tooltip text 
 # We use \r for line breaks which Waybar parses properly
 TOOLTIP="<span size='large' color='#89b4fa'><b>System Information</b></span>\r\r"
 TOOLTIP+="<span color='#89dceb'>  <b>CPU Avg:</b></span>\t${CPU_AVG}\r"
 TOOLTIP+="<span color='#94e2d5'>🧠  <b>Memory:</b></span>\t${MEM_INFO}\r"
 TOOLTIP+="<span color='#f9e2af'>🗄️  <b>Storage:</b></span>\t${STORAGE_INFO}\r"
+TOOLTIP+="<span color='#a6e3a1'>󰛳  <b>Network:</b></span>\t${NET_INFO}\r"
 TOOLTIP+="\r"
 TOOLTIP+="\r"
 TOOLTIP+="<span color='#fab387'>🌡️  <b>CPU Temp:</b></span>\t${CPU_TEMP}\r"
