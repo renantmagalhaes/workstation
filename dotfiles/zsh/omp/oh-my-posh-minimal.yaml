@@ -46,7 +46,7 @@ palette:
 
   git-clean: "#42E66C"
   git-dirty: "#FF9248"
-  git-ahead: "#985CFF"
+  git-ahead: "#35B5FF"
   git-behind: "#F331F7"
   git-diverged: "#FF5F5F"
 # ==============================================================================
