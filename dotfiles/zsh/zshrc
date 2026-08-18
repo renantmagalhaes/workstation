@@ -48,7 +48,7 @@ if (( $+commands[zoxide] )); then
   if (( $+functions[zsh-defer] )); then
     # Run after the first idle cycle: zoxide is useful, but it needn't delay
     # the first prompt. Default zsh-defer refresh actions keep ZLE in sync.
-    zsh-defer -t 0.05 -c 'eval "$(zoxide init zsh)"'
+    zsh-defer -c 'eval "$(zoxide init zsh)"'
   else
     eval "$(zoxide init zsh)"
   fi
