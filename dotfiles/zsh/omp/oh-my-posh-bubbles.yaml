@@ -17,6 +17,7 @@ palette:
   surface: "#29315A"
   text: "#FFFFFF"
   text-dark: "#000000"
+  text-muted: "#BFC7D6"
 
   path-background: "#FFFFFF"
   path-readonly: "#FF0000"
@@ -42,13 +43,18 @@ palette:
   execution-time: "#AEA4BF"
 
   git-label-bg: "p:surface"
-  git-label-fg: "p:text"
-  git-text: "#32174D"
+  git-label-fg: "p:text-muted"
+  git-text: "p:text"
   git-clean: "#42E66C"
   git-dirty: "#FF9248"
   git-ahead: "#35B5FF"
   git-behind: "#F89CFA"
   git-diverged: "#FF5F5F"
+  git-text-clean: "#0B3D1E"
+  git-text-dirty: "#3D1F00"
+  git-text-ahead: "#002B4A"
+  git-text-behind: "#4A0A4A"
+  git-text-diverged: "#4A0000"
 # ==============================================================================
 # BLOCK 1: LEFT Prompt (TOP LINE)
 # ==============================================================================
@@ -137,7 +143,7 @@ blocks:
         leading_diamond: " "
         trailing_diamond: ""
         template: "{{.UpstreamIcon }}{{.HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}"
-        foreground: "p:git-text"
+        foreground: "p:git-text-clean"
         background: "p:git-clean"
         type: git
         style: diamond
@@ -146,6 +152,11 @@ blocks:
           - "{{ if gt .Behind 0 }}p:git-behind{{ end }}"
           - "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git-dirty{{ end }}"
           - "{{ if gt .Ahead 0 }}p:git-ahead{{ end }}"
+        foreground_templates:
+          - "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git-text-diverged{{ end }}"
+          - "{{ if gt .Behind 0 }}p:git-text-behind{{ end }}"
+          - "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git-text-dirty{{ end }}"
+          - "{{ if gt .Ahead 0 }}p:git-text-ahead{{ end }}"
 
       # --------------------------------------------------------------------------
       # Check if user has root credentials cached. if not show username else show wizard
