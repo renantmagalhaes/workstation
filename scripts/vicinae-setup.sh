@@ -41,16 +41,29 @@ if ! check_cmd vicinae; then
   curl -fsSL https://vicinae.com/install | sudo bash
 fi
 
-# Build & install the mango-unified extension from this repo
-if [ -d "$PLUGINS_DIR/mango-unified" ]; then
-  echo "🔨 Building mango-unified extension..."
+# Link the entire dotfile-managed vicinae config dir into ~/.config/vicinae.
+# Both settings.json (written by vicinae via the GUI) and config.jsonc live in
+# the dotfile folder, so ALL settings changes are tracked in git automatically.
+VICINAE_CONFIG_DIR="$HOME/.config/vicinae"
+VICINAE_DOTFILE_DIR="$DOTFILES_DIR/vicinae/config"
+echo "🔗 Linking vicinae config directory..."
+mkdir -p "$(dirname "$VICINAE_CONFIG_DIR")"
+
+# Remove the target dir and any prior partial symlinks so the whole-tree link is clean.
+rm -rf "$VICINAE_CONFIG_DIR"
+ln -sfn "$VICINAE_DOTFILE_DIR" "$VICINAE_CONFIG_DIR"
+echo "✅ $VICINAE_CONFIG_DIR -> $VICINAE_DOTFILE_DIR"
+
+# Build & install the unified-launcher extension from this repo
+if [ -d "$PLUGINS_DIR/unified-launcher" ]; then
+  echo "🔨 Building unified-launcher extension..."
   (
-    cd "$PLUGINS_DIR/mango-unified"
+    cd "$PLUGINS_DIR/unified-launcher"
     npm install
     npm run build
   )
 else
-  echo "⚠️  mango-unified plugin directory not found at $PLUGINS_DIR/mango-unified"
+  echo "⚠️  unified-launcher plugin directory not found at $PLUGINS_DIR/unified-launcher"
 fi
 
 # Start the user service
