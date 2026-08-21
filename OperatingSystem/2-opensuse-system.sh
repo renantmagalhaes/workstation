@@ -213,6 +213,10 @@ ln -s -f $PWD/dotfiles/kde/jgmenu ~/.config/
 ## Fastfetch
 ln -s -f $PWD/dotfiles/fastfetch/ ~/.config/
 
+## Vicinae Launcher
+curl -fsSL https://vicinae.com/install | sudo bash
+systemctl --user enable --now vicinae.service
+
 ## KDE Tilling window setup
 bash ./scripts/kde-DE-transformation.sh
 

@@ -219,6 +219,10 @@ bash ./scripts/fd-ignore.sh
 ## Fastfetch
 ln -s -f $PWD/dotfiles/fastfetch/ ~/.config/
 
+## Vicinae Launcher
+curl -fsSL https://vicinae.com/install | sudo bash
+systemctl --user enable --now vicinae.service
+
 # ## Droidcam
 # bash ./scripts/droidcam.sh
 
