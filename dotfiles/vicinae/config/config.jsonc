@@ -1,0 +1,25 @@
+// Vicinae user configuration (dotfile-managed).
+//
+// This file is imported by ~/.config/vicinae/settings.json via the "imports"
+// array, so it survives GUI-driven config writes to settings.json.
+//
+// Learn more about configuration at https://docs.vicinae.com/config
+
+{
+  "$schema": "https://vicinae.com/schemas/config.json",
+
+  // Wrap around to the opposite end when moving past the first or last item
+  // in a list (root search, extension lists, action panel, grids).
+  "wrap_navigation": true,
+
+  // Disable the background file indexer. Without this, Vicinae indexes the
+  // entire home directory on startup and shows "indexing NNNk items" while
+  // doing so. File search becomes unavailable until re-enabled.
+  "providers": {
+    "files": {
+      "preferences": {
+        "autoIndexing": false
+      }
+    }
+  }
+}
