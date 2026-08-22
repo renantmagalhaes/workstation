@@ -22,5 +22,21 @@
       "dark": {
          "name": "vicinae-dark"
       }
+   },
+   "providers": {
+      "@local/unified-launcher": {
+         "entrypoints": {
+            "search": {
+               "enabled": true
+            }
+         }
+      },
+      "wm": {
+         "entrypoints": {
+            "switch-windows": {
+               "alias": "."
+            }
+         }
+      }
    }
 }

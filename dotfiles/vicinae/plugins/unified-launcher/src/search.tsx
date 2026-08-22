@@ -7,11 +7,11 @@ import {
   WindowManagement,
   closeMainWindow,
   getApplications,
-  open,
   showToast,
   Toast
 } from "@vicinae/api";
 import { execFile } from "child_process";
+import { promises as fs } from "fs";
 import { promisify } from "util";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -49,13 +49,17 @@ const tryEvaluate = (
     const node = math.parse(trimmed);
     const result = node.evaluate();
 
-    if (result === undefined || result === null) {
+    if (
+      result === undefined ||
+      result === null
+    ) {
       return null;
     }
 
-    const isUnit = result
-      && typeof result === "object"
-      && "units" in result;
+    const isUnit =
+      result &&
+      typeof result === "object" &&
+      "units" in result;
 
     let raw: string;
     let formatted: string;
@@ -70,12 +74,15 @@ const tryEvaluate = (
          * mathjs ->toString already does this.
          */
         formatted = result.format
-          ? result.format({ precision: 14 })
+          ? result.format({
+              precision: 14
+            })
           : raw;
       } else {
-        formatted = typeof result === "number"
-          ? String(Number(result))
-          : raw;
+        formatted =
+          typeof result === "number"
+            ? String(Number(result))
+            : raw;
       }
     } else {
       return null;
@@ -96,196 +103,200 @@ const tryEvaluate = (
 type VicinaeCommandGroup = {
   group: string;
   icon: Icon;
-  commands: { id: string; title: string; icon?: Icon }[];
+  commands: {
+    id: string;
+    title: string;
+    icon?: Icon;
+  }[];
 };
 
-const VICINAE_COMMANDS: VicinaeCommandGroup[] = [
-  {
-    group: "Settings & System",
-    icon: Icon.Cog,
-    commands: [
-      {
-        id: "core:settings",
-        title: "Open Settings"
-      },
-      {
-        id: "wm:switch-windows",
-        title: "Switch Windows"
-      },
-      {
-        id: "theme:set",
-        title: "Change Theme"
-      },
-      {
-        id: "core:manage-fallback",
-        title: "Configure Fallbacks"
-      },
-      {
-        id: "system:set-default-terminal",
-        title: "Set Default Terminal"
-      },
-      {
-        id: "system:browse-apps",
-        title: "Browse Applications"
-      },
-      {
-        id: "core:list-extensions",
-        title: "Installed Extensions"
-      },
-      {
-        id: "core:search-builtin-icons",
-        title: "Search Builtin Icons"
-      },
-      {
-        id: "core:open-config-file",
-        title: "Open Config File"
-      },
-      {
-        id: "core:show-logs",
-        title: "Show Logs"
-      },
-      {
-        id: "core:refresh-apps",
-        title: "Refresh Applications"
-      }
-    ]
-  },
-  {
-    group: "Tools",
-    icon: Icon.Hammer,
-    commands: [
-      {
-        id: "calculator:history",
-        title: "Calculator & Unit Converter",
-        icon: Icon.Calculator
-      },
-      {
-        id: "calculator:refresh-rates",
-        title: "Refresh Exchange Rates"
-      },
-      {
-        id: "clipboard:history",
-        title: "Clipboard History",
-        icon: Icon.CopyClipboard
-      },
-      {
-        id: "clipboard:clear",
-        title: "Clear Clipboard"
-      },
-      {
-        id: "files:search",
-        title: "Search Files",
-        icon: Icon.MagnifyingGlass
-      },
-      {
-        id: "core:search-emojis",
-        title: "Search Emojis",
-        icon: Icon.Emoji
-      },
-      {
-        id: "font:browse",
-        title: "Browse Fonts"
-      },
-      {
-        id: "system:run",
-        title: "Run Command"
-      }
-    ]
-  },
-  {
-    group: "Content",
-    icon: Icon.Text,
-    commands: [
-      {
-        id: "manage-shortcuts:manage",
-        title: "Manage Shortcuts",
-        icon: Icon.Link
-      },
-      {
-        id: "manage-shortcuts:create",
-        title: "Create Shortcut"
-      },
-      {
-        id: "snippets:manage",
-        title: "Manage Snippets"
-      },
-      {
-        id: "snippets:create",
-        title: "Create Snippet"
-      },
-      {
-        id: "browser-extension:browse-tabs",
-        title: "Browse Browser Tabs"
-      },
-      {
-        id: "browser-extension:shortcut-active-tab",
-        title: "Shortcut Active Tab"
-      }
-    ]
-  },
-  {
-    group: "System Control",
-    icon: Icon.Power,
-    commands: [
-      {
-        id: "power:lock",
-        title: "Lock Screen"
-      },
-      {
-        id: "power:logout",
-        title: "Log Out"
-      },
-      {
-        id: "power:suspend",
-        title: "Suspend"
-      },
-      {
-        id: "power:reboot",
-        title: "Reboot"
-      },
-      {
-        id: "power:power-off",
-        title: "Power Off"
-      },
-      {
-        id: "system:volume-up",
-        title: "Volume Up"
-      },
-      {
-        id: "system:volume-down",
-        title: "Volume Down"
-      },
-      {
-        id: "system:toggle-mute",
-        title: "Toggle Mute"
-      }
-    ]
-  }
-];
+const VICINAE_COMMANDS: VicinaeCommandGroup[] =
+  [
+    {
+      group: "Settings & System",
+      icon: Icon.Cog,
+      commands: [
+        {
+          id: "core:settings",
+          title: "Open Settings"
+        },
+        {
+          id: "wm:switch-windows",
+          title: "Switch Windows"
+        },
+        {
+          id: "theme:set",
+          title: "Change Theme"
+        },
+        {
+          id: "core:manage-fallback",
+          title: "Configure Fallbacks"
+        },
+        {
+          id: "system:set-default-terminal",
+          title: "Set Default Terminal"
+        },
+        {
+          id: "system:browse-apps",
+          title: "Browse Applications"
+        },
+        {
+          id: "core:list-extensions",
+          title: "Installed Extensions"
+        },
+        {
+          id: "core:search-builtin-icons",
+          title: "Search Builtin Icons"
+        },
+        {
+          id: "core:open-config-file",
+          title: "Open Config File"
+        },
+        {
+          id: "core:show-logs",
+          title: "Show Logs"
+        },
+        {
+          id: "core:refresh-apps",
+          title: "Refresh Applications"
+        }
+      ]
+    },
+    {
+      group: "Tools",
+      icon: Icon.Hammer,
+      commands: [
+        {
+          id: "calculator:refresh-rates",
+          title:
+            "Refresh Exchange Rates"
+        },
+        {
+          id: "clipboard:history",
+          title: "Clipboard History",
+          icon: Icon.CopyClipboard
+        },
+        {
+          id: "clipboard:clear",
+          title: "Clear Clipboard"
+        },
+        {
+          id: "files:search",
+          title: "Search Files",
+          icon: Icon.MagnifyingGlass
+        },
+        {
+          id: "core:search-emojis",
+          title: "Search Emojis",
+          icon: Icon.Emoji
+        },
+        {
+          id: "font:browse",
+          title: "Browse Fonts"
+        },
+        {
+          id: "system:run",
+          title: "Run Command"
+        }
+      ]
+    },
+    {
+      group: "Content",
+      icon: Icon.Text,
+      commands: [
+        {
+          id: "manage-shortcuts:manage",
+          title: "Manage Shortcuts",
+          icon: Icon.Link
+        },
+        {
+          id: "manage-shortcuts:create",
+          title: "Create Shortcut"
+        },
+        {
+          id: "snippets:manage",
+          title: "Manage Snippets"
+        },
+        {
+          id: "snippets:create",
+          title: "Create Snippet"
+        },
+        {
+          id: "browser-extension:browse-tabs",
+          title: "Browse Browser Tabs"
+        },
+        {
+          id: "browser-extension:shortcut-active-tab",
+          title: "Shortcut Active Tab"
+        }
+      ]
+    },
+    {
+      group: "System Control",
+      icon: Icon.Power,
+      commands: [
+        {
+          id: "power:lock",
+          title: "Lock Screen"
+        },
+        {
+          id: "power:logout",
+          title: "Log Out"
+        },
+        {
+          id: "power:suspend",
+          title: "Suspend"
+        },
+        {
+          id: "power:reboot",
+          title: "Reboot"
+        },
+        {
+          id: "power:power-off",
+          title: "Power Off"
+        },
+        {
+          id: "system:volume-up",
+          title: "Volume Up"
+        },
+        {
+          id: "system:volume-down",
+          title: "Volume Down"
+        },
+        {
+          id: "system:toggle-mute",
+          title: "Toggle Mute"
+        }
+      ]
+    }
+  ];
 
-const execFileAsync = promisify(execFile);
+const execFileAsync =
+  promisify(execFile);
 
-const launchVicinaeCommand = async (
-  command: { id: string; title: string }
-) => {
-  try {
-    await execFileAsync("vicinae", [
-      "cmd",
-      "launch",
-      command.id
-    ]);
-    closeMainWindow();
-  } catch (error) {
-    await showToast({
-      style: Toast.Style.Failure,
-      title: `Could not open ${command.title}`,
-      message:
-        error instanceof Error
-          ? error.message
-          : String(error)
-    });
-  }
-};
+const launchVicinaeCommand =
+  async (command: {
+    id: string;
+    title: string;
+  }) => {
+    try {
+      await execFileAsync("vicinae", [
+        "cmd",
+        "launch",
+        command.id
+      ]);
+      closeMainWindow();
+    } catch (error) {
+      await showToast({
+        style: Toast.Style.Failure,
+        title: `Could not open ${command.title}`,
+        message:
+          error instanceof Error
+            ? error.message
+            : String(error)
+      });
+    }
+  };
 
 const useWindows = () => {
   const [loading, setLoading] =
@@ -321,12 +332,148 @@ const useApps = () => {
 
   useEffect(() => {
     getApplications()
-      .then(setApps)
+      .then(async (allApps) => {
+        // Replicate the default launcher's `displayable()` filter: skip
+        // NoDisplay/Hidden apps and web-app shortcuts (Google Maps, Groupware,
+        // etc.) that the default root search hides.
+        const displayable: Application[] =
+          [];
+        for (const app of allApps) {
+          if (
+            await isDisplayable(app)
+          ) {
+            displayable.push(app);
+          }
+        }
+        setApps(displayable);
+      })
       .catch(setError)
       .finally(() => setLoading(false));
   }, []);
 
   return { apps, loading, error };
+};
+
+// Parse a .desktop file and decide whether the default launcher would show it.
+// Mirrors XdgAppDatabase::displayable() -> shouldBeShownInCurrentContext().
+const isDisplayable = async (
+  app: Application
+): Promise<boolean> => {
+  try {
+    const contents = await fs.readFile(
+      app.path,
+      "utf8"
+    );
+    const data =
+      parseDesktopEntry(contents);
+
+    if (data.Type !== "Application") {
+      return false;
+    }
+    if (
+      data.NoDisplay?.toLowerCase() ===
+      "true"
+    ) {
+      return false;
+    }
+    if (
+      data.Hidden?.toLowerCase() ===
+      "true"
+    ) {
+      return false;
+    }
+
+    // OnlyShowIn / NotShowIn desktop-context filtering.
+    const currentDesktop =
+      process.env.XDG_CURRENT_DESKTOP?.split(
+        ":"
+      )
+        .map((d) =>
+          d.trim().toLowerCase()
+        )
+        .filter(Boolean) ?? [];
+
+    const onlyShowIn = (
+      data.OnlyShowIn ?? ""
+    )
+      .split(";")
+      .map((d) =>
+        d.trim().toLowerCase()
+      )
+      .filter(Boolean);
+
+    const notShowIn = (
+      data.NotShowIn ?? ""
+    )
+      .split(";")
+      .map((d) =>
+        d.trim().toLowerCase()
+      )
+      .filter(Boolean);
+
+    if (
+      onlyShowIn.length > 0 &&
+      !onlyShowIn.some((d) =>
+        currentDesktop.includes(d)
+      )
+    ) {
+      return false;
+    }
+    if (
+      notShowIn.some((d) =>
+        currentDesktop.includes(d)
+      )
+    ) {
+      return false;
+    }
+
+    return true;
+  } catch {
+    // If we can't read the file, keep it (be permissive).
+    return true;
+  }
+};
+
+// Minimal .desktop parser for the [Desktop Entry] group.
+const parseDesktopEntry = (
+  contents: string
+): Record<string, string> => {
+  const result: Record<string, string> =
+    {};
+  let inDesktopEntry = false;
+
+  for (const rawLine of contents.split(
+    /\r?\n/
+  )) {
+    const line = rawLine.trim();
+    if (!line || line.startsWith("#")) {
+      continue;
+    }
+    if (
+      line.startsWith("[") &&
+      line.endsWith("]")
+    ) {
+      inDesktopEntry =
+        line === "[Desktop Entry]";
+      continue;
+    }
+    if (!inDesktopEntry) continue;
+
+    const sep = line.indexOf("=");
+    if (sep < 1) continue;
+    const key = line
+      .slice(0, sep)
+      .trim();
+    const value = line
+      .slice(sep + 1)
+      .trim();
+    // Skip localized keys like Name[de]=...
+    if (!key.includes("[")) {
+      result[key] = value;
+    }
+  }
+
+  return result;
 };
 
 const focusWindow = async (
@@ -348,10 +495,15 @@ const launchApp = async (
   app: Application
 ) => {
   try {
-    // Launch the app itself (empty target). Passing app.path here would treat
-    // the .desktop file as a target to open, causing the browser to try to
-    // download it.
-    await open("", app);
+    // Use the vicinae CLI to launch/focus the app. This passes empty args
+    // properly (avoids the empty-string target that made some apps fail to
+    // open via the typed `open` API) and focuses an existing window if one
+    // is already running, matching the default launcher.
+    await execFileAsync("vicinae", [
+      "app",
+      "launch",
+      app.id
+    ]);
     closeMainWindow();
   } catch (error) {
     await showToast({
@@ -377,7 +529,8 @@ export default function Search() {
     error: appsError
   } = useApps();
 
-  const [query, setQuery] = useState("");
+  const [query, setQuery] =
+    useState("");
   const calcResult = tryEvaluate(query);
 
   const loading =
@@ -403,7 +556,9 @@ export default function Search() {
       filtering={true}
       searchBarPlaceholder="Search apps, windows, or type a calculation..."
       onSearchTextChange={setQuery}
-      isShowingDetail={calcResult !== null}
+      isShowingDetail={
+        calcResult !== null
+      }
     >
       {calcResult && (
         <List.Section
@@ -435,7 +590,9 @@ export default function Search() {
               <ActionPanel>
                 <Action.CopyToClipboard
                   title="Copy Result"
-                  content={calcResult.formatted}
+                  content={
+                    calcResult.formatted
+                  }
                 />
                 <Action.CopyToClipboard
                   title="Copy Full Expression"
@@ -498,7 +655,6 @@ export default function Search() {
           <List.Item
             key={app.id}
             title={app.name}
-            subtitle={app.path}
             icon={
               app.icon ?? Icon.AppWindow
             }
@@ -528,28 +684,38 @@ export default function Search() {
             group.commands.length
           )}
         >
-          {group.commands.map((command) => (
-            <List.Item
-              key={command.id}
-              title={command.title}
-              subtitle={command.id}
-              icon={command.icon ?? group.icon}
-              accessories={[
-                { text: "Open" }
-              ]}
-              actions={
-                <ActionPanel>
-                  <Action
-                    title={`Open ${command.title}`}
-                    icon={command.icon ?? group.icon}
-                    onAction={() =>
-                      launchVicinaeCommand(command)
-                    }
-                  />
-                </ActionPanel>
-              }
-            />
-          ))}
+          {group.commands.map(
+            (command) => (
+              <List.Item
+                key={command.id}
+                title={command.title}
+                subtitle={command.id}
+                icon={
+                  command.icon ??
+                  group.icon
+                }
+                accessories={[
+                  { text: "Open" }
+                ]}
+                actions={
+                  <ActionPanel>
+                    <Action
+                      title={`Open ${command.title}`}
+                      icon={
+                        command.icon ??
+                        group.icon
+                      }
+                      onAction={() =>
+                        launchVicinaeCommand(
+                          command
+                        )
+                      }
+                    />
+                  </ActionPanel>
+                }
+              />
+            )
+          )}
         </List.Section>
       ))}
     </List>
