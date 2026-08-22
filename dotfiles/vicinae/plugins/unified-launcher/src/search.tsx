@@ -495,13 +495,16 @@ const launchApp = async (
   app: Application
 ) => {
   try {
-    // Use the vicinae CLI to launch/focus the app. This passes empty args
+    // Use the vicinae CLI to launch the app. This passes empty args
     // properly (avoids the empty-string target that made some apps fail to
-    // open via the typed `open` API) and focuses an existing window if one
-    // is already running, matching the default launcher.
+    // open via the typed `open` API). The `--new` flag always starts a fresh
+    // instance instead of focusing an already-running window, since selecting
+    // an application here should never reuse an existing one (windows are
+    // handled separately above).
     await execFileAsync("vicinae", [
       "app",
       "launch",
+      "--new",
       app.id
     ]);
     closeMainWindow();
