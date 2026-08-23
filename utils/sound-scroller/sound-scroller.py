@@ -355,43 +355,47 @@ def find_keybinds_conf() -> str | None:
     return None
 
 
-def _reload_mango() -> None:
-    """Reload MangoWM by injecting the SUPER+r key combo.
+def _mmsg(*args: str) -> None:
+    """Run `mmsg`, pointing it at the mango IPC socket.
 
-    `SUPER+r` is bound to `reload_config` in keybinds.conf. We emit it
-    through a temporary virtual keyboard, which MangoWM receives and acts
-    on. This avoids the mmsg IPC socket entirely (which is hard to reach
-    under `sudo` because the env var is stripped).
+    Under `sudo` the user's environment is stripped, so MANGO_INSTANCE_SIGNATURE
+    is missing and mmsg fails. We set it ourselves by locating the socket:
+    /run/user/<real-uid>/mango-<pid>.sock
+
+    Note: os.getuid() returns 0 under sudo, so we resolve the real user's
+    uid from the running mango process instead.
     """
-    import time as _time
+    import subprocess
 
-    try:
-        kbd = UInput(
-            {
-                E.EV_KEY: [E.KEY_LEFTMETA, E.KEY_R],
-            },
-            name="sound-scroller reload",
-            vendor=0x1234,
-            product=0x5678,
-            version=1,
-            bustype=E.BUS_VIRTUAL,
-        )
-    except OSError as exc:
-        log.warning("could not create reload keyboard (%s); config change "
-                    "may not take effect until you reload manually", exc)
-        return
+    if not os.environ.get("MANGO_INSTANCE_SIGNATURE"):
+        try:
+            # Find the mango process and its owner uid.
+            procs = subprocess.run(
+                ["pgrep", "-x", "mango"], capture_output=True, text=True
+            ).stdout.strip().splitlines()
+            if procs:
+                pid = procs[0]
+                # uid of the process that owns the socket
+                uid = subprocess.run(
+                    ["stat", "-c", "%U", f"/proc/{pid}"],
+                    capture_output=True, text=True,
+                ).stdout.strip()
+                # stat %U gives a name; map it to a numeric uid via pwd
+                import pwd
+                try:
+                    uid_num = pwd.getpwnam(uid).pw_uid
+                except KeyError:
+                    uid_num = os.getuid()
+                sock = f"/run/user/{uid_num}/mango-{pid}.sock"
+                if os.path.exists(sock):
+                    os.environ["MANGO_INSTANCE_SIGNATURE"] = sock
+                else:
+                    log.warning("mango socket not found: %s", sock)
+        except OSError as exc:
+            log.warning("could not find mango socket: %s", exc)
 
-    try:
-        # Press SUPER, press R, release R, release SUPER.
-        kbd.write(E.EV_KEY, E.KEY_LEFTMETA, 1)
-        kbd.write(E.EV_KEY, E.KEY_R, 1)
-        kbd.syn()
-        _time.sleep(0.05)
-        kbd.write(E.EV_KEY, E.KEY_R, 0)
-        kbd.write(E.EV_KEY, E.KEY_LEFTMETA, 0)
-        kbd.syn()
-    finally:
-        kbd.close()
+    cmd = ["mmsg"] + list(args)
+    subprocess.run(cmd)
 
 
 def temporarily_unbind_volume() -> tuple[str | None, list[str] | None]:
@@ -437,7 +441,7 @@ def temporarily_unbind_volume() -> tuple[str | None, list[str] | None]:
         return None, None
 
     # Reload MangoWM so the change takes effect.
-    _reload_mango()
+    _mmsg("dispatch", "reload_config")
     log.info("temporarily unbound volume keys in %s", path)
     return path, lines
 
@@ -449,7 +453,7 @@ def restore_volume_binds(path: str | None, original: list[str] | None) -> None:
     try:
         with open(path, "w", encoding="utf-8") as fh:
             fh.writelines(original)
-        _reload_mango()
+        _mmsg("dispatch", "reload_config")
         log.info("restored volume keys in %s", path)
     except OSError as exc:
         log.warning("could not restore %s (%s); please restore it manually",
