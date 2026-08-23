@@ -87,7 +87,7 @@ SCROLL_KEYS = {
 #   1 = 1:1 (default, one knob notch -> one wheel notch)
 #   2 = twice as fast, 3 = three times, etc.
 # Can be overridden at runtime with `--pace`.
-PACE = 1
+PACE = 5
 
 
 def create_virtual_mouse(name: str) -> UInput:
@@ -99,10 +99,12 @@ def create_virtual_mouse(name: str) -> UInput:
     """
     capabilities = {
         E.EV_KEY: [
-            E.BTN_LEFT, E.BTN_RIGHT, E.BTN_MIDDLE,
+            E.BTN_LEFT,
+            E.BTN_RIGHT,
+            E.BTN_MIDDLE,
         ],
         E.EV_REL: [
-            E.REL_X,                # so it looks like a real pointer
+            E.REL_X,  # so it looks like a real pointer
             E.REL_Y,
             E.REL_WHEEL,
             E.REL_WHEEL_HI_RES,
@@ -198,7 +200,11 @@ def select_device(args) -> InputDevice:
         # No name match: fall through to sniffing/menu below.
 
     # 3) When nothing explicit was given, offer to sniff the knob by turning it.
-    if not args.device and (args.name or "") == "*" and not getattr(args, "menu", False):
+    if (
+        not args.device
+        and (args.name or "") == "*"
+        and not getattr(args, "menu", False)
+    ):
         print("No device specified — let's identify your knob.\n")
         sniffed = sniff_device(timeout=args.timeout)
         if sniffed is not None:
@@ -273,8 +279,9 @@ def sniff_device(timeout: float = 30.0) -> InputDevice | None:
             for dev in r:
                 for event in dev.read():
                     if event.type == E.EV_KEY and event.code in SCROLL_KEYS:
-                        print(f"✓ detected knob: {dev.name}  ({dev.path})\n",
-                              flush=True)
+                        print(
+                            f"✓ detected knob: {dev.name}  ({dev.path})\n", flush=True
+                        )
                         # Keep the found device open for the caller; remove it
                         # from the cleanup list so `finally` won't close it.
                         devs.remove(dev)
@@ -318,8 +325,9 @@ def pump(device: InputDevice, ui: UInput, flip: bool, pace: int = 1) -> None:
         ui.write(E.EV_REL, E.REL_WHEEL, step * pace)
         ui.write(E.EV_REL, E.REL_WHEEL_HI_RES, step * 120 * pace)
         ui.syn()
-        log.debug("scroll pace=%d (%+d) from key code 0x%02x", pace, step * pace,
-                  event.code)
+        log.debug(
+            "scroll pace=%d (%+d) from key code 0x%02x", pace, step * pace, event.code
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -370,18 +378,22 @@ def _mmsg(*args: str) -> None:
     if not os.environ.get("MANGO_INSTANCE_SIGNATURE"):
         try:
             # Find the mango process and its owner uid.
-            procs = subprocess.run(
-                ["pgrep", "-x", "mango"], capture_output=True, text=True
-            ).stdout.strip().splitlines()
+            procs = (
+                subprocess.run(["pgrep", "-x", "mango"], capture_output=True, text=True)
+                .stdout.strip()
+                .splitlines()
+            )
             if procs:
                 pid = procs[0]
                 # uid of the process that owns the socket
                 uid = subprocess.run(
                     ["stat", "-c", "%U", f"/proc/{pid}"],
-                    capture_output=True, text=True,
+                    capture_output=True,
+                    text=True,
                 ).stdout.strip()
                 # stat %U gives a name; map it to a numeric uid via pwd
                 import pwd
+
                 try:
                     uid_num = pwd.getpwnam(uid).pw_uid
                 except KeyError:
@@ -406,16 +418,16 @@ def temporarily_unbind_volume() -> tuple[str | None, list[str] | None]:
     """
     path = find_keybinds_conf()
     if path is None:
-        log.warning("could not find keybinds.conf; volume keys may still "
-                    "change volume")
+        log.warning("could not find keybinds.conf; volume keys may still change volume")
         return None, None
 
     try:
         with open(path, "r", encoding="utf-8") as fh:
             lines = fh.readlines()
     except OSError as exc:
-        log.warning("could not read %s (%s); volume keys may still change "
-                    "volume", path, exc)
+        log.warning(
+            "could not read %s (%s); volume keys may still change volume", path, exc
+        )
         return None, None
 
     changed = False
@@ -436,8 +448,9 @@ def temporarily_unbind_volume() -> tuple[str | None, list[str] | None]:
         with open(path, "w", encoding="utf-8") as fh:
             fh.writelines(new_lines)
     except OSError as exc:
-        log.warning("could not write %s (%s); volume keys may still change "
-                    "volume", path, exc)
+        log.warning(
+            "could not write %s (%s); volume keys may still change volume", path, exc
+        )
         return None, None
 
     # Reload MangoWM so the change takes effect.
@@ -456,8 +469,7 @@ def restore_volume_binds(path: str | None, original: list[str] | None) -> None:
         _mmsg("dispatch", "reload_config")
         log.info("restored volume keys in %s", path)
     except OSError as exc:
-        log.warning("could not restore %s (%s); please restore it manually",
-                    path, exc)
+        log.warning("could not restore %s (%s); please restore it manually", path, exc)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -467,8 +479,7 @@ def main(argv: list[str] | None = None) -> int:
         epilog="Example:\n  sudo python3 sound-scroller.py --name knob --verbose\n",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument(
-        "--device", help="Exact input path, e.g. /dev/input/event7.")
+    parser.add_argument("--device", help="Exact input path, e.g. /dev/input/event7.")
     parser.add_argument(
         "--name",
         default="*",
@@ -501,9 +512,7 @@ def main(argv: list[str] | None = None) -> int:
         default=30.0,
         help="Seconds to wait for knob activity when sniffing (default: 30).",
     )
-    parser.add_argument(
-        "-v", "--verbose", action="store_true", help="Verbose logging."
-    )
+    parser.add_argument("-v", "--verbose", action="store_true", help="Verbose logging.")
     args = parser.parse_args(argv)
 
     logging.basicConfig(
