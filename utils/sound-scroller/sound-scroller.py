@@ -355,6 +355,45 @@ def find_keybinds_conf() -> str | None:
     return None
 
 
+def _reload_mango() -> None:
+    """Reload MangoWM by injecting the SUPER+r key combo.
+
+    `SUPER+r` is bound to `reload_config` in keybinds.conf. We emit it
+    through a temporary virtual keyboard, which MangoWM receives and acts
+    on. This avoids the mmsg IPC socket entirely (which is hard to reach
+    under `sudo` because the env var is stripped).
+    """
+    import time as _time
+
+    try:
+        kbd = UInput(
+            {
+                E.EV_KEY: [E.KEY_LEFTMETA, E.KEY_R],
+            },
+            name="sound-scroller reload",
+            vendor=0x1234,
+            product=0x5678,
+            version=1,
+            bustype=E.BUS_VIRTUAL,
+        )
+    except OSError as exc:
+        log.warning("could not create reload keyboard (%s); config change "
+                    "may not take effect until you reload manually", exc)
+        return
+
+    try:
+        # Press SUPER, press R, release R, release SUPER.
+        kbd.write(E.EV_KEY, E.KEY_LEFTMETA, 1)
+        kbd.write(E.EV_KEY, E.KEY_R, 1)
+        kbd.syn()
+        _time.sleep(0.05)
+        kbd.write(E.EV_KEY, E.KEY_R, 0)
+        kbd.write(E.EV_KEY, E.KEY_LEFTMETA, 0)
+        kbd.syn()
+    finally:
+        kbd.destroy()
+
+
 def temporarily_unbind_volume() -> tuple[str | None, list[str] | None]:
     """Comment out the volume binds in keybinds.conf and reload MangoWM.
 
@@ -398,7 +437,7 @@ def temporarily_unbind_volume() -> tuple[str | None, list[str] | None]:
         return None, None
 
     # Reload MangoWM so the change takes effect.
-    os.system("mmsg dispatch reload_config")
+    _reload_mango()
     log.info("temporarily unbound volume keys in %s", path)
     return path, lines
 
@@ -410,7 +449,7 @@ def restore_volume_binds(path: str | None, original: list[str] | None) -> None:
     try:
         with open(path, "w", encoding="utf-8") as fh:
             fh.writelines(original)
-        os.system("mmsg dispatch reload_config")
+        _reload_mango()
         log.info("restored volume keys in %s", path)
     except OSError as exc:
         log.warning("could not restore %s (%s); please restore it manually",
