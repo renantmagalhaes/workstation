@@ -391,7 +391,7 @@ def _reload_mango() -> None:
         kbd.write(E.EV_KEY, E.KEY_LEFTMETA, 0)
         kbd.syn()
     finally:
-        kbd.destroy()
+        kbd.close()
 
 
 def temporarily_unbind_volume() -> tuple[str | None, list[str] | None]:
@@ -542,7 +542,7 @@ def main(argv: list[str] | None = None) -> int:
     finally:
         restore_volume_binds(cfg_path, cfg_original)
         knob.close()
-        ui.destroy()
+        ui.close()
 
     return 0
 
