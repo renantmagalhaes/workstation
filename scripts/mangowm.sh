@@ -373,6 +373,28 @@ else
   build_meson_project waybar https://github.com/Alexays/Waybar.git "$WAYBAR_REF" -Dtests=disabled
 fi
 
+# The built waybar installs over /usr/bin/waybar, which is owned by the
+# distro's own "waybar" package. zypper/apt track ownership, not content,
+# so the next `zypper dup` / `apt upgrade` overwrites our source-built
+# binary with the repo version (silently dropping the mango/* modules).
+# A package hold/lock tells the package manager to never touch waybar.
+echo "🔒 Preventing package manager from replacing the source-built waybar..."
+if [ "$OS" = "opensuse" ]; then
+  if ! zypper locks | grep -q waybar; then
+    sudo zypper addlock waybar
+    echo "✅ Locked waybar in zypper (use 'zypper removelock waybar' to unlock)"
+  else
+    echo "ℹ️ waybar already locked in zypper."
+  fi
+elif [ "$OS" = "debian" ]; then
+  if ! apt-mark showhold | grep -qx waybar; then
+    sudo apt-mark hold waybar
+    echo "✅ Held waybar in apt (use 'apt-mark unhold waybar' to unhold)"
+  else
+    echo "ℹ️ waybar already held in apt."
+  fi
+fi
+
 link_config() {
   SRC="$1"
   DEST="$2"
