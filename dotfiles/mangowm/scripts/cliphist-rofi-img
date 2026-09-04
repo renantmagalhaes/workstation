@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# Cliphist + Rofi clipboard launcher (previous clipboard manager for MangoWM).
+# Retained for reference; the active setup now uses CopyQ (see keybinds.conf).
+# Uncomment the SUPER+V / ALT+V binds in keybinds.conf to re-enable.
 
 tmp_dir="/tmp/cliphist"
 rm -rf "$tmp_dir"

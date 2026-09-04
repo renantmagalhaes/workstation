@@ -22,7 +22,8 @@ sudo flatpak install -y flathub md.obsidian.Obsidian
 ## Plex media player
 sudo flatpak install -y flathub tv.plex.PlexDesktop
 
-## CopyQ - Clipboard manager
+## CopyQ - Clipboard manager (used by mangoWM, Hyprland & niri dotfiles; native Wayland via portal)
+## Requires xdg-desktop-portal installed on the host for global shortcuts on Wayland.
 sudo flatpak install -y flathub com.github.hluk.copyq
 
 ## Save desktop1
