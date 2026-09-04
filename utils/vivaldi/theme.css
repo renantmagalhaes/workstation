@@ -5,3 +5,33 @@
   border-radius: var(--radius) !important;
   overflow: hidden !important;
 }
+
+/* ========================================================= */
+/* Keep the "Tabs" (TabButton) button pinned to the bottom   */
+/* of the left tab bar.                                      */
+/* Vivaldi 8.2 put the button inside .toolbar-tabbar-after   */
+/* along with a flexible spacer, which broke its position.   */
+/* Abs-olutely pinning it to the bar's bottom edge is the    */
+/* most reliable fix because that toolbar does not stretch   */
+/* to fill the bar's height on its own.                      */
+/* ========================================================= */
+
+/* Use the entire left tab bar as the anchoring context */
+#tabs-container.left {
+  position: relative !important;
+}
+
+/* Pin the Tabs button to the very bottom of the left bar */
+#tabs-container.left .toolbar-tabbar-after .button-toolbar.tabs-button {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  order: unset !important;
+  margin: 0 !important;
+  /* stay on top of the tab strip when it overlaps */
+  z-index: 5 !important;
+}
