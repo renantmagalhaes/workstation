@@ -219,6 +219,7 @@ elif [ "$OS" = "debian" ]; then
     libexpat1-dev \
     libffi-dev \
     libxml2-dev \
+    wlogout \
     libpciaccess-dev \
     bison
 fi
