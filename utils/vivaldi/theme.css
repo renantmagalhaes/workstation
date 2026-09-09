@@ -2,7 +2,9 @@
 .webview-container,
 #webpage-stack,
 .webpageview {
-  border-radius: var(--radius) !important;
+  border-radius: var(
+    --radius
+  ) !important;
   overflow: hidden !important;
 }
 
@@ -22,7 +24,9 @@
 }
 
 /* Pin the Tabs button to the very bottom of the left bar */
-#tabs-container.left .toolbar-tabbar-after .button-toolbar.tabs-button {
+#tabs-container.left
+  .toolbar-tabbar-after
+  .button-toolbar.tabs-button {
   position: absolute !important;
   bottom: 0 !important;
   left: 0 !important;
