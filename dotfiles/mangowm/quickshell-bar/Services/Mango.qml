@@ -5,12 +5,15 @@ import Quickshell.Io
 
 // MangoWM state, sourced from the compositor's JSON IPC socket via `mmsg`.
 //
-// `mmsg watch all-monitors` streams one newline-delimited snapshot of every
-// monitor on each change, so there is nothing to poll. Mango is a dwl
-// descendant and calls workspaces "tags"; we surface them as workspaces.
+// `mmsg watch <thing>` streams one newline-delimited snapshot per change, so
+// nothing is polled. Mango is a dwl descendant and calls workspaces "tags";
+// we surface them as workspaces.
 Singleton {
     id: root
 
+    readonly property string scriptDir: `${Quickshell.env("HOME")}/.dotfiles/mangowm/scripts`
+
+    // ---- Tags --------------------------------------------------------------
     // monitor name -> array of { index, is_active, is_urgent, layout, client_count }
     property var tagsByMonitor: ({})
     // monitor name -> true while that output is showing the overview
@@ -34,6 +37,35 @@ Singleton {
     // already-focused monitor is a no-op.
     function focusTag(monitor, index) {
         run(`mmsg dispatch focusmon,${monitor}; mmsg dispatch view,${index},1`);
+    }
+
+    // ---- Focused window ----------------------------------------------------
+    property var focusedClient: null
+
+    readonly property string windowTitle: focusedClient?.title ?? ""
+    readonly property string windowAppId: focusedClient?.appid ?? ""
+    readonly property string windowMonitor: focusedClient?.monitor ?? ""
+    readonly property bool windowFullscreen: focusedClient?.is_fullscreen ?? false
+    readonly property bool windowFloating: focusedClient?.is_floating ?? false
+    readonly property bool hasWindow: !!focusedClient && windowTitle !== ""
+
+    // ---- Window actions ----------------------------------------------------
+    function killActive() {
+        dispatch("killclient");
+    }
+
+    function toggleFullscreen() {
+        dispatch("togglefullscreen");
+    }
+
+    // Reuses the existing helper script, which already handles cycling through
+    // more than two outputs.
+    function moveToNextMonitor() {
+        run(`"${scriptDir}/move_window_next_monitor.sh"`);
+    }
+
+    function dispatch(command) {
+        run(`mmsg dispatch ${command}`);
     }
 
     function run(script) {
@@ -81,6 +113,25 @@ Singleton {
                 root.tagsByMonitor = tags;
                 root.overviewByMonitor = overview;
                 root.focusedMonitor = focused;
+            }
+        }
+    }
+
+    Process {
+        running: true
+        command: ["mmsg", "watch", "focusing-client"]
+
+        stdout: SplitParser {
+            splitMarker: "\n"
+            onRead: data => {
+                if (!data) return;
+                try {
+                    const parsed = JSON.parse(data);
+                    // An empty object / missing title means nothing is focused.
+                    root.focusedClient = parsed && parsed.title !== undefined ? parsed : null;
+                } catch (e) {
+                    root.focusedClient = null;
+                }
             }
         }
     }

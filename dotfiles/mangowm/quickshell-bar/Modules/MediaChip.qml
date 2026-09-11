@@ -1,19 +1,28 @@
 import QtQuick
 import "../Config"
 import "../Services"
+import "../Widgets"
 
+// Appears in the pill only while something is playable -- the island widening
+// when you start music is the whole point of the shape.
 Item {
     id: root
 
     property bool active: false
     signal activated
 
-    // Touchpads emit many small deltas; accumulate them so a gentle two-finger
-    // swipe doesn't slam the volume from 0 to 100.
-    property real wheelAccumulator: 0
+    readonly property bool present: Media.hasPlayer
 
-    implicitWidth: row.implicitWidth + Theme.capsulePadH * 2
+    implicitWidth: present ? row.implicitWidth + Theme.capsulePadH * 2 : 0
     implicitHeight: Theme.islandHeight
+    visible: present
+
+    Behavior on implicitWidth {
+        NumberAnimation {
+            duration: Theme.durIsland
+            easing.type: Easing.OutCubic
+        }
+    }
 
     Rectangle {
         anchors.fill: parent
@@ -33,12 +42,12 @@ Item {
         id: row
 
         anchors.centerIn: parent
-        spacing: 5
+        spacing: 6
 
         Text {
             anchors.verticalCenter: parent.verticalCenter
-            text: Audio.icon
-            color: Audio.muted ? Theme.urgent : Theme.fg
+            text: Media.playing ? "󰝚" : "󰏤"
+            color: Media.playing ? Theme.good : Theme.fgDim
             font.family: Theme.fontFamily; renderType: Text.QtRendering
             font.pixelSize: Theme.iconSize
 
@@ -49,13 +58,14 @@ Item {
             }
         }
 
-        Text {
+        ScrollingText {
             anchors.verticalCenter: parent.verticalCenter
-            text: Audio.muted ? "off" : Audio.percent + "%"
-            color: Audio.muted ? Theme.fgDim : Theme.fg
-            font.family: Theme.fontFamily; renderType: Text.QtRendering
-            font.pixelSize: Theme.fontSizeSmall
-            font.weight: Font.Medium
+            width: 150
+            height: Theme.islandHeight
+            text: Media.label
+            color: Theme.fg
+            pixelSize: Theme.fontSizeSmall
+            active: Media.playing
         }
     }
 
@@ -65,30 +75,21 @@ Item {
         anchors.fill: parent
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
-        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        acceptedButtons: Qt.LeftButton | Qt.MiddleButton
 
         onClicked: event => {
-            if (event.button === Qt.RightButton)
-                Audio.toggleMute();
+            if (event.button === Qt.MiddleButton)
+                Media.toggle();
             else
                 root.activated();
         }
 
         onWheel: wheel => {
             wheel.accepted = true;
-
-            const delta = wheel.angleDelta.y;
-            const isMouseWheel = Math.abs(delta) >= 120 && Math.abs(delta) % 120 === 0;
-
-            if (isMouseWheel) {
-                Audio.step(delta > 0 ? 0.05 : -0.05);
-                return;
-            }
-
-            root.wheelAccumulator += delta;
-            if (Math.abs(root.wheelAccumulator) < 120) return;
-            Audio.step(root.wheelAccumulator > 0 ? 0.02 : -0.02);
-            root.wheelAccumulator = 0;
+            if (wheel.angleDelta.y > 0)
+                Media.previous();
+            else
+                Media.next();
         }
     }
 }

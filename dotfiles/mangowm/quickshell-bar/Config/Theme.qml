@@ -31,7 +31,16 @@ Singleton {
 
     // ---- Metrics -----------------------------------------------------------
     readonly property int islandHeight: 34
-    readonly property int islandRadius: islandHeight / 2
+
+    // Squircle corners, not a pill: well short of islandHeight/2 so the shape
+    // reads as "between a square and a rounded corner". `squircleExponent` is
+    // the superellipse power -- 2 would be a plain circular round-rect.
+    readonly property int islandRadius: 12
+    readonly property real squircleExponent: 4.0
+
+    // Radius for small inner chips (hover backgrounds, tray slots), kept in the
+    // same family rather than fully round.
+    readonly property int chipRadius: 9
     readonly property int islandPadH: 8      // inner padding, left/right
     readonly property int topMargin: 6       // gap between screen edge and pill
     readonly property int glowPad: 10        // room under the pill for the shadow
@@ -45,7 +54,7 @@ Singleton {
 
     // Expanded pages. maxPanelHeight sizes the (transparent) layer surface, so
     // it must exceed the tallest page; it is never reserved as exclusive zone.
-    readonly property int panelRadius: 22
+    readonly property int panelRadius: 20
     readonly property int panelPad: 14
     readonly property int maxPanelHeight: 420
 
@@ -53,6 +62,12 @@ Singleton {
     readonly property int calendarHeight: 340
     readonly property int volumePageWidth: 300
     readonly property int volumePageHeight: 92
+    readonly property int mediaPageWidth: 380
+    readonly property int mediaPageHeight: 96
+    readonly property int systemPageWidth: 380
+    readonly property int systemPageHeight: 252
+    readonly property int sessionPageWidth: 348
+    readonly property int sessionPageHeight: 86
 
     // ---- Type --------------------------------------------------------------
     readonly property string fontFamily: "CaskaydiaCove Nerd Font"

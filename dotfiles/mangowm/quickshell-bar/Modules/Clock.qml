@@ -20,7 +20,7 @@ Item {
         anchors.fill: parent
         anchors.topMargin: 3
         anchors.bottomMargin: 3
-        radius: height / 2
+        radius: Theme.chipRadius
         color: root.active ? Theme.pressed : mouse.containsMouse ? Theme.hover : "transparent"
 
         Behavior on color {

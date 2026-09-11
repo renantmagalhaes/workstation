@@ -65,7 +65,7 @@ Item {
 
                 Rectangle {
                     anchors.fill: parent
-                    radius: height / 2
+                    radius: Theme.chipRadius
                     color: area.containsMouse ? Theme.hover : "transparent"
 
                     Behavior on color {
