@@ -1,0 +1,70 @@
+pragma Singleton
+
+import QtQuick
+import Quickshell
+
+Singleton {
+    id: root
+
+    // ---- Palette -----------------------------------------------------------
+    // "Dynamic Island": a near-opaque true-black pill that reads as a physical
+    // cutout in the screen rather than a translucent panel. Everything else is
+    // greyscale so colour is reserved for state (urgent / muted / active).
+    readonly property color islandBg: "#F2000000"      // 95% black
+    readonly property color islandBorder: "#1FFFFFFF"  // 12% white hairline
+    readonly property color glow: "#CC000000"
+
+    readonly property color fg: "#FFFFFF"
+    readonly property color fgDim: "#8E8E93"            // iOS secondaryLabel (dark)
+    readonly property color fgFaint: "#48484A"
+
+    readonly property color hover: "#1AFFFFFF"
+    readonly property color pressed: "#2EFFFFFF"
+
+    readonly property color urgent: "#FF453A"           // iOS systemRed (dark)
+    readonly property color good: "#30D158"             // iOS systemGreen (dark)
+
+    // Workspace dot states
+    readonly property color wsEmpty: "#3A3A3C"
+    readonly property color wsOccupied: "#8E8E93"
+    readonly property color wsActive: "#FFFFFF"
+
+    // ---- Metrics -----------------------------------------------------------
+    readonly property int islandHeight: 34
+    readonly property int islandRadius: islandHeight / 2
+    readonly property int islandPadH: 8      // inner padding, left/right
+    readonly property int topMargin: 6       // gap between screen edge and pill
+    readonly property int glowPad: 10        // room under the pill for the shadow
+    readonly property int sectionSpacing: 4
+
+    readonly property int capsuleHeight: islandHeight - 8
+    readonly property int capsuleRadius: capsuleHeight / 2
+    readonly property int capsulePadH: 10
+
+    readonly property int bottomGap: 4       // breathing room under the reserved strip
+
+    // Expanded pages. maxPanelHeight sizes the (transparent) layer surface, so
+    // it must exceed the tallest page; it is never reserved as exclusive zone.
+    readonly property int panelRadius: 22
+    readonly property int panelPad: 14
+    readonly property int maxPanelHeight: 420
+
+    readonly property int calendarWidth: 316
+    readonly property int calendarHeight: 340
+    readonly property int volumePageWidth: 300
+    readonly property int volumePageHeight: 92
+
+    // ---- Type --------------------------------------------------------------
+    readonly property string fontFamily: "CaskaydiaCove Nerd Font"
+    readonly property int fontSize: 12
+    readonly property int fontSizeSmall: 10
+    readonly property int iconSize: 14
+
+    // ---- Motion ------------------------------------------------------------
+    // The island's width animation is the signature effect: a soft overshoot so
+    // it feels like it is stretching rather than snapping.
+    readonly property int durSnappy: 180
+    readonly property int durNormal: 280
+    readonly property int durIsland: 420
+    readonly property real overshoot: 1.15
+}
