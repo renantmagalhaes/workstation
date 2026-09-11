@@ -39,25 +39,27 @@ Singleton {
         return (player?.dbusName ?? "").endsWith(".playerctld");
     }
 
+    // Selection is driven by *transitions*, not by polling who happens to be
+    // playing. A player that just started is what you are paying attention to,
+    // so it takes the chip even if something else is still playing -- otherwise
+    // a long-running player (Stremio) holds it forever and starting a YouTube
+    // video changes nothing. Pausing deliberately does not hand the chip away,
+    // which is what stops a pause from jumping to an unrelated player.
+    function promote(player) {
+        if (!player || !player.canControl || isProxy(player)) return;
+        root.active = player;
+        resolve();
+    }
+
     function resolve() {
         const all = Mpris.players?.values ?? [];
         const usable = all.filter(p => p?.canControl && !isProxy(p));
 
-        // Whatever we were already showing, if it is still around.
+        // Hold on to the current choice while it still exists; promote() is
+        // what moves it. Only when it disappears do we look for a replacement,
+        // preferring something that is actually playing.
         const keep = usable.indexOf(root.active) >= 0 ? root.active : null;
-        const playingNow = usable.find(p => p.isPlaying) ?? null;
-
-        // Prefer something actually playing, but never drift off the current
-        // player merely because it was paused. Falling back to usable[0] on
-        // every pause handed the chip to whichever unrelated player happened
-        // to be first in the list.
-        let chosen;
-        if (keep && keep.isPlaying)
-            chosen = keep;
-        else if (playingNow)
-            chosen = playingNow;
-        else
-            chosen = keep ?? usable[0] ?? null;
+        const chosen = keep ?? usable.find(p => p.isPlaying) ?? usable[0] ?? null;
 
         root.active = chosen;
         root.hasPlayer = !!chosen;
@@ -110,7 +112,13 @@ Singleton {
     Instantiator {
         model: Mpris.players
 
-        onObjectAdded: root.resolve()
+        // A player can appear already playing (open a tab that autoplays), in
+        // which case no isPlaying transition ever fires for us to catch.
+        onObjectAdded: (index, object) => {
+            const player = object?.modelData ?? null;
+            if (player?.isPlaying) root.promote(player);
+            else root.resolve();
+        }
         onObjectRemoved: root.resolve()
 
         delegate: Connections {
@@ -119,7 +127,10 @@ Singleton {
             target: modelData
             ignoreUnknownSignals: true
 
-            function onIsPlayingChanged() { root.resolve(); }
+            function onIsPlayingChanged() {
+                if (modelData.isPlaying) root.promote(modelData);
+                else root.resolve();
+            }
             function onPlaybackStateChanged() { root.resolve(); }
             function onTrackTitleChanged() { root.resolve(); }
             function onTrackArtistChanged() { root.resolve(); }
