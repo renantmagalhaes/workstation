@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Wayland
 import "Config"
+import "Services"
 
 // One island per monitor.
 //
@@ -53,6 +54,14 @@ Scope {
         // of the reserved strip, so any extra made the gap under the bar wider
         // than the gap at every other screen edge.
         exclusiveZone: Theme.topMargin + Theme.islandHeight
+
+        // Protocol-level idle inhibit (zwp_idle_inhibit_manager_v1). It must be
+        // attached to a real mapped window, which is why it lives here rather
+        // than in the service that owns the flag.
+        IdleInhibitor {
+            window: barWindow
+            enabled: Control.keepAwake
+        }
 
         mask: Region {
             // Collapsed: only the pill is clickable. Expanded: the whole

@@ -73,6 +73,9 @@ Singleton {
     readonly property int mediaPageHeight: 96
     readonly property int systemPageWidth: 380
     readonly property int systemPageHeight: 252
+    readonly property int controlPageWidth: 384
+    // Floor only -- the page reports its own height as lists open.
+    readonly property int controlPageHeight: 180
     readonly property int sessionPageWidth: 286
     readonly property int sessionPageHeight: 86
 

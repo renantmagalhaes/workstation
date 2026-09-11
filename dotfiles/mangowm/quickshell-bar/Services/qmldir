@@ -1,4 +1,5 @@
 singleton Paths 1.0 Paths.qml
+singleton Control 1.0 Control.qml
 singleton Mango 1.0 Mango.qml
 singleton Audio 1.0 Audio.qml
 singleton Media 1.0 Media.qml

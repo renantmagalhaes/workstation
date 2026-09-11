@@ -62,6 +62,8 @@ Item {
             return Theme.mediaPageWidth;
         case "system":
             return Theme.systemPageWidth;
+        case "control":
+            return Theme.controlPageWidth;
         case "session":
             return Theme.sessionPageWidth;
         }
@@ -78,6 +80,8 @@ Item {
             return Theme.mediaPageHeight;
         case "system":
             return Theme.systemPageHeight;
+        case "control":
+            return Theme.controlPageHeight;
         case "session":
             return Theme.sessionPageHeight;
         }
@@ -94,6 +98,8 @@ Item {
             return mediaChip;
         case "system":
             return statusChip;
+        case "control":
+            return controlButton;
         case "session":
             return powerButton;
         }
@@ -242,6 +248,13 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
             }
 
+            ControlButton {
+                id: controlButton
+                anchors.verticalCenter: parent.verticalCenter
+                active: root.page === "control"
+                onActivated: root.requestToggle("control")
+            }
+
             Separator {
                 visible: tray.hasItems
             }
@@ -353,6 +366,8 @@ Item {
                     return mediaPage;
                 case "system":
                     return systemPage;
+                case "control":
+                    return controlPage;
                 case "session":
                     return sessionPage;
                 }
@@ -378,6 +393,11 @@ Item {
         Component {
             id: systemPage
             SystemPage {}
+        }
+
+        Component {
+            id: controlPage
+            ControlPage {}
         }
 
         Component {

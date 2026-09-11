@@ -16,6 +16,11 @@ Singleton {
 
     readonly property bool ready: sink?.ready ?? false
 
+    // PipeWire allows boosting past 100%, and this machine's sink sits above
+    // it, so clamping to 1.0 would silently cap the user on first drag. The
+    // sliders are normalised against this.
+    readonly property real maxVolume: 1.5
+
     // ---- Output ------------------------------------------------------------
     readonly property real volume: sink?.audio?.volume ?? 0
     readonly property bool muted: sink?.audio?.muted ?? false
@@ -30,7 +35,7 @@ Singleton {
 
     function setVolume(value) {
         if (!sink?.audio) return;
-        sink.audio.volume = Math.max(0, Math.min(1, value));
+        sink.audio.volume = Math.max(0, Math.min(maxVolume, value));
     }
 
     function step(delta) {
@@ -51,7 +56,7 @@ Singleton {
 
     function setMicVolume(value) {
         if (!source?.audio) return;
-        source.audio.volume = Math.max(0, Math.min(1, value));
+        source.audio.volume = Math.max(0, Math.min(maxVolume, value));
     }
 
     function toggleMicMute() {
@@ -66,9 +71,33 @@ Singleton {
     readonly property var outputs: allNodes.filter(n => n?.audio && n.isSink && !n.isStream)
     readonly property var inputs: allNodes.filter(n => n?.audio && !n.isSink && !n.isStream)
 
+    // Per-application playback streams. Quickshell reports these as
+    // isStream && isSink; a recording stream would be isStream && !isSink.
+    readonly property var streams: allNodes.filter(n => n?.audio && n.isStream && n.isSink)
+
+    // Streams carry no nickname, and `description` is the raw client name
+    // ("mpv" for Stremio's internal player), so prefer the pipewire
+    // application.name property where it exists.
+    function streamName(node) {
+        const props = node?.properties ?? {};
+        return props["application.name"] || props["media.name"] || node?.description || node?.name || "Application";
+    }
+
     function displayName(node) {
         if (!node) return "";
         return node.nickname || node.description || node.name || "";
+    }
+
+    function streamPercent(node) {
+        return Math.round((node?.audio?.volume ?? 0) * 100);
+    }
+
+    function setStreamVolume(node, value) {
+        if (node?.audio) node.audio.volume = Math.max(0, Math.min(maxVolume, value));
+    }
+
+    function toggleStreamMute(node) {
+        if (node?.audio) node.audio.muted = !node.audio.muted;
     }
 
     function setOutput(node) {
@@ -80,6 +109,7 @@ Singleton {
     }
 
     PwObjectTracker {
-        objects: root.outputs.concat(root.inputs)
+        objects: root.outputs.concat(root.inputs).concat(root.streams)
     }
+
 }

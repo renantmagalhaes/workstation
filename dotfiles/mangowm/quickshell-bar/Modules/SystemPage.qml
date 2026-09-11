@@ -6,6 +6,8 @@ import "../Widgets"
 Item {
     id: root
 
+    implicitHeight: column.implicitHeight + Theme.panelPad * 2
+
     function tempColor(celsius) {
         if (celsius === null || celsius === undefined) return Theme.fg;
         if (celsius >= 80) return Theme.urgent;
@@ -18,8 +20,14 @@ Item {
     }
 
     Column {
-        anchors.fill: parent
-        anchors.margins: Theme.panelPad
+        id: column
+
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+            margins: Theme.panelPad
+        }
         spacing: 8
 
         // ---- Weather ---------------------------------------------------------
@@ -182,6 +190,48 @@ Item {
                 font.family: Theme.fontFamily; renderType: Text.QtRendering
                 font.pixelSize: Theme.fontSizeSmall
             }
+        }
+
+        Rectangle {
+            width: parent.width
+            height: 1
+            color: Theme.fgFaint
+            opacity: 0.5
+        }
+
+        // ---- Uptime and throughput -------------------------------------------
+        InfoRow {
+            width: parent.width
+            label: "UPTIME"
+            value: SystemInfo.uptimeText
+        }
+
+        InfoRow {
+            width: parent.width
+            label: "NET"
+            value: SystemInfo.iface === "" ? "no route" : `${SystemInfo.iface}   \u2193 ${SystemInfo.formatRate(SystemInfo.rxRate)}   \u2191 ${SystemInfo.formatRate(SystemInfo.txRate)}`
+        }
+
+        // ---- Identity ---------------------------------------------------------
+        InfoRow {
+            width: parent.width
+            label: "CPU"
+            value: SystemInfo.cpuModel
+            valueColor: Theme.fgDim
+        }
+
+        InfoRow {
+            width: parent.width
+            label: "GPU"
+            value: SystemInfo.gpuModel
+            valueColor: Theme.fgDim
+        }
+
+        InfoRow {
+            width: parent.width
+            label: "OS"
+            value: SystemInfo.osName === "" ? "" : `${SystemInfo.osName}  \u00b7  ${SystemInfo.kernel}`
+            valueColor: Theme.fgDim
         }
     }
 }

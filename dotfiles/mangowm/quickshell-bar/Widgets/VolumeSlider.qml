@@ -1,7 +1,8 @@
 import QtQuick
 import "../Config"
 
-// Icon button + draggable track, shared by the output and input rows.
+// Icon button + level track + readout, shared by the output, input and per-app
+// rows on the audio page.
 Item {
     id: root
 
@@ -9,6 +10,8 @@ Item {
     property bool muted: false
     property string icon: ""
     property string readout: ""
+    // Optional leading label used instead of a glyph (per-app rows).
+    property string label: ""
 
     signal requested(real value)
     signal muteToggled
@@ -20,7 +23,7 @@ Item {
 
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
-        width: 30
+        width: root.label !== "" ? 96 : 30
         height: 30
         radius: Theme.chipRadius
         color: muteArea.containsMouse ? Theme.hover : "transparent"
@@ -33,10 +36,27 @@ Item {
 
         Text {
             anchors.centerIn: parent
+            visible: root.label === ""
             text: root.icon
             color: root.muted ? Theme.urgent : Theme.fg
-            font.family: Theme.iconFamily; renderType: Text.QtRendering
+            font.family: Theme.iconFamily
+            renderType: Text.QtRendering
             font.pixelSize: Theme.iconSize
+        }
+
+        Text {
+            anchors.left: parent.left
+            anchors.leftMargin: 4
+            anchors.right: parent.right
+            anchors.rightMargin: 4
+            anchors.verticalCenter: parent.verticalCenter
+            visible: root.label !== ""
+            elide: Text.ElideRight
+            text: root.label
+            color: root.muted ? Theme.fgFaint : Theme.fgDim
+            font.family: Theme.fontFamily
+            renderType: Text.QtRendering
+            font.pixelSize: Theme.fontSizeSmall
         }
 
         MouseArea {
@@ -57,80 +77,21 @@ Item {
         width: 44
         text: root.readout
         color: root.muted ? Theme.fgFaint : Theme.fg
-        font.family: Theme.fontFamily; renderType: Text.QtRendering
+        font.family: Theme.fontFamily
+        renderType: Text.QtRendering
         font.pixelSize: Theme.fontSizeSmall
         font.weight: Font.Medium
     }
 
-    Item {
-        id: slider
-
+    LevelSlider {
         anchors.left: muteButton.right
         anchors.right: readoutLabel.left
         anchors.leftMargin: 10
         anchors.rightMargin: 10
         anchors.verticalCenter: parent.verticalCenter
-        height: 28
 
-        function applyFromX(x) {
-            root.requested(Math.max(0, Math.min(1, x / width)));
-        }
-
-        Rectangle {
-            id: track
-
-            anchors.verticalCenter: parent.verticalCenter
-            width: parent.width
-            height: 5
-            radius: 2.5
-            color: Theme.wsEmpty
-
-            Rectangle {
-                width: parent.width * Math.max(0, Math.min(1, root.value))
-                height: parent.height
-                radius: parent.radius
-                color: root.muted ? Theme.fgFaint : Theme.fg
-
-                Behavior on color {
-                    ColorAnimation {
-                        duration: Theme.durSnappy
-                    }
-                }
-            }
-        }
-
-        Rectangle {
-            x: track.width * Math.max(0, Math.min(1, root.value)) - width / 2
-            anchors.verticalCenter: parent.verticalCenter
-            width: 13
-            height: 13
-            radius: 6.5
-            color: Theme.fg
-            scale: sliderArea.containsMouse || sliderArea.pressed ? 1.2 : 1
-
-            Behavior on scale {
-                NumberAnimation {
-                    duration: Theme.durSnappy
-                    easing.type: Easing.OutCubic
-                }
-            }
-        }
-
-        MouseArea {
-            id: sliderArea
-
-            anchors.fill: parent
-            hoverEnabled: true
-            cursorShape: Qt.PointingHandCursor
-
-            onPressed: event => slider.applyFromX(event.x)
-            onPositionChanged: event => {
-                if (pressed) slider.applyFromX(event.x);
-            }
-            onWheel: wheel => {
-                wheel.accepted = true;
-                root.requested(Math.max(0, Math.min(1, root.value + (wheel.angleDelta.y > 0 ? 0.05 : -0.05))));
-            }
-        }
+        value: root.value
+        muted: root.muted
+        onRequested: v => root.requested(v)
     }
 }

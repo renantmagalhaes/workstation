@@ -43,11 +43,11 @@ Item {
 
         VolumeSlider {
             width: parent.width
-            value: Audio.volume
+            value: Audio.volume / Audio.maxVolume
             muted: Audio.muted
             icon: Audio.icon
             readout: Audio.muted ? "off" : Audio.percent + "%"
-            onRequested: value => Audio.setVolume(value)
+            onRequested: value => Audio.setVolume(value * Audio.maxVolume)
             onMuteToggled: Audio.toggleMute()
         }
 
@@ -79,11 +79,11 @@ Item {
 
         VolumeSlider {
             width: parent.width
-            value: Audio.micVolume
+            value: Audio.micVolume / Audio.maxVolume
             muted: Audio.micMuted
             icon: Audio.micIcon
             readout: Audio.micMuted ? "off" : Audio.micPercent + "%"
-            onRequested: value => Audio.setMicVolume(value)
+            onRequested: value => Audio.setMicVolume(value * Audio.maxVolume)
             onMuteToggled: Audio.toggleMicMute()
         }
 
@@ -94,6 +94,44 @@ Item {
             expanded: root.openSection === "input"
             onToggleRequested: root.toggle("input")
             onSelected: node => Audio.setInput(node)
+        }
+
+        // ---- Per-application mixer ------------------------------------------
+        // Only present while something is actually producing audio, so the page
+        // stays short when nothing is playing.
+        Rectangle {
+            width: parent.width
+            height: 1
+            color: Theme.fgFaint
+            opacity: 0.5
+            visible: Audio.streams.length > 0
+        }
+
+        Text {
+            text: "APPS"
+            color: Theme.fgFaint
+            font.family: Theme.fontFamily
+            renderType: Text.QtRendering
+            font.pixelSize: Theme.fontSizeSmall - 2
+            font.weight: Font.DemiBold
+            font.letterSpacing: 1
+            visible: Audio.streams.length > 0
+        }
+
+        Repeater {
+            model: Audio.streams
+
+            delegate: VolumeSlider {
+                required property var modelData
+
+                width: column.width
+                label: Audio.streamName(modelData)
+                value: (modelData?.audio?.volume ?? 0) / Audio.maxVolume
+                muted: modelData?.audio?.muted ?? false
+                readout: muted ? "off" : Audio.streamPercent(modelData) + "%"
+                onRequested: v => Audio.setStreamVolume(modelData, v * Audio.maxVolume)
+                onMuteToggled: Audio.toggleStreamMute(modelData)
+            }
         }
     }
 }

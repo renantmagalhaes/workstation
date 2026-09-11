@@ -24,6 +24,44 @@ Singleton {
     property bool canNext: false
     property bool canPrevious: false
 
+    // Every controllable, non-proxy player -- used by the page's picker so a
+    // choice can be forced instead of relying on auto-selection.
+    readonly property var players: (Mpris.players?.values ?? []).filter(p => p?.canControl && !isProxy(p))
+
+    // MPRIS position does not emit on its own, so it is poked on a timer while
+    // playing and read through a binding. Players that lie about support are
+    // gated on lengthSupported/positionSupported.
+    readonly property real duration: active?.lengthSupported ? Math.max(0, active.length) : 0
+    readonly property real position: active?.positionSupported ? Math.max(0, active.position) : 0
+    readonly property real progress: duration > 0 ? Math.max(0, Math.min(1, position / duration)) : 0
+    readonly property bool seekable: (active?.canSeek ?? false) && duration > 0
+
+    function seek(fraction) {
+        if (!seekable) return;
+        active.position = Math.max(0, Math.min(1, fraction)) * duration;
+    }
+
+    function pick(player) {
+        promote(player);
+    }
+
+    function formatTime(seconds) {
+        if (!seconds || seconds < 0 || !isFinite(seconds)) return "0:00";
+        const total = Math.floor(seconds);
+        const h = Math.floor(total / 3600);
+        const m = Math.floor((total % 3600) / 60);
+        const s = total % 60;
+        const mm = h > 0 ? String(m).padStart(2, "0") : String(m);
+        return (h > 0 ? `${h}:` : "") + `${mm}:${String(s).padStart(2, "0")}`;
+    }
+
+    Timer {
+        interval: 1000
+        repeat: true
+        running: root.playing && root.seekable
+        onTriggered: root.active?.positionChanged()
+    }
+
     // "Artist — Title", collapsing gracefully when a player exposes only one.
     readonly property string label: {
         if (!hasPlayer) return "";
