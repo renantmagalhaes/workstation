@@ -39,7 +39,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             text: Audio.icon
             color: Audio.muted ? Theme.urgent : Theme.fg
-            font.family: Theme.fontFamily; renderType: Text.QtRendering
+            font.family: Theme.iconFamily; renderType: Text.QtRendering
             font.pixelSize: Theme.iconSize
 
             Behavior on color {

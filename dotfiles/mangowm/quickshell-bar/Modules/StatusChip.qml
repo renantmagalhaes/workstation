@@ -44,7 +44,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             text: Weather.icon
             color: Theme.fg
-            font.family: Theme.fontFamily; renderType: Text.QtRendering
+            font.family: Theme.iconFamily; renderType: Text.QtRendering
             font.pixelSize: Theme.iconSize
         }
 
@@ -61,7 +61,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             text: "󰔏"
             color: root.tempColor(SystemInfo.peakTemp)
-            font.family: Theme.fontFamily; renderType: Text.QtRendering
+            font.family: Theme.iconFamily; renderType: Text.QtRendering
             font.pixelSize: Theme.iconSize
             visible: SystemInfo.peakTemp !== null
 

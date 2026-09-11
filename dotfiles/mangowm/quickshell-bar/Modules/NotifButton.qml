@@ -31,7 +31,7 @@ Item {
         anchors.centerIn: parent
         text: Notifs.icon
         color: Notifs.dnd ? Theme.fgFaint : Theme.fg
-        font.family: Theme.fontFamily; renderType: Text.QtRendering
+        font.family: Theme.iconFamily; renderType: Text.QtRendering
         font.pixelSize: Theme.iconSize
 
         Behavior on color {

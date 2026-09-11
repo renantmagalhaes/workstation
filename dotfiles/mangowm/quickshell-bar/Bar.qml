@@ -48,7 +48,11 @@ Scope {
         // height does not widen the reservation, so windows keep their
         // geometry whether or not a page is open.
         exclusionMode: ExclusionMode.Normal
-        exclusiveZone: Theme.topMargin + Theme.islandHeight + Theme.bottomGap
+        // Reserve exactly as far as the pill actually reaches. Adding padding
+        // here double-counts: mango applies its own outer gap (gappov) on top
+        // of the reserved strip, so any extra made the gap under the bar wider
+        // than the gap at every other screen edge.
+        exclusiveZone: Theme.topMargin + Theme.islandHeight
 
         mask: Region {
             // Collapsed: only the pill is clickable. Expanded: the whole

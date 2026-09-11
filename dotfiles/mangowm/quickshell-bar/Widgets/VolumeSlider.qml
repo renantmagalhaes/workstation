@@ -35,7 +35,7 @@ Item {
             anchors.centerIn: parent
             text: root.icon
             color: root.muted ? Theme.urgent : Theme.fg
-            font.family: Theme.fontFamily; renderType: Text.QtRendering
+            font.family: Theme.iconFamily; renderType: Text.QtRendering
             font.pixelSize: Theme.iconSize
         }
 

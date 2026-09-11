@@ -35,7 +35,7 @@ Item {
                 visible: Media.artUrl === ""
                 text: "󰝚"
                 color: Theme.fgFaint
-                font.family: Theme.fontFamily; renderType: Text.QtRendering
+                font.family: Theme.iconFamily; renderType: Text.QtRendering
                 font.pixelSize: 26
             }
         }

@@ -55,7 +55,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             text: "󰅀"
             color: Theme.fgDim
-            font.family: Theme.fontFamily; renderType: Text.QtRendering
+            font.family: Theme.iconFamily; renderType: Text.QtRendering
             font.pixelSize: Theme.fontSizeSmall
             rotation: root.expanded ? 0 : -90
 

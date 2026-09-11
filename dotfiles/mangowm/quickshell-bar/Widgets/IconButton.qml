@@ -35,7 +35,7 @@ Item {
         anchors.centerIn: parent
         text: root.glyph
         color: area.containsMouse && root.enabled ? root.accent : root.idleColor
-        font.family: Theme.fontFamily; renderType: Text.QtRendering
+        font.family: Theme.iconFamily; renderType: Text.QtRendering
         font.pixelSize: root.glyphSize
 
         Behavior on color {

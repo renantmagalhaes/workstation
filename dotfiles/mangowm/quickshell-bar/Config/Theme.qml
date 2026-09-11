@@ -50,7 +50,6 @@ Singleton {
     readonly property int capsuleRadius: capsuleHeight / 2
     readonly property int capsulePadH: 10
 
-    readonly property int bottomGap: 4       // breathing room under the reserved strip
 
     // Expanded pages. maxPanelHeight sizes the (transparent) layer surface, so
     // it must exceed the tallest page; it is never reserved as exclusive zone.
@@ -78,9 +77,14 @@ Singleton {
     readonly property int sessionPageHeight: 86
 
     // ---- Type --------------------------------------------------------------
-    readonly property string fontFamily: "CaskaydiaCove Nerd Font"
-    readonly property int fontSize: 12
-    readonly property int fontSizeSmall: 10
+    // Two families on purpose. Text is set in a UI sans -- a monospace coding
+    // face is hard to read at bar sizes -- while every icon in the bar is a
+    // Nerd Font glyph and has to stay on a font that actually contains them.
+    readonly property string fontFamily: "Adwaita Sans"
+    readonly property string iconFamily: "CaskaydiaCove Nerd Font"
+
+    readonly property int fontSize: 13
+    readonly property int fontSizeSmall: 11
     readonly property int iconSize: 14
 
     // ---- Motion ------------------------------------------------------------

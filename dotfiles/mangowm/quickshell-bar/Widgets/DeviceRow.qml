@@ -32,7 +32,7 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         text: root.selected ? "󰄬" : "󰧞"
         color: root.selected ? Theme.good : Theme.fgFaint
-        font.family: Theme.fontFamily; renderType: Text.QtRendering
+        font.family: Theme.iconFamily; renderType: Text.QtRendering
         font.pixelSize: Theme.fontSizeSmall
     }
 

@@ -31,7 +31,7 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 text: Weather.icon
                 color: Theme.fg
-                font.family: Theme.fontFamily; renderType: Text.QtRendering
+                font.family: Theme.iconFamily; renderType: Text.QtRendering
                 font.pixelSize: 32
             }
 
@@ -171,7 +171,7 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 text: Battery.icon
                 color: Battery.low ? Theme.urgent : Theme.fg
-                font.family: Theme.fontFamily; renderType: Text.QtRendering
+                font.family: Theme.iconFamily; renderType: Text.QtRendering
                 font.pixelSize: Theme.iconSize
             }
 

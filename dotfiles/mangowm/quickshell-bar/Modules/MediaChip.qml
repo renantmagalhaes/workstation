@@ -48,7 +48,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             text: Media.playing ? "󰝚" : "󰏤"
             color: Media.playing ? Theme.good : Theme.fgDim
-            font.family: Theme.fontFamily; renderType: Text.QtRendering
+            font.family: Theme.iconFamily; renderType: Text.QtRendering
             font.pixelSize: Theme.iconSize
 
             Behavior on color {

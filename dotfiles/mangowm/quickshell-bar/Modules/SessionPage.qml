@@ -63,7 +63,7 @@ Item {
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: cell.modelData.icon
                         color: cell.isArmed ? "#FFFFFF" : cell.modelData.destructive && area.containsMouse ? Theme.urgent : Theme.fg
-                        font.family: Theme.fontFamily; renderType: Text.QtRendering
+                        font.family: Theme.iconFamily; renderType: Text.QtRendering
                         font.pixelSize: 20
                     }
 
