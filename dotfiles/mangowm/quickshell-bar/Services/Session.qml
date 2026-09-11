@@ -3,7 +3,7 @@ pragma Singleton
 import Quickshell
 
 // Session actions. Commands are taken verbatim from the wlogout layout this
-// replaces (waybar/extra/wlogout/layout), plus suspend.
+// replaces (waybar/extra/wlogout/layout).
 Singleton {
     id: root
 
@@ -13,14 +13,6 @@ Singleton {
             label: "Lock",
             icon: "󰌾",
             command: ["hyprlock"],
-            confirm: false,
-            destructive: false
-        },
-        {
-            id: "suspend",
-            label: "Suspend",
-            icon: "󰒲",
-            command: ["systemctl", "suspend"],
             confirm: false,
             destructive: false
         },

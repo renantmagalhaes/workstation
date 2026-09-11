@@ -74,7 +74,7 @@ Singleton {
     readonly property int mediaPageHeight: 96
     readonly property int systemPageWidth: 380
     readonly property int systemPageHeight: 252
-    readonly property int sessionPageWidth: 348
+    readonly property int sessionPageWidth: 286
     readonly property int sessionPageHeight: 86
 
     // ---- Type --------------------------------------------------------------
