@@ -39,15 +39,22 @@ Scope {
             right: true
         }
 
-        implicitHeight: Theme.topMargin + Theme.maxPanelHeight + Theme.glowPad
+        implicitHeight: Theme.topMargin + Theme.islandHeight + Theme.panelGap + Theme.tailHeight + Theme.maxPanelHeight + Theme.glowPad
 
         // Reserve only the collapsed pill's strip, never the expanded panel, so
         // windows keep their geometry when the island opens.
         exclusionMode: ExclusionMode.Normal
         exclusiveZone: Theme.topMargin + Theme.islandHeight + Theme.bottomGap
 
+        // Mask the pill and the panel as two separate rectangles. Masking their
+        // bounding box instead would swallow clicks in the gap between them and
+        // in the empty space either side of the panel.
         mask: Region {
-            item: island
+            item: island.pillItem
+
+            Region {
+                item: root.expanded ? island.panelItem : null
+            }
         }
 
         Island {

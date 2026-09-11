@@ -1,150 +1,99 @@
 import QtQuick
 import "../Config"
 import "../Services"
+import "../Widgets"
 
+// Output and input volume plus device selection -- the island equivalent of
+// right-clicking waybar's pulseaudio module.
+//
+// Reports its own implicitHeight so the panel grows and shrinks as the device
+// lists open and close.
 Item {
     id: root
 
-    readonly property string deviceName: Audio.sink?.nickname || Audio.sink?.description || Audio.sink?.name || "No output"
+    // "" | "output" | "input" -- only one list open at a time.
+    property string openSection: ""
+
+    implicitHeight: column.implicitHeight + Theme.panelPad * 2
+
+    function toggle(section) {
+        openSection = openSection === section ? "" : section;
+    }
 
     Column {
-        anchors.fill: parent
-        anchors.margins: Theme.panelPad
-        spacing: 10
+        id: column
 
-        Item {
-            width: parent.width
-            height: 18
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+            margins: Theme.panelPad
+        }
+        spacing: 6
 
-            Text {
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-                width: parent.width - 46
-                elide: Text.ElideRight
-                text: root.deviceName
-                color: Theme.fgDim
-                font.family: Theme.fontFamily; renderType: Text.QtRendering
-                font.pixelSize: Theme.fontSizeSmall
-                font.weight: Font.Medium
-            }
-
-            Text {
-                anchors.right: parent.right
-                anchors.verticalCenter: parent.verticalCenter
-                text: Audio.muted ? "muted" : Audio.percent + "%"
-                color: Audio.muted ? Theme.urgent : Theme.fg
-                font.family: Theme.fontFamily; renderType: Text.QtRendering
-                font.pixelSize: Theme.fontSizeSmall
-                font.weight: Font.DemiBold
-            }
+        // ---- Output ----------------------------------------------------------
+        Text {
+            text: "OUTPUT"
+            color: Theme.fgFaint
+            font.family: Theme.fontFamily; renderType: Text.QtRendering
+            font.pixelSize: Theme.fontSizeSmall - 2
+            font.weight: Font.DemiBold
+            font.letterSpacing: 1
         }
 
-        Row {
+        VolumeSlider {
             width: parent.width
-            spacing: 10
+            value: Audio.volume
+            muted: Audio.muted
+            icon: Audio.icon
+            readout: Audio.muted ? "off" : Audio.percent + "%"
+            onRequested: value => Audio.setVolume(value)
+            onMuteToggled: Audio.toggleMute()
+        }
 
-            Rectangle {
-                id: muteButton
+        AudioDeviceSelector {
+            width: parent.width
+            devices: Audio.outputs
+            current: Audio.sink
+            expanded: root.openSection === "output"
+            onToggleRequested: root.toggle("output")
+            onSelected: node => Audio.setOutput(node)
+        }
 
-                anchors.verticalCenter: parent.verticalCenter
-                width: 30
-                height: 30
-                radius: 15
-                color: muteArea.containsMouse ? Theme.hover : "transparent"
+        Rectangle {
+            width: parent.width
+            height: 1
+            color: Theme.fgFaint
+            opacity: 0.5
+        }
 
-                Behavior on color {
-                    ColorAnimation {
-                        duration: Theme.durSnappy
-                    }
-                }
+        // ---- Input -----------------------------------------------------------
+        Text {
+            text: "INPUT"
+            color: Theme.fgFaint
+            font.family: Theme.fontFamily; renderType: Text.QtRendering
+            font.pixelSize: Theme.fontSizeSmall - 2
+            font.weight: Font.DemiBold
+            font.letterSpacing: 1
+        }
 
-                Text {
-                    anchors.centerIn: parent
-                    text: Audio.icon
-                    color: Audio.muted ? Theme.urgent : Theme.fg
-                    font.family: Theme.fontFamily; renderType: Text.QtRendering
-                    font.pixelSize: Theme.iconSize
-                }
+        VolumeSlider {
+            width: parent.width
+            value: Audio.micVolume
+            muted: Audio.micMuted
+            icon: Audio.micIcon
+            readout: Audio.micMuted ? "off" : Audio.micPercent + "%"
+            onRequested: value => Audio.setMicVolume(value)
+            onMuteToggled: Audio.toggleMicMute()
+        }
 
-                MouseArea {
-                    id: muteArea
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: Audio.toggleMute()
-                }
-            }
-
-            Item {
-                id: slider
-
-                anchors.verticalCenter: parent.verticalCenter
-                width: parent.width - muteButton.width - parent.spacing
-                height: 28
-
-                function applyFromX(x) {
-                    Audio.setVolume(Math.max(0, Math.min(1, x / width)));
-                }
-
-                Rectangle {
-                    id: track
-
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: parent.width
-                    height: 6
-                    radius: 3
-                    color: Theme.wsEmpty
-
-                    Rectangle {
-                        width: parent.width * Audio.volume
-                        height: parent.height
-                        radius: parent.radius
-                        color: Audio.muted ? Theme.fgFaint : Theme.fg
-
-                        Behavior on color {
-                            ColorAnimation {
-                                duration: Theme.durSnappy
-                            }
-                        }
-                    }
-                }
-
-                Rectangle {
-                    id: knob
-
-                    x: track.width * Audio.volume - width / 2
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: 14
-                    height: 14
-                    radius: 7
-                    color: Theme.fg
-                    scale: sliderArea.containsMouse || sliderArea.pressed ? 1.2 : 1
-
-                    Behavior on scale {
-                        NumberAnimation {
-                            duration: Theme.durSnappy
-                            easing.type: Easing.OutCubic
-                        }
-                    }
-                }
-
-                MouseArea {
-                    id: sliderArea
-
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-
-                    onPressed: event => slider.applyFromX(event.x)
-                    onPositionChanged: event => {
-                        if (pressed) slider.applyFromX(event.x);
-                    }
-                    onWheel: wheel => {
-                        Audio.step(wheel.angleDelta.y > 0 ? 0.05 : -0.05);
-                        wheel.accepted = true;
-                    }
-                }
-            }
+        AudioDeviceSelector {
+            width: parent.width
+            devices: Audio.inputs
+            current: Audio.source
+            expanded: root.openSection === "input"
+            onToggleRequested: root.toggle("input")
+            onSelected: node => Audio.setInput(node)
         }
     }
 }

@@ -9,6 +9,10 @@ import QtQuick.Shapes
 // `exponent` controls the corner: 2 is exactly a circular round-rect, higher
 // values push the curve outward toward the corner, reading as "between a square
 // and a rounded corner". 4 is the usual squircle.
+//
+// Optionally grows a speech-bubble tail out of the top edge, so a detached
+// panel can point back at the thing that opened it. When `tailHeight > 0` the
+// body starts at y = tailHeight and the tail occupies the strip above it.
 Item {
     id: root
 
@@ -20,14 +24,20 @@ Item {
     // Points per corner. 16 is indistinguishable from a curve at bar sizes.
     property int segments: 16
 
+    property real tailHeight: 0
+    property real tailWidth: 18
+    property real tailX: width / 2
+
     readonly property var outline: buildOutline()
 
     function buildOutline() {
         const w = width;
         const h = height;
-        if (w <= 0 || h <= 0) return [];
+        const top = Math.max(0, tailHeight);
+        const bodyHeight = h - top;
+        if (w <= 0 || bodyHeight <= 0) return [];
 
-        const r = Math.max(0, Math.min(radius, Math.min(w, h) / 2));
+        const r = Math.max(0, Math.min(radius, Math.min(w, bodyHeight) / 2));
         const n = Math.max(2, exponent);
         const segs = Math.max(4, segments);
         const points = [];
@@ -47,10 +57,26 @@ Item {
 
         // Clockwise from the left edge. Straight sections are implied by the
         // polyline joining consecutive quadrant endpoints.
-        quadrant(r, r, -1, -1, false);          // top-left:     (0, r) -> (r, 0)
-        quadrant(w - r, r, 1, -1, true);        // top-right:    (w-r, 0) -> (w, r)
-        quadrant(w - r, h - r, 1, 1, false);    // bottom-right: (w, h-r) -> (w-r, h)
-        quadrant(r, h - r, -1, 1, true);        // bottom-left:  (r, h) -> (0, h-r)
+        quadrant(r, top + r, -1, -1, false);          // top-left
+
+        if (top > 0 && tailWidth > 0) {
+            const half = tailWidth / 2;
+            // Keep the tail clear of the corners even if the anchor sits at the
+            // very edge of the panel.
+            const cx = Math.max(r + half, Math.min(w - r - half, tailX));
+            const steps = 12;
+            for (let i = 0; i <= steps; i++) {
+                const t = i / steps;
+                // Quadratic with the control point mirrored above the edge, so
+                // x advances linearly while y traces top*(1-2t)^2 -- a smooth
+                // tail whose tip just touches y = 0.
+                points.push(Qt.point(cx - half + tailWidth * t, top * Math.pow(1 - 2 * t, 2)));
+            }
+        }
+
+        quadrant(w - r, top + r, 1, -1, true);        // top-right
+        quadrant(w - r, h - r, 1, 1, false);          // bottom-right
+        quadrant(r, h - r, -1, 1, true);              // bottom-left
 
         // Close the outline so the stroke joins cleanly.
         points.push(points[0]);

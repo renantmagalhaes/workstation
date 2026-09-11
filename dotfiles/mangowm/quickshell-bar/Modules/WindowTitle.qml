@@ -12,7 +12,30 @@ Item {
     id: root
 
     readonly property bool present: Mango.hasWindow
-    readonly property bool showActions: hover.hovered && present
+
+    // Hover intent, not raw hover: sweeping the pointer across the bar used to
+    // flash the actions on and off. Showing needs a deliberate pause, and
+    // leaving keeps them a moment longer so crossing a gap doesn't drop them.
+    property bool showActions: false
+
+    Timer {
+        id: revealTimer
+        interval: 350
+        onTriggered: root.showActions = true
+    }
+
+    Timer {
+        id: concealTimer
+        interval: 220
+        onTriggered: root.showActions = false
+    }
+
+    onPresentChanged: {
+        if (present) return;
+        revealTimer.stop();
+        concealTimer.stop();
+        showActions = false;
+    }
 
     // Resolve a real themed icon from the appid instead of a hand-maintained
     // glyph table. Mango appids are often reverse-DNS (com.stremio.Stremio),
@@ -75,7 +98,14 @@ Item {
         return title;
     }
 
-    implicitWidth: present ? (showActions ? actionRow.implicitWidth : titleRow.implicitWidth) + Theme.capsulePadH : 0
+    // Collapses to the action buttons on hover. The pill is centre-aligned, so
+    // shrinking here leaves this module's own centre where it was and only
+    // pulls its edges in -- which is what makes the stable hover zone below
+    // work.
+    readonly property real restWidth: titleRow.implicitWidth + Theme.capsulePadH
+    readonly property real activeWidth: actionRow.implicitWidth + Theme.capsulePadH
+
+    implicitWidth: present ? (showActions ? activeWidth : restWidth) : 0
     implicitHeight: Theme.islandHeight
     visible: present
 
@@ -89,6 +119,37 @@ Item {
     // HoverHandler rather than a MouseArea: it keeps reporting hovered while
     // the pointer is over the action buttons, so they don't flicker away as
     // soon as you reach for them.
+    // Hover is judged against the widest state, not the current one. Otherwise
+    // revealing the buttons shrinks the module out from under the pointer, which
+    // conceals them, which grows it back -- a slow blink instead of a fast one.
+    // This zone is centred on the module and never changes size, so it stays
+    // put in screen space no matter which face is showing.
+    readonly property bool pointerNear: hover.hovered || zoneHover.hovered
+
+    onPointerNearChanged: {
+        if (pointerNear && present) {
+            concealTimer.stop();
+            revealTimer.restart();
+        } else {
+            revealTimer.stop();
+            concealTimer.restart();
+        }
+    }
+
+    Item {
+        id: hoverZone
+
+        anchors.centerIn: parent
+        width: Math.max(root.restWidth, root.activeWidth)
+        height: parent.height
+
+        HoverHandler {
+            id: zoneHover
+        }
+    }
+
+    // Kept as well: a MouseArea on a child button blocks hover from reaching a
+    // sibling's handler, so the zone alone would drop out over the buttons.
     HoverHandler {
         id: hover
     }

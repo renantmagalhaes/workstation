@@ -56,12 +56,20 @@ Singleton {
     // it must exceed the tallest page; it is never reserved as exclusive zone.
     readonly property int panelRadius: 20
     readonly property int panelPad: 14
-    readonly property int maxPanelHeight: 420
+    readonly property int maxPanelHeight: 460
+
+    // The panel is detached from the pill and points back at whichever chip
+    // opened it, so it reads as a popover rather than part of the bar.
+    readonly property int panelGap: 8
+    readonly property int tailHeight: 8
+    readonly property int tailWidth: 20
 
     readonly property int calendarWidth: 316
     readonly property int calendarHeight: 340
-    readonly property int volumePageWidth: 300
-    readonly property int volumePageHeight: 92
+    readonly property int volumePageWidth: 384
+    // Floor only -- the audio page reports its own height, which grows when a
+    // device list is expanded.
+    readonly property int volumePageHeight: 150
     readonly property int mediaPageWidth: 380
     readonly property int mediaPageHeight: 96
     readonly property int systemPageWidth: 380
