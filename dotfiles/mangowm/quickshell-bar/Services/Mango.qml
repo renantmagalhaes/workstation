@@ -11,14 +11,15 @@ import Quickshell.Io
 Singleton {
     id: root
 
-    readonly property string scriptDir: `${Quickshell.env("HOME")}/.dotfiles/mangowm/scripts`
-
     // ---- Tags --------------------------------------------------------------
     // monitor name -> array of { index, is_active, is_urgent, layout, client_count }
     property var tagsByMonitor: ({})
     // monitor name -> true while that output is showing the overview
     property var overviewByMonitor: ({})
     property string focusedMonitor: ""
+
+    // Output names in the order mango reports them, used to cycle windows.
+    property var monitorNames: []
 
     // Only tags 1-5 are bound to keys in keybinds.conf, so the rest are noise.
     readonly property int visibleTags: 5
@@ -58,10 +59,17 @@ Singleton {
         dispatch("togglefullscreen");
     }
 
-    // Reuses the existing helper script, which already handles cycling through
-    // more than two outputs.
+    // Cycle the focused window to the next output. Done from the streamed
+    // monitor list rather than shelling out: the old waybar helper lived under
+    // waybar/scripts (which this bar is replacing) and only ever picked the
+    // first *inactive* output, so it could not cycle past two monitors.
     function moveToNextMonitor() {
-        run(`"${scriptDir}/move_window_next_monitor.sh"`);
+        const names = monitorNames;
+        if (names.length < 2) return;
+
+        const current = names.indexOf(focusedMonitor);
+        const next = names[(current + 1) % names.length];
+        if (next && next !== focusedMonitor) dispatch(`tagmon,${next}`);
     }
 
     function dispatch(command) {
@@ -97,9 +105,11 @@ Singleton {
 
                 const tags = {};
                 const overview = {};
+                const names = [];
                 let focused = root.focusedMonitor;
 
                 for (const monitor of parsed.monitors) {
+                    names.push(monitor.name);
                     tags[monitor.name] = monitor.tags ?? [];
 
                     // Mango reports active_tags [] or [0] while the overview is
@@ -112,6 +122,7 @@ Singleton {
 
                 root.tagsByMonitor = tags;
                 root.overviewByMonitor = overview;
+                root.monitorNames = names;
                 root.focusedMonitor = focused;
             }
         }

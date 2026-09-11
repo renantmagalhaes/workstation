@@ -21,7 +21,7 @@ echo "$raw" | jq -c --arg configured "$location" '
     ok: true,
     # What the user asked for, if anything. wttr.in reports the nearest named
     # locality, which for a rural request is some neighbouring hamlet nobody
-    # recognises ("Bocado" for Arganil) -- so prefer this for display.
+    # recognises -- so prefer this for display.
     configured: $configured,
     tempC:    ($c.temp_C        | tonumber? // null),
     feelsC:   ($c.FeelsLikeC    | tonumber? // null),
