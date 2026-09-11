@@ -3,11 +3,20 @@ import Quickshell
 import Quickshell.Wayland
 import "Config"
 
-// One island per monitor, plus its dismiss catcher.
+// One island per monitor.
 //
-// Both are top-level layer surfaces, so they live side by side in a Scope
-// rather than nested -- a PanelWindow cannot be a visual child of another
-// window. The open page is owned here because both surfaces depend on it.
+// The surface covers the whole output and is fully transparent; `mask` narrows
+// input down to just the visible pill, so everything else stays click-through.
+// When a page opens the mask widens to the entire output, and the dismiss area
+// underneath the island picks up any click that misses the panel.
+//
+// This used to be two surfaces, with a separate full-screen catcher. That
+// cannot work here: the island has to sit on the Top layer (mango draws a
+// fullscreen client above Top but below Overlay, which is what lets a
+// maximised window cover the bar), and two surfaces on the *same* layer cannot
+// be reliably ordered -- the catcher maps later than the island, so it always
+// ended up on top and swallowed clicks meant for the panel. Inside one window,
+// declaration order settles it for good.
 Scope {
     id: root
 
@@ -17,19 +26,13 @@ Scope {
     property string page: ""
     readonly property bool expanded: page !== ""
 
-    // The island. A fixed, oversized, fully transparent canvas sized to the
-    // largest state the island can reach; only the inner surface morphs, so the
-    // compositor never resizes or re-centres a surface mid-animation. `mask`
-    // narrows input back to the visible pill so the rest stays click-through.
     PanelWindow {
+        id: barWindow
+
         screen: root.modelData
         color: "transparent"
 
-        // Overlay, not Top: the island must stay visible over fullscreen
-        // windows, and it has to outrank the catcher below. Surfaces in the
-        // same layer stack in creation order, which would otherwise let the
-        // catcher swallow clicks meant for the expanded page.
-        WlrLayershell.layer: WlrLayer.Overlay
+        WlrLayershell.layer: WlrLayer.Top
         WlrLayershell.namespace: "quickshell-island"
         WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
 
@@ -39,22 +42,30 @@ Scope {
             right: true
         }
 
-        implicitHeight: Theme.topMargin + Theme.islandHeight + Theme.panelGap + Theme.tailHeight + Theme.maxPanelHeight + Theme.glowPad
+        implicitHeight: root.modelData.height
 
-        // Reserve only the collapsed pill's strip, never the expanded panel, so
-        // windows keep their geometry when the island opens.
+        // Reserve only the collapsed pill's strip. The surface being full
+        // height does not widen the reservation, so windows keep their
+        // geometry whether or not a page is open.
         exclusionMode: ExclusionMode.Normal
         exclusiveZone: Theme.topMargin + Theme.islandHeight + Theme.bottomGap
 
-        // Mask the pill and the panel as two separate rectangles. Masking their
-        // bounding box instead would swallow clicks in the gap between them and
-        // in the empty space either side of the panel.
         mask: Region {
-            item: island.pillItem
+            // Collapsed: only the pill is clickable. Expanded: the whole
+            // output, so a click anywhere lands either on the panel or on the
+            // dismiss area below it.
+            item: root.expanded ? null : island.pillItem
+            width: root.expanded ? barWindow.width : 0
+            height: root.expanded ? barWindow.height : 0
+        }
 
-            Region {
-                item: root.expanded ? island.panelItem : null
-            }
+        // Declared before the island, so the island and its panel sit above it
+        // and take their own clicks first.
+        MouseArea {
+            anchors.fill: parent
+            enabled: root.expanded
+            acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
+            onPressed: root.page = ""
         }
 
         Island {
@@ -66,38 +77,6 @@ Scope {
 
             anchors.horizontalCenter: parent.horizontalCenter
             y: Theme.topMargin
-        }
-    }
-
-    // Click-anywhere-to-dismiss. Mapped only while a page is open, so nothing
-    // full-screen sits on the Top layer at rest.
-    PanelWindow {
-        screen: root.modelData
-        visible: root.expanded
-        color: "transparent"
-
-        WlrLayershell.layer: WlrLayer.Top
-        WlrLayershell.namespace: "quickshell-island-dismiss"
-        WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
-        exclusionMode: ExclusionMode.Ignore
-
-        anchors {
-            top: true
-            left: true
-            right: true
-            bottom: true
-        }
-
-        // Anchoring all four edges is not enough to size a layer surface --
-        // without an explicit size it maps as 0x0 and silently swallows
-        // nothing. Take the dimensions straight from the output.
-        implicitWidth: root.modelData.width
-        implicitHeight: root.modelData.height
-
-        MouseArea {
-            anchors.fill: parent
-            acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
-            onPressed: root.page = ""
         }
     }
 }
