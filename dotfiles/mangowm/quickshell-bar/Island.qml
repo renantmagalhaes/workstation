@@ -186,6 +186,13 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
             }
 
+            // Sits with the workspace dots rather than behind a separator:
+            // both are about what is on this tag.
+            ScrollArrows {
+                monitorName: root.monitorName
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
             Separator {
                 visible: windowTitle.present
             }

@@ -20,6 +20,10 @@ Singleton {
 
     // Output names in the order mango reports them, used to cycle windows.
     property var monitorNames: []
+    // monitor name -> layout symbol ("S" is the horizontal scroller)
+    property var layoutByMonitor: ({})
+    // monitor name -> output width in px
+    property var widthByMonitor: ({})
 
     // Only tags 1-5 are bound to keys in keybinds.conf, so the rest are noise.
     readonly property int visibleTags: 5
@@ -46,6 +50,7 @@ Singleton {
     readonly property string windowTitle: focusedClient?.title ?? ""
     readonly property string windowAppId: focusedClient?.appid ?? ""
     readonly property string windowMonitor: focusedClient?.monitor ?? ""
+    readonly property int windowWidth: focusedClient?.width ?? 0
     readonly property bool windowFullscreen: focusedClient?.is_fullscreen ?? false
     readonly property bool windowFloating: focusedClient?.is_floating ?? false
     readonly property bool hasWindow: !!focusedClient && windowTitle !== ""
@@ -70,6 +75,44 @@ Singleton {
         const current = names.indexOf(focusedMonitor);
         const next = names[(current + 1) % names.length];
         if (next && next !== focusedMonitor) dispatch(`tagmon,${next}`);
+    }
+
+    // ---- Scroller layout ---------------------------------------------------
+    // The "S" layout scrolls windows horizontally, so some sit off screen with
+    // nothing on the bar to say so. This mirrors the rule the old waybar
+    // indicator used: three or more windows on the active tag always overflow,
+    // and exactly two overflow when the focused one nearly fills the output.
+    readonly property int scrollSlack: 40
+
+    function activeTagClients(monitor) {
+        let total = 0;
+        for (const tag of tagsFor(monitor))
+            if (tag.is_active) total += tag.client_count ?? 0;
+        return total;
+    }
+
+    function scrollableOn(monitor) {
+        if ((layoutByMonitor[monitor] ?? "") !== "S") return false;
+        if (inOverview(monitor)) return false;
+
+        const clients = activeTagClients(monitor);
+        if (clients >= 3) return true;
+        if (clients !== 2) return false;
+
+        // The two-window case needs the focused window's width, which is only
+        // known for the output that actually owns it.
+        if (windowMonitor !== monitor) return false;
+
+        const outputWidth = widthByMonitor[monitor] ?? 0;
+        return windowWidth > 0 && outputWidth > 0 && outputWidth - windowWidth <= scrollSlack;
+    }
+
+    function focusPrev() {
+        dispatch("focusstack,prev");
+    }
+
+    function focusNext() {
+        dispatch("focusstack,next");
     }
 
     function dispatch(command) {
@@ -106,10 +149,14 @@ Singleton {
                 const tags = {};
                 const overview = {};
                 const names = [];
+                const layouts = {};
+                const widths = {};
                 let focused = root.focusedMonitor;
 
                 for (const monitor of parsed.monitors) {
                     names.push(monitor.name);
+                    layouts[monitor.name] = monitor.layout_symbol ?? "";
+                    widths[monitor.name] = monitor.width ?? 0;
                     tags[monitor.name] = monitor.tags ?? [];
 
                     // Mango reports active_tags [] or [0] while the overview is
@@ -123,6 +170,8 @@ Singleton {
                 root.tagsByMonitor = tags;
                 root.overviewByMonitor = overview;
                 root.monitorNames = names;
+                root.layoutByMonitor = layouts;
+                root.widthByMonitor = widths;
                 root.focusedMonitor = focused;
             }
         }
