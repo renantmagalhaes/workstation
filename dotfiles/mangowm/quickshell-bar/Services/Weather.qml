@@ -17,6 +17,16 @@ Singleton {
     property string description: ""
     property string location: ""
 
+    // $WEATHER_LOCATION, when set. IP geolocation is useless behind a VPN, and
+    // there is no other automatic source on this machine (geoclue just falls
+    // back to the same GeoIP answer), so an explicit location is the only way
+    // to get the right forecast. Empty means "geolocate by IP".
+    property string configured: ""
+
+    // Prefer the configured name: wttr.in reports the nearest named locality,
+    // which for a rural request is a neighbouring hamlet nobody recognises.
+    readonly property string displayLocation: configured || location
+
     // World Weather Online condition codes, as used by wttr.in.
     readonly property string icon: {
         if (!ok) return "󰅤";
@@ -50,6 +60,7 @@ Singleton {
                     root.code = parsed.code ?? 0;
                     root.description = parsed.desc ?? "";
                     root.location = parsed.location ?? "";
+                    root.configured = parsed.configured ?? "";
                 } catch (e) {
                     root.ok = false;
                 }

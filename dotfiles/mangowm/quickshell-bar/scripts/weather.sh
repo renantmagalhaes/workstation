@@ -15,10 +15,14 @@ if [ -z "$raw" ]; then
   exit 0
 fi
 
-echo "$raw" | jq -c '
+echo "$raw" | jq -c --arg configured "$location" '
   (.current_condition[0]) as $c |
   {
     ok: true,
+    # What the user asked for, if anything. wttr.in reports the nearest named
+    # locality, which for a rural request is some neighbouring hamlet nobody
+    # recognises ("Bocado" for Arganil) -- so prefer this for display.
+    configured: $configured,
     tempC:    ($c.temp_C        | tonumber? // null),
     feelsC:   ($c.FeelsLikeC    | tonumber? // null),
     humidity: ($c.humidity      | tonumber? // null),

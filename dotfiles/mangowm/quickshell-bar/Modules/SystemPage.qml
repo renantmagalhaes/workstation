@@ -63,7 +63,7 @@ Item {
                 Text {
                     width: parent.width
                     elide: Text.ElideRight
-                    text: Weather.ok ? `${Weather.location}  ·  feels ${Weather.feelsC}°  ·  ${Weather.humidity}%  ·  ${Weather.windKmph} km/h` : "No weather data"
+                    text: Weather.ok ? `${Weather.displayLocation}  ·  feels ${Weather.feelsC}°  ·  ${Weather.humidity}%  ·  ${Weather.windKmph} km/h` : "No weather data"
                     color: Theme.fgFaint
                     font.family: Theme.fontFamily; renderType: Text.QtRendering
                     font.pixelSize: Theme.fontSizeSmall - 1
