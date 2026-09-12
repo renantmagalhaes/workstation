@@ -6,7 +6,6 @@
 # sudo setfacl -m g:input:rw /dev/uinput
 import asyncio
 import argparse
-import os
 import sys
 import logging
 import signal
@@ -25,65 +24,49 @@ def setup_logging(debug=False):
     )
     return logging.getLogger(__name__)
 
-def find_mouse_device():
-    """Find the best mouse device automatically"""
-    try:
-        devices = list_devices()
-        mouse_candidates = []
+REL_HWHEEL_HI_RES = getattr(EC, "REL_HWHEEL_HI_RES", 12)
 
-        for device_path in devices:
-            try:
-                device = InputDevice(device_path)
-                device_name = device.name.lower()
+# Our own uinput device, skipped so we never read back what we inject.
+UINPUT_NAME = "edge-virtual-kbd"
 
-                # Check if device has mouse capabilities
-                has_wheel = False
-                has_rel = False
-                try:
-                    caps = device.capabilities
-                    if isinstance(caps, dict) and EC.EV_REL in caps:
-                        rel_caps = caps[EC.EV_REL]
-                        has_wheel = EC.REL_WHEEL in rel_caps or EC.REL_HWHEEL in rel_caps
-                        has_rel = True
-                except (AttributeError, TypeError):
-                    pass
+# How often to look for a newly plugged-in mouse.
+RESCAN_INTERVAL_S = 5
 
-                # Score devices based on name and capabilities
-                score = 0
-                if "mouse" in device_name:
-                    score += 10
-                if "logitech" in device_name:
-                    score += 5
-                if has_wheel:
-                    score += 3
-                if has_rel:
-                    score += 1
+def find_hwheel_devices():
+    """Open every input device that reports a horizontal wheel.
 
-                if score > 0:
-                    mouse_candidates.append((score, device_path, device.name))
+    Scoring a single "best" mouse by name broke whenever the mouse was
+    swapped: generic mice tie with each other, so the winner came down to
+    device enumeration order. Reading all of them removes the guess, and
+    the debounce below collapses duplicates when a composite device
+    reports the same notch twice.
+    """
+    devices = []
+    for device_path in list_devices():
+        try:
+            device = InputDevice(device_path)
+        except (OSError, PermissionError):
+            continue
 
-            except (OSError, PermissionError):
-                continue
-            except Exception as e:
-                logging.debug(f"Error checking device {device_path}: {e}")
-                continue
+        try:
+            rel_caps = device.capabilities().get(EC.EV_REL, [])
+        except (AttributeError, TypeError, OSError):
+            device.close()
+            continue
 
-        if mouse_candidates:
-            mouse_candidates.sort(key=lambda x: x[0], reverse=True)
-            best_score, best_path, best_name = mouse_candidates[0]
-            logging.info(f"Found {len(mouse_candidates)} mouse candidates, best: {best_name} (score: {best_score})")
-            return best_path, best_name
+        has_hwheel = EC.REL_HWHEEL in rel_caps or REL_HWHEEL_HI_RES in rel_caps
+        if has_hwheel and device.name != UINPUT_NAME:
+            devices.append(device)
+        else:
+            device.close()
 
-    except Exception as e:
-        logging.warning(f"Error scanning devices: {e}")
-
-    return None, None
+    return devices
 
 def make_uinput(use_shift_for_plus=False):
     keys = {EC.KEY_LEFTCTRL, EC.KEY_MINUS, EC.KEY_EQUAL}
     if use_shift_for_plus:
         keys.add(EC.KEY_LEFTSHIFT)
-    return UInput({EC.EV_KEY: list(keys)}, name="edge-virtual-kbd", bustype=0x03)
+    return UInput({EC.EV_KEY: list(keys)}, name=UINPUT_NAME, bustype=0x03)
 
 def press_combo(ui, codes):
     for c in codes:
@@ -123,44 +106,21 @@ async def main():
     args = ap.parse_args()
     logger = setup_logging(args.debug)
 
-    device_path = args.device
-    if not device_path:
-        logger.info("Auto-detecting mouse device...")
-        device_path, device_name = find_mouse_device()
-        if device_path:
-            logger.info(f"Found mouse device: {device_path} ({device_name})")
-        else:
-            logger.error("No suitable mouse device found. Please specify --device manually.")
+    if args.device:
+        try:
+            devices = [InputDevice(args.device)]
+        except Exception as err:
+            logger.error(f"Failed to open {args.device}: {err}")
             sys.exit(1)
+        logger.info(f"Using specified device: {args.device}")
     else:
-        logger.info(f"Using specified device: {device_path}")
-
-    dev = None
-    max_retries = 3
-    fallback_attempts = 0
-    max_fallback_attempts = 3
-
-    while dev is None and fallback_attempts < max_fallback_attempts:
-        for attempt in range(max_retries):
-            try:
-                dev = InputDevice(device_path)
-                logger.info(f"Successfully opened device: {device_path}")
-                break
-            except Exception as err:
-                logger.warning(f"Attempt {attempt + 1}/{max_retries} failed to open {device_path}: {err}")
-                if attempt == max_retries - 1:
-                    logger.warning(f"Failed to open {device_path} after all retries")
-                    break
-                await asyncio.sleep(1)
-
-        if dev is None:
-            fallback_attempts += 1
-            if fallback_attempts < max_fallback_attempts:
-                logger.info(f"Trying alternative device...")
-                device_path, device_name = find_mouse_device()
-            else:
-                logger.error("Failed to open any mouse device.")
-                sys.exit(1)
+        logger.info("Scanning for devices with a horizontal wheel...")
+        devices = find_hwheel_devices()
+        if not devices:
+            logger.error("No horizontal-wheel device found. Check /dev/input permissions.")
+            sys.exit(1)
+        for device in devices:
+            logger.info(f"Watching {device.path} ({device.name})")
 
     try:
         ui = make_uinput(args.use_shift_for_plus)
@@ -171,36 +131,79 @@ async def main():
 
     last_horiz_ts = 0.0
     debounce_horiz = args.horiz_debounce_ms / 1000.0
-    REL_HWHEEL_HI_RES = getattr(EC, "REL_HWHEEL_HI_RES", 12)
 
-    logger.info(f"Starting global horizontal wheel zoom daemon with device={device_path}")
+    def handle(ev):
+        nonlocal last_horiz_ts
 
-    async for ev in dev.async_read_loop():
-        if ev.type == EC.EV_REL and ev.code in (EC.REL_HWHEEL, REL_HWHEEL_HI_RES):
-            v = ev.value
-            if ev.code == REL_HWHEEL_HI_RES:
-                v = -1 if v < 0 else (1 if v > 0 else 0)
-            if args.invert_hwheel:
-                v = -v
+        if ev.type != EC.EV_REL or ev.code not in (EC.REL_HWHEEL, REL_HWHEEL_HI_RES):
+            return
 
-            now = time.monotonic()
-            if now - last_horiz_ts < debounce_horiz:
-                continue
-            last_horiz_ts = now
+        v = ev.value
+        if ev.code == REL_HWHEEL_HI_RES:
+            v = -1 if v < 0 else (1 if v > 0 else 0)
+        if args.invert_hwheel:
+            v = -v
 
+        now = time.monotonic()
+        if now - last_horiz_ts < debounce_horiz:
+            return
+        last_horiz_ts = now
+
+        try:
+            if v < 0:
+                seq = [EC.KEY_LEFTCTRL]
+                if args.use_shift_for_plus:
+                    seq.append(EC.KEY_LEFTSHIFT)
+                seq.append(EC.KEY_EQUAL)
+                press_combo(ui, seq)
+                logger.debug("hwheel left  -> Ctrl++")
+            elif v > 0:
+                press_combo(ui, [EC.KEY_LEFTCTRL, EC.KEY_MINUS])
+                logger.debug("hwheel right -> Ctrl+-")
+        except Exception as e:
+            logger.error(f"Error processing horizontal wheel: {e}")
+
+    async def pump(device):
+        """Feed one device's events to the handler until it goes away."""
+        try:
+            async for ev in device.async_read_loop():
+                handle(ev)
+        except OSError:
+            logger.info(f"Device disconnected: {device.path} ({device.name})")
+        except Exception as e:
+            logger.error(f"Read loop failed for {device.path}: {e}")
+        finally:
             try:
-                if v < 0:
-                    seq = [EC.KEY_LEFTCTRL]
-                    if args.use_shift_for_plus:
-                        seq.append(EC.KEY_LEFTSHIFT)
-                    seq.append(EC.KEY_EQUAL)
-                    press_combo(ui, seq)
-                    logger.debug("hwheel left  -> Ctrl++")
-                elif v > 0:
-                    press_combo(ui, [EC.KEY_LEFTCTRL, EC.KEY_MINUS])
-                    logger.debug("hwheel right -> Ctrl+-")
-            except Exception as e:
-                logger.error(f"Error processing horizontal wheel: {e}")
+                device.close()
+            except Exception:
+                pass
+
+    watched = {d.path: asyncio.create_task(pump(d)) for d in devices}
+    logger.info(f"Starting horizontal wheel zoom daemon on {len(watched)} device(s)")
+
+    # Rescan so a mouse plugged in later is picked up without a restart.
+    while True:
+        await asyncio.sleep(RESCAN_INTERVAL_S)
+
+        for path, task in list(watched.items()):
+            if task.done():
+                del watched[path]
+
+        if args.device:
+            if not watched:
+                logger.error(f"Specified device {args.device} is gone. Exiting.")
+                sys.exit(1)
+            continue
+
+        for device in find_hwheel_devices():
+            if device.path in watched:
+                device.close()
+                continue
+            logger.info(f"Watching {device.path} ({device.name})")
+            watched[device.path] = asyncio.create_task(pump(device))
+
+        if not watched:
+            logger.warning("No horizontal-wheel device present; waiting for one.")
 
 def signal_handler(signum, frame):
     sys.exit(0)
