@@ -36,3 +36,4 @@ Plex,flatpak run tv.plex.PlexDesktop,plex
 
 ^tag(extra-menu)
 Mouse Battery Level,~/.config/mango/scripts/mouse-battery.sh,input-mouse
+INZONE Buds Battery Level,~/.config/mango/scripts/inzone-battery-notify.sh,audio-headphones

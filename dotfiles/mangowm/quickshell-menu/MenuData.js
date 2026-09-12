@@ -33,6 +33,11 @@ var extraMenu = [
         label: "Mouse Battery Level",
         icon: "input-mouse",
         command: `"$HOME/.dotfiles/mangowm/scripts/mouse-battery.sh"`
+    },
+    {
+        label: "INZONE Buds Battery Level",
+        icon: "audio-headphones",
+        command: `"$HOME/.dotfiles/mangowm/scripts/inzone-battery-notify.sh"`
     }
 ];
 

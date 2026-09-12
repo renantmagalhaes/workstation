@@ -88,9 +88,11 @@ extra_menu() {
     local sel
     sel=$(show_menu "Extra Options" \
         "← Back|go-previous" \
-        "Mouse Battery Level|input-mouse")
+        "Mouse Battery Level|input-mouse" \
+        "INZONE Buds Battery Level|audio-headphones")
     case "$sel" in
     "Mouse Battery Level") "$HOME/.dotfiles/mangowm/scripts/mouse-battery.sh" & ;;
+    "INZONE Buds Battery Level") "$HOME/.dotfiles/mangowm/scripts/inzone-battery-notify.sh" & ;;
     "← Back") main_menu ;;
     esac
 }

@@ -18,4 +18,11 @@ dotfiles/tmux/plugins/*
 !dotfiles/tmux/plugins/.gitkeep
 dotfiles/tmux/plugins/tpm_log.txt
 
+# Python bytecode cache, at any depth (no leading slash = matches every level)
+__pycache__/
+*.py[cod]
+
+# Scratch files dropped by the shell's cd hook, at any depth
+.tmp
+
 ## END

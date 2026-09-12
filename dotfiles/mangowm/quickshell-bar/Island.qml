@@ -244,6 +244,15 @@ Item {
                 onActivated: root.requestToggle("system")
             }
 
+            Separator {
+                visible: budsChip.present
+            }
+
+            BudsChip {
+                id: budsChip
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
             NotifButton {
                 anchors.verticalCenter: parent.verticalCenter
             }

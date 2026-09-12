@@ -4,6 +4,7 @@ singleton Mango 1.0 Mango.qml
 singleton Audio 1.0 Audio.qml
 singleton Media 1.0 Media.qml
 singleton Battery 1.0 Battery.qml
+singleton InzoneBuds 1.0 InzoneBuds.qml
 singleton Weather 1.0 Weather.qml
 singleton SystemInfo 1.0 SystemInfo.qml
 singleton Notifs 1.0 Notifs.qml

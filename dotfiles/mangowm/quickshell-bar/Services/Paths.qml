@@ -14,4 +14,10 @@ Singleton {
     function script(name) {
         return configDir + "scripts/" + name;
     }
+
+    // Helpers that live with the rest of the MangoWM scripts rather than with
+    // the bar, so the bar can reuse them instead of keeping a second copy.
+    function sharedScript(name) {
+        return configDir + "../scripts/" + name;
+    }
 }

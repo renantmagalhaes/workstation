@@ -434,19 +434,29 @@ fi
 
 if [ -d "$DOTFILES_DIR/mangowm/scripts" ]; then
   chmod +x "$DOTFILES_DIR/mangowm/scripts/"*.sh
+  chmod +x "$DOTFILES_DIR/mangowm/scripts/"*.py
 fi
 
-echo "🖱️ Installing ProtoArc EM01 NL udev rule (mouse battery query access)..."
-UDEV_RULE_SRC="$DOTFILES_DIR/mangowm/udev/99-protoarc-mouse.rules"
-UDEV_RULE_DEST="/etc/udev/rules.d/99-protoarc-mouse.rules"
-if [ -f "$UDEV_RULE_SRC" ]; then
-  if cmp -s "$UDEV_RULE_SRC" "$UDEV_RULE_DEST" 2>/dev/null; then
-    echo "ℹ️ udev rule already up to date, skipping."
-  else
-    sudo cp "$UDEV_RULE_SRC" "$UDEV_RULE_DEST"
+echo "🔌 Installing udev rules (ProtoArc mouse + INZONE Buds battery access)..."
+UDEV_RULE_DIR="$DOTFILES_DIR/mangowm/udev"
+if [ -d "$UDEV_RULE_DIR" ]; then
+  udev_rules_changed=0
+  for rule_src in "$UDEV_RULE_DIR"/*.rules; do
+    [ -e "$rule_src" ] || continue
+    rule_name="$(basename "$rule_src")"
+    rule_dest="/etc/udev/rules.d/$rule_name"
+    if cmp -s "$rule_src" "$rule_dest" 2>/dev/null; then
+      echo "ℹ️ $rule_name already up to date, skipping."
+    else
+      sudo cp "$rule_src" "$rule_dest"
+      echo "✅ $rule_name installed"
+      udev_rules_changed=1
+    fi
+  done
+  if [ "$udev_rules_changed" -eq 1 ]; then
     sudo udevadm control --reload-rules
     sudo udevadm trigger
-    echo "✅ udev rule installed"
+    echo "🔄 udev rules reloaded"
   fi
 fi
 

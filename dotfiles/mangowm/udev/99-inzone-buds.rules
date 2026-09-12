@@ -1,0 +1,5 @@
+# Grants the "input" group (and the active seat via uaccess) read access to the
+# Sony INZONE Buds USB dongle's hidraw node (VID 054c / PID 0ec2). Needed so
+# scripts/inzone-battery.py can listen for the dongle's battery reports without
+# sudo, since it runs unattended as a daemon from startup.conf.
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="054c", ATTRS{idProduct}=="0ec2", MODE="0660", GROUP="input", TAG+="uaccess"

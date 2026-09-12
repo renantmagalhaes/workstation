@@ -192,6 +192,29 @@ Item {
             }
         }
 
+        // ---- INZONE Buds (separate from Battery: UPower cannot see them) -----
+        Row {
+            width: parent.width
+            spacing: 6
+            visible: InzoneBuds.present
+
+            Text {
+                anchors.verticalCenter: parent.verticalCenter
+                text: InzoneBuds.iconFor(InzoneBuds.worst)
+                color: InzoneBuds.low ? Theme.urgent : Theme.fg
+                font.family: Theme.iconFamily; renderType: Text.QtRendering
+                font.pixelSize: Theme.iconSize
+            }
+
+            Text {
+                anchors.verticalCenter: parent.verticalCenter
+                text: `INZONE Buds  ${InzoneBuds.summary}`
+                color: InzoneBuds.low ? Theme.urgent : Theme.fgDim
+                font.family: Theme.fontFamily; renderType: Text.QtRendering
+                font.pixelSize: Theme.fontSizeSmall
+            }
+        }
+
         Rectangle {
             width: parent.width
             height: 1
