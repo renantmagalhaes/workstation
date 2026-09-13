@@ -1,6 +1,7 @@
 pragma Singleton
 
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.Pipewire
 
 // Default sink/source plus the list of selectable devices.
@@ -62,6 +63,29 @@ Singleton {
     function toggleMicMute() {
         if (!source?.audio) return;
         source.audio.muted = !source.audio.muted;
+    }
+
+    readonly property bool hasSource: !!source
+
+    // ---- Input activity ----------------------------------------------------
+    // PipeWire publishes volume and mute but no level, so showing real
+    // microphone activity means measuring an actual capture stream -- see
+    // scripts/miclevel.py.
+    //
+    // Deliberately gated on the mute state: muting the microphone releases the
+    // capture entirely rather than just blanking the meter, so a muted mic is
+    // genuinely closed and the device is free to suspend.
+    property real micLevel: 0
+
+    Process {
+        running: root.hasSource && !root.micMuted
+        command: [Paths.script("miclevel.py")]
+
+        stdout: SplitParser {
+            onRead: line => root.micLevel = parseFloat(line) || 0
+        }
+
+        onRunningChanged: if (!running) root.micLevel = 0
     }
 
     // ---- Devices -----------------------------------------------------------
