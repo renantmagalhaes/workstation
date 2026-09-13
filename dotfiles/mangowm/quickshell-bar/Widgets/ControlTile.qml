@@ -24,7 +24,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         radius: Theme.chipRadius + 2
-        color: root.expanded ? Theme.pressed : area.containsMouse ? Theme.hover : "#14FFFFFF"
+        color: root.expanded ? Theme.pressed : area.containsMouse ? Theme.hover : Theme.tint
 
         Behavior on color {
             ColorAnimation {
@@ -42,7 +42,7 @@ Item {
         width: 32
         height: 32
         radius: Theme.chipRadius
-        color: root.checked ? Theme.fg : "#1AFFFFFF"
+        color: root.checked ? Theme.accent : Theme.hover
 
         Behavior on color {
             ColorAnimation {
@@ -53,7 +53,7 @@ Item {
         Text {
             anchors.centerIn: parent
             text: root.glyph
-            color: root.checked ? "#000000" : Theme.fgDim
+            color: root.checked ? Theme.onAccent : Theme.fgDim
             font.family: Theme.iconFamily
             renderType: Text.QtRendering
             font.pixelSize: Theme.iconSize

@@ -62,7 +62,7 @@ Item {
                     Text {
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: cell.modelData.icon
-                        color: cell.isArmed ? "#FFFFFF" : cell.modelData.destructive && area.containsMouse ? Theme.urgent : Theme.fg
+                        color: cell.isArmed ? Theme.onAccent : cell.modelData.destructive && area.containsMouse ? Theme.urgent : Theme.fg
                         font.family: Theme.iconFamily; renderType: Text.QtRendering
                         font.pixelSize: 20
                     }
@@ -70,7 +70,7 @@ Item {
                     Text {
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: cell.isArmed ? "Confirm?" : cell.modelData.label
-                        color: cell.isArmed ? "#FFFFFF" : Theme.fgDim
+                        color: cell.isArmed ? Theme.onAccent : Theme.fgDim
                         font.family: Theme.fontFamily; renderType: Text.QtRendering
                         font.pixelSize: Theme.fontSizeSmall - 2
                         font.weight: Font.Medium

@@ -171,7 +171,7 @@ Item {
                 }
                 GradientStop {
                     position: 0.5
-                    color: "#26FFFFFF"
+                    color: Theme.highlight
                 }
                 GradientStop {
                     position: 1.0

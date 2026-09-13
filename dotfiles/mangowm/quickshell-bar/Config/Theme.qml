@@ -7,27 +7,50 @@ Singleton {
     id: root
 
     // ---- Palette -----------------------------------------------------------
-    // "Dynamic Island": a near-opaque true-black pill that reads as a physical
-    // cutout in the screen rather than a translucent panel. Everything else is
-    // greyscale so colour is reserved for state (urgent / muted / active).
-    readonly property color islandBg: "#F2000000"      // 95% black
-    readonly property color islandBorder: "#1FFFFFFF"  // 12% white hairline
-    readonly property color glow: "#CC000000"
+    // Composed from the selected entry in Palettes plus the blur preference.
+    // Nothing here is hardcoded so a new scheme needs no changes outside
+    // Palettes.qml.
+    readonly property var palette: Palettes.byId(Settings.theme)
 
-    readonly property color fg: "#FFFFFF"
-    readonly property color fgDim: "#8E8E93"            // iOS secondaryLabel (dark)
-    readonly property color fgFaint: "#48484A"
+    // Palette entries are hex strings. Assigning them to a `color` property is
+    // what converts them; Qt.alpha() needs a real colour, not a string.
+    readonly property color baseBg: palette.bg
+    readonly property color baseBorder: palette.border
 
-    readonly property color hover: "#1AFFFFFF"
-    readonly property color pressed: "#2EFFFFFF"
+    readonly property color fg: palette.fg
+    readonly property color fgDim: palette.fgDim
+    readonly property color fgFaint: palette.fgFaint
+    readonly property color accent: palette.accent
 
-    readonly property color urgent: "#FF453A"           // iOS systemRed (dark)
-    readonly property color good: "#30D158"             // iOS systemGreen (dark)
+    // Background alpha is the whole difference between the solid and blurred
+    // looks: with blur on, the compositor's backdrop blur shows through the
+    // translucency; with it off the pill reads as a solid cutout.
+    readonly property color islandBg: Qt.alpha(baseBg, Settings.blur ? palette.blurAlpha : palette.solidAlpha)
+    readonly property color islandBorder: Qt.alpha(baseBorder, palette.borderAlpha)
+
+    // Interaction states are derived from the foreground so they land correctly
+    // on every scheme instead of assuming a black background.
+    readonly property color hover: Qt.alpha(fg, 0.10)
+    readonly property color pressed: Qt.alpha(fg, 0.18)
+    readonly property color tint: Qt.alpha(fg, 0.07)
+    readonly property color highlight: Qt.alpha(fg, 0.15)
+
+    readonly property color urgent: palette.urgent
+    readonly property color good: palette.good
+    readonly property color warn: palette.warn
 
     // Workspace dot states
-    readonly property color wsEmpty: "#3A3A3C"
-    readonly property color wsOccupied: "#8E8E93"
-    readonly property color wsActive: "#FFFFFF"
+    readonly property color wsEmpty: palette.wsEmpty
+    readonly property color wsOccupied: palette.wsOccupied
+    readonly property color wsActive: palette.accent
+
+    // Readable ink for text sitting on an accent-filled shape.
+    readonly property color onAccent: foregroundFor(accent)
+
+    function foregroundFor(candidate) {
+        const luminance = 0.2126 * candidate.r + 0.7152 * candidate.g + 0.0722 * candidate.b;
+        return luminance > 0.53 ? "#12121A" : "#FFFFFF";
+    }
 
     // ---- Metrics -----------------------------------------------------------
     readonly property int islandHeight: 34

@@ -13,7 +13,7 @@ Item {
     function tempColor(celsius) {
         if (celsius === null || celsius === undefined) return Theme.fgDim;
         if (celsius >= 80) return Theme.urgent;
-        if (celsius >= 65) return "#F4C46B";
+        if (celsius >= 65) return Theme.warn;
         return Theme.fgDim;
     }
 

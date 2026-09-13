@@ -169,7 +169,7 @@ Item {
                     Text {
                         anchors.centerIn: parent
                         text: cell.modelData.day
-                        color: cell.modelData.today ? "#000000" : cell.modelData.inMonth ? Theme.fg : Theme.fgFaint
+                        color: cell.modelData.today ? Theme.onAccent : cell.modelData.inMonth ? Theme.fg : Theme.fgFaint
                         font.family: Theme.fontFamily; renderType: Text.QtRendering
                         font.pixelSize: Theme.fontSizeSmall + 1
                         font.weight: cell.modelData.today ? Font.Bold : Font.Medium

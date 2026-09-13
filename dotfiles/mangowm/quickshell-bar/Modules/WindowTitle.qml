@@ -207,13 +207,13 @@ Item {
 
         IconButton {
             glyph: Mango.windowFullscreen ? "󰊔" : "󰊓"
-            accent: "#F1C40F"
+            accent: Theme.warn
             onActivated: Mango.toggleFullscreen()
         }
 
         IconButton {
             glyph: "󰍺"
-            accent: "#2ECC71"
+            accent: Theme.good
             onActivated: Mango.moveToNextMonitor()
         }
 

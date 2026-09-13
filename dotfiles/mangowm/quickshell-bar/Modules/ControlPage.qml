@@ -143,7 +143,7 @@ Item {
                     width: (root.width - Theme.panelPad * 2 - 8) / 3
                     height: 24
                     radius: Theme.chipRadius
-                    color: segment.current ? Theme.pressed : segmentArea.containsMouse ? Theme.hover : "#14FFFFFF"
+                    color: segment.current ? Theme.pressed : segmentArea.containsMouse ? Theme.hover : Theme.tint
 
                     Behavior on color {
                         ColorAnimation {
@@ -171,6 +171,17 @@ Item {
                     }
                 }
             }
+        }
+
+        Rectangle {
+            width: parent.width
+            height: 1
+            color: Theme.fgFaint
+            opacity: 0.5
+        }
+
+        ThemePicker {
+            width: parent.width
         }
     }
 }

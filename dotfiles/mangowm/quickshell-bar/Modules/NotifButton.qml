@@ -57,7 +57,7 @@ Item {
 
             anchors.centerIn: parent
             text: Notifs.count > 9 ? "9+" : Notifs.count
-            color: "#FFFFFF"
+            color: Theme.onAccent
             font.family: Theme.fontFamily; renderType: Text.QtRendering
             font.pixelSize: 8
             font.weight: Font.Bold
