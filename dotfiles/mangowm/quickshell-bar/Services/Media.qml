@@ -15,6 +15,10 @@ Singleton {
     id: root
 
     property var active: null
+    // Whether `active` was chosen because something actually happened (a player
+    // started, or the user picked it) as opposed to being a fallback guess made
+    // while nothing was known to be playing. Only a deliberate choice is sticky.
+    property bool deliberate: false
     property bool hasPlayer: false
     property bool playing: false
     property string title: ""
@@ -86,6 +90,7 @@ Singleton {
     function promote(player) {
         if (!player || !player.canControl || isProxy(player)) return;
         root.active = player;
+        root.deliberate = true;
         resolve();
     }
 
@@ -93,12 +98,24 @@ Singleton {
         const all = Mpris.players?.values ?? [];
         const usable = all.filter(p => p?.canControl && !isProxy(p));
 
-        // Hold on to the current choice while it still exists; promote() is
-        // what moves it. Only when it disappears do we look for a replacement,
-        // preferring something that is actually playing.
-        const keep = usable.indexOf(root.active) >= 0 ? root.active : null;
-        const chosen = keep ?? usable.find(p => p.isPlaying) ?? usable[0] ?? null;
+        const present = usable.indexOf(root.active) >= 0 ? root.active : null;
 
+        // Hold on to the current choice while it still exists; promote() is
+        // what moves it. Only when it disappears do we look for a replacement.
+        //
+        // A *fallback* choice is explicitly not sticky. Players appear on the
+        // bus before Quickshell has fetched their PlaybackStatus, so the first
+        // resolve() after startup sees everything as paused and settles on
+        // whoever is first in the list. A player that was already playing
+        // before the bar started never fires an isPlaying transition, so
+        // without this the guess would hold forever and the chip would sit on a
+        // paused player while something else plays.
+        const keep = root.deliberate ? present : null;
+        const chosen = keep ?? usable.find(p => p.isPlaying) ?? present ?? usable[0] ?? null;
+
+        // A choice becomes sticky once it is backed by actual playback, so the
+        // startup settle stops drifting as soon as it finds the real player.
+        root.deliberate = (root.deliberate && chosen === present) || (chosen?.isPlaying ?? false);
         root.active = chosen;
         root.hasPlayer = !!chosen;
         root.playing = chosen?.isPlaying ?? false;
