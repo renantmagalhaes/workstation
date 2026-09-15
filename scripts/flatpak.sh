@@ -22,6 +22,9 @@ sudo flatpak install -y flathub md.obsidian.Obsidian
 ## Plex media player
 sudo flatpak install -y flathub tv.plex.PlexDesktop
 
+## VLC media player (bundled with codecs)
+sudo flatpak install -y flathub org.videolan.VLC
+
 ## CopyQ - Clipboard manager (used by mangoWM, Hyprland & niri dotfiles; native Wayland via portal)
 ## Requires xdg-desktop-portal installed on the host for global shortcuts on Wayland.
 sudo flatpak install -y flathub com.github.hluk.copyq
@@ -36,16 +39,16 @@ sudo flatpak install -y flathub com.core447.StreamController
 sudo flatpak install -y flathub com.stremio.Stremio
 
 ## Bottles - Game on Linux
-sudo flatpak install flathub com.usebottles.bottles
+sudo flatpak install -y flathub com.usebottles.bottles
 
 ## Play on Linux - Game on Linux
-# sudo flatpak install flathub com.playonlinux.PlayOnLinux4
+# sudo flatpak install -y flathub com.playonlinux.PlayOnLinux4
 
 ## moonshine
-# sudo flatpak install flathub com.moonlight_stream.Moonlight
+# sudo flatpak install -y flathub com.moonlight_stream.Moonlight
 
 ## rustDesk
-# sudo flatpak install flathub com.rustdesk.RustDesk
+# sudo flatpak install -y flathub com.rustdesk.RustDesk
 
 ## Mousam (weather)
 sudo flatpak install -y flathub io.github.amit9838.mousam
