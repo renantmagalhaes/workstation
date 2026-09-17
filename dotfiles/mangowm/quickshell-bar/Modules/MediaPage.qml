@@ -157,11 +157,12 @@ Item {
         }
 
         // ---- Player picker ----------------------------------------------------
-        // Auto-selection follows whatever started most recently; this is the
-        // manual override when several players are live at once.
-        Row {
-            spacing: 4
-            visible: Media.players.length > 1
+        // Vertical list: one row per player, full panel width. Scales to any
+        // number of sources and elides long KDE Connect names cleanly.
+        Column {
+            width: parent.width
+            spacing: 2
+            visible: Media.players.length > 0
 
             Repeater {
                 model: Media.players
@@ -173,29 +174,53 @@ Item {
 
                     readonly property bool current: modelData === Media.active
 
-                    width: label.implicitWidth + 16
-                    height: 22
+                    width: parent.width
+                    height: 26
                     radius: Theme.chipRadius
                     color: chip.current ? Theme.pressed : chipArea.containsMouse ? Theme.hover : "transparent"
                     border.width: 1
                     border.color: chip.current ? Theme.islandBorder : "transparent"
 
                     Behavior on color {
-                        ColorAnimation {
-                            duration: Theme.durSnappy
-                        }
+                        ColorAnimation { duration: Theme.durSnappy }
                     }
 
-                    Text {
-                        id: label
+                    Item {
+                        anchors.fill: parent
+                        anchors.leftMargin: 10
+                        anchors.rightMargin: 10
 
-                        anchors.centerIn: parent
-                        text: modelData?.identity ?? "Player"
-                        color: chip.current ? Theme.fg : Theme.fgDim
-                        font.family: Theme.fontFamily
-                        renderType: Text.QtRendering
-                        font.pixelSize: Theme.fontSizeSmall - 1
-                        font.weight: chip.current ? Font.DemiBold : Font.Normal
+                        Rectangle {
+                            id: dot
+                            anchors.left: parent.left
+                            anchors.verticalCenter: parent.verticalCenter
+                            width: 5
+                            height: 5
+                            radius: 3
+                            color: chip.current ? Theme.accent : Theme.fgFaint
+
+                            Behavior on color {
+                                ColorAnimation { duration: Theme.durSnappy }
+                            }
+                        }
+
+                        Text {
+                            anchors.left: dot.right
+                            anchors.leftMargin: 7
+                            anchors.right: parent.right
+                            anchors.verticalCenter: parent.verticalCenter
+                            elide: Text.ElideRight
+                            text: modelData?.identity ?? "Player"
+                            color: chip.current ? Theme.fg : Theme.fgDim
+                            font.family: Theme.fontFamily
+                            renderType: Text.QtRendering
+                            font.pixelSize: Theme.fontSizeSmall - 1
+                            font.weight: chip.current ? Font.DemiBold : Font.Normal
+
+                            Behavior on color {
+                                ColorAnimation { duration: Theme.durSnappy }
+                            }
+                        }
                     }
 
                     MouseArea {

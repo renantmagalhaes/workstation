@@ -14,18 +14,25 @@ import "../Widgets"
 //
 // Left click opens the page, right click is play/pause; there is no transport
 // button taking up room for an action you rarely need mid-glance.
+//
+// When no track is loaded (player idle or no player registered), the chip
+// collapses to a single dimmed music-note glyph so the picker remains reachable.
 Item {
     id: root
 
     property bool active: false
     signal activated
 
-    readonly property bool present: Media.hasPlayer
+    // True when there is something meaningful to show -- a playing or paused
+    // track. False when a player is registered but idle (no track loaded), or
+    // when no player exists at all.
+    readonly property bool hasMedia: Media.playing || Media.title !== "" || Media.artUrl !== ""
     readonly property int artSize: Theme.islandHeight - 12
 
-    implicitWidth: present ? row.implicitWidth + Theme.capsulePadH * 2 : 0
+    // Idle: just wide enough for the single music-note glyph.
+    // Active: expands to fit art + equalizer.
+    implicitWidth: hasMedia ? row.implicitWidth + Theme.capsulePadH * 2 : Theme.islandHeight - 6
     implicitHeight: Theme.islandHeight
-    visible: present
 
     Behavior on implicitWidth {
         NumberAnimation {
@@ -48,14 +55,31 @@ Item {
         }
     }
 
+    // Idle state: no track loaded. Dimmed glyph keeps the chip tappable so
+    // the player picker is always reachable.
+    Text {
+        anchors.centerIn: parent
+        visible: !root.hasMedia
+        text: "󰎈"
+        color: Theme.fgFaint
+        font.family: Theme.iconFamily
+        renderType: Text.QtRendering
+        font.pixelSize: Theme.iconSize
+
+        Behavior on color {
+            ColorAnimation {
+                duration: Theme.durSnappy
+            }
+        }
+    }
+
+    // Active state: player has a track (playing or paused).
     Row {
         id: row
 
         anchors.centerIn: parent
-        // Close to the gap the chip leaves to its neighbouring separators
-        // (capsulePadH + sectionSpacing), so art and meter read as evenly
-        // spaced with everything around them rather than crammed together.
         spacing: 8
+        visible: root.hasMedia
 
         // Artwork leads: it is the thing that identifies what is playing at a
         // glance, and it anchors the chip against the neighbouring modules.

@@ -45,8 +45,12 @@ Singleton {
         active.position = Math.max(0, Math.min(1, fraction)) * duration;
     }
 
+    // Explicit user pick: allows remote players, bypasses the isRemote guard.
     function pick(player) {
-        promote(player);
+        if (!player || !player.canControl || isProxy(player)) return;
+        root.active = player;
+        root.deliberate = true;
+        resolve();
     }
 
     function formatTime(seconds) {
@@ -81,6 +85,13 @@ Singleton {
         return (player?.dbusName ?? "").endsWith(".playerctld");
     }
 
+    // KDE Connect and similar bridges expose phone/remote media over MPRIS.
+    // These should never win auto-selection — the user must pick them explicitly
+    // from the player picker. Checked by dbus name prefix.
+    function isRemote(player) {
+        return (player?.dbusName ?? "").includes("kdeconnect");
+    }
+
     // Selection is driven by *transitions*, not by polling who happens to be
     // playing. A player that just started is what you are paying attention to,
     // so it takes the chip even if something else is still playing -- otherwise
@@ -89,6 +100,13 @@ Singleton {
     // which is what stops a pause from jumping to an unrelated player.
     function promote(player) {
         if (!player || !player.canControl || isProxy(player)) return;
+        if (isRemote(player)) {
+            // Don't let remote players grab the chip via transitions, but do
+            // re-evaluate so they surface as a last-resort fallback when no
+            // local player exists.
+            resolve();
+            return;
+        }
         root.active = player;
         root.deliberate = true;
         resolve();
@@ -97,11 +115,21 @@ Singleton {
     function resolve() {
         const all = Mpris.players?.values ?? [];
         const usable = all.filter(p => p?.canControl && !isProxy(p));
+        // Remote players (KDE Connect etc.) are excluded from auto-selection;
+        // they can only hold the chip if the user explicitly picked them via pick().
+        const local = usable.filter(p => !isRemote(p));
 
         const present = usable.indexOf(root.active) >= 0 ? root.active : null;
 
-        // Hold on to the current choice while it still exists; promote() is
-        // what moves it. Only when it disappears do we look for a replacement.
+        // A player "has content" when it is Playing or Paused (deliberately
+        // mid-track). Stopped covers both "no media loaded" and "video ended/
+        // closed" — browsers keep the last trackTitle in metadata even after
+        // stopping, so we rely on playbackState, not the title string.
+        const hasContent = p => p && (p.isPlaying || p.playbackState === MprisPlaybackState.Paused);
+
+        // Hold on to the current choice while it still exists and has content;
+        // promote() is what moves it. Only when it disappears or goes idle do
+        // we look for a replacement.
         //
         // A *fallback* choice is explicitly not sticky. Players appear on the
         // bus before Quickshell has fetched their PlaybackStatus, so the first
@@ -110,8 +138,16 @@ Singleton {
         // before the bar started never fires an isPlaying transition, so
         // without this the guess would hold forever and the chip would sit on a
         // paused player while something else plays.
-        const keep = root.deliberate ? present : null;
-        const chosen = keep ?? usable.find(p => p.isPlaying) ?? present ?? usable[0] ?? null;
+        const keep = root.deliberate && hasContent(present) ? present : null;
+        // Remote players surface only when actively playing and no local
+        // alternative exists. They never become the default while idle — the
+        // user must pick them explicitly via pick().
+        const chosen = keep
+            ?? local.find(p => p.isPlaying)
+            ?? (hasContent(present) && !isRemote(present) ? present : null)
+            ?? local.find(hasContent)
+            ?? usable.find(p => p.isPlaying)
+            ?? null;
 
         // A choice becomes sticky once it is backed by actual playback, so the
         // startup settle stops drifting as soon as it finds the real player.
