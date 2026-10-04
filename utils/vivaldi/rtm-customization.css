@@ -259,7 +259,7 @@ button.vivaldi .expand-arrow {
   isolation: isolate !important;
   background-color: color-mix(
     in srgb,
-    var(--colorBg) 80%,
+    var(--colorBg) 50%,
     transparent
   ) !important;
   backdrop-filter: blur(
@@ -531,7 +531,7 @@ button.vivaldi .expand-arrow {
   isolation: isolate !important;
   background-color: color-mix(
     in srgb,
-    var(--colorBg) 80%,
+    var(--colorBg) 50%,
     transparent
   ) !important;
   backdrop-filter: blur(
