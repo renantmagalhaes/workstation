@@ -379,7 +379,6 @@ button.vivaldi .expand-arrow {
   max-height: 30px !important;
   overflow: hidden !important;
   flex-shrink: 0 !important;
-  transform: translateX(2px) !important;
   transition:
     background-color
       var(--tabbar-transition-duration)
@@ -652,7 +651,6 @@ button.vivaldi .expand-arrow {
   max-height: 30px !important;
   overflow: hidden !important;
   flex-shrink: 0 !important;
-  transform: translateX(2px) !important;
   transition:
     background-color
       var(--tabbar-transition-duration)
