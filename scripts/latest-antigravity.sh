@@ -15,17 +15,15 @@ TEMP_DIR="/tmp/antigravity-install"
 mkdir -p "$TEMP_DIR"
 cd "$TEMP_DIR"
 
-# 1. Fetch the latest release details from the website
+# 1. Fetch the latest release details directly from the download page
 echo "🔍 Fetching the latest release URLs..."
-MAIN_JS=$(curl -s --compressed https://antigravity.google/download | grep -oE 'main-[A-Z0-9]+\.js' | head -n 1)
+DOWNLOAD_PAGE=$(curl -s --compressed https://antigravity.google/download)
 
-if [ -z "$MAIN_JS" ]; then
-    echo "❌ Error: Could not find main JS bundle on the Antigravity download page." >&2
-    exit 1
-fi
+HUB_URL=$(echo "$DOWNLOAD_PAGE" | grep -oE 'https://storage\.googleapis\.com/antigravity-public/antigravity-hub/[0-9.]+-[0-9]+/linux-x64/Antigravity\.tar\.gz' | head -n 1)
+IDE_URL=$(echo "$DOWNLOAD_PAGE" | grep -oE 'https://edgedl\.me\.gvt1\.com/edgedl/release2/j0qc3/antigravity/stable/[0-9.]+-[0-9]+/linux-x64/Antigravity(%20| )IDE\.tar\.gz' | head -n 1)
 
-HUB_URL=$(curl -s --compressed "https://antigravity.google/$MAIN_JS" | grep -oE 'https://storage.googleapis.com/antigravity-public/antigravity-hub/[0-9.]+-[0-9]+/linux-x64/Antigravity.tar.gz' | head -n 1)
-IDE_URL=$(curl -s --compressed "https://antigravity.google/$MAIN_JS" | grep -oE 'https://edgedl.me.gvt1.com/edgedl/release2/j0qc3/antigravity/stable/[0-9.]+-[0-9]+/linux-x64/Antigravity%20IDE.tar.gz' | head -n 1)
+echo "Desktop Hub URL: $HUB_URL"
+echo "IDE URL:         $IDE_URL"
 
 # 2. Download and install the Antigravity CLI (agy)
 echo "📥 Installing/Updating Antigravity CLI (agy)..."
