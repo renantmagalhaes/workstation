@@ -67,8 +67,8 @@ sudo apt-get update && sudo apt-get -y upgrade
 # Dotfiles syslink
 DOTFILES_DIR="$PWD/dotfiles"
 if [[ ! -L "$HOME/.dotfiles" ]] || [[ "$(readlink "$HOME/.dotfiles")" != "$DOTFILES_DIR" ]]; then
-    echo "🔗 Creating ~/.dotfiles symlink..."
-    ln -sfn "$DOTFILES_DIR" "$HOME/.dotfiles"
+  echo "🔗 Creating ~/.dotfiles symlink..."
+  ln -sfn "$DOTFILES_DIR" "$HOME/.dotfiles"
 fi
 
 # Install the packages from repo
@@ -129,7 +129,7 @@ sudo usermod -aG docker $USER
 sudo wget -qO- https://repo.vivaldi.com/archive/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/vivaldi-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/vivaldi-archive-keyring.gpg arch=amd64] https://repo.vivaldi.com/archive/deb/ stable main" | sudo tee /etc/apt/sources.list.d/vivaldi.list
 sudo apt-get update
-sudo apt-get install -y vivaldi-stable
+sudo apt-get install -y vivaldi-snapshot
 
 ## Install Google Chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/google-chrome-stable_current_amd64.deb

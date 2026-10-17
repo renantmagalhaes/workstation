@@ -29,22 +29,34 @@
 
 ## Root check
 if [ “$(id -u)” = “0” ]; then
-	echo “Dont run this script as root” 2>&1
-	exit 1
+  echo “Dont run this script as root” 2>&1
+  exit 1
 fi
 
 # Disable packagekit
 sudo systemctl stop packagekit
 sudo systemctl mask packagekit
 
-# Update / upgrade
-sudo zypper refresh && sudo zypper update
+# Configure parallel downloads (20 concurrent connections for high-speed link)
+sudo mkdir -p /etc/zypp/zypp.conf.d
+sudo tee /etc/zypp/zypp.conf.d/downloads.conf >/dev/null <<'EOF'
+[main]
+download.max_concurrent_connections = 20
+EOF
+
+# Switch to official Fastly CDN repositories & disable source repos
+sudo zypper in -y openSUSE-repos-Tumbleweed
+sudo zypper mr -d download.opensuse.org-oss 2>/dev/null || true
+sudo zypper mr -d 'Main Repository (Sources)' 2>/dev/null || true
+
+# Update / upgrade (zypper dup is required for Tumbleweed)
+sudo zypper refresh && sudo zypper dup -y
 
 # Dotfiles syslink
 DOTFILES_DIR="$PWD/dotfiles"
 if [[ ! -L "$HOME/.dotfiles" ]] || [[ "$(readlink "$HOME/.dotfiles")" != "$DOTFILES_DIR" ]]; then
-    echo "🔗 Creating ~/.dotfiles symlink..."
-    ln -sfn "$DOTFILES_DIR" "$HOME/.dotfiles"
+  echo "🔗 Creating ~/.dotfiles symlink..."
+  ln -sfn "$DOTFILES_DIR" "$HOME/.dotfiles"
 fi
 mkdir -p ~/.config/sxhkd/sxhkdrc
 ln -s -f $PWD/dotfiles/kde/sxhkd/sxhkdrc ~/.config/sxhkd/sxhkdrc
@@ -55,21 +67,21 @@ sudo zypper install -y opi
 # Install the packages from suse repo
 sudo zypper --non-interactive install -y zsh clementine breeze5-cursors vim nmap blender brasero gparted wireshark tmux curl vpnc git htop meld openvpn guake python3-pip gtk2-engines krita audacity filezilla tree remmina nload pwgen sysstat alacarte fzf ffmpeg xclip flameshot unrar zip awk net-tools coreutils ncdu whois piper openssl gnome-keyring chrome-gnome-shell telnet openssh materia-gtk-theme alacritty scrot libstdc++-devel glibc-static net-tools-deprecated xprop wmctrl xdotool gcc-c++ sassc virtualbox golang npm bc sqlite3 python3-pipx ruby ruby-devel ruby nodejs git gcc make libopenssl-devel sqlite3-devel cifs-utils cron kdeconnect-kde solaar android-tools xwininfo xbindkeys rustup libX11-devel libXcursor-devel jgmenu papirus-icon-theme nmon google-noto-sans-cjk-fonts python3-devel sensors xcb-util-cursor-devel xdg-desktop-portal xdg-desktop-portal-gtk
 
-# Install yarn 
+# Install yarn
 sudo npm install --global yarn
 
 # Based on DE
 gnome_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "GNOME" | awk '{print tolower($0)}')
 kde_check=$(env | grep XDG_CURRENT_DESKTOP | grep -ioh "KDE" | awk '{print tolower($0)}')
 if [[ $gnome_check == "gnome" ]]; then
-	sudo zypper --non-interactive install -y zenity
-	bash ./scripts/gnome-themes.sh
+  sudo zypper --non-interactive install -y zenity
+  bash ./scripts/gnome-themes.sh
 elif [[ $kde_check == "kde" ]]; then
-	sudo zypper --non-interactive install -y kvantum-qt6 kvantum-manager kvantum-themes kdialog libqt5-qdbus
-	bash ./scripts/gnome-themes.sh
+  sudo zypper --non-interactive install -y kvantum-qt6 kvantum-manager kvantum-themes kdialog libqt5-qdbus
+  bash ./scripts/gnome-themes.sh
   bash ./scripts/kde-themes.sh
 else
-	echo "Not able to identify desktop environment"
+  echo "Not able to identify desktop environment"
 fi
 
 # Virtualization using KVM + QEMU + libvirt
@@ -91,12 +103,12 @@ sudo bash ./scripts/selinux.sh
 bash ./scripts/nix-install.sh
 
 if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+  . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 elif [ -f "/etc/profile.d/nix.sh" ]; then
-	. "/etc/profile.d/nix.sh"
+  . "/etc/profile.d/nix.sh"
 else
-	echo "Nix environment script not found."
-	exit 1
+  echo "Nix environment script not found."
+  exit 1
 fi
 
 ### Nix packages
@@ -133,26 +145,21 @@ pipx install btop
 
 # Install Vivaldi Browser
 sudo rpm --import https://repo.vivaldi.com/stable/linux_signing_key.pub
-sudo zypper ar -cf https://repo.vivaldi.com/stable/rpm/x86_64/ Vivaldi
-sudo zypper ref Vivaldi
-sudo zypper in -y vivaldi-stable
-sudo zypper refresh
+sudo zypper ar -cf https://repo.vivaldi.com/archive/rpm/x86_64 vivaldi || true
+sudo zypper in -y vivaldi-snapshot
 
 # Install Google Chrome
-sudo zypper ar http://dl.google.com/linux/chrome/rpm/stable/x86_64 Google-Chrome
-wget https://dl.google.com/linux/linux_signing_key.pub -O /tmp/linux_signing_key.pub
-sudo rpm --import /tmp/linux_signing_key.pub
-sudo zypper ref
-sudo zypper install -y google-chrome-stable
+sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub
+sudo zypper ar -cf https://dl.google.com/linux/chrome/rpm/stable/x86_64 google-chrome || true
+sudo zypper in -y google-chrome-stable
 
 ## Zen Browser
 bash <(curl -s https://updates.zen-browser.app/install.sh)
 
 ## Install Visual Code
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/zypp/repos.d/vscode.repo'
-sudo zypper refresh
-sudo zypper install -y code
+sudo zypper ar -cf https://packages.microsoft.com/yumrepos/vscode vscode || true
+sudo zypper in -y code
 
 ## Install Google Antigravity
 bash ./scripts/latest-antigravity.sh
@@ -161,7 +168,6 @@ bash ./scripts/latest-antigravity.sh
 mkdir -p ~/GIT-REPOS/CORE
 
 # SCRIPTS
-
 
 ## Brew
 bash ./scripts/brew.sh
