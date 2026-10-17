@@ -2,21 +2,21 @@
 set -euo pipefail
 
 # ==============================================================================
-# Vivaldi Manual Snapshot Manager
+# Vivaldi Snapshot Manager
 # - Install / update latest snapshot standalone
-# - Add launcher to ~/.local/bin/vivaldi-manual-snapshot (PATH)
+# - Add launcher to ~/.local/bin/vivaldi-snapshot (PATH)
 # - Install icons and .desktop entry for system application search
 # - Uninstall / remove / purge options with interactive menu and CLI flags
 # ==============================================================================
 
-TARGET_DIR="${HOME}/.local/opt/vivaldi-manual-snapshot"
+TARGET_DIR="${HOME}/.local/opt/vivaldi-snapshot"
 BIN_DIR="${HOME}/.local/bin"
 DESKTOP_DIR="${HOME}/.local/share/applications"
 ICON_BASE_DIR="${HOME}/.local/share/icons/hicolor"
-LAUNCHER="${BIN_DIR}/vivaldi-manual-snapshot"
-DESKTOP_ENTRY="${DESKTOP_DIR}/vivaldi-manual-snapshot.desktop"
+LAUNCHER="${BIN_DIR}/vivaldi-snapshot"
+DESKTOP_ENTRY="${DESKTOP_DIR}/vivaldi-snapshot.desktop"
 VERSION_FILE="${TARGET_DIR}/.version"
-PROFILE_DIR="${HOME}/.config/vivaldi-manual-snapshot"
+PROFILE_DIR="${HOME}/.config/vivaldi-snapshot"
 TEST_PROFILE_DIR="${HOME}/.config/vivaldi-snapshot-test"
 
 # Colors for terminal output
@@ -29,9 +29,8 @@ RESET="\033[0m"
 
 # 1. Architecture detection
 detect_arch() {
-  local arch
-  arch="$(uname -m)"
-  case "$arch" in
+  ARCH="$(uname -m)"
+  case "$ARCH" in
     x86_64)
       TAR_ARCH="x64"
       DEB_ARCH="amd64"
@@ -41,7 +40,7 @@ detect_arch() {
       DEB_ARCH="arm64"
       ;;
     *)
-      echo -e "${RED}[-] Unsupported architecture: ${arch}${RESET}" >&2
+      echo -e "${RED}[-] Unsupported architecture: ${ARCH}${RESET}" >&2
       exit 1
       ;;
   esac
@@ -95,7 +94,7 @@ show_status() {
 
   echo ""
   echo -e "${BOLD}==========================================================${RESET}"
-  echo -e "${BOLD}            Vivaldi Manual Snapshot Status               ${RESET}"
+  echo -e "${BOLD}               Vivaldi Snapshot Status                    ${RESET}"
   echo -e "${BOLD}==========================================================${RESET}"
   echo -e "  Installed Version : ${BOLD}${installed}${RESET}"
   echo -e "  Latest Available  : ${BOLD}${latest}${RESET}"
@@ -130,11 +129,29 @@ install_snapshot() {
     fi
   fi
 
+  # Migrate from vivaldi-manual-snapshot directory if present
+  if [ -d "${HOME}/.local/opt/vivaldi-manual-snapshot" ] && [ ! -d "${TARGET_DIR}" ]; then
+    echo -e "${CYAN}[+] Migrating from previous vivaldi-manual-snapshot directory...${RESET}"
+    mv "${HOME}/.local/opt/vivaldi-manual-snapshot" "${TARGET_DIR}"
+  fi
+
+  # Migrate profile data from vivaldi-manual-snapshot if present
+  if [ -d "${HOME}/.config/vivaldi-manual-snapshot/Default" ] && [ ! -d "${PROFILE_DIR}/Default" ]; then
+    echo -e "${CYAN}[+] Migrating profile from ~/.config/vivaldi-manual-snapshot...${RESET}"
+    mkdir -p "${PROFILE_DIR}"
+    cp -rn "${HOME}/.config/vivaldi-manual-snapshot/"* "${PROFILE_DIR}/" 2>/dev/null || true
+  fi
+
+  # Clean up old manual-snapshot desktop/icon/launcher artifacts
+  rm -f "${DESKTOP_DIR}/vivaldi-manual-snapshot.desktop" 2>/dev/null || true
+  rm -f "${BIN_DIR}/vivaldi-manual-snapshot" 2>/dev/null || true
+  rm -f "${ICON_BASE_DIR}"/*/apps/vivaldi-manual-snapshot.png 2>/dev/null || true
+
   local installed
   installed="$(get_installed_version)"
 
   echo -e "${BOLD}==========================================================${RESET}"
-  echo -e "${BOLD}  Installing / Updating Vivaldi Manual Snapshot           ${RESET}"
+  echo -e "${BOLD}        Installing / Updating Vivaldi Snapshot            ${RESET}"
   echo -e "${BOLD}==========================================================${RESET}"
   echo -e "  Target Version : ${GREEN}${version}${RESET}"
   echo -e "  Architecture   : ${ARCH} (${TAR_ARCH})"
@@ -150,7 +167,7 @@ install_snapshot() {
   fi
 
   if [ "${needs_download}" -eq 1 ]; then
-    # Migrate if previous legacy directory exists with same version
+    # Migrate if previous legacy versioned directory exists with same version
     local legacy_dir="${HOME}/.local/opt/vivaldi-snapshot-${version%.*.*}"
     if [ -d "${legacy_dir}/snapshot-extracted" ] && [ "${force}" -eq 0 ] && [ ! -d "${TARGET_DIR}/snapshot-extracted" ]; then
       echo -e "${CYAN}[+] Migrating existing files from ${legacy_dir}...${RESET}"
@@ -160,7 +177,8 @@ install_snapshot() {
       local tar_url="https://downloads.vivaldi.com/snapshot/${tar_name}"
       local tmp_dir
       tmp_dir="$(mktemp -d)"
-      trap 'rm -rf "${tmp_dir}"' EXIT
+      # Clean up on interrupt/error
+      trap 'rm -rf "${tmp_dir:-}"' EXIT INT TERM
 
       echo -e "${CYAN}[+] Downloading ${tar_name}...${RESET}"
       curl -fL --progress-bar "${tar_url}" -o "${tmp_dir}/${tar_name}"
@@ -168,6 +186,9 @@ install_snapshot() {
       echo -e "${CYAN}[+] Extracting archive into ${TARGET_DIR}...${RESET}"
       rm -rf "${TARGET_DIR:?}"/*
       tar -xf "${tmp_dir}/${tar_name}" -C "${TARGET_DIR}" --strip-components=1
+
+      rm -rf "${tmp_dir}"
+      trap - EXIT INT TERM
     fi
 
     chmod +x "${TARGET_DIR}/vivaldi-snapshot" 2>/dev/null || true
@@ -187,19 +208,19 @@ install_snapshot() {
     mkdir -p "${ICON_BASE_DIR}/${size}/apps"
     local src_icon="${TARGET_DIR}/snapshot-extracted/share/icons/hicolor/${size}/apps/vivaldi-snapshot.png"
     if [ -f "${src_icon}" ]; then
-      cp -f "${src_icon}" "${ICON_BASE_DIR}/${size}/apps/vivaldi-manual-snapshot.png"
+      cp -f "${src_icon}" "${ICON_BASE_DIR}/${size}/apps/vivaldi-snapshot.png"
     fi
   done
 
-  # Create executable runner in ~/.local/bin/vivaldi-manual-snapshot
+  # Create executable runner in ~/.local/bin/vivaldi-snapshot
   echo -e "${CYAN}[+] Configuring launcher: ${LAUNCHER}...${RESET}"
   cat > "${LAUNCHER}" <<'EOF'
 #!/usr/bin/env bash
-# Standalone Vivaldi Manual Snapshot Runner
+# Standalone Vivaldi Snapshot Runner
 set -euo pipefail
 
-TARGET_DIR="${HOME}/.local/opt/vivaldi-manual-snapshot"
-PROFILE_DIR="${HOME}/.config/vivaldi-manual-snapshot"
+TARGET_DIR="${HOME}/.local/opt/vivaldi-snapshot"
+PROFILE_DIR="${HOME}/.config/vivaldi-snapshot"
 
 if [ ! -x "${TARGET_DIR}/vivaldi-snapshot" ]; then
   echo "[-] Vivaldi Snapshot binary not found at ${TARGET_DIR}/vivaldi-snapshot" >&2
@@ -215,31 +236,32 @@ fi
 
 exec "${TARGET_DIR}/vivaldi-snapshot" \
   --user-data-dir="${PROFILE_DIR}" \
-  --class="Vivaldi-manual-snapshot" \
+  --class="Vivaldi-snapshot" \
   "${LOAD_EXT_FLAG[@]}" \
   "$@"
 EOF
   chmod +x "${LAUNCHER}"
 
-  # Backward compatibility symlink
+  # Backward compatibility symlinks
   ln -sf "${LAUNCHER}" "${BIN_DIR}/vivaldi-snapshot-test"
+  ln -sf "${LAUNCHER}" "${BIN_DIR}/vivaldi-manual-snapshot"
 
   # Create .desktop file for system application search
   echo -e "${CYAN}[+] Configuring desktop search item: ${DESKTOP_ENTRY}...${RESET}"
   cat > "${DESKTOP_ENTRY}" <<EOF
 [Desktop Entry]
 Version=1.0
-Name=Vivaldi Manual Snapshot
+Name=Vivaldi Snapshot
 GenericName=Web Browser
-Comment=Access the Web (Manual Snapshot Build)
+Comment=Access the Web (Snapshot Build)
 Exec=${LAUNCHER} %U
 Terminal=false
-Icon=vivaldi-manual-snapshot
+Icon=vivaldi-snapshot
 Type=Application
 Categories=Network;WebBrowser;
 MimeType=application/pdf;application/rdf+xml;application/rss+xml;application/xhtml+xml;text/html;text/xml;x-scheme-handler/http;x-scheme-handler/https;
 StartupNotify=true
-StartupWMClass=Vivaldi-manual-snapshot
+StartupWMClass=Vivaldi-snapshot
 Actions=new-window;new-private-window;
 
 [Desktop Action new-window]
@@ -265,9 +287,9 @@ EOF
   echo -e "${BOLD}==========================================================${RESET}"
   echo -e "${GREEN}  ✓ Installation Complete! (${version})${RESET}"
   echo -e "${BOLD}==========================================================${RESET}"
-  echo -e "You can launch Vivaldi Manual Snapshot via:"
-  echo -e "  1. System App Search : Search '${BOLD}Vivaldi Manual Snapshot${RESET}'"
-  echo -e "  2. Terminal Command  : ${CYAN}vivaldi-manual-snapshot${RESET}"
+  echo -e "You can launch Vivaldi Snapshot via:"
+  echo -e "  1. System App Search : Search '${BOLD}Vivaldi Snapshot${RESET}'"
+  echo -e "  2. Terminal Command  : ${CYAN}vivaldi-snapshot${RESET}"
   echo -e "  3. Binary Full Path  : ${LAUNCHER}"
   echo ""
   echo -e "Profile directory (isolated): ${PROFILE_DIR}"
@@ -280,36 +302,37 @@ uninstall_snapshot() {
 
   echo ""
   echo -e "${BOLD}==========================================================${RESET}"
-  echo -e "${YELLOW}  Uninstalling Vivaldi Manual Snapshot...${RESET}"
+  echo -e "${YELLOW}  Uninstalling Vivaldi Snapshot...${RESET}"
   echo -e "${BOLD}==========================================================${RESET}"
 
   # Remove binaries and target directories
-  if [ -d "${TARGET_DIR}" ]; then
-    echo -e "${CYAN}[+] Removing binary directory: ${TARGET_DIR}${RESET}"
-    rm -rf "${TARGET_DIR}"
-  fi
+  for dir in "${TARGET_DIR}" "${HOME}/.local/opt/vivaldi-manual-snapshot" "${HOME}/.local/opt/vivaldi-snapshot-8.3"; do
+    if [ -d "${dir}" ]; then
+      echo -e "${CYAN}[+] Removing binary directory: ${dir}${RESET}"
+      rm -rf "${dir}"
+    fi
+  done
+  rm -rf "${HOME}/.local/opt/vivaldi-snapshot-"* 2>/dev/null || true
 
-  # Clean up legacy folders if present
-  rm -rf "${HOME}/.local/opt/vivaldi-snapshot-8.3" "${HOME}/.local/opt/vivaldi-snapshot-"* 2>/dev/null || true
+  # Remove launcher scripts and symlinks
+  for l in "${LAUNCHER}" "${BIN_DIR}/vivaldi-snapshot-test" "${BIN_DIR}/vivaldi-manual-snapshot"; do
+    if [ -f "${l}" ] || [ -L "${l}" ]; then
+      echo -e "${CYAN}[+] Removing launcher: ${l}${RESET}"
+      rm -f "${l}"
+    fi
+  done
 
-  # Remove launcher script and symlinks
-  if [ -f "${LAUNCHER}" ] || [ -L "${LAUNCHER}" ]; then
-    echo -e "${CYAN}[+] Removing launcher: ${LAUNCHER}${RESET}"
-    rm -f "${LAUNCHER}"
-  fi
-  if [ -f "${BIN_DIR}/vivaldi-snapshot-test" ] || [ -L "${BIN_DIR}/vivaldi-snapshot-test" ]; then
-    rm -f "${BIN_DIR}/vivaldi-snapshot-test"
-  fi
-
-  # Remove desktop entry
-  if [ -f "${DESKTOP_ENTRY}" ]; then
-    echo -e "${CYAN}[+] Removing desktop entry: ${DESKTOP_ENTRY}${RESET}"
-    rm -f "${DESKTOP_ENTRY}"
-  fi
+  # Remove desktop entries
+  for d in "${DESKTOP_ENTRY}" "${DESKTOP_DIR}/vivaldi-manual-snapshot.desktop"; do
+    if [ -f "${d}" ]; then
+      echo -e "${CYAN}[+] Removing desktop entry: ${d}${RESET}"
+      rm -f "${d}"
+    fi
+  done
 
   # Remove installed icons
   echo -e "${CYAN}[+] Removing icons from ${ICON_BASE_DIR}...${RESET}"
-  rm -f "${ICON_BASE_DIR}"/*/apps/vivaldi-manual-snapshot.png 2>/dev/null || true
+  rm -f "${ICON_BASE_DIR}"/*/apps/vivaldi-snapshot.png "${ICON_BASE_DIR}"/*/apps/vivaldi-manual-snapshot.png 2>/dev/null || true
 
   # Refresh system desktop database and icon caches
   echo -e "${CYAN}[+] Refreshing desktop databases...${RESET}"
@@ -323,7 +346,7 @@ uninstall_snapshot() {
   # Handle profile directories
   if [ "${purge}" -eq 1 ]; then
     echo -e "${YELLOW}[+] Purging profile data...${RESET}"
-    rm -rf "${PROFILE_DIR}" "${TEST_PROFILE_DIR}"
+    rm -rf "${PROFILE_DIR}" "${TEST_PROFILE_DIR}" "${HOME}/.config/vivaldi-manual-snapshot"
     echo -e "${GREEN}[✓] Removed profile data (${PROFILE_DIR}).${RESET}"
   else
     if [ -d "${PROFILE_DIR}" ]; then
@@ -334,7 +357,7 @@ uninstall_snapshot() {
 
   echo ""
   echo -e "${BOLD}==========================================================${RESET}"
-  echo -e "${GREEN}  ✓ Vivaldi Manual Snapshot successfully uninstalled!${RESET}"
+  echo -e "${GREEN}  ✓ Vivaldi Snapshot successfully uninstalled!${RESET}"
   echo -e "${BOLD}==========================================================${RESET}"
   echo ""
 }
@@ -342,11 +365,11 @@ uninstall_snapshot() {
 # 7. Launch browser
 launch_browser() {
   if [ ! -x "${LAUNCHER}" ]; then
-    echo -e "${RED}[-] Vivaldi Manual Snapshot is not installed.${RESET}" >&2
+    echo -e "${RED}[-] Vivaldi Snapshot is not installed.${RESET}" >&2
     echo -e "    Run with --install to install it first."
     exit 1
   fi
-  echo -e "${GREEN}[+] Launching Vivaldi Manual Snapshot...${RESET}"
+  echo -e "${GREEN}[+] Launching Vivaldi Snapshot...${RESET}"
   nohup "${LAUNCHER}" "$@" >/dev/null 2>&1 &
 }
 
@@ -361,7 +384,7 @@ show_menu() {
   while true; do
     echo ""
     echo -e "${BOLD}==========================================================${RESET}"
-    echo -e "${BOLD}             Vivaldi Manual Snapshot Manager              ${RESET}"
+    echo -e "${BOLD}               Vivaldi Snapshot Manager                   ${RESET}"
     echo -e "${BOLD}==========================================================${RESET}"
     if [ "${installed}" = "none" ]; then
       echo -e "  Installed Version : ${RED}Not installed${RESET}"
@@ -374,7 +397,7 @@ show_menu() {
     echo -e "----------------------------------------------------------"
     echo -e "  ${BOLD}1)${RESET} Install / Update to latest snapshot"
     echo -e "  ${BOLD}2)${RESET} Force reinstall snapshot (${latest})"
-    echo -e "  ${BOLD}3)${RESET} Launch Vivaldi Manual Snapshot"
+    echo -e "  ${BOLD}3)${RESET} Launch Vivaldi Snapshot"
     echo -e "  ${BOLD}4)${RESET} Uninstall (Keep profile data)"
     echo -e "  ${BOLD}5)${RESET} Purge (Uninstall + Delete profile data)"
     echo -e "  ${BOLD}6)${RESET} View Status & Paths"
@@ -396,7 +419,7 @@ show_menu() {
         break
         ;;
       4)
-        read -rp "Are you sure you want to uninstall Vivaldi Manual Snapshot? [y/N]: " confirm
+        read -rp "Are you sure you want to uninstall Vivaldi Snapshot? [y/N]: " confirm
         if [[ "$confirm" =~ ^[Yy]$ ]]; then
           uninstall_snapshot 0
           installed="$(get_installed_version)"
@@ -405,7 +428,7 @@ show_menu() {
         fi
         ;;
       5)
-        read -rp "Are you sure you want to PURGE Vivaldi Manual Snapshot and its profile? [y/N]: " confirm
+        read -rp "Are you sure you want to PURGE Vivaldi Snapshot and its profile? [y/N]: " confirm
         if [[ "$confirm" =~ ^[Yy]$ ]]; then
           uninstall_snapshot 1
           installed="$(get_installed_version)"
@@ -430,7 +453,7 @@ show_menu() {
 # 9. Help message
 show_help() {
   echo ""
-  echo -e "${BOLD}Vivaldi Manual Snapshot Manager${RESET}"
+  echo -e "${BOLD}Vivaldi Snapshot Manager${RESET}"
   echo "Usage: $(basename "$0") [OPTION]"
   echo ""
   echo "Options:"
@@ -439,7 +462,7 @@ show_help() {
   echo "  -u, --uninstall        Uninstall snapshot, launcher, desktop entry & icons"
   echo "  -p, --purge            Uninstall and delete user profile data"
   echo "  -s, --status           Show installation status and versions"
-  echo "  -l, --launch           Launch Vivaldi Manual Snapshot in background"
+  echo "  -l, --launch           Launch Vivaldi Snapshot in background"
   echo "  -m, --menu             Open interactive menu (default when run in terminal without args)"
   echo "  -h, --help             Show this help message"
   echo ""
