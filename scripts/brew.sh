@@ -48,5 +48,8 @@ brew install codex
 # Gemini CLI
 brew install gemini-cli
 
+# Github CLI
+brew install gh
+
 # Fish shell
 #brew install fish
