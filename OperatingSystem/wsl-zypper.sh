@@ -23,8 +23,20 @@ else
 	echo "systemd configured. Proceeding."
 fi
 
+# Configure parallel downloads (20 concurrent connections for high-speed link)
+sudo mkdir -p /etc/zypp/zypp.conf.d
+sudo tee /etc/zypp/zypp.conf.d/downloads.conf > /dev/null << 'EOF'
+[main]
+download.max_concurrent_connections = 20
+EOF
+
+# Switch to official Fastly CDN repositories & disable source repos
+sudo zypper in -y openSUSE-repos-Tumbleweed
+sudo zypper mr -d download.opensuse.org-oss 2>/dev/null || true
+sudo zypper mr -d 'Main Repository (Sources)' 2>/dev/null || true
+
 # refresh repos and upgrade system
-sudo zypper ref && sudo zypper dup
+sudo zypper ref && sudo zypper dup -y
 
 # Dotfiles syslink
 DOTFILES_DIR="$PWD/dotfiles"

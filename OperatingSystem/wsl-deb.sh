@@ -37,8 +37,11 @@ else
 	echo "systemd configured. Proceeding."
 fi
 
-# refresh repos
-sudo apt-get update
+# Configure parallel downloads for APT
+sudo tee /etc/apt/apt.conf.d/99parallel > /dev/null << 'EOF'
+Acquire::Queue-Mode "host";
+Acquire::http::Pipeline-Depth "5";
+EOF
 
 # Dotfiles syslink
 DOTFILES_DIR="$PWD/dotfiles"
