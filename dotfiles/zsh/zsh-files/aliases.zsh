@@ -92,7 +92,7 @@ update-all() {
     local update_status=0
 
     if check_cmd apt-get; then
-        sudo apt-get update && sudo apt-get upgrade -y || update_status=1
+        sudo apt-get update && sudo apt-get upgrade || update_status=1
     elif check_cmd zypper; then
         sudo zypper ref && sudo zypper dup || update_status=1
     fi
@@ -102,7 +102,7 @@ update-all() {
     fi
 
     if check_cmd flatpak; then
-        sudo flatpak update -y || update_status=1
+        flatpak update -y || update_status=1
     fi
 
     if check_cmd nix-env; then
