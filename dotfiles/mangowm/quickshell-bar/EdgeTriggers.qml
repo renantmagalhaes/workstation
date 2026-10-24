@@ -3,6 +3,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
+import "Config"
 
 Scope {
     id: root
@@ -101,4 +102,39 @@ Scope {
             }
         }
     }
+
+    // Top-Right Hotcorner Trigger (12x12px at top-right corner)
+    PanelWindow {
+        id: topRightHotcorner
+        screen: root.screen
+        color: "transparent"
+
+        WlrLayershell.layer: WlrLayer.Overlay
+        WlrLayershell.namespace: "trigger-hotcorner-topright"
+        WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
+
+        anchors {
+            top: true
+            right: true
+        }
+
+        implicitWidth: 12
+        implicitHeight: 12
+        exclusionMode: ExclusionMode.Ignore
+
+        property real lastTrigger: 0
+
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+
+            onEntered: {
+                const now = Date.now();
+                if (now - topRightHotcorner.lastTrigger < 600) return;
+                topRightHotcorner.lastTrigger = now;
+                OverviewManager.toggle();
+            }
+        }
+    }
 }
+

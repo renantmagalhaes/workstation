@@ -8,7 +8,7 @@ import time
 import sys
 
 # Script settings
-SCRIPT_PATH = "/home/rtm/.dotfiles/mangowm/scripts/toggle_all_overviews.sh"
+SCRIPT_PATH = "/home/rtm/.dotfiles/mangowm/scripts/toggle_overview.sh"
 HOTAREA_SIZE = 10  # pixels
 
 windows = []
@@ -48,10 +48,10 @@ def create_hotarea_window(monitor):
     # Set to -1 to not reserve space
     GtkLayerShell.set_exclusive_zone(win, -1)
     
-    # Anchor to TOP and LEFT only
+    # Anchor to TOP and RIGHT only
     GtkLayerShell.set_anchor(win, GtkLayerShell.Edge.TOP, True)
-    GtkLayerShell.set_anchor(win, GtkLayerShell.Edge.LEFT, True)
-    GtkLayerShell.set_anchor(win, GtkLayerShell.Edge.RIGHT, False)
+    GtkLayerShell.set_anchor(win, GtkLayerShell.Edge.LEFT, False)
+    GtkLayerShell.set_anchor(win, GtkLayerShell.Edge.RIGHT, True)
     GtkLayerShell.set_anchor(win, GtkLayerShell.Edge.BOTTOM, False)
     
     # We want it to receive pointer events but not keyboard focus
