@@ -62,11 +62,12 @@ Singleton {
     }
 
     function updateClientTag(cid, tagId): void {
-        const c = root.allClients.find(cl => cl.id === cid);
-        if (c) {
-            c.tags = [tagId];
-            root.allClients = root.allClients.slice();
-        }
+        root.allClients = root.allClients.map(cl => {
+            if (cl.id === cid) {
+                return Object.assign({}, cl, { tags: [tagId] });
+            }
+            return cl;
+        });
     }
 
     IpcHandler {

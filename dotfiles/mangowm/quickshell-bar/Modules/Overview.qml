@@ -127,7 +127,7 @@ PanelWindow {
     }
 
     function moveWindow(client, tagId) {
-        Quickshell.execDetached(["mmsg", "dispatch", "tag", `${tagId},1`, `client,${client.id}`]);
+        Quickshell.execDetached(["mmsg", "dispatch", `tag,${tagId},1`, `client,${client.id}`]);
         OverviewManager.updateClientTag(client.id, tagId);
     }
 
@@ -137,11 +137,12 @@ PanelWindow {
     }
 
     function wsAt(p) {
+        if (!p) return 0;
         for (let i = 0; i < cardsRepeater.count; i++) {
             const c = cardsRepeater.itemAt(i);
             if (!c) continue;
             const q = c.mapFromItem(null, p.x, p.y);
-            if (q.x >= 0 && q.y >= 0 && q.x < c.width && q.y < c.height) {
+            if (q.x >= -16 && q.x <= c.width + 16 && q.y >= -30 && q.y <= c.height + 30) {
                 return i + 1;
             }
         }
@@ -197,17 +198,19 @@ PanelWindow {
 
                 width: win.cardW
                 height: win.cardH + 26
+                z: isDropTarget ? 10 : 1
 
                 Rectangle {
                     width: win.cardW
                     height: win.cardH
                     radius: 8
-                    color: wsCard.isActive ? Qt.rgba(0.12, 0.16, 0.24, 0.95) : Qt.rgba(0.06, 0.07, 0.10, 0.85)
-                    border.width: wsCard.isDropTarget ? 2.5 : wsCard.isActive ? 2 : 1
+                    color: wsCard.isDropTarget ? Qt.rgba(0.12, 0.22, 0.35, 0.98) : wsCard.isActive ? Qt.rgba(0.12, 0.16, 0.24, 0.95) : Qt.rgba(0.06, 0.07, 0.10, 0.85)
+                    border.width: wsCard.isDropTarget ? 3 : wsCard.isActive ? 2 : 1
                     border.color: wsCard.isDropTarget ? "#00E5FF" : wsCard.isActive ? "#78FFB4" : Qt.rgba(1, 1, 1, 0.15)
                     clip: true
-                    scale: wsCard.isDropTarget ? 1.05 : 1.0
+                    scale: wsCard.isDropTarget ? 1.08 : 1.0
                     Behavior on scale { NumberAnimation { duration: 120 } }
+                    Behavior on color { ColorAnimation { duration: 120 } }
 
                     // Miniature window blocks in this workspace
                     Repeater {
@@ -423,7 +426,8 @@ PanelWindow {
                         return;
                     }
                     if (win.dragged) {
-                        const targetWs = win.wsAt(mapToItem(null, mouse.x, mouse.y));
+                        const dropPoint = mapToItem(null, mouse.x, mouse.y);
+                        const targetWs = win.wsAt(dropPoint) || win.wsAt(win.dragPos);
                         if (targetWs && targetWs !== win.activeTag) {
                             win.moveWindow(tile.modelData, targetWs);
                         }
