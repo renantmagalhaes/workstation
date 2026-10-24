@@ -15,6 +15,25 @@ Singleton {
 
     readonly property var list: [
         {
+            id: "caelestia",
+            name: "Caelestia",
+            note: "Cosmic deep navy, celestial blue accent",
+            bg: "#101418",
+            solidAlpha: 0.96,
+            blurAlpha: 0.60,
+            border: "#2A313A",
+            borderAlpha: 0.85,
+            fg: "#E0E3E8",
+            fgDim: "#8E9196",
+            fgFaint: "#44474B",
+            accent: "#9CCBFB",
+            urgent: "#FFB4AB",
+            good: "#7ADAA4",
+            warn: "#FFDCC2",
+            wsEmpty: "#232830",
+            wsOccupied: "#8E9196"
+        },
+        {
             id: "obsidian",
             name: "Obsidian",
             note: "Near-black, white accent",

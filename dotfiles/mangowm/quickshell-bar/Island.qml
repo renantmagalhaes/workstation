@@ -2,6 +2,7 @@ import QtQuick
 import "Config"
 import "Modules"
 import "Widgets"
+import "Services"
 
 // The island: a squircle pill, plus a detached popover panel that points back
 // at whichever chip opened it.
@@ -21,6 +22,7 @@ Item {
     // which also drives the dismiss catcher from it; the island only asks.
     property string page: ""
     readonly property bool expanded: page !== ""
+    readonly property bool showOsd: Audio.osdActive && !root.expanded
 
     signal requestToggle(string name)
 
@@ -130,7 +132,7 @@ Item {
 
         x: (root.width - width) / 2
         y: 0
-        width: collapsedRow.implicitWidth + Theme.islandPadH * 2
+        width: (root.showOsd ? osdRow.implicitWidth : collapsedRow.implicitWidth) + Theme.islandPadH * 2
         height: Theme.islandHeight
         clip: true
 
@@ -180,12 +182,70 @@ Item {
             }
         }
 
+        // Dynamic Island OSD Alert (Volume/Mute HUD from Celestia OSD)
+        Row {
+            id: osdRow
+
+            anchors.centerIn: parent
+            visible: opacity > 0
+            opacity: root.showOsd ? 1 : 0
+            spacing: 10
+
+            Behavior on opacity {
+                NumberAnimation { duration: Theme.durSnappy }
+            }
+
+            Text {
+                anchors.verticalCenter: parent.verticalCenter
+                text: Audio.osdIcon
+                color: Audio.osdMuted ? Theme.urgent : Theme.accent
+                font.family: Theme.iconFamily
+                renderType: Text.QtRendering
+                font.pixelSize: Theme.iconSize + 2
+            }
+
+            Rectangle {
+                anchors.verticalCenter: parent.verticalCenter
+                width: 110
+                height: 6
+                radius: 3
+                color: Theme.wsEmpty
+
+                Rectangle {
+                    width: Math.max(0, Math.min(parent.width, parent.width * (Audio.osdValue / Audio.maxVolume)))
+                    height: parent.height
+                    radius: parent.radius
+                    color: Audio.osdMuted ? Theme.fgFaint : Theme.accent
+
+                    Behavior on width {
+                        NumberAnimation { duration: Theme.durSnappy; easing.type: Easing.OutCubic }
+                    }
+                }
+            }
+
+            Text {
+                anchors.verticalCenter: parent.verticalCenter
+                text: Audio.osdMuted ? "Muted" : `${Math.round((Audio.osdValue / Audio.maxVolume) * 100)}%`
+                color: Theme.fg
+                font.family: Theme.fontFamily
+                renderType: Text.QtRendering
+                font.pixelSize: Theme.fontSizeSmall
+                font.weight: Font.DemiBold
+            }
+        }
+
         Row {
             id: collapsedRow
 
             anchors.horizontalCenter: parent.horizontalCenter
             height: Theme.islandHeight
             spacing: Theme.sectionSpacing
+            visible: opacity > 0
+            opacity: root.showOsd ? 0 : 1
+
+            Behavior on opacity {
+                NumberAnimation { duration: Theme.durSnappy }
+            }
 
             Workspaces {
                 monitorName: root.monitorName

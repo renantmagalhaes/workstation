@@ -158,6 +158,7 @@ Item {
         }
 
         onWheel: wheel => {
+            Audio.markInternalAction();
             wheel.accepted = true;
 
             const delta = wheel.angleDelta.y;

@@ -27,6 +27,7 @@ Item {
     // track. False when a player is registered but idle (no track loaded), or
     // when no player exists at all.
     readonly property bool hasMedia: Media.playing || Media.title !== "" || Media.artUrl !== ""
+    readonly property bool present: hasMedia
     readonly property int artSize: Theme.islandHeight - 12
 
     // Idle: just wide enough for the single music-note glyph.

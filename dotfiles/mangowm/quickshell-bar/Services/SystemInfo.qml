@@ -30,6 +30,9 @@ Singleton {
     // shell has no memory between runs, so the rate is computed here.
     property real rxRate: 0
     property real txRate: 0
+    property real gpuUsage: 0
+    property var rxHistory: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    property var txHistory: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     property string cpuModel: ""
     property string osName: ""
@@ -102,6 +105,7 @@ Singleton {
                 root.temps = parsed.temps ?? {};
                 root.uptime = parsed.uptime ?? 0;
                 root.iface = parsed.iface ?? "";
+                root.gpuUsage = (parsed.gpuUsage ?? 0) / 100.0;
 
                 const now = Date.now() / 1000;
                 const rx = parsed.rxBytes ?? 0;
@@ -113,6 +117,14 @@ Singleton {
                     const elapsed = now - root.previousAt;
                     root.rxRate = Math.max(0, (rx - root.previousRx) / elapsed);
                     root.txRate = Math.max(0, (tx - root.previousTx) / elapsed);
+
+                    const nextRx = root.rxHistory.slice(1);
+                    nextRx.push(root.rxRate);
+                    root.rxHistory = nextRx;
+
+                    const nextTx = root.txHistory.slice(1);
+                    nextTx.push(root.txRate);
+                    root.txHistory = nextTx;
                 }
                 root.previousRx = rx;
                 root.previousTx = tx;
@@ -141,7 +153,7 @@ Singleton {
     }
 
     Timer {
-        interval: 5000
+        interval: 2000
         running: true
         repeat: true
         triggeredOnStart: true

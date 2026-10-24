@@ -81,6 +81,24 @@ Item {
                 checked: Control.keepAwake
                 onToggled: Control.toggleKeepAwake()
             }
+
+            ControlTile {
+                width: root.tileWidth
+                title: "Audio Out"
+                detail: Audio.muted ? "muted" : `${Audio.percent}%`
+                glyph: Audio.icon
+                checked: !Audio.muted
+                onToggled: Audio.toggleMute()
+            }
+
+            ControlTile {
+                width: root.tileWidth
+                title: "Microphone"
+                detail: Audio.micMuted ? "muted" : `${Audio.micPercent}%`
+                glyph: Audio.micIcon
+                checked: !Audio.micMuted
+                onToggled: Audio.toggleMicMute()
+            }
         }
 
         // ---- Shared detail list ----------------------------------------------

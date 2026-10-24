@@ -82,38 +82,47 @@ Item {
                 }
 
                 Row {
-                    spacing: 4
+                    spacing: 8
 
-                    IconButton {
-                        glyph: "󰒮"
-                        size: 30
-                        glyphSize: 16
-                        enabled: Media.canPrevious || Media.seekable
-                        onActivated: Media.previous()
+                    Row {
+                        spacing: 4
+
+                        IconButton {
+                            glyph: "󰒮"
+                            size: 30
+                            glyphSize: 16
+                            enabled: Media.canPrevious || Media.seekable
+                            onActivated: Media.previous()
+                        }
+
+                        IconButton {
+                            glyph: Media.playing ? "󰏤" : "󰐊"
+                            size: 30
+                            glyphSize: 18
+                            idleColor: Theme.fg
+                            onActivated: Media.toggle()
+                        }
+
+                        IconButton {
+                            glyph: "󰒭"
+                            size: 30
+                            glyphSize: 16
+                            enabled: Media.canNext
+                            onActivated: Media.next()
+                        }
                     }
 
-                    IconButton {
-                        glyph: Media.playing ? "󰏤" : "󰐊"
-                        size: 30
-                        glyphSize: 18
-                        idleColor: Theme.fg
-                        onActivated: Media.toggle()
-                    }
-
-                    IconButton {
-                        glyph: "󰒭"
-                        size: 30
-                        glyphSize: 16
-                        enabled: Media.canNext
-                        onActivated: Media.next()
+                    Equalizer {
+                        anchors.verticalCenter: parent.verticalCenter
+                        active: Media.playing
+                        color: Theme.accent
+                        maxHeight: 14
                     }
                 }
             }
         }
 
-        // ---- Seek bar ---------------------------------------------------------
-        // Only for players that actually report a length; plenty of them lie or
-        // simply do not support it, and a dead scrubber is worse than none.
+        // ---- Seek bar (Wavy Scrubber from Celestia) -------------------------
         Item {
             width: parent.width
             height: 22
@@ -143,7 +152,7 @@ Item {
                 font.pixelSize: Theme.fontSizeSmall - 1
             }
 
-            LevelSlider {
+            WavySlider {
                 anchors.left: elapsed.right
                 anchors.right: total.left
                 anchors.leftMargin: 8
@@ -151,7 +160,8 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
 
                 value: Media.progress
-                wheelStep: 0.02
+                playing: Media.playing
+                color: Theme.accent
                 onRequested: fraction => Media.seek(fraction)
             }
         }

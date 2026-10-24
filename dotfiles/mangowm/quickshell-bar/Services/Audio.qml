@@ -1,5 +1,6 @@
 pragma Singleton
 
+import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Pipewire
@@ -34,17 +35,35 @@ Singleton {
         return "󰕾";
     }
 
+    // Flag to suppress OSD during direct UI interaction (mouse scroll, slider drag)
+    property bool suppressOsd: false
+
+    Timer {
+        id: suppressTimer
+        interval: 1200
+        onTriggered: root.suppressOsd = false
+    }
+
+    function markInternalAction() {
+        suppressOsd = true;
+        osdActive = false;
+        suppressTimer.restart();
+    }
+
     function setVolume(value) {
         if (!sink?.audio) return;
+        markInternalAction();
         sink.audio.volume = Math.max(0, Math.min(maxVolume, value));
     }
 
     function step(delta) {
+        markInternalAction();
         setVolume(volume + delta);
     }
 
     function toggleMute() {
         if (!sink?.audio) return;
+        markInternalAction();
         sink.audio.muted = !sink.audio.muted;
     }
 
@@ -57,15 +76,59 @@ Singleton {
 
     function setMicVolume(value) {
         if (!source?.audio) return;
+        markInternalAction();
         source.audio.volume = Math.max(0, Math.min(maxVolume, value));
     }
 
     function toggleMicMute() {
         if (!source?.audio) return;
+        markInternalAction();
         source.audio.muted = !source.audio.muted;
     }
 
     readonly property bool hasSource: !!source
+
+    // ---- Dynamic Island OSD Alert (from Celestia OSD) ----------------------
+    property bool osdActive: false
+    property string osdType: "volume"   // "volume" | "mic"
+    property real osdValue: volume
+    property bool osdMuted: muted
+    property string osdIcon: icon
+
+    property bool initialized: false
+    Timer {
+        id: initTimer
+        interval: 1800
+        running: true
+        onTriggered: root.initialized = true
+    }
+
+    Timer {
+        id: osdTimer
+        interval: 2200
+        onTriggered: root.osdActive = false
+    }
+
+    function triggerOsd(type) {
+        if (!initialized || suppressOsd) return;
+        osdType = type;
+        if (type === "volume") {
+            osdValue = volume;
+            osdMuted = muted;
+            osdIcon = icon;
+        } else {
+            osdValue = micVolume;
+            osdMuted = micMuted;
+            osdIcon = micIcon;
+        }
+        osdActive = true;
+        osdTimer.restart();
+    }
+
+    onVolumeChanged: triggerOsd("volume")
+    onMutedChanged: triggerOsd("volume")
+    onMicVolumeChanged: triggerOsd("mic")
+    onMicMutedChanged: triggerOsd("mic")
 
     // ---- Input activity ----------------------------------------------------
     // PipeWire publishes volume and mute but no level, so showing real

@@ -31,6 +31,9 @@ temps=$(sensors -j 2>/dev/null | jq -c '
   }' 2>/dev/null)
 [ -z "$temps" ] && temps='{"cpu":null,"gpu":null,"nvme":null}'
 
+gpu_busy=$(cat /sys/class/drm/card*/device/gpu_busy_percent 2>/dev/null | head -1)
+[ -z "$gpu_busy" ] && gpu_busy=0
+
 jq -cn \
   --argjson load1 "${load1:-0}" \
   --argjson cores "$(nproc)" \
@@ -43,6 +46,8 @@ jq -cn \
   --arg iface "${iface:-}" \
   --argjson rx "${rx:-0}" \
   --argjson tx "${tx:-0}" \
+  --argjson gpuUsage "${gpu_busy:-0}" \
   '{load1:$load1, cores:$cores, memUsedMib:$memUsed, memTotalMib:$memTotal,
     diskUsed:$diskUsed, diskTotal:$diskTotal, temps:$temps,
-    uptime:$uptime, iface:$iface, rxBytes:$rx, txBytes:$tx}'
+    uptime:$uptime, iface:$iface, rxBytes:$rx, txBytes:$tx,
+    gpuUsage:$gpuUsage}'

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Emit one compact JSON line of current weather for the QuickShell island.
-# Reduces wttr.in's ~30KB j1 payload to just what the bar shows.
+# Emit rich JSON of current weather and 3-day forecast for the QuickShell island.
 # Honours WEATHER_LOCATION like waybar/scripts/waybar-weather.sh did; unset
 # means wttr.in geolocates by IP.
 set -uo pipefail
@@ -17,11 +16,9 @@ fi
 
 echo "$raw" | jq -c --arg configured "$location" '
   (.current_condition[0]) as $c |
+  (.weather[0]) as $today |
   {
     ok: true,
-    # What the user asked for, if anything. wttr.in reports the nearest named
-    # locality, which for a rural request is some neighbouring hamlet nobody
-    # recognises -- so prefer this for display.
     configured: $configured,
     tempC:    ($c.temp_C        | tonumber? // null),
     feelsC:   ($c.FeelsLikeC    | tonumber? // null),
@@ -30,5 +27,18 @@ echo "$raw" | jq -c --arg configured "$location" '
     code:     ($c.weatherCode   | tonumber? // null),
     desc:     ($c.weatherDesc[0].value // ""),
     location: ([ .nearest_area[0].areaName[0].value,
-                 .nearest_area[0].country[0].value ] | map(select(. != null and . != "")) | join(", "))
+                 .nearest_area[0].country[0].value ] | map(select(. != null and . != "")) | join(", ")),
+    sunrise:      ($today.astronomy[0].sunrise // ""),
+    sunset:       ($today.astronomy[0].sunset  // ""),
+    minC:         ($today.mintempC | tonumber? // null),
+    maxC:         ($today.maxtempC | tonumber? // null),
+    chanceOfRain: ($today.hourly[0].chanceofrain | tonumber? // 0),
+    forecast: [ .weather[] | {
+      date: .date,
+      minC: (.mintempC | tonumber? // null),
+      maxC: (.maxtempC | tonumber? // null),
+      code: (.hourly[4].weatherCode | tonumber? // null),
+      desc: (.hourly[4].weatherDesc[0].value // ""),
+      rain: (.hourly[4].chanceofrain | tonumber? // 0)
+    } ]
   }' 2>/dev/null || echo '{"ok":false}'

@@ -4,7 +4,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 
-// Current conditions from wttr.in via scripts/weather.sh.
+// Current conditions & forecast from wttr.in via scripts/weather.sh.
 Singleton {
     id: root
 
@@ -16,21 +16,21 @@ Singleton {
     property int code: 0
     property string description: ""
     property string location: ""
+    property string sunrise: ""
+    property string sunset: ""
+    property int minC: 0
+    property int maxC: 0
+    property int chanceOfRain: 0
+    property var forecast: []
 
-    // $WEATHER_LOCATION, when set. IP geolocation is useless behind a VPN, and
-    // there is no other automatic source on this machine (geoclue just falls
-    // back to the same GeoIP answer), so an explicit location is the only way
-    // to get the right forecast. Empty means "geolocate by IP".
+    // $WEATHER_LOCATION, when set. Empty means "geolocate by IP".
     property string configured: ""
 
-    // Prefer the configured name: wttr.in reports the nearest named locality,
-    // which for a rural request is a neighbouring hamlet nobody recognises.
     readonly property string displayLocation: configured || location
 
     // World Weather Online condition codes, as used by wttr.in.
-    readonly property string icon: {
-        if (!ok) return "󰅤";
-        const c = code;
+    function iconForCode(c) {
+        if (!c) return "󰅤";
         if (c === 113) return "󰖙";                                    // sunny
         if (c === 116) return "󰖕";                                    // partly cloudy
         if ([119, 122].includes(c)) return "󰖐";                        // cloudy / overcast
@@ -40,6 +40,8 @@ Singleton {
         if ([182, 185, 281, 284, 311, 314, 317, 320, 350, 362, 365, 374, 377].includes(c)) return "󰙿"; // sleet
         return "󰖗";                                                    // rain
     }
+
+    readonly property string icon: ok ? iconForCode(code) : "󰅤"
 
     Process {
         id: probe
@@ -61,6 +63,12 @@ Singleton {
                     root.description = parsed.desc ?? "";
                     root.location = parsed.location ?? "";
                     root.configured = parsed.configured ?? "";
+                    root.sunrise = parsed.sunrise ?? "";
+                    root.sunset = parsed.sunset ?? "";
+                    root.minC = parsed.minC ?? 0;
+                    root.maxC = parsed.maxC ?? 0;
+                    root.chanceOfRain = parsed.chanceOfRain ?? 0;
+                    root.forecast = parsed.forecast ?? [];
                 } catch (e) {
                     root.ok = false;
                 }

@@ -92,9 +92,9 @@ Singleton {
     // Floor only -- the audio page reports its own height, which grows when a
     // device list is expanded.
     readonly property int volumePageHeight: 150
-    readonly property int mediaPageWidth: 380
+    readonly property int mediaPageWidth: 390
     readonly property int mediaPageHeight: 96
-    readonly property int systemPageWidth: 380
+    readonly property int systemPageWidth: 410
     readonly property int systemPageHeight: 252
     readonly property int controlPageWidth: 384
     // Floor only -- the page reports its own height as lists open.
