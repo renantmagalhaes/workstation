@@ -68,6 +68,8 @@ Item {
             return Theme.controlPageWidth;
         case "session":
             return Theme.sessionPageWidth;
+        case "notifications":
+            return Theme.notificationPageWidth;
         }
         return Theme.calendarWidth;
     }
@@ -86,6 +88,8 @@ Item {
             return Theme.controlPageHeight;
         case "session":
             return Theme.sessionPageHeight;
+        case "notifications":
+            return Theme.notificationPageHeight;
         }
         return Theme.calendarHeight;
     }
@@ -104,6 +108,8 @@ Item {
             return controlButton;
         case "session":
             return powerButton;
+        case "notifications":
+            return notifButton;
         }
         return null;
     }
@@ -314,7 +320,10 @@ Item {
             }
 
             NotifButton {
+                id: notifButton
                 anchors.verticalCenter: parent.verticalCenter
+                active: root.page === "notifications"
+                onActivated: root.requestToggle("notifications")
             }
 
             ControlButton {
@@ -439,6 +448,8 @@ Item {
                     return controlPage;
                 case "session":
                     return sessionPage;
+                case "notifications":
+                    return notificationPage;
                 }
                 return null;
             }
@@ -472,6 +483,11 @@ Item {
         Component {
             id: sessionPage
             SessionPage {}
+        }
+
+        Component {
+            id: notificationPage
+            NotificationPage {}
         }
     }
 }

@@ -2,11 +2,14 @@ import QtQuick
 import "../Config"
 import "../Services"
 
-// Left-click restores the last dismissed notification (what waybar's
-// custom/notification did), right-click toggles do-not-disturb, middle-click
-// dismisses everything.
+// Notification button in the Dynamic Island.
+// Left-click opens/closes the Notification Center popover.
+// Right-click toggles do-not-disturb, middle-click dismisses all notifications.
 Item {
     id: root
+
+    property bool active: false
+    signal activated
 
     implicitWidth: Theme.islandHeight - 6
     implicitHeight: Theme.islandHeight
@@ -16,7 +19,7 @@ Item {
         anchors.topMargin: 3
         anchors.bottomMargin: 3
         radius: Theme.chipRadius
-        color: mouse.containsMouse ? Theme.hover : "transparent"
+        color: root.active ? Theme.pressed : mouse.containsMouse ? Theme.hover : "transparent"
 
         Behavior on color {
             ColorAnimation {
@@ -30,7 +33,7 @@ Item {
 
         anchors.centerIn: parent
         text: Notifs.icon
-        color: Notifs.dnd ? Theme.fgFaint : Theme.fg
+        color: root.active || mouse.containsMouse ? Theme.fg : Notifs.dnd ? Theme.fgFaint : Theme.fg
         font.family: Theme.iconFamily; renderType: Text.QtRendering
         font.pixelSize: Theme.iconSize
 
@@ -78,7 +81,7 @@ Item {
             else if (event.button === Qt.MiddleButton)
                 Notifs.dismissAll();
             else
-                Notifs.restore();
+                root.activated();
         }
     }
 }

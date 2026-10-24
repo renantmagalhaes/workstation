@@ -3,6 +3,7 @@ import Quickshell
 import Quickshell.Wayland
 import "Config"
 import "Services"
+import "Modules"
 
 // One island per monitor.
 //
@@ -22,6 +23,7 @@ Scope {
     id: root
 
     required property var modelData
+    readonly property var _notifInit: Notifs
 
     // "" when collapsed, otherwise the name of the open page.
     property string page: ""
@@ -91,5 +93,9 @@ Scope {
             anchors.horizontalCenter: parent.horizontalCenter
             y: Theme.topMargin
         }
+    }
+
+    NotificationToasts {
+        screen: root.modelData
     }
 }

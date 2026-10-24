@@ -101,6 +101,8 @@ Singleton {
     readonly property int controlPageHeight: 180
     readonly property int sessionPageWidth: 286
     readonly property int sessionPageHeight: 86
+    readonly property int notificationPageWidth: 380
+    readonly property int notificationPageHeight: 380
 
     // ---- Type --------------------------------------------------------------
     // Two families on purpose. Text is set in a UI sans -- a monospace coding

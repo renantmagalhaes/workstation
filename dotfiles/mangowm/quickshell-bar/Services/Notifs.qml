@@ -2,73 +2,220 @@ pragma Singleton
 
 import QtQuick
 import Quickshell
-import Quickshell.Io
+import Quickshell.Services.Notifications
 
-// Notification state, read from mako.
-//
-// mako already owns the freedesktop notification bus, so the bar talks to it
-// through makoctl instead of standing up a competing NotificationServer.
+// Native freedesktop notification server using Quickshell.Services.Notifications.
+// Replaces Mako with full in-process notification dispatching, rich card details,
+// toast popups, actions, and real-time state tracking.
 Singleton {
     id: root
 
-    property int count: 0
-    property bool dnd: false
-
+    property var list: []
+    readonly property int count: list.length
     readonly property bool hasUnread: count > 0
+
+    property int popupVersion: 0
+    readonly property var popups: {
+        popupVersion;
+        return list.filter(n => n && n.popup);
+    }
+
+    property bool dnd: false
     readonly property string icon: dnd ? "󰂛" : count > 0 ? "󰂚" : "󰂜"
 
-    function restore() {
-        act("makoctl restore");
+    property var latestNotif: null
+    property bool notifyAlertActive: false
+
+    Timer {
+        id: alertTimer
+        interval: 4000
+        onTriggered: {
+            root.notifyAlertActive = false;
+            root.latestNotif = null;
+        }
+    }
+
+    function removeItem(item) {
+        if (!item) return;
+        item.popup = false;
+        root.list = root.list.filter(n => n !== item);
+        root.popupVersion++;
+        if (root.latestNotif === item) {
+            root.notifyAlertActive = false;
+            root.latestNotif = null;
+        }
+        item.destroy();
     }
 
     function dismissAll() {
-        act("makoctl dismiss --all");
+        for (const item of root.list.slice()) {
+            item.popup = false;
+            item.dismiss();
+        }
+        root.list = [];
+        root.popupVersion++;
+        root.notifyAlertActive = false;
+        root.latestNotif = null;
     }
 
     function toggleDnd() {
-        act(dnd ? "makoctl mode -r do-not-disturb" : "makoctl mode -a do-not-disturb");
+        root.dnd = !root.dnd;
+        if (root.dnd) {
+            for (const item of root.list) {
+                item.popup = false;
+            }
+            root.popupVersion++;
+            root.notifyAlertActive = false;
+            root.latestNotif = null;
+        }
     }
 
-    function act(command) {
-        runner.running = false;
-        runner.command = ["sh", "-c", command];
-        runner.running = true;
-        // Reflect the change without waiting for the next poll tick.
-        refreshSoon.restart();
-    }
+    NotificationServer {
+        id: server
 
-    Process {
-        id: runner
-    }
+        keepOnReload: false
+        actionsSupported: true
+        bodyHyperlinksSupported: true
+        bodyImagesSupported: true
+        bodyMarkupSupported: true
+        imageSupported: true
+        persistenceSupported: true
 
-    Timer {
-        id: refreshSoon
-        interval: 150
-        onTriggered: probe.running = true
-    }
+        onNotification: notif => {
+            notif.tracked = true;
 
-    Process {
-        id: probe
-        command: ["bash", Paths.script("notifs.sh")]
+            const nId = notif.id ? String(notif.id) : ("n_" + Date.now() + "_" + Math.floor(Math.random() * 1000));
 
-        stdout: SplitParser {
-            splitMarker: "\n"
-            onRead: data => {
-                if (!data) return;
-                try {
-                    const parsed = JSON.parse(data);
-                    root.count = parsed.count ?? 0;
-                    root.dnd = parsed.dnd === true;
-                } catch (e) {}
+            // Replace existing notification with the same ID if already in list
+            const existing = root.list.find(n => n.notifId === nId);
+            if (existing) {
+                root.list = root.list.filter(n => n !== existing);
+                existing.destroy();
+            }
+
+            const timeout = (notif.expireTimeout && notif.expireTimeout > 0) ? notif.expireTimeout : 5000;
+
+            const item = notifComp.createObject(root, {
+                rawNotif: notif,
+                notifId: nId,
+                summary: notif.summary ?? "",
+                body: notif.body ?? "",
+                appName: notif.appName && notif.appName.length > 0 ? notif.appName : "System",
+                appIcon: notif.appIcon ?? "",
+                image: notif.image ?? "",
+                urgency: notif.urgency ?? 1,
+                timeoutMs: timeout,
+                popup: !root.dnd,
+                time: new Date(),
+                actions: (notif.actions ?? []).map(a => ({
+                    identifier: a.identifier,
+                    text: a.text,
+                    invoke: () => a.invoke()
+                }))
+            });
+
+            root.list = [item, ...root.list];
+            root.popupVersion++;
+
+            if (!root.dnd) {
+                root.latestNotif = item;
+                root.notifyAlertActive = true;
+                alertTimer.restart();
             }
         }
     }
 
-    Timer {
-        interval: 3000
-        running: true
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: probe.running = true
+    Component {
+        id: notifComp
+
+        QtObject {
+            id: item
+
+            property var rawNotif
+            property string notifId: ""
+            property string summary: ""
+            property string body: ""
+            property string appName: ""
+            property string appIcon: ""
+            property string image: ""
+            property int urgency: 1
+            property var actions: []
+            property date time: new Date()
+            property string timeStr: "Just now"
+
+            property bool popup: false
+            property bool hovered: false
+            property int timeoutMs: 5000
+
+            onPopupChanged: root.popupVersion++
+
+            readonly property Timer popupTimer: Timer {
+                interval: item.timeoutMs > 0 ? item.timeoutMs : 5000
+                running: item.popup && !item.hovered
+                onTriggered: {
+                    item.popup = false;
+                }
+            }
+
+            function dismissPopup() {
+                item.popup = false;
+            }
+
+            readonly property Timer ageTimer: Timer {
+                interval: 20000
+                running: true
+                repeat: true
+                onTriggered: item.updateAge()
+            }
+
+            function updateAge() {
+                const diff = Date.now() - item.time.getTime();
+                const mins = Math.floor(diff / 60000);
+                if (mins < 1) {
+                    item.timeStr = "Just now";
+                } else if (mins < 60) {
+                    item.timeStr = mins + "m ago";
+                } else {
+                    const hrs = Math.floor(mins / 60);
+                    if (hrs < 24) {
+                        item.timeStr = hrs + "h ago";
+                    } else {
+                        const days = Math.floor(hrs / 24);
+                        item.timeStr = days + "d ago";
+                    }
+                }
+            }
+
+            function dismiss() {
+                item.popup = false;
+                if (rawNotif) {
+                    try {
+                        rawNotif.dismiss();
+                    } catch (e) {}
+                }
+                root.removeItem(item);
+            }
+
+            function invokeAction(identifier) {
+                if (actions) {
+                    for (let i = 0; i < actions.length; i++) {
+                        if (actions[i].identifier === identifier) {
+                            try {
+                                actions[i].invoke();
+                            } catch (e) {}
+                            break;
+                        }
+                    }
+                }
+                dismiss();
+            }
+
+            readonly property Connections _conn: Connections {
+                target: item.rawNotif
+                function onClosed() {
+                    root.removeItem(item);
+                }
+            }
+        }
     }
 }
