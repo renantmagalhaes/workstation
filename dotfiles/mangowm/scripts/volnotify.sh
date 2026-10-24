@@ -54,57 +54,61 @@ else
   fi
 fi
 
-# 2) Coalesce very rapid repeats, drop if last notify was < 60 ms ago
-now_ms="$(date +%s%3N)"
-last_ms="$(cat "$TSFILE" 2>/dev/null || echo 0)"
-if (( now_ms - last_ms < 60 )); then
-  exit 0
-fi
-printf '%s' "$now_ms" > "$TSFILE"
-
-# 3) Read current volume and mute state
-if $have_pamixer; then
-  vol="$(pamixer --get-volume)"
-  if pamixer --get-mute | grep -q true; then muted=true; else muted=false; fi
-else
-  line="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
-  vol="$(awk '{print int($2*100 + 0.5)}' <<<"$line")"
-  if grep -q MUTED <<<"$line"; then muted=true; else muted=false; fi
-fi
-vol="$(clamp "$vol" 0 150)"
-
-# 4) Choose icon
-icon="audio-volume-medium-symbolic"
-if [[ "$muted" == true || "$vol" -eq 0 ]]; then
-  icon="audio-volume-muted-symbolic"
-elif (( vol <= 30 )); then
-  icon="audio-volume-low-symbolic"
-elif (( vol >= 90 )); then
-  icon="audio-volume-high-symbolic"
-fi
-
-# 5) Map to mako progress 0..100
-bar_val="$vol"
-(( bar_val > 100 )) && bar_val=100
-
-title="Volume"
-[[ "$muted" == true ]] && title="Volume (muted)"
-body="$(printf "%3d%%" "$vol")"
-
-# 6) Serialize notify-send so replacements cannot race
-exec 9>"$LOCK"
-if ! flock -n 9; then
-  exit 0
-fi
-
-# 7) Single merged notification using synchronous tag, no duplicate bars
-notify-send \
-  --app-name="Volume" \
-  --icon="$icon" \
-  --urgency=low \
-  --expire-time=1200 \
-  -h int:value:"$bar_val" \
-  -h string:x-canonical-private-synchronous:volume \
-  -h string:synchronous:volume \
-  "$title" "$body" \
-  >/dev/null 2>&1 || true
+# -----------------------------------------------------------------------------
+# Mako Notification Section (dormant: volume OSD is handled by QuickShell Island)
+# Uncomment the block below if you wish to re-enable Mako volume toast notifications.
+# -----------------------------------------------------------------------------
+# # 2) Coalesce very rapid repeats, drop if last notify was < 60 ms ago
+# now_ms="$(date +%s%3N)"
+# last_ms="$(cat "$TSFILE" 2>/dev/null || echo 0)"
+# if (( now_ms - last_ms < 60 )); then
+#   exit 0
+# fi
+# printf '%s' "$now_ms" > "$TSFILE"
+# 
+# # 3) Read current volume and mute state
+# if $have_pamixer; then
+#   vol="$(pamixer --get-volume)"
+#   if pamixer --get-mute | grep -q true; then muted=true; else muted=false; fi
+# else
+#   line="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+#   vol="$(awk '{print int($2*100 + 0.5)}' <<<"$line")"
+#   if grep -q MUTED <<<"$line"; then muted=true; else muted=false; fi
+# fi
+# vol="$(clamp "$vol" 0 150)"
+# 
+# # 4) Choose icon
+# icon="audio-volume-medium-symbolic"
+# if [[ "$muted" == true || "$vol" -eq 0 ]]; then
+#   icon="audio-volume-muted-symbolic"
+# elif (( vol <= 30 )); then
+#   icon="audio-volume-low-symbolic"
+# elif (( vol >= 90 )); then
+#   icon="audio-volume-high-symbolic"
+# fi
+# 
+# # 5) Map to mako progress 0..100
+# bar_val="$vol"
+# (( bar_val > 100 )) && bar_val=100
+# 
+# title="Volume"
+# [[ "$muted" == true ]] && title="Volume (muted)"
+# body="$(printf "%3d%%" "$vol")"
+# 
+# # 6) Serialize notify-send so replacements cannot race
+# exec 9>"$LOCK"
+# if ! flock -n 9; then
+#   exit 0
+# fi
+# 
+# # 7) Single merged notification using synchronous tag, no duplicate bars
+# notify-send \
+#   --app-name="Volume" \
+#   --icon="$icon" \
+#   --urgency=low \
+#   --expire-time=1200 \
+#   -h int:value:"$bar_val" \
+#   -h string:x-canonical-private-synchronous:volume \
+#   -h string:synchronous:volume \
+#   "$title" "$body" \
+#   >/dev/null 2>&1 || true
