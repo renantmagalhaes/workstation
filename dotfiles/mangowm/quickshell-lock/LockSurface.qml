@@ -140,6 +140,11 @@ WlSessionLockSurface {
         }
     }
 
+    // Space Meteor Shower & Comet Animation (CircuitBoard.qml kept for easy switching)
+    MeteorShower {
+        anchors.fill: parent
+    }
+
     // Media Card in bottom left with fade-in
     MediaWidget {
         id: mediaCard

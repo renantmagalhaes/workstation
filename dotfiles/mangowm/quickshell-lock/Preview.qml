@@ -11,8 +11,8 @@ ShellRoot {
     FloatingWindow {
         id: win
         title: "Lockscreen Preview (Safe Mode - Esc to close)"
-        width: 1100
-        height: 700
+        implicitWidth: 1100
+        implicitHeight: 700
         visible: true
         color: "#08080C"
 
@@ -126,6 +126,11 @@ ShellRoot {
                     GradientStop { position: 1.0; color: Qt.rgba(0.04, 0.04, 0.07, 0.76) }
                 }
             }
+        }
+
+        // Space Meteor Shower & Comet Animation (CircuitBoard.qml kept for easy switching)
+        MeteorShower {
+            anchors.fill: parent
         }
 
         // Media widget in bottom left
