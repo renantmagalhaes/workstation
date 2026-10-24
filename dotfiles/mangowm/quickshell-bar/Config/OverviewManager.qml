@@ -14,12 +14,34 @@ Singleton {
     property string searchQuery: ""
     readonly property bool isSearching: searchQuery.trim().length > 0
 
-    readonly property string focusedMonitor: {
-        if (!allMonitors || allMonitors.length === 0) {
-            return Quickshell.screens[0]?.name ?? "DP-1";
+    property string activeMonitorName: ""
+    readonly property string focusedMonitor: activeMonitorName
+
+    readonly property var orderedMonitors: {
+        const screens = Quickshell.screens.slice();
+        screens.sort((a, b) => a.x - b.x);
+        return screens.map(s => s.name);
+    }
+
+    function setActiveMonitor(monName): void {
+        if (root.activeMonitorName !== monName) {
+            root.activeMonitorName = monName;
         }
-        const m = allMonitors.find(mon => mon.active);
-        return m ? m.name : (Quickshell.screens[0]?.name ?? "DP-1");
+    }
+
+    function switchMonitor(direction): void {
+        const list = orderedMonitors;
+        if (list.length <= 1) return;
+        const idx = list.indexOf(root.activeMonitorName);
+        if (idx === -1) {
+            root.activeMonitorName = list[0];
+            return;
+        }
+        if (direction === "right" && idx < list.length - 1) {
+            root.activeMonitorName = list[idx + 1];
+        } else if (direction === "left" && idx > 0) {
+            root.activeMonitorName = list[idx - 1];
+        }
     }
 
     Process {
@@ -33,6 +55,8 @@ Singleton {
                     root.allClients = data.clients ?? [];
                     root.allMonitors = data.monitors ?? [];
                     root.stamp++;
+                    const activeMon = data.monitors?.find(m => m.active)?.name;
+                    root.activeMonitorName = activeMon ?? Quickshell.screens[0]?.name ?? "DP-1";
                     root.open = true;
                 } catch (e) {
                     console.log("Overview snapshot parse error:", e);

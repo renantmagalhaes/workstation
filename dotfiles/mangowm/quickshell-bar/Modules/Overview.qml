@@ -52,7 +52,7 @@ PanelWindow {
             });
         }
         return allClients.filter(c => {
-            return c.monitor === monName && Array.isArray(c.tags) && c.tags.includes(activeTag) && !c.is_minimized && c.width > 50 && c.height > 50;
+            return c.monitor === monName && win.clientHasTag(c, activeTag) && !c.is_minimized && c.width > 50 && c.height > 50;
         });
     }
 
@@ -136,9 +136,54 @@ PanelWindow {
         return Quickshell.iconPath(appId, true);
     }
 
+    function clientTag(c) {
+        if (!c) return "WS 1";
+        const tags = c.tags;
+        if (tags) {
+            if (tags.length !== undefined && tags.length > 0) {
+                const parts = [];
+                for (let i = 0; i < tags.length; i++) {
+                    parts.push(tags[i]);
+                }
+                return "WS " + parts.join(",");
+            }
+            if (typeof tags === "number") {
+                return "WS " + tags;
+            }
+            if (tags[0] !== undefined) {
+                return "WS " + tags[0];
+            }
+        }
+        if (typeof c.tag === "number") {
+            return "WS " + c.tag;
+        }
+        return "WS " + (win.activeTag || 1);
+    }
+
+    function clientHasTag(c, tagId) {
+        if (!c || !c.tags) return false;
+        const tags = c.tags;
+        if (tags.length !== undefined) {
+            for (let i = 0; i < tags.length; i++) {
+                if (tags[i] === tagId) return true;
+            }
+            return false;
+        }
+        return tags === tagId;
+    }
+
     function focusWindow(client) {
         OverviewManager.closeOverview();
-        const targetTag = Array.isArray(client.tags) && client.tags.length > 0 ? client.tags[0] : 1;
+        let targetTag = 1;
+        if (client && client.tags) {
+            if (client.tags.length !== undefined && client.tags.length > 0) {
+                targetTag = client.tags[0];
+            } else if (typeof client.tags === "number") {
+                targetTag = client.tags;
+            }
+        } else if (client && typeof client.tag === "number") {
+            targetTag = client.tag;
+        }
         Quickshell.execDetached(["sh", "-c", `mmsg dispatch focusmon,${client.monitor}; mmsg dispatch view,${targetTag},1; mmsg dispatch focusid client,${client.id}`]);
     }
 
@@ -235,7 +280,7 @@ PanelWindow {
 
                     // Miniature window blocks in this workspace
                     Repeater {
-                        model: win.allClients.filter(c => c.monitor === win.monName && Array.isArray(c.tags) && c.tags.includes(wsCard.wsId) && c.width > 50)
+                        model: win.allClients.filter(c => c.monitor === win.monName && win.clientHasTag(c, wsCard.wsId) && c.width > 50)
 
                         Rectangle {
                             id: miniTile
@@ -368,12 +413,40 @@ PanelWindow {
                             event.accepted = true;
                         } else if (k === Qt.Key_Up) {
                             win.keyboard = true;
-                            win.current = Math.max(0, win.current - 1);
+                            if (win.current > 0) {
+                                win.current--;
+                            } else {
+                                OverviewManager.switchMonitor("left");
+                            }
                             event.accepted = true;
                         } else if (k === Qt.Key_Down || k === Qt.Key_Tab) {
                             win.keyboard = true;
-                            win.current = n > 0 ? (win.current + 1) % n : 0;
+                            if (win.current < n - 1) {
+                                win.current++;
+                            } else {
+                                OverviewManager.switchMonitor("right");
+                            }
                             event.accepted = true;
+                        } else if (k === Qt.Key_Right) {
+                            if (searchInput.cursorPosition >= searchInput.text.length) {
+                                win.keyboard = true;
+                                if (win.current < n - 1) {
+                                    win.current++;
+                                } else {
+                                    OverviewManager.switchMonitor("right");
+                                }
+                                event.accepted = true;
+                            }
+                        } else if (k === Qt.Key_Left) {
+                            if (searchInput.cursorPosition <= 0) {
+                                win.keyboard = true;
+                                if (win.current > 0) {
+                                    win.current--;
+                                } else {
+                                    OverviewManager.switchMonitor("left");
+                                }
+                                event.accepted = true;
+                            }
                         }
                     }
                 }
@@ -466,7 +539,7 @@ PanelWindow {
             readonly property rect to: win.layout[index] ?? from
             readonly property rect targetRect: win.open ? to : from
 
-            readonly property bool isSelected: tileMouse.containsMouse || (win.keyboard && index === win.current)
+            readonly property bool isSelected: tileMouse.containsMouse || (win.keyboard && (OverviewManager.activeMonitorName === win.monName) && index === win.current)
             readonly property bool isDragged: win.dragged !== null && win.dragged.client.id === modelData.id
 
             x: targetRect.x
@@ -509,30 +582,70 @@ PanelWindow {
                     }
                 }
 
-                // Workspace tag badge when searching
+                // Workspace tag badge (top-left)
                 Rectangle {
                     anchors.top: parent.top
-                    anchors.right: parent.right
-                    anchors.margins: 8
+                    anchors.left: parent.left
+                    anchors.margins: 7
                     height: 22
                     width: wsBadgeRow.implicitWidth + 14
                     radius: 11
                     color: Qt.rgba(0.06, 0.08, 0.12, 0.90)
                     border.color: "#00E5FF"
                     border.width: 1
-                    visible: OverviewManager.isSearching
-                    z: 5
+                    visible: true
+                    z: 15
 
                     RowLayout {
                         id: wsBadgeRow
                         anchors.centerIn: parent
                         spacing: 4
                         Text {
-                            text: "WS " + (Array.isArray(tile.modelData.tags) && tile.modelData.tags.length > 0 ? tile.modelData.tags[0] : 1)
+                            text: win.clientTag(tile.modelData)
                             font.family: "Inter, sans-serif"
                             font.pixelSize: 11
                             font.bold: true
                             color: "#00E5FF"
+                        }
+                    }
+                }
+
+                // Close window button (top-right)
+                Rectangle {
+                    id: closeBtn
+                    anchors.top: parent.top
+                    anchors.right: parent.right
+                    anchors.margins: 7
+                    width: 24
+                    height: 24
+                    radius: 12
+                    z: 20
+                    color: closeBtnMouse.containsMouse ? "#FF3B30" : Qt.rgba(0.08, 0.10, 0.16, 0.85)
+                    border.width: 1
+                    border.color: closeBtnMouse.containsMouse ? "#FF5F56" : Qt.rgba(1, 1, 1, 0.25)
+
+                    Behavior on color { ColorAnimation { duration: 120 } }
+                    Behavior on scale { NumberAnimation { duration: 100 } }
+                    scale: closeBtnMouse.containsMouse ? 1.15 : 1.0
+
+                    Text {
+                        anchors.centerIn: parent
+                        text: "✕"
+                        font.family: "Inter, sans-serif"
+                        font.pixelSize: 11
+                        font.bold: true
+                        color: "#FFFFFF"
+                    }
+
+                    MouseArea {
+                        id: closeBtnMouse
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        acceptedButtons: Qt.LeftButton
+                        onClicked: mouse => {
+                            mouse.accepted = true;
+                            win.killWindow(tile.modelData);
                         }
                     }
                 }
@@ -602,7 +715,10 @@ PanelWindow {
                 cursorShape: win.dragged ? Qt.ClosedHandCursor : Qt.PointingHandCursor
                 property point pressStart
 
-                onEntered: win.current = tile.index
+                onEntered: {
+                    OverviewManager.setActiveMonitor(win.monName);
+                    win.current = tile.index;
+                }
                 onPressed: mouse => pressStart = Qt.point(mouse.x, mouse.y)
 
                 onPositionChanged: mouse => {
@@ -673,10 +789,32 @@ PanelWindow {
         }
     }
 
+    // Monitor Focus Synchronization
+    Connections {
+        target: OverviewManager
+        function onActiveMonitorNameChanged() {
+            if (OverviewManager.activeMonitorName === win.monName) {
+                if (win.wins.length > 0) {
+                    if (win.current < 0 || win.current >= win.wins.length) {
+                        win.current = 0;
+                    }
+                }
+                win.keyboard = true;
+                if (OverviewManager.isSearching && searchInput) {
+                    searchInput.forceActiveFocus();
+                    searchInput.cursorPosition = searchInput.text.length;
+                } else if (keyHandler) {
+                    keyHandler.forceActiveFocus();
+                }
+            }
+        }
+    }
+
     // ---------- Keyboard Navigation Item ----------
     Item {
+        id: keyHandler
         anchors.fill: parent
-        focus: win.open
+        focus: win.open && OverviewManager.activeMonitorName === win.monName
 
         Keys.onPressed: event => {
             if (!win.open) return;
@@ -703,11 +841,19 @@ PanelWindow {
                 event.accepted = true;
             } else if (k === Qt.Key_Left || k === Qt.Key_Up) {
                 win.keyboard = true;
-                win.current = Math.max(0, win.current - 1);
+                if (win.current > 0) {
+                    win.current--;
+                } else {
+                    OverviewManager.switchMonitor("left");
+                }
                 event.accepted = true;
             } else if (k === Qt.Key_Right || k === Qt.Key_Down || k === Qt.Key_Tab) {
                 win.keyboard = true;
-                win.current = n > 0 ? (win.current + 1) % n : 0;
+                if (win.current < n - 1) {
+                    win.current++;
+                } else {
+                    OverviewManager.switchMonitor("right");
+                }
                 event.accepted = true;
             } else if (!OverviewManager.isSearching && k >= Qt.Key_1 && k <= Qt.Key_5) {
                 win.goWorkspace(k - Qt.Key_0);
@@ -725,3 +871,4 @@ PanelWindow {
         }
     }
 }
+
