@@ -42,7 +42,7 @@ mkdir -p "$LOCKSCREEN_DIR"
 # Get list of all active monitors
 monitors=""
 if command -v mmsg >/dev/null 2>&1; then
-    monitors=$(mmsg -O 2>/dev/null || echo "")
+    monitors=$(mmsg get all-monitors 2>/dev/null | jq -r '.monitors[].name' 2>/dev/null || mmsg -O 2>/dev/null || echo "")
 fi
 
 # Fallback if mmsg is not available
@@ -244,14 +244,17 @@ if [[ -f "$HYPRLOCK_CONFIG" ]]; then
     
     # Lock the screen with the dynamic config
     # Note: Don't clean up temp config immediately - hyprlock needs it while running
-    if command -v hyprlock >/dev/null 2>&1; then
+    LOCK_ENGINE="${LOCK_ENGINE:-quickshell}"
+    if [[ "$LOCK_ENGINE" == "quickshell" ]] && [[ -d "$HOME/.dotfiles/mangowm/quickshell-lock" ]] && command -v quickshell >/dev/null 2>&1; then
+        exec quickshell -p "$HOME/.dotfiles/mangowm/quickshell-lock"
+    elif command -v hyprlock >/dev/null 2>&1; then
         # Run hyprlock (it will block until unlocked)
         # Use exec to replace the shell process with hyprlock
         exec hyprlock -c "$TEMP_CONFIG"
         # Clean up temp config after hyprlock exits (shouldn't reach here)
         rm -f "$TEMP_CONFIG"
     else
-        echo "Error: hyprlock command not found" >&2
+        echo "Error: Neither quickshell nor hyprlock command found" >&2
         rm -f "$TEMP_CONFIG"
         exit 1
     fi

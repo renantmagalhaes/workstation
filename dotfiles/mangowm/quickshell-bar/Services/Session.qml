@@ -12,7 +12,7 @@ Singleton {
             id: "lock",
             label: "Lock",
             icon: "󰌾",
-            command: ["hyprlock"],
+            command: ["sh", "-c", "$HOME/.dotfiles/mangowm/scripts/lock.sh"],
             confirm: false,
             destructive: false
         },
