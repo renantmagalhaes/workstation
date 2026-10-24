@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 import Quickshell
 
 Item {
@@ -9,6 +10,7 @@ Item {
 
     property PamAuth pam
     property string username: "rtm"
+    property string avatarSource: "file:///home/rtm/.dotfiles/mangowm/quickshell-lock/assets/blackhole_circle.png"
 
     implicitWidth: 460
     implicitHeight: 460
@@ -83,31 +85,27 @@ Item {
             Layout.alignment: Qt.AlignHCenter
             spacing: 10
 
-            Rectangle {
+            Item {
+                id: avatarContainer
                 Layout.alignment: Qt.AlignHCenter
-                width: 84
-                height: 84
-                radius: 42
-                color: Qt.rgba(0.12, 0.12, 0.18, 0.70)
-                border.color: Qt.rgba(1, 1, 1, 0.16)
-                border.width: 2
-                clip: true
+                width: 86
+                height: 86
 
                 Image {
                     id: avatarImg
                     anchors.fill: parent
-                    source: "file:///home/" + root.username + "/.face"
-                    fillMode: Image.PreserveAspectCrop
-                    visible: status === Image.Ready
+                    source: root.avatarSource
+                    fillMode: Image.PreserveAspectFit
+                    asynchronous: true
                 }
 
-                Text {
-                    anchors.centerIn: parent
-                    text: ""
-                    font.family: "JetBrainsMono Nerd Font"
-                    font.pixelSize: 38
-                    color: Qt.rgba(1, 1, 1, 0.6)
-                    visible: !avatarImg.visible
+                // Smooth circular border ring on top
+                Rectangle {
+                    anchors.fill: parent
+                    radius: width / 2
+                    color: "transparent"
+                    border.color: Qt.rgba(1, 1, 1, 0.20)
+                    border.width: 1.5
                 }
             }
 
