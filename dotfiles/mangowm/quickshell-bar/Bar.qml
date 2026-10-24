@@ -98,4 +98,8 @@ Scope {
     NotificationToasts {
         screen: root.modelData
     }
+
+    EdgeTriggers {
+        screen: root.modelData
+    }
 }

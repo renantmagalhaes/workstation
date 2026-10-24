@@ -23,11 +23,12 @@ launch_main_bar() {
     # fi
 }
 
-# Function to launch the secondary/trigger waybar
+# Function to launch the secondary/trigger waybar (dormant: now handled natively by QuickShell EdgeTriggers)
 launch_trigger_waybar() {
-    if ! is_running "waybar -c .*/waybar/trigger_config.jsonc"; then
-        waybar -c "$HOME/.dotfiles/mangowm/waybar/trigger_config.jsonc" -s "$HOME/.dotfiles/mangowm/waybar/trigger_style.css" >/dev/null 2>&1 &
-    fi
+    # if ! is_running "waybar -c .*/waybar/trigger_config.jsonc"; then
+    #     waybar -c "$HOME/.dotfiles/mangowm/waybar/trigger_config.jsonc" -s "$HOME/.dotfiles/mangowm/waybar/trigger_style.css" >/dev/null 2>&1 &
+    # fi
+    :
 }
 
 # Function to launch mouse_actions.py
