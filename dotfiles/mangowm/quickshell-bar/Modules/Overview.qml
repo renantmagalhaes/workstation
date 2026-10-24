@@ -40,10 +40,21 @@ PanelWindow {
         return 1;
     }
 
-    // Windows belonging to this monitor and the active tag
-    readonly property var wins: allClients.filter(c => {
-        return c.monitor === monName && Array.isArray(c.tags) && c.tags.includes(activeTag) && !c.is_minimized && c.width > 50 && c.height > 50;
-    })
+    // Windows belonging to this monitor (filtered by search or by active tag)
+    readonly property var wins: {
+        if (OverviewManager.isSearching) {
+            const q = OverviewManager.searchQuery.trim().toLowerCase();
+            return allClients.filter(c => {
+                if (c.monitor !== monName || c.width <= 50 || c.height <= 50) return false;
+                const title = (c.title ?? "").toLowerCase();
+                const appid = (c.appid ?? "").toLowerCase();
+                return title.includes(q) || appid.includes(q);
+            });
+        }
+        return allClients.filter(c => {
+            return c.monitor === monName && Array.isArray(c.tags) && c.tags.includes(activeTag) && !c.is_minimized && c.width > 50 && c.height > 50;
+        });
+    }
 
     // Layout metrics (Mission Control style)
     readonly property int stripTop: 24
@@ -53,7 +64,13 @@ PanelWindow {
     readonly property real cardW: cardH * (monW / monH)
     readonly property int bandH: stripTop + cardH + 36
 
-    readonly property rect area: Qt.rect(80, bandH + 36, width - 160, height - bandH - 36 - 48)
+    readonly property int searchBarH: 44
+    readonly property rect area: Qt.rect(
+        80,
+        bandH + searchBarH + 28,
+        width - 160,
+        height - bandH - searchBarH - 28 - 48
+    )
 
     property int current: 0
     property bool keyboard: false
@@ -65,6 +82,9 @@ PanelWindow {
             current = 0;
             keyboard = false;
             dragged = null;
+            if (typeof searchInput !== "undefined" && searchInput) {
+                searchInput.text = "";
+            }
         }
     }
 
@@ -118,7 +138,8 @@ PanelWindow {
 
     function focusWindow(client) {
         OverviewManager.closeOverview();
-        Quickshell.execDetached(["sh", "-c", `mmsg dispatch focusmon,${client.monitor}; mmsg dispatch focusid client,${client.id}`]);
+        const targetTag = Array.isArray(client.tags) && client.tags.length > 0 ? client.tags[0] : 1;
+        Quickshell.execDetached(["sh", "-c", `mmsg dispatch focusmon,${client.monitor}; mmsg dispatch view,${targetTag},1; mmsg dispatch focusid client,${client.id}`]);
     }
 
     function killWindow(client) {
@@ -263,11 +284,161 @@ PanelWindow {
         }
     }
 
+    // ---------- Search Bar (Always Visible) ----------
+    Rectangle {
+        id: searchBar
+        anchors.horizontalCenter: parent.horizontalCenter
+        y: win.bandH + 12
+        visible: win.open
+
+        width: Math.min(480, parent.width - 160)
+        height: 44
+        radius: 22
+        z: 50
+
+        color: (searchInput.activeFocus || OverviewManager.isSearching)
+            ? Qt.rgba(0.06, 0.08, 0.14, 0.96)
+            : Qt.rgba(0.06, 0.08, 0.14, 0.75)
+        border.width: (searchInput.activeFocus || OverviewManager.isSearching) ? 1.5 : 1
+        border.color: (searchInput.activeFocus || OverviewManager.isSearching) ? "#00E5FF" : Qt.rgba(1, 1, 1, 0.18)
+
+        Behavior on border.color { ColorAnimation { duration: 150 } }
+        Behavior on color { ColorAnimation { duration: 150 } }
+
+        RowLayout {
+            anchors.fill: parent
+            anchors.leftMargin: 16
+            anchors.rightMargin: 14
+            spacing: 10
+
+            Text {
+                text: "🔍"
+                font.pixelSize: 14
+                color: (searchInput.activeFocus || OverviewManager.isSearching) ? "#00E5FF" : Qt.rgba(1, 1, 1, 0.45)
+            }
+
+            Item {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                Text {
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: "Search open windows..."
+                    font.family: "Inter, sans-serif"
+                    font.pixelSize: 14
+                    color: Qt.rgba(1, 1, 1, 0.35)
+                    visible: searchInput.text.length === 0
+                }
+
+                TextInput {
+                    id: searchInput
+                    anchors.fill: parent
+                    verticalAlignment: TextInput.AlignVCenter
+                    font.family: "Inter, sans-serif"
+                    font.pixelSize: 14
+                    font.weight: Font.Medium
+                    color: "#FFFFFF"
+                    selectionColor: "#00E5FF"
+                    selectedTextColor: "#000000"
+                    selectByMouse: true
+                    clip: true
+
+                    text: OverviewManager.searchQuery
+                    onTextChanged: {
+                        if (OverviewManager.searchQuery !== text) {
+                            OverviewManager.searchQuery = text;
+                            win.current = 0;
+                            win.keyboard = true;
+                        }
+                    }
+
+                    Keys.onPressed: event => {
+                        const k = event.key;
+                        const n = win.wins.length;
+
+                        if (k === Qt.Key_Escape) {
+                            if (text.length > 0) {
+                                text = "";
+                            } else {
+                                OverviewManager.closeOverview();
+                            }
+                            event.accepted = true;
+                        } else if ((k === Qt.Key_Return || k === Qt.Key_Enter) && n > 0) {
+                            win.focusWindow(win.wins[Math.min(win.current, n - 1)]);
+                            event.accepted = true;
+                        } else if (k === Qt.Key_Up) {
+                            win.keyboard = true;
+                            win.current = Math.max(0, win.current - 1);
+                            event.accepted = true;
+                        } else if (k === Qt.Key_Down || k === Qt.Key_Tab) {
+                            win.keyboard = true;
+                            win.current = n > 0 ? (win.current + 1) % n : 0;
+                            event.accepted = true;
+                        }
+                    }
+                }
+            }
+
+            // Results count badge (when searching)
+            Rectangle {
+                visible: OverviewManager.isSearching
+                height: 22
+                width: matchText.implicitWidth + 14
+                radius: 11
+                color: win.wins.length > 0 ? Qt.rgba(0, 0.9, 1, 0.15) : Qt.rgba(1, 0.4, 0.4, 0.18)
+                border.width: 1
+                border.color: win.wins.length > 0 ? Qt.rgba(0, 0.9, 1, 0.4) : Qt.rgba(1, 0.4, 0.4, 0.5)
+
+                Text {
+                    id: matchText
+                    anchors.centerIn: parent
+                    text: win.wins.length + (win.wins.length === 1 ? " match" : " matches")
+                    font.family: "Inter, sans-serif"
+                    font.pixelSize: 11
+                    font.bold: true
+                    color: win.wins.length > 0 ? "#78FFB4" : "#FF7878"
+                }
+            }
+
+            // Clear Button (✕)
+            Rectangle {
+                visible: OverviewManager.isSearching
+                width: 22
+                height: 22
+                radius: 11
+                color: clearMouse.containsMouse ? Qt.rgba(1, 1, 1, 0.20) : Qt.rgba(1, 1, 1, 0.08)
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "✕"
+                    font.pixelSize: 11
+                    font.bold: true
+                    color: clearMouse.containsMouse ? "#FFFFFF" : Qt.rgba(1, 1, 1, 0.6)
+                }
+
+                MouseArea {
+                    id: clearMouse
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        searchInput.text = "";
+                        OverviewManager.searchQuery = "";
+                        win.current = 0;
+                    }
+                }
+            }
+        }
+    }
+
+
     // ---------- No Windows Message ----------
     Text {
         visible: win.wins.length === 0 && win.open
         anchors.centerIn: parent
-        text: "No active windows on this workspace"
+        text: OverviewManager.isSearching
+            ? `No windows matching "${OverviewManager.searchQuery}"`
+            : "No active windows on this workspace"
         font.family: "Inter, sans-serif"
         font.pixelSize: 18
         color: Qt.rgba(1, 1, 1, 0.45)
@@ -334,6 +505,34 @@ PanelWindow {
                     onStatusChanged: {
                         if (status === Image.Ready) {
                             fallbackCol.visible = false;
+                        }
+                    }
+                }
+
+                // Workspace tag badge when searching
+                Rectangle {
+                    anchors.top: parent.top
+                    anchors.right: parent.right
+                    anchors.margins: 8
+                    height: 22
+                    width: wsBadgeRow.implicitWidth + 14
+                    radius: 11
+                    color: Qt.rgba(0.06, 0.08, 0.12, 0.90)
+                    border.color: "#00E5FF"
+                    border.width: 1
+                    visible: OverviewManager.isSearching
+                    z: 5
+
+                    RowLayout {
+                        id: wsBadgeRow
+                        anchors.centerIn: parent
+                        spacing: 4
+                        Text {
+                            text: "WS " + (Array.isArray(tile.modelData.tags) && tile.modelData.tags.length > 0 ? tile.modelData.tags[0] : 1)
+                            font.family: "Inter, sans-serif"
+                            font.pixelSize: 11
+                            font.bold: true
+                            color: "#00E5FF"
                         }
                     }
                 }
@@ -485,7 +684,19 @@ PanelWindow {
             const n = win.wins.length;
 
             if (k === Qt.Key_Escape) {
-                OverviewManager.closeOverview();
+                if (OverviewManager.isSearching) {
+                    OverviewManager.searchQuery = "";
+                    win.current = 0;
+                } else {
+                    OverviewManager.closeOverview();
+                }
+                event.accepted = true;
+            } else if (k === Qt.Key_Backspace) {
+                if (OverviewManager.searchQuery.length > 0) {
+                    OverviewManager.searchQuery = OverviewManager.searchQuery.slice(0, -1);
+                    win.current = 0;
+                    win.keyboard = true;
+                }
                 event.accepted = true;
             } else if ((k === Qt.Key_Return || k === Qt.Key_Enter) && n > 0) {
                 win.focusWindow(win.wins[Math.min(win.current, n - 1)]);
@@ -498,9 +709,18 @@ PanelWindow {
                 win.keyboard = true;
                 win.current = n > 0 ? (win.current + 1) % n : 0;
                 event.accepted = true;
-            } else if (k >= Qt.Key_1 && k <= Qt.Key_5) {
+            } else if (!OverviewManager.isSearching && k >= Qt.Key_1 && k <= Qt.Key_5) {
                 win.goWorkspace(k - Qt.Key_0);
                 event.accepted = true;
+            } else if (event.text && event.text.length > 0 && event.text.charCodeAt(0) >= 32) {
+                if (!(event.modifiers & (Qt.ControlModifier | Qt.AltModifier | Qt.MetaModifier))) {
+                    searchInput.forceActiveFocus();
+                    searchInput.text += event.text;
+                    searchInput.cursorPosition = searchInput.text.length;
+                    win.current = 0;
+                    win.keyboard = true;
+                    event.accepted = true;
+                }
             }
         }
     }

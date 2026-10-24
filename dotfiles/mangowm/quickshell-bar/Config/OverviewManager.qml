@@ -11,6 +11,8 @@ Singleton {
     property var allClients: []
     property var allMonitors: []
     property int stamp: 0
+    property string searchQuery: ""
+    readonly property bool isSearching: searchQuery.trim().length > 0
 
     readonly property string focusedMonitor: {
         if (!allMonitors || allMonitors.length === 0) {
@@ -39,9 +41,15 @@ Singleton {
         }
     }
 
+    onOpenChanged: {
+        if (!open) {
+            searchQuery = "";
+        }
+    }
+
     function toggle(): void {
         if (root.open) {
-            root.open = false;
+            root.closeOverview();
         } else if (!shotProcess.running) {
             shotProcess.running = true;
         }
@@ -55,6 +63,7 @@ Singleton {
 
     function closeOverview(): void {
         root.open = false;
+        root.searchQuery = "";
     }
 
     function removeClient(cid): void {
