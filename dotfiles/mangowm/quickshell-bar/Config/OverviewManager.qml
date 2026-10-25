@@ -57,6 +57,8 @@ Singleton {
                     root.stamp++;
                     const activeMon = data.monitors?.find(m => m.active)?.name;
                     root.activeMonitorName = activeMon ?? Quickshell.screens[0]?.name ?? "DP-1";
+                    LauncherManager.closeLauncher();
+                    WallpaperManager.closePicker();
                     root.open = true;
                 } catch (e) {
                     console.log("Overview snapshot parse error:", e);

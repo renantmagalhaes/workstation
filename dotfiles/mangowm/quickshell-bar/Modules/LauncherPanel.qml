@@ -4,21 +4,23 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import "../Config"
+import "../Services"
 
 Item {
     id: root
 
     readonly property int maxVisibleHeight: 480
-    readonly property int panelWidth: 680
+    readonly property int panelWidth: 700
 
     width: panelWidth
     implicitWidth: panelWidth
     implicitHeight: Math.min(col.implicitHeight, 620)
     height: implicitHeight
 
-    // Filter calculations
+    // Active query and mode
     readonly property string q: LauncherManager.searchQuery.trim().toLowerCase()
     readonly property string mode: LauncherManager.mode
+    readonly property string kind: LauncherManager.kind
 
     // Window scoring & filtering
     function scoreWindow(win, query) {
@@ -92,7 +94,6 @@ Item {
     readonly property var filteredApps: {
         const list = LauncherManager.allApps || [];
         if (!q) {
-            // Default top apps
             return list.slice(0, 30);
         }
         return list.map(a => ({ a, score: scoreApp(a, q) }))
@@ -102,14 +103,99 @@ Item {
                    .map(x => x.a);
     }
 
-    // Unified list of items including headers and selectable rows
+    // Filtered Shortcuts
+    readonly property var filteredShortcuts: {
+        const list = LauncherManager.shortcuts || [];
+        if (!q) return list;
+        return list.filter(s =>
+            (s.key || "").toLowerCase().includes(q) ||
+            (s.title || "").toLowerCase().includes(q) ||
+            (s.desc || "").toLowerCase().includes(q) ||
+            (s.category || "").toLowerCase().includes(q)
+        );
+    }
+
+    // Filtered System Power Actions
+    readonly property var filteredSystemActions: {
+        const list = LauncherManager.systemActions || [];
+        if (!q) return [];
+        const terms = ["wallpaper", "wall", "paper", "lock", "suspend", "sleep", "reboot", "restart", "power", "shutdown", "reload", "logout", "quit", "exit"];
+        const matchesTerm = terms.some(t => t.includes(q) || q.includes(t));
+        if (!matchesTerm) return [];
+        return list.filter(s =>
+            s.id.includes(q) ||
+            s.title.toLowerCase().includes(q) ||
+            s.subtitle.toLowerCase().includes(q)
+        );
+    }
+
+    // Filtered Themes
+    readonly property var filteredThemes: {
+        const list = Palettes.list || [];
+        if (!q) return [];
+        const isThemeQuery = q.includes("theme") || q.includes("color") || q.includes("palette");
+        return list.filter(t =>
+            isThemeQuery ||
+            t.id.toLowerCase().includes(q) ||
+            t.name.toLowerCase().includes(q) ||
+            (t.note || "").toLowerCase().includes(q)
+        );
+    }
+
+    // Unified list of items for ListView
     readonly property var modelItems: {
         const out = [];
-        const isAll = mode === "all";
-        const isWin = mode === "windows";
-        const isApps = mode === "apps";
 
-        // 1. Calculator
+        // 1. Prefix: Command runner (">" or "$")
+        if (kind === "cmd") {
+            const cmd = LauncherManager.searchQuery.replace(/^[>$]\s*/, "");
+            out.push({
+                isHeader: false,
+                kind: "cmd",
+                data: { cmd: cmd }
+            });
+            return out;
+        }
+
+        // 2. Prefix: Web search ("?")
+        if (kind === "web") {
+            const query = LauncherManager.searchQuery.replace(/^\?\s*/, "");
+            out.push({
+                isHeader: false,
+                kind: "web",
+                data: { query: query }
+            });
+            return out;
+        }
+
+        // 3. Prefix: File search ("/")
+        if (kind === "files") {
+            const files = LauncherManager.filesResults || [];
+            if (files.length > 0) {
+                out.push({
+                    isHeader: true,
+                    kind: "header",
+                    title: "FILES & DIRECTORIES",
+                    count: files.length
+                });
+                for (let i = 0; i < files.length; i++) {
+                    out.push({
+                        isHeader: false,
+                        kind: "file",
+                        data: files[i]
+                    });
+                }
+            } else {
+                out.push({
+                    isHeader: false,
+                    kind: "file_hint",
+                    data: { query: LauncherManager.searchQuery.slice(1) }
+                });
+            }
+            return out;
+        }
+
+        // 4. Calculator
         if (LauncherManager.calcResult) {
             out.push({
                 isHeader: false,
@@ -118,8 +204,42 @@ Item {
             });
         }
 
-        // 2. Open Windows
-        if ((isAll || isWin) && filteredWindows.length > 0) {
+        // 5. System Actions (in "all" mode when matching)
+        if (mode === "all" && filteredSystemActions.length > 0) {
+            out.push({
+                isHeader: true,
+                kind: "header",
+                title: "SYSTEM ACTIONS",
+                count: filteredSystemActions.length
+            });
+            for (let i = 0; i < filteredSystemActions.length; i++) {
+                out.push({
+                    isHeader: false,
+                    kind: "system",
+                    data: filteredSystemActions[i]
+                });
+            }
+        }
+
+        // 6. Themes (in "all" mode when matching)
+        if (mode === "all" && filteredThemes.length > 0) {
+            out.push({
+                isHeader: true,
+                kind: "header",
+                title: "COLOR THEMES",
+                count: filteredThemes.length
+            });
+            for (let i = 0; i < filteredThemes.length; i++) {
+                out.push({
+                    isHeader: false,
+                    kind: "theme",
+                    data: filteredThemes[i]
+                });
+            }
+        }
+
+        // 7. Open Windows
+        if ((mode === "all" || mode === "windows") && filteredWindows.length > 0) {
             out.push({
                 isHeader: true,
                 kind: "header",
@@ -135,8 +255,8 @@ Item {
             }
         }
 
-        // 3. Applications
-        if ((isAll || isApps) && filteredApps.length > 0) {
+        // 8. Applications
+        if ((mode === "all" || mode === "apps") && filteredApps.length > 0) {
             out.push({
                 isHeader: true,
                 kind: "header",
@@ -152,10 +272,29 @@ Item {
             }
         }
 
+        // 9. Shortcuts
+        if (mode === "shortcuts") {
+            if (filteredShortcuts.length > 0) {
+                out.push({
+                    isHeader: true,
+                    kind: "header",
+                    title: "MANGO WM SHORTCUTS",
+                    count: filteredShortcuts.length
+                });
+                for (let i = 0; i < filteredShortcuts.length; i++) {
+                    out.push({
+                        isHeader: false,
+                        kind: "shortcut",
+                        data: filteredShortcuts[i]
+                    });
+                }
+            }
+        }
+
         return out;
     }
 
-    // Map of selectable item indices in modelItems
+    // Selectable indices in modelItems
     readonly property var selectableIndices: {
         const indices = [];
         for (let i = 0; i < modelItems.length; i++) {
@@ -185,7 +324,7 @@ Item {
         listView.positionViewAtIndex(targetModelIndex, ListView.Contain);
     }
 
-    function activateCurrent() {
+    function activateCurrent(shift) {
         if (selectableIndices.length === 0) return;
         const targetModelIndex = selectableIndices[currentSelectable];
         const item = modelItems[targetModelIndex];
@@ -194,32 +333,34 @@ Item {
         if (item.kind === "calc") {
             LauncherManager.copyCalc(item.data.raw ?? item.data.result);
         } else if (item.kind === "window") {
-            LauncherManager.focusWindow(item.data);
+            if (shift) {
+                LauncherManager.launchWindowApp(item.data);
+            } else {
+                LauncherManager.focusWindow(item.data);
+            }
         } else if (item.kind === "app") {
             LauncherManager.launchApp(item.data);
+        } else if (item.kind === "cmd") {
+            LauncherManager.executeCommand(item.data.cmd, shift);
+        } else if (item.kind === "web") {
+            LauncherManager.searchWeb(item.data.query);
+        } else if (item.kind === "file") {
+            LauncherManager.openFile(item.data.path, shift);
+        } else if (item.kind === "system") {
+            LauncherManager.executeSystemAction(item.data);
+        } else if (item.kind === "theme") {
+            Settings.theme = item.data.id;
+            LauncherManager.closeLauncher();
         }
     }
 
-    function launchNewInstanceForCurrent() {
+    function killCurrent() {
         if (selectableIndices.length === 0) return;
         const targetModelIndex = selectableIndices[currentSelectable];
         const item = modelItems[targetModelIndex];
-        if (!item || item.isHeader) return;
+        if (!item) return;
 
         if (item.kind === "window") {
-            LauncherManager.launchWindowApp(item.data);
-        } else if (item.kind === "app") {
-            LauncherManager.launchApp(item.data);
-        } else if (item.kind === "calc") {
-            LauncherManager.copyCalc(item.data.raw ?? item.data.result);
-        }
-    }
-
-    function killCurrentWindow() {
-        if (selectableIndices.length === 0) return;
-        const targetModelIndex = selectableIndices[currentSelectable];
-        const item = modelItems[targetModelIndex];
-        if (item && item.kind === "window") {
             LauncherManager.killWindow(item.data);
         }
     }
@@ -235,15 +376,14 @@ Item {
         }
     }
 
-    // Card background with rounded corners, translucent dark glass, and subtle border
+    // Card background with rounded corners and translucent dark glass
     Rectangle {
         id: bgCard
         anchors.fill: parent
         radius: 18
-        color: Qt.rgba(0.08, 0.09, 0.13, 0.70)
+        color: Qt.rgba(0.08, 0.09, 0.13, 0.75)
         border.width: 1
         border.color: Qt.rgba(255, 255, 255, 0.18)
-
 
         // Outer glow/shadow
         Rectangle {
@@ -277,14 +417,22 @@ Item {
                 renderType: Text.QtRendering
                 font.pixelSize: 20
                 color: {
-                    if (LauncherManager.calcResult) return "#00E5FF";
+                    if (root.kind === "calc") return "#00E5FF";
+                    if (root.kind === "cmd") return "#34D399";
+                    if (root.kind === "files") return "#FBBF24";
+                    if (root.kind === "web") return "#60A5FA";
+                    if (root.mode === "shortcuts") return "#FBBF24";
                     if (root.mode === "windows") return "#A78BFA";
                     return Theme.accent;
                 }
                 text: {
-                    if (LauncherManager.calcResult) return "󰃬"; // calculator
-                    if (root.mode === "windows") return "󱂬";    // window
-                    return "󰍉";                                 // search
+                    if (root.kind === "calc") return "󰃬";
+                    if (root.kind === "cmd") return "󰞌";
+                    if (root.kind === "files") return "󰉋";
+                    if (root.kind === "web") return "󰍉";
+                    if (root.mode === "shortcuts") return "󰌌";
+                    if (root.mode === "windows") return "󱂬";
+                    return "󰍉";
                 }
 
                 Behavior on color {
@@ -335,22 +483,18 @@ Item {
                 // Mode Pills / Tabs
                 Row {
                     id: modeTabs
-                    spacing: 6
+                    spacing: 4
                     anchors.verticalCenter: parent.verticalCenter
 
                     Repeater {
-                        model: [
-                            { id: "all", icon: "󰕰", label: "All" },
-                            { id: "windows", icon: "󱂬", label: "Windows (" + root.filteredWindows.length + ")" },
-                            { id: "apps", icon: "󰀻", label: "Apps" }
-                        ]
+                        model: LauncherManager.availableModes
 
                         Rectangle {
                             id: tabItem
                             required property var modelData
                             readonly property bool isActive: root.mode === modelData.id
                             height: 28
-                            width: tabRow.implicitWidth + 20
+                            width: tabRow.implicitWidth + 14
                             radius: 14
                             color: isActive ? Qt.rgba(255, 255, 255, 0.14) : (tabMouse.containsMouse ? Theme.hover : "transparent")
                             border.width: 1
@@ -363,11 +507,16 @@ Item {
                             Row {
                                 id: tabRow
                                 anchors.centerIn: parent
-                                spacing: 5
+                                spacing: 4
 
                                 Text {
                                     text: tabItem.modelData.icon
-                                    color: tabItem.isActive ? (tabItem.modelData.id === "windows" ? "#A78BFA" : Theme.accent) : Theme.fgDim
+                                    color: {
+                                        if (!tabItem.isActive) return Theme.fgDim;
+                                        if (tabItem.modelData.id === "windows") return "#A78BFA";
+                                        if (tabItem.modelData.id === "shortcuts") return "#FBBF24";
+                                        return Theme.accent;
+                                    }
                                     font.family: Theme.iconFamily
                                     renderType: Text.QtRendering
                                     font.pixelSize: 12
@@ -375,10 +524,23 @@ Item {
                                 }
 
                                 Text {
-                                    text: tabItem.modelData.label
+                                    text: {
+                                        if (tabItem.isActive) {
+                                            if (tabItem.modelData.id === "windows") {
+                                                return "Windows (" + root.filteredWindows.length + ")";
+                                            }
+                                            return tabItem.modelData.label;
+                                        }
+                                        // Compact labels for inactive tabs
+                                        if (tabItem.modelData.id === "all") return "All";
+                                        if (tabItem.modelData.id === "windows") return "Win";
+                                        if (tabItem.modelData.id === "apps") return "Apps";
+                                        if (tabItem.modelData.id === "shortcuts") return "Keys";
+                                        return tabItem.modelData.label;
+                                    }
                                     color: tabItem.isActive ? Theme.fg : Theme.fgDim
                                     font.family: Theme.fontFamily
-                                    font.pixelSize: 12
+                                    font.pixelSize: 11
                                     font.weight: tabItem.isActive ? Font.Bold : Font.Normal
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
@@ -458,14 +620,21 @@ Item {
                 // Placeholder
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    elide: Text.ElideRight
                     visible: input.text.length === 0
                     color: Theme.fgDim
                     font.family: Theme.fontFamily
-                    font.pixelSize: 16
+                    font.pixelSize: 15
                     text: {
+                        if (root.kind === "cmd") return "Type shell command to execute...";
+                        if (root.kind === "files") return "Search files and folders in home...";
+                        if (root.kind === "web") return "Search web on DuckDuckGo...";
+                        if (root.mode === "shortcuts") return "Search MangoWM shortcuts...";
                         if (root.mode === "windows") return "Search open windows...";
                         if (root.mode === "apps") return "Search applications...";
-                        return "Search apps, open windows, or calculate (e.g. 25*4, 15% of 80)...";
+                        return "Search apps, open windows, =calc, >cmd, /files, ?web...";
                     }
                 }
 
@@ -496,14 +665,10 @@ Item {
                         LauncherManager.cycleMode(false);
                         event.accepted = true;
                     } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                        if (shift || alt || ctrl) {
-                            root.launchNewInstanceForCurrent();
-                        } else {
-                            root.activateCurrent();
-                        }
+                        root.activateCurrent(shift || alt || ctrl);
                         event.accepted = true;
                     } else if (shift && event.key === Qt.Key_Delete) {
-                        root.killCurrentWindow();
+                        root.killCurrent();
                         event.accepted = true;
                     }
                 }
@@ -517,7 +682,7 @@ Item {
             color: Qt.rgba(1, 1, 1, 0.08)
         }
 
-        // ---------- Results List ----------
+        // ---------- Results Area (ListView) ----------
         Item {
             id: listWrapper
             width: parent.width
@@ -550,9 +715,14 @@ Item {
                     }
 
                     width: listView.width
-                    height: isHeader ? 32 : (modelData.kind === "calc" ? 64 : 54)
+                    height: {
+                        if (isHeader) return 32;
+                        if (modelData.kind === "calc") return 64;
+                        if (modelData.kind === "cmd" || modelData.kind === "web") return 58;
+                        return 54;
+                    }
 
-                    // 1. SECTION HEADER
+                    // Section Header
                     Loader {
                         active: delegateRoot.isHeader
                         anchors.fill: parent
@@ -566,7 +736,12 @@ Item {
 
                                 Text {
                                     text: delegateRoot.modelData.title
-                                    color: delegateRoot.modelData.title.indexOf("WINDOWS") !== -1 ? "#A78BFA" : Theme.accent
+                                    color: {
+                                        if (delegateRoot.modelData.title.indexOf("WINDOWS") !== -1) return "#A78BFA";
+                                        if (delegateRoot.modelData.title.indexOf("SYSTEM") !== -1) return "#EF4444";
+                                        if (delegateRoot.modelData.title.indexOf("SHORTCUTS") !== -1) return "#FBBF24";
+                                        return Theme.accent;
+                                    }
                                     font.family: Theme.fontFamily
                                     font.pixelSize: 11
                                     font.bold: true
@@ -595,7 +770,7 @@ Item {
                         }
                     }
 
-                    // 2. SELECTABLE ITEMS (Calc, Window, App)
+                    // Selectable Item Row Background
                     Loader {
                         active: !delegateRoot.isHeader
                         anchors.fill: parent
@@ -625,11 +800,11 @@ Item {
                                     if (selIdx !== -1) {
                                         root.currentSelectable = selIdx;
                                     }
-                                    root.activateCurrent();
+                                    root.activateCurrent(false);
                                 }
                             }
 
-                            // ---------- CALC ITEM ----------
+                            // 1. CALC ITEM
                             Loader {
                                 active: delegateRoot.modelData.kind === "calc"
                                 anchors.fill: parent
@@ -639,7 +814,6 @@ Item {
                                     anchors.rightMargin: 14
                                     spacing: 14
 
-                                    // Calc Icon Box
                                     Rectangle {
                                         Layout.preferredWidth: 38
                                         Layout.preferredHeight: 38
@@ -650,7 +824,7 @@ Item {
 
                                         Text {
                                             anchors.centerIn: parent
-                                            text: "󰃬" // calc icon
+                                            text: "󰃬"
                                             font.family: Theme.iconFamily
                                             renderType: Text.QtRendering
                                             font.pixelSize: 20
@@ -661,7 +835,6 @@ Item {
                                     ColumnLayout {
                                         Layout.fillWidth: true
                                         spacing: 2
-
                                         Text {
                                             text: "= " + delegateRoot.modelData.data.result
                                             color: "#00E5FF"
@@ -671,7 +844,6 @@ Item {
                                             Layout.fillWidth: true
                                             elide: Text.ElideRight
                                         }
-
                                         Text {
                                             text: delegateRoot.modelData.data.expression
                                             color: Theme.fgDim
@@ -682,13 +854,11 @@ Item {
                                         }
                                     }
 
-                                    // Action Badge
                                     Rectangle {
                                         Layout.preferredHeight: 24
                                         Layout.preferredWidth: copyLabel.implicitWidth + 14
                                         radius: 6
                                         color: Qt.rgba(0, 229, 255, 0.2)
-
                                         Text {
                                             id: copyLabel
                                             anchors.centerIn: parent
@@ -702,7 +872,7 @@ Item {
                                 }
                             }
 
-                            // ---------- WINDOW ITEM ----------
+                            // 2. WINDOW ITEM
                             Loader {
                                 active: delegateRoot.modelData.kind === "window"
                                 anchors.fill: parent
@@ -710,7 +880,6 @@ Item {
                                 sourceComponent: Item {
                                     anchors.fill: parent
 
-                                    // 1. Right Actions Container (declared FIRST so winActions geometry is known)
                                     Row {
                                         id: winActions
                                         anchors.right: parent.right
@@ -719,7 +888,6 @@ Item {
                                         spacing: 6
                                         z: 10
 
-                                        // Workspace Tag Badge
                                         Rectangle {
                                             height: 24
                                             width: tagLabel.implicitWidth + 12
@@ -740,7 +908,6 @@ Item {
                                             }
                                         }
 
-                                        // Focus / Switch Button
                                         Rectangle {
                                             height: 26
                                             width: focusLabel.implicitWidth + 14
@@ -770,7 +937,6 @@ Item {
                                             }
                                         }
 
-                                        // New Instance Button
                                         Rectangle {
                                             height: 26
                                             width: newAppLabel.implicitWidth + 14
@@ -802,7 +968,6 @@ Item {
                                             }
                                         }
 
-                                        // Close Window Button ("X")
                                         Rectangle {
                                             id: closeWinBtn
                                             height: 26
@@ -839,7 +1004,6 @@ Item {
                                         }
                                     }
 
-                                    // 2. Left side: Icon + Title & Info (clicking here switches to window)
                                     MouseArea {
                                         id: rowClickArea
                                         anchors.left: parent.left
@@ -855,10 +1019,9 @@ Item {
                                             if (selIdx !== -1) {
                                                 root.currentSelectable = selIdx;
                                             }
-                                            root.activateCurrent();
+                                            root.activateCurrent(false);
                                         }
 
-                                        // Window Icon
                                         Item {
                                             id: winIconContainer
                                             width: 34
@@ -878,7 +1041,7 @@ Item {
                                             Text {
                                                 anchors.centerIn: parent
                                                 visible: !winIconImg.visible
-                                                text: "󱂬" // window glyph
+                                                text: "󱂬"
                                                 font.family: Theme.iconFamily
                                                 renderType: Text.QtRendering
                                                 font.pixelSize: 20
@@ -886,7 +1049,6 @@ Item {
                                             }
                                         }
 
-                                        // Title & Info
                                         Column {
                                             anchors.left: winIconContainer.right
                                             anchors.leftMargin: 12
@@ -917,7 +1079,7 @@ Item {
                                 }
                             }
 
-                            // ---------- APP ITEM ----------
+                            // 3. APP ITEM
                             Loader {
                                 active: delegateRoot.modelData.kind === "app"
                                 anchors.fill: parent
@@ -927,7 +1089,6 @@ Item {
                                     anchors.rightMargin: 14
                                     spacing: 12
 
-                                    // App Icon
                                     Item {
                                         Layout.preferredWidth: 34
                                         Layout.preferredHeight: 34
@@ -944,7 +1105,7 @@ Item {
                                         Text {
                                             anchors.centerIn: parent
                                             visible: !appIconImg.visible
-                                            text: "󰀻" // app cube glyph
+                                            text: "󰀻"
                                             font.family: Theme.iconFamily
                                             renderType: Text.QtRendering
                                             font.pixelSize: 20
@@ -952,7 +1113,6 @@ Item {
                                         }
                                     }
 
-                                    // Name & Description
                                     ColumnLayout {
                                         Layout.fillWidth: true
                                         spacing: 2
@@ -977,7 +1137,6 @@ Item {
                                         }
                                     }
 
-                                    // Terminal badge if needed
                                     Rectangle {
                                         visible: delegateRoot.modelData.data.runInTerminal === true
                                         Layout.preferredHeight: 20
@@ -995,12 +1154,11 @@ Item {
                                         }
                                     }
 
-                                    // Launch Badge
                                     Rectangle {
                                         Layout.preferredHeight: 24
                                         Layout.preferredWidth: launchLabel.implicitWidth + 14
                                         radius: 6
-                                        color: delegateRoot.isSelected ? Qt.rgba(255, 255, 255, 0.18) : Qt.rgba(255, 255, 255, 0.08)
+                                        color: delegateRoot.isSelected ? Qt.rgba(255, 255, 255, 0.18) : Qt.rgba(255, 255, 255, 0.06)
 
                                         Text {
                                             id: launchLabel
@@ -1014,15 +1172,384 @@ Item {
                                     }
                                 }
                             }
+
+                            // 4. COMMAND ITEM
+                            Loader {
+                                active: delegateRoot.modelData.kind === "cmd"
+                                anchors.fill: parent
+                                sourceComponent: RowLayout {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 14
+                                    anchors.rightMargin: 14
+                                    spacing: 12
+
+                                    Rectangle {
+                                        Layout.preferredWidth: 36
+                                        Layout.preferredHeight: 36
+                                        radius: 8
+                                        color: Qt.rgba(52, 211, 153, 0.15)
+                                        border.width: 1
+                                        border.color: Qt.rgba(52, 211, 153, 0.3)
+
+                                        Text {
+                                            anchors.centerIn: parent
+                                            text: "󰞌"
+                                            font.family: Theme.iconFamily
+                                            renderType: Text.QtRendering
+                                            font.pixelSize: 18
+                                            color: "#34D399"
+                                        }
+                                    }
+
+                                    ColumnLayout {
+                                        Layout.fillWidth: true
+                                        spacing: 2
+                                        Text {
+                                            text: delegateRoot.modelData.data.cmd ? "$ " + delegateRoot.modelData.data.cmd : "Type command to run..."
+                                            color: "#34D399"
+                                            font.family: "monospace"
+                                            font.pixelSize: 15
+                                            font.bold: true
+                                            Layout.fillWidth: true
+                                            elide: Text.ElideRight
+                                        }
+                                        Text {
+                                            text: "↵ Enter to run detached  •  ⇧+↵ in Kitty terminal"
+                                            color: Theme.fgDim
+                                            font.family: Theme.fontFamily
+                                            font.pixelSize: 11
+                                            Layout.fillWidth: true
+                                            elide: Text.ElideRight
+                                        }
+                                    }
+                                }
+                            }
+
+                            // 5. WEB SEARCH ITEM
+                            Loader {
+                                active: delegateRoot.modelData.kind === "web"
+                                anchors.fill: parent
+                                sourceComponent: RowLayout {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 14
+                                    anchors.rightMargin: 14
+                                    spacing: 12
+
+                                    Rectangle {
+                                        Layout.preferredWidth: 36
+                                        Layout.preferredHeight: 36
+                                        radius: 8
+                                        color: Qt.rgba(96, 165, 250, 0.15)
+                                        border.width: 1
+                                        border.color: Qt.rgba(96, 165, 250, 0.3)
+
+                                        Text {
+                                            anchors.centerIn: parent
+                                            text: "󰍉"
+                                            font.family: Theme.iconFamily
+                                            renderType: Text.QtRendering
+                                            font.pixelSize: 18
+                                            color: "#60A5FA"
+                                        }
+                                    }
+
+                                    ColumnLayout {
+                                        Layout.fillWidth: true
+                                        spacing: 2
+                                        Text {
+                                            text: delegateRoot.modelData.data.query ? "Search web for \"" + delegateRoot.modelData.data.query + "\"" : "Search the web..."
+                                            color: "#60A5FA"
+                                            font.family: Theme.fontFamily
+                                            font.pixelSize: 14
+                                            font.bold: true
+                                            Layout.fillWidth: true
+                                            elide: Text.ElideRight
+                                        }
+                                        Text {
+                                            text: "Open with DuckDuckGo in default browser"
+                                            color: Theme.fgDim
+                                            font.family: Theme.fontFamily
+                                            font.pixelSize: 11
+                                            Layout.fillWidth: true
+                                            elide: Text.ElideRight
+                                        }
+                                    }
+                                }
+                            }
+
+                            // 6. FILE ITEM
+                            Loader {
+                                active: delegateRoot.modelData.kind === "file"
+                                anchors.fill: parent
+                                sourceComponent: RowLayout {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 14
+                                    anchors.rightMargin: 14
+                                    spacing: 12
+
+                                    Rectangle {
+                                        Layout.preferredWidth: 34
+                                        Layout.preferredHeight: 34
+                                        radius: 8
+                                        color: Qt.rgba(251, 191, 36, 0.12)
+
+                                        Text {
+                                            anchors.centerIn: parent
+                                            text: delegateRoot.modelData.data.isDir ? "󰉋" : "󰈙"
+                                            font.family: Theme.iconFamily
+                                            renderType: Text.QtRendering
+                                            font.pixelSize: 18
+                                            color: "#FBBF24"
+                                        }
+                                    }
+
+                                    ColumnLayout {
+                                        Layout.fillWidth: true
+                                        spacing: 2
+                                        Text {
+                                            text: delegateRoot.modelData.data.name
+                                            color: delegateRoot.isSelected ? Theme.fg : Qt.rgba(1, 1, 1, 0.9)
+                                            font.family: Theme.fontFamily
+                                            font.pixelSize: 13
+                                            font.weight: Font.DemiBold
+                                            Layout.fillWidth: true
+                                            elide: Text.ElideRight
+                                        }
+                                        Text {
+                                            text: delegateRoot.modelData.data.parent
+                                            color: Theme.fgDim
+                                            font.family: Theme.fontFamily
+                                            font.pixelSize: 11
+                                            Layout.fillWidth: true
+                                            elide: Text.ElideRight
+                                        }
+                                    }
+
+                                    Text {
+                                        text: delegateRoot.isSelected ? "↵ Open" : ""
+                                        color: Theme.fgDim
+                                        font.family: Theme.fontFamily
+                                        font.pixelSize: 11
+                                    }
+                                }
+                            }
+
+                            // 7. SHORTCUT ITEM
+                            Loader {
+                                active: delegateRoot.modelData.kind === "shortcut"
+                                anchors.fill: parent
+                                sourceComponent: RowLayout {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 14
+                                    anchors.rightMargin: 14
+                                    spacing: 12
+
+                                    Rectangle {
+                                        Layout.preferredHeight: 28
+                                        Layout.preferredWidth: keyBadgeText.implicitWidth + 16
+                                        radius: 6
+                                        color: Qt.rgba(251, 191, 36, 0.15)
+                                        border.width: 1
+                                        border.color: Qt.rgba(251, 191, 36, 0.3)
+
+                                        Text {
+                                            id: keyBadgeText
+                                            anchors.centerIn: parent
+                                            text: delegateRoot.modelData.data.key
+                                            font.family: "monospace"
+                                            font.bold: true
+                                            font.pixelSize: 11
+                                            color: "#FBBF24"
+                                        }
+                                    }
+
+                                    ColumnLayout {
+                                        Layout.fillWidth: true
+                                        spacing: 2
+                                        Text {
+                                            text: delegateRoot.modelData.data.title
+                                            color: delegateRoot.isSelected ? Theme.fg : Qt.rgba(1, 1, 1, 0.9)
+                                            font.family: Theme.fontFamily
+                                            font.pixelSize: 13
+                                            font.weight: Font.DemiBold
+                                            Layout.fillWidth: true
+                                            elide: Text.ElideRight
+                                        }
+                                        Text {
+                                            text: delegateRoot.modelData.data.desc
+                                            color: Theme.fgDim
+                                            font.family: Theme.fontFamily
+                                            font.pixelSize: 11
+                                            Layout.fillWidth: true
+                                            elide: Text.ElideRight
+                                        }
+                                    }
+
+                                    Rectangle {
+                                        Layout.preferredHeight: 20
+                                        Layout.preferredWidth: catText.implicitWidth + 10
+                                        radius: 5
+                                        color: Qt.rgba(255, 255, 255, 0.08)
+                                        Text {
+                                            id: catText
+                                            anchors.centerIn: parent
+                                            text: delegateRoot.modelData.data.category
+                                            color: Theme.fgDim
+                                            font.family: Theme.fontFamily
+                                            font.pixelSize: 10
+                                        }
+                                    }
+                                }
+                            }
+
+                            // 8. SYSTEM ACTION ITEM
+                            Loader {
+                                active: delegateRoot.modelData.kind === "system"
+                                anchors.fill: parent
+                                sourceComponent: RowLayout {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 14
+                                    anchors.rightMargin: 14
+                                    spacing: 12
+
+                                    Rectangle {
+                                        Layout.preferredWidth: 36
+                                        Layout.preferredHeight: 36
+                                        radius: 10
+                                        color: Qt.rgba(239, 68, 68, 0.15)
+                                        border.width: 1
+                                        border.color: Qt.rgba(239, 68, 68, 0.3)
+
+                                        Text {
+                                            anchors.centerIn: parent
+                                            text: delegateRoot.modelData.data.icon
+                                            font.family: Theme.iconFamily
+                                            renderType: Text.QtRendering
+                                            font.pixelSize: 18
+                                            color: delegateRoot.modelData.data.color || "#EF4444"
+                                        }
+                                    }
+
+                                    ColumnLayout {
+                                        Layout.fillWidth: true
+                                        spacing: 2
+                                        Text {
+                                            text: delegateRoot.modelData.data.title
+                                            color: delegateRoot.modelData.data.color || Theme.fg
+                                            font.family: Theme.fontFamily
+                                            font.pixelSize: 14
+                                            font.bold: true
+                                            Layout.fillWidth: true
+                                            elide: Text.ElideRight
+                                        }
+                                        Text {
+                                            text: delegateRoot.modelData.data.subtitle
+                                            color: Theme.fgDim
+                                            font.family: Theme.fontFamily
+                                            font.pixelSize: 11
+                                            Layout.fillWidth: true
+                                            elide: Text.ElideRight
+                                        }
+                                    }
+
+                                    Rectangle {
+                                        Layout.preferredHeight: 24
+                                        Layout.preferredWidth: sysRunLabel.implicitWidth + 14
+                                        radius: 6
+                                        color: Qt.rgba(255, 255, 255, 0.1)
+                                        Text {
+                                            id: sysRunLabel
+                                            anchors.centerIn: parent
+                                            text: "↵ Execute"
+                                            color: Theme.fg
+                                            font.family: Theme.fontFamily
+                                            font.pixelSize: 11
+                                            font.bold: true
+                                        }
+                                    }
+                                }
+                            }
+
+                            // 9. THEME SWITCHER ITEM
+                            Loader {
+                                active: delegateRoot.modelData.kind === "theme"
+                                anchors.fill: parent
+                                sourceComponent: RowLayout {
+                                    anchors.fill: parent
+                                    anchors.leftMargin: 14
+                                    anchors.rightMargin: 14
+                                    spacing: 12
+
+                                    // Palette Color Swatches Preview
+                                    Row {
+                                        Layout.preferredWidth: 36
+                                        Layout.preferredHeight: 20
+                                        Layout.alignment: Qt.AlignVCenter
+                                        spacing: -6
+
+                                        Rectangle {
+                                            width: 18; height: 18; radius: 9
+                                            color: delegateRoot.modelData.data.bg
+                                            border.width: 1; border.color: "#FFFFFF"
+                                        }
+                                        Rectangle {
+                                            width: 18; height: 18; radius: 9
+                                            color: delegateRoot.modelData.data.accent
+                                            border.width: 1; border.color: "#FFFFFF"
+                                        }
+                                    }
+
+                                    ColumnLayout {
+                                        Layout.fillWidth: true
+                                        spacing: 2
+                                        Text {
+                                            text: delegateRoot.modelData.data.name
+                                            color: Theme.fg
+                                            font.family: Theme.fontFamily
+                                            font.pixelSize: 14
+                                            font.bold: true
+                                            Layout.fillWidth: true
+                                            elide: Text.ElideRight
+                                        }
+                                        Text {
+                                            text: delegateRoot.modelData.data.note || "Color Theme"
+                                            color: Theme.fgDim
+                                            font.family: Theme.fontFamily
+                                            font.pixelSize: 11
+                                            Layout.fillWidth: true
+                                            elide: Text.ElideRight
+                                        }
+                                    }
+
+                                    Rectangle {
+                                        visible: Settings.theme === delegateRoot.modelData.data.id
+                                        Layout.preferredHeight: 22
+                                        Layout.preferredWidth: activeThemeLabel.implicitWidth + 12
+                                        radius: 6
+                                        color: Qt.rgba(52, 211, 153, 0.2)
+                                        Text {
+                                            id: activeThemeLabel
+                                            anchors.centerIn: parent
+                                            text: "Active"
+                                            color: "#34D399"
+                                            font.family: Theme.fontFamily
+                                            font.pixelSize: 10
+                                            font.bold: true
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
 
-            // Empty state placeholder
+            // Empty State
             Item {
-                anchors.fill: parent
+                anchors.centerIn: parent
                 visible: root.modelItems.length === 0
+                width: parent.width
+                height: 80
 
                 Column {
                     anchors.centerIn: parent
@@ -1030,19 +1557,23 @@ Item {
 
                     Text {
                         anchors.horizontalCenter: parent.horizontalCenter
-                        text: "󰍉" // search icon
+                        text: "󰅖"
                         font.family: Theme.iconFamily
                         renderType: Text.QtRendering
-                        font.pixelSize: 28
-                        color: Theme.fgFaint
+                        font.pixelSize: 26
+                        color: Qt.rgba(255, 255, 255, 0.25)
                     }
 
                     Text {
                         anchors.horizontalCenter: parent.horizontalCenter
-                        text: root.q ? `No results found for "${root.q}"` : "Type to search or calculate..."
+                        text: {
+                            if (root.mode === "shortcuts") return "No matching shortcuts found";
+                            if (root.mode === "windows") return "No open windows matching query";
+                            return "No results found for \"" + LauncherManager.searchQuery + "\"";
+                        }
                         color: Theme.fgDim
                         font.family: Theme.fontFamily
-                        font.pixelSize: 14
+                        font.pixelSize: 13
                     }
                 }
             }
@@ -1065,14 +1596,14 @@ Item {
                 anchors.left: parent.left
                 anchors.leftMargin: 18
                 anchors.verticalCenter: parent.verticalCenter
-                spacing: 16
+                spacing: 14
 
                 Row {
                     spacing: 5
                     anchors.verticalCenter: parent.verticalCenter
                     Rectangle {
                         width: 18; height: 16; radius: 3; color: Qt.rgba(255, 255, 255, 0.1)
-                        Text { anchors.centerIn: parent; text: "↑↓"; font.pixelSize: 10; color: Theme.fgDim }
+                        Text { anchors.centerIn: parent; text: "↑↓"; font.pixelSize: 9; color: Theme.fgDim }
                     }
                     Text { text: "Navigate"; color: Theme.fgDim; font.pixelSize: 11; font.family: Theme.fontFamily; anchors.verticalCenter: parent.verticalCenter }
                 }
@@ -1084,17 +1615,30 @@ Item {
                         width: 18; height: 16; radius: 3; color: Qt.rgba(255, 255, 255, 0.1)
                         Text { anchors.centerIn: parent; text: "↵"; font.pixelSize: 11; color: Theme.fgDim }
                     }
-                    Text { text: "Open / Focus"; color: Theme.fgDim; font.pixelSize: 11; font.family: Theme.fontFamily; anchors.verticalCenter: parent.verticalCenter }
+                    Text {
+                        text: "Open / Focus"
+                        color: Theme.fgDim
+                        font.pixelSize: 11
+                        font.family: Theme.fontFamily
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
                 }
 
                 Row {
+                    visible: root.mode === "windows" || root.mode === "all" || root.kind === "cmd"
                     spacing: 5
                     anchors.verticalCenter: parent.verticalCenter
                     Rectangle {
-                        width: 44; height: 16; radius: 3; color: Qt.rgba(255, 255, 255, 0.1)
+                        width: 36; height: 16; radius: 3; color: Qt.rgba(255, 255, 255, 0.1)
                         Text { anchors.centerIn: parent; text: "⇧+↵"; font.pixelSize: 9; color: Theme.fgDim }
                     }
-                    Text { text: "New App"; color: Theme.fgDim; font.pixelSize: 11; font.family: Theme.fontFamily; anchors.verticalCenter: parent.verticalCenter }
+                    Text {
+                        text: root.kind === "cmd" ? "Terminal" : "New App"
+                        color: Theme.fgDim
+                        font.pixelSize: 11
+                        font.family: Theme.fontFamily
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
                 }
 
                 Row {
@@ -1104,24 +1648,31 @@ Item {
                         width: 26; height: 16; radius: 3; color: Qt.rgba(255, 255, 255, 0.1)
                         Text { anchors.centerIn: parent; text: "Tab"; font.pixelSize: 9; color: Theme.fgDim }
                     }
-                    Text { text: "Switch Mode"; color: Theme.fgDim; font.pixelSize: 11; font.family: Theme.fontFamily; anchors.verticalCenter: parent.verticalCenter }
+                    Text { text: "Mode"; color: Theme.fgDim; font.pixelSize: 11; font.family: Theme.fontFamily; anchors.verticalCenter: parent.verticalCenter }
                 }
 
                 Row {
+                    visible: root.mode === "windows"
                     spacing: 5
                     anchors.verticalCenter: parent.verticalCenter
                     Rectangle {
-                        width: 48; height: 16; radius: 3; color: Qt.rgba(255, 255, 255, 0.1)
+                        width: 44; height: 16; radius: 3; color: Qt.rgba(255, 255, 255, 0.1)
                         Text { anchors.centerIn: parent; text: "⇧+Del"; font.pixelSize: 9; color: Theme.fgDim }
                     }
-                    Text { text: "Close Window"; color: Theme.fgDim; font.pixelSize: 11; font.family: Theme.fontFamily; anchors.verticalCenter: parent.verticalCenter }
+                    Text {
+                        text: "Close Window"
+                        color: Theme.fgDim
+                        font.pixelSize: 11
+                        font.family: Theme.fontFamily
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
                 }
 
                 Row {
                     spacing: 5
                     anchors.verticalCenter: parent.verticalCenter
                     Rectangle {
-                        width: 26; height: 16; radius: 3; color: Qt.rgba(255, 255, 255, 0.1)
+                        width: 24; height: 16; radius: 3; color: Qt.rgba(255, 255, 255, 0.1)
                         Text { anchors.centerIn: parent; text: "Esc"; font.pixelSize: 9; color: Theme.fgDim }
                     }
                     Text { text: "Dismiss"; color: Theme.fgDim; font.pixelSize: 11; font.family: Theme.fontFamily; anchors.verticalCenter: parent.verticalCenter }
@@ -1133,7 +1684,11 @@ Item {
                 anchors.right: parent.right
                 anchors.rightMargin: 18
                 anchors.verticalCenter: parent.verticalCenter
-                text: "Spotlight Launcher"
+                text: {
+                    if (root.mode === "shortcuts") return root.filteredShortcuts.length + " shortcuts";
+                    if (root.mode === "windows") return root.filteredWindows.length + " windows";
+                    return "Spotlight Launcher";
+                }
                 color: Theme.fgFaint
                 font.family: Theme.fontFamily
                 font.pixelSize: 11

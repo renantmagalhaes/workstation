@@ -21,4 +21,10 @@ ShellRoot {
 
         Launcher {}
     }
+
+    Variants {
+        model: Quickshell.screens
+
+        WallpaperPicker {}
+    }
 }

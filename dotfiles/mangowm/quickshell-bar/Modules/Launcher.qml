@@ -59,6 +59,11 @@ PanelWindow {
             }
         }
 
+        MouseArea {
+            anchors.fill: parent
+            // Swallows clicks on card background so backdrop dismiss is not triggered
+        }
+
         LauncherPanel {
             id: panel
         }

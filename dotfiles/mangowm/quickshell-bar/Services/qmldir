@@ -9,3 +9,5 @@ singleton Weather 1.0 Weather.qml
 singleton SystemInfo 1.0 SystemInfo.qml
 singleton Notifs 1.0 Notifs.qml
 singleton Session 1.0 Session.qml
+singleton Clip 1.0 Clip.qml
+singleton Wallpapers 1.0 Wallpapers.qml

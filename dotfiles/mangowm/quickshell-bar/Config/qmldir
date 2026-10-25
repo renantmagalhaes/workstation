@@ -3,3 +3,4 @@ singleton Palettes 1.0 Palettes.qml
 singleton Settings 1.0 Settings.qml
 singleton OverviewManager 1.0 OverviewManager.qml
 singleton LauncherManager 1.0 LauncherManager.qml
+singleton WallpaperManager 1.0 WallpaperManager.qml

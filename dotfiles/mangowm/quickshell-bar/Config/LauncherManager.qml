@@ -10,7 +10,8 @@ Singleton {
     id: root
 
     property bool open: false
-    property string mode: "all" // "all" | "windows" | "apps"
+    // Modes: all | windows | apps | shortcuts
+    property string mode: "all"
     property string searchQuery: ""
     property string activeMonitorName: ""
     readonly property string focusedMonitor: activeMonitorName
@@ -18,15 +19,40 @@ Singleton {
     property var allClients: []
     property var allApps: []
     property var calcResult: null
+    property var filesResults: []
+    property bool filesSearching: false
+
+    readonly property var availableModes: [
+        { id: "all", icon: "󰕰", label: "All" },
+        { id: "windows", icon: "󱂬", label: "Windows" },
+        { id: "apps", icon: "󰀻", label: "Apps" },
+        { id: "shortcuts", icon: "󰌌", label: "Shortcuts" }
+    ]
+
+    // Effective kind: prefixes take precedence
+    readonly property string kind: {
+        const q = searchQuery.trim();
+        if (q.startsWith(">") || q.startsWith("$")) return "cmd";
+        if (q.startsWith("/")) return "files";
+        if (q.startsWith("?")) return "web";
+        if (q.startsWith("=")) return "calc";
+        return mode;
+    }
 
     onSearchQueryChanged: {
         calcResult = Calc.calculate(searchQuery);
+        if (searchQuery.trim().startsWith("/")) {
+            filesDebounce.restart();
+        } else {
+            filesResults = [];
+        }
     }
 
     onOpenChanged: {
         if (!open) {
             searchQuery = "";
             calcResult = null;
+            filesResults = [];
         } else {
             refreshClients();
         }
@@ -41,7 +67,8 @@ Singleton {
     }
 
     function openLauncher(): void {
-        // Find currently focused monitor
+        WallpaperManager.closePicker();
+        OverviewManager.closeOverview();
         const mon = Mango.focusedMonitor || (Quickshell.screens[0]?.name ?? "DP-1");
         root.activeMonitorName = mon;
         root.open = true;
@@ -52,21 +79,23 @@ Singleton {
         root.open = false;
         root.searchQuery = "";
         root.calcResult = null;
+        root.filesResults = [];
     }
 
     function cycleMode(forward): void {
-        const modes = ["all", "windows", "apps"];
-        let idx = modes.indexOf(root.mode);
+        const ids = availableModes.map(m => m.id);
+        let idx = ids.indexOf(root.mode);
         if (idx === -1) idx = 0;
         if (forward) {
-            root.mode = modes[(idx + 1) % modes.length];
+            root.mode = ids[(idx + 1) % ids.length];
         } else {
-            root.mode = modes[(idx - 1 + modes.length) % modes.length];
+            root.mode = ids[(idx - 1 + ids.length) % ids.length];
         }
     }
 
     function setMode(newMode): void {
-        if (newMode === "all" || newMode === "windows" || newMode === "apps") {
+        const found = availableModes.some(m => m.id === newMode);
+        if (found) {
             root.mode = newMode;
         }
     }
@@ -137,13 +166,11 @@ Singleton {
         const appid = (client.appid || "").toLowerCase();
         const baseAppid = appid.split(/[-_.]/)[0];
 
-        // 1. Try finding in allApps by desktop ID
         let app = root.allApps.find(a => {
             const id = (a.id || "").toLowerCase().replace(/\.desktop$/, "");
             return id === appid || appid.startsWith(id) || id.startsWith(appid);
         });
 
-        // 2. Try finding by base name (e.g. vivaldi from vivaldi-snapshot)
         if (!app && baseAppid && baseAppid.length > 2) {
             app = root.allApps.find(a => {
                 const id = (a.id || "").toLowerCase().replace(/\.desktop$/, "");
@@ -151,7 +178,6 @@ Singleton {
             });
         }
 
-        // 3. Try finding by name or command
         if (!app) {
             app = root.allApps.find(a => {
                 const name = (a.name || "").toLowerCase();
@@ -166,7 +192,6 @@ Singleton {
             return;
         }
 
-        // 4. Fallback: launch client.appid directly
         if (appid.startsWith("kitty")) {
             Quickshell.execDetached(["kitty"]);
         } else if (client.appid) {
@@ -199,6 +224,134 @@ Singleton {
         if (result === undefined || result === null) return;
         Quickshell.execDetached(["wl-copy", String(result)]);
     }
+
+    // Execute shell command
+    function executeCommand(cmd, inTerminal): void {
+        root.closeLauncher();
+        const c = (cmd || "").replace(/^[>$]\s*/, "").trim();
+        if (!c) return;
+        if (inTerminal) {
+            Quickshell.execDetached([
+                "kitty", "-1", "--class", "kitty-float", "-e", "sh", "-c",
+                c + '; echo; read -n1 -p "Press any key to close..."'
+            ]);
+        } else {
+            Quickshell.execDetached(["sh", "-c", c]);
+        }
+    }
+
+    // Web search
+    function searchWeb(query): void {
+        root.closeLauncher();
+        const q = (query || "").replace(/^\?\s*/, "").trim();
+        if (!q) return;
+        Quickshell.execDetached(["xdg-open", "https://duckduckgo.com/?q=" + encodeURIComponent(q)]);
+    }
+
+    // File open
+    function openFile(path, inFolder): void {
+        root.closeLauncher();
+        if (!path) return;
+        if (inFolder) {
+            const lastSlash = path.lastIndexOf("/");
+            const parentDir = lastSlash > 0 ? path.slice(0, lastSlash) : Quickshell.env("HOME");
+            Quickshell.execDetached(["xdg-open", parentDir]);
+        } else {
+            Quickshell.execDetached(["xdg-open", path]);
+        }
+    }
+
+    // File search debounce & process
+    Timer {
+        id: filesDebounce
+        interval: 100
+        onTriggered: {
+            const raw = root.searchQuery.trim();
+            if (!raw.startsWith("/")) {
+                root.filesResults = [];
+                return;
+            }
+            const query = raw.slice(1).trim();
+            if (!query) {
+                root.filesResults = [];
+                return;
+            }
+            filesProc.targetQuery = query;
+            filesProc.running = true;
+        }
+    }
+
+    Process {
+        id: filesProc
+        property string targetQuery: ""
+        command: [
+            "sh", "-c",
+            'PATH="$HOME/.nix-profile/bin:$PATH"; fd --fixed-strings --ignore-case --max-results 30 --absolute-path "$1" "$HOME"',
+            "sh", targetQuery
+        ]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                const lines = text.split("\n").filter(l => l.trim().length > 0);
+                const home = Quickshell.env("HOME");
+                root.filesResults = lines.map(p => {
+                    const isDir = p.endsWith("/");
+                    const clean = isDir ? p.slice(0, -1) : p;
+                    const slashIdx = clean.lastIndexOf("/");
+                    const name = slashIdx !== -1 ? clean.slice(slashIdx + 1) : clean;
+                    const parent = slashIdx !== -1 ? clean.slice(0, slashIdx) : home;
+                    return {
+                        path: clean,
+                        name: name,
+                        parent: parent.replace(home, "~"),
+                        isDir: isDir
+                    };
+                });
+            }
+        }
+    }
+
+    // System actions list
+    readonly property var systemActions: [
+        { id: "wallpaper", title: "Open Wallpaper Picker", subtitle: "Browse and set desktop wallpapers", icon: "󰸉", color: "#F472B6", command: ["sh", "-c", "~/.dotfiles/mangowm/scripts/toggle_wallpapers.sh"] },
+        { id: "lock", title: "Lock Screen", subtitle: "Lock Wayland session", icon: "󰌾", color: "#60A5FA", command: ["loginctl", "lock-session"] },
+        { id: "suspend", title: "Suspend / Sleep", subtitle: "Put computer to sleep", icon: "󰒲", color: "#FBBF24", command: ["systemctl", "suspend"] },
+        { id: "reboot", title: "Reboot System", subtitle: "Restart the workstation", icon: "󰜉", color: "#F97316", command: ["systemctl", "reboot"] },
+        { id: "poweroff", title: "Shut Down", subtitle: "Turn off the workstation", icon: "󰐥", color: "#EF4444", command: ["systemctl", "poweroff"] },
+        { id: "reload", title: "Reload MangoWM", subtitle: "Reload window manager configuration", icon: "󰑓", color: "#34D399", command: ["mmsg", "dispatch", "reload_config"] },
+        { id: "logout", title: "Log Out", subtitle: "Exit desktop session", icon: "󰗽", color: "#F43F5E", command: ["mmsg", "dispatch", "quit"] }
+    ]
+
+    function executeSystemAction(action): void {
+        root.closeLauncher();
+        if (!action || !action.command) return;
+        Quickshell.execDetached(action.command);
+    }
+
+    // MangoWM shortcuts database
+    readonly property var shortcuts: [
+        { key: "Super + Q", title: "Smart Close Window", desc: "Close window or untag", category: "Window" },
+        { key: "Alt + Space", title: "Spotlight Launcher", desc: "Open QuickShell apps & utilities", category: "Launcher" },
+        { key: "Super + W", title: "Wallpaper Picker", desc: "Dedicated wallpaper browser & changer", category: "Launcher" },
+        { key: "Super + Tab", title: "Window Overview", desc: "Toggle visual overview of monitor", category: "Navigation" },
+        { key: "Super + Shift + Tab", title: "All Overviews", desc: "Toggle overview across all monitors", category: "Navigation" },
+        { key: "Ctrl + Alt + T", title: "Open Kitty Terminal", desc: "Launch primary terminal", category: "App" },
+        { key: "Ctrl + Enter", title: "Kitty Scratchpad", desc: "Toggle floating scratchpad terminal", category: "App" },
+        { key: "Super + Enter", title: "Move to Other Monitor", desc: "Send window to opposite monitor", category: "Window" },
+        { key: "Alt + Tab", title: "Focus Other Monitor", desc: "Switch focus to adjacent monitor", category: "Navigation" },
+        { key: "Super + L", title: "Lock Screen", desc: "Lock current session", category: "Session" },
+        { key: "Print", title: "Screenshot Selection", desc: "Capture area with grim & swappy", category: "Utility" },
+        { key: "Super + V", title: "Clipboard Menu", desc: "Open CopyQ / clipboard history", category: "Utility" },
+        { key: "Super + T", title: "Toggle Floating", desc: "Float or tile active window", category: "Window" },
+        { key: "Super + M", title: "Switch Proportion", desc: "Cycle window size preset", category: "Layout" },
+        { key: "Super + Shift + M", title: "Toggle Fullscreen", desc: "Toggle fullscreen window state", category: "Layout" },
+        { key: "Super + F", title: "Set Proportion 1.0", desc: "Fill available layout width", category: "Layout" },
+        { key: "Super + 1 .. 5", title: "Switch Workspace", desc: "Switch to workspace / tag 1-5", category: "Navigation" },
+        { key: "Super + Ctrl + Left / Right", title: "Cycle Workspaces", desc: "Navigate adjacent workspaces", category: "Navigation" },
+        { key: "Super + Shift + 1 .. 5", title: "Move to Workspace", desc: "Send window to workspace 1-5", category: "Window" },
+        { key: "Super + C", title: "Play / Pause Media", desc: "Toggle audio/video playback", category: "Media" },
+        { key: "Super + R", title: "Reload Config", desc: "Reload MangoWM configuration", category: "System" },
+        { key: "Super + Alt + Esc", title: "Quit MangoWM", desc: "Exit compositor session", category: "System" }
+    ]
 
     // Resolve app icon path for a window client
     function getWindowIcon(client): string {
