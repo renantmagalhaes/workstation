@@ -15,4 +15,10 @@ ShellRoot {
 
         Overview {}
     }
+
+    Variants {
+        model: Quickshell.screens
+
+        Launcher {}
+    }
 }
