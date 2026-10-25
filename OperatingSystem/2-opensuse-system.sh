@@ -220,7 +220,7 @@ ln -s -f $PWD/dotfiles/kde/jgmenu ~/.config/
 ln -s -f $PWD/dotfiles/fastfetch/ ~/.config/
 
 ## Vicinae Launcher
-bash ./scripts/vicinae-setup.sh
+#bash ./scripts/vicinae-setup.sh
 
 ## KDE Tilling window setup
 bash ./scripts/kde-DE-transformation.sh

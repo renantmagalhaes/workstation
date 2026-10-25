@@ -220,7 +220,7 @@ bash ./scripts/fd-ignore.sh
 ln -s -f $PWD/dotfiles/fastfetch/ ~/.config/
 
 ## Vicinae Launcher
-bash ./scripts/vicinae-setup.sh
+# bash ./scripts/vicinae-setup.sh
 
 # ## Droidcam
 # bash ./scripts/droidcam.sh
