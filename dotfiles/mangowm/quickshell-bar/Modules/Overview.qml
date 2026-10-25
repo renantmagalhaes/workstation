@@ -124,7 +124,7 @@ PanelWindow {
     }
 
     function shotPath(cid) {
-        return "file:///tmp/quickshell-overview/" + cid + ".ppm?" + stamp;
+        return "file:///tmp/quickshell-overview/" + cid + ".ppm?" + (stamp % 2);
     }
 
     function appIcon(appId) {
@@ -302,6 +302,8 @@ PanelWindow {
                             Image {
                                 anchors.fill: parent
                                 source: win.open ? win.shotPath(miniTile.modelData.id) : ""
+                                sourceSize.width: 160
+                                sourceSize.height: 100
                                 cache: false
                                 fillMode: Image.PreserveAspectCrop
                                 asynchronous: true
@@ -572,6 +574,8 @@ PanelWindow {
                     anchors.fill: parent
                     anchors.margins: 2
                     source: win.open ? win.shotPath(tile.modelData.id) : ""
+                    sourceSize.width: 720
+                    sourceSize.height: 405
                     cache: false
                     fillMode: Image.PreserveAspectCrop
                     asynchronous: true
