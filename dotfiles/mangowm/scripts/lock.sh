@@ -246,6 +246,8 @@ if [[ -f "$HYPRLOCK_CONFIG" ]]; then
     # Note: Don't clean up temp config immediately - hyprlock needs it while running
     LOCK_ENGINE="${LOCK_ENGINE:-quickshell}"
     if [[ "$LOCK_ENGINE" == "quickshell" ]] && [[ -d "$HOME/.dotfiles/mangowm/quickshell-lock" ]] && command -v quickshell >/dev/null 2>&1; then
+        pkill -f "quickshell.*quickshell-lock" 2>/dev/null || true
+        sleep 0.05
         exec quickshell -p "$HOME/.dotfiles/mangowm/quickshell-lock"
     elif command -v hyprlock >/dev/null 2>&1; then
         # Run hyprlock (it will block until unlocked)

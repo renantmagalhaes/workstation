@@ -31,7 +31,13 @@ ShellRoot {
     SequentialAnimation {
         id: unlockAnimation
 
-        PauseAnimation { duration: 100 }
+        ScriptAction {
+            script: {
+                sessionLock.locked = false;
+            }
+        }
+
+        PauseAnimation { duration: 150 }
 
         ScriptAction {
             script: unlockSession()
@@ -39,7 +45,6 @@ ShellRoot {
     }
 
     function unlockSession() {
-        sessionLock.locked = false;
-        Quickshell.process.exit(0);
+        Quickshell.execDetached(["kill", "-TERM", "" + Quickshell.processId]);
     }
 }
