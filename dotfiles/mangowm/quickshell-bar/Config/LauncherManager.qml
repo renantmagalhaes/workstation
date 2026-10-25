@@ -129,6 +129,50 @@ Singleton {
         root.allClients = root.allClients.filter(c => c.id !== client.id);
     }
 
+    // Launch a new instance of an app from a window client
+    function launchWindowApp(client): void {
+        root.closeLauncher();
+        if (!client) return;
+        const appid = (client.appid || "").toLowerCase();
+        const baseAppid = appid.split(/[-_.]/)[0];
+
+        // 1. Try finding in allApps by desktop ID
+        let app = root.allApps.find(a => {
+            const id = (a.id || "").toLowerCase().replace(/\.desktop$/, "");
+            return id === appid || appid.startsWith(id) || id.startsWith(appid);
+        });
+
+        // 2. Try finding by base name (e.g. vivaldi from vivaldi-snapshot)
+        if (!app && baseAppid && baseAppid.length > 2) {
+            app = root.allApps.find(a => {
+                const id = (a.id || "").toLowerCase().replace(/\.desktop$/, "");
+                return id === baseAppid || id.startsWith(baseAppid);
+            });
+        }
+
+        // 3. Try finding by name or command
+        if (!app) {
+            app = root.allApps.find(a => {
+                const name = (a.name || "").toLowerCase();
+                const exec = (a.execString || a.command?.[0] || "").toLowerCase();
+                const baseExec = exec.split("/").pop();
+                return name === appid || exec === appid || baseExec === appid || (baseAppid && baseExec === baseAppid);
+            });
+        }
+
+        if (app) {
+            root.launchApp(app);
+            return;
+        }
+
+        // 4. Fallback: launch client.appid directly
+        if (appid.startsWith("kitty")) {
+            Quickshell.execDetached(["kitty"]);
+        } else if (client.appid) {
+            Quickshell.execDetached(["sh", "-c", `${client.appid} &`]);
+        }
+    }
+
     // Launch an application entry
     function launchApp(app): void {
         root.closeLauncher();

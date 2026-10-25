@@ -23,11 +23,11 @@ PanelWindow {
     readonly property string monName: win.screen?.name ?? "DP-1"
     readonly property bool isTargetMonitor: LauncherManager.activeMonitorName === monName
 
-    // Dark backdrop scrim covering the monitor
+    // Subtle backdrop scrim so current applications behind the launcher remain visible
     Rectangle {
         id: scrim
         anchors.fill: parent
-        color: Qt.rgba(0, 0, 0, 0.45)
+        color: Qt.rgba(0, 0, 0, 0.12)
         opacity: LauncherManager.open ? 1 : 0
 
         Behavior on opacity {

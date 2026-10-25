@@ -198,6 +198,21 @@ Item {
         }
     }
 
+    function launchNewInstanceForCurrent() {
+        if (selectableIndices.length === 0) return;
+        const targetModelIndex = selectableIndices[currentSelectable];
+        const item = modelItems[targetModelIndex];
+        if (!item || item.isHeader) return;
+
+        if (item.kind === "window") {
+            LauncherManager.launchWindowApp(item.data);
+        } else if (item.kind === "app") {
+            LauncherManager.launchApp(item.data);
+        } else if (item.kind === "calc") {
+            LauncherManager.copyCalc(item.data.raw ?? item.data.result);
+        }
+    }
+
     function killCurrentWindow() {
         if (selectableIndices.length === 0) return;
         const targetModelIndex = selectableIndices[currentSelectable];
@@ -218,14 +233,14 @@ Item {
         }
     }
 
-    // Card background with rounded corners and subtle border
+    // Card background with rounded corners, translucent dark glass, and subtle border
     Rectangle {
         id: bgCard
         anchors.fill: parent
         radius: 18
-        color: Theme.islandBg
+        color: Qt.rgba(0.08, 0.09, 0.13, 0.82)
         border.width: 1
-        border.color: Theme.islandBorder
+        border.color: Qt.rgba(255, 255, 255, 0.16)
 
         // Outer glow/shadow
         Rectangle {
@@ -311,6 +326,7 @@ Item {
                 Keys.onPressed: event => {
                     const shift = event.modifiers & Qt.ShiftModifier;
                     const ctrl = event.modifiers & Qt.ControlModifier;
+                    const alt = event.modifiers & Qt.AltModifier;
 
                     if (event.key === Qt.Key_Escape) {
                         LauncherManager.closeLauncher();
@@ -334,7 +350,11 @@ Item {
                         LauncherManager.cycleMode(false);
                         event.accepted = true;
                     } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                        root.activateCurrent();
+                        if (shift || alt || ctrl) {
+                            root.launchNewInstanceForCurrent();
+                        } else {
+                            root.activateCurrent();
+                        }
                         event.accepted = true;
                     } else if (shift && event.key === Qt.Key_Delete) {
                         root.killCurrentWindow();
@@ -720,6 +740,36 @@ Item {
                                             font.bold: delegateRoot.isSelected
                                         }
                                     }
+
+                                    // New Instance Badge
+                                    Rectangle {
+                                        Layout.preferredHeight: 24
+                                        Layout.preferredWidth: newAppLabel.implicitWidth + 14
+                                        radius: 6
+                                        color: newAppMouse.containsMouse ? Qt.rgba(0, 229, 255, 0.25) : (delegateRoot.isSelected ? Qt.rgba(255, 255, 255, 0.12) : "transparent")
+                                        border.width: 1
+                                        border.color: delegateRoot.isSelected ? Qt.rgba(255, 255, 255, 0.2) : "transparent"
+
+                                        Text {
+                                            id: newAppLabel
+                                            anchors.centerIn: parent
+                                            text: "⇧+↵ New"
+                                            color: delegateRoot.isSelected ? "#00E5FF" : Theme.fgDim
+                                            font.family: Theme.fontFamily
+                                            font.pixelSize: 10
+                                            font.bold: delegateRoot.isSelected
+                                        }
+
+                                        MouseArea {
+                                            id: newAppMouse
+                                            anchors.fill: parent
+                                            hoverEnabled: true
+                                            cursorShape: Qt.PointingHandCursor
+                                            onClicked: {
+                                                LauncherManager.launchWindowApp(delegateRoot.modelData.data);
+                                            }
+                                        }
+                                    }
                                 }
                             }
 
@@ -888,7 +938,17 @@ Item {
                         width: 18; height: 16; radius: 3; color: Qt.rgba(255, 255, 255, 0.1)
                         Text { anchors.centerIn: parent; text: "↵"; font.pixelSize: 11; color: Theme.fgDim }
                     }
-                    Text { text: "Open / Copy"; color: Theme.fgDim; font.pixelSize: 11; font.family: Theme.fontFamily; anchors.verticalCenter: parent.verticalCenter }
+                    Text { text: "Open / Focus"; color: Theme.fgDim; font.pixelSize: 11; font.family: Theme.fontFamily; anchors.verticalCenter: parent.verticalCenter }
+                }
+
+                Row {
+                    spacing: 5
+                    anchors.verticalCenter: parent.verticalCenter
+                    Rectangle {
+                        width: 44; height: 16; radius: 3; color: Qt.rgba(255, 255, 255, 0.1)
+                        Text { anchors.centerIn: parent; text: "⇧+↵"; font.pixelSize: 9; color: Theme.fgDim }
+                    }
+                    Text { text: "New App"; color: Theme.fgDim; font.pixelSize: 11; font.family: Theme.fontFamily; anchors.verticalCenter: parent.verticalCenter }
                 }
 
                 Row {
