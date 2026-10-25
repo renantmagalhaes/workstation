@@ -302,8 +302,6 @@ PanelWindow {
                             Image {
                                 anchors.fill: parent
                                 source: win.open ? win.shotPath(miniTile.modelData.id) : ""
-                                sourceSize.width: Math.max(1, Math.round(miniTile.width))
-                                sourceSize.height: Math.max(1, Math.round(miniTile.height))
                                 cache: false
                                 fillMode: Image.PreserveAspectCrop
                                 asynchronous: true
@@ -574,8 +572,6 @@ PanelWindow {
                     anchors.fill: parent
                     anchors.margins: 2
                     source: win.open ? win.shotPath(tile.modelData.id) : ""
-                    sourceSize.width: Math.max(1, Math.round(targetRect.width))
-                    sourceSize.height: Math.max(1, Math.round(targetRect.height))
                     cache: false
                     fillMode: Image.PreserveAspectCrop
                     asynchronous: true

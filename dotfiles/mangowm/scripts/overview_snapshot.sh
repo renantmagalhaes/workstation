@@ -16,9 +16,9 @@ clients=$(mmsg get all-clients 2>/dev/null || echo '{"clients":[]}')
 monitors=$(mmsg get all-monitors 2>/dev/null || echo '{"monitors":[]}')
 
 # Trigger background captures for all mapped toplevels
-jq -r '.clients[] | select(.foreign_toplevel_id != null and .width > 50) | "\(.foreign_toplevel_id) \(.id)"' <<<"$clients" 2>/dev/null | while read -r tid cid; do
-    grim -t ppm -T "$tid" "$OUT_DIR/${cid}.ppm" 2>/dev/null &
-done
+while read -r tid cid; do
+    timeout 1.0 grim -t ppm -T "$tid" "$OUT_DIR/${cid}.ppm" 2>/dev/null &
+done < <(jq -r '.clients[] | select(.foreign_toplevel_id != null and .width > 50) | "\(.foreign_toplevel_id) \(.id)"' <<<"$clients" 2>/dev/null)
 
 wait
 

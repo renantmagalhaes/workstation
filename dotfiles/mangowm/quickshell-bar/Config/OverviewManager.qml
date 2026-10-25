@@ -76,13 +76,15 @@ Singleton {
     function toggle(): void {
         if (root.open) {
             root.closeOverview();
-        } else if (!shotProcess.running) {
+        } else {
+            shotProcess.running = false;
             shotProcess.running = true;
         }
     }
 
     function openOverview(): void {
-        if (!root.open && !shotProcess.running) {
+        if (!root.open) {
+            shotProcess.running = false;
             shotProcess.running = true;
         }
     }
