@@ -301,7 +301,10 @@ PanelWindow {
 
                             Image {
                                 anchors.fill: parent
-                                source: win.shotPath(miniTile.modelData.id)
+                                source: win.open ? win.shotPath(miniTile.modelData.id) : ""
+                                sourceSize.width: Math.max(1, Math.round(miniTile.width))
+                                sourceSize.height: Math.max(1, Math.round(miniTile.height))
+                                cache: false
                                 fillMode: Image.PreserveAspectCrop
                                 asynchronous: true
                                 opacity: 0.85
@@ -570,7 +573,10 @@ PanelWindow {
                     id: tileShot
                     anchors.fill: parent
                     anchors.margins: 2
-                    source: win.shotPath(tile.modelData.id)
+                    source: win.open ? win.shotPath(tile.modelData.id) : ""
+                    sourceSize.width: Math.max(1, Math.round(targetRect.width))
+                    sourceSize.height: Math.max(1, Math.round(targetRect.height))
+                    cache: false
                     fillMode: Image.PreserveAspectCrop
                     asynchronous: true
                     smooth: true
