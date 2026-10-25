@@ -426,6 +426,11 @@ Item {
             tailX: root.anchorCenterX - panel.x
         }
 
+        // Catch clicks within the panel so they don't fall through to the fullscreen dismiss area
+        MouseArea {
+            anchors.fill: parent
+        }
+
         Loader {
             id: pageLoader
 

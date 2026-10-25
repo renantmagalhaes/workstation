@@ -21,6 +21,12 @@ Singleton {
 
     property string ethDevice: ""
     property string ethState: ""
+    property bool ethCarrier: false
+    property int ethSpeed: 0
+    property string ethMac: ""
+    property string ethIp: ""
+    property string ethGateway: ""
+    property string ethModel: ""
 
     property bool btPowered: false
     property var btDevices: []
@@ -41,12 +47,20 @@ Singleton {
     readonly property var profiles: ["performance", "balanced", "power-saver"]
 
     readonly property bool ethConnected: ethState === "connected"
+    readonly property string ethSpeedText: {
+        if (!ethCarrier || ethSpeed <= 0) return "";
+        if (ethSpeed >= 1000) return `${(ethSpeed / 1000).toFixed(0)} Gbps`;
+        return `${ethSpeed} Mbps`;
+    }
     readonly property bool wifiConnected: wifiSsid !== ""
     readonly property var btConnectedDevices: (btDevices ?? []).filter(d => d.connected)
 
     readonly property string networkSummary: {
-        if (ethConnected) return ethDevice;
+        if (ethConnected) {
+            return ethSpeedText !== "" ? `${ethDevice} · ${ethSpeedText}` : ethDevice;
+        }
         if (wifiConnected) return wifiSsid;
+        if (ethCarrier) return `${ethDevice} · cable plugged`;
         if (!wifiRadio) return "off";
         return "disconnected";
     }
@@ -57,6 +71,23 @@ Singleton {
         if (connected.length === 1) return connected[0].name;
         if (connected.length > 1) return `${connected.length} connected`;
         return "on";
+    }
+
+    function toggleEth(device) {
+        act(["eth-toggle", device ?? ethDevice]);
+    }
+
+    function connectEth(device) {
+        act(["eth-connect", device ?? ethDevice]);
+    }
+
+    function disconnectEth(device) {
+        act(["eth-disconnect", device ?? ethDevice]);
+    }
+
+    function copyToClipboard(text) {
+        if (!text) return;
+        Quickshell.execDetached(["sh", "-c", 'printf "%s" "$1" | wl-copy', "sh", text]);
     }
 
     function toggleWifi() {
@@ -141,6 +172,12 @@ Singleton {
                 root.wifiSsid = parsed.wifi?.ssid ?? "";
                 root.ethDevice = parsed.eth?.device ?? "";
                 root.ethState = parsed.eth?.state ?? "";
+                root.ethCarrier = parsed.eth?.carrier === true;
+                root.ethSpeed = parsed.eth?.speed ? parseInt(parsed.eth.speed) : 0;
+                root.ethMac = parsed.eth?.mac ?? "";
+                root.ethIp = parsed.eth?.ip ?? "";
+                root.ethGateway = parsed.eth?.gateway ?? "";
+                root.ethModel = parsed.eth?.model ?? "";
                 root.btPowered = parsed.bt?.powered === true;
                 root.btDevices = parsed.bt?.devices ?? [];
                 root.dnd = parsed.dnd === true;

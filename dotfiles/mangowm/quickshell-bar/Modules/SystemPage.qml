@@ -643,6 +643,13 @@ Item {
                 value: `${SystemInfo.load1.toFixed(2)} (${SystemInfo.cores} cores)`
                 valueColor: Theme.fgDim
             }
+
+            InfoRow {
+                width: parent.width
+                label: "LAN"
+                value: Control.ethConnected ? `${Control.ethDevice} · ${Control.ethIp || "connected"}${Control.ethSpeedText !== "" ? " (" + Control.ethSpeedText + ")" : ""}` : (Control.ethDevice !== "" ? `${Control.ethDevice} (disconnected)` : "--")
+                valueColor: Control.ethConnected ? Theme.fg : Theme.fgDim
+            }
         }
     }
 }
