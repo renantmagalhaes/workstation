@@ -381,7 +381,7 @@ Item {
         id: bgCard
         anchors.fill: parent
         radius: 18
-        color: Qt.rgba(0.08, 0.09, 0.13, 0.75)
+        color: Qt.rgba(0.08, 0.09, 0.13, 0.82)
         border.width: 1
         border.color: Qt.rgba(255, 255, 255, 0.18)
 
