@@ -124,7 +124,7 @@ PanelWindow {
     }
 
     function shotPath(cid) {
-        return "file:///tmp/quickshell-overview/" + cid + ".ppm?" + (stamp % 2);
+        return "file:///tmp/quickshell-overview/" + cid + ".jpg?" + (stamp % 4);
     }
 
     function appIcon(appId) {

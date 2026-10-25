@@ -92,7 +92,6 @@ Singleton {
     function closeOverview(): void {
         root.open = false;
         root.searchQuery = "";
-        Quickshell.execDetached(["sh", "-c", "rm -f /tmp/quickshell-overview/*.ppm 2>/dev/null"]);
         if (typeof gc === "function") {
             Qt.callLater(gc);
         }
