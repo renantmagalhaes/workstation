@@ -610,45 +610,7 @@ PanelWindow {
                     }
                 }
 
-                // Close window button (top-right)
-                Rectangle {
-                    id: closeBtn
-                    anchors.top: parent.top
-                    anchors.right: parent.right
-                    anchors.margins: 7
-                    width: 24
-                    height: 24
-                    radius: 12
-                    z: 20
-                    color: closeBtnMouse.containsMouse ? "#FF3B30" : Qt.rgba(0.08, 0.10, 0.16, 0.85)
-                    border.width: 1
-                    border.color: closeBtnMouse.containsMouse ? "#FF5F56" : Qt.rgba(1, 1, 1, 0.25)
 
-                    Behavior on color { ColorAnimation { duration: 120 } }
-                    Behavior on scale { NumberAnimation { duration: 100 } }
-                    scale: closeBtnMouse.containsMouse ? 1.15 : 1.0
-
-                    Text {
-                        anchors.centerIn: parent
-                        text: "✕"
-                        font.family: "Inter, sans-serif"
-                        font.pixelSize: 11
-                        font.bold: true
-                        color: "#FFFFFF"
-                    }
-
-                    MouseArea {
-                        id: closeBtnMouse
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-                        acceptedButtons: Qt.LeftButton
-                        onClicked: mouse => {
-                            mouse.accepted = true;
-                            win.killWindow(tile.modelData);
-                        }
-                    }
-                }
 
                 // Fallback app icon if screenshot isn't available
                 ColumnLayout {
@@ -749,6 +711,48 @@ PanelWindow {
                         win.dragged = null;
                     } else {
                         win.focusWindow(tile.modelData);
+                    }
+                }
+            }
+
+            // Close window button (top-right) - Placed after tileMouse with z: 30 so it receives hover and clicks
+            Rectangle {
+                id: closeBtn
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.margins: 7
+                width: 24
+                height: 24
+                radius: 12
+                z: 30
+                color: closeBtnMouse.containsMouse ? "#FF3B30" : Qt.rgba(0.08, 0.10, 0.16, 0.85)
+                border.width: 1
+                border.color: closeBtnMouse.containsMouse ? "#FF5F56" : Qt.rgba(1, 1, 1, 0.25)
+
+                Behavior on color { ColorAnimation { duration: 120 } }
+                Behavior on scale { NumberAnimation { duration: 100 } }
+                scale: closeBtnMouse.containsMouse ? 1.15 : 1.0
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "✕"
+                    font.family: Theme.fontFamily
+                    font.pixelSize: 11
+                    font.bold: true
+                    color: "#FFFFFF"
+                }
+
+                MouseArea {
+                    id: closeBtnMouse
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    preventStealing: true
+                    cursorShape: Qt.PointingHandCursor
+                    acceptedButtons: Qt.LeftButton
+                    onPressed: mouse => mouse.accepted = true
+                    onClicked: mouse => {
+                        mouse.accepted = true;
+                        win.killWindow(tile.modelData);
                     }
                 }
             }

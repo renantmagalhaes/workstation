@@ -12,7 +12,9 @@ Item {
     readonly property int panelWidth: 680
 
     width: panelWidth
+    implicitWidth: panelWidth
     implicitHeight: Math.min(col.implicitHeight, 620)
+    height: implicitHeight
 
     // Filter calculations
     readonly property string q: LauncherManager.searchQuery.trim().toLowerCase()
@@ -242,10 +244,6 @@ Item {
         border.width: 1
         border.color: Qt.rgba(255, 255, 255, 0.18)
 
-        // Prevent clicks on empty parts of the card from closing the launcher
-        MouseArea {
-            anchors.fill: parent
-        }
 
         // Outer glow/shadow
         Rectangle {
@@ -294,12 +292,154 @@ Item {
                 }
             }
 
+            // Right Controls Container: Clear Button + Mode Tabs + Close Launcher Button
+            Row {
+                id: rightControls
+                anchors.right: parent.right
+                anchors.rightMargin: 16
+                anchors.verticalCenter: parent.verticalCenter
+                spacing: 8
+                z: 10
+
+                // Clear input button
+                Rectangle {
+                    id: clearBtn
+                    width: 24
+                    height: 24
+                    radius: 12
+                    visible: input.text.length > 0
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: clearMouse.containsMouse ? Theme.hover : Qt.rgba(255, 255, 255, 0.08)
+
+                    Text {
+                        anchors.centerIn: parent
+                        text: "󰅖"
+                        color: clearMouse.containsMouse ? Theme.fg : Theme.fgDim
+                        font.family: Theme.iconFamily
+                        renderType: Text.QtRendering
+                        font.pixelSize: 12
+                    }
+
+                    MouseArea {
+                        id: clearMouse
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            input.text = "";
+                            input.forceActiveFocus();
+                        }
+                    }
+                }
+
+                // Mode Pills / Tabs
+                Row {
+                    id: modeTabs
+                    spacing: 6
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    Repeater {
+                        model: [
+                            { id: "all", icon: "󰕰", label: "All" },
+                            { id: "windows", icon: "󱂬", label: "Windows (" + root.filteredWindows.length + ")" },
+                            { id: "apps", icon: "󰀻", label: "Apps" }
+                        ]
+
+                        Rectangle {
+                            id: tabItem
+                            required property var modelData
+                            readonly property bool isActive: root.mode === modelData.id
+                            height: 28
+                            width: tabRow.implicitWidth + 20
+                            radius: 14
+                            color: isActive ? Qt.rgba(255, 255, 255, 0.14) : (tabMouse.containsMouse ? Theme.hover : "transparent")
+                            border.width: 1
+                            border.color: isActive ? Qt.rgba(255, 255, 255, 0.22) : "transparent"
+
+                            Behavior on color {
+                                ColorAnimation { duration: 140 }
+                            }
+
+                            Row {
+                                id: tabRow
+                                anchors.centerIn: parent
+                                spacing: 5
+
+                                Text {
+                                    text: tabItem.modelData.icon
+                                    color: tabItem.isActive ? (tabItem.modelData.id === "windows" ? "#A78BFA" : Theme.accent) : Theme.fgDim
+                                    font.family: Theme.iconFamily
+                                    renderType: Text.QtRendering
+                                    font.pixelSize: 12
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+
+                                Text {
+                                    text: tabItem.modelData.label
+                                    color: tabItem.isActive ? Theme.fg : Theme.fgDim
+                                    font.family: Theme.fontFamily
+                                    font.pixelSize: 12
+                                    font.weight: tabItem.isActive ? Font.Bold : Font.Normal
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
+
+                            MouseArea {
+                                id: tabMouse
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: {
+                                    LauncherManager.setMode(tabItem.modelData.id);
+                                    input.forceActiveFocus();
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Close Launcher Window Button ("X")
+                Rectangle {
+                    id: closeLauncherBtn
+                    width: 28
+                    height: 28
+                    radius: 14
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: closeLauncherMouse.containsMouse ? Qt.rgba(239, 68, 68, 0.22) : Qt.rgba(255, 255, 255, 0.08)
+                    border.width: 1
+                    border.color: closeLauncherMouse.containsMouse ? Qt.rgba(239, 68, 68, 0.45) : Qt.rgba(255, 255, 255, 0.12)
+
+                    Behavior on color {
+                        ColorAnimation { duration: 120 }
+                    }
+
+                    Text {
+                        anchors.centerIn: parent
+                        text: "󰅖"
+                        font.family: Theme.iconFamily
+                        renderType: Text.QtRendering
+                        font.pixelSize: 13
+                        color: closeLauncherMouse.containsMouse ? "#EF4444" : Theme.fgDim
+                    }
+
+                    MouseArea {
+                        id: closeLauncherMouse
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            LauncherManager.closeLauncher();
+                        }
+                    }
+                }
+            }
+
             // Text Input
             TextInput {
                 id: input
                 anchors.left: promptIcon.right
                 anchors.leftMargin: 14
-                anchors.right: modeTabs.left
+                anchors.right: rightControls.left
                 anchors.rightMargin: 12
                 anchors.verticalCenter: parent.verticalCenter
                 color: Theme.fg
@@ -365,111 +505,6 @@ Item {
                     } else if (shift && event.key === Qt.Key_Delete) {
                         root.killCurrentWindow();
                         event.accepted = true;
-                    }
-                }
-            }
-
-            // Clear button
-            Item {
-                id: clearBtn
-                anchors.right: modeTabs.left
-                anchors.rightMargin: 8
-                anchors.verticalCenter: parent.verticalCenter
-                width: 24
-                height: 24
-                visible: input.text.length > 0
-
-                Rectangle {
-                    anchors.fill: parent
-                    radius: 12
-                    color: clearMouse.containsMouse ? Theme.hover : "transparent"
-                }
-
-                Text {
-                    anchors.centerIn: parent
-                    text: "󰅖"
-                    color: clearMouse.containsMouse ? Theme.fg : Theme.fgDim
-                    font.family: Theme.iconFamily
-                    renderType: Text.QtRendering
-                    font.pixelSize: 13
-                }
-
-                MouseArea {
-                    id: clearMouse
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: {
-                        input.text = "";
-                        input.forceActiveFocus();
-                    }
-                }
-            }
-
-            // Mode Pills / Tabs
-            Row {
-                id: modeTabs
-                anchors.right: parent.right
-                anchors.rightMargin: 16
-                anchors.verticalCenter: parent.verticalCenter
-                spacing: 6
-
-                Repeater {
-                    model: [
-                        { id: "all", icon: "󰕰", label: "All" },
-                        { id: "windows", icon: "󱂬", label: "Windows (" + root.filteredWindows.length + ")" },
-                        { id: "apps", icon: "󰀻", label: "Apps" }
-                    ]
-
-                    Rectangle {
-                        id: tabItem
-                        required property var modelData
-                        readonly property bool isActive: root.mode === modelData.id
-                        height: 28
-                        width: tabRow.implicitWidth + 20
-                        radius: 14
-                        color: isActive ? Qt.rgba(255, 255, 255, 0.14) : (tabMouse.containsMouse ? Theme.hover : "transparent")
-                        border.width: 1
-                        border.color: isActive ? Qt.rgba(255, 255, 255, 0.22) : "transparent"
-
-                        Behavior on color {
-                            ColorAnimation { duration: 140 }
-                        }
-
-                        Row {
-                            id: tabRow
-                            anchors.centerIn: parent
-                            spacing: 5
-
-                            Text {
-                                text: tabItem.modelData.icon
-                                color: tabItem.isActive ? (tabItem.modelData.id === "windows" ? "#A78BFA" : Theme.accent) : Theme.fgDim
-                                font.family: Theme.iconFamily
-                                renderType: Text.QtRendering
-                                font.pixelSize: 12
-                                anchors.verticalCenter: parent.verticalCenter
-                            }
-
-                            Text {
-                                text: tabItem.modelData.label
-                                color: tabItem.isActive ? Theme.fg : Theme.fgDim
-                                font.family: Theme.fontFamily
-                                font.pixelSize: 12
-                                font.weight: tabItem.isActive ? Font.Bold : Font.Normal
-                                anchors.verticalCenter: parent.verticalCenter
-                            }
-                        }
-
-                        MouseArea {
-                            id: tabMouse
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                LauncherManager.setMode(tabItem.modelData.id);
-                                input.forceActiveFocus();
-                            }
-                        }
                     }
                 }
             }
@@ -582,6 +617,7 @@ Item {
                             MouseArea {
                                 id: rowMouse
                                 anchors.fill: parent
+                                enabled: delegateRoot.modelData.kind !== "window"
                                 hoverEnabled: true
                                 cursorShape: Qt.PointingHandCursor
                                 onClicked: {
@@ -670,126 +706,211 @@ Item {
                             Loader {
                                 active: delegateRoot.modelData.kind === "window"
                                 anchors.fill: parent
-                                sourceComponent: RowLayout {
+                                z: 2
+                                sourceComponent: Item {
                                     anchors.fill: parent
-                                    anchors.leftMargin: 14
-                                    anchors.rightMargin: 14
-                                    spacing: 12
 
-                                    // App/Window Icon
-                                    Item {
-                                        Layout.preferredWidth: 34
-                                        Layout.preferredHeight: 34
+                                    // 1. Right Actions Container (declared FIRST so winActions geometry is known)
+                                    Row {
+                                        id: winActions
+                                        anchors.right: parent.right
+                                        anchors.rightMargin: 12
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        spacing: 6
+                                        z: 10
 
-                                        Image {
-                                            id: winIconImg
-                                            anchors.fill: parent
-                                            source: LauncherManager.getWindowIcon(delegateRoot.modelData.data)
-                                            fillMode: Image.PreserveAspectFit
-                                            smooth: true
-                                            visible: status === Image.Ready
+                                        // Workspace Tag Badge
+                                        Rectangle {
+                                            height: 24
+                                            width: tagLabel.implicitWidth + 12
+                                            radius: 6
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            color: Qt.rgba(167, 139, 250, 0.15)
+                                            border.width: 1
+                                            border.color: Qt.rgba(167, 139, 250, 0.3)
+
+                                            Text {
+                                                id: tagLabel
+                                                anchors.centerIn: parent
+                                                text: "Tag " + (delegateRoot.modelData.data.tags?.[0] ?? 1)
+                                                color: "#C4B5FD"
+                                                font.family: Theme.fontFamily
+                                                font.pixelSize: 10
+                                                font.bold: true
+                                            }
                                         }
 
-                                        Text {
-                                            anchors.centerIn: parent
-                                            visible: !winIconImg.visible
-                                            text: "󱂬" // window glyph
-                                            font.family: Theme.iconFamily
-                                            renderType: Text.QtRendering
-                                            font.pixelSize: 20
-                                            color: "#A78BFA"
+                                        // Focus / Switch Button
+                                        Rectangle {
+                                            height: 26
+                                            width: focusLabel.implicitWidth + 14
+                                            radius: 6
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            color: switchMouse.containsMouse ? Qt.rgba(255, 255, 255, 0.25) : (delegateRoot.isSelected ? Qt.rgba(255, 255, 255, 0.18) : Qt.rgba(255, 255, 255, 0.08))
+
+                                            Text {
+                                                id: focusLabel
+                                                anchors.centerIn: parent
+                                                text: delegateRoot.isSelected ? "↵ Switch" : "Switch"
+                                                color: delegateRoot.isSelected ? Theme.fg : Theme.fgDim
+                                                font.family: Theme.fontFamily
+                                                font.pixelSize: 11
+                                                font.bold: delegateRoot.isSelected
+                                            }
+
+                                            MouseArea {
+                                                id: switchMouse
+                                                anchors.fill: parent
+                                                hoverEnabled: true
+                                                cursorShape: Qt.PointingHandCursor
+                                                onClicked: (mouse) => {
+                                                    mouse.accepted = true;
+                                                    LauncherManager.focusWindow(delegateRoot.modelData.data);
+                                                }
+                                            }
+                                        }
+
+                                        // New Instance Button
+                                        Rectangle {
+                                            height: 26
+                                            width: newAppLabel.implicitWidth + 14
+                                            radius: 6
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            color: newAppMouse.containsMouse ? Qt.rgba(0, 229, 255, 0.25) : (delegateRoot.isSelected ? Qt.rgba(255, 255, 255, 0.12) : "transparent")
+                                            border.width: 1
+                                            border.color: delegateRoot.isSelected ? Qt.rgba(255, 255, 255, 0.2) : "transparent"
+
+                                            Text {
+                                                id: newAppLabel
+                                                anchors.centerIn: parent
+                                                text: "⇧+↵ New"
+                                                color: delegateRoot.isSelected ? "#00E5FF" : Theme.fgDim
+                                                font.family: Theme.fontFamily
+                                                font.pixelSize: 10
+                                                font.bold: delegateRoot.isSelected
+                                            }
+
+                                            MouseArea {
+                                                id: newAppMouse
+                                                anchors.fill: parent
+                                                hoverEnabled: true
+                                                cursorShape: Qt.PointingHandCursor
+                                                onClicked: (mouse) => {
+                                                    mouse.accepted = true;
+                                                    LauncherManager.launchWindowApp(delegateRoot.modelData.data);
+                                                }
+                                            }
+                                        }
+
+                                        // Close Window Button ("X")
+                                        Rectangle {
+                                            id: closeWinBtn
+                                            height: 26
+                                            width: 28
+                                            radius: 6
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            color: closeWinMouse.containsMouse ? Qt.rgba(239, 68, 68, 0.35) : Qt.rgba(255, 255, 255, 0.08)
+                                            border.width: 1
+                                            border.color: closeWinMouse.containsMouse ? Qt.rgba(239, 68, 68, 0.7) : Qt.rgba(255, 255, 255, 0.12)
+
+                                            Behavior on color {
+                                                ColorAnimation { duration: 100 }
+                                            }
+
+                                            Text {
+                                                anchors.centerIn: parent
+                                                text: "󰅖"
+                                                font.family: Theme.iconFamily
+                                                renderType: Text.QtRendering
+                                                font.pixelSize: 13
+                                                color: closeWinMouse.containsMouse ? "#EF4444" : Theme.fgDim
+                                            }
+
+                                            MouseArea {
+                                                id: closeWinMouse
+                                                anchors.fill: parent
+                                                hoverEnabled: true
+                                                cursorShape: Qt.PointingHandCursor
+                                                onClicked: (mouse) => {
+                                                    mouse.accepted = true;
+                                                    LauncherManager.killWindow(delegateRoot.modelData.data);
+                                                }
+                                            }
                                         }
                                     }
 
-                                    // Title & Info
-                                    ColumnLayout {
-                                        Layout.fillWidth: true
-                                        spacing: 2
-
-                                        Text {
-                                            text: delegateRoot.modelData.data.title || "Window"
-                                            color: delegateRoot.isSelected ? Theme.fg : Qt.rgba(1, 1, 1, 0.9)
-                                            font.family: Theme.fontFamily
-                                            font.pixelSize: 14
-                                            font.weight: Font.DemiBold
-                                            Layout.fillWidth: true
-                                            elide: Text.ElideRight
+                                    // 2. Left side: Icon + Title & Info (clicking here switches to window)
+                                    MouseArea {
+                                        id: rowClickArea
+                                        anchors.left: parent.left
+                                        anchors.leftMargin: 12
+                                        anchors.right: winActions.left
+                                        anchors.rightMargin: 8
+                                        anchors.top: parent.top
+                                        anchors.bottom: parent.bottom
+                                        hoverEnabled: true
+                                        cursorShape: Qt.PointingHandCursor
+                                        onClicked: {
+                                            const selIdx = root.selectableIndices.indexOf(delegateRoot.index);
+                                            if (selIdx !== -1) {
+                                                root.currentSelectable = selIdx;
+                                            }
+                                            root.activateCurrent();
                                         }
 
-                                        Text {
-                                            text: (delegateRoot.modelData.data.appid || "app") + " • " + (delegateRoot.modelData.data.monitor || "")
-                                            color: Theme.fgDim
-                                            font.family: Theme.fontFamily
-                                            font.pixelSize: 11
-                                            Layout.fillWidth: true
-                                            elide: Text.ElideRight
-                                        }
-                                    }
+                                        // Window Icon
+                                        Item {
+                                            id: winIconContainer
+                                            width: 34
+                                            height: 34
+                                            anchors.left: parent.left
+                                            anchors.verticalCenter: parent.verticalCenter
 
-                                    // Workspace Tag Badge
-                                    Rectangle {
-                                        Layout.preferredHeight: 22
-                                        Layout.preferredWidth: tagLabel.implicitWidth + 12
-                                        radius: 6
-                                        color: Qt.rgba(167, 139, 250, 0.15)
-                                        border.width: 1
-                                        border.color: Qt.rgba(167, 139, 250, 0.3)
+                                            Image {
+                                                id: winIconImg
+                                                anchors.fill: parent
+                                                source: LauncherManager.getWindowIcon(delegateRoot.modelData.data)
+                                                fillMode: Image.PreserveAspectFit
+                                                smooth: true
+                                                visible: status === Image.Ready
+                                            }
 
-                                        Text {
-                                            id: tagLabel
-                                            anchors.centerIn: parent
-                                            text: "Tag " + (delegateRoot.modelData.data.tags?.[0] ?? 1)
-                                            color: "#C4B5FD"
-                                            font.family: Theme.fontFamily
-                                            font.pixelSize: 10
-                                            font.bold: true
-                                        }
-                                    }
-
-                                    // Focus Window Badge
-                                    Rectangle {
-                                        Layout.preferredHeight: 24
-                                        Layout.preferredWidth: focusLabel.implicitWidth + 14
-                                        radius: 6
-                                        color: delegateRoot.isSelected ? Qt.rgba(255, 255, 255, 0.18) : Qt.rgba(255, 255, 255, 0.08)
-
-                                        Text {
-                                            id: focusLabel
-                                            anchors.centerIn: parent
-                                            text: delegateRoot.isSelected ? "↵ Switch" : "Switch"
-                                            color: delegateRoot.isSelected ? Theme.fg : Theme.fgDim
-                                            font.family: Theme.fontFamily
-                                            font.pixelSize: 11
-                                            font.bold: delegateRoot.isSelected
-                                        }
-                                    }
-
-                                    // New Instance Badge
-                                    Rectangle {
-                                        Layout.preferredHeight: 24
-                                        Layout.preferredWidth: newAppLabel.implicitWidth + 14
-                                        radius: 6
-                                        color: newAppMouse.containsMouse ? Qt.rgba(0, 229, 255, 0.25) : (delegateRoot.isSelected ? Qt.rgba(255, 255, 255, 0.12) : "transparent")
-                                        border.width: 1
-                                        border.color: delegateRoot.isSelected ? Qt.rgba(255, 255, 255, 0.2) : "transparent"
-
-                                        Text {
-                                            id: newAppLabel
-                                            anchors.centerIn: parent
-                                            text: "⇧+↵ New"
-                                            color: delegateRoot.isSelected ? "#00E5FF" : Theme.fgDim
-                                            font.family: Theme.fontFamily
-                                            font.pixelSize: 10
-                                            font.bold: delegateRoot.isSelected
+                                            Text {
+                                                anchors.centerIn: parent
+                                                visible: !winIconImg.visible
+                                                text: "󱂬" // window glyph
+                                                font.family: Theme.iconFamily
+                                                renderType: Text.QtRendering
+                                                font.pixelSize: 20
+                                                color: "#A78BFA"
+                                            }
                                         }
 
-                                        MouseArea {
-                                            id: newAppMouse
-                                            anchors.fill: parent
-                                            hoverEnabled: true
-                                            cursorShape: Qt.PointingHandCursor
-                                            onClicked: {
-                                                LauncherManager.launchWindowApp(delegateRoot.modelData.data);
+                                        // Title & Info
+                                        Column {
+                                            anchors.left: winIconContainer.right
+                                            anchors.leftMargin: 12
+                                            anchors.right: parent.right
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            spacing: 2
+
+                                            Text {
+                                                width: parent.width
+                                                text: delegateRoot.modelData.data.title || "Window"
+                                                color: delegateRoot.isSelected ? Theme.fg : Qt.rgba(1, 1, 1, 0.9)
+                                                font.family: Theme.fontFamily
+                                                font.pixelSize: 14
+                                                font.weight: Font.DemiBold
+                                                elide: Text.ElideRight
+                                            }
+
+                                            Text {
+                                                width: parent.width
+                                                text: (delegateRoot.modelData.data.appid || "app") + " • " + (delegateRoot.modelData.data.monitor || "")
+                                                color: Theme.fgDim
+                                                font.family: Theme.fontFamily
+                                                font.pixelSize: 11
+                                                elide: Text.ElideRight
                                             }
                                         }
                                     }

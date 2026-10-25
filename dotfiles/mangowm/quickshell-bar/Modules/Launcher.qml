@@ -59,11 +59,6 @@ PanelWindow {
             }
         }
 
-        // Prevent click-through closing when clicking inside the panel
-        MouseArea {
-            anchors.fill: parent
-        }
-
         LauncherPanel {
             id: panel
         }

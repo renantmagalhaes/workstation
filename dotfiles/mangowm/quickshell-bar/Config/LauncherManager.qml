@@ -126,7 +126,8 @@ Singleton {
     function killWindow(client): void {
         if (!client) return;
         Quickshell.execDetached(["mmsg", "dispatch", "killclient", `client,${client.id}`]);
-        root.allClients = root.allClients.filter(c => c.id !== client.id);
+        root.allClients = (root.allClients || []).filter(c => c.id !== client.id);
+        Qt.callLater(() => root.refreshClients());
     }
 
     // Launch a new instance of an app from a window client
