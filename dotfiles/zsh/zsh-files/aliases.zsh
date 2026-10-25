@@ -187,6 +187,11 @@ if check_cmd nvim; then
 fi
 
 ### UTILS ###
+if check_cmd bpytop; then
+    alias top='bpytop'
+else
+    unalias top 2>/dev/null
+fi
 check_cmd ncdu && alias disk-manager='ncdu'
 check_cmd nmon && alias system-monitor='nmon'
 alias git-sync='git add -A && git commit -m sync && git push'

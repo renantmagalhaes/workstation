@@ -92,14 +92,6 @@ setopt HIST_FIND_NO_DUPS
 # =====================
 alias drop_cache="sudo sh -c \"echo 3 > /proc/sys/vm/drop_caches && swapoff -a && swapon -a && echo 'Ram-cache and Swap Cleared'\""
 
-# =====================
-# Use best available top
-# =====================
-if check_cmd btop; then
-  alias top='btop'
-elif check_cmd htop; then
-  alias top='htop'
-fi
 
 # =====================
 # Completion cache and preferences
