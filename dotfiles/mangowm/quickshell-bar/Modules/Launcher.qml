@@ -23,22 +23,12 @@ PanelWindow {
     readonly property string monName: win.screen?.name ?? "DP-1"
     readonly property bool isTargetMonitor: LauncherManager.activeMonitorName === monName
 
-    // Subtle backdrop scrim so current applications behind the launcher remain visible
-    Rectangle {
-        id: scrim
+    // Transparent backdrop for click-to-dismiss.
+    // Kept fully transparent (no fill color) so compositor blur is ONLY sampled
+    // and applied directly under the launcher card, leaving surrounding desktop windows crisp.
+    MouseArea {
         anchors.fill: parent
-        color: Qt.rgba(0, 0, 0, 0.12)
-        opacity: LauncherManager.open ? 1 : 0
-
-        Behavior on opacity {
-            NumberAnimation { duration: 160; easing.type: Easing.OutCubic }
-        }
-
-        // Clicking backdrop closes launcher
-        MouseArea {
-            anchors.fill: parent
-            onClicked: LauncherManager.closeLauncher()
-        }
+        onClicked: LauncherManager.closeLauncher()
     }
 
     // Centered Spotlight card on active monitor
