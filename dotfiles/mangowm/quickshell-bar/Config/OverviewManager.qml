@@ -92,6 +92,8 @@ Singleton {
     function closeOverview(): void {
         root.open = false;
         root.searchQuery = "";
+        root.allClients = [];
+        root.allMonitors = [];
         if (typeof gc === "function") {
             Qt.callLater(gc);
         }
