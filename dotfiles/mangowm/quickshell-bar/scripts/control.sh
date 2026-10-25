@@ -32,13 +32,15 @@ state() {
   ssid=$(nmcli -t -f NAME,TYPE connection show --active 2>/dev/null | awk -F: '$2 ~ /wireless/{print $1; exit}')
 
   # Gather detailed ethernet properties for the primary internal cable adapter
-  local eth_carrier=false eth_speed=0 eth_mac="" eth_ip="" eth_gateway="" eth_model=""
+  local eth_carrier=false eth_speed=0 eth_mac="" eth_ip="" eth_gateway="" eth_model="" eth_uuid=""
   if [ -n "${eth_dev:-}" ]; then
     [ "$(cat "/sys/class/net/$eth_dev/carrier" 2>/dev/null)" = "1" ] && eth_carrier=true
     eth_speed=$(cat "/sys/class/net/$eth_dev/speed" 2>/dev/null || echo 0)
     eth_mac=$(cat "/sys/class/net/$eth_dev/address" 2>/dev/null || echo "")
     eth_ip=$(ip -j addr show dev "$eth_dev" 2>/dev/null | jq -r '.[0].addr_info[]? | select(.family=="inet") | .local + "/" + (.prefixlen|tostring)' | head -1)
     eth_gateway=$(ip route show default dev "$eth_dev" 2>/dev/null | awk '/default/{print $3; exit}')
+    eth_uuid=$(nmcli -t -f DEVICE,UUID connection show --active 2>/dev/null | awk -F: -v d="$eth_dev" '$1==d{print $2; exit}')
+    [ -z "$eth_uuid" ] && eth_uuid=$(nmcli -t -f DEVICE,UUID device 2>/dev/null | awk -F: -v d="$eth_dev" '$1==d{print $2; exit}')
     
     local raw_model pat='\(([^)]+)\)'
     raw_model=$(udevadm info -p "/sys/class/net/$eth_dev" 2>/dev/null | awk -F= '$1=="E: ID_MODEL_FROM_DATABASE"{print $2; exit}')
@@ -80,10 +82,11 @@ state() {
     --argjson ethCarrier "$eth_carrier" --arg ethSpeed "$eth_speed" \
     --arg ethMac "$eth_mac" --arg ethIp "${eth_ip:-}" \
     --arg ethGateway "${eth_gateway:-}" --arg ethModel "$eth_model" \
+    --arg ethUuid "${eth_uuid:-}" \
     --argjson powered "$powered" --argjson devices "$devices" \
     --argjson dnd "$dnd" --arg profile "${profile:-}" \
     '{wifi:{radio:$radio, device:$wifiDev, state:$wifiState, ssid:$ssid},
-      eth:{device:$ethDev, state:$ethState, carrier:$ethCarrier, speed:$ethSpeed, mac:$ethMac, ip:$ethIp, gateway:$ethGateway, model:$ethModel},
+      eth:{device:$ethDev, state:$ethState, carrier:$ethCarrier, speed:$ethSpeed, mac:$ethMac, ip:$ethIp, gateway:$ethGateway, model:$ethModel, uuid:$ethUuid},
       bt:{powered:$powered, devices:$devices},
       dnd:$dnd, profile:$profile}'
 }
@@ -123,6 +126,25 @@ case "${1:-state}" in
     [ -z "$edev" ] && edev=$(nmcli -t -f DEVICE,TYPE device 2>/dev/null | awk -F: '$2=="ethernet"{print $1; exit}')
     [ -n "$edev" ] && nmcli device disconnect "$edev" >/dev/null 2>&1
     ;;
+  edit-connection)
+    target="${2:-}"
+    if [ -n "$target" ]; then
+      if [[ "$target" =~ ^[0-9a-fA-F-]{36}$ ]]; then
+        nm-connection-editor --edit "$target" >/dev/null 2>&1 &
+      else
+        u=$(nmcli -t -f DEVICE,UUID connection show --active 2>/dev/null | awk -F: -v d="$target" '$1==d{print $2; exit}')
+        [ -z "$u" ] && u=$(nmcli -t -f NAME,UUID connection show 2>/dev/null | awk -F: -v d="$target" '$1==d{print $2; exit}')
+        if [ -n "$u" ]; then
+          nm-connection-editor --edit "$u" >/dev/null 2>&1 &
+        else
+          nm-connection-editor >/dev/null 2>&1 &
+        fi
+      fi
+    else
+      nm-connection-editor >/dev/null 2>&1 &
+    fi
+    ;;
+  open-editor) nm-connection-editor >/dev/null 2>&1 & ;;
   bt) bt power "${2:-on}" >/dev/null ;;
   bt-connect) bt connect "${2:-}" >/dev/null ;;
   bt-disconnect) bt disconnect "${2:-}" >/dev/null ;;

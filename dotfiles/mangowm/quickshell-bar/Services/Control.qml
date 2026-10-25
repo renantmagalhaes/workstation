@@ -27,6 +27,7 @@ Singleton {
     property string ethIp: ""
     property string ethGateway: ""
     property string ethModel: ""
+    property string ethUuid: ""
 
     property bool btPowered: false
     property var btDevices: []
@@ -73,6 +74,20 @@ Singleton {
         return "on";
     }
 
+    property int _pollCount: 0
+
+    onWifiRadioChanged: {
+        if (wifiRadio) {
+            scanWifi();
+        } else {
+            wifiNetworks = [];
+        }
+    }
+
+    Component.onCompleted: {
+        scanWifi();
+    }
+
     function toggleEth(device) {
         act(["eth-toggle", device ?? ethDevice]);
     }
@@ -83,6 +98,14 @@ Singleton {
 
     function disconnectEth(device) {
         act(["eth-disconnect", device ?? ethDevice]);
+    }
+
+    function editConnection(uuidOrDev) {
+        act(["edit-connection", uuidOrDev ?? ethUuid ?? ethDevice]);
+    }
+
+    function openEditor() {
+        act(["open-editor"]);
     }
 
     function copyToClipboard(text) {
@@ -121,14 +144,18 @@ Singleton {
     }
 
     function scanWifi() {
+        if (!wifiRadio && wifiDevice === "") return;
         scanning = true;
         scanGuard.restart();
+        if (lister.running) {
+            lister.running = false;
+        }
         lister.running = true;
     }
 
     Timer {
         id: scanGuard
-        interval: 12000
+        interval: 10000
         onTriggered: root.scanning = false
     }
 
@@ -148,7 +175,13 @@ Singleton {
     Timer {
         id: settle
         interval: 1200
-        onTriggered: probe.running = true
+        onTriggered: {
+            probe.running = false;
+            probe.running = true;
+            if (root.wifiRadio && !root.scanning) {
+                root.scanWifi();
+            }
+        }
     }
 
     Process {
@@ -178,10 +211,15 @@ Singleton {
                 root.ethIp = parsed.eth?.ip ?? "";
                 root.ethGateway = parsed.eth?.gateway ?? "";
                 root.ethModel = parsed.eth?.model ?? "";
+                root.ethUuid = parsed.eth?.uuid ?? "";
                 root.btPowered = parsed.bt?.powered === true;
                 root.btDevices = parsed.bt?.devices ?? [];
                 root.dnd = parsed.dnd === true;
                 root.profile = parsed.profile ?? "";
+
+                if (root.wifiRadio && (root.wifiNetworks.length === 0 || root.wifiNetworks === null) && !root.scanning) {
+                    root.scanWifi();
+                }
             }
         }
     }
@@ -190,16 +228,26 @@ Singleton {
         id: lister
         command: ["bash", Paths.script("control.sh"), "wifi-list"]
 
-        stdout: SplitParser {
-            splitMarker: "\n"
-            onRead: data => {
-                if (!data) return;
-                try {
-                    root.wifiNetworks = JSON.parse(data) ?? [];
-                } catch (e) {}
+        stdout: StdioCollector {
+            onStreamFinished: {
+                if (text && text.trim().length > 0) {
+                    try {
+                        const parsed = JSON.parse(text);
+                        if (Array.isArray(parsed)) {
+                            root.wifiNetworks = parsed;
+                        }
+                    } catch (e) {
+                        console.warn("Failed to parse wifi networks:", e);
+                    }
+                }
                 root.scanning = false;
                 scanGuard.stop();
             }
+        }
+
+        onExited: {
+            root.scanning = false;
+            scanGuard.stop();
         }
     }
 
@@ -208,6 +256,13 @@ Singleton {
         running: true
         repeat: true
         triggeredOnStart: true
-        onTriggered: probe.running = true
+        onTriggered: {
+            probe.running = false;
+            probe.running = true;
+            root._pollCount++;
+            if (root._pollCount % 3 === 0 && root.wifiRadio && !root.scanning) {
+                root.scanWifi();
+            }
+        }
     }
 }

@@ -59,7 +59,7 @@ Rectangle {
             }
 
             Column {
-                width: parent.width - 32 - actionBtn.width - 16
+                width: parent.width - 32 - btnRow.width - 16
                 anchors.verticalCenter: parent.verticalCenter
                 spacing: 1
 
@@ -85,39 +85,74 @@ Rectangle {
                 }
             }
 
-            // Connect / Disconnect button
-            Rectangle {
-                id: actionBtn
-
+            // Buttons: Configure (nm-connection-editor) + Connect/Disconnect
+            Row {
+                id: btnRow
                 anchors.verticalCenter: parent.verticalCenter
-                width: btnText.implicitWidth + 18
-                height: 24
-                radius: Theme.chipRadius
-                color: btnMouse.containsMouse ? Theme.hover : Theme.pressed
-                border.width: 1
-                border.color: Control.ethConnected ? Qt.rgba(Theme.good.r, Theme.good.g, Theme.good.b, 0.4) : Theme.islandBorder
+                spacing: 5
 
-                Behavior on color {
-                    ColorAnimation { duration: Theme.durSnappy }
+                Rectangle {
+                    id: editBtn
+                    width: 24
+                    height: 24
+                    radius: Theme.chipRadius
+                    color: editMouse.containsMouse ? Theme.hover : Theme.pressed
+                    border.width: 1
+                    border.color: Theme.islandBorder
+
+                    Behavior on color {
+                        ColorAnimation { duration: Theme.durSnappy }
+                    }
+
+                    Text {
+                        anchors.centerIn: parent
+                        text: "󰒓"
+                        color: editMouse.containsMouse ? Theme.accent : Theme.fgDim
+                        font.family: Theme.iconFamily
+                        renderType: Text.QtRendering
+                        font.pixelSize: 12
+                    }
+
+                    MouseArea {
+                        id: editMouse
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: Control.editConnection()
+                    }
                 }
 
-                Text {
-                    id: btnText
-                    anchors.centerIn: parent
-                    text: Control.ethConnected ? "Disconnect" : "Connect"
-                    color: Control.ethConnected ? Theme.good : Theme.fg
-                    font.family: Theme.fontFamily
-                    renderType: Text.QtRendering
-                    font.pixelSize: Theme.fontSizeSmall - 2
-                    font.weight: Font.Medium
-                }
+                Rectangle {
+                    id: actionBtn
+                    width: btnText.implicitWidth + 16
+                    height: 24
+                    radius: Theme.chipRadius
+                    color: btnMouse.containsMouse ? Theme.hover : Theme.pressed
+                    border.width: 1
+                    border.color: Control.ethConnected ? Qt.rgba(Theme.good.r, Theme.good.g, Theme.good.b, 0.4) : Theme.islandBorder
 
-                MouseArea {
-                    id: btnMouse
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: Control.toggleEth()
+                    Behavior on color {
+                        ColorAnimation { duration: Theme.durSnappy }
+                    }
+
+                    Text {
+                        id: btnText
+                        anchors.centerIn: parent
+                        text: Control.ethConnected ? "Disconnect" : "Connect"
+                        color: Control.ethConnected ? Theme.good : Theme.fg
+                        font.family: Theme.fontFamily
+                        renderType: Text.QtRendering
+                        font.pixelSize: Theme.fontSizeSmall - 2
+                        font.weight: Font.Medium
+                    }
+
+                    MouseArea {
+                        id: btnMouse
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: Control.toggleEth()
+                    }
                 }
             }
         }

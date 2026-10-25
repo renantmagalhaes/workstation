@@ -18,10 +18,16 @@ Item {
 
     implicitHeight: column.implicitHeight + Theme.panelPad * 2
 
+    Component.onCompleted: {
+        if (Control.wifiRadio) {
+            Control.scanWifi();
+        }
+    }
+
     function open(name) {
         section = section === name ? "" : name;
         // Only scan while the network list is actually visible.
-        if (section === "network" && Control.wifiDevice !== "") {
+        if (section === "network" && Control.wifiRadio) {
             Control.scanWifi();
         }
     }
@@ -137,12 +143,14 @@ Item {
                 visible: Control.ethDevice !== ""
             }
 
-            // Section label: Wi-Fi Networks with toggle
-            Row {
+            // Section label: Wi-Fi Networks with rescan & toggle
+            Item {
                 width: parent.width
+                height: 24
                 visible: Control.wifiDevice !== ""
 
                 Text {
+                    anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
                     text: "WI-FI NETWORKS"
                     color: Theme.fgFaint
@@ -153,42 +161,81 @@ Item {
                     font.letterSpacing: 1
                 }
 
-                Item {
-                    width: parent.width - 120 - wifiTogglePill.width
-                    height: 1
-                }
-
-                Rectangle {
-                    id: wifiTogglePill
+                Row {
+                    anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
-                    height: 20
-                    width: wifiToggleText.implicitWidth + 14
-                    radius: 10
-                    color: wifiToggleMouse.containsMouse ? Theme.hover : (Control.wifiRadio ? Theme.pressed : Theme.tint)
-                    border.width: 1
-                    border.color: Control.wifiRadio ? Qt.rgba(Theme.accent.r, Theme.accent.g, Theme.accent.b, 0.4) : Theme.islandBorder
+                    spacing: 6
 
-                    Behavior on color {
-                        ColorAnimation { duration: Theme.durSnappy }
+                    // Rescan button
+                    Rectangle {
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: 22
+                        height: 20
+                        radius: 10
+                        color: rescanMouse.containsMouse ? Theme.hover : Theme.tint
+                        border.width: 1
+                        border.color: Theme.islandBorder
+
+                        Behavior on color {
+                            ColorAnimation { duration: Theme.durSnappy }
+                        }
+
+                        Text {
+                            anchors.centerIn: parent
+                            text: "󰑐"
+                            color: Control.scanning ? Theme.accent : rescanMouse.containsMouse ? Theme.fg : Theme.fgDim
+                            font.family: Theme.iconFamily
+                            renderType: Text.QtRendering
+                            font.pixelSize: 11
+                            rotation: Control.scanning ? 180 : 0
+
+                            Behavior on rotation {
+                                NumberAnimation { duration: 500 }
+                            }
+                        }
+
+                        MouseArea {
+                            id: rescanMouse
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: Control.scanWifi()
+                        }
                     }
 
-                    Text {
-                        id: wifiToggleText
-                        anchors.centerIn: parent
-                        text: Control.wifiRadio ? "Wi-Fi On" : "Wi-Fi Off"
-                        color: Control.wifiRadio ? Theme.accent : Theme.fgDim
-                        font.family: Theme.fontFamily
-                        renderType: Text.QtRendering
-                        font.pixelSize: Theme.fontSizeSmall - 2
-                        font.weight: Font.Medium
-                    }
+                    // Wi-Fi On/Off pill
+                    Rectangle {
+                        id: wifiTogglePill
+                        anchors.verticalCenter: parent.verticalCenter
+                        height: 20
+                        width: wifiToggleText.implicitWidth + 14
+                        radius: 10
+                        color: wifiToggleMouse.containsMouse ? Theme.hover : (Control.wifiRadio ? Theme.pressed : Theme.tint)
+                        border.width: 1
+                        border.color: Control.wifiRadio ? Qt.rgba(Theme.accent.r, Theme.accent.g, Theme.accent.b, 0.4) : Theme.islandBorder
 
-                    MouseArea {
-                        id: wifiToggleMouse
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: Control.toggleWifi()
+                        Behavior on color {
+                            ColorAnimation { duration: Theme.durSnappy }
+                        }
+
+                        Text {
+                            id: wifiToggleText
+                            anchors.centerIn: parent
+                            text: Control.wifiRadio ? "Wi-Fi On" : "Wi-Fi Off"
+                            color: Control.wifiRadio ? Theme.accent : Theme.fgDim
+                            font.family: Theme.fontFamily
+                            renderType: Text.QtRendering
+                            font.pixelSize: Theme.fontSizeSmall - 2
+                            font.weight: Font.Medium
+                        }
+
+                        MouseArea {
+                            id: wifiToggleMouse
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: Control.toggleWifi()
+                        }
                     }
                 }
             }
@@ -208,6 +255,13 @@ Item {
                         width: parent.width
                         label: `${modelData.ssid}${modelData.security ? "  ·  " + modelData.security : ""}`
                         selected: modelData.active === true
+                        icon: {
+                            const sig = modelData.signal || 0;
+                            if (sig >= 75) return "󰤨";
+                            if (sig >= 50) return "󰤥";
+                            if (sig >= 25) return "󰤢";
+                            return "󰤟";
+                        }
                         onActivated: Control.connectWifi(modelData.ssid)
                     }
                 }
@@ -222,6 +276,52 @@ Item {
                 renderType: Text.QtRendering
                 font.pixelSize: Theme.fontSizeSmall - 1
             }
+
+            // Launch Network Connections GUI (nm-connection-editor)
+            Rectangle {
+                width: parent.width
+                height: 26
+                radius: Theme.chipRadius
+                color: advMouse.containsMouse ? Theme.hover : Theme.tint
+                border.width: 1
+                border.color: advMouse.containsMouse ? Qt.rgba(Theme.accent.r, Theme.accent.g, Theme.accent.b, 0.4) : Theme.islandBorder
+
+                Behavior on color {
+                    ColorAnimation { duration: Theme.durSnappy }
+                }
+
+                Row {
+                    anchors.centerIn: parent
+                    spacing: 6
+
+                    Text {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "󰢻"
+                        color: advMouse.containsMouse ? Theme.accent : Theme.fgDim
+                        font.family: Theme.iconFamily
+                        renderType: Text.QtRendering
+                        font.pixelSize: 13
+                    }
+
+                    Text {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: "Edit Network Connections…"
+                        color: advMouse.containsMouse ? Theme.fg : Theme.fgDim
+                        font.family: Theme.fontFamily
+                        renderType: Text.QtRendering
+                        font.pixelSize: Theme.fontSizeSmall - 1
+                        font.weight: Font.Medium
+                    }
+                }
+
+                MouseArea {
+                    id: advMouse
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: Control.openEditor()
+                }
+            }
         }
 
         // =====================================================================
@@ -232,10 +332,12 @@ Item {
             spacing: 6
             visible: root.section === "bluetooth"
 
-            Row {
+            Item {
                 width: parent.width
+                height: 24
 
                 Text {
+                    anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
                     text: "BLUETOOTH DEVICES"
                     color: Theme.fgFaint
@@ -246,13 +348,9 @@ Item {
                     font.letterSpacing: 1
                 }
 
-                Item {
-                    width: parent.width - 150 - btTogglePill.width
-                    height: 1
-                }
-
                 Rectangle {
                     id: btTogglePill
+                    anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
                     height: 20
                     width: btToggleText.implicitWidth + 14

@@ -7,6 +7,7 @@ Item {
 
     property string label: ""
     property bool selected: false
+    property string icon: ""
 
     signal activated
 
@@ -30,10 +31,10 @@ Item {
         anchors.left: parent.left
         anchors.leftMargin: 8
         anchors.verticalCenter: parent.verticalCenter
-        text: root.selected ? "󰄬" : "󰧞"
-        color: root.selected ? Theme.good : Theme.fgFaint
+        text: root.selected ? "󰄬" : (root.icon !== "" ? root.icon : "󰧞")
+        color: root.selected ? Theme.good : (root.icon !== "" ? Theme.fgDim : Theme.fgFaint)
         font.family: Theme.iconFamily; renderType: Text.QtRendering
-        font.pixelSize: Theme.fontSizeSmall
+        font.pixelSize: root.icon !== "" ? Theme.iconSize : Theme.fontSizeSmall
     }
 
     Text {
