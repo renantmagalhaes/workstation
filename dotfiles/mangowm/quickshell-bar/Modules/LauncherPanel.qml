@@ -271,6 +271,7 @@ Item {
                 anchors.leftMargin: 20
                 anchors.verticalCenter: parent.verticalCenter
                 font.family: Theme.iconFamily
+                renderType: Text.QtRendering
                 font.pixelSize: 20
                 color: {
                     if (LauncherManager.calcResult) return "#00E5FF";
@@ -278,9 +279,9 @@ Item {
                     return Theme.accent;
                 }
                 text: {
-                    if (LauncherManager.calcResult) return "\uF00EC"; // calculator 󰃬
-                    if (root.mode === "windows") return "\uF04AC";    // window 󱂬
-                    return "\uF0349";                                 // search 󰍉
+                    if (LauncherManager.calcResult) return "󰃬"; // calculator
+                    if (root.mode === "windows") return "󱂬";    // window
+                    return "󰍉";                                 // search
                 }
 
                 Behavior on color {
@@ -381,10 +382,11 @@ Item {
 
                 Text {
                     anchors.centerIn: parent
-                    text: "✕"
+                    text: "󰅖"
                     color: clearMouse.containsMouse ? Theme.fg : Theme.fgDim
-                    font.family: Theme.fontFamily
-                    font.pixelSize: 12
+                    font.family: Theme.iconFamily
+                    renderType: Text.QtRendering
+                    font.pixelSize: 13
                 }
 
                 MouseArea {
@@ -409,9 +411,9 @@ Item {
 
                 Repeater {
                     model: [
-                        { id: "all", label: "All" },
-                        { id: "windows", label: "Windows (" + root.filteredWindows.length + ")" },
-                        { id: "apps", label: "Apps" }
+                        { id: "all", icon: "󰕰", label: "All" },
+                        { id: "windows", icon: "󱂬", label: "Windows (" + root.filteredWindows.length + ")" },
+                        { id: "apps", icon: "󰀻", label: "Apps" }
                     ]
 
                     Rectangle {
@@ -419,7 +421,7 @@ Item {
                         required property var modelData
                         readonly property bool isActive: root.mode === modelData.id
                         height: 28
-                        width: tabLabel.implicitWidth + 18
+                        width: tabRow.implicitWidth + 20
                         radius: 14
                         color: isActive ? Qt.rgba(255, 255, 255, 0.14) : (tabMouse.containsMouse ? Theme.hover : "transparent")
                         border.width: 1
@@ -429,14 +431,28 @@ Item {
                             ColorAnimation { duration: 140 }
                         }
 
-                        Text {
-                            id: tabLabel
+                        Row {
+                            id: tabRow
                             anchors.centerIn: parent
-                            text: tabItem.modelData.label
-                            color: tabItem.isActive ? Theme.fg : Theme.fgDim
-                            font.family: Theme.fontFamily
-                            font.pixelSize: 12
-                            font.weight: tabItem.isActive ? Font.Bold : Font.Normal
+                            spacing: 5
+
+                            Text {
+                                text: tabItem.modelData.icon
+                                color: tabItem.isActive ? (tabItem.modelData.id === "windows" ? "#A78BFA" : Theme.accent) : Theme.fgDim
+                                font.family: Theme.iconFamily
+                                renderType: Text.QtRendering
+                                font.pixelSize: 12
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+
+                            Text {
+                                text: tabItem.modelData.label
+                                color: tabItem.isActive ? Theme.fg : Theme.fgDim
+                                font.family: Theme.fontFamily
+                                font.pixelSize: 12
+                                font.weight: tabItem.isActive ? Font.Bold : Font.Normal
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
                         }
 
                         MouseArea {
@@ -593,8 +609,9 @@ Item {
 
                                         Text {
                                             anchors.centerIn: parent
-                                            text: "\uF00EC" // calc icon
+                                            text: "󰃬" // calc icon
                                             font.family: Theme.iconFamily
+                                            renderType: Text.QtRendering
                                             font.pixelSize: 20
                                             color: "#00E5FF"
                                         }
@@ -671,8 +688,9 @@ Item {
                                         Text {
                                             anchors.centerIn: parent
                                             visible: !winIconImg.visible
-                                            text: "\uF04AC" // window glyph
+                                            text: "󱂬" // window glyph
                                             font.family: Theme.iconFamily
+                                            renderType: Text.QtRendering
                                             font.pixelSize: 20
                                             color: "#A78BFA"
                                         }
@@ -800,8 +818,9 @@ Item {
                                         Text {
                                             anchors.centerIn: parent
                                             visible: !appIconImg.visible
-                                            text: "\uF0043" // app cube glyph
+                                            text: "󰀻" // app cube glyph
                                             font.family: Theme.iconFamily
+                                            renderType: Text.QtRendering
                                             font.pixelSize: 20
                                             color: Theme.accent
                                         }
@@ -885,8 +904,9 @@ Item {
 
                     Text {
                         anchors.horizontalCenter: parent.horizontalCenter
-                        text: "\uF0349" // search icon
+                        text: "󰍉" // search icon
                         font.family: Theme.iconFamily
+                        renderType: Text.QtRendering
                         font.pixelSize: 28
                         color: Theme.fgFaint
                     }
