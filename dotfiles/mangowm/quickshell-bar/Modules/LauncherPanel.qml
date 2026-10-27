@@ -14,13 +14,36 @@ Item {
 
     width: panelWidth
     implicitWidth: panelWidth
-    implicitHeight: Math.min(col.implicitHeight, 620)
+    implicitHeight: Math.max(root.pendingSystemAction ? 240 : 0, Math.min(col.implicitHeight, 620))
     height: implicitHeight
+
+    Behavior on height {
+        NumberAnimation { duration: 160; easing.type: Easing.OutCubic }
+    }
 
     // Active query and mode
     readonly property string q: LauncherManager.searchQuery.trim().toLowerCase()
     readonly property string mode: LauncherManager.mode
     readonly property string kind: LauncherManager.kind
+
+    property var pendingSystemAction: null
+    onPendingSystemActionChanged: {
+        if (pendingSystemAction) {
+            Qt.callLater(() => input.forceActiveFocus());
+        }
+    }
+
+    function cancelPendingAction(): void {
+        pendingSystemAction = null;
+        input.forceActiveFocus();
+    }
+
+    function confirmPendingAction(): void {
+        if (!pendingSystemAction) return;
+        const action = pendingSystemAction;
+        pendingSystemAction = null;
+        LauncherManager.executeSystemAction(action);
+    }
 
     // Window scoring & filtering
     function scoreWindow(win, query) {
@@ -119,13 +142,12 @@ Item {
     readonly property var filteredSystemActions: {
         const list = LauncherManager.systemActions || [];
         if (!q) return [];
-        const terms = ["wallpaper", "wall", "paper", "lock", "suspend", "sleep", "reboot", "restart", "power", "shutdown", "reload", "logout", "quit", "exit"];
-        const matchesTerm = terms.some(t => t.includes(q) || q.includes(t));
-        if (!matchesTerm) return [];
         return list.filter(s =>
-            s.id.includes(q) ||
+            q === "system" || q === "sys" ||
+            s.id.toLowerCase().includes(q) ||
             s.title.toLowerCase().includes(q) ||
-            s.subtitle.toLowerCase().includes(q)
+            s.subtitle.toLowerCase().includes(q) ||
+            (s.keywords && s.keywords.some(k => k.toLowerCase().includes(q) || q.includes(k.toLowerCase())))
         );
     }
 
@@ -347,7 +369,11 @@ Item {
         } else if (item.kind === "file") {
             LauncherManager.openFile(item.data.path, shift);
         } else if (item.kind === "system") {
-            LauncherManager.executeSystemAction(item.data);
+            if (item.data.confirm) {
+                root.pendingSystemAction = item.data;
+            } else {
+                LauncherManager.executeSystemAction(item.data);
+            }
         } else if (item.kind === "theme") {
             Settings.theme = item.data.id;
             LauncherManager.closeLauncher();
@@ -368,6 +394,7 @@ Item {
     Connections {
         target: LauncherManager
         function onOpenChanged() {
+            root.pendingSystemAction = null;
             if (LauncherManager.open) {
                 input.text = "";
                 currentSelectable = 0;
@@ -614,6 +641,7 @@ Item {
                 focus: LauncherManager.open
 
                 onTextChanged: {
+                    root.pendingSystemAction = null;
                     LauncherManager.searchQuery = text;
                 }
 
@@ -642,6 +670,22 @@ Item {
                     const shift = event.modifiers & Qt.ShiftModifier;
                     const ctrl = event.modifiers & Qt.ControlModifier;
                     const alt = event.modifiers & Qt.AltModifier;
+
+                    if (root.pendingSystemAction !== null) {
+                        if (event.key === Qt.Key_Escape) {
+                            root.cancelPendingAction();
+                            event.accepted = true;
+                            return;
+                        } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                            root.confirmPendingAction();
+                            event.accepted = true;
+                            return;
+                        } else {
+                            root.cancelPendingAction();
+                            event.accepted = true;
+                            return;
+                        }
+                    }
 
                     if (event.key === Qt.Key_Escape) {
                         LauncherManager.closeLauncher();
@@ -1416,9 +1460,9 @@ Item {
                                         Layout.preferredWidth: 36
                                         Layout.preferredHeight: 36
                                         radius: 10
-                                        color: Qt.rgba(239, 68, 68, 0.15)
+                                        color: Qt.alpha(delegateRoot.modelData.data.color || "#EF4444", 0.15)
                                         border.width: 1
-                                        border.color: Qt.rgba(239, 68, 68, 0.3)
+                                        border.color: Qt.alpha(delegateRoot.modelData.data.color || "#EF4444", 0.35)
 
                                         Text {
                                             anchors.centerIn: parent
@@ -1460,7 +1504,7 @@ Item {
                                         Text {
                                             id: sysRunLabel
                                             anchors.centerIn: parent
-                                            text: "↵ Execute"
+                                            text: delegateRoot.modelData.data.confirm ? "↵ Confirm..." : "↵ Execute"
                                             color: Theme.fg
                                             font.family: Theme.fontFamily
                                             font.pixelSize: 11
@@ -1692,6 +1736,219 @@ Item {
                 color: Theme.fgFaint
                 font.family: Theme.fontFamily
                 font.pixelSize: 11
+            }
+        }
+    }
+
+    // Confirmation Modal Overlay for Critical Actions (Suspend, Sleep, Reboot, Shutdown)
+    Item {
+        id: confirmOverlay
+        anchors.fill: parent
+        z: 99
+        visible: opacity > 0
+        opacity: root.pendingSystemAction ? 1.0 : 0.0
+
+        Behavior on opacity {
+            NumberAnimation { duration: 160; easing.type: Easing.OutCubic }
+        }
+
+        // Dark frosted backdrop to dim the search/results
+        Rectangle {
+            anchors.fill: parent
+            radius: 18
+            color: Qt.rgba(0.05, 0.06, 0.09, 0.90)
+            border.width: 1
+            border.color: root.pendingSystemAction ? Qt.alpha(root.pendingSystemAction.color || Theme.accent, 0.35) : Qt.rgba(255, 255, 255, 0.18)
+
+            Behavior on border.color {
+                ColorAnimation { duration: 180 }
+            }
+
+            // Clicking outside modal card cancels confirmation
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    root.cancelPendingAction();
+                }
+            }
+        }
+
+        // Centered Confirmation Card
+        Item {
+            id: modalBox
+            anchors.centerIn: parent
+            width: Math.min(parent.width - 48, 480)
+            height: modalCol.implicitHeight + 36
+
+            scale: root.pendingSystemAction ? 1.0 : 0.94
+            Behavior on scale {
+                NumberAnimation { duration: 180; easing.type: Easing.OutBack; easing.overshoot: 1.05 }
+            }
+
+            // Card background with subtle glass elevation
+            Rectangle {
+                anchors.fill: parent
+                radius: 14
+                color: Qt.rgba(0.10, 0.11, 0.16, 0.96)
+                border.width: 1
+                border.color: root.pendingSystemAction ? Qt.alpha(root.pendingSystemAction.color || Theme.accent, 0.45) : Qt.rgba(255, 255, 255, 0.15)
+
+                // Swallow clicks so backdrop click does not trigger when clicking inside card
+                MouseArea {
+                    anchors.fill: parent
+                }
+            }
+
+            Column {
+                id: modalCol
+                anchors.centerIn: parent
+                width: parent.width - 40
+                spacing: 16
+
+                // Action Icon + Title row
+                Row {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    spacing: 14
+
+                    Rectangle {
+                        width: 48
+                        height: 48
+                        radius: 14
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: root.pendingSystemAction ? Qt.alpha(root.pendingSystemAction.color || "#EF4444", 0.18) : "transparent"
+                        border.width: 1
+                        border.color: root.pendingSystemAction ? Qt.alpha(root.pendingSystemAction.color || "#EF4444", 0.45) : "transparent"
+
+                        Text {
+                            anchors.centerIn: parent
+                            text: root.pendingSystemAction?.icon ?? "󰐥"
+                            font.family: Theme.iconFamily
+                            renderType: Text.QtRendering
+                            font.pixelSize: 24
+                            color: root.pendingSystemAction?.color ?? Theme.fg
+                        }
+                    }
+
+                    Column {
+                        anchors.verticalCenter: parent.verticalCenter
+                        spacing: 3
+
+                        Text {
+                            text: "Confirm " + (root.pendingSystemAction?.title ?? "Action")
+                            color: Theme.fg
+                            font.family: Theme.fontFamily
+                            font.pixelSize: 16
+                            font.bold: true
+                        }
+
+                        Text {
+                            text: root.pendingSystemAction?.confirmPrompt ?? "Are you sure you want to proceed?"
+                            color: Theme.fgDim
+                            font.family: Theme.fontFamily
+                            font.pixelSize: 12
+                        }
+                    }
+                }
+
+                // Buttons Row: Cancel and Confirm
+                Row {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    spacing: 12
+
+                    // Cancel Button
+                    Rectangle {
+                        id: cancelBtn
+                        width: 130
+                        height: 36
+                        radius: 8
+                        color: cancelMouse.containsMouse ? Qt.rgba(255, 255, 255, 0.16) : Qt.rgba(255, 255, 255, 0.08)
+                        border.width: 1
+                        border.color: cancelMouse.containsMouse ? Qt.rgba(255, 255, 255, 0.28) : Qt.rgba(255, 255, 255, 0.15)
+
+                        Behavior on color {
+                            ColorAnimation { duration: 120 }
+                        }
+
+                        Row {
+                            anchors.centerIn: parent
+                            spacing: 6
+                            Text {
+                                text: "Esc"
+                                color: Theme.fgDim
+                                font.family: Theme.fontFamily
+                                font.pixelSize: 10
+                                font.bold: true
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                            Text {
+                                text: "Cancel"
+                                color: Theme.fg
+                                font.family: Theme.fontFamily
+                                font.pixelSize: 12
+                                font.weight: Font.Medium
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+
+                        MouseArea {
+                            id: cancelMouse
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: {
+                                root.cancelPendingAction();
+                            }
+                        }
+                    }
+
+                    // Confirm Button
+                    Rectangle {
+                        id: confirmBtn
+                        width: 150
+                        height: 36
+                        radius: 8
+                        color: confirmMouse.containsMouse
+                            ? (root.pendingSystemAction?.color ?? Theme.accent)
+                            : Qt.alpha(root.pendingSystemAction?.color ?? Theme.accent, 0.85)
+                        border.width: 1
+                        border.color: Qt.alpha(root.pendingSystemAction?.color ?? Theme.accent, 0.6)
+
+                        Behavior on color {
+                            ColorAnimation { duration: 120 }
+                        }
+
+                        Row {
+                            anchors.centerIn: parent
+                            spacing: 6
+                            Text {
+                                text: "↵"
+                                color: "#FFFFFF"
+                                font.family: Theme.fontFamily
+                                font.pixelSize: 13
+                                font.bold: true
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                            Text {
+                                text: "Confirm"
+                                color: "#FFFFFF"
+                                font.family: Theme.fontFamily
+                                font.pixelSize: 12
+                                font.bold: true
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+
+                        MouseArea {
+                            id: confirmMouse
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: {
+                                root.confirmPendingAction();
+                            }
+                        }
+                    }
+                }
             }
         }
     }

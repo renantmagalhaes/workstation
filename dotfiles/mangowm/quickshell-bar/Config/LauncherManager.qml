@@ -312,13 +312,14 @@ Singleton {
 
     // System actions list
     readonly property var systemActions: [
-        { id: "wallpaper", title: "Open Wallpaper Picker", subtitle: "Browse and set desktop wallpapers", icon: "󰸉", color: "#F472B6", command: ["sh", "-c", "~/.dotfiles/mangowm/scripts/toggle_wallpapers.sh"] },
-        { id: "lock", title: "Lock Screen", subtitle: "Lock Wayland session", icon: "󰌾", color: "#60A5FA", command: ["loginctl", "lock-session"] },
-        { id: "suspend", title: "Suspend / Sleep", subtitle: "Put computer to sleep", icon: "󰒲", color: "#FBBF24", command: ["systemctl", "suspend"] },
-        { id: "reboot", title: "Reboot System", subtitle: "Restart the workstation", icon: "󰜉", color: "#F97316", command: ["systemctl", "reboot"] },
-        { id: "poweroff", title: "Shut Down", subtitle: "Turn off the workstation", icon: "󰐥", color: "#EF4444", command: ["systemctl", "poweroff"] },
-        { id: "reload", title: "Reload MangoWM", subtitle: "Reload window manager configuration", icon: "󰑓", color: "#34D399", command: ["mmsg", "dispatch", "reload_config"] },
-        { id: "logout", title: "Log Out", subtitle: "Exit desktop session", icon: "󰗽", color: "#F43F5E", command: ["mmsg", "dispatch", "quit"] }
+        { id: "wallpaper", title: "Open Wallpaper Picker", subtitle: "Browse and set desktop wallpapers", icon: "󰸉", color: "#F472B6", command: ["sh", "-c", "~/.dotfiles/mangowm/scripts/toggle_wallpapers.sh"], keywords: ["wallpaper", "wall", "paper"] },
+        { id: "lock", title: "Lock Screen", subtitle: "Lock Wayland session", icon: "󰌾", color: "#60A5FA", command: ["loginctl", "lock-session"], keywords: ["lock"] },
+        { id: "suspend", title: "Suspend", subtitle: "Suspend session to RAM", icon: "󰒲", color: "#FBBF24", command: ["systemctl", "suspend"], confirm: true, confirmPrompt: "Put computer into suspend mode?", keywords: ["suspend"] },
+        { id: "sleep", title: "Sleep", subtitle: "Put computer to sleep", icon: "󰒲", color: "#FBBF24", command: ["systemctl", "suspend"], confirm: true, confirmPrompt: "Put computer to sleep?", keywords: ["sleep", "suspend"] },
+        { id: "reboot", title: "Reboot System", subtitle: "Restart the workstation", icon: "󰜉", color: "#F97316", command: ["systemctl", "reboot"], confirm: true, confirmPrompt: "Restart the workstation?", keywords: ["reboot", "restart"] },
+        { id: "shutdown", title: "Shut Down", subtitle: "Turn off the workstation", icon: "󰐥", color: "#EF4444", command: ["systemctl", "poweroff"], confirm: true, confirmPrompt: "Turn off the workstation?", keywords: ["shutdown", "poweroff", "power", "shut down"] },
+        { id: "reload", title: "Reload MangoWM", subtitle: "Reload window manager configuration", icon: "󰑓", color: "#34D399", command: ["mmsg", "dispatch", "reload_config"], keywords: ["reload", "refresh"] },
+        { id: "logout", title: "Log Out", subtitle: "Exit desktop session", icon: "󰗽", color: "#F43F5E", command: ["mmsg", "dispatch", "quit"], confirm: true, confirmPrompt: "Exit current desktop session?", keywords: ["logout", "quit", "exit", "log out"] }
     ]
 
     function executeSystemAction(action): void {
@@ -374,7 +375,7 @@ Singleton {
     // Load and update applications list
     function updateApps(): void {
         const raw = DesktopEntries.applications.values ?? [];
-        root.allApps = raw.filter(a => !a.noDisplay && a.name);
+        root.allApps = raw.filter(a => !a.noDisplay && a.name && !((a.id || "").startsWith("power-menu")));
     }
 
     Connections {
