@@ -35,11 +35,11 @@ sudo tee /etc/keyd/keyd.conf > /dev/null << 'EOF'
 *
 
 [global]
-overload_tap_timeout = 300
+overload_tap_timeout = 200
 
 [main]
-leftmeta = overload(meta, macro(leftalt+space))
-rightmeta = overload(meta, macro(leftalt+space))
+leftmeta = overloadt2(meta, macro(leftalt+space), 200)
+rightmeta = overloadt2(meta, macro(leftalt+space), 200)
 EOF
 
 # 4. Configure Passwordless Sudo Rule for systemctl control
