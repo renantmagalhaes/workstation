@@ -192,7 +192,7 @@ bash ./scripts/zsh.sh
 bash ./scripts/kitty.sh
 
 ## Keyd
-# bash ./scripts/keyd.sh
+bash ./scripts/keyd.sh
 
 ## Guake
 guake --restore-preferences ./utils/guake/rtm-guake-setting
