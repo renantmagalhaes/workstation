@@ -14,6 +14,13 @@ Singleton {
     property string searchQuery: ""
     readonly property bool isSearching: searchQuery.trim().length > 0
 
+    // Cross-monitor drag & drop state
+    property var dragged: null
+    property real dragGlobalX: 0
+    property real dragGlobalY: 0
+    property string hoverMonitor: ""
+    property int hoverWorkspace: 0
+
     property string activeMonitorName: ""
     readonly property string focusedMonitor: activeMonitorName
 
@@ -21,6 +28,41 @@ Singleton {
         const screens = Quickshell.screens.slice();
         screens.sort((a, b) => a.x - b.x);
         return screens.map(s => s.name);
+    }
+
+    function otherMonitorsFor(currentMonName) {
+        return Quickshell.screens.slice().filter(s => s.name !== currentMonName);
+    }
+
+    function screenAt(gx, gy) {
+        const screens = Quickshell.screens;
+        for (let i = 0; i < screens.length; i++) {
+            const s = screens[i];
+            if (gx >= s.x && gx < s.x + s.width && gy >= s.y && gy < s.y + s.height) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    function startDrag(client, icon, title, sourceMon): void {
+        root.dragged = {
+            client: client,
+            icon: icon,
+            title: title,
+            sourceMonitor: sourceMon
+        };
+    }
+
+    function updateDragPos(gx, gy): void {
+        root.dragGlobalX = gx;
+        root.dragGlobalY = gy;
+    }
+
+    function clearDrag(): void {
+        root.dragged = null;
+        root.hoverMonitor = "";
+        root.hoverWorkspace = 0;
     }
 
     function setActiveMonitor(monName): void {
@@ -70,6 +112,7 @@ Singleton {
     onOpenChanged: {
         if (!open) {
             searchQuery = "";
+            clearDrag();
         }
     }
 
@@ -94,6 +137,7 @@ Singleton {
         root.searchQuery = "";
         root.allClients = [];
         root.allMonitors = [];
+        root.clearDrag();
         if (typeof gc === "function") {
             Qt.callLater(gc);
         }
@@ -110,6 +154,29 @@ Singleton {
             }
             return cl;
         });
+        root.stamp++;
+    }
+
+    function updateClientMonitor(cid, targetMon, tagId): void {
+        let resolvedTag = tagId;
+        if (!resolvedTag || resolvedTag <= 0) {
+            const mon = root.allMonitors.find(m => m.name === targetMon);
+            if (mon && Array.isArray(mon.active_tags) && mon.active_tags.length > 0 && mon.active_tags[0] > 0) {
+                resolvedTag = mon.active_tags[0];
+            } else {
+                resolvedTag = 1;
+            }
+        }
+        root.allClients = root.allClients.map(cl => {
+            if (cl.id === cid) {
+                return Object.assign({}, cl, {
+                    monitor: targetMon,
+                    tags: [resolvedTag]
+                });
+            }
+            return cl;
+        });
+        root.stamp++;
     }
 
     IpcHandler {

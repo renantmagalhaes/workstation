@@ -74,14 +74,72 @@ PanelWindow {
 
     property int current: 0
     property bool keyboard: false
-    property var dragged: null
-    property point dragPos
+
+    readonly property real monX: win.screen ? win.screen.x : 0
+    readonly property real monY: win.screen ? win.screen.y : 0
+
+    readonly property real localCursorX: OverviewManager.dragGlobalX - monX
+    readonly property real localCursorY: OverviewManager.dragGlobalY - monY
+    readonly property bool isCursorOnThisScreen: OverviewManager.dragged !== null &&
+        localCursorX >= 0 && localCursorX < width &&
+        localCursorY >= 0 && localCursorY < height
+
+    readonly property var dragged: OverviewManager.dragged
+    readonly property point dragPos: Qt.point(localCursorX, localCursorY)
+
+    readonly property int hoveredWs: {
+        if (!win.isCursorOnThisScreen) return 0;
+        return win.wsAt(Qt.point(win.localCursorX, win.localCursorY));
+    }
+
+    readonly property string hoveredOtherMon: {
+        if (!win.isCursorOnThisScreen) return "";
+        return win.otherMonAt(Qt.point(win.localCursorX, win.localCursorY));
+    }
+
+    readonly property bool isOverDesktop: win.isCursorOnThisScreen && hoveredWs === 0 && hoveredOtherMon === ""
+
+    onHoveredWsChanged: {
+        if (win.isCursorOnThisScreen && hoveredWs > 0) {
+            OverviewManager.hoverMonitor = win.monName;
+            OverviewManager.hoverWorkspace = hoveredWs;
+        }
+    }
+
+    onHoveredOtherMonChanged: {
+        if (win.isCursorOnThisScreen && hoveredOtherMon !== "") {
+            OverviewManager.hoverMonitor = hoveredOtherMon;
+            OverviewManager.hoverWorkspace = 0;
+        }
+    }
+
+    onIsOverDesktopChanged: {
+        if (win.isCursorOnThisScreen && isOverDesktop) {
+            OverviewManager.hoverMonitor = win.monName;
+            OverviewManager.hoverWorkspace = 0;
+        }
+    }
+
+    onIsCursorOnThisScreenChanged: {
+        if (win.isCursorOnThisScreen) {
+            if (hoveredWs > 0) {
+                OverviewManager.hoverMonitor = win.monName;
+                OverviewManager.hoverWorkspace = hoveredWs;
+            } else if (hoveredOtherMon !== "") {
+                OverviewManager.hoverMonitor = hoveredOtherMon;
+                OverviewManager.hoverWorkspace = 0;
+            } else {
+                OverviewManager.hoverMonitor = win.monName;
+                OverviewManager.hoverWorkspace = 0;
+            }
+        }
+    }
 
     onOpenChanged: {
         if (open) {
             current = 0;
             keyboard = false;
-            dragged = null;
+            OverviewManager.clearDrag();
             if (typeof searchInput !== "undefined" && searchInput) {
                 searchInput.text = "";
             }
@@ -197,6 +255,15 @@ PanelWindow {
         OverviewManager.updateClientTag(client.id, tagId);
     }
 
+    function moveWindowToMonitor(client, targetMon, tagId) {
+        let cmd = `mmsg dispatch tagmon,${targetMon} client,${client.id}`;
+        if (tagId && tagId > 0) {
+            cmd += `; mmsg dispatch tag,${tagId},1 client,${client.id}`;
+        }
+        Quickshell.execDetached(["sh", "-c", cmd]);
+        OverviewManager.updateClientMonitor(client.id, targetMon, tagId);
+    }
+
     function goWorkspace(wsId) {
         OverviewManager.closeOverview();
         Quickshell.execDetached(["sh", "-c", `mmsg dispatch focusmon,${monName}; mmsg dispatch view,${wsId},1`]);
@@ -208,11 +275,24 @@ PanelWindow {
             const c = cardsRepeater.itemAt(i);
             if (!c) continue;
             const q = c.mapFromItem(null, p.x, p.y);
-            if (q.x >= -16 && q.x <= c.width + 16 && q.y >= -30 && q.y <= c.height + 30) {
+            if (q.x >= -12 && q.x <= c.width + 12 && q.y >= -20 && q.y <= c.height + 25) {
                 return i + 1;
             }
         }
         return 0;
+    }
+
+    function otherMonAt(p) {
+        if (!p) return "";
+        for (let j = 0; j < otherMonRepeater.count; j++) {
+            const m = otherMonRepeater.itemAt(j);
+            if (!m) continue;
+            const qm = m.mapFromItem(null, p.x, p.y);
+            if (qm.x >= -12 && qm.x <= m.width + 12 && qm.y >= -20 && qm.y <= m.height + 25) {
+                return m.targetMonName;
+            }
+        }
+        return "";
     }
 
     // ---------- Background Veil ----------
@@ -260,7 +340,8 @@ PanelWindow {
                 required property int index
                 readonly property int wsId: index + 1
                 readonly property bool isActive: wsId === win.activeTag
-                readonly property bool isDropTarget: win.dragged !== null && win.wsAt(win.dragPos) === wsId
+                readonly property bool isDropTarget: OverviewManager.dragged !== null &&
+                    OverviewManager.hoverMonitor === win.monName && OverviewManager.hoverWorkspace === wsId
 
                 width: win.cardW
                 height: win.cardH + 26
@@ -328,6 +409,132 @@ PanelWindow {
                     font.bold: wsCard.isActive
                     color: wsCard.isActive ? "#78FFB4" : Qt.rgba(1, 1, 1, 0.7)
                 }
+            }
+        }
+
+        // Divider before other monitor drop cards
+        Rectangle {
+            visible: OverviewManager.otherMonitorsFor(win.monName).length > 0
+            width: 1
+            height: win.cardH
+            color: Qt.rgba(1, 1, 1, 0.15)
+            anchors.verticalCenter: parent.verticalCenter
+        }
+
+        Repeater {
+            id: otherMonRepeater
+            model: OverviewManager.otherMonitorsFor(win.monName)
+
+            Item {
+                id: otherMonItem
+                required property var modelData
+                readonly property string targetMonName: modelData.name
+                readonly property bool isDropTarget: OverviewManager.dragged !== null &&
+                    OverviewManager.hoverMonitor === targetMonName && OverviewManager.hoverWorkspace === 0
+
+                width: Math.max(120, win.cardW * 0.8)
+                height: win.cardH + 26
+                z: isDropTarget ? 10 : 1
+
+                Rectangle {
+                    width: parent.width
+                    height: win.cardH
+                    radius: 8
+                    color: otherMonItem.isDropTarget ? Qt.rgba(0.12, 0.22, 0.35, 0.98) : Qt.rgba(0.06, 0.07, 0.10, 0.85)
+                    border.width: otherMonItem.isDropTarget ? 3 : 1
+                    border.color: otherMonItem.isDropTarget ? "#00E5FF" : Qt.rgba(1, 1, 1, 0.15)
+                    scale: otherMonItem.isDropTarget ? 1.08 : 1.0
+                    clip: true
+
+                    Behavior on scale { NumberAnimation { duration: 120 } }
+                    Behavior on color { ColorAnimation { duration: 120 } }
+
+                    ColumnLayout {
+                        anchors.centerIn: parent
+                        spacing: 4
+
+                        Text {
+                            Layout.alignment: Qt.AlignHCenter
+                            text: "󰍹"
+                            font.family: Theme.iconFamily
+                            font.pixelSize: 22
+                            color: otherMonItem.isDropTarget ? "#00E5FF" : Qt.rgba(1, 1, 1, 0.7)
+                        }
+
+                        Text {
+                            Layout.alignment: Qt.AlignHCenter
+                            text: otherMonItem.targetMonName
+                            font.family: "Inter, sans-serif"
+                            font.pixelSize: 11
+                            font.bold: true
+                            color: otherMonItem.isDropTarget ? "#00E5FF" : Qt.rgba(1, 1, 1, 0.8)
+                        }
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            OverviewManager.setActiveMonitor(otherMonItem.targetMonName);
+                            Mango.dispatch(`focusmon,${otherMonItem.targetMonName}`);
+                        }
+                    }
+                }
+
+                Text {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottom: parent.bottom
+                    text: otherMonItem.isDropTarget ? "Drop to Move" : "Send to Monitor"
+                    font.family: "Inter, sans-serif"
+                    font.pixelSize: 11
+                    color: otherMonItem.isDropTarget ? "#00E5FF" : Qt.rgba(1, 1, 1, 0.5)
+                }
+            }
+        }
+    }
+
+    // ---------- Cross-Monitor Drop Target Banner ----------
+    Rectangle {
+        id: crossMonDropZone
+        visible: win.open && OverviewManager.dragged !== null &&
+                 OverviewManager.dragged.sourceMonitor !== win.monName &&
+                 win.isCursorOnThisScreen && win.hoveredWs === 0
+        anchors.centerIn: parent
+        width: Math.min(540, parent.width - 160)
+        height: 110
+        radius: 16
+        color: Qt.rgba(0.04, 0.14, 0.20, 0.92)
+        border.width: 2
+        border.color: "#00E5FF"
+        z: 45
+
+        ColumnLayout {
+            anchors.centerIn: parent
+            spacing: 6
+
+            Text {
+                Layout.alignment: Qt.AlignHCenter
+                text: "󰍹 Move to " + win.monName
+                font.family: Theme.iconFamily
+                font.pixelSize: 20
+                font.bold: true
+                color: "#00E5FF"
+            }
+
+            Text {
+                Layout.alignment: Qt.AlignHCenter
+                text: "Release to place on Workspace " + win.activeTag + " of this monitor"
+                font.family: "Inter, sans-serif"
+                font.pixelSize: 13
+                color: "#FFFFFF"
+            }
+
+            Text {
+                Layout.alignment: Qt.AlignHCenter
+                text: "Or drag up to a preview card above for a specific workspace"
+                font.family: "Inter, sans-serif"
+                font.pixelSize: 11
+                color: Qt.rgba(1, 1, 1, 0.6)
             }
         }
     }
@@ -405,7 +612,9 @@ PanelWindow {
                         const n = win.wins.length;
 
                         if (k === Qt.Key_Escape) {
-                            if (text.length > 0) {
+                            if (OverviewManager.dragged !== null) {
+                                OverviewManager.clearDrag();
+                            } else if (text.length > 0) {
                                 text = "";
                             } else {
                                 OverviewManager.closeOverview();
@@ -691,15 +900,19 @@ PanelWindow {
 
                 onPositionChanged: mouse => {
                     if (!pressed || !(pressedButtons & Qt.LeftButton)) return;
-                    if (!win.dragged && Math.hypot(mouse.x - pressStart.x, mouse.y - pressStart.y) > 8) {
-                        win.dragged = {
-                            client: tile.modelData,
-                            icon: win.appIcon(tile.modelData.appid),
-                            title: tile.modelData.title
-                        };
+                    if (!OverviewManager.dragged && Math.hypot(mouse.x - pressStart.x, mouse.y - pressStart.y) > 8) {
+                        OverviewManager.startDrag(
+                            tile.modelData,
+                            win.appIcon(tile.modelData.appid),
+                            tile.modelData.title,
+                            win.monName
+                        );
                     }
-                    if (win.dragged) {
-                        win.dragPos = mapToItem(null, mouse.x, mouse.y);
+                    if (OverviewManager.dragged) {
+                        const localPt = tile.mapToItem(null, mouse.x, mouse.y);
+                        const gx = win.monX + localPt.x;
+                        const gy = win.monY + localPt.y;
+                        OverviewManager.updateDragPos(gx, gy);
                     }
                 }
 
@@ -708,13 +921,17 @@ PanelWindow {
                         win.killWindow(tile.modelData);
                         return;
                     }
-                    if (win.dragged) {
-                        const dropPoint = mapToItem(null, mouse.x, mouse.y);
-                        const targetWs = win.wsAt(dropPoint) || win.wsAt(win.dragPos);
-                        if (targetWs && targetWs !== win.activeTag) {
-                            win.moveWindow(tile.modelData, targetWs);
+                    if (OverviewManager.dragged) {
+                        const client = OverviewManager.dragged.client;
+                        const targetMon = OverviewManager.hoverMonitor || win.monName;
+                        const targetWs = OverviewManager.hoverWorkspace;
+
+                        if (targetMon !== client.monitor) {
+                            win.moveWindowToMonitor(client, targetMon, targetWs);
+                        } else if (targetWs && targetWs !== win.activeTag) {
+                            win.moveWindow(client, targetWs);
                         }
-                        win.dragged = null;
+                        OverviewManager.clearDrag();
                     } else {
                         win.focusWindow(tile.modelData);
                     }
@@ -767,15 +984,15 @@ PanelWindow {
 
     // ---------- Dragged Window Follower ----------
     Rectangle {
-        visible: win.dragged !== null
-        x: win.dragPos.x - width / 2
-        y: win.dragPos.y - height / 2
+        visible: win.isCursorOnThisScreen
+        x: win.localCursorX - width / 2
+        y: win.localCursorY - height / 2
         width: dragLayout.implicitWidth + 24
         height: 38
         radius: 19
         color: Qt.rgba(0.08, 0.12, 0.18, 0.95)
         border.width: 1.5
-        border.color: "#00E5FF"
+        border.color: (OverviewManager.dragged?.sourceMonitor !== win.monName) ? "#78FFB4" : "#00E5FF"
         z: 100
 
         RowLayout {
@@ -785,16 +1002,32 @@ PanelWindow {
 
             IconImage {
                 implicitSize: 20
-                source: win.dragged?.icon ?? ""
+                source: OverviewManager.dragged?.icon ?? ""
             }
 
             Text {
-                text: win.dragged?.title ?? ""
+                text: OverviewManager.dragged?.title ?? ""
                 font.family: "Inter, sans-serif"
                 font.pixelSize: 13
                 color: "#FFFFFF"
-                Layout.maximumWidth: 260
+                Layout.maximumWidth: 240
                 elide: Text.ElideRight
+            }
+
+            Rectangle {
+                visible: OverviewManager.dragged?.sourceMonitor !== win.monName
+                height: 20
+                width: toMonText.implicitWidth + 10
+                radius: 10
+                color: Qt.rgba(0.47, 1.0, 0.7, 0.2)
+                Text {
+                    id: toMonText
+                    anchors.centerIn: parent
+                    text: "➜ " + win.monName
+                    font.pixelSize: 10
+                    font.bold: true
+                    color: "#78FFB4"
+                }
             }
         }
     }
@@ -832,7 +1065,9 @@ PanelWindow {
             const n = win.wins.length;
 
             if (k === Qt.Key_Escape) {
-                if (OverviewManager.isSearching) {
+                if (OverviewManager.dragged !== null) {
+                    OverviewManager.clearDrag();
+                } else if (OverviewManager.isSearching) {
                     OverviewManager.searchQuery = "";
                     win.current = 0;
                 } else {
