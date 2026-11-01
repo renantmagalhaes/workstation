@@ -253,6 +253,17 @@ Item {
                 NumberAnimation { duration: Theme.durSnappy }
             }
 
+            OverviewButton {
+                id: overviewButton
+                anchors.verticalCenter: parent.verticalCenter
+                onActivated: {
+                    root.page = "";
+                    Mango.dispatch(`focusmon,${root.monitorName}`);
+                    OverviewManager.setActiveMonitor(root.monitorName);
+                    OverviewManager.toggle();
+                }
+            }
+
             Workspaces {
                 monitorName: root.monitorName
                 anchors.verticalCenter: parent.verticalCenter
