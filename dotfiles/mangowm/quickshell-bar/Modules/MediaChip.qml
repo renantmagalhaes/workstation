@@ -86,26 +86,72 @@ Item {
         // glance, and it anchors the chip against the neighbouring modules.
         // Only when there is artwork -- an empty placeholder box next to the
         // meter would just be noise.
-        ClippingRectangle {
+        Item {
             anchors.verticalCenter: parent.verticalCenter
             width: root.artSize
             height: root.artSize
-            radius: 5
-            color: Theme.tint
             visible: Media.artUrl !== ""
 
-            Image {
+            // Ambient breathing glow behind cover art when playing
+            Rectangle {
+                id: artGlow
+                anchors.centerIn: parent
+                width: parent.width + 4
+                height: parent.height + 4
+                radius: 7
+                color: Theme.accent
+                opacity: Media.playing ? glowAnim.glowVal : 0.0
+                visible: opacity > 0
+
+                QtObject {
+                    id: glowAnim
+                    property real glowVal: 0.35
+                    SequentialAnimation on glowVal {
+                        running: Media.playing
+                        loops: Animation.Infinite
+                        NumberAnimation { to: 0.65; duration: 1500; easing.type: Easing.InOutSine }
+                        NumberAnimation { to: 0.20; duration: 1500; easing.type: Easing.InOutSine }
+                    }
+                }
+
+                Behavior on opacity {
+                    NumberAnimation { duration: 300 }
+                }
+            }
+
+            ClippingRectangle {
                 anchors.fill: parent
-                source: Media.artUrl
-                fillMode: Image.PreserveAspectCrop
-                asynchronous: true
-                smooth: true
-                // Cover art is full size; without these it gets decoded at
-                // original resolution and naively downscaled to ~20px, which
-                // turns detailed artwork to mush.
-                mipmap: true
-                sourceSize: Qt.size(root.artSize * 3, root.artSize * 3)
-                visible: status === Image.Ready
+                radius: 5
+                color: Theme.tint
+
+                Image {
+                    id: coverImg
+                    anchors.fill: parent
+                    source: Media.artUrl
+                    fillMode: Image.PreserveAspectCrop
+                    asynchronous: true
+                    smooth: true
+                    mipmap: true
+                    sourceSize: Qt.size(root.artSize * 3, root.artSize * 3)
+                    visible: status === Image.Ready
+
+                    scale: status === Image.Ready ? 1.0 : 0.82
+                    opacity: status === Image.Ready ? 1.0 : 0.0
+
+                    Behavior on scale {
+                        NumberAnimation {
+                            duration: 250
+                            easing.type: Easing.OutBack
+                            easing.overshoot: 1.2
+                        }
+                    }
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: 200
+                            easing.type: Easing.OutCubic
+                        }
+                    }
+                }
             }
         }
 

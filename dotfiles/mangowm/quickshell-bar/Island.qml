@@ -136,10 +136,11 @@ Item {
     Item {
         id: pill
 
+        property real heightBounce: 0
         x: (root.width - width) / 2
         y: 0
         width: (root.showOsd ? osdRow.implicitWidth : collapsedRow.implicitWidth) + Theme.islandPadH * 2
-        height: Theme.islandHeight
+        height: Theme.islandHeight + heightBounce
         clip: true
 
         Behavior on width {
@@ -147,6 +148,53 @@ Item {
                 duration: Theme.durIsland
                 easing.type: Easing.OutBack
                 easing.overshoot: Theme.overshoot
+            }
+        }
+
+        SequentialAnimation {
+            id: pillBounceAnim
+            ParallelAnimation {
+                NumberAnimation {
+                    target: pill
+                    property: "heightBounce"
+                    to: 4
+                    duration: 90
+                    easing.type: Easing.OutQuad
+                }
+                NumberAnimation {
+                    target: osdIconText
+                    property: "scale"
+                    to: 1.25
+                    duration: 90
+                    easing.type: Easing.OutBack
+                }
+            }
+            ParallelAnimation {
+                NumberAnimation {
+                    target: pill
+                    property: "heightBounce"
+                    to: 0
+                    duration: 180
+                    easing.type: Easing.OutBack
+                    easing.overshoot: 1.4
+                }
+                NumberAnimation {
+                    target: osdIconText
+                    property: "scale"
+                    to: 1.0
+                    duration: 180
+                    easing.type: Easing.OutCubic
+                }
+            }
+        }
+
+        Connections {
+            target: Audio
+            function onOsdActiveChanged() {
+                if (root.showOsd) pillBounceAnim.restart();
+            }
+            function onOsdValueChanged() {
+                if (root.showOsd) pillBounceAnim.restart();
             }
         }
 
@@ -202,12 +250,22 @@ Item {
             }
 
             Text {
+                id: osdIconText
                 anchors.verticalCenter: parent.verticalCenter
                 text: Audio.osdIcon
                 color: Audio.osdMuted ? Theme.urgent : Theme.accent
                 font.family: Theme.iconFamily
                 renderType: Text.QtRendering
                 font.pixelSize: Theme.iconSize + 2
+                scale: 1.0
+
+                Behavior on scale {
+                    NumberAnimation {
+                        duration: 150
+                        easing.type: Easing.OutBack
+                        easing.overshoot: 1.4
+                    }
+                }
             }
 
             Rectangle {

@@ -44,9 +44,10 @@ Item {
         if (next !== activeIndex) Mango.focusTag(root.monitorName, next + 1);
     }
 
-    // The active indicator. One element animating x, rather than two dots
-    // fighting over width, so the motion reads as a single slide.
+    // The active indicator. One element animating x smoothly across slots.
     Rectangle {
+        id: activePill
+
         readonly property real slotCentre: row.x + Math.max(0, root.activeIndex) * (root.slotWidth + root.slotSpacing) + root.slotWidth / 2
 
         x: slotCentre - width / 2
@@ -59,7 +60,7 @@ Item {
 
         Behavior on x {
             NumberAnimation {
-                duration: Theme.durNormal
+                duration: Theme.durSnappy
                 easing.type: Easing.OutCubic
             }
         }

@@ -833,6 +833,25 @@ Item {
                                 ColorAnimation { duration: 100 }
                             }
 
+                            // Active selection accent indicator pill
+                            Rectangle {
+                                anchors.left: parent.left
+                                anchors.leftMargin: 3
+                                anchors.verticalCenter: parent.verticalCenter
+                                width: 3
+                                height: delegateRoot.isSelected ? 22 : 0
+                                radius: 1.5
+                                color: Theme.accent
+                                opacity: delegateRoot.isSelected ? 1.0 : 0.0
+
+                                Behavior on height {
+                                    NumberAnimation { duration: 160; easing.type: Easing.OutBack; easing.overshoot: 1.2 }
+                                }
+                                Behavior on opacity {
+                                    NumberAnimation { duration: 130 }
+                                }
+                            }
+
                             MouseArea {
                                 id: rowMouse
                                 anchors.fill: parent

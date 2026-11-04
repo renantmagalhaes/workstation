@@ -40,35 +40,89 @@ PanelWindow {
         Repeater {
             model: Notifs.popups
 
-            delegate: Rectangle {
-                id: card
+            delegate: Item {
+                id: toastWrapper
                 width: toastCol.width
-                height: Math.max(76, cardContent.implicitHeight + 20)
-                radius: 14
-                color: Theme.islandBg
-                border.width: 1
-                border.color: modelData.urgency === 2 ? Theme.urgent : cardMouse.containsMouse ? Theme.highlight : Theme.islandBorder
+                height: isExiting ? 0 : card.height
+                opacity: isExiting ? 0 : 1
+                clip: true
 
-                // Lit bevel top highlight
+                property bool isExiting: false
+
+                Behavior on height {
+                    NumberAnimation {
+                        duration: 220
+                        easing.type: Easing.OutCubic
+                    }
+                }
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 180
+                        easing.type: Easing.OutCubic
+                    }
+                }
+
+                Timer {
+                    id: dismissTimer
+                    interval: 220
+                    onTriggered: modelData.dismissPopup()
+                }
+
+                function triggerDismiss() {
+                    if (isExiting) return;
+                    isExiting = true;
+                    dismissTimer.start();
+                }
+
                 Rectangle {
-                    anchors.top: parent.top
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    height: 1
-                    color: Qt.alpha("#FFFFFF", 0.08)
-                }
+                    id: card
+                    width: toastCol.width
+                    height: Math.max(76, cardContent.implicitHeight + 20)
+                    radius: 14
+                    color: Theme.islandBg
+                    border.width: 1
+                    border.color: modelData.urgency === 2 ? Theme.urgent : cardMouse.containsMouse ? Theme.highlight : Theme.islandBorder
 
-                Behavior on border.color { ColorAnimation { duration: Theme.durSnappy } }
+                    x: entered ? 0 : 60
+                    opacity: entered ? 1.0 : 0.0
+                    property bool entered: false
 
-                MouseArea {
-                    id: cardMouse
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onEntered: modelData.hovered = true
-                    onExited: modelData.hovered = false
-                    onClicked: modelData.dismissPopup()
-                }
+                    Component.onCompleted: Qt.callLater(() => card.entered = true)
+
+                    Behavior on x {
+                        NumberAnimation {
+                            duration: 280
+                            easing.type: Easing.OutBack
+                            easing.overshoot: 1.15
+                        }
+                    }
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: 200
+                            easing.type: Easing.OutCubic
+                        }
+                    }
+
+                    // Lit bevel top highlight
+                    Rectangle {
+                        anchors.top: parent.top
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        height: 1
+                        color: Qt.alpha("#FFFFFF", 0.08)
+                    }
+
+                    Behavior on border.color { ColorAnimation { duration: Theme.durSnappy } }
+
+                    MouseArea {
+                        id: cardMouse
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onEntered: modelData.hovered = true
+                        onExited: modelData.hovered = false
+                        onClicked: toastWrapper.triggerDismiss()
+                    }
 
                 Row {
                     id: cardContent
@@ -184,7 +238,7 @@ PanelWindow {
                                     anchors.fill: parent
                                     hoverEnabled: true
                                     cursorShape: Qt.PointingHandCursor
-                                    onClicked: modelData.dismissPopup()
+                                    onClicked: toastWrapper.triggerDismiss()
                                 }
                             }
                         }
@@ -252,7 +306,7 @@ PanelWindow {
                                         cursorShape: Qt.PointingHandCursor
                                         onClicked: {
                                             model.modelData.invoke();
-                                            modelData.dismissPopup();
+                                            toastWrapper.triggerDismiss();
                                         }
                                     }
                                 }
@@ -264,3 +318,6 @@ PanelWindow {
         }
     }
 }
+}
+
+

@@ -347,8 +347,14 @@ PanelWindow {
                     border.width: wsCard.isDropTarget ? 3 : wsCard.isActive ? 2 : 1
                     border.color: wsCard.isDropTarget ? "#00E5FF" : wsCard.isActive ? "#78FFB4" : Qt.rgba(1, 1, 1, 0.15)
                     clip: true
-                    scale: wsCard.isDropTarget ? 1.08 : 1.0
-                    Behavior on scale { NumberAnimation { duration: 120 } }
+                    scale: wsCard.isDropTarget ? 1.10 : 1.0
+                    Behavior on scale {
+                        NumberAnimation {
+                            duration: 200
+                            easing.type: Easing.OutBack
+                            easing.overshoot: 1.4
+                        }
+                    }
                     Behavior on color { ColorAnimation { duration: 120 } }
 
                     // Miniature window blocks in this workspace
@@ -787,6 +793,7 @@ PanelWindow {
 
             visible: win.open
             opacity: isDragged ? 0.35 : 1.0
+            z: isSelected ? 25 : 1
 
             Behavior on x { NumberAnimation { duration: 280; easing.type: Easing.OutCubic } }
             Behavior on y { NumberAnimation { duration: 280; easing.type: Easing.OutCubic } }
@@ -804,7 +811,23 @@ PanelWindow {
                 }
             }
 
-            // Window thumbnail card
+            // Ambient glow behind the lifted card
+            Rectangle {
+                anchors.fill: parent
+                anchors.margins: -4
+                radius: 14
+                color: "transparent"
+                border.width: (tile.isSelected && !tile.isDragged) ? 3 : 0
+                border.color: Qt.rgba(0.47, 1.0, 0.70, 0.35)
+                opacity: (tile.isSelected && !tile.isDragged) ? 1 : 0
+                scale: (tile.isSelected && !tile.isDragged) ? 1.03 : 1.0
+                z: -1
+
+                Behavior on opacity { NumberAnimation { duration: 180 } }
+                Behavior on scale { NumberAnimation { duration: 180; easing.type: Easing.OutQuad } }
+            }
+
+            // Window thumbnail card with 3D tactile lift
             Rectangle {
                 anchors.fill: parent
                 radius: 10
@@ -812,8 +835,12 @@ PanelWindow {
                 border.width: tile.isSelected ? 2.5 : 1.5
                 border.color: tile.isSelected ? "#78FFB4" : Qt.rgba(1, 1, 1, 0.18)
                 clip: true
+                scale: (tile.isSelected && !tile.isDragged) ? 1.03 : 1.0
+                y: (tile.isSelected && !tile.isDragged) ? -4 : 0
 
                 Behavior on border.color { ColorAnimation { duration: 150 } }
+                Behavior on scale { NumberAnimation { duration: 180; easing.type: Easing.OutQuad } }
+                Behavior on y { NumberAnimation { duration: 180; easing.type: Easing.OutQuad } }
 
                 Image {
                     id: tileShot

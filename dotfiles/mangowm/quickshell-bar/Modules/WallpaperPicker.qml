@@ -379,8 +379,23 @@ PanelWindow {
 
                             width: grid.cellWidth
                             height: grid.cellHeight
+                            z: isSelected ? 10 : 1
+
+                            // Ambient glow behind selected/hovered card
+                            Rectangle {
+                                anchors.fill: cardInner
+                                radius: 12
+                                color: "#F472B6"
+                                opacity: cell.isSelected ? 0.35 : 0.0
+                                scale: cardInner.scale * 1.03
+                                visible: opacity > 0
+                                Behavior on opacity {
+                                    NumberAnimation { duration: 180 }
+                                }
+                            }
 
                             Rectangle {
+                                id: cardInner
                                 anchors.fill: parent
                                 anchors.margins: 5
                                 radius: 10
@@ -388,6 +403,23 @@ PanelWindow {
                                 border.width: cell.isSelected ? 2 : (cell.isCurrentDesktop ? 1.5 : 0)
                                 border.color: cell.isSelected ? "#F472B6" : "#34D399"
                                 clip: true
+
+                                scale: cell.isSelected ? 1.04 : 1.0
+                                y: cell.isSelected ? -3 : 0
+
+                                Behavior on scale {
+                                    NumberAnimation {
+                                        duration: 180
+                                        easing.type: Easing.OutBack
+                                        easing.overshoot: 1.25
+                                    }
+                                }
+                                Behavior on y {
+                                    NumberAnimation {
+                                        duration: 180
+                                        easing.type: Easing.OutQuad
+                                    }
+                                }
 
                                 Image {
                                     anchors.fill: parent
