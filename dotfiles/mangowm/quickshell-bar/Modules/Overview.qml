@@ -283,15 +283,7 @@ PanelWindow {
     }
 
     function otherMonAt(p) {
-        if (!p) return "";
-        for (let j = 0; j < otherMonRepeater.count; j++) {
-            const m = otherMonRepeater.itemAt(j);
-            if (!m) continue;
-            const qm = m.mapFromItem(null, p.x, p.y);
-            if (qm.x >= -12 && qm.x <= m.width + 12 && qm.y >= -20 && qm.y <= m.height + 25) {
-                return m.targetMonName;
-            }
-        }
+        // Disabled for now to preserve workspace strip symmetry
         return "";
     }
 
@@ -412,7 +404,8 @@ PanelWindow {
             }
         }
 
-        // Divider before other monitor drop cards
+        /*
+        // Divider before other monitor drop cards (commented out to preserve workspace symmetry)
         Rectangle {
             visible: OverviewManager.otherMonitorsFor(win.monName).length > 0
             width: 1
@@ -491,6 +484,7 @@ PanelWindow {
                 }
             }
         }
+        */
     }
 
     // ---------- Cross-Monitor Drop Target Banner ----------
@@ -1007,6 +1001,37 @@ PanelWindow {
         x: win.localCursorX - cardW / 2
         y: win.localCursorY - cardH / 2
 
+        // Check if cursor is over the workspace strip / cards at the top
+        readonly property bool isOverWorkspace: win.isCursorOnThisScreen &&
+            (win.hoveredWs > 0 || win.hoveredOtherMon !== "" || (win.localCursorY >= 0 && win.localCursorY <= win.bandH + 12))
+
+        // Target scale: shrink down to 70% of the workspace box when over the top workspace overview, 100% otherwise
+        readonly property real shrinkScale: (win.cardW * 0.70) / cardW
+        readonly property real targetScale: isOverWorkspace ? shrinkScale : 1.0
+
+        // Scale transform anchored exactly at the cursor point (cardW / 2, cardH / 2)
+        transform: Scale {
+            origin.x: dragFollower.cardW / 2
+            origin.y: dragFollower.cardH / 2
+            xScale: dragFollower.targetScale
+            yScale: dragFollower.targetScale
+
+            Behavior on xScale {
+                NumberAnimation {
+                    duration: 220
+                    easing.type: Easing.OutBack
+                    easing.overshoot: 1.15
+                }
+            }
+            Behavior on yScale {
+                NumberAnimation {
+                    duration: 220
+                    easing.type: Easing.OutBack
+                    easing.overshoot: 1.15
+                }
+            }
+        }
+
         // Soft drop shadow / elevation glow behind the preview card
         Rectangle {
             anchors.fill: previewCard
@@ -1140,6 +1165,11 @@ PanelWindow {
             color: Qt.rgba(0.06, 0.08, 0.12, 0.94)
             border.width: 1
             border.color: (OverviewManager.dragged?.sourceMonitor !== win.monName) ? "#78FFB4" : Qt.rgba(1, 1, 1, 0.25)
+            opacity: dragFollower.isOverWorkspace ? 0 : 1
+
+            Behavior on opacity {
+                NumberAnimation { duration: 160 }
+            }
 
             RowLayout {
                 id: dragTitleRow
