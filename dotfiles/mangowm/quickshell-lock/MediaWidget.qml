@@ -8,7 +8,21 @@ import Quickshell.Services.Mpris
 Rectangle {
     id: root
 
-    readonly property var players: Mpris.players?.values ?? []
+    function isProxy(player) {
+        return (player?.dbusName ?? "").endsWith(".playerctld");
+    }
+
+    function isRemote(player) {
+        return (player?.dbusName ?? "").includes("kdeconnect");
+    }
+
+    function send(method) {
+        const name = root.activePlayer?.dbusName;
+        if (!name) return;
+        Quickshell.execDetached(["busctl", "--user", "call", name, "/org/mpris/MediaPlayer2", "org.mpris.MediaPlayer2.Player", method]);
+    }
+
+    readonly property var players: (Mpris.players?.values ?? []).filter(p => p?.canControl && !isProxy(p) && !isRemote(p))
     readonly property var activePlayer: {
         for (let i = 0; i < players.length; i++) {
             if (players[i]?.playbackState === MprisPlaybackState.Playing)
@@ -107,7 +121,7 @@ Rectangle {
                     anchors.fill: parent
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: root.activePlayer?.previous()
+                    onClicked: root.send("Previous")
                 }
             }
 
@@ -129,7 +143,7 @@ Rectangle {
                 MouseArea {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: root.activePlayer?.togglePlaying()
+                    onClicked: root.send("PlayPause")
                 }
             }
 
@@ -153,7 +167,7 @@ Rectangle {
                     anchors.fill: parent
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: root.activePlayer?.next()
+                    onClicked: root.send("Next")
                 }
             }
         }
