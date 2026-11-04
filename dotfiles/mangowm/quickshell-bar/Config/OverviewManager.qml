@@ -20,6 +20,7 @@ Singleton {
     property real dragGlobalY: 0
     property string hoverMonitor: ""
     property int hoverWorkspace: 0
+    property var lastMovedClient: null
 
     property string activeMonitorName: ""
     readonly property string focusedMonitor: activeMonitorName
@@ -138,6 +139,7 @@ Singleton {
         root.searchQuery = "";
         root.allClients = [];
         root.allMonitors = [];
+        root.lastMovedClient = null;
         root.clearDrag();
         if (typeof gc === "function") {
             Qt.callLater(gc);
@@ -168,11 +170,39 @@ Singleton {
                 resolvedTag = 1;
             }
         }
+
+        const clientObj = root.allClients.find(c => c.id === cid);
+        const sourceMon = clientObj?.monitor ?? "";
+        const sourceScreen = Quickshell.screens.find(s => s.name === sourceMon);
+        const targetScreen = Quickshell.screens.find(s => s.name === targetMon);
+
+        root.lastMovedClient = {
+            id: cid,
+            sourceMonitor: sourceMon,
+            targetMonitor: targetMon,
+            sourceScreenX: sourceScreen ? sourceScreen.x : 0,
+            sourceScreenY: sourceScreen ? sourceScreen.y : 0,
+            targetScreenX: targetScreen ? targetScreen.x : 0,
+            targetScreenY: targetScreen ? targetScreen.y : 0
+        };
+
+        const localX = (clientObj && clientObj.x !== undefined && sourceScreen)
+            ? (clientObj.x - sourceScreen.x)
+            : 100;
+        const localY = (clientObj && clientObj.y !== undefined && sourceScreen)
+            ? (clientObj.y - sourceScreen.y)
+            : 100;
+
+        const newGlobalX = targetScreen ? (targetScreen.x + localX) : (clientObj ? clientObj.x : 0);
+        const newGlobalY = targetScreen ? (targetScreen.y + localY) : (clientObj ? clientObj.y : 0);
+
         root.allClients = root.allClients.map(cl => {
             if (cl.id === cid) {
                 return Object.assign({}, cl, {
                     monitor: targetMon,
-                    tags: [resolvedTag]
+                    tags: [resolvedTag],
+                    x: newGlobalX,
+                    y: newGlobalY
                 });
             }
             return cl;

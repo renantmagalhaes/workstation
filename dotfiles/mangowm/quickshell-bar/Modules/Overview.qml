@@ -736,12 +736,44 @@ PanelWindow {
             readonly property real monOffX: win.screen ? win.screen.x : 0
             readonly property real monOffY: win.screen ? win.screen.y : 0
 
-            readonly property rect from: Qt.rect(
-                modelData.x - monOffX,
-                modelData.y - monOffY,
-                modelData.width,
-                modelData.height
-            )
+            readonly property bool wasJustMovedHere: OverviewManager.lastMovedClient !== null &&
+                OverviewManager.lastMovedClient.id === modelData.id &&
+                OverviewManager.lastMovedClient.targetMonitor === win.monName
+
+            readonly property rect from: {
+                if (wasJustMovedHere) {
+                    const moveInfo = OverviewManager.lastMovedClient;
+                    const deltaX = moveInfo.sourceScreenX - moveInfo.targetScreenX;
+                    const deltaY = moveInfo.sourceScreenY - moveInfo.targetScreenY;
+
+                    let startX = 0;
+                    if (deltaX > 0) {
+                        startX = win.width + 120;
+                    } else if (deltaX < 0) {
+                        startX = -modelData.width - 120;
+                    } else {
+                        startX = (win.width - modelData.width) / 2;
+                    }
+
+                    let startY = 0;
+                    if (deltaY > 0) {
+                        startY = win.height + 120;
+                    } else if (deltaY < 0) {
+                        startY = -modelData.height - 120;
+                    } else {
+                        startY = (win.layout[index] ? win.layout[index].y : (win.height - modelData.height) / 2);
+                    }
+
+                    return Qt.rect(startX, startY, modelData.width, modelData.height);
+                }
+
+                return Qt.rect(
+                    modelData.x - monOffX,
+                    modelData.y - monOffY,
+                    modelData.width,
+                    modelData.height
+                );
+            }
             readonly property rect to: win.layout[index] ?? from
             readonly property rect targetRect: win.open ? to : from
 
@@ -760,6 +792,17 @@ PanelWindow {
             Behavior on y { NumberAnimation { duration: 280; easing.type: Easing.OutCubic } }
             Behavior on width { NumberAnimation { duration: 280; easing.type: Easing.OutCubic } }
             Behavior on height { NumberAnimation { duration: 280; easing.type: Easing.OutCubic } }
+
+            Component.onCompleted: {
+                if (tile.wasJustMovedHere) {
+                    tile.x = tile.from.x;
+                    tile.y = tile.from.y;
+                    Qt.callLater(() => {
+                        tile.x = Qt.binding(() => tile.targetRect.x);
+                        tile.y = Qt.binding(() => tile.targetRect.y);
+                    });
+                }
+            }
 
             // Window thumbnail card
             Rectangle {
