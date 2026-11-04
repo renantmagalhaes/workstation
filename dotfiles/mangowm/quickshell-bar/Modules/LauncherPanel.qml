@@ -1077,6 +1077,7 @@ Item {
                                                 id: winIconImg
                                                 anchors.fill: parent
                                                 source: LauncherManager.getWindowIcon(delegateRoot.modelData.data)
+                                                sourceSize: Qt.size(34, 34)
                                                 fillMode: Image.PreserveAspectFit
                                                 smooth: true
                                                 visible: status === Image.Ready
@@ -1141,6 +1142,7 @@ Item {
                                             id: appIconImg
                                             anchors.fill: parent
                                             source: Quickshell.iconPath(delegateRoot.modelData.data.icon, true)
+                                            sourceSize: Qt.size(34, 34)
                                             fillMode: Image.PreserveAspectFit
                                             smooth: true
                                             visible: status === Image.Ready

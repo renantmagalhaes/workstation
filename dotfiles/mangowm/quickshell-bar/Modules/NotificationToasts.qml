@@ -91,6 +91,7 @@ PanelWindow {
                             anchors.fill: parent
                             fillMode: Image.PreserveAspectFit
                             mipmap: true
+                            sourceSize: Qt.size(36, 36)
                             source: modelData.image !== "" ? modelData.image : (modelData.appIcon.startsWith("/") || modelData.appIcon.startsWith("file://")) ? modelData.appIcon : ""
                             visible: source !== "" && status === Image.Ready
                         }

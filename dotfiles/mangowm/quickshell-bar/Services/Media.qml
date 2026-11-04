@@ -29,8 +29,14 @@ Singleton {
     property bool canPrevious: false
 
     // Every controllable, non-proxy player -- used by the page's picker so a
-    // choice can be forced instead of relying on auto-selection.
-    readonly property var players: (Mpris.players?.values ?? []).filter(p => p?.canControl && !isProxy(p))
+    // choice can be forced instead of relying on auto-selection. Remote (phone)
+    // players are filtered to active audio only and deduplicated by device.
+    readonly property var players: {
+        const all = Mpris.players?.values ?? [];
+        const local = all.filter(p => p?.canControl && !isProxy(p) && !isRemote(p));
+        const remotes = filterRemotePlayers(all);
+        return local.concat(remotes);
+    }
 
     // MPRIS position does not emit on its own, so it is poked on a timer while
     // playing and read through a binding. Players that lie about support are
@@ -86,10 +92,31 @@ Singleton {
     }
 
     // KDE Connect and similar bridges expose phone/remote media over MPRIS.
-    // These should never win auto-selection — the user must pick them explicitly
-    // from the player picker. Checked by dbus name prefix.
     function isRemote(player) {
         return (player?.dbusName ?? "").includes("kdeconnect");
+    }
+
+    // Filter remote (KDE Connect) players so only active audio with real track
+    // metadata appears, and deduplicate so only at most ONE player instance represents the phone.
+    function filterRemotePlayers(allPlayers) {
+        const remotes = (allPlayers ?? []).filter(p => p?.canControl && !isProxy(p) && isRemote(p));
+        // Only players that are actively playing or have a real non-empty track title
+        const withContent = remotes.filter(p => p.isPlaying || ((p.trackTitle ?? "").trim() !== ""));
+
+        // Deduplicate per remote device, prioritizing the actively playing player
+        const byDevice = {};
+        for (const p of withContent) {
+            const ident = p.identity || "";
+            const parts = ident.split(" - ");
+            const deviceKey = parts.length > 1 ? parts.slice(1).join(" - ") : (ident || p.dbusName || "remote");
+
+            if (!byDevice[deviceKey]) {
+                byDevice[deviceKey] = p;
+            } else if (p.isPlaying && !byDevice[deviceKey].isPlaying) {
+                byDevice[deviceKey] = p;
+            }
+        }
+        return Object.values(byDevice);
     }
 
     // Selection is driven by *transitions*, not by polling who happens to be
@@ -101,11 +128,8 @@ Singleton {
     function promote(player) {
         if (!player || !player.canControl || isProxy(player)) return;
         if (isRemote(player)) {
-            // Don't let remote players grab the chip via transitions, but do
-            // re-evaluate so they surface as a last-resort fallback when no
-            // local player exists.
-            resolve();
-            return;
+            // For remote players, only promote if it is playing or has actual content
+            if (!player.isPlaying && (player.trackTitle ?? "").trim() === "") return;
         }
         root.active = player;
         root.deliberate = true;
@@ -115,42 +139,41 @@ Singleton {
     function resolve() {
         const all = Mpris.players?.values ?? [];
         const usable = all.filter(p => p?.canControl && !isProxy(p));
-        // Remote players (KDE Connect etc.) are excluded from auto-selection;
-        // they can only hold the chip if the user explicitly picked them via pick().
         const local = usable.filter(p => !isRemote(p));
+        const remotes = filterRemotePlayers(usable);
 
         const present = usable.indexOf(root.active) >= 0 ? root.active : null;
 
-        // A player "has content" when it is Playing or Paused (deliberately
-        // mid-track). Stopped covers both "no media loaded" and "video ended/
-        // closed" — browsers keep the last trackTitle in metadata even after
-        // stopping, so we rely on playbackState, not the title string.
-        const hasContent = p => p && (p.isPlaying || p.playbackState === MprisPlaybackState.Paused);
+        // A player "has content" when it is Playing or Paused mid-track.
+        // For remote players, they must have an actual non-empty track title.
+        const hasContent = p => {
+            if (!p) return false;
+            if (p.isPlaying) return true;
+            if (p.playbackState === MprisPlaybackState.Paused) {
+                if (isRemote(p)) return (p.trackTitle ?? "").trim() !== "";
+                return true;
+            }
+            return false;
+        };
 
-        // Hold on to the current choice while it still exists and has content;
-        // promote() is what moves it. Only when it disappears or goes idle do
-        // we look for a replacement.
-        //
-        // A *fallback* choice is explicitly not sticky. Players appear on the
-        // bus before Quickshell has fetched their PlaybackStatus, so the first
-        // resolve() after startup sees everything as paused and settles on
-        // whoever is first in the list. A player that was already playing
-        // before the bar started never fires an isPlaying transition, so
-        // without this the guess would hold forever and the chip would sit on a
-        // paused player while something else plays.
         const keep = root.deliberate && hasContent(present) ? present : null;
-        // Remote players surface only when actively playing and no local
-        // alternative exists. They never become the default while idle — the
-        // user must pick them explicitly via pick().
+        // Priority:
+        // 1. Deliberate choice if still valid
+        // 2. Local player actively playing
+        // 3. Local player currently paused
+        // 4. Any local player with content
+        // 5. Remote phone player actively playing
+        // 6. Currently selected remote player if it still has content
+        // 7. Single deduplicated remote player with content
         const chosen = keep
             ?? local.find(p => p.isPlaying)
             ?? (hasContent(present) && !isRemote(present) ? present : null)
             ?? local.find(hasContent)
-            ?? usable.find(p => p.isPlaying)
+            ?? remotes.find(p => p.isPlaying)
+            ?? (hasContent(present) && isRemote(present) ? present : null)
+            ?? remotes.find(hasContent)
             ?? null;
 
-        // A choice becomes sticky once it is backed by actual playback, so the
-        // startup settle stops drifting as soon as it finds the real player.
         root.deliberate = (root.deliberate && chosen === present) || (chosen?.isPlaying ?? false);
         root.active = chosen;
         root.hasPlayer = !!chosen;
@@ -178,6 +201,10 @@ Singleton {
 
     function toggle() {
         send("PlayPause");
+    }
+
+    function stop() {
+        send("Stop");
     }
 
     function next() {

@@ -37,6 +37,7 @@ Item {
                 Image {
                     anchors.fill: parent
                     source: Media.artUrl
+                    sourceSize: Qt.size(64, 64)
                     fillMode: Image.PreserveAspectCrop
                     asynchronous: true
                     smooth: true
