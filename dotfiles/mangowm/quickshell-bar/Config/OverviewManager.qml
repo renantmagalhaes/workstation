@@ -45,12 +45,13 @@ Singleton {
         return null;
     }
 
-    function startDrag(client, icon, title, sourceMon): void {
+    function startDrag(client, icon, title, sourceMon, tagText): void {
         root.dragged = {
             client: client,
             icon: icon,
             title: title,
-            sourceMonitor: sourceMon
+            sourceMonitor: sourceMon,
+            tagText: tagText ?? ""
         };
     }
 

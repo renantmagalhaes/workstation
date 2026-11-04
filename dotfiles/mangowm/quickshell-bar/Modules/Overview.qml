@@ -905,7 +905,8 @@ PanelWindow {
                             tile.modelData,
                             win.appIcon(tile.modelData.appid),
                             tile.modelData.title,
-                            win.monName
+                            win.monName,
+                            win.clientTag(tile.modelData)
                         );
                     }
                     if (OverviewManager.dragged) {
@@ -982,51 +983,182 @@ PanelWindow {
         }
     }
 
-    // ---------- Dragged Window Follower ----------
-    Rectangle {
-        visible: win.isCursorOnThisScreen
-        x: win.localCursorX - width / 2
-        y: win.localCursorY - height / 2
-        width: dragLayout.implicitWidth + 24
-        height: 38
-        radius: 19
-        color: Qt.rgba(0.08, 0.12, 0.18, 0.95)
-        border.width: 1.5
-        border.color: (OverviewManager.dragged?.sourceMonitor !== win.monName) ? "#78FFB4" : "#00E5FF"
-        z: 100
+    // ---------- Dragged Window Preview Follower (GNOME / Windows style) ----------
+    Item {
+        id: dragFollower
+        visible: win.isCursorOnThisScreen && OverviewManager.dragged !== null
+        z: 150
 
-        RowLayout {
-            id: dragLayout
-            anchors.centerIn: parent
-            spacing: 8
+        // Calculate aspect-ratio-scaled dimensions
+        readonly property real rawAspect: {
+            const cl = OverviewManager.dragged?.client;
+            if (cl && cl.width > 0 && cl.height > 0) {
+                return cl.width / cl.height;
+            }
+            return 16 / 9;
+        }
+        readonly property real clampedAspect: Math.max(0.7, Math.min(2.1, rawAspect))
+        readonly property real cardW: 220
+        readonly property real cardH: Math.round(cardW / clampedAspect)
 
-            IconImage {
-                implicitSize: 20
-                source: OverviewManager.dragged?.icon ?? ""
+        width: cardW
+        height: cardH + 32
+
+        x: win.localCursorX - cardW / 2
+        y: win.localCursorY - cardH / 2
+
+        // Soft drop shadow / elevation glow behind the preview card
+        Rectangle {
+            anchors.fill: previewCard
+            anchors.margins: -4
+            radius: previewCard.radius + 3
+            color: Qt.rgba(0, 0, 0, 0.55)
+            z: -1
+        }
+
+        // Window Thumbnail Card
+        Rectangle {
+            id: previewCard
+            width: parent.width
+            height: dragFollower.cardH
+            radius: 10
+            color: Qt.rgba(0.08, 0.10, 0.15, 0.95)
+            border.width: 2
+            border.color: (OverviewManager.dragged?.sourceMonitor !== win.monName) ? "#78FFB4" : "#00E5FF"
+            clip: true
+
+            // Live window snapshot
+            Image {
+                id: dragShot
+                anchors.fill: parent
+                anchors.margins: 2
+                source: (win.open && OverviewManager.dragged?.client?.id) ? win.shotPath(OverviewManager.dragged.client.id) : ""
+                sourceSize.width: 480
+                sourceSize.height: 270
+                cache: false
+                fillMode: Image.PreserveAspectCrop
+                asynchronous: true
+                smooth: true
+
+                onStatusChanged: {
+                    if (status === Image.Ready) {
+                        dragFallbackCol.visible = false;
+                    }
+                }
             }
 
-            Text {
-                text: OverviewManager.dragged?.title ?? ""
-                font.family: "Inter, sans-serif"
-                font.pixelSize: 13
-                color: "#FFFFFF"
-                Layout.maximumWidth: 240
-                elide: Text.ElideRight
-            }
+            // Fallback app icon if screenshot isn't ready
+            ColumnLayout {
+                id: dragFallbackCol
+                anchors.centerIn: parent
+                spacing: 6
+                visible: dragShot.status !== Image.Ready
 
-            Rectangle {
-                visible: OverviewManager.dragged?.sourceMonitor !== win.monName
-                height: 20
-                width: toMonText.implicitWidth + 10
-                radius: 10
-                color: Qt.rgba(0.47, 1.0, 0.7, 0.2)
+                IconImage {
+                    Layout.alignment: Qt.AlignHCenter
+                    implicitSize: 42
+                    source: OverviewManager.dragged?.icon ?? ""
+                }
+
                 Text {
-                    id: toMonText
+                    Layout.alignment: Qt.AlignHCenter
+                    text: OverviewManager.dragged?.client?.appid ?? ""
+                    font.family: "Inter, sans-serif"
+                    font.pixelSize: 11
+                    color: Qt.rgba(1, 1, 1, 0.7)
+                }
+            }
+
+            // Top-left workspace badge (e.g. "WS 1")
+            Rectangle {
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.margins: 6
+                height: 20
+                width: dragWsBadgeText.implicitWidth + 12
+                radius: 10
+                color: Qt.rgba(0.06, 0.08, 0.12, 0.90)
+                border.color: "#00E5FF"
+                border.width: 1
+                visible: !!(OverviewManager.dragged?.tagText)
+
+                Text {
+                    id: dragWsBadgeText
                     anchors.centerIn: parent
-                    text: "➜ " + win.monName
+                    text: OverviewManager.dragged?.tagText ?? ""
+                    font.family: "Inter, sans-serif"
                     font.pixelSize: 10
                     font.bold: true
-                    color: "#78FFB4"
+                    color: "#00E5FF"
+                }
+            }
+
+            // Top-right cross-monitor destination pill (when dragged across screens)
+            Rectangle {
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.margins: 6
+                height: 20
+                width: toMonBadge.implicitWidth + 12
+                radius: 10
+                color: Qt.rgba(0.06, 0.12, 0.10, 0.92)
+                border.color: "#78FFB4"
+                border.width: 1
+                visible: OverviewManager.dragged?.sourceMonitor !== win.monName
+
+                RowLayout {
+                    id: toMonBadge
+                    anchors.centerIn: parent
+                    spacing: 4
+
+                    Text {
+                        text: "➜"
+                        font.pixelSize: 10
+                        font.bold: true
+                        color: "#78FFB4"
+                    }
+
+                    Text {
+                        text: win.monName
+                        font.family: "Inter, sans-serif"
+                        font.pixelSize: 10
+                        font.bold: true
+                        color: "#78FFB4"
+                    }
+                }
+            }
+        }
+
+        // Attached Title Pill below the preview card
+        Rectangle {
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: previewCard.bottom
+            anchors.topMargin: 6
+            width: Math.min(parent.width + 20, Math.max(140, dragTitleRow.implicitWidth + 20))
+            height: 26
+            radius: 13
+            color: Qt.rgba(0.06, 0.08, 0.12, 0.94)
+            border.width: 1
+            border.color: (OverviewManager.dragged?.sourceMonitor !== win.monName) ? "#78FFB4" : Qt.rgba(1, 1, 1, 0.25)
+
+            RowLayout {
+                id: dragTitleRow
+                anchors.centerIn: parent
+                spacing: 6
+
+                IconImage {
+                    implicitSize: 14
+                    source: OverviewManager.dragged?.icon ?? ""
+                }
+
+                Text {
+                    Layout.maximumWidth: parent.parent.width - 32
+                    text: OverviewManager.dragged?.title ?? (OverviewManager.dragged?.client?.appid ?? "")
+                    font.family: "Inter, sans-serif"
+                    font.pixelSize: 11
+                    font.bold: true
+                    color: "#FFFFFF"
+                    elide: Text.ElideRight
                 }
             }
         }
