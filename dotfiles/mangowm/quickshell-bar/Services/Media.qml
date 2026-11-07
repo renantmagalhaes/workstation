@@ -5,19 +5,19 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Mpris
 
-// The MPRIS player the bar should represent.
+// The MPRIS media player service for QuickShell.
 //
-// State is pushed imperatively from per-player Connections rather than computed
-// in a binding: a binding over `Mpris.players.values` only depends on the
-// *list*, so it would never re-evaluate when an individual player starts or
-// changes track.
+// Manages media playback state and serves as the single source of truth for
+// both the desktop bar UI and keyboard media shortcuts (via IPC).
+// Selection is purely state-driven:
+//   1. Actively playing player always takes precedence.
+//   2. If paused, sticky retention of the player that has actual media loaded.
+//   3. Players with no loaded media are never auto-selected.
+//   4. Zero hardcoded player exclusions.
 Singleton {
     id: root
 
     property var active: null
-    // Whether `active` was chosen because something actually happened (a player
-    // started, or the user picked it) as opposed to being a fallback guess made
-    // while nothing was known to be playing. Only a deliberate choice is sticky.
     property bool deliberate: false
     property bool hasPlayer: false
     property bool playing: false
@@ -28,30 +28,34 @@ Singleton {
     property bool canNext: false
     property bool canPrevious: false
 
-    // Every controllable, non-proxy player -- used by the page's picker so a
-    // choice can be forced instead of relying on auto-selection. Remote (phone)
-    // players are filtered to active audio only and deduplicated by device.
-    readonly property var players: {
-        const all = Mpris.players?.values ?? [];
-        const local = all.filter(p => p?.canControl && !isProxy(p) && !isRemote(p));
-        const remotes = filterRemotePlayers(all);
-        return local.concat(remotes);
+    // Filter out internal daemon proxy (playerctld) so it does not duplicate
+    // real players on the bus. All real players (including KDE Connect) are kept.
+    function isProxy(player) {
+        return (player?.dbusName ?? "").endsWith(".playerctld");
     }
 
-    // MPRIS position does not emit on its own, so it is poked on a timer while
-    // playing and read through a binding. Players that lie about support are
-    // gated on lengthSupported/positionSupported.
+    function isKdeConnect(player) {
+        if (!player) return false;
+        const name = (player.dbusName ?? "").toLowerCase();
+        const ident = (player.identity ?? "").toLowerCase();
+        return name.includes("kdeconnect") || ident.includes("kde connect");
+    }
+
+    // Every controllable, real player on the bus
+    readonly property var players: (Mpris.players?.values ?? []).filter(p => p?.canControl && !isProxy(p))
+
+    // Position and seek support
     readonly property real duration: active?.lengthSupported ? Math.max(0, active.length) : 0
     readonly property real position: active?.positionSupported ? Math.max(0, active.position) : 0
     readonly property real progress: duration > 0 ? Math.max(0, Math.min(1, position / duration)) : 0
     readonly property bool seekable: (active?.canSeek ?? false) && duration > 0
 
     function seek(fraction) {
-        if (!seekable) return;
+        if (!seekable || !active) return;
         active.position = Math.max(0, Math.min(1, fraction)) * duration;
     }
 
-    // Explicit user pick: allows remote players, bypasses the isRemote guard.
+    // Explicit user pick from the player picker UI
     function pick(player) {
         if (!player || !player.canControl || isProxy(player)) return;
         root.active = player;
@@ -76,102 +80,49 @@ Singleton {
         onTriggered: root.active?.positionChanged()
     }
 
-    // "Artist — Title", collapsing gracefully when a player exposes only one.
     readonly property string label: {
         if (!hasPlayer) return "";
         if (title && artist) return `${artist} — ${title}`;
         return title || artist || identity;
     }
 
-    // playerctld registers itself on the bus as a player, but it is only a
-    // proxy that mirrors whichever real player is current. Left in the list it
-    // shows up as a duplicate of the thing already playing and the selection
-    // can land on it, which makes the chip appear to jump between sources.
-    function isProxy(player) {
-        return (player?.dbusName ?? "").endsWith(".playerctld");
-    }
-
-    // KDE Connect and similar bridges expose phone/remote media over MPRIS.
-    function isRemote(player) {
-        return (player?.dbusName ?? "").includes("kdeconnect");
-    }
-
-    // Filter remote (KDE Connect) players so only active audio with real track
-    // metadata appears, and deduplicate so only at most ONE player instance represents the phone.
-    function filterRemotePlayers(allPlayers) {
-        const remotes = (allPlayers ?? []).filter(p => p?.canControl && !isProxy(p) && isRemote(p));
-        // Only players that are actively playing or have a real non-empty track title
-        const withContent = remotes.filter(p => p.isPlaying || ((p.trackTitle ?? "").trim() !== ""));
-
-        // Deduplicate per remote device, prioritizing the actively playing player
-        const byDevice = {};
-        for (const p of withContent) {
-            const ident = p.identity || "";
-            const parts = ident.split(" - ");
-            const deviceKey = parts.length > 1 ? parts.slice(1).join(" - ") : (ident || p.dbusName || "remote");
-
-            if (!byDevice[deviceKey]) {
-                byDevice[deviceKey] = p;
-            } else if (p.isPlaying && !byDevice[deviceKey].isPlaying) {
-                byDevice[deviceKey] = p;
-            }
+    // A player has playable media content if it is actively Playing,
+    // or Paused with a valid non-empty track title.
+    // Stopped players or players with empty metadata have no media.
+    function hasContent(p) {
+        if (!p) return false;
+        if (p.isPlaying) return true;
+        if (p.playbackState === MprisPlaybackState.Paused) {
+            return (p.trackTitle ?? "").trim() !== "";
         }
-        return Object.values(byDevice);
+        return false;
     }
 
-    // Selection is driven by *transitions*, not by polling who happens to be
-    // playing. A player that just started is what you are paying attention to,
-    // so it takes the chip even if something else is still playing -- otherwise
-    // a long-running player (Stremio) holds it forever and starting a YouTube
-    // video changes nothing. Pausing deliberately does not hand the chip away,
-    // which is what stops a pause from jumping to an unrelated player.
+    // Called whenever a player starts playing so it immediately gains focus
     function promote(player) {
         if (!player || !player.canControl || isProxy(player)) return;
-        if (isRemote(player)) {
-            // For remote players, only promote if it is playing or has actual content
-            if (!player.isPlaying && (player.trackTitle ?? "").trim() === "") return;
-        }
         root.active = player;
         root.deliberate = true;
         resolve();
     }
 
     function resolve() {
-        const all = Mpris.players?.values ?? [];
-        const usable = all.filter(p => p?.canControl && !isProxy(p));
-        const local = usable.filter(p => !isRemote(p));
-        const remotes = filterRemotePlayers(usable);
-
+        const usable = (Mpris.players?.values ?? []).filter(p => p?.canControl && !isProxy(p));
         const present = usable.indexOf(root.active) >= 0 ? root.active : null;
 
-        // A player "has content" when it is Playing or Paused mid-track.
-        // For remote players, they must have an actual non-empty track title.
-        const hasContent = p => {
-            if (!p) return false;
-            if (p.isPlaying) return true;
-            if (p.playbackState === MprisPlaybackState.Paused) {
-                if (isRemote(p)) return (p.trackTitle ?? "").trim() !== "";
-                return true;
-            }
-            return false;
-        };
+        // Keep current selection if user deliberately picked it, or if it still has content
+        const keep = (root.deliberate && present) || (hasContent(present) ? present : null);
 
-        const keep = root.deliberate && hasContent(present) ? present : null;
-        // Priority:
-        // 1. Deliberate choice if still valid
-        // 2. Local player actively playing
-        // 3. Local player currently paused
-        // 4. Any local player with content
-        // 5. Remote phone player actively playing
-        // 6. Currently selected remote player if it still has content
-        // 7. Single deduplicated remote player with content
+        // State-driven hierarchy:
+        // 1. Sticky current player if it still has media
+        // 2. Any player actively playing
+        // 3. Any player paused with a loaded track
+        // 4. Any present player
+        // 5. Fallback to null (idle/no media)
         const chosen = keep
-            ?? local.find(p => p.isPlaying)
-            ?? (hasContent(present) && !isRemote(present) ? present : null)
-            ?? local.find(hasContent)
-            ?? remotes.find(p => p.isPlaying)
-            ?? (hasContent(present) && isRemote(present) ? present : null)
-            ?? remotes.find(hasContent)
+            ?? usable.find(p => p.isPlaying)
+            ?? usable.find(hasContent)
+            ?? present
             ?? null;
 
         root.deliberate = (root.deliberate && chosen === present) || (chosen?.isPlaying ?? false);
@@ -186,13 +137,7 @@ Singleton {
         root.canPrevious = chosen?.canGoPrevious ?? false;
     }
 
-    // Send a bare MPRIS method to the active player.
-    //
-    // Quickshell's play()/pause()/togglePlaying() call the Play and Pause
-    // methods, and some players -- Stremio among them -- advertise CanPlay and
-    // CanPause but implement neither, responding only to PlayPause. Those calls
-    // then fail silently. PlayPause is the one transport method essentially
-    // every player gets right, so drive the toggle with it directly.
+    // Direct MPRIS D-Bus method call
     function send(method) {
         const name = active?.dbusName;
         if (!name) return;
@@ -200,19 +145,20 @@ Singleton {
     }
 
     function toggle() {
+        if (!active) {
+            resolve();
+        }
         send("PlayPause");
     }
 
-    function stop() {
-        send("Stop");
-    }
+    function play() { send("Play"); }
+    function pause() { send("Pause"); }
+    function stop() { send("Stop"); }
 
     function next() {
         if (canNext) send("Next");
     }
 
-    // The idiomatic MPRIS previous: restart the track first, only skip back if
-    // already near the beginning.
     function previous() {
         if (!active) return;
         if (active.canSeek && active.position > 8) {
@@ -224,14 +170,39 @@ Singleton {
 
     Component.onCompleted: resolve()
 
-    // Fan out to every player so any of them waking up re-resolves the choice.
-    // Mpris itself exposes no "players changed" signal, so appearing and
-    // disappearing players are picked up from the Instantiator's own hooks.
+    // IPC interface for keybindings and scripts to control the active player
+    IpcHandler {
+        target: "media"
+
+        function toggle(): void {
+            if (root.isKdeConnect(root.active)) return;
+            root.toggle();
+        }
+
+        function playPause(): void {
+            if (root.isKdeConnect(root.active)) return;
+            root.toggle();
+        }
+
+        function play(): void {
+            if (root.isKdeConnect(root.active)) return;
+            root.play();
+        }
+
+        function pause(): void {
+            if (root.isKdeConnect(root.active)) return;
+            root.pause();
+        }
+
+        function stop(): void { root.stop(); }
+        function next(): void { root.next(); }
+        function previous(): void { root.previous(); }
+    }
+
+    // Watch for players appearing, disappearing, or updating state
     Instantiator {
         model: Mpris.players
 
-        // A player can appear already playing (open a tab that autoplays), in
-        // which case no isPlaying transition ever fires for us to catch.
         onObjectAdded: (index, object) => {
             const player = object?.modelData ?? null;
             if (player?.isPlaying) root.promote(player);

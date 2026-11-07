@@ -12,26 +12,26 @@ Rectangle {
         return (player?.dbusName ?? "").endsWith(".playerctld");
     }
 
-    function isRemote(player) {
-        return (player?.dbusName ?? "").includes("kdeconnect");
-    }
-
     function send(method) {
         const name = root.activePlayer?.dbusName;
         if (!name) return;
         Quickshell.execDetached(["busctl", "--user", "call", name, "/org/mpris/MediaPlayer2", "org.mpris.MediaPlayer2.Player", method]);
     }
 
-    readonly property var players: (Mpris.players?.values ?? []).filter(p => p?.canControl && !isProxy(p) && !isRemote(p))
+    readonly property var players: (Mpris.players?.values ?? []).filter(p => p?.canControl && !isProxy(p))
     readonly property var activePlayer: {
         for (let i = 0; i < players.length; i++) {
             if (players[i]?.playbackState === MprisPlaybackState.Playing)
                 return players[i];
         }
-        return players.length > 0 ? players[0] : null;
+        for (let i = 0; i < players.length; i++) {
+            if (players[i]?.playbackState === MprisPlaybackState.Paused && (players[i]?.trackTitle ?? "").trim() !== "")
+                return players[i];
+        }
+        return null;
     }
 
-    readonly property bool hasMedia: activePlayer !== null && (activePlayer.trackTitle.length > 0)
+    readonly property bool hasMedia: activePlayer !== null && ((activePlayer.trackTitle ?? "").trim().length > 0)
 
     visible: hasMedia
     implicitWidth: 380
