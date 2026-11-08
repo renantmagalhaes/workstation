@@ -58,3 +58,6 @@ sudo flatpak install -y flathub com.github.tchx84.Flatseal
 
 ## Stream
 sudo flatpak install -y flathub com.valvesoftware.Steam
+
+## JDownloader2
+sudo flatpak install flathub org.jdownloader.JDownloader
