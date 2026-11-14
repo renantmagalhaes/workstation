@@ -26,10 +26,43 @@ return {
       },
       presets = {
         bottom_search = false, -- floating cmdline for search too
-        command_palette = true, -- positions the cmdline and popupmenu together at top-center!
+        command_palette = false, -- false allows custom centralized positioning
         long_message_to_split = true,
         inc_rename = false,
         lsp_doc_border = true,
+      },
+      views = {
+        cmdline_popup = {
+          position = {
+            row = "40%",
+            col = "50%",
+          },
+          size = {
+            min_width = 60,
+            width = "auto",
+            height = "auto",
+          },
+          border = {
+            style = "rounded",
+            padding = { 0, 1 },
+          },
+        },
+        cmdline_popupmenu = {
+          relative = "editor",
+          position = {
+            row = "44%",
+            col = "50%",
+          },
+          size = {
+            width = 60,
+            height = "auto",
+            max_height = 15,
+          },
+          border = {
+            style = "rounded",
+            padding = { 0, 1 },
+          },
+        },
       },
       routes = {
         -- Skip noisy buffer write messages on save
