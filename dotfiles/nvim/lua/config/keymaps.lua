@@ -75,6 +75,11 @@ map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Find open buffers
 map("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Recent files", silent = true })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "Help tags", silent = true })
 
+-- Command Palette (VS Code style command fuzzy-finder)
+map("n", "<leader>:", "<cmd>Telescope commands<CR>", { desc = "Command Palette", silent = true })
+map("n", "<leader>cp", "<cmd>Telescope commands<CR>", { desc = "Command Palette (VS Code Ctrl+Shift+P)", silent = true })
+map("n", "<leader>ch", "<cmd>Telescope command_history<CR>", { desc = "Command History", silent = true })
+
 -- Lateral Tree Bar (NvimTree)
 local function toggle_tree()
   local ok, api = pcall(require, "nvim-tree.api")

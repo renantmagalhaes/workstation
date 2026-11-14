@@ -27,6 +27,9 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 ### Search & Navigation
 | Keymap | Action |
 | --- | --- |
+| <kbd>:</kbd> | **Commandline Popup** (`noice.nvim`): Floating top-center command bar with live completions |
+| `<leader>:` or `<leader>cp` | **Command Palette**: Fuzzy-search and run any Neovim command (VS Code `Ctrl+Shift+P` style) |
+| `<leader>ch` | **Command History**: Search and re-run recent commands |
 | <kbd>Space</kbd> <kbd>Space</kbd> | Fuzzy search files across the entire folder / project |
 | <kbd>Ctrl+f</kbd> or `<leader>f` | Fuzzy search inline (current buffer) |
 | <kbd>s</kbd> | **Flash Jump**: Jump anywhere on the screen in 2 keystrokes |
@@ -75,6 +78,7 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 - **Dashboard**: `alpha-nvim` (sleek minimalist startup dashboard with quick shortcuts)
 - **Theme**: Cyberdream (transparent background, terminal colors, italic comments)
 - **Statusline**: `lualine.nvim` (modern rounded capsule/pill separators ``/``)
+- **Command Palette & Cmdline**: `noice.nvim` (floating top-center popup for `:` and `/`, matching VS Code)
 - **Breadcrumbs**: `barbecue.nvim` + `nvim-navic` (shows file and code hierarchy)
 - **Floating Dialogs**: `dressing.nvim` (rounded popups for rename, selection, and inputs)
 - **Toast Notifications**: `nvim-notify` (smooth animated notifications)
