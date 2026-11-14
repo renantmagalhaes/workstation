@@ -269,6 +269,8 @@ return {
         { "<leader>m", group = "Markdown" },
         { "<leader>c", group = "Code/Format" },
         { "<leader>b", group = "Buffer" },
+        { "<leader>q", group = "Session / Quit" },
+        { "<leader>t", group = "Terminal" },
       },
     },
   },

@@ -194,3 +194,58 @@ map("n", "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { des
 map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic", silent = true })
 map("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic", silent = true })
 map("n", "<leader>d", vim.diagnostic.open_float, { desc = "Line diagnostics popup", silent = true })
+
+-- Floating Terminal Toggle (<Ctrl+/> or <leader>tt)
+local term_state = {
+  buf = -1,
+  win = -1,
+}
+
+local function toggle_floating_terminal()
+  if vim.api.nvim_win_is_valid(term_state.win) then
+    vim.api.nvim_win_hide(term_state.win)
+    return
+  end
+
+  if not vim.api.nvim_buf_is_valid(term_state.buf) then
+    term_state.buf = vim.api.nvim_create_buf(false, true)
+    vim.bo[term_state.buf].buflisted = false
+  end
+
+  local width = math.floor(vim.o.columns * 0.85)
+  local height = math.floor(vim.o.lines * 0.80)
+  local col = math.floor((vim.o.columns - width) / 2)
+  local row = math.floor((vim.o.lines - height) / 2)
+
+  local win_config = {
+    relative = "editor",
+    width = width,
+    height = height,
+    col = col,
+    row = row,
+    style = "minimal",
+    border = "rounded",
+    title = "   Terminal ",
+    title_pos = "center",
+  }
+
+  term_state.win = vim.api.nvim_open_win(term_state.buf, true, win_config)
+  vim.wo[term_state.win].winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder"
+
+  if vim.bo[term_state.buf].buftype ~= "terminal" then
+    vim.fn.termopen(os.getenv("SHELL") or "bash")
+  end
+
+  vim.cmd("startinsert")
+end
+
+map("n", "<C-/>", toggle_floating_terminal, { desc = "Toggle Floating Terminal", silent = true })
+map("n", "<C-_>", toggle_floating_terminal, { desc = "Toggle Floating Terminal", silent = true })
+map("i", "<C-/>", toggle_floating_terminal, { desc = "Toggle Floating Terminal", silent = true })
+map("i", "<C-_>", toggle_floating_terminal, { desc = "Toggle Floating Terminal", silent = true })
+map("t", "<C-/>", toggle_floating_terminal, { desc = "Toggle Floating Terminal", silent = true })
+map("t", "<C-_>", toggle_floating_terminal, { desc = "Toggle Floating Terminal", silent = true })
+map("n", "<leader>tt", toggle_floating_terminal, { desc = "Toggle Floating Terminal", silent = true })
+
+-- Terminal mode: Double Esc exits terminal input mode to scroll/copy
+map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal insert mode", silent = true })

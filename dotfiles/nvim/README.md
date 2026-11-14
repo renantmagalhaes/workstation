@@ -54,9 +54,17 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 ### Tools & Programming
 | Keymap | Action |
 | --- | --- |
+| <kbd>Ctrl+/</kbd> or `<leader>tt` | **Floating Terminal**: Quick popup terminal (Normal, Insert, Terminal modes) |
 | `<leader>pj` | **Pretty JSON**: Formats JSON buffer with `jq` / Python / LSP |
 | `<leader>cf` or `<leader>fm` | Format document (via `conform.nvim` / LSP) |
 | `<leader>gg` or `<leader>lg` | Open **LazyGit** floating window |
+| `]t` / `[t` | Next / Previous **TODO / FIX / NOTE** comment |
+| `<leader>st` | Search all project **TODOs** with Telescope |
+| `<leader>xt` | List all project **TODOs** in Trouble panel |
+| `[c` | Jump up to enclosing function / class context (**Sticky Scroll**) |
+| `<leader>ut` | Toggle Sticky Scroll header on/off |
+| `<leader>qs` | **Restore Session** for current folder |
+| `<leader>ql` | **Restore Last Session** |
 | `<leader>p` or `<leader>P` | **Paste image** from clipboard into Markdown (auto-saved to `assets/images/`) |
 | `<leader>mp` | Toggle Markdown browser preview |
 | `<leader>xx` | Toggle Trouble diagnostics panel |
@@ -97,6 +105,11 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 - **CSV Support**: `rainbow_csv.nvim` (colored columns & column alignment)
 - **Markdown**: `render-markdown.nvim` (rich inline rendering) + `markdown-preview.nvim` + `img-clip.nvim`
 - **Tabs**: `bufferline.nvim` (VS Code style top tabs)
+- **Terminal**: Native Floating Terminal popup (<kbd>Ctrl+/</kbd> or `<leader>tt`)
+- **TODOs**: `folke/todo-comments.nvim` (highlight, jump `]t`/`[t`, and search project TODOs)
+- **Sticky Scroll**: `nvim-treesitter/nvim-treesitter-context` (pins enclosing code headers on scroll)
+- **Session Manager**: `folke/persistence.nvim` (saves and restores open tabs and buffers)
+- **Auto-Tags**: `windwp/nvim-ts-autotag` (auto-close & auto-rename HTML/JSX/XML tags)
 - **Editor Ergonomics**: `nvim-autopairs`, `Comment.nvim`, `nvim-surround`, `colorizer`, `rainbow-delimiters`, `which-key`
 
 ---
