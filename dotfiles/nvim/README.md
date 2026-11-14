@@ -5,6 +5,7 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 ## ✨ Philosophy
 - **Zero Bloat & Maintenance**: No upstream distribution framework overrides; no surprise auto-updates breaking your setup.
 - **Pure `lazy.nvim`**: Automatic background update checker is disabled (`checker.enabled = false`) for deterministic stability.
+- **Modern & Appealing Visuals**: Pill/capsule statusline, breadcrumbs bar, animated cursor trails, floating rounded inputs, and toast notifications matching Cyberdream.
 - **VS Code Ergonomics**: Familiar keybindings (<kbd>Ctrl+s</kbd> to save, <kbd>Ctrl+d</kbd> to quit with prompt, <kbd>Ctrl+b</kbd> sidebar, <kbd>Ctrl+f</kbd> buffer find, tabs, indent guides).
 
 ---
@@ -21,12 +22,14 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 | <kbd>Alt+j</kbd> / <kbd>Alt+k</kbd> | Move selected block down / up (Visual mode) |
 | <kbd>Tab</kbd> / <kbd>Shift+Tab</kbd> | Indent / Outdent selected lines (Visual mode) |
 | <kbd>Ctrl+c</kbd> / <kbd>Ctrl+v</kbd> | Copy to system clipboard / Paste from system clipboard |
+| <kbd>j</kbd><kbd>k</kbd> or <kbd>k</kbd><kbd>j</kbd> | Quick exit from Insert mode to Normal mode |
 
 ### Search & Navigation
 | Keymap | Action |
 | --- | --- |
 | <kbd>Space</kbd> <kbd>Space</kbd> | Fuzzy search files across the entire folder / project |
 | <kbd>Ctrl+f</kbd> or `<leader>f` | Fuzzy search inline (current buffer) |
+| <kbd>s</kbd> | **Flash Jump**: Jump anywhere on the screen in 2 keystrokes |
 | `<leader>fg` or `<leader>/` | Live grep text across the whole project |
 | `<leader>fb` | List and search open buffers |
 | `<leader>fr` | Search recent files |
@@ -61,18 +64,26 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 ---
 
 ## 📦 Installed Features
+- **Dashboard**: `alpha-nvim` (sleek minimalist startup dashboard with quick shortcuts)
 - **Theme**: Cyberdream (transparent background, terminal colors, italic comments)
+- **Statusline**: `lualine.nvim` (modern rounded capsule/pill separators ``/``)
+- **Breadcrumbs**: `barbecue.nvim` + `nvim-navic` (shows file and code hierarchy)
+- **Floating Dialogs**: `dressing.nvim` (rounded popups for rename, selection, and inputs)
+- **Toast Notifications**: `nvim-notify` (smooth animated notifications)
+- **Scrollbar**: `nvim-scrollbar` + `nvim-hlslens` (Git, diagnostic, and search count marks)
+- **Navigation**: `flash.nvim` (<kbd>s</kbd> jump) + `better-escape.nvim` (<kbd>jk</kbd> exit)
+- **Fluid Cursor**: `smear-cursor.nvim` (smooth cursor animations between lines and windows)
 - **File Explorer**: `nvim-tree` with Devicons & Git indicators
 - **Fuzzy Finder**: `telescope.nvim`
-- **LSP**: `nvim-lspconfig`, `mason.nvim`, `mason-lspconfig.nvim`
-- **Linting**: `nvim-lint` (auto-detects filetype on save / buffer enter)
+- **LSP**: On-demand auto-installer and launcher per filetype
+- **Linting**: `nvim-lint` (auto-detects filetype on save / buffer enter without crashes)
 - **Formatting**: `conform.nvim` (format-on-save + Pretty JSON)
-- **Syntax Highlighting**: `nvim-treesitter` (with `auto_install = true`)
+- **Syntax Highlighting**: `nvim-treesitter` (pinned to modern `main` branch for Neovim 0.12+)
 - **Autocompletion**: `nvim-cmp` (LSP, path autocomplete, snippets, buffer)
 - **Git**: `gitsigns.nvim`, `lazygit.nvim`, `vim-fugitive`
 - **CSV Support**: `rainbow_csv.nvim` (colored columns & column alignment)
 - **Markdown**: `render-markdown.nvim` (rich inline rendering) + `markdown-preview.nvim` + `img-clip.nvim`
-- **Tabs & Statusline**: `bufferline.nvim` + `lualine.nvim`
+- **Tabs**: `bufferline.nvim` (VS Code style top tabs)
 - **Editor Ergonomics**: `nvim-autopairs`, `Comment.nvim`, `nvim-surround`, `colorizer`, `rainbow-delimiters`, `which-key`
 
 ---
@@ -80,5 +91,5 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 ## 🚀 Installation & Update
 Run the installation script:
 ```bash
-./scripts/vim.sh
+bash scripts/vim.sh
 ```

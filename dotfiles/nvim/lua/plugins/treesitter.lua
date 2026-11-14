@@ -44,6 +44,28 @@ return {
 
       pcall(ts.install, parsers)
 
+      -- Non-code and plain text filetypes that should NEVER trigger tree-sitter
+      local ignored_filetypes = {
+        [""] = true,
+        text = true,
+        txt = true,
+        plain = true,
+        log = true,
+        help = true,
+        man = true,
+        qf = true,
+        gitcommit = true,
+        gitrebase = true,
+        netrw = true,
+        NvimTree = true,
+        alpha = true,
+        trouble = true,
+        lazy = true,
+        mason = true,
+        checkhealth = true,
+        prompt = true,
+      }
+
       -- Enable native Neovim 0.12+ tree-sitter highlighting on-demand
       vim.api.nvim_create_autocmd("FileType", {
         group = vim.api.nvim_create_augroup("TreesitterNativeHighlight", { clear = true }),
@@ -55,16 +77,23 @@ return {
           end
 
           local ft = vim.bo[bufnr].filetype
-          if ft == "" or ft == "netrw" or ft == "NvimTree" then
+          if ignored_filetypes[ft] then
+            return
+          end
+
+          local lang = vim.treesitter.language.get_lang(ft) or ft
+          if not lang or ignored_filetypes[lang] then
             return
           end
 
           -- Start tree-sitter highlighting safely with pcall
           local started = pcall(vim.treesitter.start, bufnr)
-          -- If not started (parser not installed yet), install it on-demand in the background
+          -- If not started (parser not installed yet), only install if actually supported by Treesitter
           if not started then
-            local lang = vim.treesitter.language.get_lang(ft) or ft
-            pcall(ts.install, { lang })
+            local ok_avail, available = pcall(ts.get_available)
+            if ok_avail and type(available) == "table" and vim.tbl_contains(available, lang) then
+              pcall(ts.install, { lang })
+            end
           end
         end,
       })

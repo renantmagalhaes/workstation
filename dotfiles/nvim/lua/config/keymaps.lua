@@ -11,10 +11,52 @@ map("n", "<C-s>", "<cmd>write<CR>", { desc = "Save file", silent = true })
 map("i", "<C-s>", "<Esc><cmd>write<CR>a", { desc = "Save file", silent = true })
 map("v", "<C-s>", "<Esc><cmd>write<CR>gv", { desc = "Save file", silent = true })
 
--- Exit with Ctrl+d (Prompt to save if unsaved changes exist)
-map("n", "<C-d>", "<cmd>confirm qa<CR>", { desc = "Exit with save prompt", silent = true })
-map("i", "<C-d>", "<Esc><cmd>confirm qa<CR>", { desc = "Exit with save prompt", silent = true })
-map("v", "<C-d>", "<Esc><cmd>confirm qa<CR>", { desc = "Exit with save prompt", silent = true })
+-- Exit with Ctrl+d (Shows a floating dialog box if unsaved changes exist)
+local function confirm_exit()
+  local modified = {}
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].modified then
+      local name = vim.api.nvim_buf_get_name(buf)
+      local display = (name ~= "") and vim.fn.fnamemodify(name, ":t") or "[Untitled]"
+      table.insert(modified, display)
+    end
+  end
+
+  if #modified == 0 then
+    -- No unsaved changes, exit immediately
+    vim.cmd("qa")
+    return
+  end
+
+  -- Display a floating rounded dialog box
+  local title = string.format("Save changes to %s?", table.concat(modified, ", "))
+  local choices = {
+    "1. Save all and quit",
+    "2. Discard changes and quit",
+    "3. Cancel (keep editing)",
+  }
+
+  vim.ui.select(choices, {
+    prompt = title,
+  }, function(choice)
+    if not choice then
+      return
+    end
+    if choice:find("1") then
+      vim.cmd("wa")
+      vim.cmd("qa")
+    elseif choice:find("2") then
+      vim.cmd("qa!")
+    end
+  end)
+end
+
+map({ "n", "i", "v" }, "<C-d>", function()
+  if vim.fn.mode() ~= "n" then
+    vim.cmd("stopinsert")
+  end
+  confirm_exit()
+end, { desc = "Exit with save dialog box", silent = true })
 
 -- Fuzzy search inline (Ctrl+f)
 map("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Search inside buffer", silent = true })
@@ -34,8 +76,18 @@ map("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Recent files", s
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "Help tags", silent = true })
 
 -- Lateral Tree Bar (NvimTree)
-map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file tree", silent = true })
-map("n", "<C-b>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file tree (VS Code style)", silent = true })
+local function toggle_tree()
+  local ok, api = pcall(require, "nvim-tree.api")
+  if ok then
+    api.tree.toggle({ focus = true })
+  else
+    vim.cmd("NvimTreeToggle")
+  end
+end
+
+map("n", "<leader>e", toggle_tree, { desc = "Toggle file tree", silent = true })
+map("n", "<C-n>", toggle_tree, { desc = "Toggle file tree (Single press)", silent = true })
+map("n", "<C-b>", toggle_tree, { desc = "Toggle file tree (VS Code style)", silent = true })
 map("n", "<leader>o", "<cmd>NvimTreeFindFile<CR>", { desc = "Reveal file in tree", silent = true })
 
 -- Lazygit

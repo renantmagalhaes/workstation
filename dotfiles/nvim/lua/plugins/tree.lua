@@ -6,6 +6,7 @@ return {
     lazy = false, -- Eager load so it hijacks directory openings (e.g. `nvim .`)
     keys = {
       { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Toggle File Tree" },
+      { "<C-n>", "<cmd>NvimTreeToggle<CR>", desc = "Toggle File Tree" },
       { "<C-b>", "<cmd>NvimTreeToggle<CR>", desc = "Toggle File Tree (VS Code)" },
       { "<leader>o", "<cmd>NvimTreeFindFile<CR>", desc = "Reveal File in Tree" },
     },

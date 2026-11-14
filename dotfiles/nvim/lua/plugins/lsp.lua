@@ -25,11 +25,19 @@ return {
       local capabilities = cmp_nvim_lsp.default_capabilities()
       local is_nvim_011 = vim.fn.has("nvim-0.11") == 1
 
-      -- Global LspAttach autocmd for keymaps
+      -- Global LspAttach autocmd for keymaps & breadcrumbs
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
         callback = function(event)
           local bufnr = event.buf
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client and client.server_capabilities.documentSymbolProvider then
+            local ok_navic, navic = pcall(require, "nvim-navic")
+            if ok_navic then
+              pcall(navic.attach, client, bufnr)
+            end
+          end
+
           local map = function(mode, lhs, rhs, desc)
             vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true, desc = desc })
           end
