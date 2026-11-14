@@ -16,7 +16,7 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 | Keymap | Action |
 | --- | --- |
 | <kbd>Ctrl+s</kbd> | Save file (Normal, Insert, Visual) |
-| <kbd>Ctrl+d</kbd> | Exit Neovim (**prompts to save** if unsaved changes exist) |
+| <kbd>Ctrl+d</kbd> | Exit Neovim (shows centered modal dialog with `[Yes]` `[No]` `[Cancel]` buttons if unsaved changes exist) |
 | <kbd>Ctrl+a</kbd> | Select all text in buffer |
 | <kbd>U</kbd> | Redo |
 | <kbd>Alt+j</kbd> / <kbd>Alt+k</kbd> | Move selected block down / up (Visual mode) |

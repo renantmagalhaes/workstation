@@ -11,7 +11,7 @@ map("n", "<C-s>", "<cmd>write<CR>", { desc = "Save file", silent = true })
 map("i", "<C-s>", "<Esc><cmd>write<CR>a", { desc = "Save file", silent = true })
 map("v", "<C-s>", "<Esc><cmd>write<CR>gv", { desc = "Save file", silent = true })
 
--- Exit with Ctrl+d (Shows a floating dialog box if unsaved changes exist)
+-- Exit with Ctrl+d (Shows a sleek modal dialog box if unsaved changes exist)
 local function confirm_exit()
   local modified = {}
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
@@ -28,32 +28,202 @@ local function confirm_exit()
     return
   end
 
-  -- Display a floating rounded dialog box
-  local title = string.format("Save changes to %s?", table.concat(modified, ", "))
-  local choices = {
-    "1. Save all and quit",
-    "2. Discard changes and quit",
-    "3. Cancel (keep editing)",
+  -- Display a clean centered dialog box (not a list)
+  local files_str = table.concat(modified, ", ")
+  if #files_str > 44 then
+    files_str = files_str:sub(1, 41) .. "..."
+  end
+
+  local buttons = {
+    { text = "[ Yes ]", action = function() vim.cmd("wa"); vim.cmd("qa") end },
+    { text = "[ No ]", action = function() vim.cmd("qa!") end },
+    { text = "[ Cancel ]", action = nil },
   }
 
-  vim.ui.select(choices, {
-    prompt = title,
-  }, function(choice)
-    if not choice then
-      return
+  local current_idx = 1
+  local width = 58
+  local prompt_line = "  Save changes before quitting?"
+  local mod_line = "  Modified: " .. files_str
+  local hint_line = "        y: save & quit  •  n: discard  •  esc: cancel"
+
+  local content_lines = {
+    "",
+    prompt_line,
+    mod_line,
+    "",
+    "", -- Button row placeholder (line index 5)
+    "",
+    hint_line,
+    "",
+  }
+
+  local btn_row = 5
+  local height = #content_lines
+
+  local buf = vim.api.nvim_create_buf(false, true)
+  vim.bo[buf].buftype = "nofile"
+  vim.bo[buf].bufhidden = "wipe"
+  vim.bo[buf].swapfile = false
+
+  local col = math.floor((vim.o.columns - width) / 2)
+  local row = math.floor((vim.o.lines - height) / 2)
+
+  local win = vim.api.nvim_open_win(buf, true, {
+    relative = "editor",
+    width = width,
+    height = height,
+    col = col,
+    row = row,
+    style = "minimal",
+    border = "rounded",
+    title = " 󰈆  Unsaved Changes ",
+    title_pos = "center",
+  })
+
+  vim.wo[win].winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder"
+  vim.wo[win].cursorline = false
+
+  local ns = vim.api.nvim_create_namespace("exit_dialog")
+  local btn_ranges = {}
+
+  local function close_dialog()
+    if vim.api.nvim_win_is_valid(win) then
+      vim.api.nvim_win_close(win, true)
     end
-    if choice:find("1") then
-      vim.cmd("wa")
-      vim.cmd("qa")
-    elseif choice:find("2") then
-      vim.cmd("qa!")
+  end
+
+  local function render()
+    btn_ranges = {}
+    local rendered_buttons = {}
+    for i, btn in ipairs(buttons) do
+      if i == current_idx then
+        table.insert(rendered_buttons, "▶ " .. btn.text .. " ◀")
+      else
+        table.insert(rendered_buttons, "  " .. btn.text .. "  ")
+      end
     end
-  end)
+
+    local total_len = 0
+    for _, b in ipairs(rendered_buttons) do
+      total_len = total_len + #b
+    end
+
+    local gap = math.max(2, math.floor((width - total_len) / (#buttons + 1)))
+    local pad = string.rep(" ", gap)
+    local btn_line = pad .. table.concat(rendered_buttons, pad)
+
+    local extra = width - #btn_line
+    if extra > 0 then
+      btn_line = string.rep(" ", math.floor(extra / 2)) .. btn_line
+    end
+
+    local search_pos = 1
+    for i, btn in ipairs(buttons) do
+      local tag = (i == current_idx) and ("▶ " .. btn.text .. " ◀") or ("  " .. btn.text .. "  ")
+      local s, e = btn_line:find(tag, search_pos, true)
+      if s and e then
+        table.insert(btn_ranges, { start_col = s, end_col = e, idx = i })
+        search_pos = e + 1
+      end
+    end
+
+    content_lines[btn_row] = btn_line
+
+    vim.bo[buf].modifiable = true
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, content_lines)
+    vim.bo[buf].modifiable = false
+
+    -- Highlights
+    vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
+    vim.api.nvim_buf_add_highlight(buf, ns, "Title", 1, 2, -1)
+    vim.api.nvim_buf_add_highlight(buf, ns, "WarningMsg", 2, 2, -1)
+    vim.api.nvim_buf_add_highlight(buf, ns, "Comment", 6, 0, -1)
+
+    for i, r in ipairs(btn_ranges) do
+      if i == current_idx then
+        vim.api.nvim_buf_add_highlight(buf, ns, "IncSearch", btn_row - 1, r.start_col - 1, r.end_col)
+      else
+        vim.api.nvim_buf_add_highlight(buf, ns, "Visual", btn_row - 1, r.start_col - 1, r.end_col)
+      end
+    end
+  end
+
+  render()
+
+  local function execute_current()
+    local action = buttons[current_idx].action
+    close_dialog()
+    if action then
+      action()
+    end
+  end
+
+  local key_opts = { buffer = buf, nowait = true, silent = true }
+
+  -- Instant hotkeys
+  vim.keymap.set("n", "y", function() close_dialog(); buttons[1].action() end, key_opts)
+  vim.keymap.set("n", "Y", function() close_dialog(); buttons[1].action() end, key_opts)
+  vim.keymap.set("n", "n", function() close_dialog(); buttons[2].action() end, key_opts)
+  vim.keymap.set("n", "N", function() close_dialog(); buttons[2].action() end, key_opts)
+  vim.keymap.set("n", "c", close_dialog, key_opts)
+  vim.keymap.set("n", "C", close_dialog, key_opts)
+  vim.keymap.set("n", "q", close_dialog, key_opts)
+  vim.keymap.set("n", "<Esc>", close_dialog, key_opts)
+  vim.keymap.set("n", "<C-c>", close_dialog, key_opts)
+
+  -- Navigation
+  vim.keymap.set("n", "<Left>", function()
+    current_idx = (current_idx == 1) and #buttons or (current_idx - 1)
+    render()
+  end, key_opts)
+  vim.keymap.set("n", "h", function()
+    current_idx = (current_idx == 1) and #buttons or (current_idx - 1)
+    render()
+  end, key_opts)
+  vim.keymap.set("n", "<S-Tab>", function()
+    current_idx = (current_idx == 1) and #buttons or (current_idx - 1)
+    render()
+  end, key_opts)
+
+  vim.keymap.set("n", "<Right>", function()
+    current_idx = (current_idx == #buttons) and 1 or (current_idx + 1)
+    render()
+  end, key_opts)
+  vim.keymap.set("n", "l", function()
+    current_idx = (current_idx == #buttons) and 1 or (current_idx + 1)
+    render()
+  end, key_opts)
+  vim.keymap.set("n", "<Tab>", function()
+    current_idx = (current_idx == #buttons) and 1 or (current_idx + 1)
+    render()
+  end, key_opts)
+
+  vim.keymap.set("n", "<CR>", execute_current, key_opts)
+  vim.keymap.set("n", "<Space>", execute_current, key_opts)
+
+  -- Mouse click support
+  vim.keymap.set("n", "<LeftMouse>", function()
+    local mouse = vim.fn.getmousepos()
+    if mouse.winid == win and mouse.line == btn_row then
+      for _, r in ipairs(btn_ranges) do
+        if mouse.column >= r.start_col and mouse.column <= r.end_col then
+          current_idx = r.idx
+          execute_current()
+          return
+        end
+      end
+    elseif mouse.winid ~= win then
+      close_dialog()
+    end
+  end, key_opts)
 end
 
 map({ "n", "i", "v" }, "<C-d>", function()
-  if vim.fn.mode() ~= "n" then
+  local mode = vim.fn.mode()
+  if mode:find("i") then
     vim.cmd("stopinsert")
+  elseif mode:find("v") or mode:find("V") or mode == "\22" then
+    vim.cmd([[execute "normal! \<ESC>"]])
   end
   confirm_exit()
 end, { desc = "Exit with save dialog box", silent = true })
