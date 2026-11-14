@@ -34,6 +34,8 @@ require("lazy").setup({
   install = {
     colorscheme = { "cyberdream", "default" },
   },
+  -- Deterministic Lockfile: Pins all plugins to audited git commit SHAs
+  lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",
   -- NO AUTOMATIC BACKGROUND UPDATES: guarantees rock-solid stability!
   checker = {
     enabled = false,

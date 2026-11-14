@@ -93,3 +93,40 @@ Run the installation script:
 ```bash
 bash scripts/vim.sh
 ```
+
+---
+
+## 🔒 Security & Deterministic Lockfile (`lazy-lock.json`)
+
+To prevent supply-chain attacks, regressions, or breaking changes from upstream plugin repositories, this distribution uses a **cryptographic lockfile** (`dotfiles/nvim/lazy-lock.json`).
+
+- **Immutable Commit SHAs**: Every single plugin is pinned to an audited git commit hash.
+- **Zero Surprise Updates**: Background update checks and automatic fetching are completely disabled (`checker.enabled = false`).
+- **Safe Re-installation**: Running `bash scripts/vim.sh` executes `+Lazy! restore`, ensuring that every plugin is checked out to the exact commit pinned in `lazy-lock.json`.
+
+---
+
+## 🛠️ Future Maintenance Workflow
+
+- **Deliberately updating plugins**:
+  1. Open Neovim and run `:Lazy update <plugin-name>` (or `:Lazy update` for all plugins).
+  2. Test your workflow to verify stability and ensure no breaking changes or syntax errors.
+  3. Commit the updated `dotfiles/nvim/lazy-lock.json` to git:
+     ```bash
+     git add dotfiles/nvim/lazy-lock.json
+     git commit -m "chore(nvim): update plugin lockfile"
+     ```
+
+- **Rolling back or restoring state**:
+  If a test or manual change breaks your setup, instantly revert all plugins back to the locked commit SHAs:
+  ```bash
+  nvim --headless "+Lazy! restore" +qa
+  ```
+
+- **Adding a new plugin**:
+  1. Add its specification to a file in `dotfiles/nvim/lua/plugins/`.
+  2. Open Neovim; `lazy.nvim` will automatically install it and record its exact commit SHA into `lazy-lock.json`.
+  3. Stage and commit both your lua spec and the updated `lazy-lock.json`.
+
+- **Auditing installed plugins**:
+  Open `dotfiles/nvim/lazy-lock.json` to inspect every pinned commit SHA and branch.

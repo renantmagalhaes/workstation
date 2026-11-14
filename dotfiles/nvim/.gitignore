@@ -1,4 +1,3 @@
-./lazy-lock.json
-lazy-lock.json*
-./lazyvim.json
+# Legacy files to ignore
 lazyvim.json
+./lazyvim.json

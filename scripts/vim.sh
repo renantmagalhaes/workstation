@@ -77,9 +77,9 @@ fi
 
 if [ -n "$NVIM_BIN" ]; then
     echo "✨ Found Neovim at: $NVIM_BIN"
-    echo "📦 Pre-installing and syncing plugins headlessly..."
-    "$NVIM_BIN" --headless "+Lazy! sync" +qa || true
-    echo "✅ Plugins installed and synchronized!"
+    echo "🔒 Pre-installing and restoring plugins headlessly from lazy-lock.json..."
+    "$NVIM_BIN" --headless "+Lazy! restore" +qa || "$NVIM_BIN" --headless "+Lazy! sync" +qa || true
+    echo "✅ Plugins installed and locked to exact commits!"
 else
     echo "ℹ️  Neovim binary not in PATH during script execution."
     echo "   Ensure Homebrew's Neovim is in PATH: eval \"\$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)\""
