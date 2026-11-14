@@ -126,7 +126,21 @@ To prevent supply-chain attacks, regressions, or breaking changes from upstream 
 - **Adding a new plugin**:
   1. Add its specification to a file in `dotfiles/nvim/lua/plugins/`.
   2. Open Neovim; `lazy.nvim` will automatically install it and record its exact commit SHA into `lazy-lock.json`.
-  3. Stage and commit both your lua spec and the updated `lazy-lock.json`.
+  3. Backup the new plugin to your GitHub organization:
+     ```bash
+     python3 dotfiles/nvim/scripts/fork_plugins.py
+     ```
+  4. Stage and commit your lua spec, `lazy-lock.json`, and any configuration updates.
+
+- **Syncing / Forking All Plugins to Backup Org**:
+  Use the built-in backup script to automatically fork any new plugins to [rtm0x00](https://github.com/rtm0x00):
+  ```bash
+  # Check status without making changes
+  python3 dotfiles/nvim/scripts/fork_plugins.py --dry-run
+
+  # Fork any newly added plugins (all branches included)
+  python3 dotfiles/nvim/scripts/fork_plugins.py
+  ```
 
 - **Auditing installed plugins**:
   Open `dotfiles/nvim/lazy-lock.json` to inspect every pinned commit SHA and branch.
