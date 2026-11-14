@@ -34,6 +34,14 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 | `<leader>fb` | List and search open buffers |
 | `<leader>fr` | Search recent files |
 
+### Find & Replace
+| Keymap | Action |
+| --- | --- |
+| `<leader>sr` | **Project Find & Replace** (`grug-far`): VS Code-style find & replace with live diff |
+| `<leader>sf` | **File Find & Replace** (`grug-far`): Find & replace within current file |
+| `<leader>sw` | **Word Find & Replace** (`grug-far`): Find & replace word under cursor |
+| `<leader>R` or `<leader>mr` | **Interactive Multi-Replace** (`muren`): Side-by-side regex buffer replace |
+
 ### Lateral Tree & Explorer
 | Keymap | Action |
 | --- | --- |
@@ -75,6 +83,7 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 - **Fluid Cursor**: `smear-cursor.nvim` (smooth cursor animations between lines and windows)
 - **File Explorer**: `nvim-tree` with Devicons & Git indicators
 - **Fuzzy Finder**: `telescope.nvim`
+- **Find & Replace**: `MagicDuck/grug-far.nvim` (project-wide find & replace with live diff) + `AckslD/muren.nvim` (interactive multi-line regex replace)
 - **LSP**: On-demand auto-installer and launcher per filetype
 - **Linting**: `nvim-lint` (auto-detects filetype on save / buffer enter without crashes)
 - **Formatting**: `conform.nvim` (format-on-save + Pretty JSON)

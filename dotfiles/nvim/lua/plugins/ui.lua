@@ -264,7 +264,7 @@ return {
         { "<leader>f", group = "Find/Fuzzy" },
         { "<leader>g", group = "Git" },
         { "<leader>h", group = "Git Hunk" },
-        { "<leader>s", group = "Splits" },
+        { "<leader>s", group = "Search/Replace & Splits" },
         { "<leader>x", group = "Trouble/Diagnostics" },
         { "<leader>m", group = "Markdown" },
         { "<leader>c", group = "Code/Format" },
