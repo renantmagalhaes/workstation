@@ -15,7 +15,6 @@ import array
 import atexit
 import ctypes
 import math
-import os
 import signal
 import subprocess
 import sys

@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import json
 import subprocess
-import sys
 
 def get_niri_scroll_state():
     try:

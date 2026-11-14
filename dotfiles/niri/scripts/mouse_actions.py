@@ -215,5 +215,5 @@ if __name__ == "__main__":
         asyncio.run(main())
     except KeyboardInterrupt:
         pass
-    except Exception as e:
+    except Exception:
         sys.exit(1)

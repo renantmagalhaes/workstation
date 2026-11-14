@@ -8,7 +8,6 @@ import os
 import sys
 import logging
 import signal
-import shlex
 from evdev import InputDevice, ecodes as EC, list_devices
 
 def setup_logging(debug=False):

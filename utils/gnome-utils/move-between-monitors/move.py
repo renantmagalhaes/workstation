@@ -2,7 +2,6 @@
 
 import subprocess
 import re
-import time
 
 
 # Get the window ID of the currently active window
