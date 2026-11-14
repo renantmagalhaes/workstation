@@ -99,6 +99,33 @@ map("n", "<leader>o", "<cmd>NvimTreeFindFile<CR>", { desc = "Reveal file in tree
 map("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit", silent = true })
 map("n", "<leader>lg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit", silent = true })
 
+-- Git Web Browser & Link Copy (:GitBrowse, :GitCopyUrl, <leader>go, <leader>gy)
+local git_web = require("config.git_web")
+
+vim.api.nvim_create_user_command("GitBrowse", function(args)
+  git_web.open({ range = args.range > 0, line1 = args.line1, line2 = args.line2 })
+end, { range = true, desc = "Open current file in Git Web browser" })
+
+vim.api.nvim_create_user_command("GitCopyUrl", function(args)
+  git_web.copy({ range = args.range > 0, line1 = args.line1, line2 = args.line2 })
+end, { range = true, desc = "Copy Git Web URL for current file to clipboard" })
+
+pcall(vim.api.nvim_create_user_command, "GBrowse", function(args)
+  git_web.open({ range = args.range > 0, line1 = args.line1, line2 = args.line2 })
+end, { range = true, desc = "Open current file in Git Web browser" })
+
+map("n", "<leader>go", function() git_web.open() end, { desc = "Open file in Git Web", silent = true })
+map("v", "<leader>go", function()
+  vim.cmd([[execute "normal! \<ESC>"]])
+  git_web.open({ visual = true })
+end, { desc = "Open selected lines in Git Web", silent = true })
+
+map("n", "<leader>gy", function() git_web.copy() end, { desc = "Copy Git Web URL", silent = true })
+map("v", "<leader>gy", function()
+  vim.cmd([[execute "normal! \<ESC>"]])
+  git_web.copy({ visual = true })
+end, { desc = "Copy Git Web URL for selected lines", silent = true })
+
 -- Pretty JSON (<leader>pj)
 map("n", "<leader>pj", function()
   -- Try jq if available, otherwise python json.tool, otherwise LSP/conform format

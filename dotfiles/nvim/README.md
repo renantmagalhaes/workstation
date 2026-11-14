@@ -75,6 +75,10 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 ### Git & Code Signs
 | Keymap | Action |
 | --- | --- |
+| `<leader>go` or `:GitBrowse` | **Open in Git Web**: Opens current file/line (or Visual selection) on GitHub/GitLab |
+| `<leader>gy` or `:GitCopyUrl` | **Copy Git Web URL**: Copies the web link to clipboard with line numbers |
+| `:GBrowse` | Alias for `:GitBrowse` |
+| `<leader>gg` or `<leader>lg` | Open **LazyGit** floating window |
 | `]c` / `[c` | Jump to next / previous Git hunk |
 | `<leader>hp` | Preview Git hunk diff inline |
 | `<leader>hs` | Stage Git hunk |
