@@ -1,4 +1,4 @@
--- Minimalist & Stable Startup Dashboard (Alpha)
+-- Modern, Detailed & Minimalist Startup Dashboard (Alpha)
 return {
   {
     "goolord/alpha-nvim",
@@ -12,47 +12,174 @@ return {
       local alpha = require("alpha")
       local dashboard = require("alpha.themes.dashboard")
 
-      -- Sleek, minimalist header
-      dashboard.section.header.val = {
-        [[        _   __                _            ]],
-        [[       / | / /___  ____ _   _(_)___ ___    ]],
-        [[      /  |/ / _ \/ __ \ | / / / __ `__ \   ]],
-        [[     / /|  /  __/ /_/ / |/ / / / / / / /   ]],
-        [[    /_/ |_/\___/\____/|___/_/_/ /_/ /_/    ]],
+      -- Sleek, razor-sharp ASCII Logo (Cyberdream aesthetic)
+      local header = {
+        type = "text",
+        val = {
+          [[        ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗]],
+          [[        ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║]],
+          [[        ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║]],
+          [[        ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║]],
+          [[        ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║]],
+          [[        ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝]],
+        },
+        opts = {
+          position = "center",
+          hl = "Function",
+        },
       }
 
-      -- Header highlight
-      dashboard.section.header.opts.hl = "Keyword"
-
-      -- Quick Action Buttons
-      dashboard.section.buttons.val = {
-        dashboard.button("f", "  Find File", "<cmd>Telescope find_files hidden=true<CR>"),
-        dashboard.button("r", "  Recent Files", "<cmd>Telescope oldfiles<CR>"),
-        dashboard.button("s", "  Restore Session", "<cmd>lua require('persistence').load()<CR>"),
-        dashboard.button("g", "  Find Text (Grep)", "<cmd>Telescope live_grep<CR>"),
-        dashboard.button("e", "  File Explorer", "<cmd>NvimTreeToggle<CR>"),
-        dashboard.button("n", "  New File", "<cmd>ene <BAR> startinsert<CR>"),
-        dashboard.button("q", "  Quit", "<cmd>confirm qa<CR>"),
+      -- Dynamic Info Pill (Project / Git Branch / Plugin Count / Neovim Version)
+      local info_badge = {
+        type = "text",
+        val = function()
+          local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+          local branch = vim.fn.system("git branch --show-current 2>/dev/null"):gsub("%s+", "")
+          local branch_text = (branch ~= "") and ("  •   " .. branch) or ""
+          local stats = require("lazy").stats()
+          local v = vim.version()
+          local nvim_ver = string.format("v%d.%d.%d", v.major, v.minor, v.patch)
+          return string.format(" %s%s  •  󰏖 %d plugins  •   %s", cwd, branch_text, stats.count, nvim_ver)
+        end,
+        opts = {
+          position = "center",
+          hl = "SpecialComment",
+        },
       }
 
-      -- Shortcut key highlight
-      for _, button in ipairs(dashboard.section.buttons.val) do
-        button.opts.hl_shortcut = "Number"
+      -- Dynamic Recent Files (shows up to 5 most recently used files with Devicons)
+      local function mru_val()
+        local oldfiles = vim.v.oldfiles or {}
+        local cwd = vim.fn.getcwd()
+        local buttons = {}
+        local devicons_ok, devicons = pcall(require, "nvim-web-devicons")
+
+        for _, file in ipairs(oldfiles) do
+          if #buttons >= 5 then break end
+          if vim.fn.filereadable(file) == 1
+            and not file:find("commit_editmsg")
+            and not file:find("/tmp/")
+            and not file:find("%.git/")
+          then
+            local display = file
+            if file:sub(1, #cwd) == cwd then
+              display = file:sub(#cwd + 2)
+            else
+              display = vim.fn.fnamemodify(file, ":~")
+            end
+
+            if #display > 34 then
+              display = "..." .. display:sub(#display - 30)
+            end
+
+            local icon = ""
+            if devicons_ok then
+              local ext = vim.fn.fnamemodify(file, ":e")
+              local i = devicons.get_icon(file, ext, { default = true })
+              if i then icon = i end
+            end
+
+            local idx = tostring(#buttons + 1)
+            local btn_text = string.format("%s  %s", icon, display)
+            local escaped_path = vim.fn.fnameescape(file)
+            local btn = dashboard.button(idx, btn_text, string.format("<cmd>edit %s<CR>", escaped_path))
+            btn.opts.hl_shortcut = "Number"
+            btn.opts.width = 48
+            btn.opts.align_shortcut = "right"
+            btn.opts.shortcut = "[" .. idx .. "]"
+            table.insert(buttons, btn)
+          end
+        end
+
+        if #buttons == 0 then
+          return {}
+        end
+
+        local items = {
+          {
+            type = "text",
+            val = "  Recent Files",
+            opts = { hl = "SpecialComment", position = "center" },
+          },
+          { type = "padding", val = 1 },
+        }
+        for _, b in ipairs(buttons) do
+          table.insert(items, b)
+        end
+        table.insert(items, { type = "padding", val = 1 })
+        return items
       end
 
-      -- Footer
-      local datetime = os.date(" %Y-%m-%d   %H:%M")
-      dashboard.section.footer.val = { datetime, "", "⚡ Ready to build" }
-      dashboard.section.footer.opts.hl = "Comment"
+      local mru_section = {
+        type = "group",
+        val = mru_val,
+        opts = { shrink_margin = false },
+      }
 
-      -- Layout padding
+      -- Helper for styled action buttons
+      local function action_btn(sc, txt, cmd, shortcut_label)
+        local b = dashboard.button(sc, txt, cmd)
+        b.opts.hl_shortcut = "Keyword"
+        b.opts.width = 48
+        b.opts.align_shortcut = "right"
+        if shortcut_label then
+          b.opts.shortcut = shortcut_label
+        end
+        return b
+      end
+
+      local actions_header = {
+        type = "text",
+        val = "⚡ Quick Actions",
+        opts = { hl = "SpecialComment", position = "center" },
+      }
+
+      local action_buttons = {
+        action_btn("f", "  Find File", "<cmd>Telescope find_files hidden=true<CR>", "SPC SPC"),
+        action_btn("g", "  Find Text (Grep)", "<cmd>Telescope live_grep<CR>", "SPC fg"),
+        action_btn("s", "  Restore Session", "<cmd>lua require('persistence').load()<CR>", "s"),
+        action_btn("r", "  Recent Files (All)", "<cmd>Telescope oldfiles<CR>", "SPC fr"),
+        action_btn("t", "  Floating Terminal", "<cmd>lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<leader>tt', true, false, true), 'm', true)<CR>", "Ctrl+/"),
+        action_btn("c", "  Command Palette", "<cmd>Telescope commands<CR>", "SPC :"),
+        action_btn("e", "  File Explorer", "<cmd>NvimTreeToggle<CR>", "SPC e"),
+        action_btn("n", "  New File", "<cmd>ene <BAR> startinsert<CR>", "n"),
+        action_btn("q", "  Quit Neovim", "<cmd>confirm qa<CR>", "Ctrl+d"),
+      }
+
+      -- Footer with live statistics and datetime
+      local footer = {
+        type = "text",
+        val = function()
+          local stats = require("lazy").stats()
+          local datetime = os.date(" %Y-%m-%d   %H:%M")
+          local load_time = (stats.startuptime > 0)
+            and string.format("󱐋 Loaded %d plugins in %.1fms", stats.count, stats.startuptime)
+            or string.format("󰏖 %d plugins loaded", stats.count)
+          return {
+            datetime .. "   " .. load_time,
+            "",
+            "⚡ Ready to build",
+          }
+        end,
+        opts = {
+          position = "center",
+          hl = "Comment",
+        },
+      }
+
+      -- Layout composition
       dashboard.config.layout = {
-        { type = "padding", val = 4 },
-        dashboard.section.header,
         { type = "padding", val = 2 },
-        dashboard.section.buttons,
+        header,
+        { type = "padding", val = 1 },
+        info_badge,
         { type = "padding", val = 2 },
-        dashboard.section.footer,
+        mru_section,
+        actions_header,
+        { type = "padding", val = 1 },
+        { type = "group", val = action_buttons, opts = { shrink_margin = false } },
+        { type = "padding", val = 2 },
+        footer,
       }
 
       alpha.setup(dashboard.config)
