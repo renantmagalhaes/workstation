@@ -54,6 +54,8 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 ### Tools & Programming
 | Keymap | Action |
 | --- | --- |
+| `<leader>;` or `<leader>a` | **Toggle Dashboard**: Open startup dashboard from any file (press again to return) |
+| `:Dashboard` or `:Alpha` | Command to open startup dashboard |
 | <kbd>Ctrl+/</kbd> or `<leader>tt` | **Floating Terminal**: Quick popup terminal (Normal, Insert, Terminal modes) |
 | `<leader>pj` | **Pretty JSON**: Formats JSON buffer with `jq` / Python / LSP |
 | `<leader>cf` or `<leader>fm` | Format document (via `conform.nvim` / LSP) |
