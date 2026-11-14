@@ -1,121 +1,139 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
--- Select all text
-vim.keymap.set("n", "<C-a>", "ggVG", { silent = true })
-vim.keymap.set("i", "<C-a>", "<Esc>ggVG", { silent = true })
+-- Keymaps configuration
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
--- Save file
-vim.keymap.set("n", "<C-s>", "<cmd>write<CR>", { silent = true })
-vim.keymap.set("i", "<C-s>", "<cmd>write<CR>", { silent = true })
+-- ==========================================
+-- Core Requested Keymaps
+-- ==========================================
 
--- Exit file
-vim.keymap.set("n", "<C-d>", "<cmd>qa<CR>", { silent = true })
-vim.keymap.set("i", "<C-d>", "<Esc><cmd>qa<CR>", { silent = true })
+-- Save with Ctrl+s (Normal, Insert, Visual)
+map("n", "<C-s>", "<cmd>write<CR>", { desc = "Save file", silent = true })
+map("i", "<C-s>", "<Esc><cmd>write<CR>a", { desc = "Save file", silent = true })
+map("v", "<C-s>", "<Esc><cmd>write<CR>gv", { desc = "Save file", silent = true })
 
--- Muren Regex
-vim.keymap.set("n", "<leader>R", "<cmd>MurenToggle<CR>", { silent = true })
+-- Exit with Ctrl+d (Prompt to save if unsaved changes exist)
+map("n", "<C-d>", "<cmd>confirm qa<CR>", { desc = "Exit with save prompt", silent = true })
+map("i", "<C-d>", "<Esc><cmd>confirm qa<CR>", { desc = "Exit with save prompt", silent = true })
+map("v", "<C-d>", "<Esc><cmd>confirm qa<CR>", { desc = "Exit with save prompt", silent = true })
 
---REDO
-vim.api.nvim_set_keymap("n", "U", "<C-r>", { noremap = true })
+-- Fuzzy search inline (Ctrl+f)
+map("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Search inside buffer", silent = true })
+map("i", "<C-f>", "<Esc><cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Search inside buffer", silent = true })
+map("n", "<leader>f", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Search inside buffer", silent = true })
 
--- Background color for tokyodark theme
-vim.cmd([[highlight Visual ctermbg=grey ctermfg=NONE guibg=#634d81 guifg=NONE]])
+-- Fuzzy search across whole folder (Space Space)
+map("n", "<leader><leader>", "<cmd>Telescope find_files hidden=true<CR>", { desc = "Find files in project", silent = true })
 
--- === Snacks-based mappings ===
+-- Grep across whole folder / project
+map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Live grep across project", silent = true })
+map("n", "<leader>/", "<cmd>Telescope live_grep<CR>", { desc = "Live grep across project", silent = true })
 
--- 1) Current-buffer fuzzy find
---    Replaces: Telescope current_buffer_fuzzy_find
-vim.keymap.set("n", "<leader>f", function()
-  Snacks.picker.lines({
-    layout = "default", -- same idea as above
-  })
-end, { noremap = true, silent = true })
+-- Additional Telescope pickers
+map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Find open buffers", silent = true })
+map("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Recent files", silent = true })
+map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "Help tags", silent = true })
 
--- Optionally, replicate the <C-f> in normal/insert:
-vim.keymap.set("n", "<C-f>", function()
-  Snacks.picker.lines({
-    layout = "default", -- same idea as above
-  })
-end, { noremap = true, silent = true })
+-- Lateral Tree Bar (NvimTree)
+map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file tree", silent = true })
+map("n", "<C-b>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file tree (VS Code style)", silent = true })
+map("n", "<leader>o", "<cmd>NvimTreeFindFile<CR>", { desc = "Reveal file in tree", silent = true })
 
-vim.keymap.set("i", "<C-f>", function()
-  -- If you want to exit Insert mode first:
-  vim.cmd("stopinsert")
-  Snacks.picker.lines({
-    layout = "default", -- same idea as above
-  })
-end, { noremap = true, silent = true })
+-- Lazygit
+map("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit", silent = true })
+map("n", "<leader>lg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit", silent = true })
 
--- 2) "Smart open"-like behavior (replaces: telescope.extensions.smart_open.smart_open)
---    Here we bind <leader><leader>. You can change the key if needed.
-vim.keymap.set("n", "<leader><leader>", function()
-  Snacks.picker.pick({
-    -- Combine multiple sources into one
-    multi = { "buffers", "recent", "files" },
-    format = "file",
-    hidden = true,
-    -- The matcher.frecency = true will push your recently opened files up top
-    matcher = {
-      cwd_bonus = true,
-      frecency = true,
-      sort_empty = false,
-      history_bonus = true,
-    },
-    filter = { cwd = true },
-    transform = "unique_file",
-    -- Optional: force a floating center layout
-    layout = "default",
-  })
-end, { noremap = true, silent = true })
+-- Pretty JSON (<leader>pj)
+map("n", "<leader>pj", function()
+  -- Try jq if available, otherwise python json.tool, otherwise LSP/conform format
+  if vim.fn.executable("jq") == 1 then
+    vim.cmd("%!jq .")
+  elseif vim.fn.executable("python3") == 1 then
+    vim.cmd("%!python3 -m json.tool")
+  else
+    vim.lsp.buf.format({ async = false })
+  end
+end, { desc = "Pretty JSON (Format buffer)", silent = true })
 
--- -- Search with telescope
--- local builtin = require("telescope.builtin")
--- vim.keymap.set("n", "<leader>f", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { noremap = true, silent = true })
--- vim.keymap.set("i", "<C-f>", "<Esc><cmd>Telescope current_buffer_fuzzy_find<CR>", { silent = true })
--- vim.keymap.set("n", "<C-f>", "<Esc><cmd>Telescope current_buffer_fuzzy_find<CR>", { silent = true })
--- vim.keymap.set("n", "<leader><leader>", function()
---   require("telescope").extensions.smart_open.smart_open()
--- end, { noremap = true, silent = true })
--- -- -- Bind command
--- vim.keymap.set("n", "<leader><leader>", "<Cmd>Telescope frecency<CR>")
--- -- Bind Lua function directly
--- vim.keymap.set("n", "<leader><leader>", function()
---   require("telescope").extensions.frecency.frecency {}
--- end)
+-- Paste image from clipboard
+map("n", "<leader>p", "<cmd>PasteImage<CR>", { desc = "Paste image from clipboard", silent = true })
+map("n", "<leader>P", "<cmd>PasteImage<CR>", { desc = "Paste image from clipboard", silent = true })
 
--- surround
--- -- add surrounding pairs normal mode
-vim.keymap.set("n", "<leader>'", "ysiw'", { remap = true })
-vim.keymap.set("n", '<leader>"', 'ysiw"', { remap = true })
-vim.keymap.set("n", "<leader>`", "ysiw`", { remap = true })
-vim.keymap.set("n", "<leader>(", "ysiw(", { remap = true })
-vim.keymap.set("n", "<leader>{", "ysiw{", { remap = true })
-vim.keymap.set("n", "<leader>[", "ysiw[", { remap = true })
--- -- remove surrounding pairs normal mode
---vim.keymap.set('n', "<leader>Del", "dsq",{ remap = true })
--- -- add surrounding pairs inset mode
---TBD
---
--- COPY and PASTE insert and visual mode
--- Insert mode mappings
--- Map Ctrl+C to copy the current line in insert mode
-vim.api.nvim_set_keymap("i", "<C-c>", '"+yy', { noremap = true, silent = true })
+-- Markdown Preview Toggle
+map("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<CR>", { desc = "Toggle Markdown Preview", silent = true })
 
--- Map Ctrl+V to paste in insert mode
-vim.api.nvim_set_keymap("i", "<C-v>", "<C-r>+", { noremap = true, silent = true })
+-- Code formatting (<leader>cf or <leader>fm)
+map({ "n", "v" }, "<leader>cf", function()
+  local ok, conform = pcall(require, "conform")
+  if ok then
+    conform.format({ lsp_fallback = true, async = false, timeout_ms = 1000 })
+  else
+    vim.lsp.buf.format({ async = false })
+  end
+end, { desc = "Format document", silent = true })
 
--- Visual mode mappings
--- Map Ctrl+C to copy the selected text in visual mode
-vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
+map({ "n", "v" }, "<leader>fm", function()
+  local ok, conform = pcall(require, "conform")
+  if ok then
+    conform.format({ lsp_fallback = true, async = false, timeout_ms = 1000 })
+  else
+    vim.lsp.buf.format({ async = false })
+  end
+end, { desc = "Format document", silent = true })
 
--- Map Ctrl+V to paste in visual mode (replace selection with clipboard content)
-vim.api.nvim_set_keymap("v", "<C-v>", '"_dP', { noremap = true, silent = true })
+-- ==========================================
+-- VS Code-Style & Everyday Ergonomics
+-- ==========================================
 
--- Move selected block one line down in visual mode
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection down" })
--- Move selected block one line up in visual mode
-vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection up" })
--- Indent files, similar to vscode
-vim.keymap.set("v", "<Tab>", ">gv", { noremap = true, silent = true, desc = "Indent selected block" })
-vim.keymap.set("v", "<S-Tab>", "<gv", { noremap = true, silent = true, desc = "Outdent selected block" })
+-- Select all (<C-a>)
+map("n", "<C-a>", "ggVG", { desc = "Select all", silent = true })
+map("i", "<C-a>", "<Esc>ggVG", { desc = "Select all", silent = true })
+
+-- Redo with U
+map("n", "U", "<C-r>", { desc = "Redo", noremap = true })
+
+-- Clear search highlight on Esc
+map("n", "<Esc>", "<cmd>nohlsearch<CR>", { silent = true })
+
+-- Clipboard copy & paste
+map("i", "<C-c>", '"+yy', { desc = "Copy line in insert mode", silent = true })
+map("i", "<C-v>", "<C-r>+", { desc = "Paste in insert mode", silent = true })
+map("v", "<C-c>", '"+y', { desc = "Copy selection", silent = true })
+map("v", "<C-v>", '"_dP', { desc = "Paste replacing selection", silent = true })
+
+-- Move lines up/down in Visual mode (Alt+j / Alt+k)
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down", silent = true })
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up", silent = true })
+
+-- Indent / Outdent in Visual mode (Tab / Shift-Tab)
+map("v", "<Tab>", ">gv", { desc = "Indent selection", silent = true })
+map("v", "<S-Tab>", "<gv", { desc = "Outdent selection", silent = true })
+
+-- Buffer navigation (tabs at top)
+map("n", "[b", "<cmd>bprevious<CR>", { desc = "Previous buffer", silent = true })
+map("n", "]b", "<cmd>bnext<CR>", { desc = "Next buffer", silent = true })
+map("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Close buffer", silent = true })
+map("n", "<leader>bc", "<cmd>bdelete<CR>", { desc = "Close buffer", silent = true })
+
+-- Quick jump to tabs 1-9
+for i = 1, 9 do
+  map("n", "<leader>" .. i, "<cmd>BufferLineGoToBuffer " .. i .. "<CR>", { desc = "Go to buffer " .. i, silent = true })
+end
+
+-- Window navigation
+map("n", "<C-h>", "<C-w>h", { desc = "Focus left window", silent = true })
+map("n", "<C-j>", "<C-w>j", { desc = "Focus lower window", silent = true })
+map("n", "<C-k>", "<C-w>k", { desc = "Focus upper window", silent = true })
+map("n", "<C-l>", "<C-w>l", { desc = "Focus right window", silent = true })
+
+-- Window splits
+map("n", "<leader>sv", "<C-w>v", { desc = "Split vertically", silent = true })
+map("n", "<leader>sh", "<C-w>s", { desc = "Split horizontally", silent = true })
+map("n", "<leader>se", "<C-w>=", { desc = "Make splits equal", silent = true })
+map("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split", silent = true })
+
+-- Diagnostics (Trouble / LSP)
+map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Toggle Trouble Diagnostics", silent = true })
+map("n", "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "Buffer Diagnostics", silent = true })
+map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic", silent = true })
+map("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic", silent = true })
+map("n", "<leader>d", vim.diagnostic.open_float, { desc = "Line diagnostics popup", silent = true })
