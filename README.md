@@ -13,13 +13,6 @@ For:
 
 Use the script `install.sh`. Running the scripts directly may result in system malfunction.
 
-# TODO
-
-- [x] Gnome-like overview for hyprland
-- [x] Notification Center
-- [x] Clipboard Manager improvements (Quickshell?)
-- [x] Paperwm setup for Gnome (Scrolling layout)
-
 # MangoWM
 
 ### Menu
