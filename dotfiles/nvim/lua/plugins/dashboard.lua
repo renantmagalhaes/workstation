@@ -2,6 +2,7 @@
 return {
   {
     "goolord/alpha-nvim",
+    lazy = false,
     cmd = { "Alpha", "Dashboard" },
     keys = {
       { "<leader>;", "<cmd>Dashboard<CR>", desc = "Toggle Dashboard" },
@@ -47,48 +48,66 @@ return {
         },
       }
 
-      -- Dynamic Recent Files (shows up to 5 most recently used files with Devicons)
+      -- Dynamic Recent Files: prioritizes files from current workspace structure, falls back to global files
       local function mru_val()
         local oldfiles = vim.v.oldfiles or {}
-        local cwd = vim.fn.getcwd()
-        local buttons = {}
+        local cwd = vim.fs.normalize(vim.fn.getcwd())
         local devicons_ok, devicons = pcall(require, "nvim-web-devicons")
 
+        local workspace_files = {}
+        local global_files = {}
+
         for _, file in ipairs(oldfiles) do
-          if #buttons >= 5 then break end
           if vim.fn.filereadable(file) == 1
             and not file:find("commit_editmsg")
             and not file:find("/tmp/")
             and not file:find("%.git/")
           then
-            local display = file
-            if file:sub(1, #cwd) == cwd then
-              display = file:sub(#cwd + 2)
+            local norm_file = vim.fs.normalize(file)
+            -- Check if file belongs to the current workspace folder structure
+            if norm_file:sub(1, #cwd) == cwd and norm_file ~= cwd then
+              table.insert(workspace_files, file)
             else
-              display = vim.fn.fnamemodify(file, ":~")
+              table.insert(global_files, file)
             end
-
-            if #display > 34 then
-              display = "..." .. display:sub(#display - 30)
-            end
-
-            local icon = ""
-            if devicons_ok then
-              local ext = vim.fn.fnamemodify(file, ":e")
-              local i = devicons.get_icon(file, ext, { default = true })
-              if i then icon = i end
-            end
-
-            local idx = tostring(#buttons + 1)
-            local btn_text = string.format("%s  %s", icon, display)
-            local escaped_path = vim.fn.fnameescape(file)
-            local btn = dashboard.button(idx, btn_text, string.format("<cmd>edit %s<CR>", escaped_path))
-            btn.opts.hl_shortcut = "Number"
-            btn.opts.width = 48
-            btn.opts.align_shortcut = "right"
-            btn.opts.shortcut = "[" .. idx .. "]"
-            table.insert(buttons, btn)
           end
+        end
+
+        local is_workspace = #workspace_files > 0
+        local target_files = is_workspace and workspace_files or global_files
+        local section_title = is_workspace and "  Recent Files (Workspace)" or "  Recent Files (Global)"
+
+        local buttons = {}
+        for _, file in ipairs(target_files) do
+          if #buttons >= 5 then break end
+
+          local display = file
+          if file:sub(1, #cwd) == cwd then
+            display = file:sub(#cwd + 2)
+          else
+            display = vim.fn.fnamemodify(file, ":~")
+          end
+
+          if #display > 34 then
+            display = "..." .. display:sub(#display - 30)
+          end
+
+          local icon = ""
+          if devicons_ok then
+            local ext = vim.fn.fnamemodify(file, ":e")
+            local i = devicons.get_icon(file, ext, { default = true })
+            if i then icon = i end
+          end
+
+          local idx = tostring(#buttons + 1)
+          local btn_text = string.format("%s  %s", icon, display)
+          local escaped_path = vim.fn.fnameescape(file)
+          local btn = dashboard.button(idx, btn_text, string.format("<cmd>edit %s<CR>", escaped_path))
+          btn.opts.hl_shortcut = "Number"
+          btn.opts.width = 48
+          btn.opts.align_shortcut = "right"
+          btn.opts.shortcut = "[" .. idx .. "]"
+          table.insert(buttons, btn)
         end
 
         if #buttons == 0 then
@@ -98,7 +117,7 @@ return {
         local items = {
           {
             type = "text",
-            val = "  Recent Files",
+            val = section_title,
             opts = { hl = "SpecialComment", position = "center" },
           },
           { type = "padding", val = 1 },
@@ -183,6 +202,28 @@ return {
       }
 
       alpha.setup(dashboard.config)
+
+      -- Automatically open dashboard by default when launching without concrete file arguments (e.g. `nvim` or `nvim .`)
+      vim.api.nvim_create_autocmd("VimEnter", {
+        group = vim.api.nvim_create_augroup("AlphaAutoStart", { clear = true }),
+        nested = true,
+        callback = function()
+          local should_open_dashboard = false
+          local argc = vim.fn.argc()
+          if argc == 0 then
+            should_open_dashboard = true
+          elseif argc == 1 then
+            local arg = vim.fn.argv(0)
+            if arg ~= "" and vim.fn.isdirectory(arg) == 1 then
+              should_open_dashboard = true
+            end
+          end
+
+          if should_open_dashboard and not vim.g.started_by_firenvim then
+            alpha.start(false, dashboard.config)
+          end
+        end,
+      })
 
       -- Smart toggle function: opens dashboard if on a file, returns to file if on dashboard
       local function toggle_dashboard()

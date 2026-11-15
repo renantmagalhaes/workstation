@@ -14,6 +14,7 @@ return {
       require("nvim-tree").setup({
         disable_netrw = true,
         hijack_netrw = true,
+        hijack_directories = { enable = false },
         hijack_cursor = true,
         sync_root_with_cwd = true,
         update_focused_file = {
