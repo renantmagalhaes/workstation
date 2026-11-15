@@ -79,7 +79,8 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 | `<leader>xt` | List all project **TODOs** in Trouble panel |
 | `[c` | Jump up to enclosing function / class context (**Sticky Scroll**) |
 | `<leader>ut` | Toggle Sticky Scroll header on/off |
-| `<leader>mm` or `<leader>um` | **Toggle Lateral Overview**: Show/hide right-side Git & diagnostic overview bar |
+| `<leader>mm` or `<leader>um` | **Toggle Minimap**: Show/hide right-side code minimap (`:MinimapToggle`) |
+| `<leader>mf` | **Focus Minimap**: Browse inside the preview bar (<kbd>Enter</kbd> to jump, <kbd>Esc</kbd> to return) |
 | `<leader>qs` | **Restore Session** for current folder |
 | `<leader>ql` | **Restore Last Session** |
 | `<leader>p` or `<leader>P` | **Paste image** from clipboard into Markdown (auto-saved to `assets/images/`) |
@@ -129,8 +130,9 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 - **Tabs**: `bufferline.nvim` (VS Code style top tabs)
 - **Terminal**: Native Floating Terminal popup (<kbd>Ctrl+/</kbd> or `<leader>tt`)
 - **TODOs**: `folke/todo-comments.nvim` (highlight, jump `]t`/`[t`, and search project TODOs)
-- **Sticky Scroll**: `nvim-treesitter/nvim-treesitter-context` (pins enclosing function/class headers to the top line on scroll)
-- **Lateral Overview Bar**: `petertriho/nvim-scrollbar` (clean 1-column right-side overview ruler with Git diff hunks, diagnostics, and search highlights)
+- **Sticky Scroll**: `nvim-treesitter/nvim-treesitter-context` (VS Code-style pinned function/class headers on scroll)
+- **Minimap**: `nvim-mini/mini.map` (lateral preview bar on the right side with live scrollbar, diagnostics, and git indicators)
+- **Scrollbar**: `petertriho/nvim-scrollbar` (unobtrusive right-side scrollbar with Git hunks, diagnostics, and search highlights)
 - **Muted Scope & Delimiters**: `HiPhish/rainbow-delimiters.nvim` + `lukas-reineke/indent-blankline.nvim` (subtle dark grey indent lines with soft, muted function scope highlighting)
 - **Session Manager**: `folke/persistence.nvim` (saves and restores open tabs and buffers)
 - **Auto-Tags**: `windwp/nvim-ts-autotag` (auto-close & auto-rename HTML/JSX/XML tags)

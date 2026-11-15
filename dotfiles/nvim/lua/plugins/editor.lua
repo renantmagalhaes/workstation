@@ -206,19 +206,19 @@ return {
       max_lines = 3,
       min_window_height = 0,
       line_numbers = true,
-      multiline_threshold = 20,
+      multiline_threshold = 1, -- Single line per context level (matches VS Code, avoids multiline signature bloat)
       trim_scope = "outer",
-      mode = "topline", -- Pin to top of window like VS Code Sticky Scroll
-      separator = "─",
-      zindex = 20,
+      mode = "cursor", -- Function context strictly tracks cursor position and only appears when header scrolls off-screen
+      separator = nil, -- No retro ASCII dash line; uses clean graphical underline
+      zindex = 20, -- Below minimap (zindex 30) so minimap is never cut off at top
     },
     config = function(_, opts)
       require("treesitter-context").setup(opts)
-      -- Apply cyberdream floating highlights for the sticky header
-      vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "#1a1c1e", fg = "#ffffff" })
-      vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { bg = "#1a1c1e", fg = "#7b8496" })
-      vim.api.nvim_set_hl(0, "TreesitterContextSeparator", { fg = "#353b45" })
-      vim.api.nvim_set_hl(0, "TreesitterContextBottom", { underline = true, sp = "#353b45" })
+      -- Refined VS Code-style floating sticky header highlights (elevated bg + sleek subtle bottom border)
+      vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "#181a1d" })
+      vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { bg = "#181a1d", fg = "#5c6370" })
+      vim.api.nvim_set_hl(0, "TreesitterContextBottom", { underline = true, sp = "#2c313a" })
+      vim.api.nvim_set_hl(0, "TreesitterContextLineNumberBottom", { underline = true, sp = "#2c313a" })
     end,
     keys = {
       {

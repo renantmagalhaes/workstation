@@ -313,29 +313,7 @@ return {
         require("scrollbar.handlers.gitsigns").setup()
       end)
 
-      -- Toggle Lateral Overview Bar
-      local function toggle_overview()
-        local current = scrollbar_cfg.get().show
-        scrollbar_cfg.set({ show = not current })
-        if current then
-          scrollbar.clear()
-          vim.notify("Lateral overview bar hidden", vim.log.levels.INFO, { title = "Overview Bar" })
-        else
-          scrollbar.render()
-          vim.notify("Lateral overview bar visible", vim.log.levels.INFO, { title = "Overview Bar" })
-        end
-      end
-
-      vim.api.nvim_create_user_command("MinimapToggle", toggle_overview, { desc = "Toggle lateral overview bar" })
-      vim.api.nvim_create_user_command("OverviewToggle", toggle_overview, { desc = "Toggle lateral overview bar" })
-
-      vim.keymap.set("n", "<leader>mm", toggle_overview, { desc = "Toggle Lateral Overview Bar" })
-      vim.keymap.set("n", "<leader>um", toggle_overview, { desc = "Toggle Lateral Overview Bar" })
     end,
-    keys = {
-      { "<leader>mm", desc = "Toggle Lateral Overview Bar" },
-      { "<leader>um", desc = "Toggle Lateral Overview Bar" },
-    },
   },
 
   -- Keybinding helper (Which-Key)
@@ -350,7 +328,7 @@ return {
         { "<leader>h", group = "Git Hunk" },
         { "<leader>s", group = "Search/Replace & Splits" },
         { "<leader>x", group = "Trouble/Diagnostics" },
-        { "<leader>m", group = "Overview / Markdown" },
+        { "<leader>m", group = "Minimap / Markdown" },
         { "<leader>u", group = "UI Toggles" },
         { "<leader>c", group = "Code/Format" },
         { "<leader>b", group = "Buffer" },
