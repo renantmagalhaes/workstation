@@ -220,7 +220,7 @@ return {
     },
   },
 
-  -- Modern Scrollbar with Diagnostic, Git & Search Markers
+  -- Modern Lateral Overview Bar with Git, Diagnostic & Search Markers
   {
     "petertriho/nvim-scrollbar",
     branch = "v1", -- Pin to v1 for rock-solid stability
@@ -233,17 +233,78 @@ return {
       vim.g.scrollbar_v2_notice = false -- Silence migration notice
     end,
     config = function()
-      require("scrollbar").setup({
+      local scrollbar = require("scrollbar")
+      local scrollbar_cfg = require("scrollbar.config")
+
+      scrollbar.setup({
+        show = true,
+        show_in_active_only = false,
+        set_highlights = true,
         handle = {
-          color = "#3c4048",
+          text = " ",
+          blend = 25,
+          color = "#353b45",
+          highlight = "CursorColumn",
+          hide_if_all_visible = true,
         },
         marks = {
-          Search = { color = "#ff5ea0" },
-          Error = { color = "#ff6e5e" },
-          Warn = { color = "#f1ff5e" },
-          Info = { color = "#5ef1ff" },
-          Hint = { color = "#bd5eff" },
-          Misc = { color = "#5ea1ff" },
+          Cursor = {
+            text = "•",
+            priority = 0,
+            color = "#5c6370",
+          },
+          Search = {
+            text = { " ", " " },
+            priority = 1,
+            color = "#a3688a",
+          },
+          Error = {
+            text = { "•", " " },
+            priority = 2,
+            color = "#8a5555",
+          },
+          Warn = {
+            text = { "•", " " },
+            priority = 3,
+            color = "#8a7f5a",
+          },
+          Info = {
+            text = { "•", " " },
+            priority = 4,
+            color = "#4a757a",
+          },
+          Hint = {
+            text = { "•", " " },
+            priority = 5,
+            color = "#7b5e8a",
+          },
+          Misc = {
+            text = { "•", " " },
+            priority = 6,
+            color = "#4f6b8a",
+          },
+          GitAdd = {
+            text = "▎",
+            priority = 7,
+            color = "#587a5f", -- Muted sage green
+          },
+          GitChange = {
+            text = "▎",
+            priority = 7,
+            color = "#4f6b8a", -- Muted denim blue
+          },
+          GitDelete = {
+            text = " ",
+            priority = 7,
+            color = "#8a5555", -- Muted terracotta
+          },
+        },
+        handlers = {
+          cursor = false,
+          diagnostic = true,
+          gitsigns = true,
+          handle = true,
+          search = true,
         },
       })
       require("hlslens").setup()
@@ -251,7 +312,30 @@ return {
       pcall(function()
         require("scrollbar.handlers.gitsigns").setup()
       end)
+
+      -- Toggle Lateral Overview Bar
+      local function toggle_overview()
+        local current = scrollbar_cfg.get().show
+        scrollbar_cfg.set({ show = not current })
+        if current then
+          scrollbar.clear()
+          vim.notify("Lateral overview bar hidden", vim.log.levels.INFO, { title = "Overview Bar" })
+        else
+          scrollbar.render()
+          vim.notify("Lateral overview bar visible", vim.log.levels.INFO, { title = "Overview Bar" })
+        end
+      end
+
+      vim.api.nvim_create_user_command("MinimapToggle", toggle_overview, { desc = "Toggle lateral overview bar" })
+      vim.api.nvim_create_user_command("OverviewToggle", toggle_overview, { desc = "Toggle lateral overview bar" })
+
+      vim.keymap.set("n", "<leader>mm", toggle_overview, { desc = "Toggle Lateral Overview Bar" })
+      vim.keymap.set("n", "<leader>um", toggle_overview, { desc = "Toggle Lateral Overview Bar" })
     end,
+    keys = {
+      { "<leader>mm", desc = "Toggle Lateral Overview Bar" },
+      { "<leader>um", desc = "Toggle Lateral Overview Bar" },
+    },
   },
 
   -- Keybinding helper (Which-Key)
@@ -266,7 +350,8 @@ return {
         { "<leader>h", group = "Git Hunk" },
         { "<leader>s", group = "Search/Replace & Splits" },
         { "<leader>x", group = "Trouble/Diagnostics" },
-        { "<leader>m", group = "Markdown" },
+        { "<leader>m", group = "Overview / Markdown" },
+        { "<leader>u", group = "UI Toggles" },
         { "<leader>c", group = "Code/Format" },
         { "<leader>b", group = "Buffer" },
         { "<leader>q", group = "Session / Quit" },
@@ -275,28 +360,72 @@ return {
     },
   },
 
-  -- Indentation guides (Indent-Blankline)
+  -- Indentation guides & Function Scope Lines (Indent-Blankline v3)
   {
     "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
     event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      indent = {
-        char = "│",
-        tab_char = "│",
-      },
-      scope = { enabled = true, show_start = false, show_end = false },
-      exclude = {
-        filetypes = {
-          "help",
-          "terminal",
-          "lazy",
-          "NvimTree",
-          "trouble",
-          "alpha",
+    config = function()
+      local highlight = {
+        "RainbowRed",
+        "RainbowYellow",
+        "RainbowBlue",
+        "RainbowOrange",
+        "RainbowGreen",
+        "RainbowViolet",
+        "RainbowCyan",
+      }
+
+      local hooks = require("ibl.hooks")
+      -- Soft, muted color palette for delimiters and function scope lines
+      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+        -- Subtle dark slate grey for all standard indent guides (quiet and non-distracting)
+        vim.api.nvim_set_hl(0, "IblIndent", { fg = "#2c313a" })
+        vim.api.nvim_set_hl(0, "IblWhitespace", { fg = "#22252a" })
+
+        local palette = {
+          RainbowRed = "#8a5555",    -- Muted dusky rose
+          RainbowYellow = "#8a7f5a", -- Muted warm gold/amber
+          RainbowBlue = "#4f6b8a",   -- Muted slate denim blue
+          RainbowOrange = "#8a6b52", -- Muted terracotta
+          RainbowGreen = "#587a5f",  -- Muted sage/olive
+          RainbowViolet = "#7b5e8a", -- Muted lavender/plum
+          RainbowCyan = "#4a757a",   -- Muted teal/slate
+        }
+        for name, color in pairs(palette) do
+          vim.api.nvim_set_hl(0, name, { fg = color })
+          local delim_name = "RainbowDelimiter" .. name:gsub("^Rainbow", "")
+          vim.api.nvim_set_hl(0, delim_name, { fg = color })
+        end
+      end)
+
+      require("ibl").setup({
+        indent = {
+          char = "│",
+          tab_char = "│",
+          highlight = "IblIndent", -- Standard indentation lines are subtle muted dark grey!
         },
-      },
-    },
+        scope = {
+          enabled = true,
+          show_start = false,
+          show_end = false,
+          highlight = highlight, -- ONLY the active function scope line gets the soft muted color!
+        },
+        exclude = {
+          filetypes = {
+            "help",
+            "terminal",
+            "lazy",
+            "NvimTree",
+            "trouble",
+            "alpha",
+            "dashboard",
+          },
+        },
+      })
+
+      -- Colorize function scope line based on active delimiter extmark
+      hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+    end,
   },
 
   -- Trouble (Diagnostics & Symbol List)

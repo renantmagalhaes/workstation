@@ -61,10 +61,51 @@ return {
     end,
   },
 
-  -- Rainbow Delimiters
+  -- Rainbow Delimiters (Muted, elegant bracket pairs)
   {
     "HiPhish/rainbow-delimiters.nvim",
     event = { "BufReadPost", "BufNewFile" },
+    config = function()
+      local rainbow_delimiters = require("rainbow-delimiters")
+
+      -- Soft, muted palette (calm, non-distracting)
+      local palette = {
+        RainbowDelimiterRed = "#8a5555",
+        RainbowDelimiterYellow = "#8a7f5a",
+        RainbowDelimiterBlue = "#4f6b8a",
+        RainbowDelimiterOrange = "#8a6b52",
+        RainbowDelimiterGreen = "#587a5f",
+        RainbowDelimiterViolet = "#7b5e8a",
+        RainbowDelimiterCyan = "#4a757a",
+      }
+      for name, color in pairs(palette) do
+        vim.api.nvim_set_hl(0, name, { fg = color })
+      end
+
+      vim.g.rainbow_delimiters = {
+        strategy = {
+          [""] = rainbow_delimiters.strategy["global"],
+          vim = rainbow_delimiters.strategy["local"],
+        },
+        query = {
+          [""] = "rainbow-delimiters",
+          lua = "rainbow-blocks",
+        },
+        priority = {
+          [""] = 110,
+          lua = 210,
+        },
+        highlight = {
+          "RainbowDelimiterRed",
+          "RainbowDelimiterYellow",
+          "RainbowDelimiterBlue",
+          "RainbowDelimiterOrange",
+          "RainbowDelimiterGreen",
+          "RainbowDelimiterViolet",
+          "RainbowDelimiterCyan",
+        },
+      }
+    end,
   },
 
   -- Fluid Animated Cursor (Smear Cursor)
@@ -156,7 +197,7 @@ return {
     },
   },
 
-  -- Sticky Scroll Context (pins function/class header to top line)
+  -- Sticky Scroll Context (pins function/class header to top line like VS Code)
   {
     "nvim-treesitter/nvim-treesitter-context",
     event = { "BufReadPost", "BufNewFile" },
@@ -167,10 +208,18 @@ return {
       line_numbers = true,
       multiline_threshold = 20,
       trim_scope = "outer",
-      mode = "cursor",
-      separator = nil,
+      mode = "topline", -- Pin to top of window like VS Code Sticky Scroll
+      separator = "─",
       zindex = 20,
     },
+    config = function(_, opts)
+      require("treesitter-context").setup(opts)
+      -- Apply cyberdream floating highlights for the sticky header
+      vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "#1a1c1e", fg = "#ffffff" })
+      vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { bg = "#1a1c1e", fg = "#7b8496" })
+      vim.api.nvim_set_hl(0, "TreesitterContextSeparator", { fg = "#353b45" })
+      vim.api.nvim_set_hl(0, "TreesitterContextBottom", { underline = true, sp = "#353b45" })
+    end,
     keys = {
       {
         "[c",
