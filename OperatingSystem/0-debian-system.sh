@@ -210,7 +210,6 @@ sudo sed -i 's/\#FastConnectable\ =\ false/FastConnectable\ =\ true/' /etc/bluet
 pipx install virtualenv
 pipx install virtualenvwrapper
 pipx install pylint
-pipx install btop
 pipx ensurepath
 
 # fd - ignore NFS
@@ -218,6 +217,10 @@ bash ./scripts/fd-ignore.sh
 
 ## Fastfetch
 ln -s -f $PWD/dotfiles/fastfetch/ ~/.config/
+
+## Btop
+mkdir -p ~/.config/btop
+ln -s -f $PWD/dotfiles/btop/btop.conf ~/.config/btop/btop.conf
 
 ## Vicinae Launcher
 # bash ./scripts/vicinae-setup.sh

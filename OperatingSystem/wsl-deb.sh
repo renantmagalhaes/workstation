@@ -107,6 +107,10 @@ bash ./scripts/zsh.sh
 ## Fastfetch
 ln -s -f "$PWD/dotfiles/fastfetch/" ~/.config/
 
+## Btop
+mkdir -p ~/.config/btop
+ln -s -f "$PWD/dotfiles/btop/btop.conf" ~/.config/btop/btop.conf
+
 ## GIT
 bash ./utils/git-config/git-config.sh
 
@@ -114,7 +118,6 @@ bash ./utils/git-config/git-config.sh
 pipx install virtualenv
 pipx install virtualenvwrapper
 pipx install pylint
-pipx install btop
 pipx ensurepath
 
 # WSL config
@@ -175,17 +178,17 @@ else
       [ -d "$udir" ] || continue
       ubase=$(basename "$udir")
       case "$ubase" in
-        Public|Default|"Default User"|"All Users"|defaultuser*|desktop.ini)
+      Public | Default | "Default User" | "All Users" | defaultuser* | desktop.ini)
+        continue
+        ;;
+      *)
+        # Avoid re-writing if already configured by active profile check above
+        if [ "$CONFIGURED_WSL" = true ] && [ "$udir" = "$DETECTED_PROFILE" ]; then
           continue
-          ;;
-        *)
-          # Avoid re-writing if already configured by active profile check above
-          if [ "$CONFIGURED_WSL" = true ] && [ "$udir" = "$DETECTED_PROFILE" ]; then
-            continue
-          fi
-          write_wslconfig "$udir"
-          CONFIGURED_WSL=true
-          ;;
+        fi
+        write_wslconfig "$udir"
+        CONFIGURED_WSL=true
+        ;;
       esac
     done
   fi

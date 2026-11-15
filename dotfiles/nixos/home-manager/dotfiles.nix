@@ -20,6 +20,7 @@ in
     ".config/kvantum".source            = link "kde/kvantum";
     
     ".config/fastfetch".source  = link "fastfetch";
+    ".config/btop/btop.conf".source = link "btop/btop.conf";
     ".config/guake".source      = link "guake";
     ".config/lsd/config.yaml".source = link "zsh/lsd-config.yaml";
   };

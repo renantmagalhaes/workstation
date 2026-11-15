@@ -141,7 +141,6 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 #Utils
 pipx install wheel
 pipx install virtualenv virtualenvwrapper pylint
-pipx install btop
 
 # Install Vivaldi Browser
 sudo rpm --import https://repo.vivaldi.com/stable/linux_signing_key.pub
@@ -218,6 +217,10 @@ ln -s -f $PWD/dotfiles/kde/jgmenu ~/.config/
 
 ## Fastfetch
 ln -s -f $PWD/dotfiles/fastfetch/ ~/.config/
+
+## Btop
+mkdir -p ~/.config/btop
+ln -s -f $PWD/dotfiles/btop/btop.conf ~/.config/btop/btop.conf
 
 ## Vicinae Launcher
 #bash ./scripts/vicinae-setup.sh
