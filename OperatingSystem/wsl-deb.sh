@@ -118,14 +118,82 @@ pipx install btop
 pipx ensurepath
 
 # WSL config
-sudo bash -c 'cat << EOF > /mnt/c/Users/renan/.wslconfig
+write_wslconfig() {
+  _target_dir="$1"
+  [ -d "$_target_dir" ] || return 0
+  echo "Configuring WSL (.wslconfig) for: $_target_dir"
+  sudo tee "$_target_dir/.wslconfig" >/dev/null <<'EOF'
 [wsl2]
 memory=12GB # Limits VM memory in WSL 2
 swap=0
 #processors=4 # Makes the WSL 2 VM use 4 virtual processors
 #localhostForwarding=true # Boolean specifying if ports bound to wildcard or localhost in the WSL 2 VM should be connectable from the host via localhost:port.
 networkingMode=mirrored
-EOF'
+EOF
+}
+
+WIN_USER="${WIN_USER:-${WINDOWS_USER:-}}"
+CONFIGURED_WSL=false
+DETECTED_PROFILE=""
+
+if [ -n "$WIN_USER" ]; then
+  if [ -d "/mnt/c/Users/$WIN_USER" ]; then
+    write_wslconfig "/mnt/c/Users/$WIN_USER"
+    CONFIGURED_WSL=true
+  elif [ -d "$WIN_USER" ]; then
+    write_wslconfig "$WIN_USER"
+    CONFIGURED_WSL=true
+  else
+    echo "Warning: Windows user directory for '$WIN_USER' not found."
+  fi
+else
+  # 1. Try detecting active Windows user profile via cmd.exe and wslpath
+  CMD_EXE=$(command -v cmd.exe 2>/dev/null || echo "/mnt/c/Windows/System32/cmd.exe")
+  if [ -x "$CMD_EXE" ]; then
+    WIN_PROFILE_RAW=$("$CMD_EXE" /c "echo %USERPROFILE%" 2>/dev/null | tr -d '\r\n')
+    if [ -n "$WIN_PROFILE_RAW" ] && command -v wslpath >/dev/null 2>&1; then
+      DETECTED_PROFILE=$(wslpath "$WIN_PROFILE_RAW" 2>/dev/null)
+      if [ -d "$DETECTED_PROFILE" ]; then
+        write_wslconfig "$DETECTED_PROFILE"
+        CONFIGURED_WSL=true
+      fi
+    fi
+    # Fallback to %USERNAME% if wslpath was unavailable or profile not resolved
+    if [ "$CONFIGURED_WSL" = false ]; then
+      WIN_NAME_RAW=$("$CMD_EXE" /c "echo %USERNAME%" 2>/dev/null | tr -d '\r\n ')
+      if [ -n "$WIN_NAME_RAW" ] && [ -d "/mnt/c/Users/$WIN_NAME_RAW" ]; then
+        DETECTED_PROFILE="/mnt/c/Users/$WIN_NAME_RAW"
+        write_wslconfig "$DETECTED_PROFILE"
+        CONFIGURED_WSL=true
+      fi
+    fi
+  fi
+
+  # 2. Automatically detect Windows user(s) under /mnt/c/Users
+  if [ -d "/mnt/c/Users" ]; then
+    for udir in /mnt/c/Users/*; do
+      [ -d "$udir" ] || continue
+      ubase=$(basename "$udir")
+      case "$ubase" in
+        Public|Default|"Default User"|"All Users"|defaultuser*|desktop.ini)
+          continue
+          ;;
+        *)
+          # Avoid re-writing if already configured by active profile check above
+          if [ "$CONFIGURED_WSL" = true ] && [ "$udir" = "$DETECTED_PROFILE" ]; then
+            continue
+          fi
+          write_wslconfig "$udir"
+          CONFIGURED_WSL=true
+          ;;
+      esac
+    done
+  fi
+fi
+
+if [ "$CONFIGURED_WSL" = false ]; then
+  echo "Warning: Could not detect Windows user profile directory. Skipping .wslconfig creation."
+fi
 
 # Fix WSL2 for debian(temporary solution)
 sudo bash -c 'cat << EOF > /usr/lib/binfmt.d/WSLInterop.conf
