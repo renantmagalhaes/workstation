@@ -147,7 +147,7 @@ sudo bash -c 'cat << EOF > /mnt/c/Users/renan/.wslconfig
 memory=12GB # Limits VM memory in WSL 2
 swap=0
 #processors=4 # Makes the WSL 2 VM use 4 virtual processors
-localhostForwarding=true # Boolean specifying if ports bound to wildcard or localhost in the WSL 2 VM should be connectable from the host via localhost:port.
+#localhostForwarding=true # Boolean specifying if ports bound to wildcard or localhost in the WSL 2 VM should be connectable from the host via localhost:port.
 networkingMode=mirrored
 EOF'
 
