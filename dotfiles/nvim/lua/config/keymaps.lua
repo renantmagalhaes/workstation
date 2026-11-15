@@ -261,7 +261,6 @@ local function toggle_tree()
 end
 
 map("n", "<leader>e", toggle_tree, { desc = "Toggle file tree", silent = true })
-map("n", "<C-n>", toggle_tree, { desc = "Toggle file tree (Single press)", silent = true })
 map("n", "<C-b>", toggle_tree, { desc = "Toggle file tree (VS Code style)", silent = true })
 map("n", "<leader>o", "<cmd>NvimTreeFindFile<CR>", { desc = "Reveal file in tree", silent = true })
 

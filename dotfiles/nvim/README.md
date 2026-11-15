@@ -43,10 +43,9 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 | Visual <kbd>I</kbd> | **Multi-line Insert**: Highlight lines and insert simultaneously at the beginning of all lines |
 | Visual <kbd>A</kbd> | **Multi-line Append**: Highlight lines and append simultaneously at the end of all lines |
 | Visual `<leader>m` | **Convert Selection**: Converts all selected lines into independent active cursors |
-| <kbd>Ctrl+Down</kbd> / <kbd>Alt+Down</kbd> | Add a cursor on the line below (or `<leader>j`) |
-| <kbd>Ctrl+Up</kbd> / <kbd>Alt+Up</kbd> | Add a cursor on the line above (or `<leader>k`) |
-| `<leader><Down>` / `<leader><Up>` | Skip current line and add cursor on the next line |
-| <kbd>Alt+d</kbd> or `<leader>m` | **Match Next Word**: Add cursor at next occurrence of word under cursor (VS Code `Ctrl+D`) |
+| `<leader>j` or <kbd>Ctrl+Down</kbd> | Add a cursor on the line below (works in all terminals & tmux) |
+| `<leader>k` or <kbd>Ctrl+Up</kbd> | Add a cursor on the line above (works in all terminals & tmux) |
+| <kbd>Ctrl+n</kbd> or <kbd>Alt+d</kbd> | **Match Next Word**: Add cursor at next occurrence of word under cursor (VS Code `Ctrl+D`) |
 | `<leader>M` | Skip current match and jump to next occurrence |
 | `<leader>A` | **Match All Occurrences**: Add cursors to all occurrences of word across file (VS Code `Ctrl+Shift+L`) |
 | <kbd>Ctrl+Click</kbd> | **Mouse Multi-Cursor**: Click anywhere to place or remove a cursor |

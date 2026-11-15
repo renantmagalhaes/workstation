@@ -20,22 +20,33 @@ return {
       map("x", "<leader>m", mc.visualToCursors, { desc = "Convert selection to multi-cursors" })
 
       -- 2. Add Cursors Vertically (Up / Down):
-      -- Use Ctrl+Down / Ctrl+Up or <leader>j / <leader>k (matches VS Code / IDEs)
-      map({ "n", "x" }, "<C-Down>", function() mc.lineAddCursor(1) end, { desc = "Add cursor below" })
-      map({ "n", "x" }, "<C-Up>", function() mc.lineAddCursor(-1) end, { desc = "Add cursor above" })
-      map({ "n", "x" }, "<A-Down>", function() mc.lineAddCursor(1) end, { desc = "Add cursor below" })
-      map({ "n", "x" }, "<A-Up>", function() mc.lineAddCursor(-1) end, { desc = "Add cursor above" })
-      map({ "n", "x" }, "<leader>j", function() mc.lineAddCursor(1) end, { desc = "Add cursor below" })
-      map({ "n", "x" }, "<leader>k", function() mc.lineAddCursor(-1) end, { desc = "Add cursor above" })
+      local add_cursor_down = function() mc.lineAddCursor(1) end
+      local add_cursor_up = function() mc.lineAddCursor(-1) end
+
+      -- Standard keys & foolproof terminal/tmux shortcuts:
+      map({ "n", "x" }, "<C-Down>", add_cursor_down, { desc = "Add cursor below" })
+      map({ "n", "x" }, "<C-Up>", add_cursor_up, { desc = "Add cursor above" })
+      map({ "n", "x" }, "<M-Down>", add_cursor_down, { desc = "Add cursor below" })
+      map({ "n", "x" }, "<M-Up>", add_cursor_up, { desc = "Add cursor above" })
+      map({ "n", "x" }, "<leader>j", add_cursor_down, { desc = "Add cursor below" })
+      map({ "n", "x" }, "<leader>k", add_cursor_up, { desc = "Add cursor above" })
+
+      -- Raw ANSI escape codes for tmux (screen-256color) when Ctrl-Up/Down is sent:
+      map({ "n", "x" }, "\27[1;5B", add_cursor_down, { desc = "Add cursor below (tmux Ctrl+Down)" })
+      map({ "n", "x" }, "\27[1;5A", add_cursor_up, { desc = "Add cursor above (tmux Ctrl+Up)" })
+      map({ "n", "x" }, "\27[1;3B", add_cursor_down, { desc = "Add cursor below (tmux Alt+Down)" })
+      map({ "n", "x" }, "\27[1;3A", add_cursor_up, { desc = "Add cursor above (tmux Alt+Up)" })
 
       -- Skip line up/down without adding cursor
       map({ "n", "x" }, "<leader><Down>", function() mc.lineSkipCursor(1) end, { desc = "Skip cursor down" })
       map({ "n", "x" }, "<leader><Up>", function() mc.lineSkipCursor(-1) end, { desc = "Skip cursor up" })
 
       -- 3. Match Word under Cursor (VS Code Ctrl+D / Ctrl+Shift+L):
-      -- Alt+d or <leader>m adds cursor at next matching word
-      map({ "n", "x" }, "<A-d>", function() mc.matchAddCursor(1) end, { desc = "Add cursor at next match" })
-      map({ "n", "x" }, "<leader>m", function() mc.matchAddCursor(1) end, { desc = "Add cursor at next match" })
+      -- <C-n>, <A-d>, or <leader>m adds cursor at next matching word
+      local match_next = function() mc.matchAddCursor(1) end
+      map({ "n", "x" }, "<C-n>", match_next, { desc = "Add cursor at next match" })
+      map({ "n", "x" }, "<M-d>", match_next, { desc = "Add cursor at next match" })
+      map({ "n", "x" }, "<leader>m", match_next, { desc = "Add cursor at next match" })
       map({ "n", "x" }, "<leader>M", function() mc.matchSkipCursor(1) end, { desc = "Skip next match" })
       map({ "n", "x" }, "<leader>A", mc.matchAllAddCursors, { desc = "Add cursors to all matches" })
 
