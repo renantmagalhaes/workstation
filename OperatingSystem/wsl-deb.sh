@@ -9,13 +9,13 @@
 
 # Verifications
 if [ “$(id -u)” = “0” ]; then
-	echo “Dont run this script as root” 2>&1
-	exit 1
+  echo “Dont run this script as root” 2>&1
+  exit 1
 fi
 
 # Check if the file /etc/wsl.conf exists and systemd is configured
 if [ ! -f /etc/wsl.conf ]; then
-	sudo bash -c 'cat << EOF > /etc/wsl.conf
+  sudo bash -c 'cat << EOF > /etc/wsl.conf
 # Set a command to run when a new WSL instance launches.
 [boot]
 systemd=true
@@ -30,15 +30,15 @@ appendWindowsPath=true
 # Set to true will automount fixed drives (C:/ or D:/) with DrvFs under the root directory set above. Set to false means drives wont be mounted automatically, but need to be mounted manually or with fstab.
 enabled = true
 EOF'
-	echo "/etc/wsl.conf file created successfully."
-	echo "Shutting down WSL"
-	wsl.exe --shutdown
+  echo "/etc/wsl.conf file created successfully."
+  echo "Shutting down WSL"
+  wsl.exe --shutdown
 else
-	echo "systemd configured. Proceeding."
+  echo "systemd configured. Proceeding."
 fi
 
 # Configure parallel downloads for APT
-sudo tee /etc/apt/apt.conf.d/99parallel > /dev/null << 'EOF'
+sudo tee /etc/apt/apt.conf.d/99parallel >/dev/null <<'EOF'
 Acquire::Queue-Mode "host";
 Acquire::http::Pipeline-Depth "5";
 EOF
@@ -46,8 +46,8 @@ EOF
 # Dotfiles syslink
 DOTFILES_DIR="$PWD/dotfiles"
 if [[ ! -L "$HOME/.dotfiles" ]] || [[ "$(readlink "$HOME/.dotfiles")" != "$DOTFILES_DIR" ]]; then
-    echo "🔗 Creating ~/.dotfiles symlink..."
-    ln -sfn "$DOTFILES_DIR" "$HOME/.dotfiles"
+  echo "🔗 Creating ~/.dotfiles symlink..."
+  ln -sfn "$DOTFILES_DIR" "$HOME/.dotfiles"
 fi
 
 # Set tz
@@ -58,7 +58,7 @@ sudo ntpsec-ntpdate pool.ntp.org
 sudo apt-get update && sudo apt-get -y upgrade
 
 # Install the packages from repo
-sudo apt-get -y install zsh fonts-powerline vim wget tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat xclip unrar-free unzip python3 python3-pip net-tools ncdu whois flatpak xournal evince jq dnsutils nala sassc gawk telnet bc python3-venv sqlite3 pipx cifs-utils python3-requests ffmpeg nmon nmap jp2a zip imagemagick gcc make ruby-dev python-is-python3 openvpn
+sudo apt-get -y install zsh fonts-powerline vim wget tmux curl net-tools iproute2 git fonts-hack-ttf apt-transport-https htop meld tree nload pwgen sysstat xclip unrar-free unzip python3 python3-pip net-tools ncdu whois flatpak xournal evince jq dnsutils nala sassc gawk telnet bc python3-venv sqlite3 pipx cifs-utils python3-requests ffmpeg nmon nmap jp2a zip imagemagick gcc make ruby-dev python-is-python3 openvpn btop
 
 # Latest Go
 bash ./scripts/latest-go.sh
@@ -78,12 +78,12 @@ mkdir -p ~/GIT-REPOS/CORE
 bash ./scripts/nix-install.sh
 
 if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+  . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 elif [ -f "/etc/profile.d/nix.sh" ]; then
-	. "/etc/profile.d/nix.sh"
+  . "/etc/profile.d/nix.sh"
 else
-	echo "Nix environment script not found."
-	exit 1
+  echo "Nix environment script not found."
+  exit 1
 fi
 
 ## Nix packages
@@ -148,9 +148,9 @@ sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
 echo \
-	"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
-	sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+  sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo systemctl enable docker

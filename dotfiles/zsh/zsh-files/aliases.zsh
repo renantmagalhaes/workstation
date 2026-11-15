@@ -187,8 +187,8 @@ if check_cmd nvim; then
 fi
 
 ### UTILS ###
-if check_cmd bpytop; then
-    alias top='bpytop'
+if check_cmd btop; then
+    alias top='btop'
 else
     unalias top 2>/dev/null
 fi

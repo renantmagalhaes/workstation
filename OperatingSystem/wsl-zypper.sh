@@ -9,23 +9,23 @@
 
 # Verifications
 if [ “$(id -u)” = “0” ]; then
-	echo “Dont run this script as root” 2>&1
-	exit 1
+  echo “Dont run this script as root” 2>&1
+  exit 1
 fi
 
 # Check if the file /etc/wsl.conf exists and systemd is configured
 if [ ! -f /etc/wsl.conf ]; then
-	# # Enable Systemd
-	sudo zypper -n in --auto-agree-with-licenses -t pattern wsl_systemd
-	sudo zypper in -t pattern wsl_gui
-	wsl.exe --shutdown
+  # # Enable Systemd
+  sudo zypper -n in --auto-agree-with-licenses -t pattern wsl_systemd
+  sudo zypper in -t pattern wsl_gui
+  wsl.exe --shutdown
 else
-	echo "systemd configured. Proceeding."
+  echo "systemd configured. Proceeding."
 fi
 
 # Configure parallel downloads (20 concurrent connections for high-speed link)
 sudo mkdir -p /etc/zypp/zypp.conf.d
-sudo tee /etc/zypp/zypp.conf.d/downloads.conf > /dev/null << 'EOF'
+sudo tee /etc/zypp/zypp.conf.d/downloads.conf >/dev/null <<'EOF'
 [main]
 download.max_concurrent_connections = 20
 EOF
@@ -41,8 +41,8 @@ sudo zypper ref && sudo zypper dup -y
 # Dotfiles syslink
 DOTFILES_DIR="$PWD/dotfiles"
 if [[ ! -L "$HOME/.dotfiles" ]] || [[ "$(readlink "$HOME/.dotfiles")" != "$DOTFILES_DIR" ]]; then
-    echo "🔗 Creating ~/.dotfiles symlink..."
-    ln -sfn "$DOTFILES_DIR" "$HOME/.dotfiles"
+  echo "🔗 Creating ~/.dotfiles symlink..."
+  ln -sfn "$DOTFILES_DIR" "$HOME/.dotfiles"
 fi
 
 # Set tz
@@ -50,7 +50,7 @@ sudo zypper install -y ntp
 sudo ntpdate pool.ntp.org
 
 # Install the packages from repo
-sudo zypper install -y zsh vim curl net-tools net-tools-deprecated iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox bind-utils gcc-c++ rsync sassc gawk bc cron golang npm libcap-progs sqlite3 python312-pipx cifs-utils ffmpeg python3-requests nmon zoxide
+sudo zypper install -y zsh vim curl net-tools net-tools-deprecated iproute2 git htop meld tree nload pwgen sysstat xclip unrar unzip python3 python3-pip net-tools ncdu whois flatpak neofetch evince jq firefox bind-utils gcc-c++ rsync sassc gawk bc cron golang npm libcap-progs sqlite3 python312-pipx cifs-utils ffmpeg python3-requests nmon zoxide btop
 
 # Install yarn
 sudo npm install --global yarn
@@ -82,12 +82,12 @@ bash ./scripts/selinux.sh
 bash ./scripts/nix-install.sh
 
 if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-	. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+  . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 elif [ -f "/etc/profile.d/nix.sh" ]; then
-	. "/etc/profile.d/nix.sh"
+  . "/etc/profile.d/nix.sh"
 else
-	echo "Nix environment script not found."
-	exit 1
+  echo "Nix environment script not found."
+  exit 1
 fi
 
 ## Nix packages
