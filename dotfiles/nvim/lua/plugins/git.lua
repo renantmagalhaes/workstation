@@ -82,6 +82,70 @@ return {
     },
   },
 
+  -- Side-by-side diff & file history (VS Code Source Control diff view / Timeline)
+  {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory", "DiffviewToggleFiles" },
+    keys = {
+      {
+        "<leader>gd",
+        function()
+          if require("diffview.lib").get_current_view() then
+            vim.cmd("DiffviewClose")
+          else
+            vim.cmd("DiffviewOpen")
+          end
+        end,
+        desc = "Toggle Diff View (all changes)",
+      },
+      { "<leader>gf", "<cmd>DiffviewFileHistory %<CR>", desc = "File History (current file)" },
+      { "<leader>gF", "<cmd>DiffviewFileHistory<CR>", desc = "Repo History" },
+    },
+    opts = {
+      enhanced_diff_hl = true,
+      view = { merge_tool = { layout = "diff3_mixed" } },
+    },
+  },
+
+  -- Merge conflicts (VS Code "Accept Current / Incoming / Both" CodeLens).
+  -- Keys exist only in buffers with conflict markers:
+  --   co = ours (current), ct = theirs (incoming), cb = both, c0 = none, ]n / [n = next / prev conflict
+  -- Detection needs Neovim's working directory to be the repository root (`nvim .` in the project).
+  {
+    "akinsho/git-conflict.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("git-conflict").setup({
+        default_mappings = {
+          ours = "co",
+          theirs = "ct",
+          both = "cb",
+          none = "c0",
+          next = "]n", -- not ]x/[x: [x is the sticky-context jump
+          prev = "[n",
+        },
+        -- The plugin's own option calls vim.diagnostic.disable(), removed in Neovim 0.12
+        disable_diagnostics = false,
+      })
+      -- Hide diagnostics while a file has conflict markers (they are all noise until resolved)
+      local group = vim.api.nvim_create_augroup("GitConflictDiagnostics", { clear = true })
+      vim.api.nvim_create_autocmd("User", {
+        group = group,
+        pattern = "GitConflictDetected",
+        callback = function()
+          vim.diagnostic.enable(false, { bufnr = 0 })
+        end,
+      })
+      vim.api.nvim_create_autocmd("User", {
+        group = group,
+        pattern = "GitConflictResolved",
+        callback = function()
+          vim.diagnostic.enable(true, { bufnr = 0 })
+        end,
+      })
+    end,
+  },
+
   -- Tim Pope's Fugitive for Git commands
   {
     "tpope/vim-fugitive",

@@ -60,5 +60,16 @@ opt.confirm = true
 -- Completion options
 opt.completeopt = { "menu", "menuone", "noselect" }
 
+-- Code folding (VS Code style): syntax-aware folds from tree-sitter, all open on file load,
+-- with ▾/▸ markers next to the line number (lua/config/statuscolumn.lua).
+-- zc / zo / za close / open / toggle a fold, zM / zR fold / unfold everything; or click the marker.
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldtext = "" -- show the folded line itself (with its syntax highlighting)
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldcolumn = "0" -- the markers are drawn by 'statuscolumn' instead
+opt.statuscolumn = require("config.statuscolumn").expr
+
 -- Fillchars
-opt.fillchars = { eob = " " }
+opt.fillchars = { eob = " ", fold = " ", foldopen = "▾", foldclose = "▸", foldsep = " " }

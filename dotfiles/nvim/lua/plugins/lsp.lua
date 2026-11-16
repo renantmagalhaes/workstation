@@ -58,6 +58,11 @@ return {
           map("n", "<S-F12>", references, "Find All References (Shift+F12)")
           map("n", "<F24>", references, "Find All References (Shift+F12)")
           map("n", "<C-F12>", vim.lsp.buf.implementation, "Go to Implementation (Ctrl+F12)")
+
+          -- Inlay hints (inline types / parameter names, like VS Code). Toggle: <leader>uh
+          if client and client:supports_method("textDocument/inlayHint") then
+            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+          end
           -- Diagnostics keys ([d, ]d, <leader>d) are global, in lua/config/keymaps.lua
         end,
       })
@@ -99,13 +104,40 @@ return {
                 },
               },
               telemetry = { enable = false },
+              hint = { enable = true, arrayIndex = "Disable", setType = true },
             },
           },
         },
         bashls = {},
         pyright = {},
-        ts_ls = {},
-        gopls = {},
+        ts_ls = {
+          -- Inlay hints are opt-in in typescript-language-server (same settings as VS Code)
+          settings = (function()
+            local hints = {
+              includeInlayParameterNameHints = "literals",
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = false,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayEnumMemberValueHints = true,
+            }
+            return { typescript = { inlayHints = hints }, javascript = { inlayHints = hints } }
+          end)(),
+        },
+        gopls = {
+          settings = {
+            gopls = {
+              hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+              },
+            },
+          },
+        },
         html = {},
         cssls = {},
         jsonls = {},
