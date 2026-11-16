@@ -6,7 +6,8 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 - **Zero Bloat & Maintenance**: No upstream distribution framework overrides; no surprise auto-updates breaking your setup.
 - **Pure `lazy.nvim`**: Automatic background update checker is disabled (`checker.enabled = false`) for deterministic stability.
 - **Modern & Appealing Visuals**: Pill/capsule statusline, breadcrumbs bar, animated cursor trails, floating rounded inputs, and toast notifications matching Cyberdream.
-- **VS Code Ergonomics**: Familiar keybindings (<kbd>Ctrl+s</kbd> save, <kbd>Ctrl+p</kbd> quick open, <kbd>Ctrl+/</kbd> comment, <kbd>Alt+↑/↓</kbd> move line, <kbd>F2</kbd>/<kbd>F12</kbd> LSP, <kbd>Ctrl+b</kbd> sidebar, <kbd>Ctrl+f</kbd> buffer find, <kbd>Ctrl+d</kbd> quit with prompt, tabs, indent guides).
+- **VS Code Ergonomics**: Familiar keybindings (<kbd>Ctrl+s</kbd> save, <kbd>Ctrl+p</kbd> quick open, <kbd>Ctrl+/</kbd> comment, <kbd>Alt+↑/↓</kbd> move line, <kbd>F2</kbd>/<kbd>F12</kbd> LSP, <kbd>F5</kbd>/<kbd>F9</kbd>/<kbd>F10</kbd>/<kbd>F11</kbd> debugging, <kbd>Ctrl+b</kbd> sidebar, <kbd>Ctrl+f</kbd> buffer find, <kbd>Ctrl+d</kbd> quit with prompt, tabs, indent guides).
+- **Full IDE Loop**: Debugger, test explorer, code folding, inlay hints, go-to-symbol, side-by-side git diff and merge-conflict resolution — all inside the editor.
 
 ---
 
@@ -63,8 +64,58 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 | <kbd>K</kbd> | Hover documentation |
 | `[d` / `]d` | Previous / Next diagnostic (opens the diagnostic popup) |
 | `<leader>d` | Line diagnostics popup |
+| `<leader>fo` | Go to Symbol in file (VS Code <kbd>Ctrl+Shift+O</kbd>) |
+| `<leader>fw` | Go to Symbol in workspace (VS Code <kbd>Ctrl+T</kbd>) |
+| `<leader>uh` | Toggle inlay hints (inline types / parameter names; on by default where the server supports them — Lua, Go, TS/JS. Python's `pyright` does not send them) |
 
 > Neovim 0.11's built-in `grr`/`grn`/`gra`/`gri`/`grt`/`grx` maps are removed so `gr` fires instantly.
+
+### Code Folding
+Syntax-aware folds (tree-sitter), all open when a file loads. A `▾` / `▸` marker next to the line number shows where a fold starts — click it to toggle.
+
+| Keymap | Action |
+| --- | --- |
+| `za` | Toggle fold under cursor |
+| `zc` / `zo` | Close / open fold |
+| `zM` / `zR` | Fold / unfold everything |
+
+### Debugging (VS Code Run & Debug)
+`nvim-dap` + `nvim-dap-ui`. Python (debugpy), Go (delve) and JavaScript/TypeScript on Node (vscode-js-debug) work out of the box. The debug panels (variables, watches, call stack, breakpoints, console) open when a session starts and close when it ends, and variable values are shown inline while stepping.
+
+- **Adapters**: installed in the background through Mason the first time the debugger loads (first <kbd>F5</kbd> / <kbd>F9</kbd>); a notification confirms when each one is ready.
+- **Launch configs**: <kbd>F5</kbd> offers the built-in configs per language (e.g. *Launch file*, *Debug test*, *Attach*). A project's `.vscode/launch.json` is read automatically, so existing VS Code configs work as-is.
+- **Python**: the program runs with the project's interpreter (`$VIRTUAL_ENV`, `./venv` or `./.venv`), like VS Code's interpreter picker.
+- **TypeScript**: *Launch current file* runs it with `node`, so plain `.ts` needs a Node version that runs TypeScript or a `launch.json` (e.g. using `tsx`).
+
+| Keymap | Action |
+| --- | --- |
+| <kbd>F5</kbd> or `<leader>Dc` | Start / Continue |
+| <kbd>Shift+F5</kbd> or `<leader>Dt` | Stop |
+| <kbd>Ctrl+Shift+F5</kbd> or `<leader>Dr` | Restart |
+| <kbd>F9</kbd> or `<leader>Db` | Toggle breakpoint |
+| `<leader>DB` / `<leader>Dl` | Conditional breakpoint / Logpoint |
+| <kbd>F10</kbd> or `<leader>Do` | Step over |
+| <kbd>F11</kbd> or `<leader>Di` | Step into (Windows Terminal uses F11 for fullscreen — use `<leader>Di` or unbind it there) |
+| <kbd>Shift+F11</kbd> or `<leader>DO` | Step out |
+| `<leader>DC` | Run to cursor |
+| `<leader>De` | Evaluate expression under cursor / selection |
+| `<leader>Du` / `<leader>DR` | Toggle debug panels / debug console (REPL) |
+| `<leader>DX` | Clear all breakpoints |
+
+### Testing (VS Code Test Explorer)
+`neotest` with pytest, `go test`, jest and vitest adapters. Results show as ✓/✗ in the gutter, and the test explorer opens in the left sidebar like VS Code's Testing view. The test framework itself (e.g. `pytest`, `jest`) must be installed in the project.
+
+| Keymap | Action |
+| --- | --- |
+| `<leader>tr` | Run nearest test |
+| `<leader>tf` / `<leader>ta` | Run tests in file / all tests |
+| `<leader>tl` | Re-run last test |
+| `<leader>td` | Debug nearest test (uses the debugger above) |
+| `<leader>ts` | Toggle test explorer panel |
+| `<leader>to` / `<leader>tO` | Show test output / toggle output panel |
+| `<leader>tw` | Watch file (re-run on save) |
+| `<leader>tS` | Stop running tests |
+| `]T` / `[T` | Next / previous failed test |
 
 ### Find & Replace
 | Keymap | Action |
@@ -79,6 +130,7 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 | --- | --- |
 | `<leader>e` or <kbd>Ctrl+b</kbd> | Toggle lateral file tree |
 | `<leader>o` | Reveal current file in file tree |
+| <kbd>F2</kbd> (in the tree) | Rename file / folder under the cursor (same as `r`, like the VS Code explorer) |
 
 ### Tools & Programming
 | Keymap | Action |
@@ -116,6 +168,22 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 | `<leader>hp` | Preview Git hunk diff inline |
 | `<leader>hs` | Stage Git hunk |
 | `<leader>gb` | Toggle Git line blame |
+| `<leader>gd` | Toggle **Diff View**: side-by-side diff of all changes (`diffview.nvim`; also a 3-way merge view during merges) |
+| `<leader>gf` / `<leader>gF` | **File history** of current file / whole repo |
+| `co` / `ct` / `cb` / `c0` | **Merge conflict**: accept Current / Incoming / Both / None (only in files with conflict markers; Neovim must be opened at the repo root) |
+| `]n` / `[n` | Next / previous merge conflict |
+
+### ⚠️ Terminal & Keyboard Notes
+A terminal can't send every key combination VS Code uses. What to know:
+
+- **Ctrl+Shift+letter** (e.g. <kbd>Ctrl+Shift+F</kbd>, <kbd>Ctrl+Shift+O</kbd>) arrives as plain <kbd>Ctrl+letter</kbd>, so those shortcuts live on `<leader>` keys instead (see the tables above).
+- **Ctrl+Alt+arrow** may arrive as plain <kbd>Ctrl+arrow</kbd> (common with layouts where Ctrl+Alt acts as AltGr, e.g. German). That's why <kbd>Ctrl+↑/↓</kbd> also adds cursors instead of scrolling like VS Code.
+- **F11** toggles fullscreen in Windows Terminal, so "Step Into" needs `<leader>Di` there (or unbind F11 in Windows Terminal settings).
+- **Shifted function keys** often arrive as <kbd>F13</kbd>–<kbd>F24</kbd> (e.g. <kbd>Shift+F5</kbd> = `<F17>`, <kbd>Shift+F11</kbd> = `<F23>`, <kbd>Shift+F12</kbd> = `<F24>`); both forms are mapped.
+- **Ctrl+`** can't be sent by most terminals; the floating terminal is on <kbd>Ctrl+\</kbd>.
+- **Check what your terminal sends**: run `:lua print(vim.fn.keytrans(vim.fn.getcharstr()))` and press the key. `<C-M-Down>` means Ctrl+Alt arrived; `<C-Down>` means Alt was dropped.
+- **F2 / F12 without a language server**: F2 renames the word everywhere in the current file and F12 uses Vim's local `gd`. With a server attached they use the LSP. A server that is still auto-installing (first open of a new language) isn't attached yet.
+- **Merge-conflict keys** only appear when Neovim's working directory is the repository root (open the project with `nvim .`).
 
 ---
 
@@ -138,11 +206,15 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 - **Formatting**: `conform.nvim` (format-on-save + Pretty JSON)
 - **Syntax Highlighting**: `nvim-treesitter` (pinned to modern `main` branch for Neovim 0.12+)
 - **Autocompletion**: `nvim-cmp` (LSP, path autocomplete, snippets, buffer). First suggestion is pre-selected; <kbd>Enter</kbd> / <kbd>Tab</kbd> accept it, like VS Code
-- **Git**: `gitsigns.nvim`, `lazygit.nvim`, `vim-fugitive`
+- **Git**: `gitsigns.nvim`, `lazygit.nvim`, `vim-fugitive`, `diffview.nvim` (side-by-side diff & history), `git-conflict.nvim` (accept current / incoming / both)
+- **Debugger**: `nvim-dap` + `nvim-dap-ui` + `nvim-dap-virtual-text` (inline variable values), `nvim-dap-python`, `nvim-dap-go`, vscode-js-debug
+- **Test Runner**: `neotest` + `neotest-python`, `neotest-golang`, `neotest-jest`, `neotest-vitest`
+- **Folding**: native tree-sitter folds with a VS Code-style ▾/▸ gutter (`lua/config/statuscolumn.lua`)
+- **Inlay Hints**: native LSP inlay hints, on by default (`<leader>uh` toggles)
 - **CSV Support**: `rainbow_csv.nvim` (colored columns & column alignment)
 - **Markdown**: `render-markdown.nvim` (rich inline rendering) + `markdown-preview.nvim` + `img-clip.nvim`
 - **Tabs**: `bufferline.nvim` (VS Code style top tabs)
-- **Terminal**: Native Floating Terminal popup (<kbd>Ctrl+/</kbd> or `<leader>tt`)
+- **Terminal**: Native Floating Terminal popup (<kbd>Ctrl+\</kbd> or `<leader>tt`)
 - **TODOs**: `folke/todo-comments.nvim` (highlight, jump `]t`/`[t`, and search project TODOs)
 - **Sticky Scroll**: `nvim-treesitter/nvim-treesitter-context` (VS Code-style pinned function/class headers on scroll)
 - **Minimap**: `nvim-mini/mini.map` (lateral preview bar on the right side with live scrollbar, diagnostics, and git indicators)
@@ -196,6 +268,8 @@ To prevent supply-chain attacks, regressions, or breaking changes from upstream 
      python3 dotfiles/nvim/scripts/fork_plugins.py
      ```
   4. Stage and commit your lua spec, `lazy-lock.json`, and any configuration updates.
+
+  > The IDE features (debugger, test runner, diff view, merge conflicts) added 13 plugins: `nvim-dap`, `nvim-dap-ui`, `nvim-dap-virtual-text`, `nvim-dap-python`, `nvim-dap-go`, `nvim-nio`, `neotest`, `neotest-python`, `neotest-golang`, `neotest-jest`, `neotest-vitest`, `diffview.nvim`, `git-conflict.nvim`. Run the fork script once to back them up.
 
 - **Syncing / Forking All Plugins to Backup Org**:
   Use the built-in backup script to automatically fork any new plugins to [rtm0x00](https://github.com/rtm0x00):

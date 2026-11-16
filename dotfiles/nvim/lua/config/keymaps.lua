@@ -270,6 +270,11 @@ map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Find open buffers
 map("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Recent files", silent = true })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "Help tags", silent = true })
 
+-- Go to Symbol (VS Code Ctrl+Shift+O in the file, Ctrl+T in the workspace; terminals can't send
+-- Ctrl+Shift+O, and Ctrl+T stays Vim's "jump back" after F12)
+map("n", "<leader>fo", "<cmd>Telescope lsp_document_symbols<CR>", { desc = "Go to symbol in file", silent = true })
+map("n", "<leader>fw", "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", { desc = "Go to symbol in workspace", silent = true })
+
 -- Command Palette (VS Code style command fuzzy-finder)
 map("n", "<leader>:", "<cmd>Telescope commands<CR>", { desc = "Command Palette", silent = true })
 map("n", "<leader>cp", "<cmd>Telescope commands<CR>", { desc = "Command Palette (VS Code Ctrl+Shift+P)", silent = true })
@@ -383,6 +388,13 @@ map("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split", silent 
 map("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, { desc = "Previous diagnostic", silent = true })
 map("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Next diagnostic", silent = true })
 map("n", "<leader>d", vim.diagnostic.open_float, { desc = "Line diagnostics popup", silent = true })
+
+-- Toggle inlay hints (inline types / parameter names) for the current buffer
+map("n", "<leader>uh", function()
+  local on = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
+  vim.lsp.inlay_hint.enable(not on, { bufnr = 0 })
+  vim.notify("Inlay hints " .. (on and "off" or "on"), vim.log.levels.INFO)
+end, { desc = "Toggle inlay hints", silent = true })
 
 -- VS Code F2 / F12. Global (not set on LspAttach) so they also work where no language server is
 -- attached yet: F2 then renames the word in the current file, F12 falls back to Vim's `gd`.

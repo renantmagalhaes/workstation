@@ -107,6 +107,7 @@ return {
         vim.api.nvim_set_option_value("relativenumber", false, { win = spacer_win })
         vim.api.nvim_set_option_value("foldcolumn", "0", { win = spacer_win })
         vim.api.nvim_set_option_value("signcolumn", "no", { win = spacer_win })
+        vim.api.nvim_set_option_value("statuscolumn", "", { win = spacer_win })
         vim.api.nvim_set_option_value("winhighlight", "Normal:Normal,NormalNC:Normal", { win = spacer_win })
 
         if vim.api.nvim_win_is_valid(cur_win) then
@@ -145,6 +146,11 @@ return {
 
         if has_file_window() and vim.o.columns > 80 then
           open_spacer()
+          -- Closing side panels (debug UI, test explorer, quickfix) hands their space to the
+          -- spacer despite 'winfixwidth'; give it back to the editor
+          if is_spacer_open() and vim.api.nvim_win_get_width(spacer_win) ~= 16 then
+            pcall(vim.api.nvim_win_set_width, spacer_win, 16)
+          end
           vim.schedule(function()
             pcall(map.open)
           end)
