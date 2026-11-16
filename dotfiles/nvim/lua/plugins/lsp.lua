@@ -49,9 +49,16 @@ return {
           map("n", "gr", vim.lsp.buf.references, "Find References")
           map("n", "<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
           map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
-          map("n", "<leader>d", vim.diagnostic.open_float, "Show Diagnostics")
-          map("n", "[d", vim.diagnostic.goto_prev, "Previous Diagnostic")
-          map("n", "]d", vim.diagnostic.goto_next, "Next Diagnostic")
+
+          -- VS Code function keys (Shift+F12 arrives as <F24> in some terminals).
+          -- F2 / F12 are global in lua/config/keymaps.lua (with a no-LSP fallback).
+          local function references()
+            require("telescope.builtin").lsp_references()
+          end
+          map("n", "<S-F12>", references, "Find All References (Shift+F12)")
+          map("n", "<F24>", references, "Find All References (Shift+F12)")
+          map("n", "<C-F12>", vim.lsp.buf.implementation, "Go to Implementation (Ctrl+F12)")
+          -- Diagnostics keys ([d, ]d, <leader>d) are global, in lua/config/keymaps.lua
         end,
       })
 
@@ -74,7 +81,7 @@ return {
         severity_sort = true,
         float = {
           border = "rounded",
-          source = "always",
+          source = true,
         },
       })
 

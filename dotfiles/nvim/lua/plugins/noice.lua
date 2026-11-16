@@ -65,12 +65,14 @@ return {
         },
       },
       routes = {
-        -- Skip noisy buffer write messages on save
+        -- Skip noisy buffer write messages on save (kind is "bufwrite" since Neovim 0.11)
         {
           filter = {
             event = "msg_show",
-            kind = "",
-            find = "written",
+            any = {
+              { kind = "bufwrite" },
+              { kind = "", find = "written" },
+            },
           },
           opts = { skip = true },
         },

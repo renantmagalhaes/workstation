@@ -44,6 +44,10 @@ require("lazy").setup({
   change_detection = {
     notify = false,
   },
+  -- No plugin here needs luarocks; disabling it silences the hererocks health error
+  rocks = {
+    enabled = false,
+  },
   performance = {
     rtp = {
       disabled_plugins = {

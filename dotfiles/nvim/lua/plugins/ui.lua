@@ -5,14 +5,17 @@ return {
     "akinsho/bufferline.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "VeryLazy",
-    keys = {
-      { "[b", "<cmd>BufferLineCyclePrev<CR>", desc = "Previous Tab" },
-      { "]b", "<cmd>BufferLineCycleNext<CR>", desc = "Next Tab" },
-      { "<leader>bd", "<cmd>bdelete<CR>", desc = "Close Current Buffer" },
-    },
+    -- Keys ([b, ]b, <leader>bd, <leader>1-9) live in lua/config/keymaps.lua
     opts = {
       options = {
         mode = "buffers",
+        -- Close tabs without collapsing the window layout (same as <leader>bd)
+        close_command = function(n)
+          require("snacks").bufdelete(n)
+        end,
+        right_mouse_command = function(n)
+          require("snacks").bufdelete(n)
+        end,
         separator_style = "thin",
         always_show_bufferline = true,
         show_buffer_close_icons = true,
@@ -96,6 +99,26 @@ return {
           component_separators = "",
           section_separators = { left = "", right = "" },
           globalstatus = true,
+          disabled_filetypes = {
+            -- No breadcrumbs on special / empty windows (minimap spacer, tree, dashboard, ...)
+            winbar = {
+              "",
+              "NvimTree",
+              "alpha",
+              "dashboard",
+              "trouble",
+              "lazy",
+              "mason",
+              "help",
+              "qf",
+              "minimap_spacer",
+              "grug-far",
+              "muren",
+              "TelescopePrompt",
+              "noice",
+              "notify",
+            },
+          },
         },
         sections = {
           lualine_a = {
@@ -161,27 +184,58 @@ return {
             },
           },
         },
+        -- VS Code-style breadcrumbs (file › class › function) in the winbar, powered by nvim-navic
+        winbar = {
+          lualine_c = {
+            {
+              "filename",
+              path = 1,
+              symbols = { modified = " ●", readonly = " ", unnamed = "[No Name]" },
+              color = { fg = colors.grey },
+            },
+            {
+              function()
+                return require("nvim-navic").get_location()
+              end,
+              cond = function()
+                return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+              end,
+              padding = { left = 0, right = 1 },
+            },
+          },
+        },
+        inactive_winbar = {
+          lualine_c = {
+            { "filename", path = 1, color = { fg = colors.grey } },
+          },
+        },
         extensions = { "nvim-tree", "lazy", "trouble" },
       })
     end,
   },
 
-  -- Modern Floating UI for Inputs & Selection Dialogs
+  -- Floating input/select dialogs + layout-preserving buffer delete (replaces archived dressing.nvim)
   {
-    "stevearc/dressing.nvim",
+    "folke/snacks.nvim",
     lazy = false,
+    priority = 900,
     opts = {
-      input = {
-        border = "rounded",
-        win_options = { winblend = 0 },
+      input = { enabled = true }, -- vim.ui.input (LSP rename, ...) in a rounded float
+      picker = {
+        enabled = true,
+        ui_select = true, -- vim.ui.select (code actions, ...) in a fuzzy picker
       },
-      select = {
-        backend = { "telescope", "builtin" },
-        builtin = {
-          border = "rounded",
-          win_options = { winblend = 0 },
-        },
-      },
+      -- Everything else stays off: Telescope, nvim-notify, alpha, etc. own those jobs here
+      bigfile = { enabled = false },
+      dashboard = { enabled = false },
+      explorer = { enabled = false },
+      indent = { enabled = false },
+      notifier = { enabled = false },
+      quickfile = { enabled = false },
+      scope = { enabled = false },
+      scroll = { enabled = false },
+      statuscolumn = { enabled = false },
+      words = { enabled = false },
     },
   },
 
@@ -204,116 +258,16 @@ return {
     end,
   },
 
-  -- VS Code-style Breadcrumbs Bar (Barbecue & Navic)
+  -- Code-context provider for the winbar breadcrumbs (attached in lua/plugins/lsp.lua)
   {
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
-    version = "*",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons",
-    },
-    event = { "BufReadPost", "BufNewFile" },
+    "SmiteshP/nvim-navic",
+    lazy = true,
     opts = {
-      attach_navic = true,
-      show_modified = true,
+      highlight = true,
+      separator = " › ",
+      depth_limit = 6,
+      lazy_update_context = true,
     },
-  },
-
-  -- Modern Lateral Overview Bar with Git, Diagnostic & Search Markers
-  {
-    "petertriho/nvim-scrollbar",
-    branch = "v1", -- Pin to v1 for rock-solid stability
-    dependencies = {
-      "kevinhwang91/nvim-hlslens",
-      "lewis6991/gitsigns.nvim",
-    },
-    event = { "BufReadPost", "BufNewFile" },
-    init = function()
-      vim.g.scrollbar_v2_notice = false -- Silence migration notice
-    end,
-    config = function()
-      local scrollbar = require("scrollbar")
-      local scrollbar_cfg = require("scrollbar.config")
-
-      scrollbar.setup({
-        show = true,
-        show_in_active_only = false,
-        set_highlights = true,
-        handle = {
-          text = " ",
-          blend = 25,
-          color = "#353b45",
-          highlight = "CursorColumn",
-          hide_if_all_visible = true,
-        },
-        marks = {
-          Cursor = {
-            text = "•",
-            priority = 0,
-            color = "#5c6370",
-          },
-          Search = {
-            text = { " ", " " },
-            priority = 1,
-            color = "#a3688a",
-          },
-          Error = {
-            text = { "•", " " },
-            priority = 2,
-            color = "#8a5555",
-          },
-          Warn = {
-            text = { "•", " " },
-            priority = 3,
-            color = "#8a7f5a",
-          },
-          Info = {
-            text = { "•", " " },
-            priority = 4,
-            color = "#4a757a",
-          },
-          Hint = {
-            text = { "•", " " },
-            priority = 5,
-            color = "#7b5e8a",
-          },
-          Misc = {
-            text = { "•", " " },
-            priority = 6,
-            color = "#4f6b8a",
-          },
-          GitAdd = {
-            text = "▎",
-            priority = 7,
-            color = "#587a5f", -- Muted sage green
-          },
-          GitChange = {
-            text = "▎",
-            priority = 7,
-            color = "#4f6b8a", -- Muted denim blue
-          },
-          GitDelete = {
-            text = " ",
-            priority = 7,
-            color = "#8a5555", -- Muted terracotta
-          },
-        },
-        handlers = {
-          cursor = false,
-          diagnostic = true,
-          gitsigns = true,
-          handle = true,
-          search = true,
-        },
-      })
-      require("hlslens").setup()
-      require("scrollbar.handlers.search").setup()
-      pcall(function()
-        require("scrollbar.handlers.gitsigns").setup()
-      end)
-
-    end,
   },
 
   -- Keybinding helper (Which-Key)
@@ -334,6 +288,7 @@ return {
         { "<leader>b", group = "Buffer" },
         { "<leader>q", group = "Session / Quit" },
         { "<leader>t", group = "Terminal" },
+        { "<leader>p", group = "Pretty / Paste" },
       },
     },
   },

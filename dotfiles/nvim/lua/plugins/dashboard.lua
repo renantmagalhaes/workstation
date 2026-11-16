@@ -167,11 +167,11 @@ return {
       }
 
       local action_buttons = {
-        action_btn("f", "  Find File", "<cmd>Telescope find_files hidden=true<CR>", "SPC SPC"),
+        action_btn("f", "  Find File", "<cmd>Telescope find_files hidden=true<CR>", "Ctrl+P"),
         action_btn("g", "  Find Text (Grep)", "<cmd>Telescope live_grep<CR>", "SPC fg"),
         action_btn("s", "  Restore Session", "<cmd>lua require('persistence').load()<CR>", "s"),
         action_btn("r", "  Recent Files (All)", "<cmd>Telescope oldfiles<CR>", "SPC fr"),
-        action_btn("t", "  Floating Terminal", "<cmd>lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<leader>tt', true, false, true), 'm', true)<CR>", "Ctrl+/"),
+        action_btn("t", "  Floating Terminal", "<cmd>lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<leader>tt', true, false, true), 'm', true)<CR>", "Ctrl+\\"),
         action_btn("c", "  Command Palette", "<cmd>Telescope commands<CR>", "SPC :"),
         action_btn("e", "  File Explorer", "<cmd>NvimTreeToggle<CR>", "SPC e"),
         action_btn("n", "  New File", "<cmd>ene <BAR> startinsert<CR>", "n"),

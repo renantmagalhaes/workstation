@@ -6,6 +6,41 @@ return {
     config = function()
       local map = require("mini.map")
 
+      -- Filetypes that never get their own minimap / spacer
+      local excluded_ft = {
+        help = true,
+        alpha = true,
+        dashboard = true,
+        ["neo-tree"] = true,
+        NvimTree = true,
+        lazy = true,
+        mason = true,
+        trouble = true,
+        qf = true,
+        TelescopePrompt = true,
+        noice = true,
+        notify = true,
+        ["grug-far"] = true,
+        minimap_spacer = true,
+      }
+
+      local function is_file_buf(buf)
+        return vim.bo[buf].buftype == "" and not excluded_ft[vim.bo[buf].filetype]
+      end
+
+      -- Keep the minimap showing the last file while you are in the tree, Telescope, a terminal,
+      -- etc. mini.map skips refreshes for buffers with `vim.b.minimap_disable`. Registered before
+      -- map.setup() so it runs ahead of mini.map's own BufEnter handler.
+      vim.api.nvim_create_autocmd({ "BufEnter", "FileType", "TermOpen" }, {
+        group = vim.api.nvim_create_augroup("MiniMapFreeze", { clear = true }),
+        callback = function(args)
+          if vim.bo[args.buf].filetype == "minimap" then
+            return -- mini.map's own buffer (focus mode) must keep working
+          end
+          vim.b[args.buf].minimap_disable = not is_file_buf(args.buf) or nil
+        end,
+      })
+
       map.setup({
         integrations = {
           map.gen_integration.builtin_search(),
@@ -61,6 +96,7 @@ return {
           vim.api.nvim_set_option_value("buflisted", false, { buf = spacer_buf })
           vim.api.nvim_set_option_value("swapfile", false, { buf = spacer_buf })
           vim.api.nvim_set_option_value("modifiable", false, { buf = spacer_buf })
+          vim.api.nvim_set_option_value("filetype", "minimap_spacer", { buf = spacer_buf })
         end
 
         vim.cmd("botright vertical 16split")
@@ -82,6 +118,18 @@ return {
       -- Automatically open the minimap for normal file buffers
       local minimap_enabled = true
 
+      -- Does the current tabpage still show at least one real file in a regular split?
+      local function has_file_window()
+        for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+          if win ~= spacer_win and vim.api.nvim_win_get_config(win).relative == "" then
+            if is_file_buf(vim.api.nvim_win_get_buf(win)) then
+              return true
+            end
+          end
+        end
+        return false
+      end
+
       local function update_minimap_state()
         if not minimap_enabled then
           close_spacer()
@@ -89,23 +137,13 @@ return {
           return
         end
 
-        local ft = vim.bo.filetype
-        local bt = vim.bo.buftype
-        local excluded_ft = {
-          help = true,
-          alpha = true,
-          dashboard = true,
-          ["neo-tree"] = true,
-          NvimTree = true,
-          lazy = true,
-          mason = true,
-          trouble = true,
-          TelescopePrompt = true,
-          noice = true,
-          notify = true,
-        }
+        -- Floating windows (Telescope, terminal popup, dialogs, Lazy, ...) never change the layout,
+        -- otherwise the whole editor re-flows behind the popup every time one opens.
+        if vim.api.nvim_win_get_config(0).relative ~= "" then
+          return
+        end
 
-        if bt == "" and not excluded_ft[ft] and vim.o.columns > 80 then
+        if has_file_window() and vim.o.columns > 80 then
           open_spacer()
           vim.schedule(function()
             pcall(map.open)
@@ -118,7 +156,7 @@ return {
 
       -- Autocommands for opening and closing on buffer/window navigation
       local augroup = vim.api.nvim_create_augroup("MiniMapManager", { clear = true })
-      vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
+      vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter", "WinClosed" }, {
         group = augroup,
         callback = function()
           if is_busy then
@@ -140,7 +178,8 @@ return {
             end
             return
           end
-          update_minimap_state()
+          -- WinClosed fires before the window is gone: re-check once it has been removed
+          vim.schedule(update_minimap_state)
         end,
       })
 
@@ -183,13 +222,12 @@ return {
       vim.keymap.set("n", "<leader>mm", toggle_minimap, { desc = "Toggle Minimap (Bounds Editor)" })
       vim.keymap.set("n", "<leader>um", toggle_minimap, { desc = "Toggle Minimap (Bounds Editor)" })
       vim.keymap.set("n", "<leader>mf", map.toggle_focus, { desc = "Focus/Unfocus Minimap" })
-      vim.keymap.set("n", "<leader>mr", map.refresh, { desc = "Refresh Minimap" })
+      -- (<leader>mr belongs to muren; use :lua MiniMap.refresh() if ever needed)
     end,
     keys = {
       { "<leader>mm", desc = "Toggle Minimap (Bounds Editor)" },
       { "<leader>um", desc = "Toggle Minimap (Bounds Editor)" },
       { "<leader>mf", desc = "Focus/Unfocus Minimap" },
-      { "<leader>mr", desc = "Refresh Minimap" },
     },
   },
 }

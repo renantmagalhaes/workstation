@@ -50,9 +50,10 @@ return {
     "HakonHarnes/img-clip.nvim",
     cmd = "PasteImage",
     ft = { "markdown", "text" },
+    -- Buffer-local to markdown/text so <leader>p does not shadow <leader>pj elsewhere
     keys = {
-      { "<leader>p", "<cmd>PasteImage<CR>", desc = "Paste Clipboard Image" },
-      { "<leader>P", "<cmd>PasteImage<CR>", desc = "Paste Clipboard Image" },
+      { "<leader>p", "<cmd>PasteImage<CR>", desc = "Paste Clipboard Image", ft = { "markdown", "text" } },
+      { "<leader>P", "<cmd>PasteImage<CR>", desc = "Paste Clipboard Image", ft = { "markdown", "text" } },
     },
     opts = {
       default = {

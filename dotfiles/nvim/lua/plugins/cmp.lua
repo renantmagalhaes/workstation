@@ -26,6 +26,11 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
+        -- VS Code behaviour: first suggestion is highlighted, Enter / Tab accept it
+        preselect = cmp.PreselectMode.Item,
+        completion = {
+          completeopt = "menu,menuone,noinsert",
+        },
         window = {
           completion = cmp.config.window.bordered({
             border = "rounded",
@@ -41,11 +46,11 @@ return {
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = false }),
-          -- VS Code style Tab completion
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          -- VS Code style Tab: accept the highlighted suggestion, else jump through snippet fields
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_next_item()
+              cmp.confirm({ select = true })
             elseif luasnip.expand_or_jumpable() then
               luasnip.expand_or_jump()
             else

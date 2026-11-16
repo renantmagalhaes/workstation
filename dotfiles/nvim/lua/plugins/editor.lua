@@ -134,7 +134,8 @@ return {
     },
     keys = {
       { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash Jump" },
-      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      -- Not in visual mode: visual `S` belongs to nvim-surround ("surround selection")
+      { "S", mode = { "n", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
     },
   },
 
@@ -222,7 +223,8 @@ return {
     end,
     keys = {
       {
-        "[c",
+        -- `[c` / `]c` stay with gitsigns (previous/next hunk, Vim diff convention)
+        "[x",
         function()
           require("treesitter-context").go_to_context(vim.v.count1)
         end,

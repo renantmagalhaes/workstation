@@ -9,7 +9,7 @@ local general_group = augroup("GeneralSettings", { clear = true })
 autocmd("TextYankPost", {
   group = general_group,
   callback = function()
-    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 150 })
+    vim.hl.on_yank({ higroup = "IncSearch", timeout = 150 })
   end,
   desc = "Briefly highlight yanked text",
 })
@@ -70,14 +70,13 @@ autocmd("FileType", {
 
 -- Custom filetype detection
 vim.filetype.add({
-  filename = {
-    ["config"] = "sshconfig",
-    ["Dockerfile"] = "dockerfile",
+  -- NOTE: no bare `config` filename rule — it would turn .git/config, i3/config, etc. into sshconfig.
+  -- Neovim already detects ~/.ssh/config and /etc/ssh/ssh_config on its own.
+  pattern = {
+    [".*/%.ssh/config%.d/.*"] = "sshconfig",
   },
   extension = {
     ["tf"] = "terraform",
     ["tfvars"] = "terraform",
-    ["csv"] = "csv",
-    ["tsv"] = "tsv",
   },
 })

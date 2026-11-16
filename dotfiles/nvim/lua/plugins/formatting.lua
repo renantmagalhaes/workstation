@@ -8,7 +8,15 @@ return {
       {
         "<leader>cf",
         function()
-          require("conform").format({ async = true, lsp_fallback = true })
+          require("conform").format({ async = true, lsp_format = "fallback" })
+        end,
+        mode = { "n", "v" },
+        desc = "Format Document",
+      },
+      {
+        "<leader>fm",
+        function()
+          require("conform").format({ async = true, lsp_format = "fallback" })
         end,
         mode = { "n", "v" },
         desc = "Format Document",
@@ -27,7 +35,7 @@ return {
       conform.setup({
         formatters_by_ft = {
           lua = { "stylua" },
-          python = { "ruff_format", "black" },
+          python = { "ruff_format", "black", stop_after_first = true },
           javascript = { "prettier", stop_after_first = true },
           typescript = { "prettier", stop_after_first = true },
           javascriptreact = { "prettier", stop_after_first = true },
@@ -48,7 +56,7 @@ return {
           if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
             return
           end
-          return { timeout_ms = 500, lsp_fallback = true }
+          return { timeout_ms = 500, lsp_format = "fallback" }
         end,
       })
 
@@ -59,7 +67,7 @@ return {
         elseif vim.fn.executable("python3") == 1 then
           vim.cmd("%!python3 -m json.tool")
         else
-          conform.format({ formatters = { "prettier" }, lsp_fallback = true })
+          conform.format({ formatters = { "prettier" }, lsp_format = "fallback" })
         end
       end, { desc = "Format current buffer as pretty JSON" })
     end,

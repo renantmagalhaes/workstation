@@ -1,6 +1,15 @@
 -- Keymaps configuration
+-- Plugin-specific keys live in their plugin spec (lua/plugins/*.lua); this file holds global
+-- editor keys only, so every key has exactly one owner.
 local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
+
+-- Neovim 0.11+ ships default LSP maps starting with `gr` (grr, grn, gra, gri, grt, grx).
+-- They turn our `gr` (Find References) into a prefix that waits 'timeoutlen'. The same actions
+-- are available on F2 / F12 / Shift+F12 / <leader>rn / <leader>ca, so drop the defaults.
+for _, lhs in ipairs({ "grr", "grn", "gri", "grt", "grx" }) do
+  pcall(vim.keymap.del, "n", lhs)
+end
+pcall(vim.keymap.del, { "n", "x" }, "gra")
 
 -- ==========================================
 -- Core Requested Keymaps
@@ -13,12 +22,16 @@ map("v", "<C-s>", "<Esc><cmd>write<CR>gv", { desc = "Save file", silent = true }
 
 -- Exit with Ctrl+d (Shows a sleek modal dialog box if unsaved changes exist)
 local function confirm_exit()
-  local modified = {}
+  -- Only real file buffers count: scratch/nofile buffers (grug-far, muren, ...) never block :qa
+  local modified, unnamed = {}, 0
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].modified then
+    local bt = vim.bo[buf].buftype
+    if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].modified and (bt == "" or bt == "acwrite") then
       local name = vim.api.nvim_buf_get_name(buf)
-      local display = (name ~= "") and vim.fn.fnamemodify(name, ":t") or "[Untitled]"
-      table.insert(modified, display)
+      if name == "" then
+        unnamed = unnamed + 1
+      end
+      table.insert(modified, (name ~= "") and vim.fn.fnamemodify(name, ":t") or "[Untitled]")
     end
   end
 
@@ -34,8 +47,25 @@ local function confirm_exit()
     files_str = files_str:sub(1, 41) .. "..."
   end
 
+  local function save_and_quit()
+    if unnamed > 0 then
+      vim.notify(
+        "Untitled buffer has no file name. Save it with :w <name>, or choose [No] to discard.",
+        vim.log.levels.WARN,
+        { title = "Unsaved Changes" }
+      )
+      return
+    end
+    local ok, err = pcall(vim.cmd, "wa")
+    if not ok then
+      vim.notify(tostring(err), vim.log.levels.ERROR, { title = "Save failed" })
+      return
+    end
+    vim.cmd("qa")
+  end
+
   local buttons = {
-    { text = "[ Yes ]", action = function() vim.cmd("wa"); vim.cmd("qa") end },
+    { text = "[ Yes ]", action = save_and_quit },
     { text = "[ No ]", action = function() vim.cmd("qa!") end },
     { text = "[ Cancel ]", action = nil },
   }
@@ -86,6 +116,15 @@ local function confirm_exit()
   local ns = vim.api.nvim_create_namespace("exit_dialog")
   local btn_ranges = {}
 
+  -- Highlight [start_col, end_col) on a 0-based row; end_col = nil means end of line
+  local function hl(group, lnum, start_col, end_col)
+    local line = vim.api.nvim_buf_get_lines(buf, lnum, lnum + 1, false)[1] or ""
+    vim.api.nvim_buf_set_extmark(buf, ns, lnum, start_col, {
+      end_col = math.min(end_col or #line, #line),
+      hl_group = group,
+    })
+  end
+
   local function close_dialog()
     if vim.api.nvim_win_is_valid(win) then
       vim.api.nvim_win_close(win, true)
@@ -135,16 +174,12 @@ local function confirm_exit()
 
     -- Highlights
     vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
-    vim.api.nvim_buf_add_highlight(buf, ns, "Title", 1, 2, -1)
-    vim.api.nvim_buf_add_highlight(buf, ns, "WarningMsg", 2, 2, -1)
-    vim.api.nvim_buf_add_highlight(buf, ns, "Comment", 6, 0, -1)
+    hl("Title", 1, 2)
+    hl("WarningMsg", 2, 2)
+    hl("Comment", 6, 0)
 
     for i, r in ipairs(btn_ranges) do
-      if i == current_idx then
-        vim.api.nvim_buf_add_highlight(buf, ns, "IncSearch", btn_row - 1, r.start_col - 1, r.end_col)
-      else
-        vim.api.nvim_buf_add_highlight(buf, ns, "Visual", btn_row - 1, r.start_col - 1, r.end_col)
-      end
+      hl(i == current_idx and "IncSearch" or "Visual", btn_row - 1, r.start_col - 1, r.end_col)
     end
   end
 
@@ -159,44 +194,33 @@ local function confirm_exit()
   end
 
   local key_opts = { buffer = buf, nowait = true, silent = true }
+  local function prev_btn()
+    current_idx = (current_idx == 1) and #buttons or (current_idx - 1)
+    render()
+  end
+  local function next_btn()
+    current_idx = (current_idx == #buttons) and 1 or (current_idx + 1)
+    render()
+  end
 
   -- Instant hotkeys
-  vim.keymap.set("n", "y", function() close_dialog(); buttons[1].action() end, key_opts)
-  vim.keymap.set("n", "Y", function() close_dialog(); buttons[1].action() end, key_opts)
-  vim.keymap.set("n", "n", function() close_dialog(); buttons[2].action() end, key_opts)
-  vim.keymap.set("n", "N", function() close_dialog(); buttons[2].action() end, key_opts)
-  vim.keymap.set("n", "c", close_dialog, key_opts)
-  vim.keymap.set("n", "C", close_dialog, key_opts)
-  vim.keymap.set("n", "q", close_dialog, key_opts)
-  vim.keymap.set("n", "<Esc>", close_dialog, key_opts)
-  vim.keymap.set("n", "<C-c>", close_dialog, key_opts)
+  for _, k in ipairs({ "y", "Y" }) do
+    vim.keymap.set("n", k, function() close_dialog(); buttons[1].action() end, key_opts)
+  end
+  for _, k in ipairs({ "n", "N" }) do
+    vim.keymap.set("n", k, function() close_dialog(); buttons[2].action() end, key_opts)
+  end
+  for _, k in ipairs({ "c", "C", "q", "<Esc>", "<C-c>" }) do
+    vim.keymap.set("n", k, close_dialog, key_opts)
+  end
 
   -- Navigation
-  vim.keymap.set("n", "<Left>", function()
-    current_idx = (current_idx == 1) and #buttons or (current_idx - 1)
-    render()
-  end, key_opts)
-  vim.keymap.set("n", "h", function()
-    current_idx = (current_idx == 1) and #buttons or (current_idx - 1)
-    render()
-  end, key_opts)
-  vim.keymap.set("n", "<S-Tab>", function()
-    current_idx = (current_idx == 1) and #buttons or (current_idx - 1)
-    render()
-  end, key_opts)
-
-  vim.keymap.set("n", "<Right>", function()
-    current_idx = (current_idx == #buttons) and 1 or (current_idx + 1)
-    render()
-  end, key_opts)
-  vim.keymap.set("n", "l", function()
-    current_idx = (current_idx == #buttons) and 1 or (current_idx + 1)
-    render()
-  end, key_opts)
-  vim.keymap.set("n", "<Tab>", function()
-    current_idx = (current_idx == #buttons) and 1 or (current_idx + 1)
-    render()
-  end, key_opts)
+  for _, k in ipairs({ "<Left>", "h", "<S-Tab>" }) do
+    vim.keymap.set("n", k, prev_btn, key_opts)
+  end
+  for _, k in ipairs({ "<Right>", "l", "<Tab>" }) do
+    vim.keymap.set("n", k, next_btn, key_opts)
+  end
 
   vim.keymap.set("n", "<CR>", execute_current, key_opts)
   vim.keymap.set("n", "<Space>", execute_current, key_opts)
@@ -231,9 +255,10 @@ end, { desc = "Exit with save dialog box", silent = true })
 -- Fuzzy search inline (Ctrl+f)
 map("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Search inside buffer", silent = true })
 map("i", "<C-f>", "<Esc><cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Search inside buffer", silent = true })
-map("n", "<leader>f", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Search inside buffer", silent = true })
+map("n", "<leader>fs", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Search inside buffer", silent = true })
 
--- Fuzzy search across whole folder (Space Space)
+-- Quick Open (VS Code Ctrl+P) & fuzzy search across whole folder (Space Space)
+map("n", "<C-p>", "<cmd>Telescope find_files hidden=true<CR>", { desc = "Quick Open file (VS Code Ctrl+P)", silent = true })
 map("n", "<leader><leader>", "<cmd>Telescope find_files hidden=true<CR>", { desc = "Find files in project", silent = true })
 
 -- Grep across whole folder / project
@@ -249,24 +274,6 @@ map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "Help tags", sil
 map("n", "<leader>:", "<cmd>Telescope commands<CR>", { desc = "Command Palette", silent = true })
 map("n", "<leader>cp", "<cmd>Telescope commands<CR>", { desc = "Command Palette (VS Code Ctrl+Shift+P)", silent = true })
 map("n", "<leader>ch", "<cmd>Telescope command_history<CR>", { desc = "Command History", silent = true })
-
--- Lateral Tree Bar (NvimTree)
-local function toggle_tree()
-  local ok, api = pcall(require, "nvim-tree.api")
-  if ok then
-    api.tree.toggle({ focus = true })
-  else
-    vim.cmd("NvimTreeToggle")
-  end
-end
-
-map("n", "<leader>e", toggle_tree, { desc = "Toggle file tree", silent = true })
-map("n", "<C-b>", toggle_tree, { desc = "Toggle file tree (VS Code style)", silent = true })
-map("n", "<leader>o", "<cmd>NvimTreeFindFile<CR>", { desc = "Reveal file in tree", silent = true })
-
--- Lazygit
-map("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit", silent = true })
-map("n", "<leader>lg", "<cmd>LazyGit<CR>", { desc = "Open LazyGit", silent = true })
 
 -- Git Web Browser & Link Copy (:GitBrowse, :GitCopyUrl, <leader>go, <leader>gy)
 local git_web = require("config.git_web")
@@ -295,44 +302,6 @@ map("v", "<leader>gy", function()
   git_web.copy({ visual = true })
 end, { desc = "Copy Git Web URL for selected lines", silent = true })
 
--- Pretty JSON (<leader>pj)
-map("n", "<leader>pj", function()
-  -- Try jq if available, otherwise python json.tool, otherwise LSP/conform format
-  if vim.fn.executable("jq") == 1 then
-    vim.cmd("%!jq .")
-  elseif vim.fn.executable("python3") == 1 then
-    vim.cmd("%!python3 -m json.tool")
-  else
-    vim.lsp.buf.format({ async = false })
-  end
-end, { desc = "Pretty JSON (Format buffer)", silent = true })
-
--- Paste image from clipboard
-map("n", "<leader>p", "<cmd>PasteImage<CR>", { desc = "Paste image from clipboard", silent = true })
-map("n", "<leader>P", "<cmd>PasteImage<CR>", { desc = "Paste image from clipboard", silent = true })
-
--- Markdown Preview Toggle
-map("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<CR>", { desc = "Toggle Markdown Preview", silent = true })
-
--- Code formatting (<leader>cf or <leader>fm)
-map({ "n", "v" }, "<leader>cf", function()
-  local ok, conform = pcall(require, "conform")
-  if ok then
-    conform.format({ lsp_fallback = true, async = false, timeout_ms = 1000 })
-  else
-    vim.lsp.buf.format({ async = false })
-  end
-end, { desc = "Format document", silent = true })
-
-map({ "n", "v" }, "<leader>fm", function()
-  local ok, conform = pcall(require, "conform")
-  if ok then
-    conform.format({ lsp_fallback = true, async = false, timeout_ms = 1000 })
-  else
-    vim.lsp.buf.format({ async = false })
-  end
-end, { desc = "Format document", silent = true })
-
 -- ==========================================
 -- VS Code-Style & Everyday Ergonomics
 -- ==========================================
@@ -348,24 +317,50 @@ map("n", "U", "<C-r>", { desc = "Redo", noremap = true })
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { silent = true })
 
 -- Clipboard copy & paste
-map("i", "<C-c>", '"+yy', { desc = "Copy line in insert mode", silent = true })
+map("i", "<C-c>", '<cmd>normal! "+yy<CR>', { desc = "Copy line (stay in insert mode)", silent = true })
 map("i", "<C-v>", "<C-r>+", { desc = "Paste in insert mode", silent = true })
-map("v", "<C-c>", '"+y', { desc = "Copy selection", silent = true })
-map("v", "<C-v>", '"_dP', { desc = "Paste replacing selection", silent = true })
+map("x", "<C-c>", '"+y', { desc = "Copy selection", silent = true })
+-- Visual-mode `P` replaces the selection without clobbering the register (also correct at end of line)
+map("x", "<C-v>", '"+P', { desc = "Paste replacing selection", silent = true })
 
--- Move lines up/down in Visual mode (Alt+j / Alt+k)
-map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down", silent = true })
-map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up", silent = true })
+-- Move lines up/down (VS Code Alt+Up / Alt+Down; Alt+j / Alt+k also work) in every mode
+for _, keys in ipairs({ { "<A-j>", "<A-k>" }, { "<A-Down>", "<A-Up>" } }) do
+  local down, up = keys[1], keys[2]
+  map("n", down, "<cmd>execute 'move .+' . v:count1<CR>==", { desc = "Move line down", silent = true })
+  map("n", up, "<cmd>execute 'move .-' . (v:count1 + 1)<CR>==", { desc = "Move line up", silent = true })
+  map("i", down, "<Esc><cmd>move .+1<CR>==gi", { desc = "Move line down", silent = true })
+  map("i", up, "<Esc><cmd>move .-2<CR>==gi", { desc = "Move line up", silent = true })
+  map("x", down, ":<C-u>execute \"'<,'>move '>+\" . v:count1<CR>gv=gv", { desc = "Move selection down", silent = true })
+  map("x", up, ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<CR>gv=gv", { desc = "Move selection up", silent = true })
+end
 
--- Indent / Outdent in Visual mode (Tab / Shift-Tab)
-map("v", "<Tab>", ">gv", { desc = "Indent selection", silent = true })
-map("v", "<S-Tab>", "<gv", { desc = "Outdent selection", silent = true })
+-- Toggle line comment (VS Code Ctrl+/). Terminals send Ctrl+/ as <C-_>, so map both.
+local function comment_line()
+  require("Comment.api").toggle.linewise.current()
+end
+local function comment_selection()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "nx", false)
+  require("Comment.api").toggle.linewise(vim.fn.visualmode())
+  vim.cmd("normal! gv") -- keep the selection, like VS Code
+end
+for _, lhs in ipairs({ "<C-/>", "<C-_>" }) do
+  map({ "n", "i" }, lhs, comment_line, { desc = "Toggle comment", silent = true })
+  map("x", lhs, comment_selection, { desc = "Toggle comment", silent = true })
+end
+
+-- Indent / Outdent in Visual mode (Tab / Shift-Tab). `x` (not `v`) so snippet select-mode Tab still jumps.
+map("x", "<Tab>", ">gv", { desc = "Indent selection", silent = true })
+map("x", "<S-Tab>", "<gv", { desc = "Outdent selection", silent = true })
 
 -- Buffer navigation (tabs at top)
-map("n", "[b", "<cmd>bprevious<CR>", { desc = "Previous buffer", silent = true })
-map("n", "]b", "<cmd>bnext<CR>", { desc = "Next buffer", silent = true })
-map("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Close buffer", silent = true })
-map("n", "<leader>bc", "<cmd>bdelete<CR>", { desc = "Close buffer", silent = true })
+map("n", "[b", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer", silent = true })
+map("n", "]b", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer", silent = true })
+-- Close buffer but keep the window layout (no collapse into the file tree)
+local function close_buffer()
+  require("snacks").bufdelete()
+end
+map("n", "<leader>bd", close_buffer, { desc = "Close buffer", silent = true })
+map("n", "<leader>bc", close_buffer, { desc = "Close buffer", silent = true })
 
 -- Quick jump to tabs 1-9
 for i = 1, 9 do
@@ -384,14 +379,50 @@ map("n", "<leader>sh", "<C-w>s", { desc = "Split horizontally", silent = true })
 map("n", "<leader>se", "<C-w>=", { desc = "Make splits equal", silent = true })
 map("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split", silent = true })
 
--- Diagnostics (Trouble / LSP)
-map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Toggle Trouble Diagnostics", silent = true })
-map("n", "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "Buffer Diagnostics", silent = true })
-map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic", silent = true })
-map("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic", silent = true })
+-- Diagnostics (Trouble keys live in lua/plugins/ui.lua)
+map("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, { desc = "Previous diagnostic", silent = true })
+map("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Next diagnostic", silent = true })
 map("n", "<leader>d", vim.diagnostic.open_float, { desc = "Line diagnostics popup", silent = true })
 
--- Floating Terminal Toggle (<Ctrl+/> or <leader>tt)
+-- VS Code F2 / F12. Global (not set on LspAttach) so they also work where no language server is
+-- attached yet: F2 then renames the word in the current file, F12 falls back to Vim's `gd`.
+local function lsp_supports(method)
+  return #vim.lsp.get_clients({ bufnr = 0, method = method }) > 0
+end
+
+map("n", "<F2>", function()
+  if lsp_supports("textDocument/rename") then
+    return vim.lsp.buf.rename()
+  end
+  if not vim.bo.modifiable or vim.bo.readonly then
+    return vim.notify("Nothing to rename here (buffer is read-only)", vim.log.levels.WARN)
+  end
+  local word = vim.fn.expand("<cword>")
+  if word == "" then
+    return vim.notify("Nothing to rename", vim.log.levels.WARN)
+  end
+  vim.ui.input({ prompt = "Rename in file (no LSP)", default = word }, function(new)
+    if not new or new == "" or new == word then
+      return
+    end
+    local view = vim.fn.winsaveview()
+    local pattern = "\\V\\<" .. vim.fn.escape(word, "/\\") .. "\\>"
+    local ok, err = pcall(vim.cmd, ("keeppatterns %%s/%s/%s/geI"):format(pattern, vim.fn.escape(new, "/\\&~")))
+    vim.fn.winrestview(view)
+    if not ok then
+      vim.notify(err, vim.log.levels.ERROR)
+    end
+  end)
+end, { desc = "Rename symbol (F2)", silent = true })
+
+map("n", "<F12>", function()
+  if lsp_supports("textDocument/definition") then
+    return vim.lsp.buf.definition()
+  end
+  vim.cmd("normal! gd")
+end, { desc = "Go to definition (F12)", silent = true })
+
+-- Floating Terminal Toggle (<Ctrl+\> or <leader>tt)
 local term_state = {
   buf = -1,
   win = -1,
@@ -403,7 +434,8 @@ local function toggle_floating_terminal()
     return
   end
 
-  if not vim.api.nvim_buf_is_valid(term_state.buf) then
+  local new_term = not vim.api.nvim_buf_is_valid(term_state.buf)
+  if new_term then
     term_state.buf = vim.api.nvim_create_buf(false, true)
     vim.bo[term_state.buf].buflisted = false
   end
@@ -413,7 +445,7 @@ local function toggle_floating_terminal()
   local col = math.floor((vim.o.columns - width) / 2)
   local row = math.floor((vim.o.lines - height) / 2)
 
-  local win_config = {
+  term_state.win = vim.api.nvim_open_win(term_state.buf, true, {
     relative = "editor",
     width = width,
     height = height,
@@ -421,27 +453,38 @@ local function toggle_floating_terminal()
     row = row,
     style = "minimal",
     border = "rounded",
-    title = "   Terminal ",
+    title = "   Terminal ",
     title_pos = "center",
-  }
-
-  term_state.win = vim.api.nvim_open_win(term_state.buf, true, win_config)
+  })
   vim.wo[term_state.win].winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder"
 
-  if vim.bo[term_state.buf].buftype ~= "terminal" then
-    vim.fn.termopen(os.getenv("SHELL") or "bash")
+  if new_term then
+    local buf = term_state.buf
+    vim.fn.jobstart({ vim.o.shell }, {
+      term = true,
+      -- When the shell exits, close the popup and drop the dead buffer so the next toggle starts fresh
+      on_exit = function()
+        vim.schedule(function()
+          if vim.api.nvim_win_is_valid(term_state.win) and vim.api.nvim_win_get_buf(term_state.win) == buf then
+            vim.api.nvim_win_close(term_state.win, true)
+          end
+          if vim.api.nvim_buf_is_valid(buf) then
+            vim.api.nvim_buf_delete(buf, { force = true })
+          end
+        end)
+      end,
+    })
+    -- Terminal-local keys (kept buffer-local so LazyGit & other terminals get an instant <Esc>)
+    local topts = { buffer = buf, silent = true }
+    vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", vim.tbl_extend("force", topts, { desc = "Exit terminal insert mode" }))
+    vim.keymap.set("t", "<C-\\>", toggle_floating_terminal, vim.tbl_extend("force", topts, { desc = "Toggle Floating Terminal" }))
+    vim.keymap.set("n", "<C-\\>", toggle_floating_terminal, vim.tbl_extend("force", topts, { desc = "Toggle Floating Terminal" }))
   end
 
   vim.cmd("startinsert")
 end
 
-map("n", "<C-/>", toggle_floating_terminal, { desc = "Toggle Floating Terminal", silent = true })
-map("n", "<C-_>", toggle_floating_terminal, { desc = "Toggle Floating Terminal", silent = true })
-map("i", "<C-/>", toggle_floating_terminal, { desc = "Toggle Floating Terminal", silent = true })
-map("i", "<C-_>", toggle_floating_terminal, { desc = "Toggle Floating Terminal", silent = true })
-map("t", "<C-/>", toggle_floating_terminal, { desc = "Toggle Floating Terminal", silent = true })
-map("t", "<C-_>", toggle_floating_terminal, { desc = "Toggle Floating Terminal", silent = true })
+-- VS Code uses Ctrl+` for the terminal, but most terminals cannot send it; Ctrl+\ is the reliable stand-in.
+map({ "n", "i" }, "<C-\\>", toggle_floating_terminal, { desc = "Toggle Floating Terminal", silent = true })
+map({ "n", "i" }, "<C-`>", toggle_floating_terminal, { desc = "Toggle Floating Terminal", silent = true })
 map("n", "<leader>tt", toggle_floating_terminal, { desc = "Toggle Floating Terminal", silent = true })
-
--- Terminal mode: Double Esc exits terminal input mode to scroll/copy
-map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal insert mode", silent = true })

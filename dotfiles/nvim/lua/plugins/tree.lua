@@ -6,12 +6,17 @@ return {
     lazy = false, -- Eager load so it hijacks directory openings (e.g. `nvim .`)
     keys = {
       { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Toggle File Tree" },
-      { "<C-n>", "<cmd>NvimTreeToggle<CR>", desc = "Toggle File Tree" },
       { "<C-b>", "<cmd>NvimTreeToggle<CR>", desc = "Toggle File Tree (VS Code)" },
       { "<leader>o", "<cmd>NvimTreeFindFile<CR>", desc = "Reveal File in Tree" },
     },
     config = function()
       require("nvim-tree").setup({
+        on_attach = function(bufnr)
+          local api = require("nvim-tree.api")
+          api.config.mappings.default_on_attach(bufnr)
+          -- VS Code explorer: F2 renames the file/folder under the cursor (same as `r`)
+          vim.keymap.set("n", "<F2>", api.fs.rename, { buffer = bufnr, nowait = true, silent = true, desc = "nvim-tree: Rename" })
+        end,
         disable_netrw = true,
         hijack_netrw = true,
         hijack_directories = { enable = false },
