@@ -67,6 +67,8 @@ A fast, robust, low-maintenance Neovim configuration built for day-to-day softwa
 | `<leader>fo` | Go to Symbol in file (VS Code <kbd>Ctrl+Shift+O</kbd>) |
 | `<leader>fw` | Go to Symbol in workspace (VS Code <kbd>Ctrl+T</kbd>) |
 | `<leader>uh` | Toggle inlay hints (inline types / parameter names; on by default where the server supports them — Lua, Go, TS/JS. Python's `pyright` does not send them) |
+| `]]` / `[[` | Next / previous use of the symbol under the cursor (every use is highlighted automatically, like VS Code) |
+| `<leader>cR` | Rename / move the current file and update the imports that point to it |
 
 > Neovim 0.11's built-in `grr`/`grn`/`gra`/`gri`/`grt`/`grx` maps are removed so `gr` fires instantly.
 
@@ -131,6 +133,8 @@ Syntax-aware folds (tree-sitter), all open when a file loads. A `▾` / `▸` ma
 | `<leader>e` or <kbd>Ctrl+b</kbd> | Toggle lateral file tree |
 | `<leader>o` | Reveal current file in file tree |
 | <kbd>F2</kbd> (in the tree) | Rename file / folder under the cursor (same as `r`, like the VS Code explorer) |
+
+Renaming (<kbd>F2</kbd> / `r`) or moving (`x` cut + `p` paste) a file in the tree updates the imports that point to it, and the moved file's own relative imports, through the language server, then saves the changed files — like VS Code. Works where the server supports it (TypeScript/JavaScript; others vary).
 
 ### Tools & Programming
 | Keymap | Action |
@@ -211,6 +215,9 @@ A terminal can't send every key combination VS Code uses. What to know:
 - **Test Runner**: `neotest` + `neotest-python`, `neotest-golang`, `neotest-jest`, `neotest-vitest`
 - **Folding**: native tree-sitter folds with a VS Code-style ▾/▸ gutter (`lua/config/statuscolumn.lua`)
 - **Inlay Hints**: native LSP inlay hints, on by default (`<leader>uh` toggles)
+- **Symbol Highlight**: `snacks.nvim` words (every use of the symbol under the cursor is highlighted; `]]` / `[[` jump between them)
+- **File Rename with Imports**: tree renames / moves and `<leader>cR` update the imports through the language server (`lua/config/lsp_rename.lua`)
+- **Large Files**: `snacks.nvim` bigfile (files over 1.5 MB or minified open as plain text — no tree-sitter, LSP, folding, colorizer or minimap — so Neovim stays responsive)
 - **CSV Support**: `rainbow_csv.nvim` (colored columns & column alignment)
 - **Markdown**: `render-markdown.nvim` (rich inline rendering) + `markdown-preview.nvim` + `img-clip.nvim`
 - **Tabs**: `bufferline.nvim` (VS Code style top tabs)
@@ -218,7 +225,7 @@ A terminal can't send every key combination VS Code uses. What to know:
 - **TODOs**: `folke/todo-comments.nvim` (highlight, jump `]t`/`[t`, and search project TODOs)
 - **Sticky Scroll**: `nvim-treesitter/nvim-treesitter-context` (VS Code-style pinned function/class headers on scroll)
 - **Minimap**: `nvim-mini/mini.map` (lateral preview bar on the right side with live scrollbar, diagnostics, and git indicators)
-- **Muted Scope & Delimiters**: `HiPhish/rainbow-delimiters.nvim` + `snacks.nvim` indent (subtle dark grey indent lines; the block around the cursor gets a soft, muted line coloured by nesting level). Like VS Code's active indent guide, the scope comes from indentation, so it works the same in every language and in files without a tree-sitter parser.
+- **Muted Scope & Delimiters**: `HiPhish/rainbow-delimiters.nvim` + `snacks.nvim` indent (subtle dark grey indent lines; the block around the cursor gets a soft, muted line coloured by nesting level, and the enclosing function keeps its line too). Like VS Code's active indent guide, the block comes from indentation, so it works the same in every language and in files without a tree-sitter parser; the function line uses tree-sitter (`lua/config/function_scope.lua`).
 - **Session Manager**: `folke/persistence.nvim` (saves and restores open tabs and buffers)
 - **Auto-Tags**: `windwp/nvim-ts-autotag` (auto-close & auto-rename HTML/JSX/XML tags)
 - **Editor Ergonomics**: `nvim-autopairs`, `Comment.nvim`, `nvim-surround`, `colorizer`, `rainbow-delimiters`, `which-key`

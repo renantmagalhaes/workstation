@@ -43,7 +43,7 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("colorizer").setup({
-        filetypes = { "*" },
+        filetypes = { "*", "!bigfile" },
         user_default_options = {
           RGB = true,
           RRGGBB = true,

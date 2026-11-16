@@ -10,12 +10,33 @@ return {
       { "<leader>o", "<cmd>NvimTreeFindFile<CR>", desc = "Reveal File in Tree" },
     },
     config = function()
+      -- Renaming / moving a file in the tree (F2, r, cut + paste) asks the language servers to
+      -- update imports that point at it, like VS Code's explorer
+      local api = require("nvim-tree.api")
+      -- nvim-tree re-saves open buffers under their new name (`write!`); don't run format-on-save
+      -- for that, the language server hasn't seen the new path yet and returns an error
+      api.events.subscribe(api.events.Event.WillRenameNode, function(data)
+        require("config.lsp_rename").before_rename(data.old_name, data.new_name)
+        vim.g.skip_format_on_save = true
+        vim.schedule(function() -- the rename runs synchronously, so this clears right after it
+          vim.g.skip_format_on_save = nil
+        end)
+      end)
+      api.events.subscribe(api.events.Event.NodeRenamed, function(data)
+        require("config.lsp_rename").on_rename(data.old_name, data.new_name)
+      end)
+
       require("nvim-tree").setup({
         on_attach = function(bufnr)
           local api = require("nvim-tree.api")
           api.config.mappings.default_on_attach(bufnr)
           -- VS Code explorer: F2 renames the file/folder under the cursor (same as `r`)
-          vim.keymap.set("n", "<F2>", api.fs.rename, { buffer = bufnr, nowait = true, silent = true, desc = "nvim-tree: Rename" })
+          vim.keymap.set(
+            "n",
+            "<F2>",
+            api.fs.rename,
+            { buffer = bufnr, nowait = true, silent = true, desc = "nvim-tree: Rename" }
+          )
         end,
         disable_netrw = true,
         hijack_netrw = true,

@@ -225,8 +225,12 @@ return {
         enabled = true,
         ui_select = true, -- vim.ui.select (code actions, ...) in a fuzzy picker
       },
+      -- Huge or minified files (> 1.5 MB, or very long lines) open as plain text: no tree-sitter,
+      -- LSP, folding, colorizer or minimap, so Neovim doesn't freeze (VS Code does the same)
+      bigfile = { enabled = true },
+      -- Highlight every use of the symbol under the cursor (LSP document highlight); ]] / [[ jump between them
+      words = { enabled = true },
       -- Everything else stays off: Telescope, nvim-notify, alpha, etc. own those jobs here
-      bigfile = { enabled = false },
       dashboard = { enabled = false },
       explorer = { enabled = false },
       -- Indent guides + active scope line (VS Code "active indent guide").
@@ -258,7 +262,29 @@ return {
       scope = { enabled = false },
       scroll = { enabled = false },
       statuscolumn = { enabled = false },
-      words = { enabled = false },
+    },
+    keys = {
+      {
+        "]]",
+        function()
+          Snacks.words.jump(vim.v.count1)
+        end,
+        desc = "Next reference of symbol",
+      },
+      {
+        "[[",
+        function()
+          Snacks.words.jump(-vim.v.count1)
+        end,
+        desc = "Previous reference of symbol",
+      },
+      {
+        "<leader>cR",
+        function()
+          require("config.lsp_rename").rename_file()
+        end,
+        desc = "Rename current file (updates imports)",
+      },
     },
     config = function(_, opts)
       require("snacks").setup(opts)

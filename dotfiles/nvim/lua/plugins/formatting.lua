@@ -51,6 +51,10 @@ return {
         },
         -- Format on save (can be disabled per buffer if needed)
         format_on_save = function(bufnr)
+          -- Set while the file tree renames a file (lua/plugins/tree.lua)
+          if vim.g.skip_format_on_save then
+            return
+          end
           -- Disable for specific filetypes if desired
           local ignore_filetypes = { "sql" }
           if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then

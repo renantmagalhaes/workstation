@@ -22,6 +22,7 @@ return {
         notify = true,
         ["grug-far"] = true,
         minimap_spacer = true,
+        bigfile = true, -- snacks bigfile: rendering a multi-MB file into the minimap would freeze
       }
 
       local function is_file_buf(buf)
