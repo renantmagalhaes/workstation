@@ -229,7 +229,30 @@ return {
       bigfile = { enabled = false },
       dashboard = { enabled = false },
       explorer = { enabled = false },
-      indent = { enabled = false },
+      -- Indent guides + active scope line (VS Code "active indent guide").
+      -- The scope comes from indentation alone, so it behaves the same in every language
+      -- (tree-sitter scopes differ per language: Python/bash only knew functions, YAML drew
+      -- one level too deep, files without a parser had no scope at all).
+      indent = {
+        enabled = true,
+        indent = { char = "│", hl = "SnacksIndent" }, -- dark grey, set below
+        scope = {
+          char = "│",
+          -- Colour by nesting level, same muted palette as the bracket pairs (lua/plugins/editor.lua)
+          hl = {
+            "RainbowDelimiterRed",
+            "RainbowDelimiterYellow",
+            "RainbowDelimiterBlue",
+            "RainbowDelimiterOrange",
+            "RainbowDelimiterGreen",
+            "RainbowDelimiterViolet",
+            "RainbowDelimiterCyan",
+          },
+          treesitter = { enabled = false },
+          cursor = false, -- the line's indentation decides, not the cursor column (blank lines, `0`)
+        },
+        animate = { enabled = false },
+      },
       notifier = { enabled = false },
       quickfile = { enabled = false },
       scope = { enabled = false },
@@ -237,6 +260,20 @@ return {
       statuscolumn = { enabled = false },
       words = { enabled = false },
     },
+    config = function(_, opts)
+      require("snacks").setup(opts)
+      -- Subtle dark slate grey for the regular indent guides (re-applied after a colorscheme change)
+      local function guide_hl()
+        vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#2c313a" })
+      end
+      guide_hl()
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        group = vim.api.nvim_create_augroup("IndentGuideColors", { clear = true }),
+        callback = guide_hl,
+      })
+      -- Also keep the enclosing function's line coloured (not only the innermost block)
+      require("config.function_scope").setup()
+    end,
   },
 
   -- Floating Toast Notifications (Notify)
@@ -292,74 +329,6 @@ return {
         { "<leader>p", group = "Pretty / Paste" },
       },
     },
-  },
-
-  -- Indentation guides & Function Scope Lines (Indent-Blankline v3)
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    config = function()
-      local highlight = {
-        "RainbowRed",
-        "RainbowYellow",
-        "RainbowBlue",
-        "RainbowOrange",
-        "RainbowGreen",
-        "RainbowViolet",
-        "RainbowCyan",
-      }
-
-      local hooks = require("ibl.hooks")
-      -- Soft, muted color palette for delimiters and function scope lines
-      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-        -- Subtle dark slate grey for all standard indent guides (quiet and non-distracting)
-        vim.api.nvim_set_hl(0, "IblIndent", { fg = "#2c313a" })
-        vim.api.nvim_set_hl(0, "IblWhitespace", { fg = "#22252a" })
-
-        local palette = {
-          RainbowRed = "#8a5555",    -- Muted dusky rose
-          RainbowYellow = "#8a7f5a", -- Muted warm gold/amber
-          RainbowBlue = "#4f6b8a",   -- Muted slate denim blue
-          RainbowOrange = "#8a6b52", -- Muted terracotta
-          RainbowGreen = "#587a5f",  -- Muted sage/olive
-          RainbowViolet = "#7b5e8a", -- Muted lavender/plum
-          RainbowCyan = "#4a757a",   -- Muted teal/slate
-        }
-        for name, color in pairs(palette) do
-          vim.api.nvim_set_hl(0, name, { fg = color })
-          local delim_name = "RainbowDelimiter" .. name:gsub("^Rainbow", "")
-          vim.api.nvim_set_hl(0, delim_name, { fg = color })
-        end
-      end)
-
-      require("ibl").setup({
-        indent = {
-          char = "│",
-          tab_char = "│",
-          highlight = "IblIndent", -- Standard indentation lines are subtle muted dark grey!
-        },
-        scope = {
-          enabled = true,
-          show_start = false,
-          show_end = false,
-          highlight = highlight, -- ONLY the active function scope line gets the soft muted color!
-        },
-        exclude = {
-          filetypes = {
-            "help",
-            "terminal",
-            "lazy",
-            "NvimTree",
-            "trouble",
-            "alpha",
-            "dashboard",
-          },
-        },
-      })
-
-      -- Colorize function scope line based on active delimiter extmark
-      hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
-    end,
   },
 
   -- Trouble (Diagnostics & Symbol List)

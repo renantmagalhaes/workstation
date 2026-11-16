@@ -23,17 +23,27 @@ function M.fold()
   return fold_starts_here(lnum) and "▾" or " "
 end
 
+-- Toggle the fold on `line` of window `winid` (there is no :foldtoggle; use :foldopen / :foldclose)
+function M.toggle(winid, line)
+  vim.api.nvim_win_call(winid, function()
+    if vim.fn.foldlevel(line) == 0 then
+      return
+    end
+    if vim.fn.foldclosed(line) ~= -1 then
+      vim.cmd(line .. "foldopen")
+    else
+      vim.cmd(line .. "foldclose")
+    end
+  end)
+end
+
 -- Mouse click on the marker: toggle the fold on that line
 function M.click()
   local pos = vim.fn.getmousepos()
   if pos.winid == 0 or pos.line == 0 then
     return
   end
-  vim.api.nvim_win_call(pos.winid, function()
-    if vim.fn.foldlevel(pos.line) > 0 then
-      vim.cmd(pos.line .. "foldtoggle")
-    end
-  end)
+  M.toggle(pos.winid, pos.line)
 end
 
 _G.StatusColumnFoldClick = M.click

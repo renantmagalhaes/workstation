@@ -218,7 +218,7 @@ A terminal can't send every key combination VS Code uses. What to know:
 - **TODOs**: `folke/todo-comments.nvim` (highlight, jump `]t`/`[t`, and search project TODOs)
 - **Sticky Scroll**: `nvim-treesitter/nvim-treesitter-context` (VS Code-style pinned function/class headers on scroll)
 - **Minimap**: `nvim-mini/mini.map` (lateral preview bar on the right side with live scrollbar, diagnostics, and git indicators)
-- **Muted Scope & Delimiters**: `HiPhish/rainbow-delimiters.nvim` + `lukas-reineke/indent-blankline.nvim` (subtle dark grey indent lines with soft, muted function scope highlighting)
+- **Muted Scope & Delimiters**: `HiPhish/rainbow-delimiters.nvim` + `snacks.nvim` indent (subtle dark grey indent lines; the block around the cursor gets a soft, muted line coloured by nesting level). Like VS Code's active indent guide, the scope comes from indentation, so it works the same in every language and in files without a tree-sitter parser.
 - **Session Manager**: `folke/persistence.nvim` (saves and restores open tabs and buffers)
 - **Auto-Tags**: `windwp/nvim-ts-autotag` (auto-close & auto-rename HTML/JSX/XML tags)
 - **Editor Ergonomics**: `nvim-autopairs`, `Comment.nvim`, `nvim-surround`, `colorizer`, `rainbow-delimiters`, `which-key`

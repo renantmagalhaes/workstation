@@ -78,9 +78,17 @@ return {
         RainbowDelimiterViolet = "#7b5e8a",
         RainbowDelimiterCyan = "#4a757a",
       }
-      for name, color in pairs(palette) do
-        vim.api.nvim_set_hl(0, name, { fg = color })
+      -- Also used by the active indent scope line (snacks indent in lua/plugins/ui.lua)
+      local function apply_palette()
+        for name, color in pairs(palette) do
+          vim.api.nvim_set_hl(0, name, { fg = color })
+        end
       end
+      apply_palette()
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        group = vim.api.nvim_create_augroup("RainbowDelimiterColors", { clear = true }),
+        callback = apply_palette,
+      })
 
       vim.g.rainbow_delimiters = {
         strategy = {
