@@ -181,6 +181,7 @@ elif [ "$OS" = "debian" ]; then
     libxcb1-dev \
     libxcb-composite0-dev \
     libxcb-render0-dev \
+    libxcb-randr0-dev \
     libxcb-shape0-dev \
     libxcb-xfixes0-dev \
     libxcb-dri3-dev \
