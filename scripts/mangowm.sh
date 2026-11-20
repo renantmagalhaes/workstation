@@ -160,6 +160,7 @@ elif [ "$OS" = "debian" ]; then
   sudo apt-get install -y \
     build-essential \
     cmake \
+    meson \
     ninja-build \
     git \
     pkgconf \
