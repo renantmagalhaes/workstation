@@ -26,7 +26,7 @@ else
     exit 1
 fi
 
-# 2. Deploy system-wide keyd configuration (Super tap mapped to F24)
+# 2. Deploy system-wide keyd configuration (Super tap mapped to Alt+Space launcher)
 echo "[-] Creating /etc/keyd/keyd.conf..."
 sudo mkdir -p /etc/keyd
 
@@ -38,8 +38,8 @@ sudo tee /etc/keyd/keyd.conf > /dev/null << 'EOF'
 overload_tap_timeout = 200
 
 [main]
-leftmeta = overload(meta, f24)
-rightmeta = overload(meta, f24)
+leftmeta = overload(meta, macro(A-space))
+rightmeta = overload(meta, macro(A-space))
 EOF
 
 # 4. Configure Passwordless Sudo Rule for systemctl control
