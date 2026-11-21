@@ -150,6 +150,7 @@ if [ "$OS" = "opensuse" ]; then
     awww \
     wlrctl \
     wlr-randr \
+    xdg-desktop-portal-wlr \
     dunst \
     kitty
 elif [ "$OS" = "debian" ]; then
@@ -240,7 +241,8 @@ elif [ "$OS" = "debian" ]; then
     wlogout \
     qt6-wayland-private-dev \
     wlrctl \
-    wlr-randr
+    wlr-randr \
+    xdg-desktop-portal-wlr
 fi
 
 # Homebrew (linuxbrew) path cleanup and pkg-config sanitization
@@ -420,6 +422,7 @@ link_config "$DOTFILES_DIR/mako" "$HOME/.config/mako"
 link_config "$DOTFILES_DIR/rofi" "$HOME/.config/rofi"
 link_config "$DOTFILES_DIR/mangowm/jgmenu" "$HOME/.config/jgmenu"
 link_config "$DOTFILES_DIR/mangowm/waybar/extra/wlogout" "$HOME/.config/wlogout"
+link_config "$DOTFILES_DIR/mangowm/xdg-desktop-portal" "$HOME/.config/xdg-desktop-portal"
 
 echo "⚙️ Creating swappy configuration..."
 mkdir -p "$HOME/.config/swappy"
