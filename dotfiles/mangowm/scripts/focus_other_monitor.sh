@@ -7,7 +7,7 @@ if [ -z "$MANGO_INSTANCE_SIGNATURE" ] || [ ! -S "$MANGO_INSTANCE_SIGNATURE" ]; t
 fi
 
 current_mon=$(mmsg get all-monitors | jq -r '.monitors[] | select(.active) | .name')
-other_mon=$(mmsg get all-monitors | jq -r '.monitors[] | select(.active | not) | .name' | head -n 1)
+other_mon=$(mmsg get all-monitors | jq -r '.monitors[] | select((.active | not) and .width > 0) | .name' | head -n 1)
 
 if [ -n "$other_mon" ]; then
     mmsg dispatch focusmon,"$other_mon"
