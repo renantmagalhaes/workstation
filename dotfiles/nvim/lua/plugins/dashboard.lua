@@ -167,7 +167,7 @@ return {
       }
 
       local action_buttons = {
-        action_btn("f", "  Find File", "<cmd>Telescope find_files hidden=true<CR>", "Ctrl+P"),
+        action_btn("f", "  Find File", "<cmd>lua require('config.telescope_mru').find_files_mru()<CR>", "Ctrl+P"),
         action_btn("g", "  Find Text (Grep)", "<cmd>Telescope live_grep<CR>", "SPC fg"),
         action_btn("s", "  Restore Session", "<cmd>lua require('persistence').load()<CR>", "s"),
         action_btn("r", "  Recent Files (All)", "<cmd>Telescope oldfiles<CR>", "SPC fr"),

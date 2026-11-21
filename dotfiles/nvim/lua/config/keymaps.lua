@@ -257,9 +257,13 @@ map("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Sear
 map("i", "<C-f>", "<Esc><cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Search inside buffer", silent = true })
 map("n", "<leader>fs", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Search inside buffer", silent = true })
 
--- Quick Open (VS Code Ctrl+P) & fuzzy search across whole folder (Space Space)
-map("n", "<C-p>", "<cmd>Telescope find_files hidden=true<CR>", { desc = "Quick Open file (VS Code Ctrl+P)", silent = true })
-map("n", "<leader><leader>", "<cmd>Telescope find_files hidden=true<CR>", { desc = "Find files in project", silent = true })
+-- Quick Open (VS Code Ctrl+P) & fuzzy search across whole folder (Space Space) with MRU priority
+map("n", "<C-p>", function()
+  require("config.telescope_mru").find_files_mru()
+end, { desc = "Quick Open file (MRU + Workspace)", silent = true })
+map("n", "<leader><leader>", function()
+  require("config.telescope_mru").find_files_mru()
+end, { desc = "Find files in project (Recent first)", silent = true })
 
 -- Grep across whole folder / project
 map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Live grep across project", silent = true })
@@ -267,7 +271,8 @@ map("n", "<leader>/", "<cmd>Telescope live_grep<CR>", { desc = "Live grep across
 
 -- Additional Telescope pickers
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Find open buffers", silent = true })
-map("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Recent files", silent = true })
+map("n", "<leader>fr", "<cmd>Telescope oldfiles cwd_only=true<CR>", { desc = "Recent files (Workspace)", silent = true })
+map("n", "<leader>fR", "<cmd>Telescope oldfiles<CR>", { desc = "Recent files (Global)", silent = true })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "Help tags", silent = true })
 
 -- Go to Symbol (VS Code Ctrl+Shift+O in the file, Ctrl+T in the workspace; terminals can't send
