@@ -16,9 +16,85 @@ pcall(vim.keymap.del, { "n", "x" }, "gra")
 -- ==========================================
 
 -- Save with Ctrl+s (Normal, Insert, Visual)
-map("n", "<C-s>", "<cmd>write<CR>", { desc = "Save file", silent = true })
-map("i", "<C-s>", "<Esc><cmd>write<CR>a", { desc = "Save file", silent = true })
-map("v", "<C-s>", "<Esc><cmd>write<CR>gv", { desc = "Save file", silent = true })
+-- If the buffer is unnamed (e.g. launched with `nvim`), prompts with a sleek input box to name and save it.
+local function save_file(mode)
+  local buf = vim.api.nvim_get_current_buf()
+  local bt = vim.bo[buf].buftype
+
+  -- Special buffers (terminal, help, nofile, etc.)
+  if bt ~= "" and bt ~= "acwrite" then
+    pcall(vim.cmd, "write")
+    return
+  end
+
+  local name = vim.api.nvim_buf_get_name(buf)
+
+  -- Named buffer: save immediately
+  if name ~= "" then
+    local ok, err = pcall(vim.cmd, "write")
+    if not ok then
+      vim.notify(tostring(err):gsub("^.-:%s*", ""), vim.log.levels.ERROR, { title = "Save Failed" })
+    end
+    return
+  end
+
+  -- Unnamed buffer: stop insert or exit visual mode before prompting
+  if mode == "i" or vim.fn.mode():sub(1, 1) == "i" then
+    vim.cmd("stopinsert")
+  elseif mode == "v" or vim.fn.mode():sub(1, 1) == "v" or vim.fn.mode():sub(1, 1) == "V" then
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+  end
+
+  -- Prompt for file name using the floating input box (Snacks / vim.ui.input)
+  vim.ui.input({
+    prompt = " 󰆓  Save As: ",
+    default = "",
+    completion = "file",
+  }, function(input)
+    if not input or input:match("^%s*$") then
+      return
+    end
+
+    input = vim.trim(input)
+    local target_path = vim.fs.normalize(vim.fn.fnamemodify(input, ":p"))
+
+    -- Ensure parent directories exist (e.g. src/components/test.lua)
+    local parent_dir = vim.fs.dirname(target_path)
+    if parent_dir and vim.fn.isdirectory(parent_dir) == 0 then
+      pcall(vim.fn.mkdir, parent_dir, "p")
+    end
+
+    local function do_write(force)
+      local cmd = (force and "write! " or "write ") .. vim.fn.fnameescape(target_path)
+      local ok, err = pcall(vim.cmd, cmd)
+      if ok then
+        vim.cmd("filetype detect")
+        local rel_name = vim.fn.fnamemodify(target_path, ":~:.")
+        vim.notify("Saved as " .. rel_name, vim.log.levels.INFO, { title = "File Saved" })
+      else
+        vim.notify("Save failed: " .. tostring(err):gsub("^.-:%s*", ""), vim.log.levels.ERROR, { title = "Save Failed" })
+      end
+    end
+
+    -- If file already exists, confirm overwrite
+    if vim.uv.fs_stat(target_path) then
+      vim.ui.select({ "Overwrite", "Cancel" }, {
+        prompt = " File already exists! Overwrite? ",
+      }, function(choice)
+        if choice == "Overwrite" then
+          do_write(true)
+        end
+      end)
+    else
+      do_write(false)
+    end
+  end)
+end
+
+map("n", "<C-s>", function() save_file("n") end, { desc = "Save file (prompts if unnamed)", silent = true })
+map("i", "<C-s>", function() save_file("i") end, { desc = "Save file (prompts if unnamed)", silent = true })
+map("v", "<C-s>", function() save_file("v") end, { desc = "Save file (prompts if unnamed)", silent = true })
+vim.api.nvim_create_user_command("Save", function() save_file("n") end, { desc = "Save file (prompts if unnamed)" })
 
 -- Exit with Ctrl+d (Shows a sleek modal dialog box if unsaved changes exist)
 local function confirm_exit()
@@ -50,7 +126,7 @@ local function confirm_exit()
   local function save_and_quit()
     if unnamed > 0 then
       vim.notify(
-        "Untitled buffer has no file name. Save it with :w <name>, or choose [No] to discard.",
+        "Untitled buffer has no file name. Press Ctrl+S to name and save it, or choose [No] to discard.",
         vim.log.levels.WARN,
         { title = "Unsaved Changes" }
       )
