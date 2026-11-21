@@ -120,6 +120,59 @@ return {
           },
         },
       })
+
+      -- Automatically open nvim-tree sidebar when opening a file (e.g. `nvim .` -> select file, or `nvim file`)
+      local tree_opened_on_file = false
+
+      -- Reset when returning to dashboard so selecting another file re-opens the tree
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "alpha",
+        callback = function()
+          tree_opened_on_file = false
+        end,
+      })
+
+      local function open_tree_silently()
+        vim.schedule(function()
+          local tree_api = require("nvim-tree.api")
+          if not tree_api.tree.is_visible() then
+            local cur_win = vim.api.nvim_get_current_win()
+            tree_api.tree.open({ find_file = true })
+            if vim.api.nvim_win_is_valid(cur_win) then
+              vim.api.nvim_set_current_win(cur_win)
+            end
+          end
+        end)
+      end
+
+      vim.api.nvim_create_autocmd({ "BufWinEnter", "BufReadPost" }, {
+        group = vim.api.nvim_create_augroup("NvimTreeAutoOpenFile", { clear = true }),
+        callback = function(args)
+          if tree_opened_on_file then
+            return
+          end
+
+          local buf = args.buf
+          if not vim.api.nvim_buf_is_valid(buf) then
+            return
+          end
+
+          local name = vim.api.nvim_buf_get_name(buf)
+          local bt = vim.bo[buf].buftype
+          local ft = vim.bo[buf].filetype
+
+          -- Skip special and UI buffers
+          if bt ~= "" or ft == "alpha" or ft == "NvimTree" or ft == "lazy" or ft == "mason" or ft == "trouble" or ft == "help" then
+            return
+          end
+
+          -- Only trigger for real files on disk or newly named files
+          if name ~= "" and vim.fn.isdirectory(name) == 0 then
+            tree_opened_on_file = true
+            open_tree_silently()
+          end
+        end,
+      })
     end,
   },
 }
