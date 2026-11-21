@@ -68,7 +68,7 @@ sudo reboot
 
 ## 4. BIOS: switch to Discrete Graphics (the real fix for external monitors)
 
-On this laptop the external ports are wired to the NVIDIA GPU. In hybrid mode wlroots renders on Intel and
+On the laptop the external ports are wired to the NVIDIA GPU. In hybrid mode wlroots renders on Intel and
 copies frames to NVIDIA, which caused lag, flicker, a black laptop panel and compositor crashes.
 
 1. Reboot, press **F1**, then *Config > Display > Graphics Device* and set **Discrete Graphics**.
@@ -77,23 +77,6 @@ copies frames to NVIDIA, which caused lag, flicker, a black laptop panel and com
 Now NVIDIA is the only GPU (`/dev/dri/by-path/` shows a single card), the laptop panel and all outputs go
 through it, and MangoWM needs **no** `WLR_DRM_DEVICES` and no launcher wrapper. The session file keeps its
 stock `Exec=mango`. Cost: higher battery use, so this suits docked use.
-
-## 5. Dotfiles (already in the repo)
-
-- **No hardcoded username.** Config and scripts use `~/.dotfiles/mangowm/...`, `Quickshell.env("HOME")`
-  and `os.path.expanduser`. `~/.dotfiles` must point at the repo's `dotfiles` folder
-  (`ln -s ~/GIT-REPOS/workstation/dotfiles ~/.dotfiles`) and `~/.config/mango` at `dotfiles/mangowm`.
-- **Monitors (`monitors.conf`).** The externals are matched by port-name regex (`DP.*`, `HDMI.*`), so port
-  numbers can differ between machines. The laptop panel is disabled by EDID make/model, so the rule only
-  matches that panel and is ignored on other computers:
-  ```
-  monitor_rule=make:Chimei Innolux Corporation,model:0x150C,disable:1
-  ```
-  Get a panel's make/model with `wlr-randr`. Rules match on name/make/model/serial together; the first
-  matching rule wins, so the disable rule goes first. Comment it out when using the laptop undocked.
-- **Moving windows between monitors.** A disabled monitor stays in `mmsg get all-monitors` with
-  `width: 0`. `move_to_other_monitor.sh` and `focus_other_monitor.sh` skip it with
-  `select((.active | not) and .width > 0)`.
 
 ## Troubleshooting
 
