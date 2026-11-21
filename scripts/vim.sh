@@ -46,7 +46,48 @@ if [ -d "$TREESITTER_DIR/.git" ]; then
     (cd "$TREESITTER_DIR" && git checkout main 2>/dev/null || git pull origin main 2>/dev/null || true)
 fi
 
-# 4. Link dotfiles/nvim to ~/.config/nvim
+# 4. Ensure the tree-sitter CLI that nvim-treesitter (main branch) uses to build parsers.
+# It needs >= 0.26.1: Debian stable ships 0.22.6 (too old) and npm builds are unsupported.
+TS_MIN="0.26.1"
+ts_version_ok() {
+    local v
+    v="$(tree-sitter --version 2>/dev/null | awk '{print $2}')"
+    [ -n "$v" ] && [ "$(printf '%s\n%s\n' "$TS_MIN" "$v" | sort -V | head -n1)" = "$TS_MIN" ]
+}
+
+if ! ts_version_ok && command -v brew >/dev/null 2>&1; then
+    echo "📥 Installing tree-sitter-cli via Homebrew..."
+    brew install tree-sitter-cli || true
+fi
+
+if ! ts_version_ok; then
+    case "$(uname -s)-$(uname -m)" in
+        Linux-x86_64)   TS_ASSET="tree-sitter-linux-x64" ;;
+        Linux-aarch64)  TS_ASSET="tree-sitter-linux-arm64" ;;
+        Darwin-x86_64)  TS_ASSET="tree-sitter-macos-x64" ;;
+        Darwin-arm64)   TS_ASSET="tree-sitter-macos-arm64" ;;
+        *)              TS_ASSET="" ;;
+    esac
+    if [ -n "$TS_ASSET" ]; then
+        echo "📥 Downloading tree-sitter CLI binary into ~/.local/bin..."
+        mkdir -p "$HOME/.local/bin"
+        TS_TMP="$(mktemp)"
+        if curl -fsSL "https://github.com/tree-sitter/tree-sitter/releases/latest/download/$TS_ASSET.gz" | gunzip > "$TS_TMP"; then
+            install -m 755 "$TS_TMP" "$HOME/.local/bin/tree-sitter"
+        else
+            echo "⚠️  Could not download tree-sitter CLI; treesitter parsers will not compile."
+        fi
+        rm -f "$TS_TMP"
+    fi
+fi
+
+if ts_version_ok; then
+    echo "🌳 tree-sitter CLI: $(tree-sitter --version)"
+else
+    echo "⚠️  tree-sitter CLI >= $TS_MIN not available; install it manually (see nvim-treesitter README)."
+fi
+
+# 5. Link dotfiles/nvim to ~/.config/nvim
 mkdir -p "$HOME/.config" 2>/dev/null || true
 if [ -e "$CONFIG_NVIM" ] && [ ! -L "$CONFIG_NVIM" ]; then
     BACKUP="$CONFIG_NVIM.backup.$(date +%Y%m%d%H%M%S)"
@@ -57,7 +98,7 @@ fi
 ln -sfn "$DOTFILES_NVIM" "$CONFIG_NVIM" 2>/dev/null || true
 echo "🔗 Symlinked: $CONFIG_NVIM -> $DOTFILES_NVIM"
 
-# 5. Bootstrap lazy.nvim plugin manager if not present
+# 6. Bootstrap lazy.nvim plugin manager if not present
 LAZY_DIR="$HOME/.local/share/nvim/lazy/lazy.nvim"
 if [ ! -d "$LAZY_DIR" ]; then
     echo "📥 Bootstrapping lazy.nvim plugin manager..."
@@ -65,7 +106,7 @@ if [ ! -d "$LAZY_DIR" ]; then
     git clone --filter=blob:none --branch=stable https://github.com/folke/lazy.nvim.git "$LAZY_DIR" 2>/dev/null || true
 fi
 
-# 6. Verify nvim binary
+# 7. Verify nvim binary
 NVIM_BIN="$(command -v nvim || true)"
 if [ -z "$NVIM_BIN" ]; then
     if [ -x "/home/linuxbrew/.linuxbrew/bin/nvim" ]; then
