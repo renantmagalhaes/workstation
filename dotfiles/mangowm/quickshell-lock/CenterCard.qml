@@ -9,8 +9,8 @@ Item {
     id: root
 
     property PamAuth pam
-    property string username: "rtm"
-    property string avatarSource: "file:///home/rtm/.dotfiles/mangowm/quickshell-lock/assets/blackhole_circle.png"
+    property string username: Quickshell.env("USER")
+    property string avatarSource: "file://" + Quickshell.env("HOME") + "/.dotfiles/mangowm/quickshell-lock/assets/blackhole_circle.png"
 
     implicitWidth: 460
     implicitHeight: 460

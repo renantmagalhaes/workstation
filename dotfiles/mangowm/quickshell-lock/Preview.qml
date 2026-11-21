@@ -55,7 +55,7 @@ ShellRoot {
 
                 onStatusChanged: {
                     if (status === Image.Error) {
-                        source = "file:///home/rtm/.config/mango/images/blackhole.jpg";
+                        source = "file://" + Quickshell.env("HOME") + "/.config/mango/images/blackhole.jpg";
                     }
                 }
             }

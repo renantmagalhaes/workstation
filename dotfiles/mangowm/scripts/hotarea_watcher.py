@@ -8,7 +8,7 @@ import time
 import sys
 
 # Script settings
-SCRIPT_PATH = "/home/rtm/.dotfiles/mangowm/scripts/toggle_overview.sh"
+SCRIPT_PATH = os.path.expanduser("~/.dotfiles/mangowm/scripts/toggle_overview.sh")
 HOTAREA_SIZE = 10  # pixels
 
 windows = []

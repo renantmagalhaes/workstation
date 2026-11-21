@@ -90,7 +90,7 @@ Singleton {
 
     Process {
         id: shotProcess
-        command: ["/home/rtm/.dotfiles/mangowm/scripts/overview_snapshot.sh", "/tmp/quickshell-overview"]
+        command: [Quickshell.env("HOME") + "/.dotfiles/mangowm/scripts/overview_snapshot.sh", "/tmp/quickshell-overview"]
 
         stdout: StdioCollector {
             onStreamFinished: {

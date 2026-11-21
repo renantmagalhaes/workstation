@@ -16,11 +16,11 @@ Scope {
         const now = Date.now();
         if (now - lastScrollTime < 25) return;
         lastScrollTime = now;
-        Quickshell.execDetached(["/home/rtm/.dotfiles/mangowm/scripts/change_workspace.sh", direction]);
+        Quickshell.execDetached([Quickshell.env("HOME") + "/.dotfiles/mangowm/scripts/change_workspace.sh", direction]);
     }
 
     function handleMenu(edge) {
-        Quickshell.execDetached(["/home/rtm/.dotfiles/mangowm/scripts/mango-menu.sh", edge]);
+        Quickshell.execDetached([Quickshell.env("HOME") + "/.dotfiles/mangowm/scripts/mango-menu.sh", edge]);
     }
 
     // Top Trigger Panel (height: 2px)
