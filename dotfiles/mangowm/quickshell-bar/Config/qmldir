@@ -4,3 +4,4 @@ singleton Settings 1.0 Settings.qml
 singleton OverviewManager 1.0 OverviewManager.qml
 singleton LauncherManager 1.0 LauncherManager.qml
 singleton WallpaperManager 1.0 WallpaperManager.qml
+singleton DeadKeysManager 1.0 DeadKeysManager.qml
