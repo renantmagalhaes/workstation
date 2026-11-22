@@ -255,8 +255,11 @@ if [[ -f "$HYPRLOCK_CONFIG" ]]; then
         exec hyprlock -c "$TEMP_CONFIG"
         # Clean up temp config after hyprlock exits (shouldn't reach here)
         rm -f "$TEMP_CONFIG"
+    elif command -v swaylock >/dev/null 2>&1; then
+        # hyprlock isn't packaged for Debian; swaylock is
+        exec swaylock -f -c 000000
     else
-        echo "Error: Neither quickshell nor hyprlock command found" >&2
+        echo "Error: none of quickshell, hyprlock or swaylock found" >&2
         rm -f "$TEMP_CONFIG"
         exit 1
     fi
