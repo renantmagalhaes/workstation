@@ -242,7 +242,8 @@ elif [ "$OS" = "debian" ]; then
     qt6-wayland-private-dev \
     wlrctl \
     wlr-randr \
-    xdg-desktop-portal-wlr
+    xdg-desktop-portal-wlr \
+    swappy
 fi
 
 # Homebrew (linuxbrew) path cleanup and pkg-config sanitization
