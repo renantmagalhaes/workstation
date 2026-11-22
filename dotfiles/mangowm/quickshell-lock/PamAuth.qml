@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.Pam
 
 Item {
@@ -65,11 +66,18 @@ Item {
         }
     }
 
+    // Debian keeps the "login" service in /etc/pam.d; openSUSE ships it in /usr/lib/pam.d
+    FileView {
+        id: etcLogin
+        path: "/etc/pam.d/login"
+        blockLoading: true
+    }
+
     PamContext {
         id: passwd
 
         config: "login"
-        configDirectory: "/usr/lib/pam.d"
+        configDirectory: etcLogin.loaded ? "/etc/pam.d" : "/usr/lib/pam.d"
 
         onMessageChanged: {
             if (message && message.length > 0 && !message.startsWith("Password")) {
