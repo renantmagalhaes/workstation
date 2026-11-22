@@ -1,0 +1,4 @@
+# Lets the "input" group (and the active seat via uaccess) open /dev/uinput.
+# Needed so scripts/mouse_actions.py can create its virtual keyboard to send
+# Ctrl+plus / Ctrl+minus without root.
+KERNEL=="uinput", GROUP="input", MODE="0660", TAG+="uaccess", RUN+="/usr/bin/setfacl -m g:input:rw /dev/$name"
