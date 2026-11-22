@@ -243,7 +243,58 @@ elif [ "$OS" = "debian" ]; then
     wlrctl \
     wlr-randr \
     xdg-desktop-portal-wlr \
-    swappy
+    swappy \
+    swaybg \
+    cliphist \
+    playerctl \
+    pamixer \
+    libnotify-bin \
+    kdeconnect \
+    mate-polkit \
+    swaylock \
+    rofi \
+    wtype \
+    xdotool \
+    xclip \
+    imagemagick \
+    python3-evdev \
+    python3-gi \
+    python3-dbus \
+    python3-pyudev \
+    python3-requests \
+    gir1.2-gtklayershell-0.1 \
+    slurp \
+    wl-clipboard \
+    jq \
+    curl \
+    lm-sensors \
+    pciutils \
+    psmisc \
+    acl \
+    pulseaudio-utils \
+    pipewire-bin \
+    upower \
+    power-profiles-daemon \
+    bluez \
+    network-manager
+
+  # Debian ships grim 1.4.0, which lacks -T (per-toplevel capture) used by the overview previews.
+  # Nix provides grim >= 1.5.0.
+  if check_cmd nix; then
+    echo "📦 Installing grim >= 1.5 via nix (Debian's grim is too old for overview previews)..."
+    nix --extra-experimental-features 'nix-command flakes' profile add nixpkgs#grim
+    # The mango session's PATH doesn't include ~/.nix-profile/bin, so keybinds and quickshell
+    # wouldn't find grim. /usr/local/bin is on that PATH.
+    sudo ln -sf "$HOME/.nix-profile/bin/grim" /usr/local/bin/grim
+
+    # awww (wallpaper daemon) isn't packaged for Debian either
+    echo "📦 Installing awww via nix..."
+    nix --extra-experimental-features 'nix-command flakes' profile add nixpkgs#awww
+    sudo ln -sf "$HOME/.nix-profile/bin/awww" /usr/local/bin/awww
+    sudo ln -sf "$HOME/.nix-profile/bin/awww-daemon" /usr/local/bin/awww-daemon
+  else
+    echo "⚠️ nix not found: install nix, then run 'nix profile add nixpkgs#grim nixpkgs#awww' and link them into /usr/local/bin"
+  fi
 fi
 
 # Homebrew (linuxbrew) path cleanup and pkg-config sanitization
@@ -443,7 +494,7 @@ if [ -d "$DOTFILES_DIR/mangowm/scripts" ]; then
   chmod +x "$DOTFILES_DIR/mangowm/scripts/"*.py
 fi
 
-echo "🔌 Installing udev rules (ProtoArc mouse + INZONE Buds battery access)..."
+echo "🔌 Installing udev rules (ProtoArc mouse, INZONE Buds battery access, uinput)..."
 UDEV_RULE_DIR="$DOTFILES_DIR/mangowm/udev"
 if [ -d "$UDEV_RULE_DIR" ]; then
   udev_rules_changed=0
@@ -465,6 +516,16 @@ if [ -d "$UDEV_RULE_DIR" ]; then
     echo "🔄 udev rules reloaded"
   fi
 fi
+
+# mouse_actions.py reads /dev/input/event* (group "input") and writes /dev/uinput
+echo "👥 Ensuring $USER is in the input group..."
+if id -nG "$USER" | tr ' ' '\n' | grep -qx input; then
+  echo "ℹ️ $USER already in input group, skipping."
+else
+  sudo usermod -aG input "$USER"
+  echo "✅ Added $USER to input group (log out and back in for it to apply)"
+fi
+echo uinput | sudo tee /etc/modules-load.d/uinput.conf >/dev/null
 
 if [ -d "$HOME/.config/rofi/rofi" ]; then
   echo "⚠️ Found nested rofi folder, fixing..."
