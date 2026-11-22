@@ -23,12 +23,36 @@ Singleton {
     function setWallpaper(filePath): void {
         if (!filePath) return;
         currentWallpaperPath = filePath;
-        // Use awww with smooth fade transition
-        Quickshell.execDetached([
-            "awww", "img", filePath,
-            "--transition-type", "fade",
-            "--transition-duration", "1"
-        ]);
+        setProc.command = ["sh", "-c", setScript, "sh", filePath];
+        setProc.running = true;
+    }
+
+    // Prefers awww (fade transition), falls back to swaybg (in the Debian repos)
+    readonly property string setScript: `
+        f="$1"
+        if command -v awww >/dev/null 2>&1; then
+            pgrep -x awww-daemon >/dev/null || { setsid awww-daemon >/dev/null 2>&1 & sleep 0.3; }
+            exec awww img "$f" --transition-type fade --transition-duration 1
+        elif command -v swaybg >/dev/null 2>&1; then
+            old=$(pgrep -x swaybg)
+            setsid swaybg -m fill -i "$f" >/dev/null 2>&1 &
+            sleep 0.5
+            [ -n "$old" ] && kill $old
+        else
+            echo "no wallpaper backend found (install awww or swaybg)" >&2
+            exit 1
+        fi
+    `
+
+    Process {
+        id: setProc
+        stderr: SplitParser {
+            onRead: data => console.warn("[Wallpapers]", data)
+        }
+        onExited: (code, status) => {
+            if (code !== 0)
+                console.warn("[Wallpapers] setting wallpaper failed, exit code", code);
+        }
     }
 
     // Model for wallpaper folder
