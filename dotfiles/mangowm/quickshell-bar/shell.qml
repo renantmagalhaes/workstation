@@ -27,4 +27,10 @@ ShellRoot {
 
         WallpaperPicker {}
     }
+
+    Variants {
+        model: Quickshell.screens
+
+        DeadKeys {}
+    }
 }
